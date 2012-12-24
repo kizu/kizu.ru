@@ -1,0 +1,235 @@
+@import '../stylobate/stylus/stylobate'
+@import 'font.css'
+
+$t_module = 16px
+
+$body_bg = #F8F8F8
+$body_text = rgba(0,0,0,0.8)
+$body_link = #0883C9
+
+// Layout etc.
+html
+  height: 100%
+  padding: 0
+  margin: 0
+  overflow-y: scroll
+
+body
+  position: relative
+  z-index: 1
+
+  min-width: 30em
+  height: 100%
+  padding: 0 $t_module*2;
+  margin: 0
+
+  font: 22px/$t_module*2 Cent21, Georgia, serif;
+  color: $body_text;
+  text-shadow: 0 1px #FFF;
+  background: $body_bg;
+
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+  text-rendering: optimizelegibility
+  -webkit-font-smoothing: subpixel-antialiased
+
+body:before,
+body:after
+  content: ""
+  display: table
+
+.section
+  position: relative
+  width: 37em
+  max-width: 100%
+  margin: 0 auto
+
+
+// Links
+A
+  padding: .25em 0
+
+  cursor: pointer
+
+  color: $body_link
+  text-decoration: none
+
+A:hover
+  color: $body_link
+
+  text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px -1px $body_bg, 2px -1px $body_bg,
+                0 -1px $body_bg, 0 -2px $body_bg, 0 -3px $body_bg, 0 -4px $body_bg, 0 -5px $body_bg, 0 -6px $body_bg
+
+  background: linear-gradient($body_link, $body_link) repeat-x
+  background-size: 1px 1px
+  background-position: -9px 1.3em
+
+.gap_narrow
+  text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px 0 $body_bg, 2px 0 $body_bg, -3px 0 $body_bg, 3px 0 $body_bg
+
+::selection
+  text-shadow: none !important
+  background: #B1D2FB
+
+
+// Awfully useful wrapper link (also, all pseudo-links are made as wrappers)
+.link_wrapper
+  white-space: nowrap // Would be a class for multiline links
+
+.link_wrapper .ico
+  margin-top: -4px
+
+  vertical-align: middle
+
+.link_wrapper:hover
+  background-repeat: no-repeat
+
+
+.link_wrapper:hover .link__inner
+  padding: inherit
+  background: inherit
+  background-repeat: repeat-x
+
+
+// Pseudo-link (can be only in wrapper)
+.link_pseudo,
+.link_pseudo.link_wrapper .link__inner
+  text-decoration: none
+  border-bottom: 1px dotted
+
+.link_pseudo.link_wrapper
+  border-bottom: 0
+
+
+// Text-like link
+.link_text
+  color: inherit
+
+
+// Copyrights block
+.copy
+  font-size: 18px
+  color: rgba(0,0,0,.5)
+
+
+// Typography
+P,
+UL,
+OL,
+DL,
+BLOCKQUOTE,
+HR,
+CODE,
+PRE,
+TABLE {
+  padding: 0;
+  margin: 0 0 $t_module*2;
+}
+LI,
+LI > P {
+  padding: 0;
+  margin: 0 0 $t_module;
+}
+
+H1,
+H2,
+H3,
+H4,
+H5,
+H6 {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
+
+H1 {
+  position: relative;
+  font-size: $t_module*5;
+  line-height: $t_module*6;
+  padding-top: $t_module;
+  margin-left: -.075em;
+}
+
+// Add before/after when it's a link (not on home page? )
+H2 {
+  position: relative;
+  font-size: $t_module*4;
+  line-height: $t_module*5;
+  margin-left: -.05em;
+}
+
+H1 A:not(:hover),
+H2 A:not(:hover) {
+  color: #AAA
+}
+
+
+H3,
+H1.title {
+  font-size: $t_module * 3;
+  line-height: $t_module * 4;
+  padding-top: $t_module;
+  padding-bottom: $t_module;
+}
+H4,
+H5,
+H6 {
+  font-size: $t_module * 2;
+  line-height: $t_module * 2;
+  padding-bottom: $t_module;
+}
+
+UL > LI {
+  list-style-type: none;
+}
+
+UL > LI:before {
+  content: "— ";
+  display: inline-block;
+  width: 2em;
+  margin-left: -2em;
+  text-align: right;
+}
+
+.figure
+  padding: .3em !important
+  margin: 0 0 0 -.3em
+
+  background: rgba(0,0,0,0.1)
+
+  border-radius: 3px
+  box-shadow: 0 0 0 1px rgba(0,0,0,.2)
+
+.dabblet
+  position: relative
+
+  overflow: hidden
+
+  margin: 1.5em auto
+  box-sizing: border-box
+
+.dabblet__frame
+  display: block
+
+  height: 26em
+  padding: 0
+  margin: 0
+  border: 0
+
+.dabblet__link
+  position: absolute
+  right: 0
+  bottom: 0
+  left: 0
+  text-align: center
+
+  text-shadow: none !important
+
+  background: rgba(255,255,255,.5) !important
+
+  border-radius: 4px 4px 0 0
+  transition: bottom .2s
+
+.dabblet:not(:hover) .dabblet__link
+  bottom: -2em
+  transition: bottom .2s 1s

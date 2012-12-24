@@ -1,0 +1,6 @@
+[submodule "stylus/if-ie_styl"]
+	path = stylus/if-ie_styl
+	url = git@github.com:kizu/if-ie.styl.git
+[submodule "stylobate"]
+	path = stylobate
+	url = git@github.com:kizu/stylobate.git

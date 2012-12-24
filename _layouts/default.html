@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="page page_index">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge"/>
+	<!--[if gt IE 7]><!-->
+		<link rel="stylesheet" href="/s/style.css">
+	<!--<![endif]--><!--[if lt IE 8]><link rel="stylesheet" href="/s/style_ie.css"><![endif]-->
+    <title>{{ page.title }} — kizu.ru — blog and experiments of Roman Komarov</title>
+</head>
+<body>
+	<header class="section">
+		<h1 class="title">
+			{% if page.categories contains 'fun' %}
+				Experiments
+			{% else %}
+				Words
+			{% endif %}
+
+			by Roman Komarov
+		</h1>
+		{% if page.categories contains 'en' %}
+			lol en!
+		{% else %}
+			lol ru!
+		{% endif %}
+	</header>
+
+	<div role="main">
+		{{ content }}
+	</div>
+
+	<footer class="section">
+		<p class="copy">
+			<a class="link  link_text  link_wrapper" href="http://kizu.ru/en/">
+				© {{ site.time | date: "%Y" }}
+				<span class="link__inner">Roman Komarov</span>.
+			</a>
+			<a class="link  link_wrapper" href="https://twitter.com/kizmarh">
+				<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
+				<span class="link__inner">Follow me on twitter</span>!
+			</a>
+		</p>
+	</footer>
+	<!-- Don't forget the metrika -->
+</body>
+</html>

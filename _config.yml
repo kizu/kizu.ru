@@ -1,0 +1,6 @@
+auto: true
+safe: true
+server: true
+markdown: rdiscount
+pygments: true
+permalink: /:categories/:title

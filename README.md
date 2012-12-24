@@ -1,2 +1,3 @@
-kizu.github.com
-===============
+# kizu.ru
+
+Yay!
