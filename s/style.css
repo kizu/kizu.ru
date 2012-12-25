@@ -32,7 +32,7 @@ body {
   padding: 0 32px;
   margin: 0;
   font: 22px /32px Georgia, serif;
-  color: rgba(0,0,0,0.8);
+  color: rgba(37,34,14,0.92);
   text-shadow: 0 1px #fff;
   background: #fbfaf4;
   -webkit-text-size-adjust: 100%;
@@ -104,7 +104,7 @@ A:hover {
 }
 .copy {
   font-size: 18px;
-  color: rgba(0,0,0,0.5);
+  color: rgba(37,34,14,0.62);
 }
 P,
 UL,
@@ -149,7 +149,7 @@ H1.title {
 }
 H1 A:not(:hover),
 H2 A:not(:hover) {
-  color: #aaa;
+  color: rgba(37,34,14,0.48);
 }
 H3 {
   font-size: 32px;
