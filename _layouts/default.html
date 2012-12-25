@@ -36,6 +36,35 @@ layout: layout
 	</div>
 
 	<footer class="section">
+		<hr/>
+		<p>
+			<ul>
+				{% if page.categories contains 'en' %}
+					<li><a href="https://github.com/kizu/kizu.github.com/blob/master/_posts/en/{{ page.date | date: "%Y-%m-%d" }}-{{ page.url | replace:'/fun/':'' | replace:'/en':'' }}.md">See the source of this page at GitHub</a></li>
+				{% else %}
+					<li><a href="https://github.com/kizu/kizu.github.com/blob/master/_posts/{{ page.date | date: "%Y-%m-%d" }}-{{ page.url | replace:'/fun/':'' }}.md">Исходный код этой страницы на Гитхабе</a></li>
+				{% endif %}
+				<li>
+					<form action="https://github.com/kizu/kizu.github.com/issues/new" method="get">
+						{% if page.categories contains 'en' %}
+							<input name="title" hidden="hidden" type="text" value="Feedback for “{{ page.title }}”" />
+						{% else %}
+							<input name="title" hidden="hidden" type="text" value="Отзыв на «{{ page.title }}»" />
+						{% endif %}
+						<label>
+							{% if page.categories contains 'en' %}
+								A shortcut to creating a new issue for this page
+							{% else %}
+								Быстрый переход к созданию issue про эту страницу
+							{% endif %}
+							<textarea style="display:block;" name="body" id="Body" cols="30" rows="10"></textarea>
+						</label>
+						<button>Jump to GitHub</button>
+					</form>
+				</li>
+			</ul>
+		</p>
+		<hr/>
 		<p class="copy">
 			{% if page.categories contains 'en' %}
 				<a class="link  link_text  link_wrapper" href="http://kizu.ru/en/">

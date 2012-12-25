@@ -156,6 +156,7 @@ UL > LI {
 }
 UL > LI:before {
   content: "— ";
+  position: absolute;
   display: inline;
   zoom: 1;
   width: 2em;
