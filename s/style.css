@@ -34,7 +34,7 @@ body {
   font: 22px /32px Georgia, serif;
   color: rgba(0,0,0,0.8);
   text-shadow: 0 1px #fff;
-  background: #fbf9f4;
+  background: #fbfaf4;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
@@ -59,7 +59,7 @@ A {
 }
 A:hover {
   color: #0883c9;
-  text-shadow: -1px 0 #fbf9f4, 1px 0 #fbf9f4, -2px -1px #fbf9f4, 2px -1px #fbf9f4, 0 -1px #fbf9f4, 0 -2px #fbf9f4, 0 -3px #fbf9f4, 0 -4px #fbf9f4, 0 -5px #fbf9f4, 0 -6px #fbf9f4;
+  text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px -1px #fbfaf4, 2px -1px #fbfaf4, 0 -1px #fbfaf4, 0 -2px #fbfaf4, 0 -3px #fbfaf4, 0 -4px #fbfaf4, 0 -5px #fbfaf4, 0 -6px #fbfaf4;
   background: -webkit-linear-gradient(#0883c9, #0883c9) repeat-x;
   background: -moz-linear-gradient(#0883c9, #0883c9) repeat-x;
   background: -o-linear-gradient(#0883c9, #0883c9) repeat-x;
@@ -71,7 +71,7 @@ A:hover {
   background-position: -9px 1.3em;
 }
 .gap_narrow {
-  text-shadow: -1px 0 #fbf9f4, 1px 0 #fbf9f4, -2px 0 #fbf9f4, 2px 0 #fbf9f4, -3px 0 #fbf9f4, 3px 0 #fbf9f4;
+  text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px 0 #fbfaf4, 2px 0 #fbfaf4, -3px 0 #fbfaf4, 3px 0 #fbfaf4;
 }
 ::selection {
   text-shadow: none !important;
