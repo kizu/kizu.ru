@@ -2,7 +2,7 @@
 
 title: Scrolling shadows
 
-layout: post_dabblet
+layout: post
 
 categories: en fun
 

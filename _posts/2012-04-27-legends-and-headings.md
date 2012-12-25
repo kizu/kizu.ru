@@ -2,7 +2,7 @@
 
 title: Легенды и заголовки
 
-layout: post_dabblet
+layout: post
 
 categories: fun
 

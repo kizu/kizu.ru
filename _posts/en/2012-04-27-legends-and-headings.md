@@ -2,7 +2,7 @@
 
 title: Legends and Headings
 
-layout: post_dabblet
+layout: post
 
 categories: en fun
 

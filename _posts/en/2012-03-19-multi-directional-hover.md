@@ -2,7 +2,7 @@
 
 title: Multi-directional hover
 
-layout: post_dabblet
+layout: post
 
 categories: en fun
 

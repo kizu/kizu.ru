@@ -2,7 +2,7 @@
 
 title: Многосторонний ховер
 
-layout: post_dabblet
+layout: post
 
 categories: fun
 
