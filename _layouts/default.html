@@ -37,13 +37,24 @@ layout: layout
 
 	<footer class="section">
 		<p class="copy">
-			<a class="link  link_text  link_wrapper" href="http://kizu.ru/en/">
-				© {{ site.time | date: "%Y" }}
-				<span class="link__inner">Roman Komarov</span>.
-			</a>
-			<a class="link  link_wrapper" href="https://twitter.com/kizmarh">
-				<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
-				<span class="link__inner">Follow me on twitter</span>!
-			</a>
+			{% if page.categories contains 'en' %}
+				<a class="link  link_text  link_wrapper" href="http://kizu.ru/en/">
+					© {{ site.time | date: "%Y" }}
+					<span class="link__inner">Roman Komarov</span>.
+				</a>
+				<a class="link  link_wrapper" href="https://twitter.com/kizmarh">
+					<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
+					<span class="link__inner">Follow me on twitter</span>!
+				</a>
+			{% else %}
+				<a class="link  link_text  link_wrapper" href="http://kizu.ru/">
+					© {{ site.time | date: "%Y" }}
+					<span class="link__inner">Роман Комаров</span>.
+				</a>
+				<a class="link  link_wrapper" href="https://twitter.com/ki_zu">
+					<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
+					<span class="link__inner">Читайте меня в твиттере</span>
+				</a>
+			{% endif %}
 		</p>
 	</footer>

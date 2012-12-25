@@ -10,4 +10,6 @@ categories: [fun]
 
 Попробуйте понаводить курсор на этот блок с разных сторон
 
-**[Demo at dabblet №2123396](http://dabblet.com/gist/2123396/)**
+{% assign demo = 'hovers' %}
+{% assign demo_height = '12.5em' %}
+{% include demo.html %}

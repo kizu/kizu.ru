@@ -16,10 +16,12 @@ The easiest part is the positioning of the legend to the right: use the `dire
 
 For the centered and the double one I used a hack with extra elements and stretched legend. There could be pseudos instead of some extra elements, but there were some bugs with them there, so I just used the extras here. Of course it’s not that «fair», but you can style it so it would look like borders, so… Here is a dabblet with those fieldsets and legends:
 
-**[Demo at dabblet №2502510](http://dabblet.com/gist/2502510/)**
+{% assign demo = 'legends' %}
+{% include demo.html %}
 
 And there is a simplier demo of the headings with rulers on the sides. The main point is to use only one element and to make the borders somewhat «fair», so if there would be a background, there would be visual gaps. Other similar methods I saw used the fake background on the centered item to cover the line under it.
 
 It’s sad that you can’t do multiline variant using only one element — so in that case there is one extra span. In other cases there is only the header and the pseudos — and it must degrade gracefully. So here is it’s dabblet:
 
-**[Demo at dabblet №2502535](http://dabblet.com/gist/2502535/)**
+{% assign demo = 'headings' %}
+{% include demo.html %}

@@ -1,3 +1,7 @@
 <div class="dabblet  figure">
-    <iframe class="dabblet__frame" style="height: {{ demo_height }}" width="100%" src="/demos/{{ demo }}.html"></iframe>
+    {% if demo_height %}
+        <iframe class="dabblet__frame" style="height: {{ demo_height }}" width="100%" src="/demos/{{ demo }}.html"></iframe>
+    {% else %}
+        <iframe class="dabblet__frame" height="240" width="100%" src="/demos/{{ demo }}.html"></iframe>
+    {% endif %}
 </div>

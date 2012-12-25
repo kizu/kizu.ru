@@ -42,6 +42,9 @@ body:after {
   max-width: 100%;
   margin: 0 auto;
 }
+footer.section {
+  padding-bottom: 32px;
+}
 A {
   padding: 0.25em 0;
   cursor: pointer;
