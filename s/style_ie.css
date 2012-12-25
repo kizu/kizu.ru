@@ -51,6 +51,10 @@ A {
 }
 A:hover {
   color: #0883c9;
+  background: -webkit-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -moz-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -o-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -ms-linear-gradient(#0883c9, #0883c9) repeat-x;
   background: linear-gradient(#0883c9, #0883c9) repeat-x;
   background-position: -9px 1.3em;
 }

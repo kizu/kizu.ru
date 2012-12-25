@@ -60,7 +60,13 @@ A {
 A:hover {
   color: #0883c9;
   text-shadow: -1px 0 #f8f8f8, 1px 0 #f8f8f8, -2px -1px #f8f8f8, 2px -1px #f8f8f8, 0 -1px #f8f8f8, 0 -2px #f8f8f8, 0 -3px #f8f8f8, 0 -4px #f8f8f8, 0 -5px #f8f8f8, 0 -6px #f8f8f8;
+  background: -webkit-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -moz-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -o-linear-gradient(#0883c9, #0883c9) repeat-x;
+  background: -ms-linear-gradient(#0883c9, #0883c9) repeat-x;
   background: linear-gradient(#0883c9, #0883c9) repeat-x;
+  -webkit-background-size: 1px 1px;
+  -moz-background-size: 1px 1px;
   background-size: 1px 1px;
   background-position: -9px 1.3em;
 }
@@ -173,13 +179,17 @@ UL > LI:before {
   padding: 0.3em !important;
   margin: 0 0 0 -0.3em;
   background: rgba(0,0,0,0.1);
+  -webkit-border-radius: 3px;
   border-radius: 3px;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
 }
 .dabblet {
   position: relative;
   overflow: hidden;
   margin: 1.5em auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 .dabblet__frame {
@@ -197,10 +207,19 @@ UL > LI:before {
   text-align: center;
   text-shadow: none !important;
   background: rgba(255,255,255,0.5) !important;
+  -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
+  -webkit-transition: bottom 0.2s;
+  -moz-transition: bottom 0.2s;
+  -o-transition: bottom 0.2s;
+  -ms-transition: bottom 0.2s;
   transition: bottom 0.2s;
 }
 .dabblet:not(:hover) .dabblet__link {
   bottom: -2em;
+  -webkit-transition: bottom 0.2s 1s;
+  -moz-transition: bottom 0.2s 1s;
+  -o-transition: bottom 0.2s 1s;
+  -ms-transition: bottom 0.2s 1s;
   transition: bottom 0.2s 1s;
 }
