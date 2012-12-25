@@ -1,7 +1,9 @@
 ---
 
 title: Legends and Headings
+
 layout: post_dabblet
+
 categories: [en, fun]
 
 ---

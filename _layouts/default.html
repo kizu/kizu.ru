@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html class="page page_index">
-<head>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge"/>
-	<!--[if gt IE 7]><!-->
-		<link rel="stylesheet" href="/s/style.css">
-	<!--<![endif]--><!--[if lt IE 8]><link rel="stylesheet" href="/s/style_ie.css"><![endif]-->
-    <title>{{ page.title }} — kizu.ru — blog and experiments of Roman Komarov</title>
-</head>
-<body>
+---
+layout: layout
+---
+
 	<header class="section">
 		<h1 class="title">
-			{% if page.categories contains 'fun' %}
-				Experiments
+			{% if page.categories contains 'en' %}
+				<a href="/en/">Roman Komarov</a>
 			{% else %}
-				Words
+				<a href="/">Роман Комаров</a>
 			{% endif %}
-
-			by Roman Komarov
+			{% if page.categories contains 'fun' %}
+				—
+				{% if page.categories contains 'en' %}
+					Experiments
+				{% else %}
+					Эксперименты
+				{% endif %}
+			{% endif %}
 		</h1>
 		<nav>
 			<p class="">
@@ -49,15 +47,3 @@
 			</a>
 		</p>
 	</footer>
-	<!-- Don't forget the metrika -->
-	<script>
-/* Lazy loading the fonts */
-var h = document.getElementsByTagName('head')[0];
-var link = document.createElement('link');
-link.href = '/s/font.css';
-link.type = 'text/css';
-link.rel = 'stylesheet';
-h.appendChild(link);
-	</script>
-</body>
-</html>
