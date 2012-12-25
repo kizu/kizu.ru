@@ -4,3 +4,4 @@ server: true
 markdown: rdiscount
 pygments: true
 permalink: /:categories/:title
+exclude:[stylobate]

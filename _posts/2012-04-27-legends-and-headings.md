@@ -4,7 +4,7 @@ title: Легенды и заголовки
 
 layout: post_dabblet
 
-categories: [fun]
+categories: fun
 
 ---
 

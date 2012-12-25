@@ -1,10 +1,10 @@
 ---
 
-layout: post
-
 title: Эмуляция text-overflow
 
-categories: [fun]
+layout: post
+
+categories: fun
 
 ---
 

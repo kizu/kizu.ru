@@ -4,7 +4,7 @@ title: Multi-directional hover
 
 layout: post_dabblet
 
-categories: [en, fun]
+categories: en fun
 
 ---
 

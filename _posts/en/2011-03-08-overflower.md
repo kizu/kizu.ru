@@ -1,10 +1,10 @@
 ---
 
-layout: post
-
 title: Text-overflow emulation and gradient overflow
 
-categories: [en, fun]
+layout: post
+
+categories: en fun
 
 ---
 

@@ -4,7 +4,7 @@ title: Scrolling shadows
 
 layout: post_dabblet
 
-categories: [en, fun]
+categories: en fun
 
 ---
 
