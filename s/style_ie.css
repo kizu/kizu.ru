@@ -119,32 +119,32 @@ H6 {
 }
 H1 {
   position: relative;
-  font-size: 80px;
-  line-height: 96px;
+  font-size: 64px;
+  line-height: 80px;
   padding-top: 16px;
   margin-left: -0.075em;
 }
-H2 {
+H2,
+H1.title {
   position: relative;
-  font-size: 64px;
-  line-height: 80px;
+  font-size: 48px;
+  line-height: 64px;
   margin-left: -0.05em;
 }
 H1 A:not(:hover),
 H2 A:not(:hover) {
   color: #aaa;
 }
-H3,
-H1.title {
-  font-size: 48px;
-  line-height: 64px;
+H3 {
+  font-size: 32px;
+  line-height: 32px;
   padding-top: 16px;
   padding-bottom: 16px;
 }
 H4,
 H5,
 H6 {
-  font-size: 32px;
+  font-size: 24px;
   line-height: 32px;
   padding-bottom: 16px;
 }
