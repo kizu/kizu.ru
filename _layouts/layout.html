@@ -11,7 +11,6 @@
 </head>
 <body>
 	{{ content }}
-	<!-- Don't forget the metrika -->
 	<script>
 /* Lazy loading the fonts */
 var h = document.getElementsByTagName('head')[0];
@@ -21,5 +20,6 @@ link.type = 'text/css';
 link.rel = 'stylesheet';
 h.appendChild(link);
 	</script>
+	{% include metrika.html %}
 </body>
 </html>
