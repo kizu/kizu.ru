@@ -20,11 +20,17 @@
 
 			by Roman Komarov
 		</h1>
-		{% if page.categories contains 'en' %}
-			lol en!
-		{% else %}
-			lol ru!
-		{% endif %}
+		<nav>
+			<p class="">
+				{% if page.categories contains 'en' %}
+					<a href="{{ page.url | replace:'/en/':'/' }}">ru</a>
+					<strong>en</strong>
+				{% else %}
+					<strong>ru</strong>
+					<a href="/en{{ page.url }}">en</a>
+				{% endif %}
+			</p>
+		</nav>
 	</header>
 
 	<div role="main">

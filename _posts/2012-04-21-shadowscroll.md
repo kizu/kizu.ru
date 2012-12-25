@@ -1,7 +1,7 @@
 ---
 
 title: Тени скролла
-layout: post_dabblet
+layout: post
 categories: [fun]
 
 ---
@@ -12,7 +12,8 @@ categories: [fun]
 
 У метода есть некоторое число ограничений: фон должен быть сплошным (хотя, если взять `background-attachment: fixed…`), блок должен иметь определённое позиционирование, но в остальном — метод довольно ударопрочный. Если делать не через CSS-градиенты, а используя обычные изображения, то метод должен будет заработать и в IE, но я не проверял.
 
-**Update:** [Lea Verou](https://twitter.com/leaverou) обновила мой эксперимент использовав `background-attachment: local`.[Подробности можно прочитать в её посте](http://lea.verou.me/2012/04/background-attachment-local/).
+**Update:** [Lea Verou](https://twitter.com/leaverou) обновила мой эксперимент использовав `background-attachment: local`. [Подробности можно прочитать в её посте](http://lea.verou.me/2012/04/background-attachment-local/).
 
-
-**[Demo at dabblet №2432327](http://dabblet.com/gist/2432327/)**
+{% assign demo = 'shadowscroll' %}
+{% assign demo_height = '23em' %}
+{% include demo.html %}
