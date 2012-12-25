@@ -46,7 +46,6 @@ body:after {
   display: table;
 }
 .section {
-  position: relative;
   width: 37em;
   max-width: 100%;
   margin: 0 auto;
@@ -228,4 +227,10 @@ kbd {
   -o-transition: bottom 0.2s 1s;
   -ms-transition: bottom 0.2s 1s;
   transition: bottom 0.2s 1s;
+}
+.languages {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
 }
