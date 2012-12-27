@@ -182,7 +182,7 @@ code,
 pre,
 kbd {
   font-family: Monaco, Consolas, monospace;
-  font-size: 20px;
+  font-size: 0.9em;
 }
 .figure {
   padding: 0.3em !important;

@@ -7,7 +7,7 @@ title: Ololo!
     <p>Oh hi, I'm here!</p>
     <ul>
         {% for post in site.posts %}
-            {% unless post.categories contains 'en' %}
+            {% unless post.categories contains 'en' or post.categories contains 'old' %}
                 <li>
                     <a href="{{ post.url }}">{{ post.title }}</a>
                     <span>{{ post.date | date: "%d %B, %Y" }}</span>
