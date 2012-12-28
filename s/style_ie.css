@@ -22,9 +22,9 @@ body {
   z-index: 1;
   min-width: 30em;
   height: 100%;
-  padding: 0 32px;
+  padding: 0 36px;
   margin: 0;
-  font: 22px /32px Georgia, serif;
+  font: 23px /36px Georgia, serif;
   color: rgba(37,34,14,0.92);
   background: #fbfaf4;
   -webkit-text-size-adjust: 100%;
@@ -43,22 +43,22 @@ body:after {
   margin: 0 auto;
 }
 footer.section {
-  padding-bottom: 32px;
+  padding-bottom: 36px;
 }
 A {
-  padding: 0.25em 0;
+  padding: 0.3em 0 0.287em;
   cursor: pointer;
   color: #0883c9;
   text-decoration: none;
 }
 A:hover {
   color: #0883c9;
-  background: -webkit-linear-gradient(#0883c9, #0883c9) repeat-x;
-  background: -moz-linear-gradient(#0883c9, #0883c9) repeat-x;
-  background: -o-linear-gradient(#0883c9, #0883c9) repeat-x;
-  background: -ms-linear-gradient(#0883c9, #0883c9) repeat-x;
-  background: linear-gradient(#0883c9, #0883c9) repeat-x;
-  background-position: -9px 1.3em;
+  background: -webkit-linear-gradient(#0883c9, #0883c9 1px, transparent 1px) repeat-x;
+  background: -moz-linear-gradient(#0883c9, #0883c9 1px, transparent 1px) repeat-x;
+  background: -o-linear-gradient(#0883c9, #0883c9 1px, transparent 1px) repeat-x;
+  background: -ms-linear-gradient(#0883c9, #0883c9 1px, transparent 1px) repeat-x;
+  background: linear-gradient(#0883c9, #0883c9 1px, transparent 1px) repeat-x;
+  background-position: -9px 100%;
 }
 ::selection {
   background: #b1d2fb;
@@ -103,12 +103,12 @@ CODE,
 PRE,
 TABLE {
   padding: 0;
-  margin: 0 0 32px;
+  margin: 0 0 36px;
 }
 LI,
 LI > P {
   padding: 0;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
 }
 H1,
 H2,
@@ -122,16 +122,16 @@ H6 {
 }
 H1 {
   position: relative;
-  font-size: 64px;
-  line-height: 80px;
-  padding-top: 16px;
+  font-size: 72px;
+  line-height: 90px;
+  padding-top: 18px;
   margin-left: -0.075em;
 }
 H2,
 H1.title {
   position: relative;
-  font-size: 48px;
-  line-height: 64px;
+  font-size: 54px;
+  line-height: 72px;
   margin-left: -0.05em;
 }
 H1 A:not(:hover),
@@ -139,17 +139,17 @@ H2 A:not(:hover) {
   color: rgba(37,34,14,0.48);
 }
 H3 {
-  font-size: 32px;
-  line-height: 32px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  font-size: 36px;
+  line-height: 36px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 H4,
 H5,
 H6 {
-  font-size: 24px;
-  line-height: 32px;
-  padding-bottom: 16px;
+  font-size: 27px;
+  line-height: 36px;
+  padding-bottom: 18px;
 }
 UL > LI {
   list-style-type: none;

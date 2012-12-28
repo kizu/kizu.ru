@@ -1,6 +1,6 @@
 @import '../stylobate/stylus/stylobate'
 
-$t_module = 16px
+$t_module = 18px
 
 $dark = #25220E
 
@@ -24,7 +24,7 @@ body
   padding: 0 $t_module*2;
   margin: 0
 
-  font: 22px/$t_module*2 Georgia, serif;
+  font: 23px/$t_module*2 Georgia, serif;
   color: $body_text;
   text-shadow: 0 1px #FFF;
   background: $body_bg;
@@ -50,7 +50,7 @@ footer.section
 
 // Links
 A
-  padding: .25em 0
+  padding: .3em 0 .287em
 
   cursor: pointer
 
@@ -63,9 +63,17 @@ A:hover
   text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px -1px $body_bg, 2px -1px $body_bg,
                 0 -1px $body_bg, 0 -2px $body_bg, 0 -3px $body_bg, 0 -4px $body_bg, 0 -5px $body_bg, 0 -6px $body_bg
 
-  background: linear-gradient($body_link, $body_link) repeat-x
-  background-size: 1px 1px
-  background-position: -9px 1.3em
+  background: linear-gradient($body_link, $body_link 1px, transparent 1px) repeat-x
+  background-size: 1px .44em
+  // background-position: -9px 1.08em
+  background-position: -9px 100%
+
+  h1 &
+    background-size: 1px .49em
+
+  .copy &
+    background-size: 1px .45em
+
 
 .gap_narrow
   text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px 0 $body_bg, 2px 0 $body_bg, -3px 0 $body_bg, 3px 0 $body_bg
