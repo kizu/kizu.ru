@@ -56,7 +56,9 @@ body {
 
 em, i {
     font-family: 'Cent-Italic21', Georgia, serif;
+    font-style: normal;
     }
 strong, b {
     font-family: 'Cent-Bold21', Georgia, serif;
-   }
+    font-weight: normal;
+    }
