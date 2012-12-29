@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 21em;
+  min-width: 19em;
   height: 100%;
   padding: 0 36px;
   margin: 0;
