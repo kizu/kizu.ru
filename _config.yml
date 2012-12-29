@@ -4,4 +4,4 @@ server: true
 markdown: kramdown
 pygments: true
 permalink: /:categories/:title
-exclude: [stylobate, all.styl, style.styl, style_ie.styl]
+exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]

@@ -1,3 +1,4 @@
+@import 'font_regular'
 @import '../stylobate/stylus/stylobate'
 
 $t_module = 18px
@@ -24,7 +25,7 @@ body
   padding: 0 $t_module*2;
   margin: 0
 
-  font: 23px/$t_module*2 Georgia, serif;
+  font: 23px/$t_module*2 'Cent-Regular21', Georgia, serif;
   color: $body_text;
   text-shadow: 0 1px #FFF;
   background: $body_bg;
@@ -33,9 +34,6 @@ body
   -ms-text-size-adjust: 100%
   text-rendering: optimizelegibility
   -webkit-font-smoothing: subpixel-antialiased
-
-  // To prevent the font flickering, would be restored in the end of body tag
-  visibility: hidden
 
 body:before,
 body:after
