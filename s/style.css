@@ -46,7 +46,7 @@ body:after {
   display: table;
 }
 .section {
-  width: 37em;
+  width: 38em;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -144,12 +144,12 @@ H5,
 H6 {
   padding: 0;
   margin: 0;
+  line-height: 1;
   font-weight: normal;
 }
 H1 {
   position: relative;
   font-size: 72px;
-  line-height: 90px;
   padding-top: 18px;
   margin-left: -0.075em;
 }
@@ -157,7 +157,6 @@ H2,
 H1.title {
   position: relative;
   font-size: 54px;
-  line-height: 72px;
   margin-left: -0.05em;
 }
 H1 A:not(:hover),
@@ -166,7 +165,6 @@ H2 A:not(:hover) {
 }
 H3 {
   font-size: 36px;
-  line-height: 36px;
   padding-top: 18px;
   padding-bottom: 18px;
 }
@@ -174,7 +172,6 @@ H4,
 H5,
 H6 {
   font-size: 27px;
-  line-height: 36px;
   padding-bottom: 18px;
 }
 UL > LI {
@@ -192,7 +189,7 @@ code,
 pre,
 kbd {
   font-family: Monaco, Consolas, monospace;
-  font-size: 0.9em;
+  font-size: 0.87em;
 }
 .figure {
   padding: 0.3em !important;
@@ -244,7 +241,7 @@ kbd {
 }
 .languages {
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1em;
+  top: -0.1em;
+  right: 0.6em;
+  padding: 0;
 }
