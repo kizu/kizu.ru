@@ -34,6 +34,9 @@ body
   text-rendering: optimizelegibility
   -webkit-font-smoothing: subpixel-antialiased
 
+  // To prevent the font flickering, would be restored in the end of body tag
+  visibility: hidden
+
 body:before,
 body:after
   content: ""

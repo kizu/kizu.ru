@@ -31,6 +31,7 @@ body {
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
+  visibility: hidden;
 }
 body:before,
 body:after {
