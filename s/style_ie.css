@@ -216,6 +216,19 @@ A:hover {
   font-size: 18px;
   color: rgba(37,34,14,0.62);
 }
+.feedback {
+  padding-top: 36px;
+  margin: 72px -54px 0;
+}
+.feedback__header {
+  font-size: 27px;
+}
+.feedback__content {
+  display: none;
+}
+.feedback:target > .feedback__content {
+  display: block;
+}
 P,
 UL,
 OL,
