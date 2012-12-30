@@ -33,7 +33,15 @@ page_type: post
                         {% endunless %}
                     {% endif %}
                     {% if post == item %}
-                        <li>{{ post.title }}</li>
+                        {% if post.id == page.id %}
+                            {% if post_next %}
+                                <li>Next: <a href="{{ post_next.url }}">{{ post_next.title }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                        {% if post_next.id == page.id %}
+                            <li>Prev: <a href="{{ post.url }}">{{ post.title }}</a></li>
+                        {% endif %}
+                        {% assign post_next = item %}
                     {% endif %}
                 {% endfor %}
             </ul>
