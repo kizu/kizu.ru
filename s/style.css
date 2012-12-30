@@ -58,7 +58,7 @@ body {
   position: relative;
   z-index: 1;
   min-width: 19em;
-  padding: 108px 0 144px;
+  padding: 108px 0 108px;
   margin: 0;
   text-align: center;
   font: 23px /36px 'Cent-Regular21', Georgia, serif;
@@ -119,7 +119,7 @@ body:after {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 144px;
+  height: 108px;
   background: #f0efe8;
 }
 .date,

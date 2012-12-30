@@ -1,14 +1,21 @@
 ---
 layout: default
 ---
+{% include variables.md %}
 <article class="main" role="main">
     <header>
         <h1>{{ page.title }}</h1>
-        {% if page.categories contains 'fun' %}
-            <nav class="breadcrumbs">
-                <a href="../">{% if page.categories contains 'en' %}Experiments{% else %}Эксперименты{% endif %}</a>
-            </nav>
-        {% endif %}
+        <nav class="breadcrumbs">
+            {% assign counter = 0 %}
+            {% assign path = "" %}
+            {% for item in page.categories %}
+                {% if item != 'en' %}
+                    {% capture counter %}{{ counter | plus:1 }}{% endcapture %}
+                    {% capture path %}{{ path | append:"../" }}{% endcapture %}
+                    <a href="{{ path }}">{{ site.loc | map: item | map: lang }}</a>
+                {% endif %}
+            {% endfor %}
+        </nav>
         <p class="date">{{ page.date | date: "%d %B %Y" }}</p>
     </header>
     {{ content }}

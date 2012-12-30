@@ -5,3 +5,21 @@ markdown: kramdown
 pygments: true
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
+
+loc:
+    fun:
+        ru: "Эксперименты"
+        en: "Experiments"
+    issue:
+        ru: "Заметки"
+        en: "Issues"
+    name:
+        ru: "Роман Комаров"
+        en: "Roman Komarov"
+    twitter_name:
+        ru: "ki_zu"
+        en: "kizmarh"
+    twitter_follow:
+        ru: "Читайте меня в твиттере"
+        en: "Follow me on twitter"
+
