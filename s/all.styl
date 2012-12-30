@@ -9,9 +9,14 @@ $body_bg = #FBFAF4
 $body_text = rgba($dark,.92)
 $body_link = #0883C9
 
+$distant_bg = blend(rgba($dark,.05),$body_bg)
+
+$header_size = $t_module*6
+$footer_size = $t_module*8
+
+
 // Layout etc.
 html
-  height: 100%
   padding: 0
   margin: 0
   overflow-y: scroll
@@ -21,14 +26,16 @@ body
   z-index: 1
 
   min-width: 19em
-  height: 100%
-  padding: 0 $t_module*2
+  padding: $header_size 0 $footer_size
   margin: 0
 
+  text-align: center
+
   font: 23px/$t_module*2 'Cent-Regular21', Georgia, serif
+
   color: $body_text
   text-shadow: 0 1px #FFF
-  background: $body_bg
+  background: $distant_bg
 
   -webkit-text-size-adjust: 100%
   -ms-text-size-adjust: 100%
@@ -39,15 +46,95 @@ body:before,
 body:after
   content: ""
   display: table
+  clear: both
 
-.section
-  width: 38em
-  max-width: 100%
-  margin: 0 auto
 
-footer.section
-  padding-bottom: $t_module*2
+.main
+  position: relative
+  z-index: 9
 
+  padding: 3*$t_module
+
+  background: $body_bg
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
+
+  & > p,
+  & > ul,
+  & > ol,
+  & > pre
+    width: 38em
+    max-width: 100%
+    margin-left: auto
+    margin-right: auto
+
+    text-align: left
+
+.main header h1
+  padding-bottom: 1em
+
+.header
+  position: absolute
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  height: $header_size
+
+  background: $distant_bg
+
+
+.title
+  padding-top: $t_module*1.5
+
+  font-size: $t_module*3.5
+
+.title A:not(:hover)
+  color: rgba($dark,.48)
+
+
+.footer
+  position: absolute
+  position: fixed
+  right: 0
+  bottom: 0
+  left: 0
+  height: $footer_size
+
+  background: $distant_bg
+
+.date,
+.breadcrumbs
+  position: absolute
+  top: 0
+  right: 0
+
+  padding: 0 $t_module*0.5
+
+  font-size: $t_module
+
+  color: rgba($dark, 0.3)
+
+.breadcrumbs
+  left: 0
+  right: auto
+
+  & > A:before
+    content: "←"
+
+    display: inline-block
+
+    padding: $t_module*0.5
+
+    margin: -.4em 0 0 -0.5*$t_module
+
+    vertical-align: middle
+
+    font: .9em/1 Arial, sans-serif
+
+    background: $body_bg
+
+  & > A:not(:hover)
+    color: rgba($dark,.48)
 
 // Links
 A
@@ -64,13 +151,16 @@ A:hover
   text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px -1px $body_bg, 2px -1px $body_bg,
                 0 -1px $body_bg, 0 -2px $body_bg, 0 -3px $body_bg, 0 -4px $body_bg, 0 -5px $body_bg, 0 -6px $body_bg
 
-  background: linear-gradient($body_link, $body_link 1px, transparent 1px) repeat-x
+  background: linear-gradient($body_link, $body_link 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x
   background-size: 1px .44em
   // background-position: -9px 1.08em
   background-position: -9px 100%
 
-  h1 &
-    background-size: 1px .49em
+  .title &
+    background-image: linear-gradient($body_link, $body_link 2px, rgba(255,255,255,.9) 2px, rgba(255,255,255,.9) 3px, transparent 3px)
+    background-size: 1px .47em
+    text-shadow: 0 1px rgba(255,255,255,.9), -2px 0 $distant_bg, 2px 0 $distant_bg
+
 
   .copy &
     background-size: 1px .45em
@@ -161,17 +251,9 @@ H1
   padding-top: $t_module
   margin-left: -.075em
 
-// Add before/after when it's a link (not on home page? )
-H2,
-H1.title
+H2
   position: relative
   font-size: $t_module*3
-  margin-left: -.05em
-
-H1 A:not(:hover),
-H2 A:not(:hover)
-  color: rgba($dark,.48)
-
 
 H3
   font-size: $t_module * 2
@@ -183,16 +265,27 @@ H6
   font-size: $t_module * 1.5
   padding-bottom: $t_module
 
-UL > LI
-  list-style-type: none
+OL
+  counter-reset: list
 
-UL > LI:before
+LI
+  list-style-type: none
+  padding-left: 1.5*$t_module
+
+LI:before,
+LI:before
   content: "— "
   position: absolute
   display: inline-block
-  width: 2em
-  margin-left: -2em
-  text-align: right
+  width: 1.5*$t_module
+  margin-left: -1.5*$t_module
+  text-align: left
+
+OL > LI
+  counter-increment: list
+
+OL > LI:before
+  content: counter(list) "."
 
 code,
 pre,

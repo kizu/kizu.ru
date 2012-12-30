@@ -2,40 +2,28 @@
 layout: layout
 ---
 
-	<header class="section">
+	<header class="header">
 		<h1 class="title">
 			{% if page.categories contains 'en' %}
 				<a href="/en/">Roman Komarov</a>
 			{% else %}
 				<a href="/">Роман Комаров</a>
 			{% endif %}
-			{% if page.categories contains 'fun' %}
-				—
-				{% if page.categories contains 'en' %}
-					Experiments
-				{% else %}
-					Эксперименты
-				{% endif %}
-			{% endif %}
 		</h1>
 		<nav>
 			<p class="languages">
 				{% if page.categories contains 'en' %}
-					<a href="{{ page.url | replace:'/en/':'/' }}">ru</a>
-					<strong>en</strong>
+					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
 				{% else %}
-					<strong>ru</strong>
-					<a href="/en{{ page.url | remove:'index.html' }}">en</a>
+					<a href="/en{{ page.url | remove:'index.html' }}">in english</a>
 				{% endif %}
 			</p>
 		</nav>
 	</header>
 
-	<div role="main">
-		{{ content }}
-	</div>
+	{{ content }}
 
-	<footer class="section">
+	<footer class="footer">
 		<hr/>
 		<p>
 			<ul>
