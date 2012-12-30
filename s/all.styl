@@ -102,6 +102,30 @@ body:after
 
   background: $distant_bg
 
+.footer .prevnext
+  overflow: hidden
+
+  padding-bottom: $t_module
+
+  font-size: $t_module
+
+.footer .link_prev,
+.footer .link_next
+  padding-right: $t_module
+  padding-left: $t_module
+
+.footer .link_prev
+  float: left
+
+  &:before
+    content: "← "
+
+.footer .link_next
+  float: right
+
+  &:after
+    content: " →"
+
 .date,
 .breadcrumbs
   position: absolute
@@ -118,20 +142,19 @@ body:after
   left: 0
   right: auto
 
-  & > A:before
-    content: "←"
+  & > A:first-child:before
+    content: "↑"
 
     display: inline-block
 
-    padding: $t_module*0.5
+    padding-left: $t_module*0.5
+    padding-right: $t_module*0.5
 
-    margin: -.4em 0 0 -0.5*$t_module
+    margin: -.6em 0 0 -0.5*$t_module
 
     vertical-align: middle
 
     font: .9em/1 Arial, sans-serif
-
-    background: $body_bg
 
   & > A:not(:hover)
     color: rgba($dark,.48)
@@ -161,9 +184,11 @@ A:hover
     background-size: 1px .47em
     text-shadow: 0 1px rgba(255,255,255,.9), -2px 0 $distant_bg, 2px 0 $distant_bg
 
-
-  .copy &
+  .header &,
+  .footer &
     background-size: 1px .45em
+    text-shadow: -1px 0 $distant_bg, 1px 0 $distant_bg, -2px -1px $distant_bg, 2px -1px $distant_bg,
+                  0 -1px $distant_bg, 0 -2px $distant_bg, 0 -3px $distant_bg, 0 -4px $distant_bg, 0 -5px $distant_bg, 0 -6px $distant_bg
 
 
 .gap_narrow
@@ -188,7 +213,8 @@ A:hover
 
 
 .link_wrapper:hover .link__inner
-  padding: inherit
+  padding-top: inherit
+  padding-bottom: inherit
   background: inherit
   background-repeat: repeat-x
 

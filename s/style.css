@@ -122,6 +122,28 @@ body:after {
   height: 108px;
   background: #f0efe8;
 }
+.footer .prevnext {
+  overflow: hidden;
+  padding-bottom: 18px;
+  font-size: 18px;
+}
+.footer .link_prev,
+.footer .link_next {
+  padding-right: 18px;
+  padding-left: 18px;
+}
+.footer .link_prev {
+  float: left;
+}
+.footer .link_prev:before {
+  content: "← ";
+}
+.footer .link_next {
+  float: right;
+}
+.footer .link_next:after {
+  content: " →";
+}
 .date,
 .breadcrumbs {
   position: absolute;
@@ -135,14 +157,14 @@ body:after {
   left: 0;
   right: auto;
 }
-.breadcrumbs > A:before {
-  content: "←";
+.breadcrumbs > A:first-child:before {
+  content: "↑";
   display: inline-block;
-  padding: 9px;
-  margin: -0.4em 0 0 -9px;
+  padding-left: 9px;
+  padding-right: 9px;
+  margin: -0.6em 0 0 -9px;
   vertical-align: middle;
   font: 0.9em/1 Arial, sans-serif;
-  background: #fbfaf4;
 }
 .breadcrumbs > A:not(:hover) {
   color: rgba(37,34,14,0.48);
@@ -177,10 +199,12 @@ A:hover {
   background-size: 1px 0.47em;
   text-shadow: 0 1px rgba(255,255,255,0.9), -2px 0 #f0efe8, 2px 0 #f0efe8;
 }
-.copy A:hover {
+.header A:hover,
+.footer A:hover {
   -webkit-background-size: 1px 0.45em;
   -moz-background-size: 1px 0.45em;
   background-size: 1px 0.45em;
+  text-shadow: -1px 0 #f0efe8, 1px 0 #f0efe8, -2px -1px #f0efe8, 2px -1px #f0efe8, 0 -1px #f0efe8, 0 -2px #f0efe8, 0 -3px #f0efe8, 0 -4px #f0efe8, 0 -5px #f0efe8, 0 -6px #f0efe8;
 }
 .gap_narrow {
   text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px 0 #fbfaf4, 2px 0 #fbfaf4, -3px 0 #fbfaf4, 3px 0 #fbfaf4;
@@ -200,7 +224,8 @@ A:hover {
   background-repeat: no-repeat;
 }
 .link_wrapper:hover .link__inner {
-  padding: inherit;
+  padding-top: inherit;
+  padding-bottom: inherit;
   background: inherit;
   background-repeat: repeat-x;
 }

@@ -20,40 +20,29 @@ layout: layout
 	{{ content }}
 
 	<footer class="footer">
-		<ul style="display: none">
-			{% assign filename = page.url %}
-			{% for item in page.categories %}
-			    {% capture remove %}{{ item }}/{% endcapture %}
-			    {% capture filename %}{{ filename | remove:remove }}{% endcapture %}
-			{% endfor %}
-	    	{% capture filename %}{% unless filename == '/en/' or filename == '/index.html' %}_posts/{% endunless %}{% if page.categories contains 'en' %}en/{% endif %}{{ page.date | date: "%Y-%m-%d-" }}{% if filename == '/en/' %}index_{% endif %}{{ filename | remove:'/' | remove_first:'.html' }}{% unless filename == '/en/' or filename == '/index.html' %}.md{% else %}.html{% endunless %}{% endcapture %}
-
-				<li><a href="https://github.com/kizu/kizu.github.com/blob/master/{{ filename }}">
-					{% if page.categories contains 'en' %}
-						See the source of this page at GitHub
-					{% else %}
-						Исходный код этой страницы на Гитхабе
-					{% endif %}
-				</a></li>
-			<li>
-				<form action="https://github.com/kizu/kizu.github.com/issues/new" method="get">
-					{% if page.categories contains 'en' %}
-						<input name="title" hidden="hidden" type="text" value="Feedback for “{{ page.title }}”" />
-					{% else %}
-						<input name="title" hidden="hidden" type="text" value="Отзыв на «{{ page.title }}»" />
-					{% endif %}
-					<label>
-						{% if page.categories contains 'en' %}
-							A shortcut to creating a new issue for this page
-						{% else %}
-							Быстрый переход к созданию issue про эту страницу
-						{% endif %}
-						<textarea style="display:block;" name="body" id="Body" cols="30" rows="10"></textarea>
-					</label>
-					<button>Jump to GitHub</button>
-				</form>
-			</li>
-		</ul>
+        <nav class="prevnext">
+            {% for item in site.posts %}
+                {% if lang == 'en' and item.categories contains 'en' %}
+                    {% assign post = item %}
+                {% endif %}
+                {% if lang == 'ru' %}
+                    {% unless item.categories contains 'en' %}
+                        {% assign post = item %}
+                    {% endunless %}
+                {% endif %}
+                {% if post == item %}
+                    {% if post_next.id == page.id %}
+                        <a class="link link_wrapper link_prev" href="{{ post.url }}/#Content"><span class="link__inner">{{ post.title }}</span></a>
+                    {% endif %}
+                    {% if post.id == page.id %}
+                        {% if post_next %}
+                            <a class="link link_wrapper link_next" href="{{ post_next.url }}/#Content"><span class="link__inner">{{ post_next.title }}</span></a>
+                        {% endif %}
+                    {% endif %}
+                    {% assign post_next = item %}
+                {% endif %}
+            {% endfor %}
+        </nav>
 		<p class="copy">
 			<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
 				© {{ site.time | date: "%Y" }}

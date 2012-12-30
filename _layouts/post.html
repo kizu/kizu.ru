@@ -3,7 +3,7 @@ layout: default
 page_type: post
 ---
 {% include variables.md %}
-<article class="main" role="main">
+<article class="main" role="main" id="Content">
     <header>
         <h1>{{ page.title }}</h1>
         <nav class="breadcrumbs">
@@ -13,7 +13,7 @@ page_type: post
                 {% if item != 'en' %}
                     {% capture counter %}{{ counter | plus:1 }}{% endcapture %}
                     {% capture path %}{{ path | append:"../" }}{% endcapture %}
-                    <a href="{{ path }}">{{ site.loc | map: item | map: lang }}</a>
+                    <a class="link link_wrapper" href="{{ path }}"><span class="link__inner">{{ site.loc | map: item | map: lang }}</span></a>
                 {% endif %}
             {% endfor %}
         </nav>
@@ -21,30 +21,39 @@ page_type: post
     </header>
     {{ content }}
     <aside>
-        <nav>
-            <ul>
-                {% for item in site.posts %}
-                    {% if lang == 'en' and item.categories contains 'en' %}
-                        {% assign post = item %}
+        <ul>
+            {% assign filename = page.url %}
+            {% for item in page.categories %}
+                {% capture remove %}{{ item }}/{% endcapture %}
+                {% capture filename %}{{ filename | remove:remove }}{% endcapture %}
+            {% endfor %}
+            {% capture filename %}{% unless filename == '/en/' or filename == '/index.html' %}_posts/{% endunless %}{% if page.categories contains 'en' %}en/{% endif %}{{ page.date | date: "%Y-%m-%d-" }}{% if filename == '/en/' %}index_{% endif %}{{ filename | remove:'/' | remove_first:'.html' }}{% unless filename == '/en/' or filename == '/index.html' %}.md{% else %}.html{% endunless %}{% endcapture %}
+
+                <li><a href="https://github.com/kizu/kizu.github.com/blob/master/{{ filename }}">
+                    {% if page.categories contains 'en' %}
+                        See the source of this page at GitHub
+                    {% else %}
+                        Исходный код этой страницы на Гитхабе
                     {% endif %}
-                    {% if lang == 'ru' %}
-                        {% unless item.categories contains 'en' %}
-                            {% assign post = item %}
-                        {% endunless %}
+                </a></li>
+            <li>
+                <form action="https://github.com/kizu/kizu.github.com/issues/new" method="get">
+                    {% if page.categories contains 'en' %}
+                        <input name="title" hidden="hidden" type="text" value="Feedback for “{{ page.title }}”" />
+                    {% else %}
+                        <input name="title" hidden="hidden" type="text" value="Отзыв на «{{ page.title }}»" />
                     {% endif %}
-                    {% if post == item %}
-                        {% if post.id == page.id %}
-                            {% if post_next %}
-                                <li>Next: <a href="{{ post_next.url }}">{{ post_next.title }}</a></li>
-                            {% endif %}
+                    <label>
+                        {% if page.categories contains 'en' %}
+                            A shortcut to creating a new issue for this page
+                        {% else %}
+                            Быстрый переход к созданию issue про эту страницу
                         {% endif %}
-                        {% if post_next.id == page.id %}
-                            <li>Prev: <a href="{{ post.url }}">{{ post.title }}</a></li>
-                        {% endif %}
-                        {% assign post_next = item %}
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </nav>
+                        <textarea style="display:block;" name="body" id="Body" cols="30" rows="10"></textarea>
+                    </label>
+                    <button>Jump to GitHub</button>
+                </form>
+            </li>
+        </ul>
     </aside>
 </article>

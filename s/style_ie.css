@@ -112,6 +112,28 @@ body:after {
   height: 108px;
   background: #f0efe8;
 }
+.footer .prevnext {
+  overflow: hidden;
+  padding-bottom: 18px;
+  font-size: 18px;
+}
+.footer .link_prev,
+.footer .link_next {
+  padding-right: 18px;
+  padding-left: 18px;
+}
+.footer .link_prev {
+  float: left;
+}
+.footer .link_prev:before {
+  content: "← ";
+}
+.footer .link_next {
+  float: right;
+}
+.footer .link_next:after {
+  content: " →";
+}
 .date,
 .breadcrumbs {
   position: absolute;
@@ -125,15 +147,15 @@ body:after {
   left: 0;
   right: auto;
 }
-.breadcrumbs > A:before {
-  content: "←";
+.breadcrumbs > A:first-child:before {
+  content: "↑";
   display: inline;
   zoom: 1;
-  padding: 9px;
-  margin: -0.4em 0 0 -9px;
+  padding-left: 9px;
+  padding-right: 9px;
+  margin: -0.6em 0 0 -9px;
   vertical-align: middle;
   font: 0.9em/1 Arial, sans-serif;
-  background: #fbfaf4;
 }
 .breadcrumbs > A:not(:hover) {
   color: rgba(37,34,14,0.48);
@@ -174,7 +196,8 @@ A:hover {
   background-repeat: no-repeat;
 }
 .link_wrapper:hover .link__inner {
-  padding: inherit;
+  padding-top: inherit;
+  padding-bottom: inherit;
   background: inherit;
   background-repeat: repeat-x;
 }
