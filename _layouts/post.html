@@ -20,4 +20,25 @@ page_type: post
         <p class="date">{{ page.date | date: "%d %B %Y" }}</p>
     </header>
     {{ content }}
+    <aside>
+        {% if category != "" %}
+        <nav>
+            <ul>
+                {% for item in site.categories[category] %}
+                    {% if lang == 'en' and item.categories contains 'en' %}
+                        {% assign post = item %}
+                    {% endif %}
+                    {% if lang == 'ru' %}
+                        {% unless item.categories contains 'en' %}
+                            {% assign post = item %}
+                        {% endunless %}
+                    {% endif %}
+                    {% if post == item %}
+                        <li>{{ post.title }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+        {% endif %}
+    </aside>
 </article>
