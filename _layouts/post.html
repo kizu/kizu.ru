@@ -21,10 +21,9 @@ page_type: post
     </header>
     {{ content }}
     <aside>
-        {% if category != "" %}
         <nav>
             <ul>
-                {% for item in site.categories[category] %}
+                {% for item in site.posts %}
                     {% if lang == 'en' and item.categories contains 'en' %}
                         {% assign post = item %}
                     {% endif %}
@@ -39,6 +38,5 @@ page_type: post
                 {% endfor %}
             </ul>
         </nav>
-        {% endif %}
     </aside>
 </article>
