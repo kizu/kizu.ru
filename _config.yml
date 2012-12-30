@@ -10,7 +10,7 @@ loc:
     fun:
         ru: "Эксперименты"
         en: "Experiments"
-    issue:
+    issues:
         ru: "Заметки"
         en: "Issues"
     name:
