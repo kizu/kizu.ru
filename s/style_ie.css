@@ -370,22 +370,24 @@ kbd {
 }
 .figure {
   padding: 0.3em !important;
-  margin: 0 0 0 -0.3em;
+  margin: 0 0.6em 0 -0.3em;
+  margin: 0 2.5vw 0 -0.3em;
   background: rgba(0,0,0,0.1);
 }
-.dabblet {
+.demo {
   position: relative;
   overflow: hidden;
-  margin: 1.5em auto;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
-.dabblet__frame {
+.demo__frame {
   display: block;
   height: 26em;
   padding: 0;
   margin: 0;
   border: 0;
 }
-.dabblet__link {
+.demo__link {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -393,7 +395,7 @@ kbd {
   text-align: center;
   background: rgba(255,255,255,0.5) !important;
 }
-.dabblet:not(:hover) .dabblet__link {
+.demo:not(:hover) .demo__link {
   bottom: -2em;
 }
 .languages {

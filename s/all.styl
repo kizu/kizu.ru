@@ -400,22 +400,24 @@ kbd
 
 .figure
   padding: .3em !important
-  margin: 0 0 0 -.3em
+  margin: 0 0.6em 0 -0.3em
+  margin: 0 2.5vw 0 -0.3em
 
   background: rgba(0,0,0,0.1)
 
   border-radius: 3px
   box-shadow: 0 0 0 1px rgba(0,0,0,.2)
 
-.dabblet
+.demo
   position: relative
 
   overflow: hidden
 
-  margin: 1.5em auto
+  margin-top: 1.5em
+  margin-bottom: 1.5em
   box-sizing: border-box
 
-.dabblet__frame
+.demo__frame
   display: block
 
   height: 26em
@@ -423,7 +425,7 @@ kbd
   margin: 0
   border: 0
 
-.dabblet__link
+.demo__link
   position: absolute
   right: 0
   bottom: 0
@@ -437,7 +439,7 @@ kbd
   border-radius: 4px 4px 0 0
   transition: bottom .2s
 
-.dabblet:not(:hover) .dabblet__link
+.demo:not(:hover) .demo__link
   bottom: -2em
   transition: bottom .2s 1s
 
