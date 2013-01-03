@@ -23,11 +23,11 @@ layout: layout
                 {% endif %}
                 {% if post == item %}
                     {% if post_next.id == page.id %}
-                        <a class="link link_wrapper link_prev" href="{{ post.url }}/#Content"><span class="link__inner">{{ post.title }}</span></a>
+                        <a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ post.title }}</span></a>
                     {% endif %}
                     {% if post.id == page.id %}
                         {% if post_next %}
-                            <a class="link link_wrapper link_next" href="{{ post_next.url }}/#Content"><span class="link__inner">{{ post_next.title }}</span></a>
+                            <a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ post_next.title }}</span></a>
                         {% endif %}
                     {% endif %}
                     {% assign post_next = item %}
