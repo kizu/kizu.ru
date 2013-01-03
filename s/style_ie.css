@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 450px;
+  min-width: 468px;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -73,7 +73,7 @@ body:after {
   position: relative;
   z-index: 9;
   padding: 54px 1.5em;
-  padding: 54px 5vw;
+  padding: 54px 7vw;
   background: #fbfaf4;
 }
 .main > header,
@@ -112,7 +112,7 @@ body:after {
   left: 0;
   height: 108px;
   padding: 0 27px;
-  padding: 0 5vw;
+  padding: 0 7vw;
   white-space: nowrap;
   background: #f0efe8;
 }
@@ -240,7 +240,7 @@ A:hover {
 .feedback {
   padding-top: 36px;
   margin: 72px -27px 0;
-  margin: 72px -5vw 0;
+  margin: 72px -7vw 0;
 }
 .feedback__header {
   font-size: 27px;
