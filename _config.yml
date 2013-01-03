@@ -13,6 +13,9 @@ loc:
     issues:
         ru: "Заметки"
         en: "Issues"
+    old:
+        ru: "Старое"
+        en: "Old"
     name:
         ru: "Роман Комаров"
         en: "Roman Komarov"

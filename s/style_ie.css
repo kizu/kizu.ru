@@ -46,21 +46,22 @@ html {
   padding: 0;
   margin: 0;
   overflow-y: scroll;
-}
-body {
-  position: relative;
-  z-index: 1;
-  min-width: 19em;
-  padding: 108px 0 108px;
-  margin: 0;
   text-align: center;
-  font: 23px /36px 'Cent-Regular21', Georgia, serif;
+  font-size: 18px;
   color: rgba(37,34,14,0.92);
   background: #f0efe8;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+body {
+  position: relative;
+  z-index: 1;
+  min-width: 19em;
+  font: 23px/36px 'Cent-Regular21', Georgia, serif;
+  padding: 108px 0 108px;
+  margin: 0;
 }
 body:before,
 body:after {
@@ -74,15 +75,26 @@ body:after {
   padding: 54px;
   background: #fbfaf4;
 }
+.main > h1,
+.main > h2,
+.main > h3,
+.main > h4,
+.main > h5,
+.main > h6,
 .main > p,
 .main > ul,
 .main > ol,
-.main > pre {
-  width: 38em;
+.main > pre,
+.main > dl {
+  width: 882px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+}
+.main > table {
+  display: inline;
+  zoom: 1;
 }
 .main header h1 {
   padding-bottom: 1em;
@@ -244,7 +256,7 @@ TABLE {
 LI,
 LI > P {
   padding: 0;
-  margin: 0 0 18px;
+  margin: 0 0 28px;
 }
 h1,
 H2,
@@ -276,7 +288,7 @@ H3 {
 H4,
 H5,
 H6 {
-  font-size: 27px;
+  font-size: 18px;
   padding-bottom: 18px;
 }
 OL {

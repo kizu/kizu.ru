@@ -1,7 +1,12 @@
 @import 'font_regular'
 @import '../stylobate/stylus/stylobate'
 
-$t_module = 18px
+// rem! as we can't redefine it in Stylus, we can use the var for it.
+//   Can be used as `2*rem` — almost like normal units, but with asteriks.
+//   Also, it would fallback to pixels in IE automagically.
+rem_px = 18px
+rem = 1rem
+rem = rem_px if ie
 
 $dark = #25220E
 
@@ -11,8 +16,8 @@ $body_link = #0883C9
 
 $distant_bg = blend(rgba($dark,.05),$body_bg)
 
-$header_size = $t_module*6
-$footer_size = $t_module*6
+$header_size = 6*rem
+$footer_size = 6*rem
 
 
 // Layout etc.
@@ -21,18 +26,9 @@ html
   margin: 0
   overflow-y: scroll
 
-body
-  position: relative
-  z-index: 1
-
-  min-width: 19em
-  padding: $header_size 0 $footer_size
-  margin: 0
-
   text-align: center
 
-  font: 23px/$t_module*2 'Cent-Regular21', Georgia, serif
-
+  font-size: 1*rem_px
   color: $body_text
   text-shadow: 0 1px #FFF
   background: $distant_bg
@@ -41,6 +37,15 @@ body
   -ms-text-size-adjust: 100%
   text-rendering: optimizelegibility
   -webkit-font-smoothing: subpixel-antialiased
+
+body
+  position: relative
+  z-index: 1
+
+  min-width: 19em
+  font: 23px/2*rem 'Cent-Regular21', Georgia, serif
+  padding: $header_size 0 $footer_size
+  margin: 0
 
 body:before,
 body:after
@@ -53,21 +58,31 @@ body:after
   position: relative
   z-index: 9
 
-  padding: 3*$t_module
+  padding: 3*rem
 
   background: $body_bg
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
 
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
   & > p,
   & > ul,
   & > ol,
-  & > pre
-    width: 38em
+  & > pre,
+  & > dl
+    width: 49*rem
     max-width: 100%
     margin-left: auto
     margin-right: auto
 
     text-align: left
+
+  & > table
+    display: inline-block
 
 .main header h1
   padding-bottom: 1em
@@ -84,9 +99,9 @@ body:after
 
 
 .title
-  padding-top: $t_module*1.5
+  padding-top: 1.5*rem
 
-  font-size: $t_module*3.5
+  font-size: 3.5*rem
 
 .title A:not(:hover)
   color: rgba($dark,.48)
@@ -105,14 +120,14 @@ body:after
 .footer .prevnext
   overflow: hidden
 
-  padding-bottom: $t_module
+  padding-bottom: 1*rem
 
-  font-size: $t_module
+  font-size: 1*rem
 
 .footer .link_prev,
 .footer .link_next
-  padding-right: $t_module
-  padding-left: $t_module
+  padding-right: 1*rem
+  padding-left: 1*rem
 
 .footer .link_prev
   float: left
@@ -132,9 +147,9 @@ body:after
   top: 0
   right: 0
 
-  padding: 0 $t_module*0.5
+  padding: 0 0.5*rem
 
-  font-size: $t_module
+  font-size: 1*rem
 
   color: rgba($dark, 0.3)
 
@@ -147,10 +162,10 @@ body:after
 
     display: inline-block
 
-    padding-left: $t_module*0.5
-    padding-right: $t_module*0.5
+    padding-left: 0.5*rem
+    padding-right: 0.5*rem
 
-    margin: -.6em 0 0 -0.5*$t_module
+    margin: -.6em 0 0 -0.5*rem
 
     vertical-align: middle
 
@@ -242,12 +257,12 @@ A:hover
 .feedback
   box-shadow: inset 0 1px 0 rgba($dark, 0.2)
 
-  padding-top: 2*$t_module
+  padding-top: 2*rem
 
-  margin: 4*$t_module -3*$t_module 0
+  margin: 4*rem -3*rem 0
 
 .feedback__header
-  font-size: 1.5*$t_module
+  font-size: 1.5*rem
 
 .feedback__content
   display: none
@@ -267,12 +282,12 @@ CODE,
 PRE,
 TABLE
   padding: 0
-  margin: 0 0 $t_module*2
+  margin: 0 0 2*rem
 
 LI,
 LI > P
   padding: 0
-  margin: 0 0 $t_module
+  margin: 0 0 su
 
 h1,
 H2,
@@ -289,38 +304,38 @@ H6
 
 H1
   position: relative
-  font-size: $t_module*4
-  padding-top: $t_module
+  font-size: 4*rem
+  padding-top: 1*rem
   margin-left: -.075em
 
 H2
   position: relative
-  font-size: $t_module*3
+  font-size: 3*rem
 
 H3
-  font-size: $t_module * 2
-  padding-top: $t_module
-  padding-bottom: $t_module
+  font-size: 2*rem
+  padding-top: 1*rem
+  padding-bottom: 1*rem
 H4,
 H5,
 H6
-  font-size: $t_module * 1.5
-  padding-bottom: $t_module
+  font-size: 1*rem
+  padding-bottom: 1*rem
 
 OL
   counter-reset: list
 
 LI
   list-style-type: none
-  padding-left: 1.5*$t_module
+  padding-left: 1.5*rem
 
 LI:before,
 LI:before
   content: "— "
   position: absolute
   display: inline-block
-  width: 1.5*$t_module
-  margin-left: -1.5*$t_module
+  width: 1.5*rem
+  margin-left: -1.5*rem
   text-align: left
 
 OL > LI

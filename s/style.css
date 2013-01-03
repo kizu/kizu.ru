@@ -53,15 +53,8 @@ html {
   padding: 0;
   margin: 0;
   overflow-y: scroll;
-}
-body {
-  position: relative;
-  z-index: 1;
-  min-width: 19em;
-  padding: 108px 0 108px;
-  margin: 0;
   text-align: center;
-  font: 23px /36px 'Cent-Regular21', Georgia, serif;
+  font-size: 18px;
   color: rgba(37,34,14,0.92);
   text-shadow: 0 1px #fff;
   background: #f0efe8;
@@ -69,6 +62,14 @@ body {
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+body {
+  position: relative;
+  z-index: 1;
+  min-width: 19em;
+  font: 23px/2rem 'Cent-Regular21', Georgia, serif;
+  padding: 6rem 0 6rem;
+  margin: 0;
 }
 body:before,
 body:after {
@@ -79,20 +80,30 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 54px;
+  padding: 3rem;
   background: #fbfaf4;
   -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
 }
+.main > h1,
+.main > h2,
+.main > h3,
+.main > h4,
+.main > h5,
+.main > h6,
 .main > p,
 .main > ul,
 .main > ol,
-.main > pre {
-  width: 38em;
+.main > pre,
+.main > dl {
+  width: 49rem;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+}
+.main > table {
+  display: inline-block;
 }
 .main header h1 {
   padding-bottom: 1em;
@@ -103,12 +114,12 @@ body:after {
   top: 0;
   right: 0;
   left: 0;
-  height: 108px;
+  height: 6rem;
   background: #f0efe8;
 }
 .title {
-  padding-top: 27px;
-  font-size: 63px;
+  padding-top: 1.5rem;
+  font-size: 3.5rem;
 }
 .title A:not(:hover) {
   color: rgba(37,34,14,0.48);
@@ -119,18 +130,18 @@ body:after {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 108px;
+  height: 6rem;
   background: #f0efe8;
 }
 .footer .prevnext {
   overflow: hidden;
-  padding-bottom: 18px;
-  font-size: 18px;
+  padding-bottom: 1rem;
+  font-size: 1rem;
 }
 .footer .link_prev,
 .footer .link_next {
-  padding-right: 18px;
-  padding-left: 18px;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 .footer .link_prev {
   float: left;
@@ -149,8 +160,8 @@ body:after {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0 9px;
-  font-size: 18px;
+  padding: 0 0.5rem;
+  font-size: 1rem;
   color: rgba(37,34,14,0.3);
 }
 .breadcrumbs {
@@ -160,9 +171,9 @@ body:after {
 .breadcrumbs > A:first-child:before {
   content: "↑";
   display: inline-block;
-  padding-left: 9px;
-  padding-right: 9px;
-  margin: -0.6em 0 0 -9px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: -0.6em 0 0 -0.5rem;
   vertical-align: middle;
   font: 0.9em/1 Arial, sans-serif;
 }
@@ -247,11 +258,11 @@ A:hover {
 .feedback {
   -webkit-box-shadow: inset 0 1px 0 rgba(37,34,14,0.2);
   box-shadow: inset 0 1px 0 rgba(37,34,14,0.2);
-  padding-top: 36px;
-  margin: 72px -54px 0;
+  padding-top: 2rem;
+  margin: 4rem -3rem 0;
 }
 .feedback__header {
-  font-size: 27px;
+  font-size: 1.5rem;
 }
 .feedback__content {
   display: none;
@@ -269,12 +280,12 @@ CODE,
 PRE,
 TABLE {
   padding: 0;
-  margin: 0 0 36px;
+  margin: 0 0 2rem;
 }
 LI,
 LI > P {
   padding: 0;
-  margin: 0 0 18px;
+  margin: 0 0 28px;
 }
 h1,
 H2,
@@ -290,39 +301,39 @@ H6 {
 }
 H1 {
   position: relative;
-  font-size: 72px;
-  padding-top: 18px;
+  font-size: 4rem;
+  padding-top: 1rem;
   margin-left: -0.075em;
 }
 H2 {
   position: relative;
-  font-size: 54px;
+  font-size: 3rem;
 }
 H3 {
-  font-size: 36px;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  font-size: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 H4,
 H5,
 H6 {
-  font-size: 27px;
-  padding-bottom: 18px;
+  font-size: 1rem;
+  padding-bottom: 1rem;
 }
 OL {
   counter-reset: list;
 }
 LI {
   list-style-type: none;
-  padding-left: 27px;
+  padding-left: 1.5rem;
 }
 LI:before,
 LI:before {
   content: "— ";
   position: absolute;
   display: inline-block;
-  width: 27px;
-  margin-left: -27px;
+  width: 1.5rem;
+  margin-left: -1.5rem;
   text-align: left;
 }
 OL > LI {
