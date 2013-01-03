@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 486px;
+  min-width: 477px;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -302,15 +302,17 @@ H6 {
   padding-bottom: 18px;
 }
 @media (max-width: 550px) {
-  H1,
   H1.title {
     font-size: 3rem;
   }
+  H1 {
+    font-size: 2rem;
+  }
   H2 {
-    font-size: 36px;
+    font-size: 27px;
   }
   H3 {
-    font-size: 27px;
+    font-size: 22.5px;
   }
 }
 OL {

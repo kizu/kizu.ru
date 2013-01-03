@@ -331,15 +331,17 @@ H6 {
   padding-bottom: 1rem;
 }
 @media (max-width: 550px) {
-  H1,
   H1.title {
     font-size: 3rem;
   }
-  H2 {
+  H1 {
     font-size: 2rem;
   }
-  H3 {
+  H2 {
     font-size: 1.5rem;
+  }
+  H3 {
+    font-size: 1.25rem;
   }
 }
 OL {
