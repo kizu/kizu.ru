@@ -10,17 +10,7 @@ page_type: post
     {{ content }}
     <p class="published">
         {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}
-
-        {% assign counter = 0 %}
-        {% assign path = "" %}
-        {% for item in page.categories %}
-            {% if item != 'en' %}
-                {{ site.loc | map: "in" | map: lang }}
-                {% capture counter %}{{ counter | plus:1 }}{% endcapture %}
-                {% capture path %}{{ path | append:"../" }}{% endcapture %}
-                <a class="link" href="{{ path }}">{{ site.loc | map: item | map: "_in_" | map: lang }}</a>
-            {% endif %}
-        {% endfor %}
+        {% assign list_categories = page.categories %}{% include list_categories.html %}
     </p>
     <aside class="feedback" id="Feedback">
         <h1 class="feedback__header"><a href="#Feedback" class="link">Your feedback is welcome!</a></h1>

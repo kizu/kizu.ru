@@ -19,7 +19,6 @@ $distant_bg = blend(rgba($dark,.05),$body_bg)
 $header_size = 6*rem
 $footer_size = 6*rem
 
-
 // Layout etc.
 html
   padding: 0
@@ -350,6 +349,11 @@ H5,
 H6
   font-size: 1*rem
   padding-bottom: 1*rem
+
+// We could do this, but it don't recalculate on window resize -_-
+// @media (max-width: 882px)
+//   H1
+//     font-size: 7.6vw
 
 @media (max-width: 550px)
   .main

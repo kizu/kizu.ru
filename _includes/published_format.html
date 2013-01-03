@@ -1,19 +1,16 @@
-{% unless published_time %}
-    {% assign published_time = site.time %}
-{% endunless %}
+{% capture trim_whitespaces %}
 
 {% capture published_day %}{{ published_time | date: "%d" }}{% endcapture %}
 {% capture published_month %}{{ published_time | date: "%B" }}{% endcapture %}
+{% capture published_year %}{{ published_time | date: "%Y" }}{% endcapture %}
+{% capture current_year %}{{ site.time | date: "%Y" }}{% endcapture %}
 {% capture published_day_truncated %}{{ published_day | truncate:1,'' }}{% endcapture %}
 {% capture published_day %}{% if published_day_truncated == "0" %}{{ published_day | remove:'0' }}{% else %}{{ published_day }}{% endif %}{% endcapture %}
 
 {% if lang == "en" %}
-    {{ published_time | date: "%B" }}
-    {{ published_day }}
-    {{ published_time | date: "%Y" }}
+    {% capture result %}{{ published_time | date: "%B" }} {{ published_day }}{% if published_year != current_year %}, {{ published_time | date: "%Y" }}{% endif %}{% endcapture %}
 {% else %}
-    {{ published_day }}
-    {% case published_month %}
+    {% capture result %}{{ published_day }} {% case published_month %}
         {% when "January" %}января
         {% when "February" %}февраля
         {% when "March" %}марта
@@ -26,8 +23,7 @@
         {% when "October" %}октября
         {% when "November" %}ноября
         {% when "December" %}декабря
-    {% endcase %}
-    {{ published_time | date: "%Y" }}
+    {% endcase %} {% if published_year != current_year %} {{ published_time | date: "%Y" }}{% endif %}{% endcapture %}
 {% endif %}
 
-{% assign published_time = site.time %}
+{% endcapture %}{{ result }}
