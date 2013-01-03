@@ -303,13 +303,13 @@ H6 {
 }
 @media (max-width: 550px) {
   .main {
-    padding-top: -36px;
+    padding-top: 36px;
   }
   H1.title {
-    font-size: 3rem;
+    font-size: 54px;
   }
   H1 {
-    font-size: 2rem;
+    font-size: 36px;
   }
   H2 {
     font-size: 27px;
