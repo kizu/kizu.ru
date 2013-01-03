@@ -201,34 +201,32 @@ body:after {
 A {
   padding: 0.3em 0 0.287em;
   cursor: pointer;
-  color: #0883c9;
+  color: #0985ce;
   text-decoration: none;
 }
-.main A:visited:not(:hover):not(.link) {
-  color: #51a7d6;
-}
+.main A:visited:not(:hover):not(.link),
 .prevnext > .link:visited:not(:hover) {
-  color: #4ea3d2;
+  color: #9c169c;
 }
 A:hover {
-  color: #0883c9;
+  color: #0985ce;
   text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px -1px #fbfaf4, 2px -1px #fbfaf4, 0 -1px #fbfaf4, 0 -2px #fbfaf4, 0 -3px #fbfaf4, 0 -4px #fbfaf4, 0 -5px #fbfaf4, 0 -6px #fbfaf4;
-  background: -webkit-linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
-  background: -moz-linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
-  background: -o-linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
-  background: -ms-linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
-  background: linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+  background: -webkit-linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+  background: -moz-linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+  background: -o-linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+  background: -ms-linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
+  background: linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
   -webkit-background-size: 1px 0.44em;
   -moz-background-size: 1px 0.44em;
   background-size: 1px 0.44em;
   background-position: -9px 100%;
 }
 .title A:hover {
-  background-image: -webkit-linear-gradient(#0883c9, #0883c9 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
-  background-image: -moz-linear-gradient(#0883c9, #0883c9 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
-  background-image: -o-linear-gradient(#0883c9, #0883c9 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
-  background-image: -ms-linear-gradient(#0883c9, #0883c9 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
-  background-image: linear-gradient(#0883c9, #0883c9 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
+  background-image: -webkit-linear-gradient(#0985ce, #0985ce 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
+  background-image: -moz-linear-gradient(#0985ce, #0985ce 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
+  background-image: -o-linear-gradient(#0985ce, #0985ce 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
+  background-image: -ms-linear-gradient(#0985ce, #0985ce 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
+  background-image: linear-gradient(#0985ce, #0985ce 2px, rgba(255,255,255,0.9) 2px, rgba(255,255,255,0.9) 3px, transparent 3px);
   -webkit-background-size: 1px 0.47em;
   -moz-background-size: 1px 0.47em;
   background-size: 1px 0.47em;

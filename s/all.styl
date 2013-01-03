@@ -12,7 +12,8 @@ $dark = #25220E
 
 $body_bg = #FBFAF4
 $body_text = rgba($dark,.92)
-$body_link = #0883C9
+$body_link = #0985CE
+$body_link_visited = #9C169C
 
 $distant_bg = blend(rgba($dark,.05),$body_bg)
 
@@ -197,11 +198,9 @@ A
   color: $body_link
   text-decoration: none
 
-.main A:visited:not(:hover):not(.link)
-  color: blend(rgba($body_link,.7),$body_bg)
-
+.main A:visited:not(:hover):not(.link),
 .prevnext > .link:visited:not(:hover)
-  color: blend(rgba($body_link,.7),$distant_bg)
+  color: $body_link_visited
 
 A:hover
   color: $body_link
