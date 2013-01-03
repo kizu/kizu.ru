@@ -197,6 +197,12 @@ A
   color: $body_link
   text-decoration: none
 
+.main A:visited:not(:hover):not(.link)
+  color: blend(rgba($body_link,.7),$body_bg)
+
+.prevnext > .link:visited:not(:hover)
+  color: blend(rgba($body_link,.7),$distant_bg)
+
 A:hover
   color: $body_link
 
@@ -450,7 +456,7 @@ kbd
 
 .languages
   position: absolute
-  top: -0.1em
+  bottom: 0.45em
   right: 0.6em
   padding: 0
-
+  margin: 0

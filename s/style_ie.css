@@ -191,6 +191,12 @@ A {
   color: #0883c9;
   text-decoration: none;
 }
+.main A:visited:not(:hover):not(.link) {
+  color: #51a7d6;
+}
+.prevnext > .link:visited:not(:hover) {
+  color: #4ea3d2;
+}
 A:hover {
   color: #0883c9;
   background: -webkit-linear-gradient(#0883c9, #0883c9 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
@@ -400,7 +406,8 @@ kbd {
 }
 .languages {
   position: absolute;
-  top: -0.1em;
+  bottom: 0.45em;
   right: 0.6em;
   padding: 0;
+  margin: 0;
 }

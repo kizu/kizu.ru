@@ -204,6 +204,12 @@ A {
   color: #0883c9;
   text-decoration: none;
 }
+.main A:visited:not(:hover):not(.link) {
+  color: #51a7d6;
+}
+.prevnext > .link:visited:not(:hover) {
+  color: #4ea3d2;
+}
 A:hover {
   color: #0883c9;
   text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px -1px #fbfaf4, 2px -1px #fbfaf4, 0 -1px #fbfaf4, 0 -2px #fbfaf4, 0 -3px #fbfaf4, 0 -4px #fbfaf4, 0 -5px #fbfaf4, 0 -6px #fbfaf4;
@@ -458,7 +464,8 @@ kbd {
 }
 .languages {
   position: absolute;
-  top: -0.1em;
+  bottom: 0.45em;
   right: 0.6em;
   padding: 0;
+  margin: 0;
 }
