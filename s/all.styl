@@ -63,6 +63,8 @@ body:after
   background: $body_bg
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
 
+  // Setting all those things in a list so we could intrude there.
+  & > header,
   & > h1,
   & > h2,
   & > h3,
@@ -73,7 +75,7 @@ body:after
   & > ul,
   & > ol,
   & > pre,
-  & > dl
+  & > dl{",h1.title"}
     width: 49*rem
     max-width: 100%
     margin-left: auto
@@ -94,12 +96,14 @@ body:after
   right: 0
   left: 0
   height: $header_size
+  padding: 0 3*rem
 
   background: $distant_bg
 
 
 .title
   padding-top: 1.5*rem
+  text-indent: -0.3*rem
 
   font-size: 3.5*rem
 
@@ -306,7 +310,7 @@ H1
   position: relative
   font-size: 4*rem
   padding-top: 1*rem
-  margin-left: -.075em
+  margin-left: -0.3*rem
 
 H2
   position: relative
@@ -327,7 +331,9 @@ OL
 
 LI
   list-style-type: none
-  padding-left: 1.5*rem
+
+  & LI
+    padding-left: 1.5*rem
 
 LI:before,
 LI:before
@@ -336,13 +342,13 @@ LI:before
   display: inline-block
   width: 1.5*rem
   margin-left: -1.5*rem
-  text-align: left
+  text-align: right
 
 OL > LI
   counter-increment: list
 
 OL > LI:before
-  content: counter(list) "."
+  content: counter(list) ". "
 
 code,
 pre,

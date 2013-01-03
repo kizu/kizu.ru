@@ -75,6 +75,7 @@ body:after {
   padding: 54px;
   background: #fbfaf4;
 }
+.main > header,
 .main > h1,
 .main > h2,
 .main > h3,
@@ -85,7 +86,7 @@ body:after {
 .main > ul,
 .main > ol,
 .main > pre,
-.main > dl {
+.main > dl,h1.title {
   width: 882px;
   max-width: 100%;
   margin-left: auto;
@@ -106,10 +107,12 @@ body:after {
   right: 0;
   left: 0;
   height: 108px;
+  padding: 0 54px;
   background: #f0efe8;
 }
 .title {
   padding-top: 27px;
+  text-indent: -5.3999999999999995px;
   font-size: 63px;
 }
 .title A:not(:hover) {
@@ -274,7 +277,7 @@ H1 {
   position: relative;
   font-size: 72px;
   padding-top: 18px;
-  margin-left: -0.075em;
+  margin-left: -5.3999999999999995px;
 }
 H2 {
   position: relative;
@@ -296,6 +299,8 @@ OL {
 }
 LI {
   list-style-type: none;
+}
+LI LI {
   padding-left: 27px;
 }
 LI:before,
@@ -306,13 +311,13 @@ LI:before {
   zoom: 1;
   width: 27px;
   margin-left: -27px;
-  text-align: left;
+  text-align: right;
 }
 OL > LI {
   counter-increment: list;
 }
 OL > LI:before {
-  content: counter(list) ".";
+  content: counter(list) ". ";
 }
 code,
 pre,

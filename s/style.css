@@ -85,6 +85,7 @@ body:after {
   -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
 }
+.main > header,
 .main > h1,
 .main > h2,
 .main > h3,
@@ -95,7 +96,7 @@ body:after {
 .main > ul,
 .main > ol,
 .main > pre,
-.main > dl {
+.main > dl,h1.title {
   width: 49rem;
   max-width: 100%;
   margin-left: auto;
@@ -115,10 +116,12 @@ body:after {
   right: 0;
   left: 0;
   height: 6rem;
+  padding: 0 3rem;
   background: #f0efe8;
 }
 .title {
   padding-top: 1.5rem;
+  text-indent: -0.3rem;
   font-size: 3.5rem;
 }
 .title A:not(:hover) {
@@ -303,7 +306,7 @@ H1 {
   position: relative;
   font-size: 4rem;
   padding-top: 1rem;
-  margin-left: -0.075em;
+  margin-left: -0.3rem;
 }
 H2 {
   position: relative;
@@ -325,6 +328,8 @@ OL {
 }
 LI {
   list-style-type: none;
+}
+LI LI {
   padding-left: 1.5rem;
 }
 LI:before,
@@ -334,13 +339,13 @@ LI:before {
   display: inline-block;
   width: 1.5rem;
   margin-left: -1.5rem;
-  text-align: left;
+  text-align: right;
 }
 OL > LI {
   counter-increment: list;
 }
 OL > LI:before {
-  content: counter(list) ".";
+  content: counter(list) ". ";
 }
 code,
 pre,
