@@ -6,6 +6,12 @@ pygments: true
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
 
+link_handles:
+    - prefix: "@"
+      handle: "https://twitter.com/"
+    - prefix: "gh:"
+      handle: "https://github.com/"
+
 loc:
     fun:
         ru: "Эксперименты"

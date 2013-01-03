@@ -1,0 +1,8 @@
+{% capture trim_whitespaces %}
+    {% assign link_handles_result = link_handles_input %}
+    {% for link_handle in site.link_handles %}
+        {% capture link_handle_what %}href="{{ link_handle.prefix }}{% endcapture %}
+        {% capture link_handle_with %}href="{{ link_handle.handle }}{% endcapture %}
+        {% capture link_handles_result %}{{ link_handles_result | replace:link_handle_what,link_handle_with }}{% endcapture %}
+    {% endfor %}
+{% endcapture %}{% assign content = link_handles_result %}
