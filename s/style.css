@@ -204,7 +204,7 @@ A {
   color: #0985ce;
   text-decoration: none;
 }
-.main A:visited:not(:hover):not(.link),
+.main > *:not(.feedback) A:visited:not(:hover),
 .prevnext > .link:visited:not(:hover) {
   color: #9c169c;
 }

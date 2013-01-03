@@ -8,10 +8,10 @@
 {% capture published_day %}{% if published_day_truncated == "0" %}{{ published_day | remove:'0' }}{% else %}{{ published_day }}{% endif %}{% endcapture %}
 
 {% if lang == "en" %}
-    {% capture result %}{{ published_time | date: "%B" }} {{ published_day }}{% if published_year != current_year %}, {{ published_time | date: "%Y" }}{% endif %}{% endcapture %}
+    {% capture published_format_result %}{{ published_time | date: "%B" }} {{ published_day }}{% if published_year != current_year %}, {{ published_time | date: "%Y" }}{% endif %}{% endcapture %}
 {% else %}
-    {% capture result %}{{ published_day }} {% case published_month %}
+    {% capture published_format_result %}{{ published_day }} {% case published_month %}
         {% when "January" %}января{% when "February" %}февраля{% when "March" %}марта{% when "April" %}апреля{% when "May" %}мая{% when "June" %}июня{% when "July" %}июля{% when "August" %}августа{% when "September" %}сентабря{% when "October" %}октября{% when "November" %}ноября{% when "December" %}декабря{% endcase %}{% if published_year != current_year %} {{ published_time | date: "%Y" }}{% endif %}{% endcapture %}
 {% endif %}
 
-{% endcapture %}{{ result }}
+{% endcapture %}{{ published_format_result }}
