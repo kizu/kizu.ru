@@ -5,4 +5,6 @@
         {% capture link_handle_with %}href="{{ link_handle.handle }}{% endcapture %}
         {% capture link_handles_result %}{{ link_handles_result | replace:link_handle_what,link_handle_with }}{% endcapture %}
     {% endfor %}
+    {% capture link_handles_result %}{{ link_handles_result | replace:'">__ ','"><span class="link__inner">' }}{% endcapture %}
+    {% capture link_handles_result %}{{ link_handles_result | replace:' __</a>','</span></a>' }}{% endcapture %}
 {% endcapture %}{% assign content = link_handles_result %}

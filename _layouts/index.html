@@ -3,5 +3,5 @@ layout: default
 page_type: index
 ---
 <div class="main" role="main">
-    {{ content }}
+    {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}{{ content }}
 </div>
