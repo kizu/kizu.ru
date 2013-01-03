@@ -42,7 +42,7 @@ strong, b {
     font-style: normal;
     src: url('webfonts/253450_2_0.woff') format('woff');
     }
-em, i, .date, .breadcrumbs {
+em, i, .date, .breadcrumbs, .published {
     font-family: 'Cent-Italic21', Georgia, serif;
     font-style: normal;
     }

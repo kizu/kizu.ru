@@ -10,12 +10,27 @@ loc:
     fun:
         ru: "Эксперименты"
         en: "Experiments"
+
+        _in_:
+            ru: "Экспериментах"
+            en: "Experiments"
+
     issues:
         ru: "Заметки"
         en: "Issues"
+
+        _in_:
+            ru: "Заметках"
+            en: "Issues"
+
     old:
         ru: "Старое"
         en: "Old"
+
+        _in_:
+            ru: "Старом"
+            en: "Old"
+
     name:
         ru: "Роман Комаров"
         en: "Roman Komarov"
@@ -25,4 +40,9 @@ loc:
     twitter_follow:
         ru: "Читайте меня в твиттере"
         en: "Follow me on twitter"
-
+    published:
+        ru: "Опубликовано"
+        en: "Published on"
+    in:
+        ru: "в"
+        en: "in"

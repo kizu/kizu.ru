@@ -98,9 +98,6 @@ body:after {
   display: inline;
   zoom: 1;
 }
-.main > header {
-  position: relative;
-}
 .main header h1 {
   padding-bottom: 1em;
 }
@@ -155,13 +152,17 @@ body:after {
 .footer .link_next:after {
   content: " →";
 }
-.date,
-.breadcrumbs {
+.date {
   position: absolute;
-  top: -54px;
+  top: 0;
   right: 0;
-  padding: 0 9px;
+  padding: 9px 23.400000000000002px;
   font-size: 18px;
+  -webkit-transform-origin: 100% 0;
+  -moz-transform-origin: 100% 0;
+  -o-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
   color: rgba(37,34,14,0.3);
 }
 .breadcrumbs {
@@ -180,6 +181,9 @@ body:after {
 }
 .breadcrumbs > A:not(:hover) {
   color: rgba(37,34,14,0.48);
+}
+.published {
+  font-size: 18px;
 }
 A {
   padding: 0.3em 0 0.287em;
@@ -229,6 +233,18 @@ A:hover {
 }
 .link_pseudo.link_wrapper {
   border-bottom: 0;
+}
+.link_quoted:before {
+  content: "“";
+}
+.page_ru .link_quoted:before {
+  content: "«";
+}
+.link_quoted:after {
+  content: "”";
+}
+.page_ru .link_quoted:after {
+  content: "»";
 }
 .link_text {
   color: inherit;

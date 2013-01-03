@@ -6,15 +6,6 @@ layout: layout
 		<h1 class="title">
 			<a href="/{{ lang_prefix }}">{{ site.loc.name | map: lang }}</a>
 		</h1>
-		<nav>
-			<p class="languages">
-				{% if page.categories contains 'en' %}
-					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
-				{% else %}
-					<a href="/en{{ page.url | remove:'index.html' }}">in english</a>
-				{% endif %}
-			</p>
-		</nav>
 	</header>
 
 	{{ content }}
@@ -42,6 +33,13 @@ layout: layout
                     {% assign post_next = item %}
                 {% endif %}
             {% endfor %}
+			<p class="languages">
+				{% if page.categories contains 'en' %}
+					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
+				{% else %}
+					<a href="/en{{ page.url | remove:'index.html' }}">in english</a>
+				{% endif %}
+			</p>
         </nav>
 		<p class="copy">
 			<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
