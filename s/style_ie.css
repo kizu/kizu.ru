@@ -72,8 +72,8 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 54px 1.2em;
-  padding: 54px 5vw;
+  padding: 54px 0.6em 54px 1.2em;
+  padding: 54px 2.5vw 54px 5vw;
   background: #fbfaf4;
 }
 .main > header,
@@ -108,8 +108,8 @@ body:after {
   right: 0;
   left: 0;
   height: 108px;
-  padding: 0 21.599999999999998px;
-  padding: 0 5vw;
+  padding: 0 10.799999999999999px 0 21.599999999999998px;
+  padding: 0 2.5vw 0 5vw;
   white-space: nowrap;
   background: #f0efe8;
 }
@@ -255,8 +255,8 @@ A:hover {
 }
 .feedback {
   padding-top: 36px;
-  margin: 72px -21.599999999999998px 0;
-  margin: 72px -5vw 0;
+  margin: 72px -10.799999999999999px 0 -21.599999999999998px;
+  margin: 72px -2.5vw 0 -5vw;
 }
 .feedback__header {
   font-size: 27px;
