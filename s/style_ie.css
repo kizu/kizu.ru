@@ -301,7 +301,7 @@ H6 {
   font-size: 18px;
   padding-bottom: 18px;
 }
-@media (max-width: 516px) {
+@media (max-width: 550px) {
   H1,
   H1.title {
     font-size: 3rem;
