@@ -42,7 +42,7 @@ body
   position: relative
   z-index: 1
 
-  min-width: 26.5*rem
+  min-width: 25.5*rem
   font: 23px/2*rem 'Cent-Regular21', Georgia, serif
   padding: $header_size 0 $footer_size
   margin: 0
@@ -58,8 +58,8 @@ body:after
   position: relative
   z-index: 9
 
-  padding: 3*rem 1.5em
-  padding: 3*rem 7vw
+  padding: 3*rem 1.2em
+  padding: 3*rem 5vw
 
   background: $body_bg
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
@@ -100,8 +100,8 @@ body:after
   right: 0
   left: 0
   height: $header_size
-  padding: 0 1.5*rem
-  padding: 0 7vw
+  padding: 0 1.2*rem
+  padding: 0 5vw
 
   white-space: nowrap
 
@@ -270,8 +270,8 @@ A:hover
 
   padding-top: 2*rem
 
-  margin: 4*rem -1.5*rem 0
-  margin: 4*rem -7vw 0
+  margin: 4*rem -1.2*rem 0
+  margin: 4*rem -5vw 0
 
 .feedback__header
   font-size: 1.5*rem
@@ -344,6 +344,10 @@ H6
   H3
     font-size: 1.25*rem
 
+  LI:before
+    font-size: 1*rem
+    word-spacing: -2px
+
 OL
   counter-reset: list
 
@@ -353,7 +357,6 @@ LI
   & LI
     padding-left: 1.5*rem
 
-LI:before,
 LI:before
   content: "— "
   position: absolute

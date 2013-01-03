@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 477px;
+  min-width: 459px;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -72,8 +72,8 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 54px 1.5em;
-  padding: 54px 7vw;
+  padding: 54px 1.2em;
+  padding: 54px 5vw;
   background: #fbfaf4;
 }
 .main > header,
@@ -111,8 +111,8 @@ body:after {
   right: 0;
   left: 0;
   height: 108px;
-  padding: 0 27px;
-  padding: 0 7vw;
+  padding: 0 21.599999999999998px;
+  padding: 0 5vw;
   white-space: nowrap;
   background: #f0efe8;
 }
@@ -239,8 +239,8 @@ A:hover {
 }
 .feedback {
   padding-top: 36px;
-  margin: 72px -27px 0;
-  margin: 72px -7vw 0;
+  margin: 72px -21.599999999999998px 0;
+  margin: 72px -5vw 0;
 }
 .feedback__header {
   font-size: 27px;
@@ -314,6 +314,10 @@ H6 {
   H3 {
     font-size: 22.5px;
   }
+  LI:before {
+    font-size: 18px;
+    word-spacing: -2px;
+  }
 }
 OL {
   counter-reset: list;
@@ -324,7 +328,6 @@ LI {
 LI LI {
   padding-left: 27px;
 }
-LI:before,
 LI:before {
   content: "— ";
   position: absolute;
