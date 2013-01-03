@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 19em;
+  min-width: 23em;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -73,6 +73,7 @@ body:after {
   position: relative;
   z-index: 9;
   padding: 54px;
+  padding: 54px 5vw;
   background: #fbfaf4;
 }
 .main > header,
@@ -97,6 +98,9 @@ body:after {
   display: inline;
   zoom: 1;
 }
+.main > header {
+  position: relative;
+}
 .main header h1 {
   padding-bottom: 1em;
 }
@@ -108,6 +112,8 @@ body:after {
   left: 0;
   height: 108px;
   padding: 0 54px;
+  padding: 0 5vw;
+  white-space: nowrap;
   background: #f0efe8;
 }
 .title {
@@ -152,14 +158,14 @@ body:after {
 .date,
 .breadcrumbs {
   position: absolute;
-  top: 0;
+  top: -54px;
   right: 0;
   padding: 0 9px;
   font-size: 18px;
   color: rgba(37,34,14,0.3);
 }
 .breadcrumbs {
-  left: 0;
+  left: -25.2px;
   right: auto;
 }
 .breadcrumbs > A:first-child:before {
@@ -234,6 +240,7 @@ A:hover {
 .feedback {
   padding-top: 36px;
   margin: 72px -54px 0;
+  margin: 72px -5vw 0;
 }
 .feedback__header {
   font-size: 27px;
