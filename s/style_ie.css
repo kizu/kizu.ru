@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 23em;
+  min-width: 450px;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -300,6 +300,18 @@ H5,
 H6 {
   font-size: 18px;
   padding-bottom: 18px;
+}
+@media (max-width: 516px) {
+  H1,
+  H1.title {
+    font-size: 3rem;
+  }
+  H2 {
+    font-size: 36px;
+  }
+  H3 {
+    font-size: 27px;
+  }
 }
 OL {
   counter-reset: list;
