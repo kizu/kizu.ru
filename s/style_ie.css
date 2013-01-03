@@ -72,7 +72,7 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 54px;
+  padding: 54px 1.5em;
   padding: 54px 5vw;
   background: #fbfaf4;
 }
@@ -111,7 +111,7 @@ body:after {
   right: 0;
   left: 0;
   height: 108px;
-  padding: 0 54px;
+  padding: 0 27px;
   padding: 0 5vw;
   white-space: nowrap;
   background: #f0efe8;
@@ -239,7 +239,7 @@ A:hover {
 }
 .feedback {
   padding-top: 36px;
-  margin: 72px -54px 0;
+  margin: 72px -27px 0;
   margin: 72px -5vw 0;
 }
 .feedback__header {
