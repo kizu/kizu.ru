@@ -12,27 +12,7 @@ layout: layout
 
 	<footer class="footer">
         <nav class="prevnext">
-            {% for item in site.posts %}
-                {% if lang == 'en' and item.categories contains 'en' %}
-                    {% assign post = item %}
-                {% endif %}
-                {% if lang == 'ru' %}
-                    {% unless item.categories contains 'en' %}
-                        {% assign post = item %}
-                    {% endunless %}
-                {% endif %}
-                {% if post == item %}
-                    {% if post_next.id == page.id %}
-                        <a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ post.title }}</span></a>
-                    {% endif %}
-                    {% if post.id == page.id %}
-                        {% if post_next %}
-                            <a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ post_next.title }}</span></a>
-                        {% endif %}
-                    {% endif %}
-                    {% assign post_next = item %}
-                {% endif %}
-            {% endfor %}
+        	{% include get_prevnext.html %}
 			<p class="languages">
 				{% if page.categories contains 'en' %}
 					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
