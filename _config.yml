@@ -10,13 +10,24 @@ prose:
     rooturl: "_posts"
     metadata:
         "_posts": |
-            title: МойЗаголовок
+
+            title: Без заголовка
+
             categories: issues
+
             layout: post
+
+            published: false
+
         "_posts/en": |
-            title: МойЗаголовок
+
+            title: No subject
+
             categories: en issues
+
             layout: post
+
+            published: false
 
 link_handles:
     - prefix: "@"
