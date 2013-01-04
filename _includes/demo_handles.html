@@ -1,0 +1,14 @@
+{% capture trim_whitespaces %}
+    {% assign demo_handles_result = demo_handles_input %}
+    {% assign count = 1 %}
+    {% for demo_handle in page.demos %}
+        {% capture demo_handle_what %}[demo_{{ demo_handle.handle }}]{% endcapture %}
+        {% capture demo_handle_with %}
+            <div class="demo figure">
+                <iframe class="demo__frame" {% if demo_handle.height %}style="height: {{ demo_handle.height }}" {% else %}height="240" {% endif %}width="100%" src="/demos/{{ demo_handle.handle }}.html"></iframe>
+            </div>
+        {% endcapture %}
+        {% capture demo_handles_result %}{{ demo_handles_result | replace_first:demo_handle_what,demo_handle_with }}{% endcapture %}
+        {% capture count %}{{ count | plus:1 }}{% endcapture %}
+    {% endfor %}
+{% endcapture %}{% assign content = demo_handles_result %}

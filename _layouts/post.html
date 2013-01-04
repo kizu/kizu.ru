@@ -8,7 +8,8 @@ page_type: post
         <h1>{{ page.title }}</h1>
     </header>
 
-    {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}{{ content }}
+    {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}
+    {% capture demo_handles_input %}{{ content }}{% endcapture %}{% include demo_handles.html %}{{ content }}
 
     <p class="published">
         {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}

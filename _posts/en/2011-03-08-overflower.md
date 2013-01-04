@@ -6,6 +6,10 @@ layout: post
 
 categories: en fun
 
+demos:
+  - handle: overflower
+    height: 20em
+
 ---
 
 1. The «overflow» effect is visible only if there is something to hide (so, there wouldn’t be a case when there is an overlayed gradient that hides a part of text, that would be visible whole anyway).
@@ -14,6 +18,4 @@ categories: en fun
 
 Resize the browser’s window to see the switching of overflow effect.
 
-{% assign demo = 'overflower' %}
-{% assign demo_height = '20em' %}
-{% include demo.html %}
+[demo_overflower]

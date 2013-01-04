@@ -6,10 +6,12 @@ layout: post
 
 categories: en fun
 
+demos:
+  - handle: hovers
+    height: 12.5em
+
 ---
 
 Try to hover this block from different directions
 
-{% assign demo = 'hovers' %}
-{% assign demo_height = '12.5em' %}
-{% include demo.html %}
+[demo_hovers]

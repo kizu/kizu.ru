@@ -6,6 +6,10 @@ layout: post
 
 categories: fun
 
+demos:
+  - handle: overflower
+    height: 20em
+
 ---
 
 1. Эффект «скрытия контента» появляется только если есть что скрывать (следовательно, не будет ситуации когда места для контента хватает, но визуально кажется, что уже что-то скрыто).
@@ -14,6 +18,4 @@ categories: fun
 
 Можно поизменять размер окна, чтобы увидеть момент перехода.
 
-{% assign demo = 'overflower' %}
-{% assign demo_height = '20em' %}
-{% include demo.html %}
+[demo_overflower]

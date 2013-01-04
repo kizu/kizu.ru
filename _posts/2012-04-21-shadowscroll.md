@@ -6,6 +6,10 @@ layout: post
 
 categories: fun
 
+demos:
+  - handle: shadowscroll
+    height: 23em
+
 ---
 
 Сверстал тут довольно старый эффект, но вот только на чистом CSS.
@@ -16,6 +20,4 @@ categories: fun
 
 **Update:** [Lea Verou](https://twitter.com/leaverou) обновила мой эксперимент использовав `background-attachment: local`. [Подробности можно прочитать в её посте](http://lea.verou.me/2012/04/background-attachment-local/).
 
-{% assign demo = 'shadowscroll' %}
-{% assign demo_height = '23em' %}
-{% include demo.html %}
+[demo_shadowscroll]
