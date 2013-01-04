@@ -80,8 +80,8 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 3rem 0.6em 3rem 1.2em;
-  padding: 3rem 2.5vw 3rem 5vw;
+  padding: 3rem 0.6em 2rem 1.2em;
+  padding: 3rem 2.5vw 2rem 5vw;
   background: #fbfaf4;
   -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
@@ -97,7 +97,8 @@ body:after {
 .main > ul,
 .main > ol,
 .main > pre,
-.main > dl,h1.title {
+.main > dl,
+.main > .feedback,h1.title {
   width: 49rem;
   max-width: 100%;
   margin-left: auto;
@@ -204,7 +205,7 @@ A {
   color: #0985ce;
   text-decoration: none;
 }
-.main > *:not(.feedback) A:visited:not(:hover),
+.main > A:visited:not(:hover),
 .prevnext > .link:visited:not(:hover) {
   color: #9c169c;
 }
@@ -239,7 +240,8 @@ A:hover {
   background-size: 1px 0.45em;
   text-shadow: -1px 0 #f0efe8, 1px 0 #f0efe8, -2px -1px #f0efe8, 2px -1px #f0efe8, 0 -1px #f0efe8, 0 -2px #f0efe8, 0 -3px #f0efe8, 0 -4px #f0efe8, 0 -5px #f0efe8, 0 -6px #f0efe8;
 }
-.published A:hover {
+.feedback > A:hover,
+.published > A:hover {
   -webkit-background-size: 1px 0.47em;
   -moz-background-size: 1px 0.47em;
   background-size: 1px 0.47em;
@@ -291,24 +293,16 @@ A:hover {
   color: inherit;
 }
 .copy {
-  font-size: 18px;
+  font-size: 1rem;
   color: rgba(37,34,14,0.62);
 }
 .feedback {
+  padding: 2.25rem 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: rgba(37,34,14,0.62);
   -webkit-box-shadow: inset 0 1px 0 rgba(37,34,14,0.2);
   box-shadow: inset 0 1px 0 rgba(37,34,14,0.2);
-  padding-top: 2rem;
-  margin: 4rem -0.6rem 0 -1.2rem;
-  margin: 4rem -2.5vw 0 -5vw;
-}
-.feedback__header {
-  font-size: 1.5rem;
-}
-.feedback__content {
-  display: none;
-}
-.feedback:target > .feedback__content {
-  display: block;
 }
 P,
 UL,
