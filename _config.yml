@@ -14,6 +14,10 @@ link_handles:
     - prefix: "gh:"
       handle: "https://github.com/"
 
+flat_categories:
+    - "fun"
+    - "issues"
+
 prose:
     rooturl: "_posts"
     metadata:

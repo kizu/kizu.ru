@@ -192,9 +192,9 @@ A {
   color: #0985ce;
   text-decoration: none;
 }
-.main > A:visited:not(:hover),
+.main A:visited:not(:hover),
 .prevnext > .link:visited:not(:hover) {
-  color: #9c169c;
+  color: #8c64b4;
 }
 A:hover {
   color: #0985ce;
