@@ -1,0 +1,7 @@
+{% capture trim_whitespaces %}
+    {% for item in page.categories %}
+        {% capture get_filename_remove %}{{ item }}/{% endcapture %}
+        {% capture get_filename_input %}{{ get_filename_input | remove:get_filename_remove }}{% endcapture %}
+    {% endfor %}
+    {% capture get_filename_output %}{% unless get_filename_input == '/en/' or get_filename_input == '/index.html' %}_posts/{% endunless %}{% if page.categories contains 'en' %}en/{% endif %}{{ page.date | date: "%Y-%m-%d-" }}{% if get_filename_input == '/en/' %}index_{% endif %}{{ get_filename_input | remove:'/' | remove_first:'.html' }}{% unless get_filename_input == '/en/' or get_filename_input == '/index.html' %}.md{% else %}.html{% endunless %}{% endcapture %}
+{% endcapture %}

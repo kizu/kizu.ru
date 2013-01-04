@@ -6,6 +6,14 @@ pygments: true
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
 
+github_repo: "kizu/kizu.github.com"
+
+link_handles:
+    - prefix: "@"
+      handle: "https://twitter.com/"
+    - prefix: "gh:"
+      handle: "https://github.com/"
+
 prose:
     rooturl: "_posts"
     metadata:
@@ -28,12 +36,6 @@ prose:
             layout: post
 
             published: false
-
-link_handles:
-    - prefix: "@"
-      handle: "https://twitter.com/"
-    - prefix: "gh:"
-      handle: "https://github.com/"
 
 loc:
     fun:
@@ -75,3 +77,21 @@ loc:
     in:
         ru: "в"
         en: "in"
+    edit_in_prose:
+        ru: "Отредактируйте в Prose"
+        en: "Edit in Prose"
+    source_code:
+        ru: "Исходный код этой страницы на Гитхабе"
+        en: "See the source of this page at GitHub"
+    feedback_for:
+        ru: "Отзыв на"
+        en: "Feedback for"
+    feedback_text:
+        ru: "Создайте задачу на Гитхабе"
+        en: "Create an issue at GitHub"
+    laquo:
+        ru: "«"
+        en: "“"
+    raquo:
+        ru: "»"
+        en: "”"
