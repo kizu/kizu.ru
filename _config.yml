@@ -6,6 +6,8 @@ pygments: true
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
 
+production_url : http://kizu.ru
+
 github_repo: "kizu/kizu.github.com"
 
 link_handles:
