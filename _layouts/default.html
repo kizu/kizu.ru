@@ -13,13 +13,13 @@ layout: layout
 	<footer class="footer">
         <nav class="prevnext">
         	{% include get_prevnext.html %}
-			<p class="languages">
+			{% comment %}<!-- <p class="languages">
 				{% if page.categories contains 'en' %}
 					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
 				{% else %}
 					<a href="/en{{ page.url | remove:'index.html' }}">in english</a>
 				{% endif %}
-			</p>
+			</p> -->{% endcomment %}
         </nav>
 		<p class="copy">
 			<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
