@@ -12,7 +12,7 @@ layout: layout
 
 	<footer class="footer">
         <nav class="prevnext">
-        	{% include get_prevnext.html %}
+        	{% if page.page_type == 'post' %}{% include get_prevnext.html %}{% endif %}
 			{% comment %}<!-- <p class="languages">
 				{% if page.categories contains 'en' %}
 					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>

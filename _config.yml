@@ -16,18 +16,62 @@ link_handles:
     - prefix: "gh:"
       handle: "https://github.com/"
 
-flat_categories:
-    - "fun"
-    - "issues"
+# flat_categories:
+#    - "fun"
+#    - "issues"
 
 prose:
     rooturl: "_posts"
     metadata:
         "_posts": |
 
+            title: Набросок статьи
+
+            categories: drafts
+
+            layout: post
+
+            invisible: true
+
+            published: false
+
+        "_posts/fun": |
+
+            title: Без заголовка
+
+            categories: fun
+
+            layout: post
+
+            published: false
+
+        "_posts/issues": |
+
             title: Без заголовка
 
             categories: issues
+
+            layout: post
+
+            published: false
+
+        "_posts/en": |
+
+            title: Draft of an article
+
+            categories: en drafts
+
+            layout: post
+
+            invisible: true
+
+            published: false
+
+        "_posts/en/fun": |
+
+            title: No subject
+
+            categories: en fun
 
             layout: post
 
@@ -59,6 +103,14 @@ loc:
         _in_:
             ru: "Заметках"
             en: "Issues"
+
+    projects:
+        ru: "Проекты"
+        en: "Projects"
+
+        _in_:
+            ru: "Проектах"
+            en: "Projects"
 
     old:
         ru: "Старое"
