@@ -318,13 +318,15 @@ H6 {
     line-height: 31.5px;
   }
   .main {
-    padding-top: 27px;
+    padding-top: 22.5px;
   }
   H1.title {
     font-size: 49.5px;
+    padding-top: 31.5px;
   }
   H1 {
     font-size: 31.5px;
+    margin-left: -2.6999999999999997px;
   }
   .main header H1 {
     padding-bottom: 27px;
