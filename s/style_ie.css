@@ -58,7 +58,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 459px;
+  min-width: 432px;
   font: 23px/36px 'Cent-Regular21', Georgia, serif;
   padding: 108px 0 108px;
   margin: 0;
@@ -72,8 +72,8 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 54px 0.6em 36px 1.2em;
-  padding: 54px 2.5vw 36px 5vw;
+  padding: 45px 0.6em 36px 1.2em;
+  padding: 45px 2.5vw 36px 5vw;
   background: #fbfaf4;
 }
 .main > header,
@@ -89,7 +89,7 @@ body:after {
 .main > pre,
 .main > dl,
 .main > .feedback,h1.title {
-  width: 882px;
+  width: 756px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -100,7 +100,7 @@ body:after {
   zoom: 1;
 }
 .main header h1 {
-  padding-bottom: 1em;
+  padding-bottom: 45px;
 }
 .header {
   position: absolute;
@@ -117,7 +117,6 @@ body:after {
 .title {
   padding-top: 27px;
   text-indent: -5.3999999999999995px;
-  font-size: 63px;
 }
 .title A:not(:hover) {
   color: rgba(37,34,14,0.48);
@@ -295,13 +294,13 @@ H6 {
 }
 H1 {
   position: relative;
-  font-size: 72px;
+  font-size: 63px;
   padding-top: 18px;
   margin-left: -5.3999999999999995px;
 }
 H2 {
   position: relative;
-  font-size: 54px;
+  font-size: 45px;
 }
 H3 {
   font-size: 36px;
@@ -315,14 +314,20 @@ H6 {
   padding-bottom: 18px;
 }
 @media (max-width: 550px) {
+  body {
+    line-height: 31.5px;
+  }
   .main {
-    padding-top: 36px;
+    padding-top: 27px;
   }
   H1.title {
-    font-size: 54px;
+    font-size: 49.5px;
   }
   H1 {
-    font-size: 36px;
+    font-size: 31.5px;
+  }
+  .main header H1 {
+    padding-bottom: 27px;
   }
   H2 {
     font-size: 27px;

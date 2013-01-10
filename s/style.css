@@ -66,7 +66,7 @@ html {
 body {
   position: relative;
   z-index: 1;
-  min-width: 25.5rem;
+  min-width: 24rem;
   font: 23px/2rem 'Cent-Regular21', Georgia, serif;
   padding: 6rem 0 6rem;
   margin: 0;
@@ -80,8 +80,8 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 3rem 0.6em 2rem 1.2em;
-  padding: 3rem 2.5vw 2rem 5vw;
+  padding: 2.5rem 0.6em 2rem 1.2em;
+  padding: 2.5rem 2.5vw 2rem 5vw;
   background: #fbfaf4;
   -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba(37,34,14,0.05), 0 0 40px -5px rgba(37,34,14,0.3);
@@ -99,7 +99,7 @@ body:after {
 .main > pre,
 .main > dl,
 .main > .feedback,h1.title {
-  width: 49rem;
+  width: 42rem;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -109,7 +109,7 @@ body:after {
   display: inline-block;
 }
 .main header h1 {
-  padding-bottom: 1em;
+  padding-bottom: 2.5rem;
 }
 .header {
   position: absolute;
@@ -126,7 +126,6 @@ body:after {
 .title {
   padding-top: 1.5rem;
   text-indent: -0.3rem;
-  font-size: 3.5rem;
 }
 .title A:not(:hover) {
   color: rgba(37,34,14,0.48);
@@ -335,13 +334,13 @@ H6 {
 }
 H1 {
   position: relative;
-  font-size: 4rem;
+  font-size: 3.5rem;
   padding-top: 1rem;
   margin-left: -0.3rem;
 }
 H2 {
   position: relative;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 H3 {
   font-size: 2rem;
@@ -355,14 +354,20 @@ H6 {
   padding-bottom: 1rem;
 }
 @media (max-width: 550px) {
+  body {
+    line-height: 1.75rem;
+  }
   .main {
-    padding-top: 2rem;
+    padding-top: 1.5rem;
   }
   H1.title {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
   H1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+  .main header H1 {
+    padding-bottom: 1.5rem;
   }
   H2 {
     font-size: 1.5rem;

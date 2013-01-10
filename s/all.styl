@@ -42,7 +42,7 @@ body
   position: relative
   z-index: 1
 
-  min-width: 25.5*rem
+  min-width: 24*rem
   font: 23px/2*rem 'Cent-Regular21', Georgia, serif
   padding: $header_size 0 $footer_size
   margin: 0
@@ -58,8 +58,8 @@ body:after
   position: relative
   z-index: 9
 
-  padding: 3*rem 0.6em 2*rem 1.2em
-  padding: 3*rem 2.5vw 2*rem 5vw
+  padding: 2.5*rem 0.6em 2*rem 1.2em
+  padding: 2.5*rem 2.5vw 2*rem 5vw
 
   background: $body_bg
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
@@ -78,7 +78,7 @@ body:after
   & > pre,
   & > dl,
   & > .feedback{",h1.title"}
-    width: 49*rem
+    width: 42*rem
     max-width: 100%
     margin-left: auto
     margin-right: auto
@@ -89,7 +89,7 @@ body:after
     display: inline-block
 
 .main header h1
-  padding-bottom: 1em
+  padding-bottom: 2.5*rem
 
 .header
   position: absolute
@@ -109,8 +109,6 @@ body:after
 .title
   padding-top: 1.5*rem
   text-indent: -0.3*rem
-
-  font-size: 3.5*rem
 
 .title A:not(:hover)
   color: rgba($dark,.48)
@@ -331,18 +329,19 @@ H6
 
 H1
   position: relative
-  font-size: 4*rem
+  font-size: 3.5*rem
   padding-top: 1*rem
   margin-left: -0.3*rem
 
 H2
   position: relative
-  font-size: 3*rem
+  font-size: 2.5*rem
 
 H3
   font-size: 2*rem
   padding-top: 1*rem
   padding-bottom: 1*rem
+
 H4,
 H5,
 H6
@@ -355,13 +354,18 @@ H6
 //     font-size: 7.6vw
 
 @media (max-width: 550px)
+  body
+    line-height: 1.75*rem
+
   .main
-    padding-top: 2*rem
+    padding-top: 1.5*rem
 
   H1.title
-    font-size: 3*rem
+    font-size: 2.75*rem
   H1
-    font-size: 2*rem
+    font-size: 1.75*rem
+  .main header H1
+    padding-bottom: 1.5*rem
   H2
     font-size: 1.5*rem
   H3
