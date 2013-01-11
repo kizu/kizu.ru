@@ -363,6 +363,7 @@ H6 {
   H1.title {
     font-size: 2.5rem;
     padding-top: 2rem;
+    text-indent: -0.15rem;
   }
   H1 {
     font-size: 1.75rem;
