@@ -313,6 +313,30 @@ H6 {
   font-size: 18px;
   padding-bottom: 18px;
 }
+OL {
+  counter-reset: list;
+}
+LI {
+  list-style-type: none;
+}
+LI LI {
+  padding-left: 27px;
+}
+LI:before {
+  content: "— ";
+  position: absolute;
+  display: inline;
+  zoom: 1;
+  width: 27px;
+  margin-left: -27px;
+  text-align: right;
+}
+OL > LI {
+  counter-increment: list;
+}
+OL > LI:before {
+  content: counter(list) ". ";
+}
 @media (max-width: 550px) {
   body {
     line-height: 31.5px;
@@ -339,39 +363,22 @@ H6 {
     font-size: 22.5px;
   }
   LI:before {
-    font-size: 18px;
     word-spacing: -2px;
+    text-align: left;
   }
-}
-OL {
-  counter-reset: list;
-}
-LI {
-  list-style-type: none;
-}
-LI LI {
-  padding-left: 27px;
-}
-LI:before {
-  content: "— ";
-  position: absolute;
-  display: inline;
-  zoom: 1;
-  width: 27px;
-  margin-left: -27px;
-  text-align: right;
-}
-OL > LI {
-  counter-increment: list;
-}
-OL > LI:before {
-  content: counter(list) ". ";
+  LI {
+    padding-left: 27px;
+  }
 }
 code,
 pre,
 kbd {
   font-family: Monaco, Consolas, monospace;
   font-size: 0.87em;
+}
+pre {
+  overflow: hidden;
+  overflow-x: auto;
 }
 .figure {
   padding: 0.3em !important;

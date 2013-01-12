@@ -353,6 +353,29 @@ H6 {
   font-size: 1rem;
   padding-bottom: 1rem;
 }
+OL {
+  counter-reset: list;
+}
+LI {
+  list-style-type: none;
+}
+LI LI {
+  padding-left: 1.5rem;
+}
+LI:before {
+  content: "— ";
+  position: absolute;
+  display: inline-block;
+  width: 1.5rem;
+  margin-left: -1.5rem;
+  text-align: right;
+}
+OL > LI {
+  counter-increment: list;
+}
+OL > LI:before {
+  content: counter(list) ". ";
+}
 @media (max-width: 550px) {
   body {
     line-height: 1.75rem;
@@ -379,38 +402,22 @@ H6 {
     font-size: 1.25rem;
   }
   LI:before {
-    font-size: 1rem;
     word-spacing: -2px;
+    text-align: left;
   }
-}
-OL {
-  counter-reset: list;
-}
-LI {
-  list-style-type: none;
-}
-LI LI {
-  padding-left: 1.5rem;
-}
-LI:before {
-  content: "— ";
-  position: absolute;
-  display: inline-block;
-  width: 1.5rem;
-  margin-left: -1.5rem;
-  text-align: right;
-}
-OL > LI {
-  counter-increment: list;
-}
-OL > LI:before {
-  content: counter(list) ". ";
+  LI {
+    padding-left: 1.5rem;
+  }
 }
 code,
 pre,
 kbd {
   font-family: Monaco, Consolas, monospace;
   font-size: 0.87em;
+}
+pre {
+  overflow: hidden;
+  overflow-x: auto;
 }
 .figure {
   padding: 0.3em !important;

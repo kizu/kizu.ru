@@ -348,6 +348,30 @@ H6
   font-size: 1*rem
   padding-bottom: 1*rem
 
+OL
+  counter-reset: list
+
+LI
+  list-style-type: none
+
+  & LI
+    padding-left: 1.5*rem
+
+LI:before
+  content: "— "
+  position: absolute
+  display: inline-block
+  width: 1.5*rem
+  margin-left: -1.5*rem
+  text-align: right
+
+OL > LI
+  counter-increment: list
+
+OL > LI:before
+  content: counter(list) ". "
+
+
 // We could do this, but it don't recalculate on window resize -_-
 // @media (max-width: 882px)
 //   H1
@@ -376,31 +400,11 @@ H6
     font-size: 1.25*rem
 
   LI:before
-    font-size: 1*rem
     word-spacing: -2px
+    text-align: left
 
-OL
-  counter-reset: list
-
-LI
-  list-style-type: none
-
-  & LI
+  LI
     padding-left: 1.5*rem
-
-LI:before
-  content: "— "
-  position: absolute
-  display: inline-block
-  width: 1.5*rem
-  margin-left: -1.5*rem
-  text-align: right
-
-OL > LI
-  counter-increment: list
-
-OL > LI:before
-  content: counter(list) ". "
 
 code,
 pre,
@@ -408,6 +412,9 @@ kbd
   font-family: Monaco, Consolas, monospace
   font-size: 0.87em
 
+pre
+  overflow: hidden
+  overflow-x: auto
 
 .figure
   padding: .3em !important
