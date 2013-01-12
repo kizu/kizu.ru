@@ -380,7 +380,11 @@ OL > LI:before
 @media (max-width: 550px)
   body
     line-height: 1.75*rem
-    -webkit-transform: translateZ(0)
+
+  // On iphones that bugs a lot
+  .header,
+  .footer
+    position: absolute
 
   .main
     padding-top: 1.25*rem
