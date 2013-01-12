@@ -340,6 +340,7 @@ OL > LI:before {
 @media (max-width: 550px) {
   body {
     line-height: 31.5px;
+    -webkit-transform: translateZ(0);
   }
   .main {
     padding-top: 22.5px;
