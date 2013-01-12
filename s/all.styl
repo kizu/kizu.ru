@@ -97,6 +97,9 @@ body:after
   top: 0
   right: 0
   left: 0
+
+  overflow: hidden
+
   height: $header_size
   padding: 0 0.5*rem 0 1*rem
   padding: 0 2.5vw 0 5vw
@@ -120,6 +123,9 @@ body:after
   right: 0
   bottom: 0
   left: 0
+
+  overflow: hidden
+
   height: $footer_size
 
   background: $distant_bg
@@ -385,6 +391,27 @@ OL > LI:before
   .header,
   .footer
     position: absolute
+
+  .footer
+    text-align: left
+    padding: 0 0.5*rem 0 1*rem
+    padding: 0 2.5vw 0 5vw
+
+  .footer .link_twitter
+    display: none
+
+  .footer .prevnext
+    padding-bottom: 0
+
+  .footer .link_prev,
+  .footer .link_next
+    float: none
+    display: block
+    padding-left: 0
+    padding-right: 0
+
+  .footer .link_next
+    padding-top: 0
 
   .main
     padding-top: 1.25*rem
