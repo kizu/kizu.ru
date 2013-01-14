@@ -276,6 +276,13 @@ A:hover {
   line-height: 27px;
   color: rgba(37,34,14,0.62);
 }
+.nav {
+  padding: 0;
+  margin: -27px 0 27px;
+  font-size: 18px;
+  line-height: 27px;
+  color: rgba(37,34,14,0.62);
+}
 P,
 UL,
 OL,
