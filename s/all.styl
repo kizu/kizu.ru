@@ -31,12 +31,16 @@ html
   font-size: 1*rem_px
   color: $body_text
   text-shadow: 0 1px #FFF
-  background: $distant_bg
 
   -webkit-text-size-adjust: 100%
   -ms-text-size-adjust: 100%
   text-rendering: optimizelegibility
   -webkit-font-smoothing: subpixel-antialiased
+
+  background: $body_bg
+
+.page_post
+  background: $distant_bg
 
 body
   position: relative
@@ -58,11 +62,15 @@ body:after
   position: relative
   z-index: 9
 
-  padding: 2.5*rem 0.5*rem 2*rem 1*rem
-  padding: 2.5*rem 2.5vw 2*rem 5vw
+  padding: 0 0.5*rem 0 1*rem
+  padding: 0 2.5vw 0 5vw
 
   background: $body_bg
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
+
+  .page_post &
+    padding-top: 2.5*rem
+    padding-bottom: 2*rem
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
 
   // Setting all those things in a list so we could intrude there.
   & > header,
@@ -93,7 +101,6 @@ body:after
 
 .header
   position: absolute
-  position: fixed
   top: 0
   right: 0
   left: 0
@@ -106,7 +113,9 @@ body:after
 
   white-space: nowrap
 
-  background: $distant_bg
+  .page_post &
+    position: fixed
+    background: $distant_bg
 
 
 .title
@@ -119,7 +128,6 @@ body:after
 
 .footer
   position: absolute
-  position: fixed
   right: 0
   bottom: 0
   left: 0
@@ -128,7 +136,9 @@ body:after
 
   height: $footer_size
 
-  background: $distant_bg
+  .page_post &
+    position: fixed
+    background: $distant_bg
 
 .footer .prevnext
   overflow: hidden
@@ -226,8 +236,10 @@ A:hover
   .header &,
   .footer &
     background-size: 1px .45em
-    text-shadow: -1px 0 $distant_bg, 1px 0 $distant_bg, -2px -1px $distant_bg, 2px -1px $distant_bg,
-                  0 -1px $distant_bg, 0 -2px $distant_bg, 0 -3px $distant_bg, 0 -4px $distant_bg, 0 -5px $distant_bg, 0 -6px $distant_bg
+
+    .page_post &
+      text-shadow: -1px 0 $distant_bg, 1px 0 $distant_bg, -2px -1px $distant_bg, 2px -1px $distant_bg,
+                    0 -1px $distant_bg, 0 -2px $distant_bg, 0 -3px $distant_bg, 0 -4px $distant_bg, 0 -5px $distant_bg, 0 -6px $distant_bg
 
   .feedback > &,
   .published > &

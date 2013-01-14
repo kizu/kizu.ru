@@ -49,11 +49,14 @@ html {
   text-align: center;
   font-size: 18px;
   color: rgba(37,34,14,0.92);
-  background: #f0efe8;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
+  background: #fbfaf4;
+}
+.page_post {
+  background: #f0efe8;
 }
 body {
   position: relative;
@@ -72,9 +75,13 @@ body:after {
 .main {
   position: relative;
   z-index: 9;
-  padding: 45px 9px 36px 18px;
-  padding: 45px 2.5vw 36px 5vw;
+  padding: 0 9px 0 18px;
+  padding: 0 2.5vw 0 5vw;
   background: #fbfaf4;
+}
+.page_post .main {
+  padding-top: 45px;
+  padding-bottom: 36px;
 }
 .main > header,
 .main > h1,
@@ -104,7 +111,6 @@ body:after {
 }
 .header {
   position: absolute;
-  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -113,6 +119,9 @@ body:after {
   padding: 0 9px 0 18px;
   padding: 0 2.5vw 0 5vw;
   white-space: nowrap;
+}
+.page_post .header {
+  position: fixed;
   background: #f0efe8;
 }
 .title {
@@ -124,12 +133,14 @@ body:after {
 }
 .footer {
   position: absolute;
-  position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: hidden;
   height: 108px;
+}
+.page_post .footer {
+  position: fixed;
   background: #f0efe8;
 }
 .footer .prevnext {
