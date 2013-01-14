@@ -4,7 +4,7 @@ layout: layout
 	{% include variables.md %}
 	<header class="header">
 		<h1 class="title">
-			<a href="/{{ lang_prefix }}">{{ site.loc.name | map: lang }}</a>
+			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}
 		</h1>
 	</header>
 
