@@ -474,6 +474,26 @@ pre
   overflow: hidden
   overflow-x: auto
 
+sup,
+sub
+  position: relative
+  vertical-align: baseline
+  font-size: .8em
+  line-height: 1
+sup
+  bottom: 1.4ex
+sub
+  top: .5ex
+
+h1 > sup
+  font-size: 1*rem
+  bottom: 1.7*rem
+
+  & > .link
+    padding: 1em
+    margin: -1em
+    text-shadow: none !important
+
 .figure
   padding: .3em !important
   margin: 0 0.5*rem 0 -0.3em

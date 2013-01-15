@@ -429,6 +429,27 @@ pre {
   overflow: hidden;
   overflow-x: auto;
 }
+sup,
+sub {
+  position: relative;
+  vertical-align: baseline;
+  font-size: 0.8em;
+  line-height: 1;
+}
+sup {
+  bottom: 1.4ex;
+}
+sub {
+  top: 0.5ex;
+}
+h1 > sup {
+  font-size: 18px;
+  bottom: 30.599999999999998px;
+}
+h1 > sup > .link {
+  padding: 1em;
+  margin: -1em;
+}
 .figure {
   padding: 0.3em !important;
   margin: 0 9px 0 -0.3em;
