@@ -491,6 +491,10 @@ pre {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.demo_injected {
+  text-align: left;
+  overflow: visible;
+}
 .demo__frame {
   display: block;
   height: 26em;

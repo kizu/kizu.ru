@@ -441,6 +441,10 @@ pre {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
+.demo_injected {
+  text-align: left;
+  overflow: visible;
+}
 .demo__frame {
   display: block;
   height: 26em;
