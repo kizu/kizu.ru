@@ -8,7 +8,7 @@
                 {% if page.page_type != "feed" %}
                     {% if demo.injected == true %}
                         {% capture demo_handle_with %}
-                            <div class="demo demo_injected figure" id="Demo_{{ demo_name }}">
+                            <div class="demo demo_injected {% if demo.seamless %}demo_seamless{% else %}figure{% endif %}" id="Demo_{{ demo_name }}">
                                 {{ demo.content }}
                             </div>
                         {% endcapture %}

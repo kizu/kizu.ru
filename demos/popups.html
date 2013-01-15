@@ -1,0 +1,358 @@
+---
+layout: demo
+injected: true
+seamless: true
+---
+
+<style>
+/*_*/
+
+/* Dropdowns
+-----------------------------*/
+.b-dropdown {
+    position: relative;
+    display: inline-block;
+    }
+.b-dropdown-handle {
+    border-bottom: 1px dotted;
+
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+
+    position: relative;
+    z-index: 9;
+
+    color: blue;
+    }
+    .b-dropdown-helper:checked+.b-dropdown .b-dropdown-handle {
+        z-index: auto;
+        }
+    .b-dropdown-handle:hover {
+        color: #F00;
+        }
+
+.b-dropdown-popup {
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    z-index: 9;
+
+    visibility: hidden;
+    opacity: 0;
+
+    margin: 10px 0 0;
+
+    font-size: .8571em;
+
+    -webkit-transition: opacity .2s, visibility .2s;
+       -moz-transition: opacity .2s, visibility .2s;
+         -o-transition: opacity .2s, visibility .2s;
+            transition: opacity .2s, visibility .2s;
+    }
+    .b-dropdown-helper:checked+.b-dropdown .b-dropdown-popup {
+        visibility: inherit;
+        opacity: 1;
+        -webkit-transition: opacity .2s;
+           -moz-transition: opacity .2s;
+             -o-transition: opacity .2s;
+                transition: opacity .2s;
+        }
+    .b-dropdown-popup-in {
+        position: relative;
+
+        display: block;
+
+        height: 0;
+        }
+        .b-dropdown-popup-inin {
+            position: relative;
+            left: 50%;
+
+            display: block;
+
+            white-space: nowrap;
+
+            background: #FFF;
+            background: rgba(255,255,255,0.95);
+
+            -webkit-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+               -moz-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+                 -o-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+                    box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+
+            -webkit-border-radius: .4em;
+               -moz-border-radius: .4em;
+                    border-radius: .4em;
+            }
+            .b-dropdown-link {
+                position: relative;
+
+                display: block;
+
+                padding: .3em 1em;
+
+                text-decoration: none;
+                color: #000 !important;
+                }
+                A.b-dropdown-link:hover {
+                    background: rgba(120,200,255,0.9);
+                    text-shadow: none;
+                    color: #000 !important;
+                    }
+                    .b-dropdown-link:first-child {
+                        -webkit-border-radius: .4em .4em 0 0;
+                           -moz-border-radius: .4em .4em 0 0;
+                                border-radius: .4em .4em 0 0;
+                        }
+                    .b-dropdown-link:last-child {
+                        -webkit-border-radius: 0 0 .4em .4em;
+                           -moz-border-radius: 0 0 .4em .4em;
+                                border-radius: 0 0 .4em .4em;
+                        }
+            .b-dropdown-popup-inin:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+
+                width: 10px;
+                height: 10px;
+                margin: -5px 0 0 -5px;
+
+                background: #FFF;
+                background: rgba(255,255,255,0.95);
+
+                -webkit-transform: rotate(135deg);
+                   -moz-transform: rotate(135deg);
+                     -o-transform: rotate(135deg);
+                        transform: rotate(135deg);
+                -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                   -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                     -o-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                        box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                }
+.b-paranja {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 8;
+
+    opacity: 0;
+    }
+    .b-paranja-helper:checked+.b-paranja {
+        display: none;
+        }
+
+/* Popups
+-----------------------------*/
+.b-popup-paranja {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    background: rgba(0,0,0,0.6) !important;
+    cursor: default;
+
+    visibility: hidden;
+    opacity: 0;
+
+    -webkit-transition: opacity .4s, visibility .4s;
+       -moz-transition: opacity .4s, visibility .4s;
+         -o-transition: opacity .4s, visibility .4s;
+            transition: opacity .4s, visibility .4s;
+    }
+
+.b-popup {
+    position: fixed;
+    top: -100px;
+    right: 0;
+    left: 0;
+    z-index: 10;
+
+    opacity: 0;
+    visibility: hidden;
+
+    height: 0;
+
+    text-align: center;
+
+    -webkit-transition: opacity .4s, visibility .4s, top .4s;
+       -moz-transition: opacity .4s, visibility .4s, top .4s;
+         -o-transition: opacity .4s, visibility .4s, top .4s;
+            transition: opacity .4s, visibility .4s, top .4s;
+    }
+    .b-popup-in {
+        position: relative;
+
+        display: inline-block;
+
+        max-width: 80%;
+        padding: 1.375em 1.375em 0;
+        margin: 5em 0;
+
+        text-align: left;
+
+        background: #FFF;
+
+        -webkit-border-radius: 1em;
+           -moz-border-radius: 1em;
+                border-radius: 1em;
+        -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+           -moz-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+             -o-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+                box-shadow: 0 0 5px rgba(0,0,0,0.7);
+        }
+
+.b-popup-paranja:target {
+    visibility: inherit;
+    opacity: 1;
+    -webkit-transition: opacity .4s;
+       -moz-transition: opacity .4s;
+         -o-transition: opacity .4s;
+            transition: opacity .4s;
+    }
+.b-popup-paranja:target+.b-popup {
+    visibility: inherit;
+    opacity: 1;
+    top: 0;
+    -webkit-transition: opacity .4s, top .4s;
+       -moz-transition: opacity .4s, top .4s;
+         -o-transition: opacity .4s, top .4s;
+            transition: opacity .4s, top .4s;
+    }
+
+.b-popup-closer {
+    position: absolute;
+    top: -0.75em;
+    left: -0.75em;
+
+    width: 1.7em;
+    height: 1.2em;
+
+    text-align: center;
+    line-height: 1.4em;
+
+    text-decoration: none;
+
+    background: #333 !important;
+    background: rgba(0,0,0,0.7) !important;
+
+    -webkit-border-radius: 1em;
+       -moz-border-radius: 1em;
+            border-radius: 1em;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+       -moz-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+         -o-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+            box-shadow: 0 0 4px rgba(0,0,0,0.7);
+    }
+    .b-popup-closer:before {
+        content: "×";
+
+        font-size: 1.2em;
+
+        color: rgba(255,255,255,0.9);
+        text-shadow: 0 -1px rgba(0,0,0,0.9);
+        }
+
+@media (max-device-width: 1024px) {
+/* Fixing iOS bug with visibility+opacity transitions */
+.b-popup,
+.b-dropdown-popup,
+.b-popup-paranja {
+    opacity: 1 !important;
+    }
+
+/* Since position:fixed works badly, must hide them at all */
+.b-paranja,
+.b-popup-paranja {
+    display: none;
+}
+}
+</style>
+
+<h2>Dropdowns</h2>
+<p>
+    Here are simple dropdowns, made using radiobuttons:
+    <input type="radio" id="Dropdown1" class="b-dropdown-helper" name="dropdowns" hidden="hidden"/>
+    <span class="b-dropdown">
+        <label class="b-dropdown-handle" for="Dropdown1">Hello, I'm a dropdown!</label>
+        <span class="b-dropdown-popup">
+            <span class="b-dropdown-popup-in">
+                <span class="b-dropdown-popup-inin">
+                    <a class="b-dropdown-link" href="#one">First link</a>
+                    <a class="b-dropdown-link" href="#two">Second link</a>
+                    <a class="b-dropdown-link" href="#three">Third link</a>
+                    <a class="b-dropdown-link" href="#four">Fourth link</a>
+                </span>
+            </span>
+        </span>
+    </span>
+    and
+    <input type="radio" id="Dropdown2" class="b-dropdown-helper" name="dropdowns" hidden="hidden"/>
+    <span class="b-dropdown">
+        <label class="b-dropdown-handle" for="Dropdown2">just another one</label>.
+        <span class="b-dropdown-popup">
+            <span class="b-dropdown-popup-in">
+                <span class="b-dropdown-popup-inin">
+                    <a class="b-dropdown-link" href="#one">Bang!</a>
+                    <a class="b-dropdown-link" href="#two">Kabang!</a>
+                </span>
+            </span>
+        </span>
+    </span>
+</p>
+<h2>Popups</h2>
+<p>Here is a popup:: <a href="#SomePopup1">click me</a>! It use the hash in the address and the :target pseudo-class.</p>
+<a id="SomePopup1" class="b-popup-paranja" href="#x"></a>
+<div class="b-popup">
+    <div class="b-popup-in">
+        <p>Here is some dope popup's content, ok.</p>
+        <p>Well, and a little more of it.</p>
+
+        <a class="b-popup-closer" href="#x"></a>
+    </div>
+</div>
+<p>And here is  <a href="#SomePopup2">Another popup</a>, just for an example, also it have one nested drowdown and a link to the first popup..</p>
+<a id="SomePopup2" class="b-popup-paranja" href="#x"></a>
+<div class="b-popup">
+    <div class="b-popup-in">
+        <p>
+            So, you can call another popup from here, though this one would close, 'cause the :target used instead of :checked:
+            <a href="#SomePopup1">Wooosh!</a>
+            or you can call right here
+            <input type="radio" id="Dropdown3" class="b-dropdown-helper" name="dropdowns2" hidden="hidden"/>
+            <span class="b-dropdown">
+                <label class="b-dropdown-handle" for="Dropdown3">another dropdown</label>
+                <span class="b-dropdown-popup">
+                    <span class="b-dropdown-popup-in">
+                        <span class="b-dropdown-popup-inin">
+                            <a class="b-dropdown-link" href="/en/">Go back to the homepage</a>
+
+                            <a class="b-dropdown-link" href="http://twitter.com/#!/kizmarh">Or follow me in twitter!</a>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <!-- Helper blocks (paranja for inner dropdown) -->
+        <input type="radio" id="Paranja2" class="b-paranja-helper" name="dropdowns2" checked="checked" hidden="hidden" />
+        <label class="b-paranja" for="Paranja2"></label>
+
+        <a class="b-popup-closer" href="#x"></a>
+    </div>
+</div>
+
+
+
+<!-- Helper blocks (paranja for dropdowns) -->
+<input type="radio" id="Paranja" class="b-paranja-helper" name="dropdowns" checked="checked" hidden="hidden" />
+<label class="b-paranja" for="Paranja"></label>

@@ -95,6 +95,7 @@ body:after {
 .main > ol,
 .main > pre,
 .main > dl,
+.main > .demo_seamless,
 .main > .feedback, h1.title, .page:not(.page_post) .footer > .copy {
   width: 756px;
   max-width: 100%;
