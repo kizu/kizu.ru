@@ -1,0 +1,479 @@
+---
+layout: demo
+injected: true
+seamless: true
+---
+
+<style>
+/*_*/
+
+/* Bubble with tail
+---------------------------------------- */
+.b-bubble {
+    position:relative;
+
+    width:6em;
+    height:3em;
+    margin:0 auto 2em;
+
+    -webkit-border-radius: 2em;
+       -moz-border-radius: 2em;
+            border-radius: 2em;
+
+    text-align:center;
+
+    font:normal italic 3em/2.9 Georgia;
+    font-size:3em;
+    line-height:2.9em;
+
+    background:#BF6;
+    color:#FFF;
+    }
+    /* Tail */
+    .b-bubble:before,
+    .b-bubble:after,
+    x:nth-child(1) {
+        content:"";
+
+        position:absolute;
+        top:100%;
+
+        width:1em;
+        height:1em;
+        border:solid #BF6;
+        }
+    .b-bubble:before,
+    x:nth-child(1) {
+        right:50%;
+
+        border-width:1em 1em 0 0;
+        margin:-1em -1em 0 0;
+        -webkit-border-top-right-radius: 2em;
+            -moz-border-radius-topright: 2em;
+                border-top-right-radius: 2em;
+
+        clip: rect(1em 1em auto auto);
+        }
+    .b-bubble:after,
+    x:nth-child(1) {
+        left:50%;
+
+        border-width:1em 0 0 1em;
+        margin:-1em 0 0 -1em;
+
+        -webkit-border-top-left-radius: 2em;
+            -moz-border-radius-topleft: 2em;
+                border-top-left-radius: 2em;
+
+        clip: rect(1em auto auto 1em);
+        }
+
+/* Tabs with rounded corners
+---------------------------------------- */
+.b-tabs {
+    width:34em;
+    overflow:hidden;
+    padding:0;
+    margin:0 0 2em;
+    }
+    /* Just some content emulation */
+    .b-tabs:after,
+    x:nth-child(1) {
+        content:"";
+
+        position:relative;
+
+        clear:both;
+        display:block;
+
+        width:100%;
+        height:7em;
+
+        background:#333;
+
+        -webkit-border-radius:.75em;
+           -moz-border-radius:.75em;
+                border-radius:.75em;
+        -webkit-border-top-left-radius:0;
+            -moz-border-radius-topleft:0;
+                border-top-left-radius:0;
+        }
+    /* Tab item */
+    .b-tabs-item {
+        float:left;
+        display:inline;
+
+        padding: 0;
+        margin:0 .4em 0 0;
+        }
+        .b-tabs-item:before,
+        x:nth-child(1) {
+            content:"";
+            }
+        .b-tabs-item-in {
+            position:relative;
+            top:.25em;
+
+            display:block;
+
+            -webkit-border-top-right-radius:.75em;
+                -moz-border-radius-topright:.75em;
+                    border-top-right-radius:.75em;
+            -webkit-border-top-left-radius:.75em;
+                -moz-border-radius-topleft:.75em;
+                    border-top-left-radius:.75em;
+
+            height:2em;
+            padding:0 .5em;
+
+            line-height:2em;
+            text-decoration:none;
+            font-weight:normal;
+
+            color:#000 !important;
+            background:#CCC !important;
+            }
+            /* Inner rouned corners */
+            .b-tabs-item-in:before,
+            .b-tabs-item-in:after,
+            x:nth-child(1) {
+                content:"";
+
+                position:absolute;
+                bottom:-.75em;
+
+                width:.75em;
+                height:.75em;
+                border:solid #CCC;
+                }
+            .b-tabs-item-in:before,
+            x:nth-child(1) {
+                right: 100%;
+                margin-right:-0.75em;
+
+                border-width:0 .75em .75em 0;
+
+                -webkit-border-bottom-right-radius: 1.5em;
+                    -moz-border-radius-bottomright: 1.5em;
+                        border-bottom-right-radius: 1.5em;
+
+                clip: rect(auto .75em .75em auto);
+                }
+            .b-tabs-item-in:after,
+            x:nth-child(1) {
+                left: 100%;
+                margin-left:-.75em;
+
+                border-width:0 0 .75em .75em;
+
+                -webkit-border-bottom-left-radius: 1.5em;
+                    -moz-border-radius-bottomleft: 1.5em;
+                        border-bottom-left-radius: 1.5em;
+
+                clip: rect(auto auto .75em .75em);
+                }
+        /* Selected tab item */
+        STRONG.b-tabs-item-in {
+            z-index:9;
+            top:0;
+
+            color:#FFF !important;
+            background:#333 !important;
+            text-shadow: none;
+            }
+            STRONG.b-tabs-item-in:before,
+            STRONG.b-tabs-item-in:after {
+                border-color:#333;
+                }
+        /* Hovered tab item */
+        A.b-tabs-item-in:link:hover,
+        A.b-tabs-item-in:visited:hover {
+            top:0;
+
+            color:#000 !important;
+            text-shadow: none;
+            }
+
+/* Some block with outcast
+---------------------------------------- */
+.b-something {
+    overflow:hidden;
+
+    padding:0 0 0 5em;
+    margin:0 0 2em;
+    }
+    /* Some block header */
+    .b-something-header {
+        position:relative;
+        left:1px;
+
+        float:left;
+
+        width:3em;
+        height:3em;
+        padding:1em;
+        margin:0 0 0 -5em;
+
+        -webkit-border-top-left-radius: 1em;
+            -moz-border-radius-topleft: 1em;
+                border-top-left-radius: 1em;
+        -webkit-border-bottom-left-radius: 1em;
+            -moz-border-radius-bottomleft: 1em;
+                border-bottom-left-radius: 1em;
+
+        text-align:center;
+
+        font-family:Georgia;
+        font-weight:bold;
+        font-style:italic;
+
+        background:#CCC;
+        }
+        /* Inner corners for outcast */
+        .b-something-header:before,
+        .b-something-header:after,
+        x:nth-child(1) {
+            content:"";
+
+            position:absolute;
+            left: 100%;
+            margin-left: -1em;
+
+            width:1em;
+            height:1em;
+            border:solid #CCC;
+            }
+        .b-something-header:before,
+        x:nth-child(1) {
+            top: 100%;
+            margin-top:-1em;
+
+            border-width:1em 1em 0 0;
+
+            -webkit-border-top-right-radius: 2em;
+                -moz-border-radius-topright: 2em;
+                    border-top-right-radius: 2em;
+
+            clip: rect(1em 1em auto auto);
+            }
+        .b-something-header:after,
+        x:nth-child(1) {
+            top:-1em;
+
+            border-width:0 1em 1em 0;
+
+            -webkit-border-bottom-right-radius: 2em;
+                -moz-border-radius-bottomright: 2em;
+                    border-bottom-right-radius: 2em;
+
+            clip: rect(auto 1em 1em auto);
+            }
+    /* Some block content */
+    .b-something-content {
+        background:#CCC;
+        padding:1em;
+        margin:0 0 0 0;
+        }
+        .b-something-content:first-of-type {
+            -webkit-border-top-right-radius: 1em;
+                -moz-border-radius-topright: 1em;
+                    border-top-right-radius: 1em;
+            }
+        .b-something-content:last-of-type {
+            -webkit-border-bottom-right-radius: 1em;
+                -moz-border-radius-bottomright: 1em;
+                    border-bottom-right-radius: 1em;
+            -webkit-border-bottom-left-radius: 1em;
+                -moz-border-radius-bottomleft: 1em;
+                    border-bottom-left-radius: 1em;
+            }
+
+/* Steps block with diagonal connection of items
+---------------------------------------- */
+.b-steps {
+    overflow:hidden;
+    }
+    .b-steps-item {
+        position:relative;
+
+        float:left;
+        clear:left;
+
+        width:50%;
+        padding:1em 2em 1em 1em;
+        margin: 0;
+
+        -webkit-box-sizing:border-box;
+           -moz-box-sizing:border-box;
+                box-sizing:border-box;
+
+        text-align:center;
+
+        background:#4F8;
+        }
+    .b-steps-item:nth-child(even) {
+        padding:1em 1em 1em 2em;
+        }
+        .b-steps-item:before {
+            content:counter(list_item);
+
+            position:absolute;
+            top:50%;
+            right:.25em;
+
+            opacity:.5;
+
+            width:1.5em;
+            height:1.5em;
+            padding:0;
+            margin:-.75em 0 0 0;
+
+            -webkit-border-radius: .75em;
+               -moz-border-radius: .75em;
+                    border-radius: .75em;
+
+            text-align:center;
+
+            font-family:sans-serif;
+            line-height:1.5;
+
+            color:#FFF;
+            background:#0B4;
+            }
+        .b-steps-item:nth-child(even):before {
+            right:auto;
+            left:.25em;
+            }
+        .b-steps-item:nth-child(odd) {
+            -webkit-border-top-left-radius: 1.5em;
+            -moz-border-radius-topleft: 1.5em;
+            border-top-left-radius: 1.5em;
+            -webkit-border-bottom-left-radius: 1.5em;
+            -moz-border-radius-bottomleft: 1.5em;
+            border-bottom-left-radius: 1.5em;
+            }
+        .b-steps-item:nth-child(even) {
+            margin-left:50%;
+            -webkit-border-top-right-radius: 1.5em;
+                -moz-border-radius-topright: 1.5em;
+                    border-top-right-radius: 1.5em;
+            -webkit-border-bottom-right-radius: 1.5em;
+                -moz-border-radius-bottomright: 1.5em;
+                    border-bottom-right-radius: 1.5em;
+            }
+        .b-steps-item:first-child {
+            -webkit-border-top-left-radius: 1.5em;
+                -moz-border-radius-topleft: 1.5em;
+                    border-top-left-radius: 1.5em;
+            -webkit-border-top-right-radius: 1.5em;
+                -moz-border-radius-topright: 1.5em;
+                    border-top-right-radius: 1.5em;
+            }
+        .b-steps-item:last-child {
+            -webkit-border-bottom-left-radius: 1.5em;
+                -moz-border-radius-bottomleft: 1.5em;
+                    border-bottom-left-radius: 1.5em;
+            -webkit-border-bottom-right-radius: 1.5em;
+                -moz-border-radius-bottomright: 1.5em;
+                    border-bottom-right-radius: 1.5em;
+            }
+            /* Diagonal connections */
+            .b-steps-item-in:before,
+            .b-steps-item-in:after,
+            x:nth-child(1) {
+                content:"";
+
+                position:absolute;
+
+                width:1.5em;
+                height:1.5em;
+                border:solid #4F8;
+                }
+            .b-steps-item:nth-child(odd) .b-steps-item-in:before {
+                left: 100%;
+                top: 100%;
+                margin: -1.5em 0 0 -1.5em;
+
+                border-width:1.5em 1.5em 0 0;
+
+                -webkit-border-top-right-radius: 3em;
+                    -moz-border-radius-topright: 3em;
+                        border-top-right-radius: 3em;
+
+                clip: rect(1.5em 1.5em auto auto);
+                }
+            .b-steps-item:nth-child(even) .b-steps-item-in:before {
+                top: 100%;
+                right: 100%;
+                margin: -1.5em -1.5em 0 0;
+
+                border-width:1.5em 0 0 1.5em;
+
+                -webkit-border-top-left-radius: 3em;
+                    -moz-border-radius-topleft: 3em;
+                        border-top-left-radius: 3em;
+
+                clip: rect(1.5em auto auto 1.5em);
+                }
+            .b-steps-item:nth-child(odd) .b-steps-item-in:after {
+                bottom: 100%;
+                left: 100%;
+                margin: 0 0 -1.5em -1.5em;
+
+                border-width:0 1.5em 1.5em 0;
+
+                -webkit-border-bottom-right-radius: 3em;
+                    -moz-border-radius-bottomright: 3em;
+                        border-bottom-right-radius: 3em;
+
+                clip: rect(auto 1.5em 1.5em auto);
+                }
+            .b-steps-item:nth-child(even) .b-steps-item-in:after {
+                right: 100%;
+                bottom: 100%;
+                margin: 0 -1.5em -1.5em 0;
+
+                border-width:0 0 1.5em 1.5em;
+
+                -webkit-border-bottom-left-radius: 3em;
+                    -moz-border-radius-bottomleft: 3em;
+                        border-bottom-left-radius: 3em;
+
+                clip: rect(auto auto 1.5em 1.5em);
+                }
+</style>
+
+<h2>Хвостик баббла</h2>
+<blockquote class="b-bubble">Привет!</blockquote>
+
+<h2>Табы</h2>
+<ul class="b-tabs">
+    <li class="b-tabs-item">
+        <strong class="b-tabs-item-in">Выделенный пункт</strong>
+    </li>
+    <li class="b-tabs-item">
+        <a href="#" class="b-tabs-item-in">второй пункт</a>
+    </li>
+    <li class="b-tabs-item">
+        <a href="#" class="b-tabs-item-in">третий пункт</a>
+    </li>
+</ul>
+
+<h2>Выносные блоки</h2>
+<dl class="b-something">
+    <dt class="b-something-header">Пыщь!</dt>
+    <dd class="b-something-content">Идея (пафос), в первом приближении, заканчивает канон, что-то подобное можно встретить в работах Ауэрбаха и Тандлера. Биографический метод, так или иначе, органичен. Структурализм продолжает классический реализм, таким образом, сходные законы контрастирующего развития характерны и для процессов в психике. Художественное восприятие, так или иначе, имеет канон биографии, так Г.Корф формулирует собственную антитезу. Очевидно, что метод кластерного анализа образует непосредственный культовый образ, однако само по себе состояние игры всегда амбивалентно. Постмодернизм конвенционален.</dd>
+    <dt class="b-something-header">Опа!</dt>
+    <dd class="b-something-content">Нивелирование индивидуальности многопланово представляет собой самодостаточный комплекс агрессивности, это же положение обосновывал Ж.Польти в книге "Тридцать шесть драматических ситуаций". Диахронический подход многопланово дает фабульный каркас, однако само по себе состояние игры всегда амбивалентно. Выявляя устойчивые архетипы на примере художественного творчества, можно сказать, что предмет искусства иллюстрирует бессознательный импрессионизм, таким образом, сходные законы контрастирующего развития характерны и для процессов в психике.</dd>
+</dl>
+
+<h2>Диагональное соединение блоков</h2>
+<ol class="b-steps">
+    <li class="b-steps-item"><div class="b-steps-item-in">Абсолютно спозиционированный блок с толстой рамкой.</div></li>
+    <li class="b-steps-item"><div class="b-steps-item-in">Радиус скругления в два раза больше нужного.</div></li>
+    <li class="b-steps-item"><div class="b-steps-item-in">Скрытие лишнего контента при помощи overflow:hidden или свойства clip.</div></li>
+    <li class="b-steps-item"><div class="b-steps-item-in">?????</div></li>
+    <li class="b-steps-item"><div class="b-steps-item-in">PROFIT!</div></li>
+</ol>
+
+<p>и т.д., и т.п.</p>

@@ -15,7 +15,7 @@
                     {% else %}
                         {% capture demo_handle_with %}
                             <div class="demo figure" id="Demo_{{ demo_name }}">
-                                <iframe class="demo__frame" {% if demo.height %}style="height: {{ demo.height }}" {% else %}height="240" {% endif %}width="100%" src="/demos/{{ demo_name }}.html"></iframe>
+                                <iframe class="demo__frame" {% if demo.height %}style="height: {{ demo.height }}" {% else %}height="240" {% endif %}width="100%" src="{% if demo.iframe_url %}{{ demo.iframe_url }}{% else %}/demos/{{ demo_name }}.html{% endif %}"></iframe>
                             </div>
                         {% endcapture %}
                     {% endif %}
