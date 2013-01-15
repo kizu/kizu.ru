@@ -10,7 +10,7 @@
 
         {% if list_posts_categories_url contains list_posts_categories and list_posts_categories != "^/" %}
             {% capture list_posts_items %}{{ list_posts_items }}
-                <li><a href="{{ post.url }}/">{{ post.title }}</a> — <em>{{ post.date | date: "%d %B, %Y" }}</em></li>{% endcapture %}
+                <li><a href="{{ post.url }}/">{{ post.title }}</a> — <em class="published">{{ post.date | date: "%d %B, %Y" }}</em></li>{% endcapture %}
         {% endif %}
     {% endfor %}
 
