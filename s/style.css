@@ -407,11 +407,11 @@ OL > LI:before {
   body {
     line-height: 1.75rem;
   }
-  .header,
-  .footer {
+  .page .header,
+  .page .footer {
     position: absolute;
   }
-  .footer {
+  .page .footer {
     text-align: left;
     padding: 0 0.5rem 0 1rem;
     padding: 0 2.5vw 0 5vw;
