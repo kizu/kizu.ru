@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html id="nojs">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Презентация</title>
+	<link rel="stylesheet" href="s/style.css" />
+	<link rel="stylesheet" href="s/paged.css" media="print,projection" />
+	<script src="j/mootools-1.2.4-core.js"></script>
+	<script src="j/highlight.pack.js"></script>
+	<script src="j/script.js"></script>
+	
+</head>
+<body id="Presentation">
+<article class="presentation">
+	<header class="slide" id="Title">
+		<div class="slide-in">
+			<h1>Систематизация экспрешнов в IE</h1>
+			<h2 class="vcard">Комаров Роман</h2>
+		</div>
+	</header>
+
+	<section class="slide" id="Intro">
+		<h3>Экспрешны</h3>
+		<ul>
+			<li>Насколько они нужны? А нужно ли вообще что-то править под IE?</li>
+			<li>За что разработчики не любят экспрешны <em>(не умеют готовить?)</em></li>
+			<li>Объективные недостатки имеющихся подходов к экспрешнам.</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="NoGrail">
+		<h3>Важно!</h3>
+		<p>Экспрешны — не универсальное решение всех проблем, но при правильном применении способны существенно сократить время разработки.</p>
+		<p>Предлагаемая система не является универсальным комбайном а ля печально известная библиотека IE7, это набор точных инструментов, при применении которых необходимо думать.</p>
+	</section>
+
+	<section class="slide" id="Basics">
+		<h3>Правильный рецепт приготовления экспрешнов</h3>
+		<ul>
+			<li><a href="#Basics_RunOnce_and_Cached">Перезаписываемые («одноразовые») экспрешны.</a></li>
+			<li><a href="#Basics_RunOnce_and_Cached">Постоянно выполняющиеся экспрешны с условиями («кешируемые»)</a></li>
+		</ul>
+		<h4>А кроме того:</h4>
+		<ul>
+			<li><a href="#Basics_Delivery">Автоматическое получение эмулируемых свойств.</a></li>
+			<li><a href="#Basics_Divide">Отделение экспрешнов от таблиц стилей во внешний .js файл.</a></li>
+			<li><a href="#Basics_Multiple">Гибкость вариантов применения экспрешнов.</a></li>
+		</ul>
+	</section>
+
+	<section class="slide" id="Basics_RunOnce_and_Cached">
+		<h4>Одноразовые и кешируемые экспрешны</h4>
+		<p>Про самые основы уже есть достаточно материалов:</p>
+		<ul>
+			<li>«<a href="http://lusever.livejournal.com/15868.html">Тонкий CSS для Internet Explorer</a>», Павел Корнилов, <em>(ClientSide 2007)</em></li>
+			<li>«<a href="http://subbotnik.yandex.st/css-framework/practice.html">CSS Framework своими руками. Практика</a>»<sup>(примерно 40-й слайд)</sup>, Виталий Харисов, <em>(Я.Субботник в январе 2009)</em></li>
+		</ul>
+		<h4>Вкратце:</h4>
+		<ul>
+			<li>Всё что можно выполнить только один раз раз — нужно выполнить только один раз.</li>
+			<li>А для всего остального, перед вычислением всех значений, узнавать нужно ли это делать.</li>
+		</ul>
+	</section>
+
+	<section class="slide" id="Basics_Delivery">
+		<h4>Автоматическое получение эмулируемых свойств</h4>
+		<p>Почти всё, что нам нужно, мы можем получить из свойства <code>currentStyle</code>.</p>
+		<p>Например:</p>
+		<ul>
+			<li><pre><code class="language-javascript">parseInt(t.currentStyle['max-width'], 10);</code></pre></li>
+			<li><pre><code class="language-javascript">t.currentStyle.opacity * 100;</code></pre></li>
+			<li><pre><code class="language-javascript">t.currentStyle['content']; // хотя тут ещё надо парсить…</code></pre></li>
+		</ul>
+		<p>Таким образом, любые правки в проекте мы будем вносить только в оригинальные таблицы стилей, забыв про хаки IE.</p>
+	</section>
+
+	<section class="slide" id="Basics_Divide">
+		<h4>Отделение экспрешнов от таблиц стилей во внешний .js файл</h4>
+		<ol>
+			<li>Разделение поведения (behavior!) и представления.</li>
+			<li>Повторное использование кода.</li>
+			<li>Отсутствие проблем с подсветкой кода в редакторах.</li>
+			<li>Предотвращение ошибок браузеров, связанных с неверной интерпретацией содержимого экспрешнов (привет, Safari!)</li>
+			<li>Ну и все прелести яваскрипта <em>*доступные IE.</em></li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h4>Отделение экспрешнов от таблиц стилей во внешний .js файл</h4>
+		<dl>
+			<dt>ie.js</dt>
+			<dd>
+				<pre><code class="language-javascript">var IExpr = {
+	fix: function(t) {…},
+	target: function(t) {…},
+	hover: function(t) {…},
+	…
+}</code></pre>
+			</dd>
+			<dt>ie.css</dt>
+			<dd>
+				<pre><code class="language-css">.example1 {
+	zzz:expression(IExpr.positioning(this));
+	}
+.example2 {
+	behavior:expression(IExpr.fix(this,'hover'));
+	}</code></pre>
+			</dd>
+		</dl>
+	</section>
+
+	<section class="slide" id="Basics_Multiple">
+		<h4>Гибкость вариантов применения экспрешнов</h4>
+		<ul>
+			<li>Чаще всего все исправления применяются к одному свойству.</li>
+			<li>Самый простой способ для одноразовых экспрешнов:
+				<pre><code class="language-javascript">zoom:expression(IExpr.iframeShim(this),this.runtimeStyle.zoom=1);</code></pre>
+			</li>
+			<li>И для постоянно выполнящихся:
+				<pre><code class="language-javascript">zzz:expression(IExpr.positioning(this));</code></pre>
+			</li>
+		</ul>
+			<p>Ну и, кроме того, удобно применить сразу много исправлений в одном экспрешне:</p>
+			<pre><code class="language-css">.example {
+	behavior:expression(IExpr.fix(this,'before','after','target'));
+	}</code></pre>
+	</section>
+
+	<section class="slide">
+		<h4>Различные варианты применения эскпрешнов</h4>
+		<p>Вариант со вспомогательной функцией <var>fix</var> уменьшает количество кода в CSS, кроме того он позволяет «отключать» постоянно выполняющиеся функции.</p>
+		<p>Однако, в случае, когда необходимо применять к одному элементу несколько экспрешнов по разным селекторам, этот вариант не подходит, т.к. нельзя дополнять свойство <var>behavior</var>, можно только переопределять его.</p>
+		<p><em>На самом деле, я сейчас тестирую одну штуку, которая позволит добавлять любые экспрешны из любого селектора без конфликтов, но пока про неё ничего не скажу ;)</em></p>
+	</section>
+
+	<section class="slide" id="Examples">
+		<h3>Практические примеры</h3>
+		<ol>
+			<li><a href="#Examples_MaxWidth"><var>max-width</var></a></li>
+			<li><a href="#Examples_Hover"><var>:hover</var></a></li>
+			<li><a href="#Examples_Before"><var>:before</var></a></li>
+		</ol>
+	</section>
+
+	<section class="slide" id="Examples_MaxWidth">
+		<h4><var>max-width</var></h4>
+		<pre><code class="language-javascript">maxWidthPx: function(t)
+{
+	if (t.parentNode.scrollWidth != t.w) {
+		t.w = t.parentNode.scrollWidth;
+		var max = parseInt(t.currentStyle["max-width"], 10);
+		t.style.width = 'auto';
+		if (t.scrollWidth > max) {
+			t.style.width = max;
+		}
+	}
+	return 1;
+},</code></pre>
+	</section>
+
+	<section class="slide" id="Examples_Hover">
+		<h4><var>:hover</var></h4>
+		<pre><code class="language-javascript">hover: function(t)
+{
+	var hoverClass = t.className ? t.className.replace(/([^\s]+)/g,'$1_hover') : 'hover';
+	t.attachEvent('onmouseover',function() {
+		t.className += (' ' + hoverClass);
+	});
+	t.attachEvent('onmouseout',function() {
+		t.className = t.className.replace(new RegExp(' ' + hoverClass,'g'), '');
+	});
+},</code></pre>
+	</section>
+
+	<section class="slide" id="Examples_Before">
+		<h4><var>:before</var></h4>
+		<pre><code>before: function(t)
+{
+	t.insertAdjacentHTML(&#x27;afterBegin&#x27;,&#x27;&lt;span class=&quot;&#x27; + (t.className ? t.className.replace(/([^\s]+)/g,&#x27;$1_before&#x27;) : &#x27;before&#x27;) + &#x27;&quot; style=&quot;behavior:expression(IExpr.fix(this,\&#x27;renderContent\&#x27;))&quot;&gt;&lt;/span&gt;&#x27;);
+},
+renderContent: function(t)
+{
+	var content = t.currentStyle['content'];
+	if (content &amp;&amp; content.length > 2) {
+		if (content == 'none' || content == 'normal') {
+			t.removeNode(true);
+		} else {
+			t.insertAdjacentText('afterBegin', content.slice(1,-1));
+		}
+	}
+},</code></pre>
+	</section>
+
+	<div class="hr slide"><hr /></div>
+
+	<footer class="slide" id="Footer">
+		<h3>Спасибо!</h3>
+		<ul>
+			<li><a class="aslink" href="http://kizu.ru/lib/ie/">http://kizu.ru/lib/ie/</a></li>
+			<li><a class="aslink" href="mailto:kizu@kizu.ru">kizu@kizu.ru</a></li>
+		</ul>
+	</footer>
+
+
+</article>
+<!--	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758); } catch(e){}</script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute" alt="" /></noscript><!-- /Yandex.Metrika --> -->
+</body>
+</html>
+

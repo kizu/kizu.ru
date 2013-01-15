@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>bug</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<style>
+BODY {
+	background:red;
+	}
+
+.test {
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	
+	width:16px;
+	background:lime;
+	}
+	</style>
+</head>
+<body onload="document.getElementById('Wrap').style.height='16px'">
+	<div id="Wrap" style="height:0;position:relative;">
+		<div class="test"></div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>:focus</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.focustest:focus,
+.focustest_focus,
+.focustest_a A:focus,
+.focustest_a A.focus {
+	background:lime;
+	}
+
+.hovertest:hover,
+.hovertest_hover {
+	background:lime;
+	}
+
+.targettest:target,
+.targettest_target {
+	background:lime;
+	}
+
+	</style>
+
+	<!--[if IE]>
+		<script src="ie.js"></script>
+		<style>
+
+.focustest,
+.focustest_a A {
+	behavior:expression(IExpr.fix(this,'focus'));
+	}
+
+.hovertest {
+	behavior:expression(IExpr.fix(this,'hover'));
+	}
+
+.targettest {
+	behavior:expression(IExpr.fix(this,'target'));
+	}
+
+		</style>
+	<![endif]-->
+</head>
+<body>
+	<h1>:focus</h1>
+
+	<p><input type="text" class="type-text focustest" value="Focus me!" /></p>
+	<p class="focustest_a"><a href="#">Focus me!</a></p>
+	<p class="hovertest">Hover me!</p>
+	<p>Click or target them: <a id="Test1" href="#Test1" class="targettest">Test1</a> <a id="Test2" href="#Test2" class="targettest">Test2</a> <a href="#lol" class="targettest">dope</a></p>
+
+
+
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758); } catch(e){}</script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute" alt="" /></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>

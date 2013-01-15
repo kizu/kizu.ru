@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='ru' xml:lang='ru' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<script src='http://mootools.net/download/get/mootools-core-edge.js' type='text/javascript'></script>
+	<script type="text/javascript">
+
+window.addEvent('domready', function() {
+	alert($$('.test').getStyle('line-height'));
+});
+
+	</script>
+	<title>Buggy detection of line-height in IE</title>
+</head>
+<body>
+	<p class="test" style="line-height:1;">alert($$('.test').get('line-height'));</p>
+	<p>In normal browsers we get something like "16px", however in IE the return is "1"</p>
+</body>
+</html>

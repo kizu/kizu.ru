@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>ane one more Opera positioning bug</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.test {
+	position: absolute;
+	width: 300px;
+	}
+
+.underlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 300px;
+	background: lime;
+	}
+.block {
+	position: relative;
+	}
+.block2 {
+	position: relative;
+	background: rgba(0,0,0,0);
+	}
+	</style>
+</head>
+<body>
+    <div class="test">
+        <div class="underlay"></div>
+        <div class="block">
+            asdasd Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="block2">
+            asdasd Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+    </div>
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><div style="display:none;"><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758);yaCounter632758.clickmap();yaCounter632758.trackLinks({external: true});} catch(e){}</script></div><noscript><div style="position:absolute"><img src="//mc.yandex.ru/watch/632758" alt="" /></div></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>

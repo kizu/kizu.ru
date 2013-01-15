@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>:before и :after</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.test1:before,
+.test1_before {
+	content:"before";
+	padding:0 .5em;
+	background:lime;
+	}
+
+.test2:after,
+.test2_after {
+	content:"after";
+	padding:0 .5em;
+	background:lime;
+	}
+
+.test3:before,
+.test3_before {
+	content:"before";
+	padding:0 .5em;
+	background:lime;
+	}
+.test3:after,
+.test3_after {
+	content:"after";
+	padding:0 .5em;
+	background:lime;
+	}
+	</style>
+
+	<!--[if IE]>
+		<script src="ie.js"></script>
+		<style>
+
+.test1 {
+	behavior:expression(IExpr.fix(this,'before'));
+	}
+
+.test2 {
+	behavior:expression(IExpr.fix(this,'after'));
+	}
+.test3 {
+	behavior:expression(IExpr.fix(this,'before','after'));
+	}
+
+		</style>
+	<![endif]-->
+</head>
+<body>
+	<h1>::before и ::after</h1>
+	<dl>
+		<dt class="test1">Test1.</dt><dd>.test1:before { content:"before"; }</dd>
+	</dl>
+	<dl>
+		<dt class="test2">Test2.</dt><dd>.test2:after { content:"after"; }</dd>
+	</dl>
+	<dl>
+		<dt class="test3">Test3.</dt><dd>.test3:before { content:"before"; } .test3:after { content:"after"; }</dd>
+	</dl>
+
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758); } catch(e){}</script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute" alt="" /></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>

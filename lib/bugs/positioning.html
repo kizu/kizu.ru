@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<title>relative</title>
+		<style type="text/css" media="screen">
+.wrap {
+	width:400px;
+	height:100px;
+	border:1px solid;
+	color:#222;
+	background:#CCC;
+	margin:0 0 1em 100px;
+	position:relative;
+	}
+	.a {
+		width:98px;
+		height:98px;
+		background:#888;
+		border:1px solid;
+		}
+	.a1 .a {
+		position:relative;
+		left:100px;
+		right:100px;
+		}
+	.a2 .a {
+		position:relative;
+		left:100px;
+		right:100px;
+		direction:rtl;
+		}
+	.b1 .a {
+		position:absolute;
+		left:100px;
+		right:100px;
+		}
+	.rtl {
+		direction:rtl;
+		}
+		.rtl .a {
+			direction:ltr;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="wrap a2"><div class="a">relative;<br />width:100px;<br />left:100px;<br />right:100px;<br />dir:rtl;</div></div>
+		<div class="wrap a1 rtl"><div class="a">relative;<br />width:100px;<br />left:100px;<br />right:100px;<br />[dir:rtl;]</div></div>
+		<div class="wrap b1 rtl"><div class="a">absolute;<br />width:100px;<br />left:100px;<br />right:100px;<br />[dir:rtl;]</div></div>
+
+	</body>
+</html>

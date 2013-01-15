@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>bug</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<style>
+.test-wrap {
+    width:30px;
+    position:relative;
+    background:red;
+    }
+.test {
+    position:relative;
+    overflow:scroll;
+    height:40px;
+}
+
+.lime {
+    width:16px;
+    height:16px;
+    position:absolute;
+    top:0;
+    right:0;
+    background:lime;
+    }
+	</style>
+</head>
+<body>
+    <div class="test-wrap">
+        <div class="test">
+            <div class="lime"></div>
+        </div>
+    </div>
+    <div class="test-wrap" style="top:0;left:8px;position:absolute;">
+        <div class="test">
+            <div class="lime"></div>
+        </div>
+    </div>
+</body>
+</html>

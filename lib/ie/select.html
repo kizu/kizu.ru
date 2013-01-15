@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Перекрытие селектов айфреймом</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<!--[if IE]>
+		<script src="ie.js"></script>
+		<style>
+
+.iframed {
+	zoom:1;
+	behavior:expression(IExpr.fix(this,'iframeShim'));
+	}
+
+		</style>
+	<![endif]-->
+</head>
+<body>
+	<h1><a href="http://kizu.ru/lib/ie/#Select">Перекрытие селектов айфреймом</a></h1>
+
+	<div>
+		<select name="lol" id="Lol" style="width:200px;margin-top:90px;">
+			<option>Пункт списка</option>
+		</select>
+	</div>
+	<div class="iframed" style="position:relative;top:-110px;left:70px;height:200px;width:40px; background:red;"></div>
+
+
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758); } catch(e){}</script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute" alt="" /></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>

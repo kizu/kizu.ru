@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>another Opera positioning bug</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.test {
+	position:absolute;
+	top:0;
+	bottom:100px;
+
+	/* styles for visual testing */
+	background:#AFA;
+	border-bottom:2px solid #000;
+	}
+	</style>
+</head>
+<body>
+	<div class="test" style="width:20%;left:0;"></div>
+	<div class="test" style="width:200px;right:0;"></div>
+	<div class="test" style="width:200px;right:200px;padding-right:1%"></div>
+	<article style="display:block;position:relative;">
+		<h1>Resize window or change zoom to see bug</h1>
+		<ol>
+			<li>All absolute or fixed positioned blocks, with both <code>top</code> and <code>bottom</code> properties specified do not recalculate their heights when we resize window only in Y axis.</li>
+			<li>Even more: blocks with pixel widths do not recalculate at all.</li>
+			<li>However, when we give these blocks with pixel widths percent size paddings the recalculate appears, but the lower the padding the worse the recalculating become.</li>
+		</ol>
+	</article>
+</body>
+</html>

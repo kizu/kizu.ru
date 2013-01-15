@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Webkit dinamic selectors</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.test1:checked ~ SPAN {
+    background:lime;
+    }
+
+.test2:checked + SPAN,
+.test2:checked + SPAN + SPAN,
+.test2:checked + SPAN + SPAN + SPAN {
+    background:lime;
+    }
+
+.test3:hover ~ SPAN {
+    background:lime;
+    }
+
+.test4:hover + SPAN,
+.test4:hover + SPAN + SPAN,
+.test4:hover + SPAN + SPAN + SPAN {
+    background:lime;
+    }
+
+.test5:focus ~ SPAN {
+    background:lime;
+    }
+
+.test6:focus + SPAN,
+.test6:focus + SPAN + SPAN,
+.test6:focus + SPAN + SPAN + SPAN {
+    background:lime;
+    }
+
+	</style>
+</head>
+<body>
+    <fieldset>
+        <legend>:checked using ~</legend>
+        <p><input class="test1" type="checkbox" /> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+    <fieldset>
+        <legend>:checked using +</legend>
+        <p><input class="test2" type="checkbox" /> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+    <fieldset>
+        <legend>:hover using ~</legend>
+        <p><a class="test3" href="#">hover me!</a> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+    <fieldset>
+        <legend>:hover using +</legend>
+        <p><a class="test4" href="#">hover me!</a> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+    <fieldset>
+        <legend>:focus using ~</legend>
+        <p><input class="test5" type="text" value="focus me!"> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+    <fieldset>
+        <legend>:focus using +</legend>
+        <p><input class="test6" type="text" value="focus me!"> <span>элемент1</span> <span>элемент2</span> <span>элемент3</span>
+    </fieldset>
+</body>
+</html>

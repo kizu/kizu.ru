@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>bug</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<style>
+
+.test {
+	max-width:16px;
+	}
+	.float {
+		position:relative;
+		float:left;
+		}
+	.absolute {
+		position:absolute;
+		top:8px;
+		}
+.inner {
+	width:16px;
+	height:8px;
+	background:lime;
+	position:absolute;
+	right:0;
+	}
+.block {
+	width:16px;
+	height:8px;
+	background:red;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="test float">
+		<div class="inner"></div>
+		<div class="block"></div>
+	</div>
+	<div class="test absolute">
+		<div class="inner"></div>
+		<div class="block"></div>
+	</div>
+</body>
+</html>

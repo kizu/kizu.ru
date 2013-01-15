@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Максимальная ширина</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style>
+.test {
+	background:#EEE;
+	border:3px solid red;
+	}
+	</style>
+	<!--[if lte IE 6]>
+		<script src="ie.js"></script>
+		<style>
+.fix {
+	zoom:1;
+	behavior:expression(IExpr.fix(this,'maxWidthPx'));
+	}
+
+		</style>
+	<![endif]-->
+
+</head>
+<body>
+	<h1><a href="http://kizu.ru/lib/ie/#MinMax">Минимальные/максимальные ширины/высоты</a></h1>
+
+	<div class="test" style="width:500px;">sample</div>
+	<div class="test fix" style="max-width:500px;">max-widthed</div>
+	<div style="width:60%;">
+		<div class="test fix" style="max-width:500px;">max-widthed</div>
+	</div>
+	<div style="width:40%;">
+		<div class="test fix" style="max-width:500px;">max-widthed</div>
+	</div>
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758); } catch(e){}</script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute" alt="" /></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>

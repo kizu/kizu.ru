@@ -1,0 +1,366 @@
+/*_*/
+
+/* Contents
+----------------------------------------	
+	- Reset
+	- Global
+		- Links
+		- Accessibility
+		- Contacts' icons
+		- Other global elements
+		- Layout
+
+	- Typography
+		- Headings
+		- Lists
+		- Tables
+		- Code Blocks
+		- Other elements
+
+	- @ Medias
+
+
+---------------------------------------- */
+
+/* Reset based on http://html5doctor.com/html-5-reset-stylesheet/ */
+HTML,BODY,DIV,SPAN,OBJECT,IFRAME,H1,H2,H3,H4,H5,H6,P,BLOCKQUOTE,PRE,ABBR,ADDRESS,CITE,CODE,DEL,DFN,EM,IMG,INS,KBD,Q,SAMP,SMALL,STRONG,SUB,SUP,VAR,B,I,DL,DT,DD,OL,UL,LI,FIELDSET,FORM,LABEL,LEGEND,TABLE,CAPTION,TBODY,TFOOT,THEAD,TR,TH,TD,ARTICLE,ASIDE,DIALOG,FIGURE,FOOTER,HEADER,HGROUP,MENU,NAV,SECTION,TIME,MARK,AUDIO,VIDEO{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}BODY{line-height:1}ARTICLE,ASIDE,DIALOG,FIGURE,FOOTER,HEADER,HGROUP,NAV,SECTION{display:block}NAV UL{list-style:none}BLOCKQUOTE,Q{quotes:none}BLOCKQUOTE:before,BLOCKQUOTE:after,Q:before,Q:after{content:''}A{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;background:transparent}INS{background-color:#FF9;color:#000;text-decoration:none}MARK{background-color:#FF9;color:#000;font-style:italic;font-weight:bold}DEL{text-decoration:line-through}TABLE{border-collapse:collapse;border-spacing:0}INPUT,SELECT{vertical-align:middle}
+
+/* Global
+---------------------------------------- */
+BODY {
+	padding:0 0 5em;
+	font:62.5%/1.4 Helvetica, Arial, sans-serif;
+	color:#000;
+	background:#FFF;
+	}
+HEADER,
+ASIDE,
+ARTICLE,
+CONTENT,
+FOOTER,
+FIGURE,
+SECTION {
+	display:block;
+	}
+
+/* Links */
+:link *, :visited * {
+	cursor:pointer;
+	}
+A[rel=tag]:link,
+A[rel=tag]:visited {
+	color:#222;
+	}
+	A[rel=tag]:link:hover,
+	A[rel=tag]:visited:hover {
+		color:#0AF;
+		}
+A:link {
+	color:#0C56FF;
+	}
+A:visited {
+	color:#5C8EFF;
+	}
+	A:link:hover,
+	A:link:active,
+	A:visited:hover,
+	A:visited:active {
+		color:#0AF;
+		}
+
+/* Other global elements */
+.accessibility {
+	position:absolute;
+	width:0;
+	height:0;
+	overflow:hidden;
+	visibility:hidden;
+	}
+
+
+/* Typography
+---------------------------------------- */
+UL,
+OL,
+DL,
+P,
+BLOCKQUOTE,
+HR,
+CODE,
+TABLE {
+	margin-bottom:1.5em;
+	}
+
+/* Headings */
+H1,
+H2,
+H3,
+H4,
+H5,
+H6 {
+	margin-bottom:.5em;
+	font-weight:normal;
+	}
+H1 {
+	margin-top:1.45em;
+	font-size:2em;
+	line-height:1.1;
+	}
+H2 {
+	margin-top:1.5em;
+	font-size:2em;
+	line-height:1.15;
+	}
+H3 {
+	margin-top:1.55em;
+	font-size:1.4em;
+	line-height:1.2;
+	}
+H4 {
+	margin-top:1.6em;
+	font-size:1.3em;
+	line-height:1.25;
+	}
+H5 {
+	margin-top:1.65em;
+	font-size:1.2em;
+	font-weight:bolder;
+	line-height:1.3;
+	}
+H6 {
+	margin-top:1.7em;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:1.35;
+	}
+
+/* Lists */
+LI {
+	padding-bottom:1em;
+	}
+UL LI {
+	list-style:none;
+	}
+UL LI:before,
+UL LI .before {
+	content:"— ";
+	position:relative;
+	display:inline-block;
+	width:1.7em;
+	padding-right:.3em;
+	margin-left:-2em;
+	text-align:right;
+	}
+
+UL BR,
+OL BR,
+DL BR {
+	display:none;
+	}
+	UL LI BR,
+	OL LI BR,
+	DL DT BR,
+	DL DD BR {
+		display:block;
+		}
+UL UL,
+UL OL,
+OL UL,
+OL OL,
+DT CODE {
+	margin-bottom:0;
+	}
+
+/* Tables */
+TABLE {
+	max-width:100%;
+	}
+	TABLE CAPTION {
+		padding:.6em .5em 0;
+		border-bottom:2px solid;
+		text-align:center;
+		font-size:1.6em;
+		}
+	TABLE THEAD TH,
+	TABLE THEAD TD {
+		padding:.6em .5em;
+		border-bottom:2px solid;
+		font-size:1.2em;
+		font-weight:normal;
+		}
+		TABLE TD,
+		TABLE TH {
+			padding:.3em .6em;
+			border-bottom:1px solid;
+			text-align:left;
+			}
+		TABLE TFOOT TD,
+		TABLE TFOOT TH {
+			font-style:italic;
+			}
+		TABLE TH {
+			font-weight:bold;
+			}
+/* Code blocks */
+CODE,
+VAR {
+	font-family:Monaco,Consolas,"Lucida Console","Courier New",monospace;
+	font-style:normal;
+	}
+CODE {
+	display:block;
+	width:100%;
+	max-width:100%;
+	white-space:pre-wrap;
+	}
+P CODE,
+H1 CODE,
+H2 CODE,
+H3 CODE,
+H4 CODE,
+H5 CODE,
+H6 CODE,
+LI CODE {
+	display:inline;
+	white-space:normal;
+	}
+LI PRE {
+	vertical-align:top;
+	display:inline-block;
+	}
+
+/* Other elements */
+BLOCKQUOTE {
+	padding:0 1em;
+	border-left:1px solid;
+	line-height:1.4;
+	}
+	BLOCKQUOTE P {
+		margin-bottom:1em;
+		}
+SUP,
+SUB {
+	position:relative;
+	vertical-align:baseline;
+	font-size:.8em;
+	line-height:1;
+	}
+SUP {
+	bottom:1.4ex;
+	}
+SUB {
+	top:.5ex;
+	}
+ABBR {
+	border:none;
+	}
+HR {
+	clear:both;
+	margin-top:1.5em;
+	opacity:.4;
+	}
+.hr HR {
+	display:none;
+	}
+
+/* @ Medias
+---------------------------------------- */
+@media handheld {
+
+}
+
+/* Presentation
+---------------------------------------- */
+ARTICLE {
+	font-size:1.5em;
+	}
+/* Simple slide */
+.slide {
+	display:block;
+	width:40em;
+	max-width:100%;
+	padding:1em;
+	margin:0 auto;
+	}
+	H3 {
+		margin-bottom:2em;
+		color:#808080;
+		}
+	H4 {
+		font-size:1em;
+		margin-top:1em;
+		margin-bottom:1em;
+		color:#808080;
+		}
+
+/* Title Page */
+HEADER.slide H1 {
+	font-size:2em;
+	color:#333;
+	}
+HEADER.slide H2 {
+	font-size:1.3em;
+	color:#808080;
+	}
+
+
+/* Highlight.js: Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
+---------------------------------------- */
+PRE CODE {
+	color:#000;
+	background:#FFF;
+	font-size:.9em;
+	}
+PRE .subst, PRE .title {
+	font-weight:normal;
+	color:#000;
+	}
+PRE .comment, PRE .template_comment, PRE .javadoc, PRE .diff .header {
+	color:#808080;
+	font-style:italic;
+	}
+PRE .annotation, PRE .decorator, PRE .preprocessor, PRE .doctype, PRE .pi, PRE .chunk, PRE .shebang, PRE .apache .cbracket {
+	color:#808000;
+	}
+PRE .tag, PRE .pi {
+	background:#EFEFEF;
+	}
+PRE .tag .title, PRE .id, PRE .attr_selector, PRE .pseudo, PRE .literal, PRE .keyword, PRE .hexcolor, PRE .css .function, PRE .ini .title, PRE .css .class, PRE .list .title {
+	color:#000080;
+	}
+PRE .attribute, PRE .rules .keyword, PRE .number, PRE .date, PRE .regexp {
+	color:#0000FF;
+	}
+PRE .number, PRE .regexp {
+	font-weight:normal;
+	}
+PRE .string, PRE .value, PRE .filter .argument, PRE .css .function .params, PRE .apache .tag {
+	color:#008000;
+	}
+PRE .symbol, PRE .char {
+	color:#000;
+	background:#D0EDED;
+	font-style:italic;
+	}
+PRE .phpdoc, PRE .javadoctag {
+	text-decoration:underline;
+	}
+PRE .variable, PRE .envvar, PRE .apache .sqbracket {
+	color:#660E7A;
+	}
+PRE .addition {
+	background:#BAEEBA;
+	}
+PRE .deletion {
+	background:#FFC8BD;
+	}
+PRE .diff .change {
+	background:#BCCFF9;
+	}
+
+@media only screen {
+	BODY {
+		font-size:3em;
+		content:"Projection only for now";
+		}
+}

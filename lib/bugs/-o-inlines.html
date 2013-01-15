@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html id="nojs">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Bug in opera with inline elements</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+	<style type="text/css">
+.wrap
+{
+	width: 0;
+}
+.test
+{
+	display: inline;
+	
+	padding: 0 1em;
+	background: lime;
+}
+
+	</style>
+</head>
+<body>
+	<h1>Padding of inline elements is staying on the previous lines when wrapping.</h1>
+	<div class="wrap">
+		Hello,
+		<span class="test">world!</span>
+	</div>
+	<!-- Yandex.Metrika --><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script><div style="display:none;"><script type="text/javascript">try { var yaCounter632758 = new Ya.Metrika(632758);yaCounter632758.clickmap();yaCounter632758.trackLinks({external: true});} catch(e){}</script></div><noscript><div style="position:absolute"><img src="//mc.yandex.ru/watch/632758" alt="" /></div></noscript><!-- /Yandex.Metrika -->
+</body>
+</html>
