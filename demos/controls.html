@@ -1,0 +1,258 @@
+---
+layout: demo
+injected: true
+---
+
+<style>
+<style>
+/*_*/
+
+.b-radio-label {
+    cursor: pointer;
+    }
+.b-radio-input:checked+.b-radio-wrap>.b-radio-label {
+    cursor: default;
+    }
+/* Slider
+--------------------------*/
+.b-radio_slider {
+    position: relative;
+
+    width: 401px;
+    padding-left: 0;
+    margin: 0 auto 1em;
+
+    overflow: hidden;
+
+    border: 1px solid #666688;
+
+    white-space: nowrap;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    background: #a1dbff; /* old browsers */
+    background: -moz-linear-gradient(top, #a1dbff 0%, #cbebff 47%, #f0f9ff 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a1dbff), color-stop(47%,#cbebff), color-stop(100%,#f0f9ff)); /* webkit */
+
+    -webkit-border-radius: .5em;
+       -moz-border-radius: .5em;
+            border-radius: .5em;
+
+    -webkit-box-shadow: inset 0 4px 25px rgba(26,11,78,0.5);
+       -moz-box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+         -o-box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+            box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -o-user-select: none;
+            user-select: none;
+    }
+
+    .b-radio_slider .b-radio-input {
+        position: absolute;
+
+        margin: 8px 0 0 10px;
+
+        cursor: pointer;
+        }
+
+    .b-radio_slider .b-radio-input:not(x) {
+        position: absolute;
+        top: 0;
+        left: -99px;
+        }
+    .b-radio_slider .b-radio-label {
+        position: relative;
+        z-index: 9;
+
+        display: inline-block;
+
+        width: 100px;
+        padding: 0.5em 0;
+
+        text-align: center;
+
+        text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        }
+    .b-radio_slider .b-radio-underlay {
+        position: absolute;
+        left: -100px;
+
+        width: 100px;
+        height: 100%;
+
+        background: #4387fd; /* old browsers */
+        background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* firefox */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0)); /* webkit */
+
+        -webkit-border-radius: .4em;
+           -moz-border-radius: .4em;
+                border-radius: .4em;
+
+        -webkit-transition: all .3s ease;
+           -moz-transition: all .3s ease;
+             -o-transition: all .3s ease;
+                transition: all .3s ease;
+
+        -webkit-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,34,0.5);
+           -moz-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+             -o-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+                box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+
+        }
+
+    .b-radio_slider .b-radio-input#Radio1-1:checked+.b-radio-wrap .b-radio-underlay { left:   0px;}
+    .b-radio_slider .b-radio-input#Radio1-2:checked+.b-radio-wrap .b-radio-underlay { left: 100px;}
+    .b-radio_slider .b-radio-input#Radio1-3:checked+.b-radio-wrap .b-radio-underlay { left: 200px;}
+    .b-radio_slider .b-radio-input#Radio1-4:checked+.b-radio-wrap .b-radio-underlay { left: 300px;}
+
+/* Dotty
+--------------------------*/
+.b-radio_dots {
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+
+    padding: 0.3em 1em;
+    margin-left: 0;
+    border: 1px solid #888;
+
+    -webkit-border-radius: 1em;
+       -moz-border-radius: 1em;
+            border-radius: 1em;
+
+    list-style: none;
+
+    background: rgb(225,235,255);
+    }
+
+    .b-radio_dots .b-radio-wrap {
+        display: block;
+        line-height: 2em;
+        }
+        .b-radio_dots .b-radio-label:after {
+            content: "";
+            position: absolute;
+            top: -0.5em;
+            left: -0.75em;
+            z-index: 9;
+
+            width: 1.5em;
+            height: 1.5em;
+            border: solid rgb(225,235,255);
+            border-width: 0.75em;
+
+            -webkit-border-radius: 1.5em;
+               -moz-border-radius: 1.5em;
+                    border-radius: 1.5em;
+
+            clip: rect(0.25em 2.25em 2.75em 0.75em);
+            }
+
+    .b-radio_dots .b-radio-input {
+        position: absolute;
+
+        margin: 0.6em 0 0 0.5em;
+        }
+    .b-radio_dots .b-radio-label {
+        position: relative;
+        display: block;
+        padding-left: 2.4em;
+        }
+
+    .b-radio_dots .b-radio-label:not(x):before {
+        content: "";
+        position: absolute;
+
+        width: 1.5em;
+        height: 1.5em;
+        left: 0;
+        top: 0.2em;
+
+        overflow: hidden;
+
+        background: rgb(235,245,255);
+
+        vertical-align: middle;
+
+        -webkit-border-radius: 0.75em;
+           -moz-border-radius: 0.75em;
+                border-radius: 0.75em;
+
+        -webkit-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+           -moz-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+             -o-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+                box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+
+        }
+        .b-radio_dots .b-radio-underlay {
+            position: absolute;
+            top: -0.4em;
+            left: 1.4em;
+
+            width: 0.8em;
+            height: 0.8em;
+
+            -webkit-border-radius: 0.4em;
+               -moz-border-radius: 0.4em;
+                    border-radius: 0.4em;
+
+            -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+               -moz-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+                 -o-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+                    box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+
+            -webkit-transition: all .3s ease;
+               -moz-transition: all .3s ease;
+                 -o-transition: all .3s ease;
+                    transition: all .3s ease;
+            }
+            .b-radio_dots .b-radio-underlay:before {
+                content: "";
+                position: absolute;
+                top: 3px;
+                left: 5px;
+                width: 0.2em;
+                height: 0.2em;
+                -webkit-box-shadow: inset -3px 1px 2px rgba(255,255,255,0.7);
+                }
+
+
+    .b-radio_dots .b-radio-input#Radio2-1:checked+.b-radio-wrap .b-radio-underlay {
+        top: 0.9em;
+        background: rgba(230,170,60,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-2:checked+.b-radio-wrap .b-radio-underlay {
+        top: 2.9em;
+        background: rgba(80,121,240,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-3:checked+.b-radio-wrap .b-radio-underlay {
+        top: 4.9em;
+        background: rgba(240,75,65,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-4:checked+.b-radio-wrap .b-radio-underlay {
+        top: 6.9em;
+        background: rgba(60,220,54,0.9);
+        }
+</style>
+
+<h4>Slider on radiobutton</h4>
+<p class="b-radio b-radio_slider"
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-1" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-1">One</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-2" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-2">Two</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-3" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-3">Three</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-4" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-4">Four</label
+   ><b class="b-radio-underlay"></b>
+</span></span></span></span></p>
+
+<h4>Choosing the ball's color</h4>
+<p class="b-radio b-radio_dots"
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-1" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-1">Orange</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-2" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-2">Blue</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-3" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-3">Red</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-4" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-4">Green</label
+   ><b class="b-radio-underlay"></b>
+</span></span></span></span></p>
