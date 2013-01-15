@@ -85,7 +85,7 @@ body:after
   & > ol,
   & > pre,
   & > dl,
-  & > .feedback{",h1.title"}
+  & > .feedback{", h1.title, .page:not(.page_post) .footer > .copy"}
     width: 42*rem
     max-width: 100%
     margin-left: auto
@@ -135,6 +135,8 @@ body:after
   overflow: hidden
 
   height: $footer_size
+  padding: 0 0.5*rem 0 1*rem
+  padding: 0 2.5vw 0 5vw
 
   .page_post &
     position: fixed

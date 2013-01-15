@@ -105,7 +105,7 @@ body:after {
 .main > ol,
 .main > pre,
 .main > dl,
-.main > .feedback,h1.title {
+.main > .feedback, h1.title, .page:not(.page_post) .footer > .copy {
   width: 42rem;
   max-width: 100%;
   margin-left: auto;
@@ -147,6 +147,8 @@ body:after {
   left: 0;
   overflow: hidden;
   height: 6rem;
+  padding: 0 0.5rem 0 1rem;
+  padding: 0 2.5vw 0 5vw;
 }
 .page_post .footer {
   position: fixed;
