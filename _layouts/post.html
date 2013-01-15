@@ -11,10 +11,10 @@ page_type: post
     {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}
     {% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}{{ demo_handles_result }}
 
-    <p class="published">
+    {% if page.date %}<p class="published">
         {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}
         {% assign list_categories = page.categories %}{% include list_categories.html %}
-    </p>
+    </p>{% endif %}
     <aside class="feedback">
         {% assign get_filename_input = page.url %}{% include get_filename.html %}{% capture feeback_title %}{{ site.loc | map: 'feedback_for' | map: lang }} {{ site.loc | map: 'laquo' | map: lang }}{{ page.title }}{{ site.loc | map: 'raquo' | map: lang }}{% endcapture %}
         {{ site.loc | map: "feedback_text1" | map: lang }} <a class="link" href="https://github.com/kizu/kizu.github.com/issues/new?title={{ feeback_title | cgi_escape }}">{{ site.loc | map: "feedback_issue" | map: lang }}</a> {{ site.loc | map: "feedback_text2" | map: lang }} <a class="link" href="http://prose.io/#{{ site.github_repo }}/edit/master/{{ get_filename_output }}">{{ site.loc | map: "feedback_edit" | map: lang }}</a> {{ site.loc | map: "feedback_text3" | map: lang }} prose.io.
