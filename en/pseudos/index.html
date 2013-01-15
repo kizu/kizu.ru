@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en"><head><title>Use CSS transitions for pseudo-elements right now</title><meta charset="utf-8"><meta name="viewport" content="width=1274, user-scalable=no"><link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css"><link rel="stylesheet" media="print" href="shower/themes/ribbon/styles/print.css"></head><body class="list"><style>#Cover h2 {
+    margin: 65px 0 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 70px;
+    line-height: 1.1;
+    }
+#Cover h3 {
+    margin-top: 20px;
+    font-size: 40px;
+    color: #FFF;
+    text-align: center;
+    }
+
+/* No ribbon, please */
+.slide {
+    background-image: none;
+    }
+
+/* No numbers, please */
+.slide pre code::before,
+.full .slide::after {
+    display: none;
+    }
+
+/* Generic example */
+.example {
+    position: relative;
+    width: 50%;
+    height: 13em;
+    padding: 3em;
+    margin: 3% auto;
+
+    color: #FFF;
+
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:    -moz-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:      -o-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:         linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+
+    border-radius: 3em;
+    box-shadow: 0 1.5em 3em -1em rgba(0,0,0,0.75);
+
+    -webkit-transition: all .5s;
+       -moz-transition: all .5s;
+        -ms-transition: all .5s;
+         -o-transition: all .5s;
+            transition: all .5s;
+    }
+
+
+/* Generic pseudo-element */
+.example:after {
+    content: "Pseudo!";
+
+    position: relative;
+
+    display: block;
+
+    width: 10em;
+    height: 10em;
+    padding: 2em;
+    border: .5em dotted;
+
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:    -moz-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:      -o-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:         linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background-origin: border-box;
+
+    border-radius: 2em;
+    }
+
+/* Width and height transition */
+.example_widthheight {
+    width: 10em;
+    min-width: 50%;
+    max-width: 50%;
+    height: 10em;
+    min-height: 13em;
+    max-height: 13em;
+    }
+.example_widthheight:after {
+    width: inherit;
+    height: inherit;
+    }
+.example_widthheight:hover {
+    width: 400px;
+    height: 400px;
+    }
+
+/* Positioning example */
+.example_position {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    }
+.example_position:after {
+    bottom: inherit;
+    right: inherit;
+    }
+.example_position:hover {
+    right: 7em;
+    bottom: 7em;
+    }
+
+/* Clip example */
+.example_clip {
+    clip: rect(0, 15em, 15em, 0);
+    }
+.example_clip:after {
+    position: absolute;
+    clip: inherit;
+    }
+.example_clip:hover {
+    clip: rect(2em, 10em, 13em, 3em);
+    }
+
+/* Color example */
+.example_color {
+    text-indent: -9999px;
+    text-shadow: 9999px 0 0 #FFF;
+    }
+.example_color:after {
+    color: inherit;
+    text-indent: 0;
+    }
+.example_color:hover {
+    color: lime;
+    }
+
+/* Background example */
+.example_bg {
+    background-position: 0 0;
+    }
+.example_bg:after {
+    background-repeat: no-repeat;
+    background-image:
+        -webkit-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),
+        -webkit-linear-gradient(rgba(0,255,0,0) 34%, rgba(0,255,0,1) 67%);
+    background-image:
+        -moz-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),
+        -moz-linear-gradient(rgba(0,255,0,0) 34%, rgba(0,255,0,1) 67%);
+    background-image:
+        -o-linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),
+        -o-linear-gradient(rgba(0,255,0,0) 34%, rgba(0,255,0,1) 67%);
+    background-image:
+        linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),
+        linear-gradient(rgba(0,255,0,0) 34%, rgba(0,255,0,1) 67%);
+    background-position: inherit;
+    background-size: 100%, 300%;
+    }
+.example_bg:hover {
+    background-position: 0 100%;
+    }
+
+
+/* Crazy tooltip */
+
+#Tooltips h3 {
+    margin-bottom: 2em;
+    }
+
+.tooltipped {
+    font-size: 1.8em;
+    display: inline-block;
+    text-decoration: none; /* Why does this not work on  */
+    overflow: hidden;
+    height: 1.575em;
+
+    -webkit-transition: all .5s;
+       -moz-transition: all .5s;
+        -ms-transition: all .5s;
+         -o-transition: all .5s;
+            transition: all .5s;
+
+    background: -webkit-linear-gradient(rgba(0,0,0,0) 10%,rgba(0,0,0,0.3),rgba(0,0,0,0.6)) no-repeat -1px;
+    background:    -moz-linear-gradient(rgba(0,0,0,0) 10%,rgba(0,0,0,0.3),rgba(0,0,0,0.6)) no-repeat -1px;
+    background:      -o-linear-gradient(rgba(0,0,0,0) 10%,rgba(0,0,0,0.3),rgba(0,0,0,0.6)) no-repeat -1px;
+    background:         linear-gradient(rgba(0,0,0,0) 10%,rgba(0,0,0,0.3),rgba(0,0,0,0.6)) no-repeat -1px;
+    background-position: -1px 0;
+    background-size: 1px;
+
+    text-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+.tooltipped:hover {
+    text-shadow: 0 0 0 #FFF;
+    background-position: -1px 100%;
+    }
+.tooltipped:before {
+    content: attr(data-tooltip);
+
+    position: absolute;
+
+    padding: 0.5em;
+    margin: -2.75em 0 0 -1.5em;
+
+    color: transparent;
+
+    background: inherit;
+    background-size: 102% 90em;
+
+    border-radius: 2em;
+
+    text-shadow: inherit;
+    pointer-events: none;
+    }
+    </style><header class="caption"><h1>Use CSS transitions for pseudo-elements right now</h1><p><a href="http://kizu.ru/en/">Roman Komarov</a></p></header><section class="slide cover" id="Cover"><h2>Use CSS transitions for pseudo-elements right now</h2><h3>Roman Komarov</h3></section><section class="slide shout"><h2 style="font-size:4em">I like CSS experiments</h2></section><section class="slide shout"><h2 style="font-size:2.5em">Sometimes you want to do <em style="font-family:'PT Sans', sans-serif">everything</em> just on one element…</h2></section><section class="slide shout"><h2 style="font-size:2.5em">…and use transitions there</h2></section><section class="slide"><h2>Like that</h2><pre><code>.foo:before {</code><code>    top: 0;</code><code>    transition: top .3s;</code><code>    }</code><code>.foo:hover:before {</code><code>    top: 100px;</code><code>    }</code></pre></section><section class="slide shout"><h2>The problem is</h2></section><section class="slide shout"><h2 style="font-size:4em">Only Firefox supports transitions for pseudo-elements</h2></section><section class="slide shout"><h2 style="font-size:4.5em">But. There is a workaround.</h2></section><section class="slide shout"><h2 style="font-size:6em">More on it later, it’s demo time!</h2></section><section class="slide shout" id="WidthHeight"><h3>Width and height</h3><div class="example example_widthheight">Original element</div></section><section class="slide shout" id="Position"><h3>Positioning</h3><div class="example example_position">Original element</div></section><section class="slide shout" id="Clip"><h3>Clip</h3><div class="example example_clip">Original element</div></section><section class="slide shout" id="Color"><h3>Color</h3><div class="example example_color">Original element</div></section><section class="slide shout" id="BG"><h3>Background</h3><div class="example example_bg">Original element</div></section><section class="slide shout" id="Tooltips"><h3>Tooltips</h3><a href="#fake" data-tooltip="Hi, I'm a tooltip!" class="tooltipped">Some link</a>, <a href="#fake" data-tooltip="Hi, I'm another tooltip." class="tooltipped">And another one</a>, <a href="#fake" data-tooltip="Tooltip!" class="tooltipped">Links everywhere</a>.</section><section class="slide shout"><h2 style="font-size:3em">…Those were just single HTML elements, yep.</h2></section><section class="slide shout"><h2 style="font-size:3em">So, the first part of solution is…</h2></section><section class="slide shout"><h2 style="font-size:3em"><code>inherit</code></h2></section><section class="slide shout"><h2 style="font-size:7em"><code>inherit</code></h2></section><section class="slide shout"><h2 style="font-size:2em">1. Add transition for some property on the element</h2></section><section class="slide shout"><h2 style="font-size:2em">2. Inherit this property on the pseudo-element</h2></section><section class="slide shout"><h2 style="font-size:2em">3. Change the value on the parent</h2></section><section class="slide shout"><h2 style="font-size:2em">4. ???????</h2></section><section class="slide shout"><h2 style="font-size:3.5em">Well, it works! But…</h2></section><section class="slide shout"><h2 style="font-size:3.5em">…we don’t want to change the value on the parent!</h2></section><section class="slide shout"><h2 style="font-size:3em">This is where the second part of solution comes:</h2></section><section class="slide shout"><h2 style="font-size:5.5em">CSS is AWESOME</h2></section><section class="slide shout"><h2 style="font-size:3em">One single CSS property is lonely and somewhat dull</h2></section><section class="slide shout"><h2 style="font-size:4em">Multiple properties conjure magic</h2></section><section class="slide shout"><h2 style="font-size:2em">(Magic, described in the specs, btw)</h2></section><section class="slide shout"><h2 style="font-size:1.8em">1. Properties with sub-properties, like <code>background</code></h2></section><section class="slide shout"><h2 style="font-size:1.8em">2. “Limiting” properties, like <code>min-width</code></h2></section><section class="slide shout"><h2 style="font-size:1.8em">3. Using <code>text-shadow</code> instead of <code>color</code> for text</h2></section><section class="slide shout"><h2 style="font-size:1.8em">4. Using another pseudo as the actual content</h2></section><section class="slide shout"><h2 style="font-size:1.8em">5. And so on…</h2></section><section class="slide shout"><h2 style="font-size:2.5em">Not every property can be “limited” only to pseudos that way</h2></section><section class="slide shout"><h2 style="font-size:2em">No <code>opacity</code> or <code>transform</code> for you. Sorry.</h2></section><section class="slide shout"><h2 style="font-size:3em">So, tell browsers to implement transitions for pseudo-elements like Firefox did</h2></section><section class="slide shout"><h2 style="font-size:3em">And experiment with the CSS in the meantime!</h2></section><section class="slide"><h2>Thank you!</h2>
+
+<ul><li>Roman Komarov</li><li><a href="http://twitter.com/kizmarh">twitter.com/kizmarh</a></li><li><a href="http://github.com/kizu">github.com/kizu</a></li><li><a href="mailto:kizu@kizu.ru">kizu@kizu.ru</a></li></ul></section>
+
+<script src="shower/scripts/script.js"></script><!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net--><!-- Photos by John Carey — fiftyfootshadows.net-->
+
+<!-- Yandex.Metrika counter -->
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+            (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+        //]]>
+    </script><noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" /></noscript><!-- /Yandex.Metrika counter -->
+
+</body></html>
