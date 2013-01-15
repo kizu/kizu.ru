@@ -1,5 +1,6 @@
 ---
 title : Atom Feed
+page_type: feed
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -19,7 +20,9 @@ title : Atom Feed
         <link href="{{ site.production_url }}{{ post.url }}"/>
         <updated>{{ post.date | date_to_xmlschema }}</updated>
         <id>{{ site.production_url }}{{ post.id }}</id>
-        <content type="html">{{ post.content | xml_escape }}</content>
+        {% capture link_handles_input %}{{ post.content }}{% endcapture %}{% include link_handles.html %}
+        {% capture demo_handles_link %}{{ post.url }}{% endcapture %}{% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}
+        <content type="html">{{ demo_handles_result | xml_escape }}</content>
     </entry>
     {% endunless %}{% endfor %}
 </feed>

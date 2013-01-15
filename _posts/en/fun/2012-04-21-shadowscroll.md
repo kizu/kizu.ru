@@ -6,10 +6,6 @@ layout: post
 
 categories: en fun
 
-demos:
-  - handle: shadowscroll
-    height: 23em
-
 ---
 
 Here is some old idea, but made only with pure CSS.
@@ -22,4 +18,4 @@ Enjoy!
 
 **Update:** [Lea Verou](https://twitter.com/leaverou) updated this experiment using the `background-attachment: local`. [Read about it in her post](http://lea.verou.me/2012/04/background-attachment-local/).
 
-[demo_shadowscroll]
+[demo:shadowscroll]

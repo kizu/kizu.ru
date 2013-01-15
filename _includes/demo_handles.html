@@ -1,14 +1,31 @@
 {% capture trim_whitespaces %}
     {% assign demo_handles_result = demo_handles_input %}
-    {% assign count = 1 %}
-    {% for demo_handle in page.demos %}
-        {% capture demo_handle_what %}[demo_{{ demo_handle.handle }}]{% endcapture %}
-        {% capture demo_handle_with %}
-            <div class="demo figure">
-                <iframe class="demo__frame" {% if demo_handle.height %}style="height: {{ demo_handle.height }}" {% else %}height="240" {% endif %}width="100%" src="/demos/{{ demo_handle.handle }}.html"></iframe>
-            </div>
-        {% endcapture %}
-        {% capture demo_handles_result %}{{ demo_handles_result | replace_first:demo_handle_what,demo_handle_with }}{% endcapture %}
-        {% capture count %}{{ count | plus:1 }}{% endcapture %}
+    {% for demo in site.pages %}
+        {% if demo.url contains '/demos/' %}
+            {% capture demo_name %}{{ demo.url | remove:"/demos/" | remove:".html" }}{% endcapture %}
+            {% capture demo_handle_what %}<p>[demo:{{ demo_name }}]</p>{% endcapture %}
+            {% if demo_handles_result contains demo_handle_what %}
+                {% if page.page_type != "feed" %}
+                    {% if demo.injected == true %}
+                        {% capture demo_handle_with %}
+                            <div class="demo demo_injected figure" id="Demo_{{ demo_name }}">
+                                {{ demo.content }}
+                            </div>
+                        {% endcapture %}
+                    {% else %}
+                        {% capture demo_handle_with %}
+                            <div class="demo figure" id="Demo_{{ demo_name }}">
+                                <iframe class="demo__frame" {% if demo.height %}style="height: {{ demo.height }}" {% else %}height="240" {% endif %}width="100%" src="/demos/{{ demo_name }}.html"></iframe>
+                            </div>
+                        {% endcapture %}
+                    {% endif %}
+                {% else %}
+                    {% capture demo_handle_with %}
+                        <p>Look at the demo <a href="{{ site.production_url }}{% if demo_handles_link %}{{ demo_handles_link }}{% else %}{{ page.url }}{% endif %}/#Demo_{{ demo_name }}">embedded in the post</a>.</p>
+                    {% endcapture %}
+                {% endif %}
+                {% capture demo_handles_result %}{{ demo_handles_result | replace_first:demo_handle_what,demo_handle_with }}{% endcapture %}
+            {% endif %}
+        {% endif %}
     {% endfor %}
-{% endcapture %}{% assign content = demo_handles_result %}
+{% endcapture %}

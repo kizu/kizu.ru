@@ -1,11 +1,12 @@
 ---
 layout: demo
+injected: true
 ---
 
 <style>
 
 /* Centered heading with rules */
-h1 {
+#Demo_headings h1 {
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -15,8 +16,8 @@ h1 {
     padding: .2em 0;
     text-shadow: 0 1px rgba(255,255,255,.6);
     }
-h1:before,
-h1:after {
+#Demo_headings h1:before,
+#Demo_headings h1:after {
     content: "";
     position: relative;
     display: inline-block;
@@ -28,26 +29,29 @@ h1:after {
     background-clip: content-box;
     border-bottom: 1px solid rgba(255,255,255,.5);
     }
-h1:before {
+#Demo_headings h1:before {
     left: -.5em;
     margin: 0 0 0 -50%;
     }
-h1:after {
+#Demo_headings h1:after {
     left: .5em;
     margin: 0 -50% 0 0;
     }
-h1>span {
+#Demo_headings h1>span {
     display: inline-block;
     vertical-align: middle;
     white-space: normal;
     }
 
 /* Works on any background */
-html {
-    background: #f06;
-    background: linear-gradient(45deg, #f39, yellow);
-    min-height:100%;
-    font: 1.3em/1.5 Georgia;
+#Demo_headings {
+    background: #FFA046;
+    background: -webkit-linear-gradient(45deg, #f39, yellow);
+    background:    -moz-linear-gradient(45deg, #f39, yellow);
+    background:      -o-linear-gradient(45deg, #f39, yellow);
+    background:         linear-gradient(45deg, #f39, yellow);
+    padding: 1em;
+    text-shadow: none;
     }
 
 </style>
