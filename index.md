@@ -1,6 +1,6 @@
 ---
 layout: index
-title: Ololo!
+title: Заметки и эксперименты Романа Комарова
 ---
 {% include references.md %}
 
@@ -10,7 +10,7 @@ title: Ololo!
 Привет. Я работаю разработчиком интерфейсов в [Яндексе][yndx] и иногда участвую в жизни сообщества [__ Веб-стандарты __][wst]{:quoted}.
 
 
-Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над всякими опенсорсными проектами: [Хаяку](gh:hayaku/hayaku), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
+Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над всякими опенсорсными проектами: [Хаяку](http://hayakubundle.com), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
 
 Иногда я выступаю с различными докладами на всяких конференциях: [Яндекс.Субботниках](http://events.yandex.ru/search/?text=Роман+Комаров), [Web Standards Days](http://webstandardsdays.ru) и других. Недавно даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session).
 
