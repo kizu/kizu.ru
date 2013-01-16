@@ -427,14 +427,14 @@ OL > LI:before {
   .footer .link_twitter {
     display: none;
   }
-  .footer .prevnext {
-    padding-bottom: 0;
+  .footer .copy {
+    padding-top: 0.5rem;
   }
   .footer .link_prev,
   .footer .link_next {
     float: none;
     display: block;
-    padding-left: 0;
+    padding-left: 5vw !important;
     padding-right: 0;
   }
   .footer .link_next {
