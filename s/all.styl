@@ -136,17 +136,18 @@ body:after
   overflow: hidden
 
   height: $footer_size
-  padding: 0 0.5*rem 0 1*rem
-  padding: 0 2.5vw 0 5vw
 
   .page_post &
     position: fixed
     background: $distant_bg
 
 .footer .prevnext
-  overflow: hidden
+  position: absolute
+  right: 0
+  bottom: 0
+  left: 0
 
-  padding-bottom: 1*rem
+  overflow: hidden
 
   font-size: 1*rem
 
@@ -305,8 +306,15 @@ A:hover
 
 // Copyrights block
 .copy
+  padding-top: 1*rem
+  margin-bottom: 0
+
   font-size: 1*rem
   color: rgba($dark,.62)
+
+.page:not(.page_post) .footer > .copy
+  padding: 1*rem 0.5*rem 0 1*rem
+  padding: 1*rem 2.5vw 0 5vw
 
 .feedback
   padding: 2.25*rem 0 0.25*rem

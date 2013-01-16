@@ -12,6 +12,16 @@ layout: layout
 	{{ content }}
 
 	<footer class="footer">
+		<p class="copy">
+			{% if page.page_type != "index" %}<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
+				© {{ site.time | date: "%Y" }}
+				<span class="link__inner">{{ site.loc.name | map: lang }}</span>.
+			</a>{% else %}© {{ site.time | date: "%Y" }} {{ site.loc.name | map: lang }}.{% endif %}
+			<a class="link  link_wrapper  link_twitter" href="https://twitter.com/{{ site.loc.twitter_name | map: lang }}">
+				<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
+				<span class="link__inner">{{ site.loc.twitter_follow | map: lang }}</span>!
+			</a>
+		</p>
         <nav class="prevnext">
         	{% if page.page_type == 'post' %}{% include get_prevnext.html %}{% endif %}
 			{% comment %}<!-- <p class="languages">
@@ -22,14 +32,4 @@ layout: layout
 				{% endif %}
 			</p> -->{% endcomment %}
         </nav>
-		<p class="copy">
-			<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
-				© {{ site.time | date: "%Y" }}
-				<span class="link__inner">{{ site.loc.name | map: lang }}</span>.
-			</a>
-			<a class="link  link_wrapper  link_twitter" href="https://twitter.com/{{ site.loc.twitter_name | map: lang }}">
-				<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
-				<span class="link__inner">{{ site.loc.twitter_follow | map: lang }}</span>!
-			</a>
-		</p>
 	</footer>

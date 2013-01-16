@@ -139,16 +139,17 @@ body:after {
   left: 0;
   overflow: hidden;
   height: 108px;
-  padding: 0 9px 0 18px;
-  padding: 0 2.5vw 0 5vw;
 }
 .page_post .footer {
   position: fixed;
   background: #f0efe8;
 }
 .footer .prevnext {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow: hidden;
-  padding-bottom: 18px;
   font-size: 18px;
 }
 .footer .link_prev,
@@ -270,8 +271,14 @@ A:hover {
   color: inherit;
 }
 .copy {
+  padding-top: 18px;
+  margin-bottom: 0;
   font-size: 18px;
   color: rgba(37,34,14,0.62);
+}
+.page:not(.page_post) .footer > .copy {
+  padding: 18px 9px 0 18px;
+  padding: 18px 2.5vw 0 5vw;
 }
 .feedback {
   padding: 40.5px 0 4.5px;
