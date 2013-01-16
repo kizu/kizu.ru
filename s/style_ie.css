@@ -445,6 +445,7 @@ sub {
 h1 > sup {
   font-size: 18px;
   bottom: 30.599999999999998px;
+  left: -9px;
 }
 h1 > sup > .link {
   padding: 1em;
