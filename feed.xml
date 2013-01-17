@@ -5,8 +5,8 @@ page_type: feed
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>kizu.ru</title>
-    <link href="{{ site.production_url }}/feed.xml" rel="self"/>
-    <link href="{{ site.production_url }}"/>
+    <link href="{{ site.production_url }}/en/feed.xml" rel="self"/>
+    <link href="{{ site.production_url }}/en/"/>
     <updated>{{ site.time | date_to_xmlschema }}</updated>
     <id>{{ site.production_url }}</id>
     <author>
