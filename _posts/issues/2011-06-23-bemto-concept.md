@@ -89,5 +89,5 @@ categories: issues
 
 ## Добавлено:
 
-1. В последней версии Zen Coding [были реализованы](https://github.com/sergeche/zen-coding/commit/86953fc054492153846098f6095951849a4c04f8) некоторые аспекты bemto.
+1. В последней версии Zen Coding [были реализованы](https://github.com/emmetio/emmet/commit/86953fc054492153846098f6095951849a4c04f8) некоторые аспекты bemto.
 2. Я начал разработку [bemto](https://github.com/kizu/bemto/) — набора миксинов для Jade, позволяющую делать многие вещи, доступные в bemto (пускай и чуть-чуть обходными путями).
