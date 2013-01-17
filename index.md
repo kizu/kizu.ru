@@ -12,6 +12,6 @@ title: Заметки и эксперименты Романа Комарова
 
 Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над несколькими опенсорсными проектами: [Хаяку](http://hayakubundle.com), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
 
-Иногда я выступаю с докладами на конференциях: [Яндекс.Субботниках](http://events.yandex.ru/search/?text=Роман+Комаров), [Web Standards Days](http://webstandardsdays.ru) и других. Недавно даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session).
+Иногда я выступаю с докладами на конференциях, например на  [Яндекс.Субботниках](http://events.yandex.ru/search/?text=Роман+Комаров) и [Web Standards Days](http://webstandardsdays.ru). Недавно даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session).
 
 А ещё я планирую в этому году серьёзно взяться за блог. Специально для этого я переделал свой сайт — всё, чтобы мне было проще это делать. Читайте об этом в [соответствующем посте](issues/restart/).
