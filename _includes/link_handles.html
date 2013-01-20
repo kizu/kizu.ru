@@ -5,6 +5,10 @@
         {% capture link_handle_with %}href="{{ link_handle.handle }}{% endcapture %}
         {% capture link_handles_result %}{{ link_handles_result | replace:link_handle_what,link_handle_with }}{% endcapture %}
     {% endfor %}
+
     {% capture link_handles_result %}{{ link_handles_result | replace:'">__ ','"><span class="link__inner">' }}{% endcapture %}
     {% capture link_handles_result %}{{ link_handles_result | replace:' __</a>','</span></a>' }}{% endcapture %}
+
+    {% capture link_handles_result %}{{ link_handles_result | replace:'">«','"><span class="hanger">«</span>' }}{% endcapture %}
+    {% capture link_handles_result %}{{ link_handles_result | replace:'">“','"><span class="hanger">“</span>' }}{% endcapture %}
 {% endcapture %}

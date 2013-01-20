@@ -366,6 +366,17 @@ H6 {
   font-weight: normal;
   word-wrap: break-word;
 }
+h1 > .hanger:first-child,
+H2 > .hanger:first-child,
+H3 > .hanger:first-child,
+H4 > .hanger:first-child,
+H5 > .hanger:first-child,
+H6 > .hanger:first-child {
+  position: absolute;
+  width: 1.5em;
+  margin-left: -1.5em;
+  text-align: right;
+}
 H1 {
   position: relative;
   font-size: 3.5rem;
