@@ -3,17 +3,18 @@
     {% capture list_posts_categories_url %}^{{ page.url }}{% endcapture %}
 
     {% for post in site.posts %}
-        {% assign list_posts_categories = "^/" %}
-        {% for category in post.categories %}
-            {% capture list_posts_categories %}{{ list_posts_categories }}{{ category }}/{% endcapture %}
-        {% endfor %}
+        {% unless post.invisible %}
+            {% assign list_posts_categories = "^/" %}
+            {% for category in post.categories %}
+                {% capture list_posts_categories %}{{ list_posts_categories }}{{ category }}/{% endcapture %}
+            {% endfor %}
 
-        {% if list_posts_categories_url contains list_posts_categories and list_posts_categories != "^/" %}
-            {% capture list_posts_items %}{{ list_posts_items }}
-                <li><a href="{{ post.url }}/">{{ post.title }}</a> — <em class="published">{{ post.date | date: "%d %B, %Y" }}</em></li>{% endcapture %}
-        {% endif %}
+            {% if list_posts_categories_url contains list_posts_categories and list_posts_categories != "^/" %}
+                {% capture list_posts_items %}{{ list_posts_items }}
+                    <li><a href="{{ post.url }}/">{{ post.title }}</a> — <em class="published">{{ post.date | date: "%d %B, %Y" }}</em></li>{% endcapture %}
+            {% endif %}
+        {% endunless %}
     {% endfor %}
-
 {% endcapture %}{% if list_posts_items != '' %}
 <ul>
     {{ list_posts_items }}

@@ -4,25 +4,27 @@
 {% assign result_next = '' %}
 
 {% for item in site.posts %}
-    {% if lang == 'en' and item.categories contains 'en' %}
-        {% assign post = item %}
-    {% endif %}
-    {% if lang == 'ru' %}
-        {% unless item.categories contains 'en' %}
+    {% unless item.invisible %}
+        {% if lang == 'en' and item.categories contains 'en' %}
             {% assign post = item %}
-        {% endunless %}
-    {% endif %}
-    {% if post == item %}
-        {% if post_next.id == page.id %}
-            {% capture result_prev %}<a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ post.title }}</span></a>{% endcapture %}
         {% endif %}
-        {% if post.id == page.id %}
-            {% if post_next %}
-                {% capture result_next %}<a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ post_next.title }}</span></a>{% endcapture %}
+        {% if lang == 'ru' %}
+            {% unless item.categories contains 'en' %}
+                {% assign post = item %}
+            {% endunless %}
+        {% endif %}
+        {% if post == item %}
+            {% if post_next.id == page.id %}
+                {% capture result_prev %}<a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ post.title }}</span></a>{% endcapture %}
             {% endif %}
+            {% if post.id == page.id %}
+                {% if post_next %}
+                    {% capture result_next %}<a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ post_next.title }}</span></a>{% endcapture %}
+                {% endif %}
+            {% endif %}
+            {% assign post_next = item %}
         {% endif %}
-        {% assign post_next = item %}
-    {% endif %}
+    {% endunless %}
 {% endfor %}
 
 {% endcapture %}{{ result_prev }}{{ result_next }}

@@ -14,7 +14,7 @@ page_type: feed
         <email>kizmarh@ya.ru</email>
     </author>
 
-    {% for post in site.posts %}{% if post.categories contains 'en' %}
+    {% for post in site.posts %}{% if post.categories contains 'en' %}{% unless post.invisible %}
     <entry>
         <title>{{ post.title }}</title>
         <link href="{{ site.production_url }}{{ post.url }}"/>
@@ -24,5 +24,5 @@ page_type: feed
         {% capture demo_handles_link %}{{ post.url }}{% endcapture %}{% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}
         <content type="html">{{ demo_handles_result | xml_escape }}</content>
     </entry>
-    {% endif %}{% endfor %}
+    {% endunless %}{% endif %}{% endfor %}
 </feed>
