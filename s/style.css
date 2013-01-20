@@ -257,7 +257,7 @@ A:hover {
 }
 .page_post .header A:hover,
 .page_post .footer A:hover {
-  text-shadow: -1px 0 #f0efe8, 1px 0 #f0efe8, -2px -1px #f0efe8, 2px -1px #f0efe8, 0 -1px #f0efe8, 0 -2px #f0efe8, 0 -3px #f0efe8, 0 -4px #f0efe8, 0 -5px #f0efe8, 0 -6px #f0efe8;
+  text-shadow: -1px 0 #f0efe8, 1px 0 #f0efe8, -2px -1px #f0efe8, 2px -1px #f0efe8, 0 -1px #f0efe8, 0 -2px #f0efe8, 0 -3px #f0efe8, 0 -4px #f0efe8, 0 -5px #f0efe8, 0 -6px #f0efe8, 0 -7px #f0efe8;
 }
 .feedback > A:hover,
 .published > A:hover,
