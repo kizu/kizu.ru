@@ -44,4 +44,100 @@ And I could argue if someone would say that the active area of an element should
 
 ## Arguments against changing the cursor
 
+I really did try, but hadn't find any proper arguments against changing the cursor over the active elements. Most of those arguments can be described as “Don't break users' habits!”
+
+But you can't treat the presence of habits as an argument. This only mean there was one of the possible solutions that was either the only one there, either it was the best on at the moment. The habit should be treated in it's context, and in context of _what_ would happen if we'd brake it. Would it be destructive in some way, or it would be just a matter of minor users' discomfort?
+
+Another fact is that not all of the habits are good. If we'd always stay with the users' desires, the progress would stop. Often users become used to the things that only hinder them. A clear example of such bad habit are labels for checkboxes and radio buttons. Lazy developers didn't bind them together for years, so users often don't know that the labels could be actually clicked, so they spend their time and efforts trying to hit those little areas of those little controls even if the labels are clickable too. It's a great example why you should not only bind the inputs with labels, but also tell users about this with all possible ways.
+
+We could divide the “habits arguments” into different categories. I'd try to answer the most frequently used arguments  against the changing of the cursor on hover.
+
+### “The cursor doesn't change in users' OS”
+
+In OS the most used cursor is just an arrow. It doesn't change over most of the system controls like buttons. However, the question is “Is this really good?” Is it familiar? Yes. But is it usable and could it be better? I often see how some desktop app that is not usable because I need to guess where to click — there are no signs of active areas.
+
+When we are talking about desktop we should also talk about games too. Unlike apps, games often have custom cursors that are changed over different UI elements. In comparison with modern games most of the web apps feel like the old games with pixel-hunting — you have to guess where to click and where to hover in order to do something. However, recently the web apps tend to use more cursor for different actions like drag-n-drop or resize. But why then use the default cursor for buttons? `cursor:pointer` would fit great there. And when we'd look at the checkboxes and radio buttons, then there should be not only a distinct visual hover state like changed background, but you shouldn't forget to set the `cursor:default` for them — that's the cursor the desktop apps mostly use to _select_ something. But if selecting the checkbox or radio button results in a UI change like expanding the accordion's section, then the best cursor would be a pointer one — telling that something would happen after you'd click.
+
+### “I see a pointer cursor and think it's a link!”
+
+Ah, that's another often used argument. When there were no web apps, there were only linked textual documents. The apps mostly didn't have such links, so in browsers, to tell users what the HTML `<a>` is, there appeared underline, blue color and a pointer cursor. And as all the buttons and inputs were system controls, they inherited the default behavior with the default cursor.
+
+Years passed and sites become more complex and UI-rich, designers created new controls and they often were just the links disguised as buttons and other elements. And in most cases   nobody removed the links' cursors. So if you'd look at the modern sites, most custom buttons would be actually links and would have `cursor:pointer` there.
+
+In fact, you should forget the “pointer is for links” thing a long ago.
+
+### “But you could open links in new windows, get the contextual menus for them…”
+
+Well, yeah — links are not buttons, and buttons are not links. But that doesn't mean that the behavior of hover for links and buttons should differ.
+
+Nobody would expect an ability to open something in a new tab from the button. In each case both the links and the buttons would have their context where user could either await the link's behavior, either he would just use the control he have. And it really doesn't matter which cursor the user would see — if a user would see a cursor in a links' context, he would treat it as a link. But if the user won't wait a link, the button underneath would be ok. If a user would like to attach a file, he won't need the link's behavior. If user would like to send a form, he would just do it, even if there'd be a `cursor:pointer` on it, the user won't go away and won't try to open it in a new window — he already know how to use search forms. The only place when the user would be confused if you'd do it reverse: make a button look like a link — be blue and underlined.
+
+Further more — there already a lot of links that don't look like ones and other elements that are disguised as links. Different dropdown handles, filters, cuts, closing icons, “cancel” links — a lot of sites have a lot of elements using different elements in HTML for them and having this `cursor:pointer`. Why would then simple buttons or selects have default cursor instead of the one all other controls have?
+
+There is a great example from one company's service:
+
+![Active areas example](/pictures/cursor-pointer.png)
+
+You could try to guess which marked elements are links, which are not; which have `cursor:pointer`, which don't. What would happen when you'll hover of click any of those elements? You can think for a while, and I'll give you an answer later.
+
+If you'd say straightforwardly that ”only everything that have `href` must have a cursor“ then there could be a lot of confusing things appear. For example, if there would be one element visually, but with different tags underneath (like [bootstrap's buttons](http://twitter.github.com/bootstrap/base-css.html#buttons) are), then it would be strange and confusing if there'd be a difference between the button made of `<a>` and `<button>`. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you'd make the `default` one, then it would become really confusing, 'cause there could be a disabled state for this button and you would need to spot the change of the button's background in order to know could it be pressed or no. And then if you'd remove the `cursor:pointer` tom an actual link it won't be any better, so the only proper way is to have `cursor:pointer` in both cases.
+
+We could find a lot of examples with buttons, links and their states would conflict with each other and the overall UX. Making the `cursor:pointer` to mark only actionable elements makes sense and won't create any conflicts other than slight discomfort for some persons.
+
+And let's get back to one strange service:
+
+![Active areas example](/pictures/cursor-pointer.png)
+
+So, what's there?
+
+1. It's the post's permalink. Ok, it's an actual link, there is an underline and a pointer on hover.
+
+2. Hey, it's not a link, it's just a text, not clickable at all.
+
+3. That's pseudo-link, there is no actual link, but there is a hover state as the one on permalink: underline and pointer. Clicking here calls a dropdown to appear.
+
+4. Another control that behaves like link (changes color on hover and gets `cursor:pointer`), but there is no actual link. Again, dropdown on click.
+
+5. This icon is not a link and clicking on it does nothing, while the other parts of the snippet — header and picture — are links.
+
+6. There are two links: userpic and username. They're not connected and have their own hovers: pointer and an underline for username.
+
+7. It's a psuedo-link, no `href` seen. And the underline on hover and pointer.
+
+8. Oh, a button! A custom button. But what't that? No pointer on hover! And even more — hover brings the dropdown, I feel like on a minefield there.
+
+9. So, the button was treated as a “system” element, but what's with checkbox? It and it's label have `cursor:pointer`. Wow.
+
+So, what could we say? There is no even slight consistency and a lot of other UI mistakes. But hey, there is no `cursor:pointer`! I wonder what excuses the developer have for this.
+
+BTW it's very interesting to look at different services in the search for consistency, almost no one is perfect, so you could often find things to think about and to criticise on.
+
+### “But the specs say…”
+
+[SelenIT](@SelenIT2) brings [another argument (in russian)](http://habrahabr.ru/qa/19097/): that the [CSS2.1](http://www.w3.org/TR/CSS21/ui.html#propdef-cursor) spec and [CSS3 Basic UI](http://www.w3.org/TR/css3-ui/#links-and-status-cursors) one have this sentence: “The cursor is a pointer that indicates a link”. He also gives a link to a [Gérard Talbot's message](http://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html), where he declines a change to one of the CSS2.1 tests. However, it couldn't be an argument for this issue — the context of this message is a **test for spec**, and if spec says something, then the test should cover only this.
+
+And the spec only say that the pointer is for link, but it don't say that you _can't_ use it for anything other than link. It states the default use of such cursor, nothing more. Moreover, I think that this part in specs should be changed to something like “The cursor is a pointer that indicates an element that can be clicked” to reflect modern state of the web — 'cause the current statement is come at least from the [year 1997](http://www.w3.org/TR/WD-CSS2-971104/ui.html#propdef-cursor) and a lot of things did happen since then.
+
+### “Flickering”
+
+Here is another, different from habit ones, argument. If there would be a lot of actionable elements, they say, the cursor would blink a lot when you'd move it here and there.
+
+But that's not a proper argument, it's a pointer for one of another problems:
+
+1. Active elements could be placed not that close one to another. In that case it would be harder for user to hit those elements and there would be symptomatic flickering when you'd move the cursor from one such element to another. Ideally, those elements should have continuous active areas. And to delimit different elements in that case you should use the visual hover like changing background and not the cursor less gaps.
+
+2. And another problem — cluttered interface. If you'd have whole page covered in active elements, then — yeah — the cursor would change a lot (however, it already changes a lot when you hover over text or other static elements). When you have a lot of active areas, it could be that you need to simplify something there.
+
+## Recap
+
+In ideal situation every active element should have a distinct visual hover state. But even with such state it won't hurt to add a `cursor:pointer` — it would only add clarity and would remove possible UI conflicts. And if you can't find how to make a visual state on hover, adding pointer would be enough for most cases (however, if you're working with a designer, it would be better to ask him to give you a correct visual hover state).
+
+And there are just no other arguments against cursor over active elements than user habits. And there would be more happy users than those who moan.
+
+However, if you have any other arguments that I didn't cover — I  would like to hear them. If you know of any A/B-testing with different cursors — it would be very cool to look at the results of those.
+
+Anyway, I hope that _now_ this topic is obvious and you would go and add the `cursor:pointer` to anything on you page that desires it.
+
+## Links
+
 …
