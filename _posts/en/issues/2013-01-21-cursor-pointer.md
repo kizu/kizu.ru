@@ -22,7 +22,7 @@ At first I thought that it's obvious, but then I found out that there are a lot 
 
 In this article I'll tell you my arguments at first, and then I'll discuss all the arguments against my point of view, describing why those arguments hadn't incline me from it.
 
-## My arguments for changing the cursor
+## Benefits of using `cursor:pointer`
 
 ### Visual Feedback
 
@@ -140,4 +140,14 @@ Anyway, I hope that _now_ this topic is obvious and you would go and add the `cu
 
 ## Links
 
-…
+- [Chris Coyer's snippet on adding pointer cursor](http://css-tricks.com/snippets/css/give-clickable-elements-a-pointer-cursor/)
+
+    Except for the snippet itself, in the comments there are all the same arguments on habits and points of view without arguments at all.
+
+- [Dmitry Fadeyev's article on cursor's affordance](http://www.usabilitypost.com/2009/10/26/mouse-cursor-affordance/)
+
+    In this article Dmitry comes with this statement: “If the cursor type is wrong, specify it using the CSS “cursor” property” and gives as an example custom buttons and input placeholders.
+
+- [Vadim Makeev's slides ](http://pepelsbey.net/pres/push-it/) (in russian)
+
+    A nice slides on using the right elements for right purposes and all those things, however Vadim says that you shouldn't make a pointer cursor for buttons and I disagree there. Hope he'll make his mind after this article.
