@@ -6,8 +6,6 @@ categories: issues
 
 layout: post
 
-invisible: true
-
 ---
 
 {% include references.md %}
