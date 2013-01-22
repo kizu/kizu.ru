@@ -18,7 +18,7 @@ By active elements I mean links, buttons, selects, labels with checkboxes and ra
 
 Those elements should be treated as “active” when clicking on such element results in any action. Thereby a menu item for the current page, checked radio button or disabled buttons or links are not active elements, so they shouldn't have any change on hover.
 
-At first I thought that it's obvious, but then I found out there are a lot of developers who think otherwise. And I didn't find any proper arguments against `cursor:pointer` for active elements after reading all their points of view.
+At first I thought it's obvious, but then I found out there are a lot of developers who think otherwise. And I didn't find any proper arguments against `cursor:pointer` for active elements after reading all their points of view.
 
 In this article I'll tell you my arguments at first, and then I'll discuss all the arguments against my point of view, describing why those arguments hadn't incline me from it.
 
@@ -34,7 +34,7 @@ Changing of the cursor is the most natural, noticeable and obvious feedback you 
 
 ### Delimitation of the active area
 
-There are a lot of cases when you should hint user that he could  click already. You could often want to increase the clickable area of different elements like small icons or menu items placed near the window edges. In those cases adding a cursor on hover would help user to find out when he could click on an element.
+There are a lot of cases when you should hint to the user he could click already. You could often want to increase the clickable area of different elements like small icons or menu items placed near the window edges. In those cases adding a cursor on hover would help user to find out when he could click on an element.
 
 In some cases, when there are many elements near each other, the cursor wouldn't be enough to tell which element is hovered — in those cases you should change the visual state of those elements. It would be nice to have there anyway.
 
