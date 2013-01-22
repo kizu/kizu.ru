@@ -33,8 +33,6 @@ prose:
 
             invisible: true
 
-            published: false
-
         "_posts/fun": |
 
             title: Без заголовка
@@ -43,8 +41,6 @@ prose:
 
             layout: post
 
-            published: false
-
         "_posts/issues": |
 
             title: Без заголовка
@@ -52,8 +48,6 @@ prose:
             categories: issues
 
             layout: post
-
-            published: false
 
         "_posts/en": |
 
@@ -65,8 +59,6 @@ prose:
 
             invisible: true
 
-            published: false
-
         "_posts/en/fun": |
 
             title: No subject
@@ -75,8 +67,6 @@ prose:
 
             layout: post
 
-            published: false
-
         "_posts/en": |
 
             title: No subject
@@ -84,8 +74,6 @@ prose:
             categories: en issues
 
             layout: post
-
-            published: false
 
 loc:
     fun:
