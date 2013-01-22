@@ -26,7 +26,7 @@ In this article I'll tell you my arguments at first, and then I'll discuss all t
 
 ### Visual Feedback
 
-The main profit from changed cursor for me is the visual feedback. Ideally every custom element should change it's state on hover. For example it could be a background or color. However, in real life such could state could be absent or wouldn't differ much from the original state or happen with a transition, so there would't be feedback, or it wouldn't be obvious.
+The main profit from changed cursor for me is the visual feedback. Ideally every custom element should change its state on hover. For example it could be a background or color. However, in real life such could state could be absent or wouldn't differ much from the original state or happen with a transition, so there would't be feedback, or it wouldn't be obvious.
 
 But you surely would see when the cursor changes — this happens instantly and stable. The click that could follow the mouseover would be _intuitive_, otherwise the brain would need to match the position of the cursor with the element or spot the element's change and find out if it's a hover state over this element's active area or something else.
 
@@ -38,15 +38,15 @@ There are a lot of cases when you should hint user that he could  click already.
 
 In some cases, when there are many elements near each other, the cursor wouldn't be enough to tell which element is hovered — in those cases you should change the visual state of those elements. It would be nice to have there anyway.
 
-Anyway, if you'd hint user when to use any specific active element, user would use to it and it would be easier for him to use the UI next time — he'd need to target with less precision, because he'd know that active area of an element could be bigger  that it can be seen. And when he'd move the cursor he could click right at the moment the cursor would change. Otherwise, if an element don't change it's cursor on hover, the user should to aim carefully to hit the area of a small element like icon or checkbox.
+Anyway, if you'd hint user when to use any specific active element, user would use to it and it would be easier for him to use the UI next time — he'd need to target with less precision, because he'd know that active area of an element could be bigger  that it can be seen. And when he'd move the cursor he could click right at the moment the cursor would change. Otherwise, if an element don't change its cursor on hover, the user should to aim carefully to hit the area of a small element like icon or checkbox.
 
-And I could argue if someone would say that the active area of an element should be as big as it's visual representation, but I'll keep my arguments on this topic for another article.
+And I could argue if someone would say that the active area of an element should be as big as its visual representation, but I'll keep my arguments on this topic for another article.
 
 ## Arguments against changing the cursor
 
 I really did try, but hadn't find any proper arguments against changing the cursor over the active elements. Most of those arguments can be described as “Don't break users' habits!”
 
-But you can't treat the presence of habits as an argument. This only mean there was one of the possible solutions that was either the only one there, either it was the best on at the moment. The habit should be treated in it's context, and in context of _what_ would happen if we'd brake it. Would it be destructive in some way, or it would be just a matter of minor users' discomfort?
+But you can't treat the presence of habits as an argument. This only mean there was one of the possible solutions that was either the only one there, either it was the best on at the moment. The habit should be treated in its context, and in context of _what_ would happen if we'd brake it. Would it be destructive in some way, or it would be just a matter of minor users' discomfort?
 
 Another fact is that not all of the habits are good. If we'd always stay with the users' desires, the progress would stop. Often users become used to the things that only hinder them. A clear example of such bad habit are labels for checkboxes and radio buttons. Lazy developers didn't bind them together for years, so users often don't know that the labels could be actually clicked, so they spend their time and efforts trying to hit those little areas of those little controls even if the labels are clickable too. It's a great example why you should not only bind the inputs with labels, but also tell users about this with all possible ways.
 
