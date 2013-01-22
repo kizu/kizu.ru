@@ -136,7 +136,7 @@ And there are just no other arguments against cursor over active elements than u
 
 However, if you have any other arguments that I didn't cover — I  would like to hear them. If you know of any A/B-testing with different cursors — it would be very cool to look at the results of those.
 
-Anyway, I hope that _now_ this topic is obvious and you would go and add the `cursor:pointer` to anything on you page that desires it.
+Anyway, I hope that _now_ this topic is obvious and you would go and add the `cursor:pointer` to anywhere on you page where it needed.
 
 ## Links
 
@@ -150,4 +150,4 @@ Anyway, I hope that _now_ this topic is obvious and you would go and add the `cu
 
 - [Vadim Makeev's slides ](http://pepelsbey.net/pres/push-it/) (in russian)
 
-    A nice slides on using the right elements for right purposes and all those things, however Vadim says that you shouldn't make a pointer cursor for buttons and I disagree there. Hope he'll make his mind after this article.
+    Nice slides on using the right elements for right purposes and all those things, however Vadim says that you shouldn't make a pointer cursor for buttons and I disagree there. Hope he'll make up his mind after this article.
