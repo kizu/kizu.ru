@@ -6,7 +6,6 @@ categories: issues
 
 layout: post
 
-published: false
 ---
 
 {% include references.md %}
