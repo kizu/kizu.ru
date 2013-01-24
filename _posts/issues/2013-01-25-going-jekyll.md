@@ -39,3 +39,9 @@ invisible: true
 
 ## Ссылки
 
+_это черновик, ссылки не оформлены, тут будет их минимальное описание_
+
+- [Официальный сайт](http://jekyllrb.com)
+- [Настройки для prose](http://prose.io/help/handbook.html)
+- [Проект Jekyll Bootstrap](http://jekyllbootstrap.com)
+- 
