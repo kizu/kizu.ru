@@ -43,5 +43,13 @@ _это черновик, ссылки не оформлены, тут буде�
 
 - [Официальный сайт](http://jekyllrb.com)
 - [Настройки для prose](http://prose.io/help/handbook.html)
-- [Проект Jekyll Bootstrap](http://jekyllbootstrap.com)
-- 
+
+У проекта [Jekyll Bootstrap](http://jekyllbootstrap.com) есть отличная серия статей про Jekyll:
+
+- [Введение в Jekyll](http://jekyllbootstrap.com/lessons/jekyll-introduction.html)
+- [Описание форматов внутренних данных](http://jekyllbootstrap.com/api/template-data-api.html)
+
+В процессе работы над всякими сложными штуками необходимо использовать различные теги liquid, вот документация по ним:
+
+- [Список стандартных тегов liquid](https://github.com/shopify/liquid/wiki/liquid-for-designers)
+- [Дополнительные теги liquid в Jekyll](https://github.com/mojombo/jekyll/wiki/liquid-extensions)
