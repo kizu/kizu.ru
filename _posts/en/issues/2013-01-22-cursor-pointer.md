@@ -8,7 +8,7 @@ layout: post
 
 ---
 
-{% include references.md %}
+{% include setup.md %}
 
 Every active element must have a set `cursor` on hover. And it should be `cursor:pointer` in most cases.
 

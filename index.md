@@ -2,7 +2,7 @@
 layout: index
 title: Заметки и эксперименты Романа Комарова
 ---
-{% include references.md %}
+{% include setup.md %}
 
 [Заметки](issues/) • [Эксперименты](fun/) • [Проекты](projects/)
 {:.nav}
