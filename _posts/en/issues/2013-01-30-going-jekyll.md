@@ -22,7 +22,7 @@ I need to tell one thing from the start: this and all other future articles woul
 
 With Jekyll you can just create a file in markdown, add a YAML front matter to it — and start writing. After pushing this file to the repo on GitHub, the whole site would be regenerated and you'll see the corresponding post both as a page on your site and in all the listings on other pages as well. And you could push your changes from any place: you could even use just GitHub's site for this or any web app using GitHub's API.
 
-And another thing I need to mention right from the start: a lot of things that I'll describe in the next articles could be made _so mush_ easier using plugins. But I won't use an easy way — I'd like to make everything in a way more people could use it: even in places where the plugins are disabled — as on GitHub Pages. 
+And another thing I need to mention right from the start: a lot of things I'll describe in the next articles could be made _so mush_ easier using plugins. But I won't use an easy way — I'd like to make everything in a way more people could use it: even in places where the plugins are disabled — as on GitHub Pages. 
 
 ## “Hello world”
 
@@ -39,15 +39,15 @@ In real world you'd like to add at least a title or some other data, but for the
 
 ## Dates
 
-One of the features I like in Jekyll is it's format for posts. You need to name the files as `YYYY-MM-DD-title` and I think that it's awesome. It makes you to maintain a better file hierarchy that would be sorted by date automatically, and also you won't need to write the date in the post itself — Jekyll would use the date from the filename. Yes, in some cases you'll want to use the `published` field in YAML to override the date in filename, but it's up to you. In most cases you won't need it.
+One of the features I like in Jekyll is its format for posts. You need to name the files as `YYYY-MM-DD-title` and I think that's awesome. It makes you to maintain a better file hierarchy that would be sorted by date automatically, and also you won't need to write the date in the post itself — Jekyll would use the date from the filename. Yes, in some cases you'll want to use the `published` field in YAML to override the date in filename, but it's up to you. In most cases you won't need it.
 
 ## Prose.io
 
-And if you don't like to fill up YAML by yourself, and also you don't want to use any scripts for it (like it's done in Jekyll Bootstrap), you could use a service like [Prose.io](http://prose.io). That awesome service allows you to [describe all the metadata defaults](http://prose.io/help/handbook.html#metadata_defaults) in a config, so when you'll create a new post using Prose, all the metadata would be filled for you (actually, in most basic cases you'd need to at least look at the metadata, but that's another story I'll tell someday later).
+And if you don't like to fill up YAML by yourself, and you don't want to use any scripts for it (like it's done in Jekyll Bootstrap), you could use a service like [Prose.io](http://prose.io). This awesome service allows you to [describe all the metadata defaults](http://prose.io/help/handbook.html#metadata_defaults) in a config, so when you'll create a new post using Prose, all the metadata would be filled for you (actually, in most basic cases you'd need to at least look at the metadata, but that's another story I'll tell someday later).
 
 ## Links
 
-The is a lot of useful info in the internets on Jekyll, I'll try to sum all the useful links in that post for you (and for myself), there are links that would help to start with Jekyll, and the links that are useful all the time you're tinkering with the logic behind Jekyll's templates.
+The is a lot of useful info in the internets on Jekyll, I'll try to sum all the useful links in this post for you (and for myself), there are links that would help to start with Jekyll, and the links that are useful all the time you're tinkering with the logic behind Jekyll's templates.
 
 - [Jekyll's official site](http://jekyllrb.com)
 - [Configuring Prose.io for Jekyll](http://prose.io/help/handbook.html)
@@ -69,4 +69,4 @@ For writing posts I recommend to use markdown. While there are other ways, like 
 - As markdown engine I'd recommend to use [kramdown](http://kramdown.rubyforge.org) — it's the best option so far, I'd write why in one of the next articles.
 - For configuring the site or any specific post you'll need to use [YAML](http://en.wikipedia.org/wiki/YAML) — so if you're not familiar with its syntax — go and read about it, it's nice.
 
-Overall, Im very happy that I chosen the Jekyll for my new site,  while there are a lot of issues with Liquid templates, the result worths it.
+Overall, I'm very happy I've chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result worths it.
