@@ -12,21 +12,21 @@ invisible: true
 
 {% include setup.md %}
 
-In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I'll write a lot of article on Jekyll. That's the first post in a eerie, an introduction.
+In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I'll write a lot of article on Jekyll. That's the first post in a series, an introduction.
 
-I won't write on how to install [Jekyll](https://github.com/mojombo/jekyll), how the files are structured there etc. There are already a lot of articles on that (look for some at the [__ links __](#links){:quoted}). To describe Jekyll briefly, it's a blog-aware static site generator.
+I won't write on how to install [Jekyll](https://github.com/mojombo/jekyll), how the files are structured there, etc — there are already a lot of articles on that (look for some at the [__ links __](#links){:quoted}). To describe Jekyll briefly, it's a blog-aware static site generator. An awesome one.
 
 ## GitHub Pages
 
-I need to tell one thing from the start: this and all the articles in this serie would be in the context of [GitHub Pages](http://pages.github.com). While GitHub allows you to host any static sites on it, there is also a way to host sites wrote with Jekyll. So, the Jekyll is the only way to actually generate something right at GitHub without use of any other services or any front-end only solutions.
+I need to tell one thing from the start: this and all other future articles would be in the context of [GitHub Pages](http://pages.github.com). While GitHub allows you to host any static sites on it, there is also a way to host sites wrote with Jekyll. So, the Jekyll is the only way to actually generate something right at GitHub without use of any other services or any front-end only solutions.
 
-With Jekyll you can just create a file in markdown, add a YAML front matter to it — and start writing. After pushing this file to the repo on GitHub, the whole site would be regenerated and you'll see the corresponding post both as a page of your site and in all the page listings on other pages as well. And you could push your changes from any place: you could even use just GitHub's site for this or any web app using GitHub's API.
+With Jekyll you can just create a file in markdown, add a YAML front matter to it — and start writing. After pushing this file to the repo on GitHub, the whole site would be regenerated and you'll see the corresponding post both as a page on your site and in all the listings on other pages as well. And you could push your changes from any place: you could even use just GitHub's site for this or any web app using GitHub's API.
 
-And another thing I need to mention right from the start: a lot of things that I'll describe in the next articles could be made so mush easier using plugins. But I won't use an easy way — I'd like to make everything so more people could use it, even in places where the plugins are disabled — as on GitHub Pages. 
+And another thing I need to mention right from the start: a lot of things that I'll describe in the next articles could be made _so mush_ easier using plugins. But I won't use an easy way — I'd like to make everything in a way more people could use it: even in places where the plugins are disabled — as on GitHub Pages. 
 
-## «Hello world»
+## “Hello world”
 
-Minimal document you'll need to generate a site on Jekyll should contain the YAML front matter with at least one field — `layout` (you could actually make one without it, with empty YAML front matter, but in that case you page won't have any layout at all). So, the minimal `hello-world.md` for Jekyll would look like
+Minimal document you'll need to generate a site on Jekyll should contain the [YAML](http://en.wikipedia.org/wiki/YAML) front matter with at least one field — `layout` (you could actually make one without it, with empty YAML front matter, but in that case your page won't have any layout at all). So, the minimal `hello-world.md` for Jekyll would look like
 
 
     ---
@@ -39,7 +39,7 @@ In real world you'd like to add at least a title or some other data, but for the
 
 ## Dates
 
-One of the features I like in Jekyll is it's format for posts. You need to name them as `YYYY-MM-DD-title` and I think that it's awesome. It makes you to maintain a better file hierarchy that would sort by date automatically, and also you won't need to write the date in the post itself — Jekyll would use the date from the filename automatically. Yes, in some cases you could use the `published` field in YAML to override the date in filename, but it's up to you. In most cases you won't need it.
+One of the features I like in Jekyll is it's format for posts. You need to name the files as `YYYY-MM-DD-title` and I think that it's awesome. It makes you to maintain a better file hierarchy that would be sorted by date automatically, and also you won't need to write the date in the post itself — Jekyll would use the date from the filename. Yes, in some cases you'll want to use the `published` field in YAML to override the date in filename, but it's up to you. In most cases you won't need it.
 
 ## Prose.io
 
@@ -67,5 +67,6 @@ Before this update you could't use the powerful `split` tag — almost the only 
 For writing posts I recommend to use markdown. While there are other ways, like plain HTML or Textile, for most cases the markdown would fit the best.
 
 - As markdown engine I'd recommend to use [kramdown](http://kramdown.rubyforge.org) — it's the best option so far, I'd write why in one of the next articles.
+- For configuring the site or any specific post you'll need to use [YAML](http://en.wikipedia.org/wiki/YAML) — so if you're not familiar with its syntax — go and read about it, it's nice.
 
 Overall, Im very happy that I chosen the Jekyll for my new site,  while there are a lot of issues with Liquid templates, the result worths it.
