@@ -10,7 +10,7 @@ layout: post
 
 {% include setup.md %}
 
-In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I’ll write a lot of articles on Jekyll. That’s the first post in the serie, an introduction.
+In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.
 
 I won’t write on how to install [Jekyll](https://github.com/mojombo/jekyll), how the files are structured there, and so on — there are already a lot of articles on that (look for some at the [__ links __](#links){:quoted}). To describe Jekyll briefly, it’s a blog-aware static site generator. An awesome one.
 
@@ -41,7 +41,7 @@ One of the features I like in Jekyll is its format for posts. You need to n
 
 ## Prose.io
 
-And if you don’t like to fill up YAML by yourself, and you don’t want to use any scripts for it (like it’s done in Jekyll Bootstrap), you could use a service like [Prose.io](http://prose.io). This awesome service allows you to [describe all the metadata defaults](http://prose.io/help/handbook.html#metadata_defaults) in a config, so when you’ll create a new post using Prose, all the metadata would be filled for you (actually, in most basic cases you’d need to at least look at the metadata, but that’s another story I’ll tell someday later).
+And if you don’t like to fill up YAML by yourself, and you don’t want to use any scripts for it (like it’s done in Jekyll Bootstrap), you could use a service like [Prose.io](http://prose.io). This awesome service allows you to [describe all the metadata defaults](http://prose.io/help/handbook.html#metadata_defaults) in a config, so when you create a new post using Prose, all the metadata would be filled for you (actually, in most basic cases you’d need to at least look at the metadata, but that’s another story I’ll tell someday later).
 
 ## Links
 
@@ -60,11 +60,11 @@ Jekyll uses [Liquid](http://www.liquidmarkup.org) for templating. GitHub recentl
 - [list of all the default liquid tags](https://github.com/shopify/liquid/wiki/liquid-for-designers);
 - [extra liquid tags available in Jekyll](https://github.com/mojombo/jekyll/wiki/liquid-extensions).
 
-Before this update you could’t use the powerful `split` tag — almost the only way to make a lot of different things with Jekyll (guess what — there would be some article on me hacking with that tag).
+Before this update you couldn’t use the powerful `split` tag — almost the only way to make a lot of different things with Jekyll (guess what — there would be some article on me hacking with that tag).
 
 For writing posts I recommend to use markdown. While there are other ways, like plain HTML or Textile, for most cases the markdown would fit the best.
 
-- As markdown engine I’d recommend to use [kramdown](http://kramdown.rubyforge.org) — it’s the best option so far, I’d write why in one of the next articles.
+- For a markdown engine I’d recommend to use [kramdown](http://kramdown.rubyforge.org) — it’s the best option so far, I’d write why in one of the next articles.
 - For configuring the site or any specific post you’ll need to use [YAML](http://en.wikipedia.org/wiki/YAML) — so if you’re not familiar with its syntax — go and read about it, it’s nice.
 
-Overall, I’m very happy I’ve chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result worths it.
+Overall, I’m very happy I’ve chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result has been worth it.
