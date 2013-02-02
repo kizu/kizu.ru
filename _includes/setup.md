@@ -1,4 +1,3 @@
-{% capture strip_whitespace %}
 # This file contains all the magic for the overloading of the Jekyll
 
 Now we must get the current page from posts, so all other thigngs would be the same as for any iterated posts.
@@ -27,5 +26,3 @@ Getting the title
 Capturing the category
 
     {% capture category %}{% if lang == "en" %}{{ page.categories[1] }}{% else %}{{ page.categories[0] }}{% endif %}{% endcapture %}
-
-{% endcapture %}
