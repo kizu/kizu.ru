@@ -1,6 +1,15 @@
 {% capture strip_whitespace %}
 # This file contains all the magic for the overloading of the Jekyll
 
+Now we must get the current page from posts, so all other thigngs would be the same as for any iterated posts.
+
+    {% assign processed_post = false %}
+    {% for post in site.posts %}
+        {% if page.id == post.id %}
+            {% assign processed_post = post %}
+        {% endif %}
+    {% endfor %}
+
 Here we getting the language from url
 
     {% assign lang = "ru" %}
@@ -15,19 +24,8 @@ Getting the title
 
     {% include get_title.md %}
 
-Applying the references and hacking the start of the markdown for the content
-
-```
-{% capture processed_content %}
-{{ processed_content }}
-{% include references.md %}
-{% endcapture %}
-```
-
 Capturing the category
 
     {% capture category %}{% if lang == "en" %}{{ page.categories[1] }}{% else %}{{ page.categories[0] }}{% endif %}{% endcapture %}
-
-Markdownify the processed content
 
 {% endcapture %}
