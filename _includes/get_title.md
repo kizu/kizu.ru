@@ -1,4 +1,3 @@
-{% capture strip_whitespace %}
 # Trying to get the title from the markdown content
 
     {% assign processed_content = page.content %}
@@ -15,5 +14,3 @@ Check if the first line contains `# `, then if so, then set the title to the fou
     {% else %}
         {% capture processed_title %}{{ page.title }}{% endcapture %}
     {% endif %}
-
-{% endcapture %}
