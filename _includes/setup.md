@@ -17,8 +17,12 @@ Getting the title
 
 Applying the references and hacking the start of the markdown for the content
 
-    {% capture processed_content %}
-    {{ processed_content }}{% include references.md %}{% endcapture %}
+```
+{% capture processed_content %}
+{{ processed_content }}
+{% include references.md %}
+{% endcapture %}
+```
 
 Capturing the category
 

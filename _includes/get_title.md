@@ -11,7 +11,7 @@ Check if the first line contains `# `, then if so, then set the title to the fou
 
     {% if content_lines[0] contains '# ' %}
         {% assign processed_content = processed_content | remove_first:content_lines[0] %}
-        {% capture processed_title %}{{ content_lines[0] | remove_first:"# " | markdownify }}{% endcapture %}
+        {% capture processed_title %}{{ content_lines[0] | remove_first:"# " | markdownify | remove:"<p>" | remove:"</p>" }}{% endcapture %}
     {% else %}
         {% capture processed_title %}{{ page.title }}{% endcapture %}
     {% endif %}
