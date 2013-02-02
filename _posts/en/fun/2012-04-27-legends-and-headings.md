@@ -1,12 +1,12 @@
 ---
 
-title: Legends and Headings
-
 layout: post
 
 categories: en fun
 
 ---
+
+# Legends and Headings
 
 One day in the last december I tried to find out what we can do with the `legend` element. I wanted to move it in the fieldset’s frame, and didn’t want to style it out ’cause the fieldsets with legend have this special behavior: the fieldset’s border gets the gap for the legend to fit in.
 

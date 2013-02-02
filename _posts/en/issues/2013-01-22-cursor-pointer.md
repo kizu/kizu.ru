@@ -1,14 +1,12 @@
 ---
 
-title: Correct cursor on active elements
-
 categories: en issues
 
 layout: post
 
 ---
 
-{% include setup.md %}
+# Correct cursor on active elements
 
 Every active element must have a set `cursor` on hover. And it should be `cursor:pointer` in most cases.
 

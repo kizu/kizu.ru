@@ -1,14 +1,12 @@
 ---
 
-title: Jekyll
-
 categories: issues
 
 layout: post
 
 ---
 
-{% include setup.md %}
+# Jekyll
 
 В [посте про перезапуск](http://kizu.ru/issues/restart/) я пообещал написать серию статей про Jekyll. Это — первая, вводная, заметка из серии.
 
