@@ -11,7 +11,7 @@
 
             {% if list_posts_categories_url contains list_posts_categories and list_posts_categories != "^/" %}
                 {% assign processed_post = post %}
-                {% include get_title.md %}
+                {% include tenkan/get_title.md %}
                 {% capture list_posts_items %}{{ list_posts_items }}
                     <li><a href="{{ post.url }}/">{{ processed_title }}</a> — <em class="published">{{ post.date | date: "%d %B, %Y" }}</em></li>{% endcapture %}
             {% endif %}

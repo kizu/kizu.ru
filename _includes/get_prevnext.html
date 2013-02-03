@@ -16,13 +16,13 @@
         {% if post == item %}
             {% if post_next.id == page.id %}
                 {% assign processed_post = post %}
-                {% include get_title.md %}
+                {% include tenkan/get_title.md %}
                 {% capture result_prev %}<a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ processed_title }}</span></a>{% endcapture %}
             {% endif %}
             {% if post.id == page.id %}
                 {% if post_next %}
                     {% assign processed_post = post_next %}
-                    {% include get_title.md %}
+                    {% include tenkan/get_title.md %}
                     {% capture result_next %}<a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ processed_title }}</span></a>{% endcapture %}
                 {% endif %}
             {% endif %}
