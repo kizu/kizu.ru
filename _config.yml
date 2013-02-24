@@ -43,6 +43,12 @@ prose:
 
             layout: post
 
+        "_posts/blog": |
+
+            categories: blog
+
+            layout: post
+
         "_posts/en": |
 
             categories: en drafts
@@ -57,9 +63,15 @@ prose:
 
             layout: post
 
-        "_posts/en": |
+        "_posts/en/issues": |
 
             categories: en issues
+
+            layout: post
+
+        "_posts/en/blog": |
+
+            categories: en blog
 
             layout: post
 
@@ -87,6 +99,14 @@ loc:
         _in_:
             ru: "Проектах"
             en: "Projects"
+
+    blog:
+        ru: "Блог"
+        en: "Blog"
+
+        _in_:
+            ru: "блоге"
+            en: "the Blog"
 
     old:
         ru: "Старое"
