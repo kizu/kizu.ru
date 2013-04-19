@@ -1,4 +1,5 @@
 @import 'font_regular'
+@import 'prism.css'
 @import '../stylobate/stylus/stylobate'
 
 // rem! as we can't redefine it in Stylus, we can use the var for it.
@@ -486,9 +487,32 @@ kbd
   font-family: Monaco, Consolas, monospace
   font-size: 0.87em
 
+pre > code
+  font-size: 1em
+
 pre
+  position: relative
+  left: -1*rem
+
   overflow: hidden
   overflow-x: auto
+
+pre > code
+  display: inline-block
+  vertical-align: top
+
+  padding: 0.5*rem 1*rem
+  margin-bottom: 0
+
+  background: rgba($dark,0.03)
+  box-shadow: inset 0 0 0 1px rgba($dark,0.1)
+
+p > img:only-child:not(.b-figure)
+  padding: 1*rem
+  margin: 0 -1*rem
+
+  background: rgba($dark,0.03)
+  box-shadow: inset 0 0 0 1px rgba($dark,0.1)
 
 sup,
 sub
