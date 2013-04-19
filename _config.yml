@@ -25,55 +25,83 @@ prose:
     metadata:
         "_posts": |
 
-            title: Набросок статьи
-
             categories: drafts
 
             layout: post
+
+            published: true
 
             invisible: true
 
         "_posts/fun": |
 
-            title: Без заголовка
-
             categories: fun
 
             layout: post
 
-        "_posts/issues": |
+            published: true
 
-            title: Без заголовка
+            invisible: true
+
+        "_posts/issues": |
 
             categories: issues
 
             layout: post
 
-        "_posts/en": |
+            published: true
 
-            title: Draft of an article
+            invisible: true
+
+        "_posts/blog": |
+
+            categories: blog
+
+            layout: post
+
+            published: true
+
+            invisible: true
+
+        "_posts/en": |
 
             categories: en drafts
 
             layout: post
 
+            published: true
+
             invisible: true
 
         "_posts/en/fun": |
-
-            title: No subject
 
             categories: en fun
 
             layout: post
 
-        "_posts/en": |
+            published: true
 
-            title: No subject
+            invisible: true
+
+        "_posts/en/issues": |
 
             categories: en issues
 
             layout: post
+
+            published: true
+
+            invisible: true
+
+        "_posts/en/blog": |
+
+            categories: en blog
+
+            layout: post
+
+            published: true
+
+            invisible: true
 
 loc:
     fun:
@@ -99,6 +127,14 @@ loc:
         _in_:
             ru: "Проектах"
             en: "Projects"
+
+    blog:
+        ru: "Блог"
+        en: "Blog"
+
+        _in_:
+            ru: "блоге"
+            en: "the Blog"
 
     old:
         ru: "Старое"

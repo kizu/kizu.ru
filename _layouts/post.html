@@ -2,13 +2,12 @@
 layout: default
 page_type: post
 ---
-{% capture setup %}{% include setup.md %}{% endcapture %}
+{% include setup.md %}
 <article class="main" role="main">
     <header>{% if page.invisible %}<p style="color: red;"><strong>This page is a draft, it's not published yet, so please don't share links to it to anyone, ok?</strong></p>{% endif %}
-        <h1>{{ page.title }}</h1>
+        <h1>{{ processed_title }}</h1>
     </header>
-
-    {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}
+    {% capture link_handles_input %}{{ processed_content }}{% endcapture %}{% include link_handles.html %}
     {% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}{{ demo_handles_result }}
 
     {% if page.date %}<p class="published">
@@ -16,7 +15,7 @@ page_type: post
         {% assign list_categories = page.categories %}{% include list_categories.html %}
     </p>{% endif %}
     <aside class="feedback">
-        {% assign get_filename_input = page.url %}{% include get_filename.html %}{% capture feeback_title %}{{ site.loc | map: 'feedback_for' | map: lang }} {{ site.loc | map: 'laquo' | map: lang }}{{ page.title }}{{ site.loc | map: 'raquo' | map: lang }}{% endcapture %}
+        {% assign get_filename_input = page.url %}{% include get_filename.html %}{% capture feeback_title %}{{ site.loc | map: 'feedback_for' | map: lang }} {{ site.loc | map: 'laquo' | map: lang }}{{ processed_title }}{{ site.loc | map: 'raquo' | map: lang }}{% endcapture %}
         {{ site.loc | map: "feedback_text1" | map: lang }} <a class="link" href="https://github.com/kizu/kizu.github.com/issues/new?title={{ feeback_title | cgi_escape }}">{{ site.loc | map: "feedback_issue" | map: lang }}</a> {{ site.loc | map: "feedback_text2" | map: lang }} <a class="link" href="http://edit.kizu.ru/#{{ site.github_repo }}/edit/master/{{ get_filename_output }}">{{ site.loc | map: "feedback_edit" | map: lang }}</a> {{ site.loc | map: "feedback_text3" | map: lang }} prose.io.
     </aside>
 </article>

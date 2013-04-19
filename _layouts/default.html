@@ -1,7 +1,7 @@
 ---
 layout: layout
 ---
-	{% capture setup %}{% include setup.md %}{% endcapture %}
+	{% include setup.md %}
 	<header class="header">
 		<h1 class="title">
 			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}

@@ -1,14 +1,12 @@
 ---
 
-title: Jekyll
-
 categories: en issues
 
 layout: post
 
 ---
 
-{% include setup.md %}
+# Jekyll
 
 In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.
 
@@ -20,7 +18,7 @@ I need to tell one thing from the start: this and all other future articles wo
 
 With Jekyll you can just create a file in markdown, add a YAML front matter to it — and start writing. After pushing this file to the repo on GitHub, the whole site would be regenerated and you’ll see the corresponding post both as a page on your site and in all the listings on other pages as well. And you could push your changes from any place: you could even use just GitHub’s site for this or any web app using GitHub’s API.
 
-And another thing I need to mention right from the start: a lot of things I’ll describe in the next articles could be made _so mush_ easier using plugins. But I won’t go an easy way — I’d like to make everything in a way more people could use it: even in places where the plugins are disabled — as on GitHub Pages. 
+And another thing I need to mention right from the start: a lot of things I’ll describe in the next articles could be made _so mush_ easier using plugins. But I won’t go an easy way — I’d like to make everything in a way more people could use it: even in places where the plugins are disabled — as on GitHub Pages.
 
 ## “Hello world”
 
@@ -68,3 +66,5 @@ For writing posts I recommend to use markdown. While there are other ways, lik
 - For configuring the site or any specific post you’ll need to use [YAML](http://en.wikipedia.org/wiki/YAML) — so if you’re not familiar with its syntax — go and read about it, it’s nice.
 
 Overall, I’m very happy I’ve chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result has been worth it.
+
+{:quoted: .link .link_wrapper .link_quoted}

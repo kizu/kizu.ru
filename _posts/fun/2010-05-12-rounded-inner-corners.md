@@ -1,11 +1,11 @@
 ---
 
-title: Скруглённые внутренние углы
-
 layout: post
 
 categories: fun
 
 ---
+
+# Скруглённые внутренние углы
 
 [demo:rounded-inner-corners]
