@@ -29,6 +29,8 @@ prose:
 
             layout: post
 
+            published: true
+
             invisible: true
 
         "_posts/fun": |
@@ -37,11 +39,19 @@ prose:
 
             layout: post
 
+            published: true
+
+            invisible: true
+
         "_posts/issues": |
 
             categories: issues
 
             layout: post
+
+            published: true
+
+            invisible: true
 
         "_posts/blog": |
 
@@ -49,11 +59,17 @@ prose:
 
             layout: post
 
+            published: true
+
+            invisible: true
+
         "_posts/en": |
 
             categories: en drafts
 
             layout: post
+
+            published: true
 
             invisible: true
 
@@ -63,17 +79,29 @@ prose:
 
             layout: post
 
+            published: true
+
+            invisible: true
+
         "_posts/en/issues": |
 
             categories: en issues
 
             layout: post
 
+            published: true
+
+            invisible: true
+
         "_posts/en/blog": |
 
             categories: en blog
 
             layout: post
+
+            published: true
+
+            invisible: true
 
 loc:
     fun:
