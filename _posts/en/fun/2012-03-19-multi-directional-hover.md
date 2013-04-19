@@ -1,12 +1,12 @@
 ---
 
-title: Multi-directional hover
-
 layout: post
 
 categories: en fun
 
 ---
+
+# Multi-directional hover
 
 Try to hover this block from different directions
 

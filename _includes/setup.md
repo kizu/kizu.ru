@@ -1,11 +1,21 @@
-{% assign lang = "ru" %}
-{% assign lang_prefix = "" %}
+{% capture setup_cache %}
 
-{% if page.categories contains 'en' or page.url contains '/en/' %}
-    {% assign lang = "en" %}
-    {% assign lang_prefix = "en/" %}
-{% endif %}
+Including [Tenkan](https://github.com/kizu/tenkan)
 
-{% capture category %}{% if lang == "en" %}{{ page.categories[1] }}{% else %}{{ page.categories[0] }}{% endif %}{% endcapture %}
+    {% include tenkan/setup.md %}
 
-{% include references.md %}
+Getting the language from url
+
+    {% assign lang = "ru" %}
+    {% assign lang_prefix = "" %}
+
+    {% if page.categories contains 'en' or page.url contains '/en/' %}
+        {% assign lang = "en" %}
+        {% assign lang_prefix = "en/" %}
+    {% endif %}
+
+Capturing the main category
+
+    {% capture category %}{% if lang == "en" %}{{ page.categories[1] }}{% else %}{{ page.categories[0] }}{% endif %}{% endcapture %}
+
+{% endcapture %}

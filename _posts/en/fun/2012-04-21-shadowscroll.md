@@ -1,12 +1,12 @@
 ---
 
-title: Scrolling shadows
-
 layout: post
 
 categories: en fun
 
 ---
+
+# Scrolling shadows
 
 Here is some old idea, but made only with pure CSS.
 

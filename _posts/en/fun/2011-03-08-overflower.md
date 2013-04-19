@@ -1,12 +1,12 @@
 ---
 
-title: Text-overflow emulation and gradient overflow
-
 layout: post
 
 categories: en fun
 
 ---
+
+# Text-overflow emulation and gradient overflow
 
 1. The «overflow» effect is visible only if there is something to hide (so, there wouldn’t be a case when there is an overlayed gradient that hides a part of text, that would be visible whole anyway).
 2. Also, you can add a `title` attribute to a block, that would appear only when something is hidden.

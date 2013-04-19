@@ -15,11 +15,15 @@
         {% endif %}
         {% if post == item %}
             {% if post_next.id == page.id %}
-                {% capture result_prev %}<a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ post.title }}</span></a>{% endcapture %}
+                {% assign processed_post = post %}
+                {% include tenkan/get_title.md %}
+                {% capture result_prev %}<a class="link link_wrapper link_prev" href="{{ post.url }}/"><span class="link__inner">{{ processed_title }}</span></a>{% endcapture %}
             {% endif %}
             {% if post.id == page.id %}
                 {% if post_next %}
-                    {% capture result_next %}<a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ post_next.title }}</span></a>{% endcapture %}
+                    {% assign processed_post = post_next %}
+                    {% include tenkan/get_title.md %}
+                    {% capture result_next %}<a class="link link_wrapper link_next" href="{{ post_next.url }}/"><span class="link__inner">{{ processed_title }}</span></a>{% endcapture %}
                 {% endif %}
             {% endif %}
             {% assign post_next = item %}
