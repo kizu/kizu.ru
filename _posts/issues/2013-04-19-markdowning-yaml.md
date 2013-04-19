@@ -4,7 +4,10 @@ categories: issues
 
 layout: post
 
-published: false
+published: true
+
+invisible: true
+
 ---
 
 # Маркдауним YAML для Jekyll
