@@ -12,12 +12,11 @@ invisible: true
 
 # Markdowning YAML for Jekyll
 
-While I'm struggling to write a lengthy article, here is a small one, on a few Jekyll tricks I use.
+While I’m struggling to write a lengthy article, here is a small one, on a little Jekyll trick I use.
 
-The first one is on how to mark up YAML prologue in a _readable_ matter. Well, not readable actually, but renderable by markdown.
+In Jekyll you need to use YAML front matter to add any metadata to the post or page. Actually, Jekyll “sees” only those files that have the YAML front matter, so it is a somewhat important thing.
 
-Why would I need this? I though it would be cool if the .md file looked nice on GitHub. Right now if you'd just write YAML in a simple way, like this:
-
+Most of the time this front matter would look like this:
 
     ---
     layout: docs
@@ -25,11 +24,13 @@ Why would I need this? I though it would be cool if the .md file looked nice on 
     prev_section: sites
     ---
 
-You would get ugly header for your file at GitHub:
+It could seem to be ok. However, as I use Jekyll right on GitHub, my perfectionism tells me that the source of all my posts in markdown should look perfect when looked at GitHub. And it would render all the markdown documents instead of showing their content. So, the YAML front matter in that case would look like this:
 
 ![Bad code][bad]
 
-This is easy fixable, just try to write YAML front matter in a markdowny way: add extra empty lines etc. then the example above would be restyled to this:
+Not that readable, huh? And the last line suddenly became a header — I don’t think it’s what we could want there.
+
+However, it can be fixed with ease: you just need to add some extra lines in-between:
 
     ---
     
@@ -41,12 +42,15 @@ This is easy fixable, just try to write YAML front matter in a markdowny way: ad
     
     ---
 
-And it would look so much better at GitHub:
+And this would look so much better at GitHub:
 
 ![Good code][good]
 
-As an added bonus I find this style of YAML better readable in a code editor also, so there is virtually nothing that should stop you from using this code style for your YAML front matters. If you didn't had any code style, then adding any one would already be useful enought btw!
+Instead of a useless header we would get YAML nicely separated from content, and every line would become a paragraph there.
 
+As most of posts won’t have a lot of metadata, those extra lines won’t bloat the code. And, in my opinion, this code style is also more readable when you’re working with actual code, so I don’t see any reasons why you shouldn’t use it all the time for YAML front matters.
+
+The only thing I don’t like there is that YAML is so strict. You can’t add indents in the front of data, or use lists with hyphens here — those could be rendered even nicer. Also, if someone would see any other possibility to enhance the readability of the YAML front matters — tell me via twitter or by issues on GitHub.
 
 
 [bad]: http://img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png
