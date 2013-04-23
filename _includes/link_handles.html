@@ -33,8 +33,8 @@
         {% endif %}
         {% if with != "" %}
             <!-- Need to add debug mode, so there would be not a production url, but relative one -->
-            {% capture what1 %}href="{{ post.id | split:"/" | last }}"{% endcapture %}
-            {% capture what2 %}href="{{ post.id | split:"/" | last }}#{% endcapture %}
+            {% capture what1 %}href=":{{ post.id | split:"/" | last }}"{% endcapture %}
+            {% capture what2 %}href=":{{ post.id | split:"/" | last }}#{% endcapture %}
             {% capture with1 %}href="{{ site.production_url }}{{ with }}/"{% endcapture %}
             {% capture with2 %}href="{{ site.production_url }}{{ with }}/#{% endcapture %}
             {% assign link_handles_result = link_handles_result | replace:what1,with1 %}
