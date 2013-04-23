@@ -8,7 +8,7 @@ layout: post
 
 # Jekyll
 
-In a [post on site relaunch](http://kizu.ru/en/issues/restart/) I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.
+In a [post on site relaunch](restart) I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.
 
 I won’t write on how to install [Jekyll](https://github.com/mojombo/jekyll), how the files are structured there, and so on — there are already a lot of articles on that (look for some at the [__ links __](#links){:quoted}). To describe Jekyll briefly, it’s a blog-aware static site generator. An awesome one.
 
