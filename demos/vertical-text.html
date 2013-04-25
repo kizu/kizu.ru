@@ -1,6 +1,69 @@
 ---
+
 layout: demo
+
 injected: true
+
+seamless: true
+
 ---
 
-Hello world
+<style>
+
+.vertical-text {
+    display: inline-block;
+    overflow: hidden;
+    width: 1.5em;
+    line-height: 1.5;
+}
+.vertical-text__inner {
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-transform: translate(0,100%) rotate(-90deg);
+       -moz-transform: translate(0,100%) rotate(-90deg);
+        -ms-transform: translate(0,100%) rotate(-90deg);
+         -o-transform: translate(0,100%) rotate(-90deg);
+            transform: translate(0,100%) rotate(-90deg);
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+}
+/* This element stretches the parent to be square
+   by using the mechanics of vertical margins  */
+.vertical-text__inner:after {
+    content: "";
+    display: block;
+    margin: -1.5em 0 100%;
+}
+
+
+/* Just for more pretty example */
+th,td {
+    border: 1px solid;
+    text-align: center;
+    font-weight: normal;
+    padding: 0.5em;
+}
+
+
+</style>
+
+<table>
+    <tr>
+        <th><div class="vertical-text"><div class="vertical-text__inner">First th</div></div></th>
+        <td>Some cell</td>
+        <td>And another</td>
+    </tr>
+    <tr>
+        <th><div class="vertical-text"><div class="vertical-text__inner">Second th</div></div></th>
+        <td>12</td>
+        <td>12314</td>
+    </tr>
+    <tr>
+        <th><div class="vertical-text"><div class="vertical-text__inner">Third th</div></div></th>
+        <td>12</td>
+        <td>12314</td>
+    </tr>
+</table>
