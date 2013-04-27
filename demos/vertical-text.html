@@ -10,13 +10,13 @@ seamless: true
 
 <style>
 
-.vertical-text {
+.rotated-text {
     display: inline-block;
     overflow: hidden;
     width: 1.5em;
     line-height: 1.5;
 }
-.vertical-text__inner {
+.rotated-text__inner {
     display: inline-block;
     white-space: nowrap;
     -webkit-transform: translate(0,100%) rotate(-90deg);
@@ -32,7 +32,7 @@ seamless: true
 }
 /* This element stretches the parent to be square
    by using the mechanics of vertical margins  */
-.vertical-text__inner:before {
+.rotated-text__inner:before {
     content: "";
     float: left;
     margin-top: 100%;
@@ -43,8 +43,8 @@ seamless: true
 <table border="1" cellpadding="10">
     <tr>
         <th>
-            <span class="vertical-text">
-                <span class="vertical-text__inner">
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
                     First th
                 </span>
             </span>
@@ -54,8 +54,8 @@ seamless: true
     </tr>
     <tr>
         <th>
-            <span class="vertical-text">
-                <span class="vertical-text__inner">
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
                     Second th
                 </span>
             </span>
@@ -65,8 +65,8 @@ seamless: true
     </tr>
     <tr>
         <th>
-            <span class="vertical-text">
-                <span class="vertical-text__inner">
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
                     Third th
                 </span>
             </span>
