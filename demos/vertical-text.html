@@ -32,37 +32,45 @@ seamless: true
 }
 /* This element stretches the parent to be square
    by using the mechanics of vertical margins  */
-.vertical-text__inner:after {
+.vertical-text__inner:before {
     content: "";
-    display: block;
-    margin: -1.5em 0 100%;
+    float: left;
+    margin-top: 100%;
 }
-
-
-/* Just for more pretty example */
-th,td {
-    border: 1px solid;
-    text-align: center;
-    font-weight: normal;
-    padding: 0.5em;
-}
-
 
 </style>
 
-<table>
+<table border="1" cellpadding="10">
     <tr>
-        <th><div class="vertical-text"><div class="vertical-text__inner">First th</div></div></th>
+        <th>
+            <span class="vertical-text">
+                <span class="vertical-text__inner">
+                    First th
+                </span>
+            </span>
+        </th>
         <td>Some cell</td>
         <td>And another</td>
     </tr>
     <tr>
-        <th><div class="vertical-text"><div class="vertical-text__inner">Second th</div></div></th>
+        <th>
+            <span class="vertical-text">
+                <span class="vertical-text__inner">
+                    Second th
+                </span>
+            </span>
+        </th>
         <td>12</td>
         <td>12314</td>
     </tr>
     <tr>
-        <th><div class="vertical-text"><div class="vertical-text__inner">Third th</div></div></th>
+        <th>
+            <span class="vertical-text">
+                <span class="vertical-text__inner">
+                    Third th
+                </span>
+            </span>
+        </th>
         <td>12</td>
         <td>12314</td>
     </tr>
