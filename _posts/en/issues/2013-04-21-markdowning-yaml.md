@@ -21,6 +21,7 @@ Most of the time this front matter would look like this:
     title: Resources
     prev_section: sites
     ---
+{:.language-yaml}
 
 It could seem to be ok. However, as I use Jekyll right on GitHub, my perfectionism tells me that the source of all my posts in markdown should look perfect when looked at GitHub. And it would render all the markdown documents instead of showing their content. So, the YAML front matter in that case would look like this:
 
@@ -39,6 +40,7 @@ However, it can be fixed with ease: you just need to add some extra lines in-
     prev_section: sites
     
     ---
+{:.language-yaml}
 
 And this would look so much better at GitHub:
 
