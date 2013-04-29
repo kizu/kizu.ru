@@ -559,6 +559,9 @@ pre {
   overflow: hidden;
   overflow-x: auto;
 }
+li pre {
+  left: 0;
+}
 pre > code {
   display: inline;
   zoom: 1;
