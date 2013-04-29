@@ -1,0 +1,89 @@
+---
+
+layout: demo
+
+injected: true
+
+seamless: true
+
+---
+
+<style>
+
+.rotated-text {
+    display: inline-block;
+    overflow: hidden;
+    width: 1.5em;
+    line-height: 1.5;
+}
+.rotated-text__inner {
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-transform: translate(0,100%) rotate(-90deg);
+       -moz-transform: translate(0,100%) rotate(-90deg);
+        -ms-transform: translate(0,100%) rotate(-90deg);
+         -o-transform: translate(0,100%) rotate(-90deg);
+            transform: translate(0,100%) rotate(-90deg);
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+}
+/* This element stretches the parent to be square
+   by using the mechanics of vertical margins  */
+.rotated-text__inner:before {
+    content: "";
+    float: left;
+    margin-top: 100%;
+}
+
+.bookshelf {
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.book {
+    padding: 1em 0.5em;
+
+    vertical-align: bottom;
+    list-style: none;
+
+    -webkit-box-shadow: inset 0 0 0 1px #000;
+            box-shadow: inset 0 0 0 1px #000;
+}
+
+.book:before {
+    display: none;
+}
+
+.book__inner {
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+
+    min-width: 8em;
+    padding: 0;
+
+    color: #000;
+    text-shadow: none !important;
+}
+
+</style>
+
+<ul class="bookshelf">
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Idiot</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Little Prince</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Roadside Picnic</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Flowers for Algernon</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">A Book of Five Rings</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Glass Bead Game</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Hitchhiker's Guide to the Galaxy</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Hobbit</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Cat's Cradle</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">1984</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Mother Night</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Speaker for the Dead</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Day of the Triffids</a></li>
+</ul>
