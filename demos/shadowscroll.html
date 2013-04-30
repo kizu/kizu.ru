@@ -20,8 +20,14 @@ html {
 
     background: #FFF no-repeat;
     background-image:
-        radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)),
-        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0));
+        -webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        -webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image:
+        -moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        -moz-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image:
+        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.2), rgba(0,0,0,0));
     background-position: 0 0, 0 100%;
     background-size: 100% 14px;
     }
@@ -36,11 +42,15 @@ html {
 
     height: 30px;
     margin: 0 0 -30px;
-    background: linear-gradient(top,#FFF,#FFF 30%,rgba(255,255,255,0));
+    background: -webkit-linear-gradient(top,#FFF,#FFF 30%,rgba(255,255,255,0));
+    background:    -moz-linear-gradient(top,#FFF,#FFF 30%,rgba(255,255,255,0));
+    background:      linear-gradient(to top,#FFF,#FFF 30%,rgba(255,255,255,0));
     }
 .scrollbox:after {
     margin: -30px 0 0;
-    background: linear-gradient(top,rgba(255,255,255,0),#FFF 70%,#FFF);
+    background: -webkit-linear-gradient(top,rgba(255,255,255,0),#FFF 70%,#FFF);
+    background:    -moz-linear-gradient(top,rgba(255,255,255,0),#FFF 70%,#FFF);
+    background:      linear-gradient(to top,rgba(255,255,255,0),#FFF 70%,#FFF);
     }
 
 </style>
