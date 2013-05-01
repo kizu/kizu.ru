@@ -10,7 +10,7 @@ title: Заметки и эксперименты Романа Комарова
 Привет. Я работаю разработчиком интерфейсов в [Яндексе][yndx] и участвую в жизни сообщества [__ Веб-стандарты __][wst]{:quoted}.
 
 
-Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над несколькими опенсорсными проектами: [Хаяку](http://hayakubundle.com), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
+Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над несколькими опенсорсными проектами: [Хаяку](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
 
 Иногда я выступаю с докладами на конференциях, например на [Яндекс.Субботниках](http://events.yandex.ru/search/?text=Роман+Комаров) и [Web Standards Days](http://webstandardsdays.ru). Недавно даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session).
 
