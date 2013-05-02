@@ -7,14 +7,7 @@ layout: layout
 			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}
 		</h1>
 		<ul class="languages">
-			{% if lang == 'en' %}
-				{% capture expected_translation_id %}{{ page.id | replace:'/en/','/' }}{% endcapture %}
-			{% else %}
-				{% capture expected_translation_id  %}/en{{ page.id }}{% endcapture %}
-			{% endif %}
-			{% assign posts_ids = site.posts | map:'id' %}
-
-			{% if page.page_type != 'post' or posts_ids contains expected_translation_id %}
+			{% if page_have_translation %}
 				{% if lang == 'en' %}
 					<li class="language language_current" data-short="en">in english</li>
 					<li class="language"><a class="language__link" href="{{ page.url | replace:'/en/','/' | remove:'index.html' }}" data-short="ru">по-русски</a></li>

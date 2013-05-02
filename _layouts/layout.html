@@ -5,6 +5,17 @@
 	<meta name="viewport" content="width=device-width"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge"/>
 	<link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu{% if lang == 'en' %}ruen{% endif %}">
+
+	{% if page_have_translation %}
+		{% if lang == 'en' %}
+			<link rel="alternate" hreflang="en" href="{{ site.production_url }}{{ page.url | remove:'index.html' }}" />
+			<link rel="alternate" hreflang="ru" href="{{ site.production_url }}{{ page.url | replace:'/en/','/' | remove:'index.html' }}" />
+		{% else %}
+			<link rel="alternate" hreflang="en" href="{{ site.production_url }}/en{{ page.url | remove:'index.html' }}" />
+			<link rel="alternate" hreflang="ru" href="{{ site.production_url }}{{ page.url | remove:'index.html' }}" />
+		{% endif %}
+	{% endif %}
+
 	<!--[if gt IE 7]><!-->
 		<link rel="stylesheet" href="/s/style.css">
 	<!--<![endif]--><!--[if lt IE 8]><link rel="stylesheet" href="/s/style_ie.css"><![endif]-->
