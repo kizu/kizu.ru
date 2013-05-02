@@ -16,6 +16,9 @@ link_handles:
     - prefix: "gh:"
       handle: "https://github.com/"
 
+langs: [ru,en]
+default_lang: ru
+
 # flat_categories:
 #    - "fun"
 #    - "issues"

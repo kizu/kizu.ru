@@ -11,4 +11,36 @@
 
     {% capture link_handles_result %}{{ link_handles_result | replace:'">«','"><span class="hanger">«</span>' }}{% endcapture %}
     {% capture link_handles_result %}{{ link_handles_result | replace:'">“','"><span class="hanger">“</span>' }}{% endcapture %}
+
+    <!-- Заменяем указатели на посты на ссылки на соответствующие посты -->
+    {% for post in site.posts %}
+        {% assign with = "" %}
+        {% if lang != site.default_lang %}
+            {% if post.categories contains lang %}
+                {% assign with = post.id %}
+            {% endif %}
+        {% else %}
+            {% assign is_ok = true %}
+            {% for l in site.langs %}
+                {% capture checking %}^BEGIN/{{ l }}/{% endcapture %}
+                {% if post.id contains checking %}
+                    {% assign is_ok = false %}
+                {% endif %}
+            {% endfor %}
+            {% if is_ok == true %}
+                {% assign with = post.id %}
+            {% endif %}
+        {% endif %}
+        {% if with != "" %}
+            <!-- Need to add debug mode, so there would be not a production url, but relative one -->
+            {% capture what1 %}href=":{{ post.id | split:"/" | last }}"{% endcapture %}
+            {% capture what2 %}href=":{{ post.id | split:"/" | last }}#{% endcapture %}
+            {% capture with1 %}href="{{ site.production_url }}{{ with }}/"{% endcapture %}
+            {% capture with2 %}href="{{ site.production_url }}{{ with }}/#{% endcapture %}
+            {% assign link_handles_result = link_handles_result | replace:what1,with1 %}
+            {% assign link_handles_result = link_handles_result | replace:what2,with2 %}
+            {% assign with = "" %}
+        {% endif %}
+    {% endfor %}
+
 {% endcapture %}

@@ -2,6 +2,7 @@
 layout: default
 page_type: index
 ---
+{% include setup.md %}
 <div class="main" role="main">
     {% capture link_handles_input %}{{ content }}{% endcapture %}{% include link_handles.html %}{{ link_handles_result }}
 </div>
