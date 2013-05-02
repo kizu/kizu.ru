@@ -5,9 +5,36 @@ layout: layout
 	<header class="header">
 		<h1 class="title">
 			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}
-			<sup>{% unless page.url contains "/issues/restart" %}<a class="link link_wrapper" href="/{{ lang_prefix }}issues/restart/">{% endunless %}β{% unless page.url contains "/issues/restart" %}</a>{% endunless %}</sup>
 		</h1>
+		<ul class="languages">
+			{% if lang == 'en' %}
+				{% capture expected_translation_id %}{{ page.id | replace:'/en/','/' }}{% endcapture %}
+			{% else %}
+				{% capture expected_translation_id  %}/en{{ page.id }}{% endcapture %}
+			{% endif %}
+			{% assign posts_ids = site.posts | map:'id' %}
+
+			{% if page.page_type != 'post' or posts_ids contains expected_translation_id %}
+				{% if lang == 'en' %}
+					<li class="language language_current" data-short="en">in english</li>
+					<li class="language"><a class="language__link" href="{{ page.url | replace:'/en/','/' | remove:'index.html' }}" data-short="ru">по-русски</a></li>
+				{% else %}
+					<li class="language"><a class="language__link" href="/en{{ page.url | remove:'index.html' }}" data-short="en">in english</a></li>
+					<li class="language language_current" data-short="ru">по-русски</li>
+				{% endif %}
+			{% else %}
+				{% if lang == 'en' %}
+					<li class="language language_current" data-short="en">in english</li>
+					<li class="language"><a class="language__link" href="/" data-short="ru" title="Для этой статьи нет перевод, но для многих других — есть">по-русски*</a></li>
+				{% else %}
+					<li class="language"><a class="language__link" href="/en/" data-short="en" title="No translation for this article, but a lot of translations for other ones">in english*</a></li>
+					<li class="language language_current" data-short="ru">по-русски</li>
+				{% endif %}
+			{% endif %}
+		</ul>
 	</header>
+
+
 
 	{{ content }}
 
@@ -24,12 +51,5 @@ layout: layout
 		</p>
         <nav class="prevnext">
         	{% if page.page_type == 'post' %}{% include get_prevnext.html %}{% endif %}
-			{% comment %}<!-- <p class="languages">
-				{% if page.categories contains 'en' %}
-					<a href="{{ page.url | replace:'/en/':'/' }}">по-русски</a>
-				{% else %}
-					<a href="/en{{ page.url | remove:'index.html' }}">in english</a>
-				{% endif %}
-			</p> -->{% endcomment %}
         </nav>
 	</footer>

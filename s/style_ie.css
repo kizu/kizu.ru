@@ -630,10 +630,48 @@ h1 > sup > .link {
 }
 .languages {
   position: absolute;
-  bottom: 0.45em;
-  right: 0.6em;
+  top: 36px;
+  right: 0.5em;
+  right: -webkit-calc((100% - 42rem) / 2);
+  right: -moz-calc((100% - 42rem) / 2);
+  right: calc((100% - 42rem) / 2);
+  height: 0;
   padding: 0;
   margin: 0;
+  text-align: left;
+  font-size: 18px;
+  line-height: 27px;
+  color: rgba(37,34,14,0.25);
+}
+@media (max-width: 820px) {
+  .languages {
+    right: 9px;
+    right: 4vw;
+  }
+}
+@media (max-width: 576px) {
+  .languages {
+    top: 0.3em;
+    right: 0.5em;
+  }
+}
+.language {
+  margin: 0;
+}
+@media (max-width: 670px) {
+  .language {
+    width: 0;
+    overflow: hidden;
+    text-align: right;
+  }
+  .language:before,
+  .language .language__link:before {
+    content: attr(data-short);
+    position: absolute;
+    right: 0;
+    text-align: right;
+    background: inherit;
+  }
 }
 IMG {
   max-width: 100%;
