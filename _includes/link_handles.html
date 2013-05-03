@@ -43,4 +43,10 @@
         {% endif %}
     {% endfor %}
 
+    <!-- Replace relative hash links with a normal url for feeds -->
+    {% if page.page_type == 'feed' %}
+        {% capture link_hash_replace %}href="{{ site.production_url }}{{ post.url | remove:'index.html' }}/#{% endcapture %}
+        {% assign link_handles_result = link_handles_result | replace:'href="#',link_hash_replace %}
+    {% endif %}
+
 {% endcapture %}
