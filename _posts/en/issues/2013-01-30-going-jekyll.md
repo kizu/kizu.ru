@@ -10,7 +10,7 @@ layout: post
 
 In a [post on site relaunch](:restart) I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.
 
-I won’t write on how to install [Jekyll](gh:mojombo/jekyll), how the files are structured there, and so on — there are already a lot of articles on that (look for some at the [__ links __](#links){:quoted}). To describe Jekyll briefly, it’s a blog-aware static site generator. An awesome one.
+I won’t write on how to install [Jekyll](gh:mojombo/jekyll), how the files are structured there, and so on — there are already a lot of articles on that (look for some at the “[links](#links)”). To describe Jekyll briefly, it’s a blog-aware static site generator. An awesome one.
 
 ## GitHub Pages
 
@@ -66,5 +66,3 @@ For writing posts I recommend to use markdown. While there are other ways, lik
 - For configuring the site or any specific post you’ll need to use [YAML](http://en.wikipedia.org/wiki/YAML) — so if you’re not familiar with its syntax — go and read about it, it’s nice.
 
 Overall, I’m very happy I’ve chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result has been worth it.
-
-{:quoted: .link .link_wrapper .link_quoted}

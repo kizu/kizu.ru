@@ -9,7 +9,7 @@ layout: index
 [Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
 {:.nav}
 
-Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of [__ Russian Web-standards Community __](http://web-standards.ru/about/en/){:quoted}.
+Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of “[Russian Web-standards Community](http://web-standards.ru/about/en/)”.
 
 I love to [experiment on CSS](fun/) and trying to do this as efficient as I can. For do so I work on different open source projects to fasten the web development: [Hayaku](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) and [others](gh:kizu?tab=repositories).
 
