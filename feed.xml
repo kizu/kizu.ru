@@ -2,7 +2,7 @@
 title : Atom Feed
 page_type: feed
 ---
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>{% include setup.md %}
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>kizu.ru</title>
     <link href="{{ site.production_url }}/feed.xml" rel="self"/>
