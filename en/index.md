@@ -6,7 +6,7 @@ layout: index
 
 ---
 
-[Blog](blog/) • [Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
+[Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
 {:.nav}
 
 Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of “[Russian Web-standards Community](http://web-standards.ru/about/en/)”.
