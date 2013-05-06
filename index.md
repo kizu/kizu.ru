@@ -1,7 +1,11 @@
 ---
-layout: index
+
 title: Заметки и эксперименты Романа Комарова
+
+layout: index
+
 ---
+
 {% include references.md %}
 
 [Заметки](issues/) • [Эксперименты](fun/) • [Проекты](projects/)
