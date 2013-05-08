@@ -30,7 +30,7 @@ I managed to make this work with one assumption — we would need to know t
         </span>
     {:.language-markup}
 
-2. Wrapper, on the other hand, would get those styles:
+2. Wrapper would get those styles:
 
         .rotated-text {
             display: inline-block;
@@ -41,9 +41,9 @@ I managed to make this work with one assumption — we would need to know t
         }
     {:.language-css}
 
-    Here we make our element to be inline-block (that’s not critical, the block display would work too, but inline-block is often handier), then we remove all the extra things by overflow (we would need this later) and make the width to the current elements’ height — the mentioned assumption (and `line-height` is placed here as an example of what defines the blocks’ height).
+    Here we make our element to be inline-block (that’s not critical, the block display would work too, but inline-block is often handier), then we remove all the extra things using overflow (we would need this later) and set the width to the current elements’ height — the mentioned assumption (and `line-height` is placed here as an example of what defines the blocks’ height).
 
-3. Then we make an inner element to be inline-block too, so its width would be collapsed to its content. After this we make it have `white-space:nowrap`, so nothing would wrap (because of the fixed width in the previous step), and then we actually rotate the block from the left top corner using `transform-origin` (for readability the transform properties are given without proper prefixes):
+3. Then we make the inner element to be inline-block too, so its width would be collapsed to its content. After this we make it have `white-space:nowrap`, so nothing would wrap (because of the fixed width in the previous step), and then we actually rotate the block from the left top corner using `transform-origin` (for readability the transform properties are given without proper prefixes):
 
         .rotated-text__inner {
             display: inline-block;
