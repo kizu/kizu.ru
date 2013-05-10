@@ -11,8 +11,7 @@ page_type: post
     {% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}{{ demo_handles_result }}
 
     {% if page.date %}<p class="published">
-        {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}
-        {% assign list_categories = page.categories %}{% include list_categories.html %}
+        {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}{% assign list_categories = page.categories %}{% include list_categories.html %}.
     </p>{% endif %}
     <aside class="feedback">
         {% assign get_filename_input = page.url %}{% include get_filename.html %}{% capture feeback_title %}{{ site.loc | map: 'feedback_for' | map: lang }} {{ site.loc | map: 'laquo' | map: lang }}{{ processed_title }}{{ site.loc | map: 'raquo' | map: lang }}{% endcapture %}
