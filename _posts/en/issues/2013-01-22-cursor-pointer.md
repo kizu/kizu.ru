@@ -4,6 +4,8 @@ categories: en issues
 
 layout: post
 
+published: true
+
 ---
 
 # Correct cursor on active elements
@@ -104,7 +106,7 @@ So, what’s there?
 
 8. Oh, a button! A custom button. But what’t that? No pointer on hover! And even more — hover brings the dropdown, I feel like on a minefield there.
 
-9. So, the button was treated as a “system” element, but what’s with checkbox? It and it’s label have `cursor:pointer`. Wow.
+9. So, the button was treated as a “system” element, but what’s with checkbox? It and its label have `cursor:pointer`. Wow.
 
 So, what could I say? There is no even slight consistency and a lot of other UI mistakes. But hey, there is no `cursor:pointer` on a button! I wonder which excuses the developer have for this.
 
