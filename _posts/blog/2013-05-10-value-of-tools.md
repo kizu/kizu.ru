@@ -1,10 +1,11 @@
 ---
-published: 
-  - true
-  - "true"
 categories: blog
+
 layout: post
-invisible: "true"
+
+published: true
+
+invisible: true
 
 ---
 
