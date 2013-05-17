@@ -4,7 +4,7 @@
 {% assign result_next = '' %}
 
 {% for item in site.posts %}
-    {% unless item.invisible %}
+    {% unless item.invisible and site.debug != true %}
         {% if lang == 'en' and item.categories contains 'en' %}
             {% assign post = item %}
         {% endif %}
