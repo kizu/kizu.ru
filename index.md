@@ -4,6 +4,8 @@ title: Заметки и эксперименты Романа Комарова
 
 layout: index
 
+permalink: /
+
 ---
 
 {% include references.md %}

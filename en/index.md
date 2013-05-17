@@ -4,6 +4,8 @@ title: Issues and experiments by Roman Komarov
 
 layout: index
 
+permalink: /en/
+
 ---
 
 [Blog](blog/) • [Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
