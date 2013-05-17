@@ -4,7 +4,7 @@ categories: blog
 
 layout: post
 
-published: false
+published: true
 
 invisible: true
 
