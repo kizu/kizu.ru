@@ -1,12 +1,11 @@
-auto: true
 safe: true
-server: true
 markdown: kramdown
 pygments: true
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
 
-production_url : http://kizu.ru
+production_url: http://kizu.ru
+relative_permalinks: false
 
 github_repo: "kizu/kizu.github.com"
 
