@@ -52,8 +52,7 @@
         {% else %}
             {% assign is_ok = true %}
             {% for l in site.langs %}
-                {% capture checking %}^BEGIN/{{ l }}/{% endcapture %}
-                {% if post.id contains checking %}
+                {% if post.categories contains l %}
                     {% assign is_ok = false %}
                 {% endif %}
             {% endfor %}
