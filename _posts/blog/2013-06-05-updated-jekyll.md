@@ -6,8 +6,6 @@ layout: post
 
 published: true
 
-invisible: true
-
 ---
 
 # Обновлённый Jekyll
