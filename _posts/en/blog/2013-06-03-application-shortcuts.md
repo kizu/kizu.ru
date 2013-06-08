@@ -35,7 +35,7 @@ I also added shortcuts using `shift`, so `option+shift+E` went for the secondar
 
 Right now I have shortcuts for messenger, mail, image editor, iA Writer and a lot of other stuff I use.
 
-With one Mac OS version Spaces become worse to use with shortcuts and at the same time I bought great [Alfred Powerpack](http://www.alfredapp.com), which had a very handy way to set any apps or files to keyboard shortcuts. With Alfred the setup of such shortcuts become so much easier, I got the sync for those settings across my two MacBooks using Dropbox, and the switch between apps become even faster than with Spaces (even after disabling the space switching animation). As I know, there are a bunch of similar apps for Mac like QuickSilver or [BetterTouchTool](http://www.boastr.de), that can do the same trick. I think there should be apps for other OS like this, so if there are — write me and I’ll add them here.
+With one Mac OS version Spaces become worse to use with shortcuts and at the same time I bought great [Alfred Powerpack](http://www.alfredapp.com), which had a very handy way to set any apps or files to keyboard shortcuts. With Alfred the setup of such shortcuts become so much easier, I got the sync for those settings across my two MacBooks using Dropbox, and the switch between apps become even faster than with Spaces (even after disabling the space switching animation). As I know, there are a bunch of similar apps for Mac like [QuickSilver](http://qsapp.com/) or [BetterTouchTool](http://www.boastr.de), that can do the same trick. I think there should be apps for other OS like this, so if there are — write me and I’ll add them here.
 
 Anyway, you really should try them — your workflow would be so much faster and seamless with them:
 
