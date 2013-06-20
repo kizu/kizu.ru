@@ -11,7 +11,7 @@ permalink: /en/
 [Blog](blog/) • [Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
 {:.nav}
 
-Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of “[Russian Web-standards Community](http://web-standards.ru/about/en/)”.
+Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of Russian “[Web Standards](http://web-standards.ru/about/en/)” community.
 
 I love to [experiment on CSS](fun/) and trying to do this as efficient as I can. For do so I work on different open source projects to fasten the web development: [Hayaku](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) and [others](gh:kizu?tab=repositories).
 
