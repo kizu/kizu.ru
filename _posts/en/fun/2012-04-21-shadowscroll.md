@@ -8,11 +8,19 @@ categories: en fun
 
 # Scrolling shadows
 
-Here is some old idea, but made only with pure CSS.
+Here’s an old idea, but recreated with pure CSS.
 
-At first there was a variant with extra wrapper and two extra pseudo-elements on it, but then I rethought the code and made it all just on a single element by using radial gradients.
+Originally, I had an extra wrapper and two extra pseudo-elements on it. Later I decided to rewrite the code and to use just a single element (by using radial gradients).
 
-While this method is simple, there are some limitations: the background must be solid (however, if you'd try `background-attachment: fixed`…), there are some positioning issues, but in other ways this method is rather bulletproof. And if you'd replace the CSS-gradients with simple images, this method could work in IE (maybe with some extra small fixes, I didn't check).
+While this method is simple, there are some limitations: 
+
+* the background must be solid
+ - however, if you'd try `background-attachment: fixed`…)
+* there are some positioning issues
+
+But in most regards this method is rather bulletproof. 
+
+If you replace the CSS-gradients with simple images, this method could work in IE. (It might need a few more small fixes; I didn't check.)
 
 Enjoy!
 
