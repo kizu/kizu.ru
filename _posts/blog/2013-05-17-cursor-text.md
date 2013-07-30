@@ -24,10 +24,10 @@ published: true
 
 У меня возникло несколько вопросов: как часто, когда мы видим форму, мы хотим что-то выделить в её текстовых полях? А как часто мы хотим что-то там написать, _активировав_ поле, то есть, переместив в него фокус? Является ли перенос фокуса действием? Не стоит ли, ради единообразия, делать для текстовых полей ввода вот так?
 
-    input[type=text], textarea {
+    input[type=text], input[type=password], textarea {
         cursor: pointer;
     }
-    input[type=text]:focus, textarea:focus {
+    input[type=text]:focus, input[type=password]:focus, textarea:focus {
         cursor: text;
     }
 {:.language-css}
