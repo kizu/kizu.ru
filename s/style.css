@@ -272,10 +272,10 @@ body:after {
   }
   .context-item:after {
     content: "*";
-    position: relative;
-    bottom: 1ex;
+    position: absolute;
+    margin-top: -1ex;
     font-size: 0.7em;
-    color: rgba(37,34,14,0.5);
+    color: rgba(37,34,14,0.6);
   }
   .context-content {
     position: relative;
