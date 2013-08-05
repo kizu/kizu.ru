@@ -221,7 +221,7 @@ body:after {
   display: inline;
   color: inherit !important;
   background-image: none !important;
-  cursor: default;
+  cursor: text;
 }
 .context-content {
   color: rgba(37,34,14,0.7);
@@ -253,7 +253,7 @@ body:after {
     position: relative;
     bottom: 1ex;
     font-size: 0.7em;
-    color: rgba(0,0,0,0.5);
+    color: rgba(37,34,14,0.5);
   }
   .context-content {
     position: relative;
@@ -272,7 +272,7 @@ body:after {
     left: -9px;
     width: 18px;
     text-align: right;
-    color: rgba(0,0,0,0.5);
+    color: rgba(37,34,14,0.5);
   }
   .context-misc {
     display: none;

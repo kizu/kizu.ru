@@ -121,7 +121,7 @@ $sidebar_width = 11.5*rem
     color: inherit !important
     background-image: none !important
     text-shadow: none !important
-    cursor: default
+    cursor: text // change to `default` if it would be added to root
 
   &-content
     color: rgba($dark,.7)
@@ -157,7 +157,7 @@ $sidebar_width = 11.5*rem
       bottom: 1ex
       font-size: 0.7em
 
-      color: rgba(0,0,0,0.5)
+      color: rgba($body_text, 0.5)
 
     &-content
       position: relative
@@ -183,7 +183,7 @@ $sidebar_width = 11.5*rem
 
         text-align: right
 
-        color: rgba(0,0,0,0.5)
+        color: rgba($body_text, 0.5)
 
     &-misc
       display: none
