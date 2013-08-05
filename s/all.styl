@@ -2,6 +2,15 @@
 @import 'prism.css'
 @import '../stylobate/stylus/stylobate'
 
+@keyframes target-fade
+  from
+    background: rgba(yellow, 0.8)
+
+  to
+    background: rgba(yellow, 0.2)
+
+
+
 // rem! as we can't redefine it in Stylus, we can use the var for it.
 //   Can be used as `2*rem` — almost like normal units, but with asteriks.
 //   Also, it would fallback to pixels in IE automagically.
@@ -73,6 +82,8 @@ body:after
     padding-bottom: 2*rem
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 0 0 1px rgba($dark,0.05), 0 0 40px -5px rgba($dark,0.3)
 
+$content_width = 42*rem
+.content
   // Setting all those things in a list so we could intrude there.
   & > header,
   & > h1,
@@ -88,7 +99,7 @@ body:after
   & > dl,
   & > .demo_seamless,
   & > .feedback{", h1.title, .page:not(.page_post) .footer > .copy"}
-    width: 42*rem
+    width: $content_width
     max-width: 100%
     margin-left: auto
     margin-right: auto
@@ -98,8 +109,84 @@ body:after
   & > table
     display: inline-block
 
-.main header h1
-  padding-bottom: 2.5*rem
+  & header h1
+    padding-bottom: 2.5*rem
+
+// Styles for context
+$sidebar_width = 11.5*rem
+
+@media (max-width: 819px)
+  .context
+    &-content
+      color: rgba($dark,.62)
+
+@media (min-width: 820px)
+  .liquid-wrapper
+    margin: 0 auto
+    max-width: $content_width + 2*$sidebar_width
+
+  .liquid-content
+    max-width: $content_width
+    margin: 0 $sidebar_width 0 auto
+
+  .context
+    display: inline
+
+    &-item
+      display: inline
+      color: inherit !important
+      background-image: none !important
+      text-shadow: none !important
+      padding-left: 0.3em
+      padding-right: 0.3em
+      margin-left: -0.3em
+      margin-right: -0.3em
+
+    &-item:after
+      content: "*"
+      position: relative
+      bottom: 1ex
+      font-size: 0.7em
+
+      color: rgba(0,0,0,0.5)
+
+    &-content
+      position: relative
+      float: right
+      clear: right
+
+      width: 11*rem
+      padding: 0.5*rem
+      margin: -0.05*rem -12.5*rem 0 1.5*rem
+
+      font-size: 0.7em
+      line-height: 1.5
+
+      color: inherit
+
+      &:before
+        content: "* "
+        position: absolute
+        left: -0.5*rem
+        width: 1*rem
+
+        text-align: right
+
+        color: rgba(0,0,0,0.5)
+
+    &-misc
+      display: none
+
+  .context:target > .context-item,
+  .context:target > .context-content
+    background: rgba(yellow, 0.8)
+    animation: target-fade 1s 1s
+    animation-fill-mode: forwards
+
+  .context:hover > .context-item:not(:hover),
+  .context-item:hover + .context-content
+    background: rgba(yellow, 0.4)
+
 
 .header
   position: absolute
@@ -218,7 +305,7 @@ A
   color: $body_link
   text-decoration: none
 
-.main A:visited:not(:hover),
+.content A:visited:not(:hover),
 .prevnext > .link:visited:not(:hover)
   color: $body_link_visited
 
@@ -454,7 +541,7 @@ OL > LI:before
   H1
     font-size: 1.75*rem
     margin-left: -0.15*rem
-  .main header H1
+  .content header H1
     padding-bottom: 1.5*rem
   H2
     font-size: 1.5*rem
