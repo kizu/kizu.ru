@@ -268,7 +268,6 @@ body:after {
     margin-right: -0.3em;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    cursor: pointer;
   }
   .context-item:after {
     content: "*";
