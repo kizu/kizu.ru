@@ -279,6 +279,11 @@ body:after {
   .context:hover > .context-item:not(:hover),
   .context-item:hover + .context-content {
     background: rgba(255,255,0,0.4);
+    background: rgba(255,255,0,0.4) -webkit-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
+    background: rgba(255,255,0,0.4) -moz-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
+    background: rgba(255,255,0,0.4) -o-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
+    background: rgba(255,255,0,0.4) -ms-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
+    background: rgba(255,255,0,0.4) linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
   }
 }
 .header {
@@ -734,46 +739,46 @@ IMG {
 }
 @-moz-keyframes target-fade {
   0% {
-    background: rgba(255,255,0,0.8);
+    background-color: rgba(255,255,0,0.8);
   }
 
   100% {
-    background: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.2);
   }
 }
 @-webkit-keyframes target-fade {
   0% {
-    background: rgba(255,255,0,0.8);
+    background-color: rgba(255,255,0,0.8);
   }
 
   100% {
-    background: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.2);
   }
 }
 @-o-keyframes target-fade {
   0% {
-    background: rgba(255,255,0,0.8);
+    background-color: rgba(255,255,0,0.8);
   }
 
   100% {
-    background: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.2);
   }
 }
 @-ms-keyframes target-fade {
   0% {
-    background: rgba(255,255,0,0.8);
+    background-color: rgba(255,255,0,0.8);
   }
 
   100% {
-    background: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.2);
   }
 }
 @keyframes target-fade {
   0% {
-    background: rgba(255,255,0,0.8);
+    background-color: rgba(255,255,0,0.8);
   }
 
   100% {
-    background: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.2);
   }
 }
