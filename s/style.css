@@ -226,10 +226,28 @@ body:after {
 .content header h1 {
   padding-bottom: 2.5rem;
 }
-@media (max-width: 819px) {
-  .context-content {
-    color: rgba(37,34,14,0.62);
-  }
+.context-item {
+  display: inline;
+  color: inherit !important;
+  background-image: none !important;
+  text-shadow: none !important;
+  cursor: default;
+}
+.context-content {
+  color: rgba(37,34,14,0.7);
+}
+.context:target > .context-item {
+  background: rgba(255,255,0,0.8);
+  -webkit-animation: target-fade 1s 1s;
+  -moz-animation: target-fade 1s 1s;
+  -o-animation: target-fade 1s 1s;
+  -ms-animation: target-fade 1s 1s;
+  animation: target-fade 1s 1s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  -ms-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 @media (min-width: 820px) {
   .liquid-wrapper {
@@ -244,14 +262,13 @@ body:after {
     display: inline;
   }
   .context-item {
-    display: inline;
-    color: inherit !important;
-    background-image: none !important;
-    text-shadow: none !important;
     padding-left: 0.3em;
     padding-right: 0.3em;
     margin-left: -0.3em;
     margin-right: -0.3em;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
   }
   .context-item:after {
     content: "*";
@@ -270,6 +287,8 @@ body:after {
     font-size: 0.7em;
     line-height: 1.5;
     color: inherit;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
   }
   .context-content:before {
     content: "* ";

@@ -217,10 +217,17 @@ body:after {
 .content header h1 {
   padding-bottom: 45px;
 }
-@media (max-width: 819px) {
-  .context-content {
-    color: rgba(37,34,14,0.62);
-  }
+.context-item {
+  display: inline;
+  color: inherit !important;
+  background-image: none !important;
+  cursor: default;
+}
+.context-content {
+  color: rgba(37,34,14,0.7);
+}
+.context:target > .context-item {
+  background: rgba(255,255,0,0.8);
 }
 @media (min-width: 820px) {
   .liquid-wrapper {
@@ -235,13 +242,11 @@ body:after {
     display: inline;
   }
   .context-item {
-    display: inline;
-    color: inherit !important;
-    background-image: none !important;
     padding-left: 0.3em;
     padding-right: 0.3em;
     margin-left: -0.3em;
     margin-right: -0.3em;
+    cursor: pointer;
   }
   .context-item:after {
     content: "*";

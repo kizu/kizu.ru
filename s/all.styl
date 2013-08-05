@@ -115,10 +115,21 @@ $content_width = 42*rem
 // Styles for context
 $sidebar_width = 11.5*rem
 
-@media (max-width: 819px)
-  .context
-    &-content
-      color: rgba($dark,.62)
+.context
+  &-item
+    display: inline
+    color: inherit !important
+    background-image: none !important
+    text-shadow: none !important
+    cursor: default
+
+  &-content
+    color: rgba($dark,.7)
+
+  &:target > &-item
+    background: rgba(yellow, 0.8)
+    animation: target-fade 1s 1s
+    animation-fill-mode: forwards
 
 @media (min-width: 820px)
   .liquid-wrapper
@@ -133,14 +144,12 @@ $sidebar_width = 11.5*rem
     display: inline
 
     &-item
-      display: inline
-      color: inherit !important
-      background-image: none !important
-      text-shadow: none !important
       padding-left: 0.3em
       padding-right: 0.3em
       margin-left: -0.3em
       margin-right: -0.3em
+      border-radius: 2px
+      cursor: pointer
 
     &-item:after
       content: "*"
@@ -163,6 +172,8 @@ $sidebar_width = 11.5*rem
       line-height: 1.5
 
       color: inherit
+
+      border-radius: 2px
 
       &:before
         content: "* "
