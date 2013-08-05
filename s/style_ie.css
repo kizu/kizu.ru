@@ -260,8 +260,8 @@ body:after {
     clear: right;
     width: 198px;
     padding: 9px;
-    margin: -0.9px -225px 0 27px;
-    font-size: 0.7em;
+    margin: -1.8px -225px 0 27px;
+    font-size: 15.84px;
     line-height: 1.5;
     color: inherit;
   }
@@ -276,8 +276,8 @@ body:after {
   .context-misc {
     display: none;
   }
-  .context:target > .context-item,
-  .context:target > .context-content {
+  .context-item:target,
+  .context-item:target + .context-content {
     background: rgba(255,255,0,0.8);
   }
   .context:hover > .context-item:not(:hover),

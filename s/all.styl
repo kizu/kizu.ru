@@ -165,9 +165,9 @@ $sidebar_width = 11.5*rem
 
       width: 11*rem
       padding: 0.5*rem
-      margin: -0.05*rem -12.5*rem 0 1.5*rem
+      margin: -0.1*rem -12.5*rem 0 1.5*rem
 
-      font-size: 0.7em
+      font-size: 0.88*rem
       line-height: 1.5
 
       color: inherit
@@ -187,8 +187,8 @@ $sidebar_width = 11.5*rem
     &-misc
       display: none
 
-  .context:target > .context-item,
-  .context:target > .context-content
+  .context-item:target,
+  .context-item:target + .context-content
     background: rgba(yellow, 0.8)
     animation: target-fade 1s 1s
     animation-fill-mode: forwards
