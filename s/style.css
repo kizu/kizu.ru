@@ -298,6 +298,9 @@ body:after {
     -webkit-border-radius: 3px;
     border-radius: 3px;
   }
+  .sidenote:first-letter {
+    text-transform: uppercase;
+  }
   .sidenote:before {
     content: counter(sidenote) ". ";
     position: absolute;
@@ -310,6 +313,9 @@ body:after {
   }
   .with-lonely-sidenote .sidenote:before {
     content: "* ";
+  }
+  .sidenote:after {
+    content: ".";
   }
   .sidenote-misc {
     display: none;

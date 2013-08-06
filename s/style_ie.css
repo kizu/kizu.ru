@@ -275,6 +275,9 @@ body:after {
     line-height: 1.5em;
     color: inherit;
   }
+  .sidenote:first-letter {
+    text-transform: uppercase;
+  }
   .sidenote:before {
     content: counter(sidenote) ". ";
     position: absolute;
@@ -287,6 +290,9 @@ body:after {
   }
   .with-lonely-sidenote .sidenote:before {
     content: "* ";
+  }
+  .sidenote:after {
+    content: ".";
   }
   .sidenote-misc {
     display: none;

@@ -186,6 +186,9 @@ $sidebar_width = 11.5*rem
 
     border-radius: 3px
 
+    &:first-letter
+      text-transform: uppercase
+
     &:before
       content: counter(sidenote) ". "
       position: absolute
@@ -202,6 +205,9 @@ $sidebar_width = 11.5*rem
 
       .with-lonely-sidenote &
         content: "* "
+
+    &:after
+      content: "."
 
   .sidenote-misc
     display: none
