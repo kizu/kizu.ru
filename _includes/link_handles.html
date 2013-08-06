@@ -72,21 +72,6 @@
         {% endif %}
     {% endfor %}
 
-
-    <!-- Transforming sidenotes: -->
-    {% unless sidenotes_input or sidenotes_input == '' %}
-        {% assign sidenotes_input = link_handles_result %}
-    {% endunless %}
-    {% assign sidenotes_result = '' %}
-    {% capture lolcache %}{% include tenkan/sidenotes.md %}{% endcapture %}
-    {% for sidenote_id in sidenotes_ids %}
-        {% capture sidenote_replace %}<span class="context"><a class="context-item" href="#{{ sidenote_id }}" id="{{ sidenote_id }}">{% endcapture %}
-        {% assign link_handles_result = link_handles_result | replace:sidenotes_id_strings[forloop.index0],sidenote_replace %}
-    {% endfor %}
-    {% assign link_handles_result = link_handles_result | replace:' (* ','</a><span class="context-content"><span class="context-misc"> (</span>' %}
-    {% assign link_handles_result = link_handles_result | replace:')</sidenote>','<span class="context-misc">)</span></span></span>' %}
-    {% assign sidenotes_input = '' %}
-
     <!-- Replace relative hash links with a normal url for feeds -->
     {% if page.page_type == 'feed' %}
         {% capture link_hash_replace %}href="{{ site.production_url }}{{ post.url | remove:'index.html' }}/#{% endcapture %}

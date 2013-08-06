@@ -217,16 +217,16 @@ body:after {
 .content header h1 {
   padding-bottom: 45px;
 }
-.context-item {
+.sidenote-context {
   display: inline;
   color: inherit !important;
   background-image: none !important;
   cursor: text;
 }
-.context-content {
+.sidenote {
   color: rgba(37,34,14,0.7);
 }
-.context:target > .context-item {
+.sidenote-wrapper:target > .sidenote-context {
   background: rgba(255,255,0,0.8);
 }
 @media (min-width: 820px) {
@@ -237,57 +237,75 @@ body:after {
   .liquid-content {
     max-width: 756px;
     margin: 0 207px 0 auto;
+    counter-reset: sidenote;
   }
-  .context {
+  .sidenote-wrapper {
     display: inline;
+    counter-increment: sidenote;
   }
-  .context-item {
-    padding-left: 0.3em;
+  .sidenote-context {
+    padding-left: 0.2em;
     padding-right: 0.3em;
-    margin-left: -0.3em;
+    margin-left: -0.2em;
     margin-right: -0.3em;
   }
-  .context-item:after {
-    content: "*";
-    position: absolute;
-    margin-top: -1ex;
-    font-size: 0.7em;
-    color: rgba(37,34,14,0.6);
+  .sidenote-context:after {
+    content: counter(sidenote);
+    position: relative;
+    top: -10.799999999999999px;
+    display: inline;
+    zoom: 1;
+    padding: 0 0 0 2px;
+    margin: 0 -0.7em 0 -px;
+    font-size: 12.6px;
+    color: rgba(37,34,14,0.7);
   }
-  .context-content {
+  .with-lonely-sidenote .sidenote-context:after {
+    content: "*";
+  }
+  .sidenote {
     position: relative;
     float: right;
     clear: right;
     width: 198px;
     padding: 9px;
-    margin: -1.8px -225px 0 27px;
+    padding-left: 27px;
+    margin: -1.8px -225px 0 9px;
     font-size: 15.84px;
-    line-height: 1.5;
+    line-height: 1.5em;
     color: inherit;
   }
-  .context-content:before {
-    content: "* ";
+  .sidenote:before {
+    content: counter(sidenote) ". ";
     position: absolute;
-    left: -9px;
+    left: 9px;
     width: 18px;
+    margin-top: 1px;
     text-align: right;
+    font-size: 12.6px;
     color: rgba(37,34,14,0.5);
   }
-  .context-misc {
+  .with-lonely-sidenote .sidenote:before {
+    content: "* ";
+  }
+  .sidenote-misc {
     display: none;
   }
-  .context-item:target,
-  .context-item:target + .context-content {
+  .sidenote-context:target,
+  .sidenote-context:target + .sidenote {
     background: rgba(255,255,0,0.8);
   }
-  .context:hover > .context-item:not(:hover),
-  .context-item:hover + .context-content {
-    background: rgba(255,255,0,0.4);
-    background: rgba(255,255,0,0.4) -webkit-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
-    background: rgba(255,255,0,0.4) -moz-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
-    background: rgba(255,255,0,0.4) -o-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
-    background: rgba(255,255,0,0.4) -ms-linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
-    background: rgba(255,255,0,0.4) linear-gradient(rgba(255,255,0,0.4), rgba(255,255,0,0.4)) !important;
+  .sidenote-wrapper:hover > .sidenote-context:not(:hover),
+  .sidenote-context:hover + .sidenote {
+    background: rgba(255,255,0,0.3);
+  }
+  .sidenote-wrapper:hover > .sidenote-context:target:not(:hover),
+  .sidenote-context:target:hover + .sidenote {
+    background: -webkit-linear-gradient(rgba(255,255,0,0.3), rgba(255,255,0,0.3)) !important;
+    background: -moz-linear-gradient(rgba(255,255,0,0.3), rgba(255,255,0,0.3)) !important;
+    background: -o-linear-gradient(rgba(255,255,0,0.3), rgba(255,255,0,0.3)) !important;
+    background: -ms-linear-gradient(rgba(255,255,0,0.3), rgba(255,255,0,0.3)) !important;
+    background: linear-gradient(rgba(255,255,0,0.3), rgba(255,255,0,0.3)) !important;
   }
 }
 .header {
@@ -747,7 +765,7 @@ IMG {
   }
 
   100% {
-    background-color: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.15);
   }
 }
 @-webkit-keyframes target-fade {
@@ -756,7 +774,7 @@ IMG {
   }
 
   100% {
-    background-color: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.15);
   }
 }
 @-o-keyframes target-fade {
@@ -765,7 +783,7 @@ IMG {
   }
 
   100% {
-    background-color: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.15);
   }
 }
 @-ms-keyframes target-fade {
@@ -774,7 +792,7 @@ IMG {
   }
 
   100% {
-    background-color: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.15);
   }
 }
 @keyframes target-fade {
@@ -783,6 +801,6 @@ IMG {
   }
 
   100% {
-    background-color: rgba(255,255,0,0.2);
+    background-color: rgba(255,255,0,0.15);
   }
 }

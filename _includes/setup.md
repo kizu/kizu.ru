@@ -32,4 +32,17 @@ Capturing the main category
 
     {% capture category %}{% if lang == "en" %}{{ page.categories[1] }}{% else %}{{ page.categories[0] }}{% endif %}{% endcapture %}
 
+Trnsforming the sidenotes
+
+    {% unless sidenotes_input or sidenotes_input == '' %}
+        {% assign sidenotes_input = processed_content %}
+    {% endunless %}
+    {% include tenkan/sidenotes.md %}
+
+    {% for sidenote_id in sidenotes_ids %}
+        {% capture sidenote_replace %}<span class="sidenote-wrapper"><a class="sidenote-context" href="#{{ sidenote_id }}" id="{{ sidenote_id }}">{{ sidenotes_contexts[forloop.index0] }}</a><span class="sidenote"><span class="sidenote-misc"> (</span>{{ sidenotes_contents[forloop.index0] }}<span class="sidenote-misc">)</span></span></span>{% endcapture %}
+        {% assign processed_content = processed_content | replace:sidenotes_id_strings[forloop.index0],sidenote_replace %}
+    {% endfor %}
+    {% assign sidenotes_input = '' %}
+
 {% endcapture %}
