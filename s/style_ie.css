@@ -258,6 +258,7 @@ body:after {
     padding: 0 0 0 2px;
     margin: 0 -0.7em 0 -px;
     font-size: 12.6px;
+    line-height: 1;
     color: rgba(37,34,14,0.7);
   }
   .with-lonely-sidenote .sidenote-context:after {
@@ -270,8 +271,8 @@ body:after {
     width: 198px;
     padding: 9px;
     padding-left: 27px;
-    margin: -1.8px -225px 0 9px;
-    font-size: 15.84px;
+    margin: -0.125em -225px 0 9px;
+    font-size: 16.02px;
     line-height: 1.5em;
     color: inherit;
   }
