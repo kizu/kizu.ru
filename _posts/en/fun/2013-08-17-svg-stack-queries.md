@@ -63,7 +63,7 @@ The SVG itself would look like this:
         <path class="icon" id="print" d="M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5"></path>
     </svg>
 
-And the <span class="sidenote" id="webkit-bug">_basic_ ( * there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the 
+And the <span class="sidenote" id="webkit-bug">_basic_ (* there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the 
 )</span> CSS would look this way:
 
     .icon-wrapper {
