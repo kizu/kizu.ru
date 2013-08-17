@@ -289,10 +289,10 @@ body:after {
     position: relative;
     float: right;
     clear: right;
-    width: 11rem;
+    width: 10.5rem;
     padding: 0.5rem;
     padding-left: 1.5rem;
-    margin: -0.125em -12.5rem 0 0.5rem;
+    margin: -0.125em -12.5rem 0 0;
     font-size: 0.89rem;
     line-height: 1.5em;
     color: inherit;
