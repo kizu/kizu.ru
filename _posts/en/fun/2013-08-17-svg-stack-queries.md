@@ -96,7 +96,7 @@ Some notes on some things in code you're already wondering on:
 
 1. We should use `<img/>` (or any similar method) instead of SVG in CSS backgrounds, 'cause there are a lot of <span class="sidenote" id="svg-in-css">issues (* )</span> with backgrounds in different browsers. And that's sad, 'cause we could use only one element in HTML for those icons then, using `background-image` or pseudo-elements.
 
-2. I've used a wrapper to show only the actual part of the SVG, hiding the extra canvas that is needed only for media queries. However, if you're ok with absolute positioning, you could use it along with `clip` to hide the extras (see the third icon):
+2. I've used a wrapper to show only the actual part of the SVG, hiding the extra canvas that is needed only for media queries. However, if you're ok with absolute positioning, you could use it along with `clip` to hide the extras:
 
         .icon_absolute {
             position: absolute;
