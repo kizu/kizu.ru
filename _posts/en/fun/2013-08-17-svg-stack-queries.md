@@ -30,7 +30,7 @@ Well, the code wouldn't be that elegant as with original SVG Stacks idea, but wh
 
 The HTML for those icons is this:
 
-{:.language-html}
+{:.language-markup}
     <span class="icon-wrapper">
         <img class="icon icon_download" src="test3.svg" alt="">
     </span>
@@ -43,7 +43,7 @@ The HTML for those icons is this:
 
 The SVG itself would look like this:
 
-{:.language-xml}
+{:.language-markup}
     <svg xmlns="http://www.w3.org/2000/svg">
         <style>
     
@@ -66,6 +66,7 @@ The SVG itself would look like this:
 And the <span class="sidenote" id="webkit-bug">_basic_ (* there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the 
 )</span> CSS would look this way:
 
+{:.language-css}
     .icon-wrapper {
         display: inline-block;
         vertical-align: top;
@@ -98,6 +99,7 @@ Some notes on some things in code you're already wondering on:
 
 2. I've used a wrapper to show only the actual part of the SVG, hiding the extra canvas that is needed only for media queries. However, if you're ok with absolute positioning, you could use it along with `clip` to hide the extras:
 
+    {:.language-css}
         .icon_absolute {
             position: absolute;
             clip: rect(0, 16px, 16px, 0);
