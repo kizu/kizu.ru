@@ -42,7 +42,7 @@
     {% capture link_handles_result %}{{ link_handles_result | replace:'">«','"><span class="hanger">«</span>' }}{% endcapture %}
     {% capture link_handles_result %}{{ link_handles_result | replace:'">“','"><span class="hanger">“</span>' }}{% endcapture %}
 
-    <!-- Заменяем указатели на посты на ссылки на соответствующие посты -->
+    <!-- Replace pointers to posts with the links to those posts -->
     {% for post in site.posts %}
         {% assign with = "" %}
         {% if lang != site.default_lang %}
