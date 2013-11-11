@@ -1,3 +1,5 @@
+use('autoprefixer.js')
+
 @import 'font_regular'
 @import 'prism.css'
 @import '../stylobate/stylus/stylobate'
@@ -759,3 +761,34 @@ h1 > sup
 IMG
   max-width: 100%
   height: auto
+
+.header-anchor
+  float: left
+
+  width: 0
+  padding-top: 0
+  padding-right: 0.7em
+  margin: -0.3em 0 0 -1.3em
+  border: 0.3em solid transparent
+
+  text-shadow: none
+
+  opacity: 0
+  transform: translate(100%, 0)
+  transition: opacity 0.3s 0.3s, transform 0.3s 0.3s
+
+  h2:hover > &
+  h3:hover > &
+  h4:hover > &
+  h5:hover > &
+  h6:hover > &
+    text-shadow: none
+    background-repeat: no-repeat
+    background-size: 100% 0.44em
+    background-position: 0 100%
+
+    opacity: 1
+    transform: translate(0, 0)
+
+  &:before
+    content: "#"

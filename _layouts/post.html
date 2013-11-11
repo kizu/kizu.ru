@@ -8,8 +8,32 @@ page_type: post
     <header>{% if page.invisible %}<p style="color: red;"><strong>This page is a draft, it's not published yet, so please don't share links to it to anyone, ok?</strong></p>{% endif %}{% capture processed_title_hanged %}^^^BEGIN{{ processed_title }}{% endcapture %}{% assign processed_title_hanged = processed_title_hanged | replace:'^^^BEGIN«','^^^BEGIN<span class="hanger">«</span>' %}{% assign processed_title_hanged = processed_title_hanged | replace:'^^^BEGIN“','^^^BEGIN<span class="hanger">“</span>' %}{% assign processed_title_hanged = processed_title_hanged | remove:'^^^BEGIN' %}
         <h1>{{ processed_title_hanged }}</h1>
     </header>
+    <!-- Move those things to content_handles or something like that -->
     {% capture link_handles_input %}{{ processed_content }}{% endcapture %}{% include link_handles.html %}
-    {% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}{{ demo_handles_result }}
+    {% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}
+
+    <!-- Add anchors to headers with IDs -->
+    {% capture lolcache %}
+        {% assign final_content = demo_handles_result %}
+        {% assign content_headers = demo_handles_result | split:'<h' %}
+        {% for content_header in content_headers offset:1 %}
+            {% assign substr_input = content_header %}
+            {% assign substr_index = 0 %}
+            {% assign substr_length = 4 %}
+            {% include tenkan/substr.md %}
+
+            {% assign lolheaders = "2 id,3 id,4 id,5 id,6 id" | split:',' %}
+            {% if lolheaders contains substr_result %}
+                {% assign header_id = content_header | split:'>' | first %}
+                {% assign thing_to_trim = header_id | truncate:6,'' %}
+                {% assign header_id = header_id | remove_first:thing_to_trim | remove:'"' %}
+                {% capture what_to_replace %}<h{{ thing_to_trim }}{{ header_id }}">{% endcapture %}
+                {% capture replace_with %}{{ what_to_replace }}<a class="header-anchor" title="{{ site.loc | map: 'link_to_part' | map: lang }}" href="#{{ header_id }}"></a>{% endcapture %}
+                {% assign final_content = final_content | replace_first:what_to_replace,replace_with %}
+            {% endif %}
+        {% endfor %}
+    {% endcapture %}
+    {{ final_content }}
 
     {% if page.date %}<p class="published">
         {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}{% assign list_categories = page.categories %}{% include list_categories.html %}.

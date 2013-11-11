@@ -164,6 +164,9 @@ loc:
     in:
         ru: "в"
         en: "in"
+    link_to_part:
+        ru: "Ссылка на это место"
+        en: "Link to this place"
     feedback_text1:
         ru: "Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете или"
         en: "If you've spotted a typo or a mistake, or wish to add something on, you could either"
