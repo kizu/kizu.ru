@@ -27,7 +27,7 @@ published: true
                 Rotated foo
             </span>
         </span>
-    {:.language-markup}
+    {:.language-html}
 
 2. Врапперу мы задаём вот такие стили: 
 

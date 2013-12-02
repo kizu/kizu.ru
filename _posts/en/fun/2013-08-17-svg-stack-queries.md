@@ -30,7 +30,7 @@ Well, the code wouldn't be that elegant as with original SVG Stacks idea, but wh
 
 The HTML for those icons is this:
 
-{:.language-markup}
+{:.language-html}
     <span class="icon-wrapper">
         <img class="icon icon_download" src="test3.svg" alt="">
     </span>

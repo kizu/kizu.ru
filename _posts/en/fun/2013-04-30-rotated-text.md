@@ -28,7 +28,7 @@ I managed to make this work with one assumption — we would need to know t
                 Rotated foo
             </span>
         </span>
-    {:.language-markup}
+    {:.language-html}
 
 2. Wrapper would get those styles:
 
