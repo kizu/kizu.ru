@@ -4,6 +4,9 @@ categories: issues
 
 layout: post
 
+thanks_to:
+    - "[Артёму Сапегину](@sapegin) за уместные замечания"
+
 published: true
 
 invisible: true

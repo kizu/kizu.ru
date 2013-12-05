@@ -161,6 +161,9 @@ loc:
     published:
         ru: "Опубликовано"
         en: "Published on"
+    thanks_to:
+        ru: "Спасибо"
+        en: "Thanks to"
     in:
         ru: "в"
         en: "in"

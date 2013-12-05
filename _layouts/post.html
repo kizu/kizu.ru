@@ -35,9 +35,14 @@ page_type: post
     {% endcapture %}
     {{ final_content }}
 
+    {% if page.thanks_to %}{% capture thanks_to %}{:.thanks-to}
+{{ site.loc | map: "thanks_to" | map: lang }} {% for thanks in page.thanks_to %}{% if forloop.index0 > 0 %}, {% endif %}{{ thanks }}{% endfor %}.
+{% endcapture %}{% assign link_handles_input = thanks_to | markdownify %}{% include link_handles.html %}{% assign thanks_to = link_handles_result %}{% endif %}
+
     {% if page.date %}<p class="published">
         {{ site.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}{% assign list_categories = page.categories %}{% include list_categories.html %}.
-    </p>{% endif %}
+        {% if thanks_to %}{{ thanks_to | markdownify | remove:'<p class="thanks-to">' | remove:'</p>' }}{% endif %}
+    </p>{% else %}{% if thanks_to %}{{ thanks_to | markdownify }}{% endif %}{% endif %}
     <aside class="feedback">
         {% capture feeback_title %}{{ site.loc | map: 'feedback_for' | map: lang }} {{ site.loc | map: 'laquo' | map: lang }}{{ processed_title }}{{ site.loc | map: 'raquo' | map: lang }}{% endcapture %}
         {{ site.loc | map: "feedback_text1" | map: lang }} <a class="link" href="https://github.com/kizu/kizu.github.com/issues/new?title={{ feeback_title | cgi_escape }}">{{ site.loc | map: "feedback_issue" | map: lang }}</a> {{ site.loc | map: "feedback_text2" | map: lang }} <a class="link" href="http://edit.kizu.ru/#{{ site.github_repo }}/edit/master/{{ page.path }}">{{ site.loc | map: "feedback_edit" | map: lang }}</a> {{ site.loc | map: "feedback_text3" | map: lang }} prose.io.
