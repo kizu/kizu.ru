@@ -4,6 +4,9 @@ categories: en issues
 
 layout: post
 
+thanks_to:
+    - "[Ian Devlin](@iandevlin) for the proofreading"
+
 published: true
 
 invisible: true
