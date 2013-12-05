@@ -9,8 +9,6 @@ thanks_to:
 
 published: true
 
-invisible: true
-
 ---
 
 # Новые фичи в Стайлусе
