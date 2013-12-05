@@ -14,7 +14,7 @@ invisible: true
 
 Not so far ago I <span class="sidenote" id="maintaining">became a maintainer (* I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya))</span> for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
 
-Yesterday we released a new version of it — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added a support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one <span class="sidenote" id="maintaining">new tech (* you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result), or you can go and [see it in action at CodePen](#ololo-not-yet))</span> that is now possible in the new Stylus, but I'll describe the new features for the start.
+At the end of the last week we released a new version of it — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added a support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one <span class="sidenote" id="maintaining">new tech (* you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result))</span> that is now possible in the new Stylus, but I'll describe the new features for the start.
 
 ## Block mixins {#block-mixins}
 
@@ -96,6 +96,14 @@ I won't describe there [all the features](http://learnboost.github.io/stylus/doc
 There is now one small but important feature in Stylus — `selector()`. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn't _get_ the compiled selector, they were there only in the compiled CSS.
 
 But now, using `selector()` function that returns the current compiled selector, you could do a lot of nice things, like check the selector for something using `match()` function, or use it for something else. It is already very useful, and it would become even more so in the future releases.
+
+As an example, you can take this small chunk of code:
+
+    if match(':(before|after)', selector())
+      content: ''
+{:.language-styl}
+
+Here we check if the selector have any pseudo-elements in it and if so — we apply the `content`. That could be useful if we have some mixin, containing styles that could be applied both to a normal element and to a pseudo one.
 
 ## Example with cached media-queries {#example}
 
