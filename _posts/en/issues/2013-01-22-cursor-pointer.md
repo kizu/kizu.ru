@@ -1,9 +1,7 @@
 ---
 categories: en issues
 layout: post
-published: 
-  - true
-  - "true"
+published: "true"
 invisible: "false"
 thanks_to: "[Shagen Ogandzhanyan](@shabunc) for some proofreading"
 ---
