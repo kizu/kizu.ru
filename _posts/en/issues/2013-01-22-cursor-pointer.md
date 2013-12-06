@@ -1,11 +1,11 @@
 ---
-
 categories: en issues
-
 layout: post
-
-published: true
-
+published: 
+  - true
+  - "true"
+invisible: "true"
+thanks_to: "[Shagen Ogandzhanyan](@shabunc) for some proofreading"
 ---
 
 # Correct cursor on active elements
