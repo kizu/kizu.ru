@@ -34,9 +34,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/fun": |
 
@@ -44,9 +42,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/issues": |
 
@@ -54,9 +50,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/blog": |
 
@@ -64,9 +58,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/en": |
 
@@ -74,9 +66,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/en/fun": |
 
@@ -84,9 +74,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/en/issues": |
 
@@ -94,9 +82,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
         "_posts/en/blog": |
 
@@ -104,9 +90,7 @@ prose:
 
             layout: post
 
-            published: true
-
-            invisible: true
+            published: "true"
 
 loc:
     fun:
