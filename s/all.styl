@@ -124,13 +124,113 @@ $sidebar_width = 11.5*rem
   text-shadow: none !important
   cursor: text // change to `default` if it would be added to root
 
-.sidenote
-  color: rgba($dark,.7)
-
 .sidenote-wrapper:target > .sidenote-context
   background: rgba(yellow, 0.8)
   animation: target-fade 1s 1s
   animation-fill-mode: forwards
+
+// General things for sidenotes
+.sidenote
+  &:first-letter
+    text-transform: uppercase
+
+  &:after
+    content: "."
+
+.liquid-content
+  counter-reset: sidenote
+
+.sidenote-wrapper
+  display: inline
+  counter-increment: sidenote
+
+.sidenote-context:after
+  content: counter(sidenote)
+  position: relative
+  top: -0.6*rem
+
+  display: inline-block
+
+  padding: 0 0 0 2px
+  margin: 0 -0.7em 0 -px
+
+  font-size: 0.7*rem
+  line-height: 1
+
+  color: rgba($body_text, 0.7)
+
+  .with-lonely-sidenote &
+    content: "*"
+
+.sidenote-misc
+  display: none
+
+@media (max-width: 819px)
+  .sidenote-wrapper
+    -webkit-animation: bugfix infinite 1s
+
+  .sidenote
+    visibility: hidden
+
+    z-index: 2
+    position: absolute
+    left: 0.6*rem
+    right: 0.6*rem
+
+    padding: 1*rem
+    margin-top: 1.8*rem
+
+    background: $body_bg
+    box-shadow: 0 10px 10px -8px rgba($dark, 0.5), 0 0 0 2000px rgba($dark, 0.5)
+    border-radius: 0.5*rem
+
+  .sidenote-context
+    cursor: pointer
+
+  .sidenote-context:target:before
+    content: ""
+    position: absolute
+    top: -2*rem
+    height: 2*rem
+    width: 2*rem
+    visibility: hidden
+
+  .sidenote-context:target
+    outline: none
+    position: relative
+    z-index: 3
+    background: $body_bg
+    border-radius: 0.5*rem 0.5*rem 0 0
+    box-shadow: -0.5*rem 0 0 0 $body_bg,
+                 0.5*rem 0 0 0 $body_bg,
+                 0 0.5*rem 0 0.5*rem $body_bg
+
+    white-space: nowrap
+    max-width: 100%
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .sidenote-context:target + .sidenote
+    visibility: visible
+
+  .sidenote-close
+    display: none
+
+    position: absolute
+    position: fixed
+    z-index: 1
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+
+    background: rgba(0,0,0,0.001) !important
+
+  .sidenote-context:target + .sidenote + .sidenote-close
+    display: block
+
+/* Fix for +/~ selectors in webkit */
+unquote("@-webkit-keyframes bugfix { from { padding: 0 } to { padding: 0 } }")
 
 @media (min-width: 820px)
   .liquid-wrapper
@@ -141,36 +241,12 @@ $sidebar_width = 11.5*rem
     max-width: $content_width
     margin: 0 $sidebar_width 0 auto
 
-    counter-reset: sidenote
-
-  .sidenote-wrapper
-    display: inline
-    counter-increment: sidenote
-
   .sidenote-context
     padding-left: 0.2em
     padding-right: 0.3em
     margin-left: -0.2em
     margin-right: -0.3em
     border-radius: 3px
-
-  .sidenote-context:after
-    content: counter(sidenote)
-    position: relative
-    top: -0.6*rem
-
-    display: inline-block
-
-    padding: 0 0 0 2px
-    margin: 0 -0.7em 0 -px
-
-    font-size: 0.7*rem
-    line-height: 1
-
-    color: rgba($body_text, 0.7)
-
-    .with-lonely-sidenote &
-      content: "*"
 
   .sidenote
     position: relative
@@ -189,9 +265,6 @@ $sidebar_width = 11.5*rem
 
     border-radius: 3px
 
-    &:first-letter
-      text-transform: uppercase
-
     &:before
       content: counter(sidenote) ". "
       position: absolute
@@ -208,12 +281,6 @@ $sidebar_width = 11.5*rem
 
       .with-lonely-sidenote &
         content: "* "
-
-    &:after
-      content: "."
-
-  .sidenote-misc
-    display: none
 
   .sidenote-context,
   .sidenote-context + .sidenote

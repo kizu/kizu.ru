@@ -15,7 +15,7 @@ published: true
 
 Not so long ago I <span class="sidenote" id="maintaining">became a maintainer (* I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya))</span> for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
 
-At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one <span class="sidenote" id="maintaining">new tech (* you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result))</span> that is now possible in the new Stylus, but I'll describe the new features for a start.
+At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one <span class="sidenote" id="example-sidenote">new tech (* you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result))</span> that is now possible in the new Stylus, but I'll describe the new features for a start.
 
 ## Block mixins {#block-mixins}
 

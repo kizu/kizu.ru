@@ -242,12 +242,117 @@ h1.title,
   cursor: text;
 }
 
-.sidenote {
+.sidenote-wrapper:target > .sidenote-context {
+  background: rgba(255,255,0,0.8);
+}
+
+.sidenote:first-letter {
+  text-transform: uppercase;
+}
+
+.sidenote:after {
+  content: ".";
+}
+
+.liquid-content {
+  counter-reset: sidenote;
+}
+
+.sidenote-wrapper {
+  display: inline;
+  counter-increment: sidenote;
+}
+
+.sidenote-context:after {
+  content: counter(sidenote);
+  position: relative;
+  top: -10.799999999999999px;
+  display: inline;
+  zoom: 1;
+  padding: 0 0 0 2px;
+  margin: 0 -0.7em 0 -px;
+  font-size: 12.6px;
+  line-height: 1;
   color: rgba(37,34,14,0.7);
 }
 
-.sidenote-wrapper:target > .sidenote-context {
-  background: rgba(255,255,0,0.8);
+.with-lonely-sidenote .sidenote-context:after {
+  content: "*";
+}
+
+.sidenote-misc {
+  display: none;
+}
+
+@media (max-width: 819px) {
+  .sidenote-wrapper {
+    -webkit-animation: bugfix infinite 1s;
+  }
+
+  .sidenote {
+    visibility: hidden;
+    z-index: 2;
+    position: absolute;
+    left: 10.799999999999999px;
+    right: 10.799999999999999px;
+    padding: 18px;
+    margin-top: 32.4px;
+    background: #fbfaf4;
+  }
+
+  .sidenote-context {
+    cursor: pointer;
+  }
+
+  .sidenote-context:target:before {
+    content: "";
+    position: absolute;
+    top: -36px;
+    height: 36px;
+    width: 36px;
+    visibility: hidden;
+  }
+
+  .sidenote-context:target {
+    outline: none;
+    position: relative;
+    z-index: 3;
+    background: #fbfaf4;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidenote-context:target + .sidenote {
+    visibility: visible;
+  }
+
+  .sidenote-close {
+    display: none;
+    position: absolute;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.001) !important;
+  }
+
+  .sidenote-context:target + .sidenote + .sidenote-close {
+    display: block;
+  }
+}
+
+@-webkit-keyframes bugfix {
+  from {
+    padding: 0;
+  }
+
+  to {
+    padding: 0;
+  }
 }
 
 @media (min-width: 820px) {
@@ -259,12 +364,6 @@ h1.title,
   .liquid-content {
     max-width: 756px;
     margin: 0 207px 0 auto;
-    counter-reset: sidenote;
-  }
-
-  .sidenote-wrapper {
-    display: inline;
-    counter-increment: sidenote;
   }
 
   .sidenote-context {
@@ -272,23 +371,6 @@ h1.title,
     padding-right: 0.3em;
     margin-left: -0.2em;
     margin-right: -0.3em;
-  }
-
-  .sidenote-context:after {
-    content: counter(sidenote);
-    position: relative;
-    top: -10.799999999999999px;
-    display: inline;
-    zoom: 1;
-    padding: 0 0 0 2px;
-    margin: 0 -0.7em 0 -px;
-    font-size: 12.6px;
-    line-height: 1;
-    color: rgba(37,34,14,0.7);
-  }
-
-  .with-lonely-sidenote .sidenote-context:after {
-    content: "*";
   }
 
   .sidenote {
@@ -304,10 +386,6 @@ h1.title,
     color: inherit;
   }
 
-  .sidenote:first-letter {
-    text-transform: uppercase;
-  }
-
   .sidenote:before {
     content: counter(sidenote) ". ";
     position: absolute;
@@ -321,14 +399,6 @@ h1.title,
 
   .with-lonely-sidenote .sidenote:before {
     content: "* ";
-  }
-
-  .sidenote:after {
-    content: ".";
-  }
-
-  .sidenote-misc {
-    display: none;
   }
 
   .sidenote-context:target,
