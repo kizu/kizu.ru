@@ -198,7 +198,7 @@ published: true
         push($media_cache[$condition], block)
 
       +helper($condition)
-        {selector()}
+        {selector() + ''}
           {block}
 
     // Функция, вызывающая закешированные медиаквери
