@@ -201,7 +201,7 @@ However, there are a few things to improve in this function: we do not want to a
         push($media_cache[$condition], block)
 
       +helper($condition)
-        {selector()}
+        {selector() + ''}
           {block}
 
     // Function we would use to call all the cached styles
