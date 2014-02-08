@@ -1,0 +1,47 @@
+---
+
+layout: demo
+
+injected: true
+
+seamless: true
+
+---
+
+<style>
+
+
+.combined-inline-flex {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+
+    vertical-align: baseline;
+    }
+
+.combined-inline-flex-content {
+    padding: 10px;
+    border: 1px solid lime;
+    }
+
+</style>
+
+<div class="baseline-wrapper">
+    <div class="combined-inline-flex">
+        <div class="combined-inline-flex-content">
+            I'm an inline-flex
+        </div>
+    </div>
+
+    <div class="combined-inline-flex">
+        <div class="combined-inline-flex-content">
+            I'm an inline-flex<br/>
+            With a second line
+        </div>
+    </div>
+
+    <div class="combined-inline-flex">
+        <div class="combined-inline-flex-content" style="width: 7em; overflow: auto;">
+            I'm an inline-flex with an overflow auto
+        </div>
+    </div>
+</div>
