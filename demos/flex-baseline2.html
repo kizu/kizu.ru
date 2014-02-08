@@ -1,0 +1,55 @@
+---
+
+layout: demo
+
+injected: true
+
+seamless: true
+
+---
+
+<style>
+
+.baseline-wrapper {
+    overflow: auto;
+    white-space: nowrap;
+    }
+
+.baseline-wrapper:before {
+    content: "";
+    position: relative;
+
+    display: inline-table;
+
+    height: 1px;
+    width: 100%;
+    margin-right: -100%;
+
+    background: red;
+    }
+
+.inline-table {
+    display: inline-table;
+    table-layout: fixed;
+
+    vertical-align: baseline;
+
+    padding: 10px;
+    border: 1px solid lime;
+    }
+</style>
+
+<div class="baseline-wrapper">
+    <div class="inline-table">
+        I'm an inline-table
+    </div>
+
+    <div class="inline-table">
+        I'm an inline-table<br/>
+        With a second line
+    </div>
+
+    <div class="inline-table" style="width: 7em; overflow: auto;">
+        I'm an inline-table with an overflow auto
+    </div>
+</div>

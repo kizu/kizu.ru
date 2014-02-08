@@ -1,0 +1,54 @@
+---
+
+layout: demo
+
+injected: true
+
+seamless: true
+
+---
+
+<style>
+
+.baseline-wrapper {
+    overflow: auto;
+    white-space: nowrap;
+    }
+
+.baseline-wrapper:before {
+    content: "";
+    position: relative;
+
+    display: inline-block;
+
+    height: 1px;
+    width: 100%;
+    margin-right: -100%;
+
+    background: red;
+    }
+
+.inline-block {
+    display: inline-block;
+
+    vertical-align: baseline;
+
+    padding: 10px;
+    border: 1px solid lime;
+    }
+</style>
+
+<div class="baseline-wrapper">
+    <div class="inline-block">
+        I'm an inline-block
+    </div>
+
+    <div class="inline-block">
+        I'm an inline-block<br/>
+        With a second line
+    </div>
+
+    <div class="inline-block" style="width: 7em; overflow: auto;">
+        I'm an inline-block with an overflow auto
+    </div>
+</div>
