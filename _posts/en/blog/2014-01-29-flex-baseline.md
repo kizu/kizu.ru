@@ -18,7 +18,7 @@ The best solution for inline blocks were, well, inline-blocks. I used to like th
 
 2. “If [`inline-block`'s] `overflow` property has a computed value other than `visible`, [its] baseline is the bottom margin edge.”
 
-Those rules makes only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not <span class="sidenote" id="why-baseline">what we would need(* I should mention why we'd need `baseline` and not the `top` — 'cause the top edge of block could differ from block to block (different paddings and borders), so `top` wouldn't work for such cases)</span>.
+Those rules makes only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not <span class="sidenote" id="why-baseline">what we would need (* I should mention why we'd need `baseline` and not the `top` — 'cause the top edge of block could differ from block to block (different paddings and borders), so `top` wouldn't work for such cases)</span>.
 
 Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, second one is multiline and the third one have `overflow: auto`.
 
