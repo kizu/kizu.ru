@@ -15,7 +15,8 @@ seamless: true
     white-space: nowrap;
     }
 
-.baseline-wrapper:before {
+.baseline-wrapper:before,
+.baseline-wrapper:after {
     content: "";
     position: relative;
 
@@ -27,6 +28,11 @@ seamless: true
 
     background: red;
     }
+
+.baseline-wrapper:after {
+    margin: 0 0 0 -100%;
+}
+
 
 .inline-block {
     display: inline-block;

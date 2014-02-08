@@ -11,7 +11,7 @@ seamless: true
 <style>
 
 
-.combined-inline-flex {
+.almost-final-flex {
     display: -ms-inline-flexbox;
     display: -webkit-inline-flex;
     display: inline-flex;
@@ -19,29 +19,35 @@ seamless: true
     vertical-align: baseline;
     }
 
-.combined-inline-flex-content {
-    padding: 10px;
+.almost-final-flex-content {
+    padding: 0 10px 10px;
     border: 1px solid lime;
+    }
+
+.almost-final-flex-content:before {
+    content: "";
+    display: block;
+    padding-top: 10px;
     }
 
 </style>
 
 <div class="baseline-wrapper">
-    <div class="combined-inline-flex">
-        <div class="combined-inline-flex-content">
+    <div class="almost-final-flex">
+        <div class="almost-final-flex-content">
             I'm an inline-flex
         </div>
     </div>
 
-    <div class="combined-inline-flex">
-        <div class="combined-inline-flex-content">
+    <div class="almost-final-flex">
+        <div class="almost-final-flex-content">
             I'm an inline-flex<br/>
             With a second line
         </div>
     </div>
 
-    <div class="combined-inline-flex">
-        <div class="combined-inline-flex-content" style="width: 7em; overflow: auto;">
+    <div class="almost-final-flex">
+        <div class="almost-final-flex-content" style="width: 7em; overflow: auto;">
             I'm an inline-flex with an overflow auto
         </div>
     </div>
