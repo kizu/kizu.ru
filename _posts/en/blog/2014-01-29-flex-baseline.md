@@ -12,73 +12,101 @@ invisible: true
 
 # Battle for baseline
 
-I used to love inline-blocks. You can do a lot of things with the inline flow using them, and most of those things were not easy to do using any other method.
+The best solution for inline blocks were, well, inline-blocks. I used to like them, because you could solve a lot of tasks with them. But they're not ideal. They're not capable of doing baseline vertical aligning *right*. And the problems come straight from the [specs][vertical-align], just read the last two paragraphs to see the problems:
 
-But there always was one aspect of their behavior that made me mad: baseline vertical alignment. In most cases you could want to use `vertical-align: baseline` for inline elements. But, according to specification, inline-blocks have two big flaws:
+1. “The baseline of an `inline-block` is the baseline of its **last** line box in the normal flow”.
 
-1. The baseline for multiline inline-blocks is set at the **last** line box.
+2. “If [`inline-block`'s] `overflow` property has a computed value other than `visible`, [its] baseline is the bottom margin edge.”
 
-2. If inline-block have `overflow` other from `visible`, its baseline is placed at the bottom margin edge of this block.
+Those rules makes only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not <span class="sidenote" id="why-baseline">what we would need(* I should mention why we'd need `baseline` and not the `top` — 'cause the top edge of block could differ from block to block (different paddings and borders), so `top` wouldn't work for such cases)</span>.
 
-So, while we can align simple blocks by their baselines, we're doomed when more complex blocks are coming into play, so with a wrapped text inside an inline-block, or with `overflow: hidden` on it we lose the ability to align blocks according to their baseline.
+Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, second one is multiline and the third one have `overflow: auto`.
 
-*пример хреновых инлайн-блоков*
+[demo:flex-baseline1]
 
-## Winning the battle with flex
+You can see where each block have its baseline in this example.
 
-This is when the `flex` appears and wins. Blocks inside the `flex`, in fact, do not inherit the broken behaviour of inline-blocks, it would work *properly*.
+## inline-table
 
-### Multiline children
+Actually, there was one place in CSS, where the baseline aligning worked *properly* — `display: inline-table`. If we'd replace inline-blocks with it in our example, we'd get almost what we tried to achieve:
 
-To align children of a `flex` block by their **first line box'** baseline you would need to place this on their parent:
+[demo:flex-baseline2]
+
+But you can see an obvious flaw: the `overflow: auto` is not working. And you shouldn't forget that you'll need to have `table-layout: fixed`. So, `inline-table` are nice as long as we don't need `overflow` other than `visible`.
+
+## Trying to go flex {#trying-flex}
+
+So, can we do a block with the proper baseline and with some `overflow`? It seems we can, using flexboxes — `display: inline-flex`. In [theory][flex-baselines] they also have a proper baseline position in all complex cases, but what would we get in practice?
+
+[demo:flex-baseline3]
+
+If you're looking at this example in any browser other than Firefox, you'll see nicely aligned blocks (yep, even in IE10 and Opera 12).
+
+But in Fx the block with `overflow: auto`, suddenly, behaves just like the inline-blocks — it loses the baseline. So sad, this way we'll need to wait to this [newly reported bug][bug1] to be fixed.
+
+## Is there another way? {#another-way}
+
+It is nice we could align `inline-flex` blocks with the baselines of other blocks, if only there wasn't this Fx bug… But what if we'd go and try to align not different `inline-flex` blocks, but their children?
+
+[demo:flex-baseline4]
+
+Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` for wrap them. And guess what? Firefox don't support this property yet.
+
+## All together {#combined}
+
+But hey! If `inline-flex` is property aligned alongside other blocks and the nested block with `overflow: auto` also have a proper baseline alongside other inner blocks, what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
+
+[demo:flex-baseline5]
+
+In most browsers you won't see any changes, but when we'll look at Fx, we would see that the blocks now won't have baseline at their bottom margin edge. But they won't have it at the proper place either — they're shifted from the baseline of other blocks a little. Let's measure it — 10 pixels. Hey, it is our padding! By removing paddings from each side we found that the problem is at the top padding — when we remove it everything works great. So, if the bug is in the padding (btw, [let's go and report it][bug2]), how could we workaround it? Let's remove it and replace with a pseudo-element:
+
+[demo:flex-baseline6]
+
+Perfect!
+
+## Finishing strokes {#finishing-strokes}
+
+Well, not perfect. There is one small issue that can appear at IE 10 — flexbox with the set width wouldn't have wrapped text inside of it. That's a rather strange bug, but we could workaround it by adding `width: 100%` or `-ms-flex-negative: 1` to the inner element, the latter is better.
+
+There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but you could manage it by yourself as this falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
+
+[demo:flex-baseline7]
+
+The resulting code for this example would be:
 
 {:.language-css}
-    display: flex;
-    align-items: baseline;
+    .flex {
+        display: -ms-inline-flexbox;
+        display: -webkit-inline-flex;
+        display: inline-flex;
 
-*пример*
+        vertical-align: baseline;
+        }
 
-This would make everything work like a charm in all modern browsers! Hooray!
+    .flex-content {
+        padding: 0 10px 10px;
+        border: 1px solid lime;
 
-### Overflow
+        /* Fixing IE issue */
+        -ms-flex-negative: 1;
+        }
 
-However, with the `overflow` other than `visible` there is on issue.
+    /* Fixing Fx issue */
+    .flex-content:before {
+        content: "";
+        display: block;
+        padding-top: 10px;
+        }
 
-{:.language-css}
-    display: flex;
-    align-items: baseline;
-    overflow: hidden;
+## Overall {#resume}
 
-*пример*
+Ah, Firefox! Without his bugs (and IE one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
 
-While in webkits everything works ok — the baseline is placed where it should be, in Fx this would work only if the children do not have any top paddings. As long as they have it `> 0`, the bug appears and the block is aligned lower than it should be.
 
-*есть ли воркэраунд?*
+But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want the even better code, you should go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
 
-## inline-flex
 
-Ok, so `display: flex` could help us to align its children using thir baseline.
-
-But how would the `inline-flex` be positioned near other such blocks, or near other inline-blocks? It is close to the children bahavour, but there still are some issues.
-
-### Multiline inline-flex
-
-When we have multiline inline-flex block everything, again, works ok.
-
-Со многострочностью, опять, всё хорошо: такой блок, в отличие от инлайн-блока, будет иметь базовую линию на первой строчке.
-
-*пример*
-
-### inline-flex с overflow
-
-А вот с overflow всё печальнее: в вебкитах всё ок, но всё опять взрывается в Fx, причём на этот раз совсем: Fx в этом случае ведёт себя как с инлайн-блоками и ставит базовую линию на нижнюю границу маджина.
-
-*пример*
-
-## Итого
-
-В заключение можно сказать, что для выравнивания по базовой линии флексбокс оказывается незаменим. Для надёжного выравнивания лучше использовать выравнивание через `align-items` + воркэраунд для верхнего паддинга внутри блоков с overflow, отличным от ноля.
-
-Выравнивать инлайн-флексы относительно друг друга можно, но только с overflow: visible, пока не будет починен соответствующий баг в ФФ.
-
-*найти/завести баги ФФ*
+[bug1]: https://bugzilla.mozilla.org/show_bug.cgi?id=969874
+[bug2]: https://bugzilla.mozilla.org/show_bug.cgi?id=969880
+[vertical-align]: http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align
+[flex-baselines]: http://www.w3.org/TR/css3-flexbox/#flex-baselines
