@@ -10,7 +10,7 @@ invisible: true
 
 ---
 
-# Flex Baseline
+# Battle for baseline
 
 I used to love inline-blocks. You can do a lot of things with the inline flow using them, and most of those things were not easy to do using any other method.
 
