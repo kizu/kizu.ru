@@ -71,7 +71,11 @@ Perfect!
 
 ## Finishing strokes {#finishing-strokes}
 
-Well, not perfect. There is one small issue that can appear at IE 10 — flexbox with the set width wouldn't have wrapped text inside of it. That's a rather strange bug, but we could workaround it by adding `width: 100%` or `-ms-flex-negative: 1` to the inner element, the latter is better.
+Well, not perfect. There are two small issues that can appear in IE 10 and Opera 12.
+
+In IE flexbox with the set width wouldn't have wrapped text inside of it. That's a rather strange bug, but we could workaround it by adding `width: 100%` or `-ms-flex-negative: 1` to the inner element, the latter is better.
+
+Opera have a similar bug — the element inside a flexbox would have width set to content. The only fix I found is adding `flex-direction: column` to flexbox. As there would be only one element inside our wrapper it won't affect anything else.
 
 There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but you could manage it by yourself as this falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
 

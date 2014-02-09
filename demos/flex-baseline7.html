@@ -20,6 +20,8 @@ seamless: true
     display: -webkit-inline-flex;
     display: inline-flex;
 
+    flex-direction: column;
+
     vertical-align: baseline;
     }
 
@@ -54,14 +56,14 @@ seamless: true
         </div>
     </div>
 
-    <div class="flex">
-        <div class="flex-content" style="width: 7em; overflow: auto; white-space: nowrap;">
+    <div class="flex" style="width: 7em;">
+        <div class="flex-content" style="overflow: auto; white-space: nowrap;">
             I'm an inline-flex with an overflow auto
         </div>
     </div>
 
-    <div class="flex">
-        <div class="flex-content" style="width: 7em;">
+    <div class="flex" style="width: 7em;">
+        <div class="flex-content">
             I'm an inline-flex with the text wrapped on the next lines
         </div>
     </div>
