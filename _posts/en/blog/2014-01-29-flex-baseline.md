@@ -89,6 +89,9 @@ The resulting code for this example would be:
         display: -webkit-inline-flex;
         display: inline-flex;
 
+        /* Fixing Opera issue */
+        flex-direction: column;
+
         vertical-align: baseline;
         }
 
