@@ -8,9 +8,14 @@ published: true
 
 invisible: true
 
+thanks_to:
+    - "[Fev](http://taerin.deviantart.com/) for kittens"
+
 ---
 
 # Battle for baseline
+
+![Котики](/pictures/flex-baseline.jpg){:.b-figure}
 
 The best solution for inline blocks were, well, inline-blocks. I used to like them, because you could solve a lot of tasks with them. But they're not ideal. They're not capable of doing baseline vertical aligning *right*. And the problems come straight from the [specs][vertical-align], just read the last two paragraphs to see the problems:
 
