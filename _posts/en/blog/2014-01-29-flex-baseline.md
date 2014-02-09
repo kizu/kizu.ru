@@ -23,7 +23,7 @@ The best solution for inline blocks were, well, inline-blocks. I used to like th
 
 2. “If [`inline-block`'s] `overflow` property has a computed value other than `visible`, [its] baseline is the bottom margin edge.”
 
-Those rules makes only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not <span class="sidenote" id="why-baseline">what we would need (* I should mention why we'd need `baseline` and not the `top` — 'cause the top edge of block could differ from block to block (different paddings and borders), so `top` wouldn't work for such cases)</span>.
+Those rules make only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not <span class="sidenote" id="why-baseline">what we would need (* I should mention why we'd need `baseline` and not the `top` — 'cause the top edge of block could differ from block to block (different paddings and borders), so `top` wouldn't work for such cases)</span>.
 
 Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, second one is multiline and the third one have `overflow: auto`.
 
@@ -33,15 +33,15 @@ You can see where each block have its baseline in this example.
 
 ## inline-table
 
-Actually, there was one place in CSS, where the baseline aligning worked *properly* — `display: inline-table`. If we'd replace inline-blocks with it in our example, we'd get almost what we tried to achieve:
+Actually, there was one place in CSS, where the baseline aligning worked *properly*: `display: inline-table`. If we'd use it instead of inline-blocks in our example, we'd get almost what we tried to achieve:
 
 [demo:flex-baseline2]
 
-But you can see an obvious flaw: the `overflow: auto` is not working. And you shouldn't forget that you'll need to have `table-layout: fixed`. So, `inline-table` are nice as long as we don't need `overflow` other than `visible`.
+You can see an obvious flaw: the `overflow: auto` is not working. And you shouldn't forget that you'll need to have `table-layout: fixed`. So, `inline-table` is nice as long as we don't need `overflow` other than `visible`.
 
 ## Trying to go flex {#trying-flex}
 
-So, can we do a block with the proper baseline and with some `overflow`? It seems we can, using flexboxes — `display: inline-flex`. In [theory][flex-baselines] they also have a proper baseline position in all complex cases, but what would we get in practice?
+So, can we do a block both with the proper baseline and with some `overflow`? It seems we can, using flexboxes — `display: inline-flex`. In [theory][flex-baselines] they have a proper baseline position in all complex cases, but what would we get in practice?
 
 [demo:flex-baseline3]
 
@@ -59,11 +59,11 @@ Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow,
 
 ## All together {#combined}
 
-But hey! If `inline-flex` is property aligned alongside other blocks and the nested block with `overflow: auto` also have a proper baseline alongside other inner blocks, what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
+But hey! If `inline-flex` is properly aligned alongside other blocks and the nested block with `overflow: auto` also have a proper baseline, then what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
 
 [demo:flex-baseline5]
 
-In most browsers you won't see any changes, but when we'll look at Fx, we would see that the blocks now won't have baseline at their bottom margin edge. But they won't have it at the proper place either — they're shifted from the baseline of other blocks a little. Let's measure it — 10 pixels. Hey, it is our padding! By removing paddings from each side we found that the problem is at the top padding — when we remove it everything works great. So, if the bug is in the padding (btw, [let's go and report it][bug2]), how could we workaround it? Let's remove it and replace with a pseudo-element:
+In most browsers you won't see any changes, but when we'll look at Fx, we would see that the blocks now won't have baseline at their bottom margin edge. But they won't have it at the proper place either — they're shifted from the baseline of other blocks a little. Let's measure it — 10 pixels. Hey, it is our padding! By removing paddings from each side we found that the problem is at the top padding — when we remove it everything works great. So, if the bug is in the padding ([and I reported it too][bug2]), how could we workaround it? Let's remove it and replace with a pseudo-element:
 
 [demo:flex-baseline6]
 
@@ -77,7 +77,7 @@ In IE flexbox with the set width wouldn't have wrapped text inside of it. That's
 
 Opera have a similar bug — the element inside a flexbox would have width set to content. The only fix I found is adding `flex-direction: column` to flexbox. As there would be only one element inside our wrapper it won't affect anything else.
 
-There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but you could manage it by yourself as this falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
+There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but this slightly falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
 
 [demo:flex-baseline7]
 
@@ -112,10 +112,10 @@ The resulting code for this example would be:
 
 ## Overall {#resume}
 
-Ah, Firefox! Without his bugs (and IE one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
+Ah, Firefox! Without his bugs (and IE's one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
 
 
-But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want the even better code, you should go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
+But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want to wrote even better code in the future, I'd recommend you to go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
 
 
 [bug1]: https://bugzilla.mozilla.org/show_bug.cgi?id=969874
