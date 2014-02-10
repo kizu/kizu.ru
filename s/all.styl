@@ -470,6 +470,9 @@ A:hover
 .link_wrapper
   white-space: nowrap // Would be a class for multiline links
 
+  @media (max-width: 550px)
+    white-space: normal
+
 .link_wrapper .ico
   margin-top: -4px
 
@@ -646,6 +649,10 @@ OL > LI:before
     display: block
     padding-left: 5vw !important
     padding-right: 0
+
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
 
   .footer .link_next
     padding-top: 0

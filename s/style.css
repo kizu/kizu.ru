@@ -634,6 +634,12 @@ A:hover,
   white-space: nowrap;
 }
 
+@media (max-width: 550px) {
+  .link_wrapper {
+    white-space: normal;
+  }
+}
+
 .link_wrapper .ico {
   margin-top: -4px;
   vertical-align: middle;
@@ -822,6 +828,9 @@ OL > LI:before {
     display: block;
     padding-left: 5vw !important;
     padding-right: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .footer .link_next {
