@@ -23,7 +23,9 @@ permalink: /en/feed.xml
         <id>{{ site.production_url }}{{ post.id }}</id>
         {% capture link_handles_input %}{{ processed_content }}{% endcapture %}{% include link_handles.html %}
         {% capture demo_handles_link %}{{ post.url }}{% endcapture %}{% capture demo_handles_input %}{{ link_handles_result }}{% endcapture %}{% include demo_handles.html %}
-        <content type="html">{{ demo_handles_result | xml_escape }}</content>
+        {% capture replace_img %}src="/{% endcapture %}
+        {% capture replace_img_with %}src="{{ site.production_url }}/{% endcapture %}
+        <content type="html">{{ demo_handles_result | replace:replace_img,replace_img_with | xml_escape }}</content>
     </entry>
     {% endunless %}{% endif %}{% endfor %}
 </feed>
