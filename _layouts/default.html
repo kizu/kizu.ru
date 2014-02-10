@@ -4,7 +4,7 @@ layout: layout
 	{% include setup.md %}
 	<header class="header">
 		<h1 class="title">
-			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}
+			{% if page.page_type != "index" %}<a href="/{{ lang_prefix }}">{% endif %}{{ site.data.loc.name | map: lang }}{% if page.page_type != "index" %}</a>{% endif %}
 		</h1>
 		<ul class="languages">
 			{% if page_have_translation %}
@@ -35,11 +35,11 @@ layout: layout
 		<p class="copy">
 			{% if page.page_type != "index" %}<a class="link  link_text  link_wrapper" href="http://kizu.ru/{{ lang_prefix }}">
 				© {{ site.time | date: "%Y" }}
-				<span class="link__inner">{{ site.loc.name | map: lang }}</span>.
-			</a>{% else %}© {{ site.time | date: "%Y" }} {{ site.loc.name | map: lang }}.{% endif %}
-			<a class="link  link_wrapper  link_twitter" href="https://twitter.com/{{ site.loc.twitter_name | map: lang }}">
+				<span class="link__inner">{{ site.data.loc.name | map: lang }}</span>.
+			</a>{% else %}© {{ site.time | date: "%Y" }} {{ site.data.loc.name | map: lang }}.{% endif %}
+			<a class="link  link_wrapper  link_twitter" href="https://twitter.com/{{ site.data.loc.twitter_name | map: lang }}">
 				<img alt="Twitter" class="ico" src="http://favicon.yandex.net/favicon/twitter.com" title="Twitter"/>
-				<span class="link__inner">{{ site.loc.twitter_follow | map: lang }}</span>!
+				<span class="link__inner">{{ site.data.loc.twitter_follow | map: lang }}</span>!
 			</a>
 		</p>
         <nav class="prevnext">

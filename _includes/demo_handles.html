@@ -5,13 +5,27 @@
             {% capture demo_name %}{{ demo.url | remove:"/demos/" | remove:".html" }}{% endcapture %}
             {% capture demo_handle_what %}<p>[demo:{{ demo_name }}]</p>{% endcapture %}
             {% if demo_handles_result contains demo_handle_what %}
+                {% capture demo_screenshot_name %}{% if demo.screenshot_name %}{{ demo.screenshot_name | map:lang }}{% else %}{{ site.data.loc.screenshot | map:lang }}{% endif %}{% endcapture %}
                 {% if page.page_type != "feed" %}
                     {% if demo.injected == true %}
-                        {% capture demo_handle_with %}
-                            <div class="demo demo_injected {% if demo.seamless %}demo_seamless{% else %}figure{% endif %}" id="Demo_{{ demo_name }}">
-                                {{ demo.content }}
-                            </div>
-                        {% endcapture %}
+                        {% if demo.screenshot == true %}
+                            {% capture demo_handle_with %}
+                                <input type="checkbox" class="demo-toggle" id="Demo_{{ demo_name }}_toggle" checked="checked" />
+                                <div class="demo demo_injected with-screenshot {% if demo.seamless %}demo_seamless{% else %}figure{% endif %}" id="Demo_{{ demo_name }}">
+                                    <label class="demo-toggler" for="Demo_{{ demo_name }}_toggle"><a class="demo-toggler-checked">{{ demo_screenshot_name }}</a><span class="demo-misc"> and </span><a class="demo-toggler-unchecked">{{ site.data.loc.html_demo | map:lang }}</a></label>
+                                    <img class="demo-screenshot" src="{{ site.production_url }}/demos/{{ demo_name }}.png" alt="{{ demo_screenshot_name }}" title="{{ demo_screenshot_name }}" />
+                                    <div class="demo-content" title="{{ site.data.loc.html_demo | map:lang }}">
+                                        {{ demo.content }}
+                                    </div>
+                                </div>
+                            {% endcapture %}
+                        {% else %}
+                            {% capture demo_handle_with %}
+                                <div class="demo demo_injected {% if demo.seamless %}demo_seamless{% else %}figure{% endif %}" id="Demo_{{ demo_name }}">
+                                    {{ demo.content }}
+                                </div>
+                            {% endcapture %}
+                        {% endif %}
                     {% else %}
                         {% capture demo_handle_with %}
                             <div class="demo figure" id="Demo_{{ demo_name }}">
@@ -20,9 +34,16 @@
                         {% endcapture %}
                     {% endif %}
                 {% else %}
-                    {% capture demo_handle_with %}
-                        <p>Look at the demo <a href="{{ site.production_url }}{% if demo_handles_link %}{{ demo_handles_link }}{% else %}{{ page.url }}{% endif %}/#Demo_{{ demo_name }}">embedded in the post</a>.</p>
-                    {% endcapture %}
+                    {% if demo.screenshot == true %}
+                        {% capture demo_handle_with %}
+                            <p><img src="{{ site.production_url }}/demos/{{ demo_name }}.png" alt="{{ demo_screenshot_name }}" title="{{ demo_screenshot_name }}" /></p>
+                            <p><small>{{ site.data.loc.look_at_the_demo | map:lang }} <a href="{{ site.production_url }}{% if demo_handles_link %}{{ demo_handles_link }}{% else %}{{ page.url }}{% endif %}/#Demo_{{ demo_name }}">{{ site.data.loc.embedded_in_the_post | map:lang }}</a>.</small></p>
+                        {% endcapture %}
+                    {% else %}
+                        {% capture demo_handle_with %}
+                            <p>{{ site.data.loc.look_at_the_demo | map:lang }} <a href="{{ site.production_url }}{% if demo_handles_link %}{{ demo_handles_link }}{% else %}{{ page.url }}{% endif %}/#Demo_{{ demo_name }}">{{ site.data.loc.embedded_in_the_post | map:lang }}</a>.</p>
+                        {% endcapture %}
+                    {% endif %}
                 {% endif %}
                 {% capture demo_handles_result %}{{ demo_handles_result | replace_first:demo_handle_what,demo_handle_with }}{% endcapture %}
             {% endif %}

@@ -701,12 +701,22 @@ pre > code
   background: rgba($dark,0.03)
   box-shadow: inset 0 0 0 1px rgba($dark,0.1)
 
-p > img:only-child:not(.b-figure)
+p > img:only-child:not(.b-figure),
+.demo-screenshot,
+.demo-content
   padding: 1*rem
   margin: 0 -1*rem
 
   background: rgba($dark,0.03)
   box-shadow: inset 0 0 0 1px rgba($dark,0.1)
+
+.demo-content
+  background: 0
+  box-shadow: none
+
+.demo-screenshot
+  background: 0
+  box-shadow: inset 0 0 0 1px rgba($dark,0.1), inset 0 5px 15px 5px rgba($dark,0.1)
 
 sup,
 sub
@@ -862,3 +872,33 @@ IMG
 
   &:before
     content: "#"
+
+.demo-toggle,
+.demo-misc
+  position: absolute
+  clip: rect(1px, 1px, 1px, 1px)
+
+.demo-toggler
+  visibility: hidden
+  font-size: 1*rem
+
+.demo-toggler-checked,
+.demo-toggler-unchecked
+  visibility: visible
+  cursor: pointer
+  margin-right: 0.5em
+  background-size: 1px 0.47em
+
+.demo-toggle:checked + .demo > .demo-content,
+.demo-screenshot
+  display: none
+
+.demo-content,
+.demo-toggle:checked + .demo > .demo-screenshot
+  display: block
+
+.demo-toggle:checked + .demo > .demo-toggler > .demo-toggler-checked,
+.demo-toggle:not(:checked) + .demo > .demo-toggler > .demo-toggler-unchecked
+  cursor: default
+  pointer-events: none
+  color: rgba($dark, 0.5)

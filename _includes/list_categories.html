@@ -6,7 +6,7 @@
     {% if item != 'en' %}
         {% capture counter %}{{ counter | plus:1 }}{% endcapture %}
         {% capture path %}{{ path | append:"../" }}{% endcapture %}
-        {% capture list_categories_result %}{{ site.loc | map: "in" | map: lang }} <a class="link" href="{{ path }}">{{ site.loc | map: item | map: "_in_" | map: lang }}</a>{% endcapture %}
+        {% capture list_categories_result %}{{ site.data.loc | map: "in" | map: lang }} <a class="link" href="{{ path }}">{{ site.data.loc | map: item | map: "_in_" | map: lang }}</a>{% endcapture %}
     {% endif %}
 {% endfor %}
 

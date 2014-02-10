@@ -43,7 +43,7 @@ So, can we do a block both with the proper baseline and with some `overflow`? It
 
 [demo:flex-baseline3]
 
-If you're looking at this example in any browser other than Firefox, you'll see nicely aligned blocks (yep, even in IE10 and Opera 12).
+If you'd look at this example in any browser other than Firefox, you'll see nicely aligned blocks (yep, even in IE10 and Opera 12).
 
 But in Fx the block with `overflow: auto`, suddenly, behaves just like the inline-blocks — it loses the baseline. So sad, this way we'll need to wait to this [newly reported bug][bug1] to be fixed.
 

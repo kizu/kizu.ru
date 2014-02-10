@@ -826,10 +826,20 @@ pre > code {
   background: rgba(37,34,14,0.03);
 }
 
-p > img:only-child:not(.b-figure) {
+p > img:only-child:not(.b-figure),
+.demo-screenshot,
+.demo-content {
   padding: 18px;
   margin: 0 -18px;
   background: rgba(37,34,14,0.03);
+}
+
+.demo-content {
+  background: 0;
+}
+
+.demo-screenshot {
+  background: 0;
 }
 
 sup,
@@ -976,6 +986,41 @@ h6:hover > .header-anchor {
 
 .header-anchor:before {
   content: "#";
+}
+
+.demo-toggle,
+.demo-misc {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+}
+
+.demo-toggler {
+  visibility: hidden;
+  font-size: 18px;
+}
+
+.demo-toggler-checked,
+.demo-toggler-unchecked {
+  visibility: visible;
+  cursor: pointer;
+  margin-right: 0.5em;
+}
+
+.demo-toggle:checked + .demo > .demo-content,
+.demo-screenshot {
+  display: none;
+}
+
+.demo-content,
+.demo-toggle:checked + .demo > .demo-screenshot {
+  display: block;
+}
+
+.demo-toggle:checked + .demo > .demo-toggler > .demo-toggler-checked,
+.demo-toggle:not(:checked) + .demo > .demo-toggler > .demo-toggler-unchecked {
+  cursor: default;
+  pointer-events: none;
+  color: rgba(37,34,14,0.5);
 }
 
 @-webkit-keyframes target-fade {
