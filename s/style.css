@@ -563,7 +563,8 @@ h1.title,
   font-size: 1rem;
 }
 
-A {
+A,
+.demo-toggler-item {
   padding: 0.3em 0 0.287em;
   cursor: pointer;
   color: #0985ce;
@@ -575,7 +576,8 @@ A {
   color: #8c64b4;
 }
 
-A:hover {
+A:hover,
+.demo-toggler-item:hover {
   color: #0985ce;
   text-shadow: -1px 0 #fbfaf4, 1px 0 #fbfaf4, -2px -1px #fbfaf4, 2px -1px #fbfaf4, 0 -1px #fbfaf4, 0 -2px #fbfaf4, 0 -3px #fbfaf4, 0 -4px #fbfaf4, 0 -5px #fbfaf4, 0 -6px #fbfaf4;
   background: -webkit-gradient(linear, top left, bottom left, from(#0985ce), color-stop(1px, #0985ce), color-stop(1px, rgba(255,255,255,0.9)), color-stop(2px, rgba(255,255,255,0.9)), to(transparent)) repeat-x;
@@ -1102,8 +1104,7 @@ h6:hover > .header-anchor {
   font-size: 1rem;
 }
 
-.demo-toggler-checked,
-.demo-toggler-unchecked {
+.demo-toggler-item {
   visibility: visible;
   cursor: pointer;
   margin-right: 0.5em;

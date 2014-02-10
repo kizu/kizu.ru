@@ -413,7 +413,8 @@ unquote("@-webkit-keyframes bugfix { from { padding: 0 } to { padding: 0 } }")
   font-size: 1*rem
 
 // Links
-A
+A,
+.demo-toggler-item
   padding: .3em 0 .287em
 
   cursor: pointer
@@ -426,15 +427,17 @@ A
   color: $body_link_visited
 
 A:hover
-  color: $body_link
+  &,
+  /.demo-toggler-item:hover
+    color: $body_link
 
-  text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px -1px $body_bg, 2px -1px $body_bg,
-                0 -1px $body_bg, 0 -2px $body_bg, 0 -3px $body_bg, 0 -4px $body_bg, 0 -5px $body_bg, 0 -6px $body_bg
+    text-shadow: -1px 0 $body_bg, 1px 0 $body_bg, -2px -1px $body_bg, 2px -1px $body_bg,
+                  0 -1px $body_bg, 0 -2px $body_bg, 0 -3px $body_bg, 0 -4px $body_bg, 0 -5px $body_bg, 0 -6px $body_bg
 
-  background: linear-gradient($body_link, $body_link 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x
-  background-size: 1px .44em
-  // background-position: -9px 1.08em
-  background-position: -9px 100%
+    background: linear-gradient($body_link, $body_link 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x
+    background-size: 1px .44em
+    // background-position: -9px 1.08em
+    background-position: -9px 100%
 
   .title &
     background-image: linear-gradient($body_link, $body_link 2px, rgba(255,255,255,.9) 2px, rgba(255,255,255,.9) 3px, transparent 3px)
@@ -882,8 +885,7 @@ IMG
   visibility: hidden
   font-size: 1*rem
 
-.demo-toggler-checked,
-.demo-toggler-unchecked
+.demo-toggler-item
   visibility: visible
   cursor: pointer
   margin-right: 0.5em

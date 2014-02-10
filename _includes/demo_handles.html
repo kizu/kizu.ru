@@ -12,7 +12,7 @@
                             {% capture demo_handle_with %}
                                 <input type="checkbox" class="demo-toggle" id="Demo_{{ demo_name }}_toggle" checked="checked" />
                                 <div class="demo demo_injected with-screenshot {% if demo.seamless %}demo_seamless{% else %}figure{% endif %}" id="Demo_{{ demo_name }}">
-                                    <label class="demo-toggler" for="Demo_{{ demo_name }}_toggle"><a class="demo-toggler-checked">{{ demo_screenshot_name }}</a><span class="demo-misc"> and </span><a class="demo-toggler-unchecked">{{ site.data.loc.html_demo | map:lang }}</a></label>
+                                    <label class="demo-toggler" for="Demo_{{ demo_name }}_toggle"><span class="demo-toggler-item demo-toggler-checked">{{ demo_screenshot_name }}</span><span class="demo-misc"> and </span><span class="demo-toggler-item demo-toggler-unchecked">{{ site.data.loc.html_demo | map:lang }}</span></label>
                                     <img class="demo-screenshot" src="{{ site.production_url }}/demos/{{ demo_name }}.png" alt="{{ demo_screenshot_name }}" title="{{ demo_screenshot_name }}" />
                                     <div class="demo-content" title="{{ site.data.loc.html_demo | map:lang }}">
                                         {{ demo.content }}

@@ -527,7 +527,8 @@ h1.title,
   font-size: 18px;
 }
 
-A {
+A,
+.demo-toggler-item {
   padding: 0.3em 0 0.287em;
   cursor: pointer;
   color: #0985ce;
@@ -539,7 +540,8 @@ A {
   color: #8c64b4;
 }
 
-A:hover {
+A:hover,
+.demo-toggler-item:hover {
   color: #0985ce;
   background: -webkit-gradient(linear, top left, bottom left, from(#0985ce), color-stop(1px, #0985ce), color-stop(1px, rgba(255,255,255,0.9)), color-stop(2px, rgba(255,255,255,0.9)), to(transparent)) repeat-x;
   background: -webkit-linear-gradient(#0985ce, #0985ce 1px, rgba(255,255,255,0.9) 1px, rgba(255,255,255,0.9) 2px, transparent 2px) repeat-x;
@@ -999,8 +1001,7 @@ h6:hover > .header-anchor {
   font-size: 18px;
 }
 
-.demo-toggler-checked,
-.demo-toggler-unchecked {
+.demo-toggler-item {
   visibility: visible;
   cursor: pointer;
   margin-right: 0.5em;
