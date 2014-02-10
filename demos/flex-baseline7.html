@@ -38,13 +38,17 @@ seamless: true
     padding-top: 10px;
     }
 
+.flex:first-child > .flex-content:before {
+    padding-top: 20px;
+    }
+
 </style>
 
 <div class="baseline-wrapper baseline-wrapper_normal">
     Just some inline text
 
     <div class="flex">
-        <div class="flex-content">
+        <div class="flex-content" style="padding: 0 20px 20px">
             I'm an inline-flex
         </div>
     </div>
