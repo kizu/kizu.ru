@@ -836,6 +836,15 @@ p > img:only-child:not(.b-figure),
   background: rgba(37,34,14,0.03);
 }
 
+@media (max-width: 820px) {
+  p > img:only-child:not(.b-figure),
+  .demo-screenshot,
+  .demo-content {
+    padding: 9px;
+    margin: 0 -9px;
+  }
+}
+
 .demo-content {
   background: 0;
 }
