@@ -23,11 +23,11 @@ The best solution for inline blocks were, well, inline-blocks. I used to like th
 
 Those rules make only onelined simple inline-blocks usable with `vertical-align: baseline`, in all other complex cases we would get not what we would need.
 
-Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, but with bigger padding, second one is multiline, but have smaller font-size and the third one have `overflow: auto`.
+Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, but with bigger padding, second one is multiline, but has smaller font-size and the third one has `overflow: auto`.
 
 [demo:flex-baseline1]
 
-You <span class="sidenote" id="safari">can see (* btw, in the latest Safari the block with `overflow` don't behave according to the specs)</span> where each block have its baseline in this example.
+You <span class="sidenote" id="safari">can see (* btw, in the latest Safari the block with `overflow` don't behave according to the specs)</span> where each block has its baseline in this example.
 
 ## inline-table
 
@@ -45,7 +45,7 @@ So, can we do a block both with the proper baseline and with some `overflow`? It
 
 If you'd look at this example in any browser other than Firefox, you'll see nicely aligned blocks (yep, even in IE10 and Opera 12).
 
-But in Fx the block with `overflow: auto`, suddenly, behaves just like the inline-blocks — it loses the baseline. So sad, this way we'll need to wait to this [newly reported bug][bug1] to be fixed.
+But in Fx the block with `overflow: auto`, suddenly, behaves just like the inline-blocks — it loses the baseline. So sad, this way we'll need to wait for this [newly reported bug][bug1] to be fixed.
 
 ## Is there another way? {#another-way}
 
@@ -53,11 +53,11 @@ It is nice we could align `inline-flex` blocks with the baselines of other block
 
 [demo:flex-baseline4]
 
-Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` for wrap them. And guess what? Firefox don't support this property yet.
+Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` to wrap them. And guess what? Firefox doesn't support this property yet.
 
 ## All together {#combined}
 
-But hey! If `inline-flex` is properly aligned alongside other blocks and the nested block with `overflow: auto` also have a proper baseline, then what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
+But hey! If `inline-flex` is properly aligned alongside other blocks and the nested block with `overflow: auto` also has a proper baseline, then what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
 
 [demo:flex-baseline5]
 
@@ -73,7 +73,7 @@ Well, not perfect. There are two small issues that can appear in IE 10 and Ope
 
 In IE flexbox with the set width wouldn't have wrapped text inside of it. That's a rather strange bug, but we could workaround it by adding `width: 100%` or `-ms-flex-negative: 1` to the inner element, the latter is better.
 
-Opera have a similar bug — the element inside a flexbox would have width set to content. The only fix I found is adding `flex-direction: column` to flexbox. As there would be only one element inside our wrapper it won't affect anything else.
+Opera has a similar bug — the element inside a flexbox would have width set to content. The only fix I found is adding `flex-direction: column` to flexbox. As there would be only one element inside our wrapper it won't affect anything else.
 
 There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but this slightly falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
 
@@ -113,7 +113,7 @@ The resulting code for this example would be:
 Ah, Firefox! Without his bugs (and IE's one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
 
 
-But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want to wrote even better code in the future, I'd recommend you to go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
+But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want to write even better code in the future, I'd recommend you to go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
 
 
 [bug1]: https://bugzilla.mozilla.org/show_bug.cgi?id=969874
