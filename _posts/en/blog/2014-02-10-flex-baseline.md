@@ -13,7 +13,7 @@ thanks_to:
 
 # Battle for baseline
 
-![Котики](/pictures/flex-baseline.jpg){:.b-figure width="848" height="536"}
+![Kitties](/pictures/flex-baseline.jpg){:.b-figure width="848" height="536"}
 
 The best solution for inline blocks were, well, inline-blocks. I used to like them, because you could solve a lot of tasks with them. But they're not ideal. They're not capable of doing baseline vertical aligning *right*. And the problems come straight from the [specs][vertical-align], just read the last two paragraphs to see the problems:
 
@@ -53,7 +53,7 @@ It is nice we could align `inline-flex` blocks with the baselines of other block
 
 [demo:flex-baseline4]
 
-Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` to wrap them. And guess what? Firefox doesn't support this property yet.
+Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` to wrap them. And guess what? Firefox didn't support this property until 28.0.
 
 ## All together {#combined}
 
