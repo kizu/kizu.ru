@@ -50,6 +50,9 @@ twitter_follow:
 published:
     ru: "Опубликовано"
     en: "Published on"
+drafted:
+    ru: "Черновик от"
+    en: "Draft from"
 thanks_to:
     ru: "Спасибо"
     en: "Thanks to"

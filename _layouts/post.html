@@ -40,7 +40,7 @@ page_type: post
 {% endcapture %}{% assign link_handles_input = thanks_to | markdownify %}{% include link_handles.html %}{% assign thanks_to = link_handles_result %}{% endif %}
 
     {% if page.date %}<p class="published">
-        {{ site.data.loc | map: "published" | map: lang }} {% assign published_time = page.date %}{% include published_format.html %}{% assign list_categories = page.categories %}{% include list_categories.html %}.
+        {% if page.invisible %}{{ site.data.loc | map: "drafted" | map: lang }}{% else %}{{ site.data.loc | map: "published" | map: lang }}{% endif %} {% assign published_time = page.date %}{% include published_format.html %}{% assign list_categories = page.categories %}{% include list_categories.html %}.
         {% if thanks_to %}{{ thanks_to | markdownify | remove:'<p class="thanks-to">' | remove:'</p>' }}{% endif %}
     </p>{% else %}{% if thanks_to %}{{ thanks_to | markdownify }}{% endif %}{% endif %}
     <aside class="feedback">
