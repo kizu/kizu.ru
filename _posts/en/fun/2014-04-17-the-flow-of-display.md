@@ -59,7 +59,7 @@ This means that if our block with `position:absolute` don't have the `top`, `rig
 
 Look at this simple example:
 
-…
+[demo:the-flow-of-display2]
 
 The `html` for those blocks is the same, with the only difference of the used classes:
 
@@ -78,19 +78,18 @@ And the CSS for them:
 
 ``` CSS
 .a {
-  float: left;
-  display: inline-block;
-}
-
+    float: left;
+    display: inline-block;
+    }
 .b {
-  float: left;
-  display: block;
-}
-
+    float: left;
+    display: block;
+    }
 .a,
 .b {
-  position: absolute;
-}
+    position: absolute;
+    }
+
 ```
 
 Yep, the `float` won't do anything there, and the difference in the flow are there because of the differences in `display`.
@@ -101,7 +100,7 @@ Wonderful! Think a bit about all this. Of course, the `float` is not needed ther
 
 Now I'll try to explain the case I shown above, I'll show you it once again (resize your browser, blah blah):
 
-…
+[demo:the-flow-of-display1]
 
 What happens here (and what needed to be achieved) is that the last item from the list should be always on the first line, going after all the other items which are wrapped if they don't have enought place for them.
 
@@ -109,11 +108,48 @@ That was not an easy task, and I'm a bit ashamed that I didn't solve it by mysel
 
 The HTML for those items is this:
 
-…
+``` HTML
+<ul class="just-some-items">
+    <li class="just-some-item">One</li>
+    <li class="just-some-item">Two</li>
+    <li class="just-some-item">Three</li>
+    <li class="just-some-item">Four</li>
+    <li class="just-some-item">Five</li>
+    <li class="just-some-item">Six</li>
+    <li class="just-some-item">Seven</li>
+    <li class="just-some-item">Eight</li>
+    <li class="just-some-item">Nine</li>
+    <li class="just-some-item">Ten</li>
+    <li class="just-some-item">Eleven</li>
+    <li class="just-some-item">…last</li>
+</ul>
+```
 
 The CSS is this:
 
-…
+``` CSS
+.just-some-items {
+    overflow: hidden;
+
+    height: 2em;
+    padding-right: 2.4em;
+    margin: 0;
+    }
+.just-some-item {
+    float: left;
+
+    margin-right: 0.5em;
+
+    line-height: 2em;
+    }
+.just-some-item:last-child {
+    position: absolute;
+
+    display: inline-block;
+
+    width: 2.4em;
+    }
+```
 
 And even knowing all the above stuff, the “Aha!” moment was delayed a bit for me. What happens there is the following:
 
