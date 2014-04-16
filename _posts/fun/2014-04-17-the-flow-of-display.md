@@ -13,9 +13,9 @@ thanks_to:
 
 ---
 
-# The flow of display
+# Отображение в потоке
 
-![Как собирается этот пазл?](/pictures/the-flow-of-display.jpg){:.b-figure width="756" height="382"}
+![Как же собрать этот пазл?](/pictures/the-flow-of-display.jpg){:.b-figure width="756" height="382"}
 
 В CSS есть множество нюансов. Иногда ты смотришь на код и думаешь: «Почему это вообще работает?!», и чем опытнее ты становишься, тем реже это происходит. Но всё ещё иногда происходит.
 
@@ -63,33 +63,31 @@ thanks_to:
 
 HTML для обоих примеров одинаков, за исключением классов:
 
-``` HTML
-<p>
-  Hello
-  <span class="a">A</span>
-</p>
-<p>
-  Hello
-  <span class="b">B</span>
-</p>
-```
+{:.language-html}
+    <p>
+      Hello
+      <span class="a">A</span>
+    </p>
+    <p>
+      Hello
+      <span class="b">B</span>
+    </p>
 
 CSS для них такой:
 
-``` CSS
-.a {
-    float: left;
-    display: inline-block;
-    }
-.b {
-    float: left;
-    display: block;
-    }
-.a,
-.b {
-    position: absolute;
-    }
-```
+{:.language-css}
+    .a {
+        float: left;
+        display: inline-block;
+        }
+    .b {
+        float: left;
+        display: block;
+        }
+    .a,
+    .b {
+        position: absolute;
+        }
 
 Да, `float` тут не нужен, так он ничего не будет делать, но он не будет и отменять поведение `display`. И, тогда как оба элемента полностью одинаковы и имеют `position:absolute`, из-зазначений `display` результат различается.
 
@@ -107,48 +105,46 @@ CSS для них такой:
 
 HTML для этого списка: 
 
-``` HTML
-<ul class="just-some-items">
-    <li class="just-some-item">One</li>
-    <li class="just-some-item">Two</li>
-    <li class="just-some-item">Three</li>
-    <li class="just-some-item">Four</li>
-    <li class="just-some-item">Five</li>
-    <li class="just-some-item">Six</li>
-    <li class="just-some-item">Seven</li>
-    <li class="just-some-item">Eight</li>
-    <li class="just-some-item">Nine</li>
-    <li class="just-some-item">Ten</li>
-    <li class="just-some-item">Eleven</li>
-    <li class="just-some-item">…last</li>
-</ul>
-```
+{:.language-html}
+    <ul class="just-some-items">
+        <li class="just-some-item">One</li>
+        <li class="just-some-item">Two</li>
+        <li class="just-some-item">Three</li>
+        <li class="just-some-item">Four</li>
+        <li class="just-some-item">Five</li>
+        <li class="just-some-item">Six</li>
+        <li class="just-some-item">Seven</li>
+        <li class="just-some-item">Eight</li>
+        <li class="just-some-item">Nine</li>
+        <li class="just-some-item">Ten</li>
+        <li class="just-some-item">Eleven</li>
+        <li class="just-some-item">…last</li>
+    </ul>
 
 И значащий CSS таков (я оставлю часть презентационных стилей за рамками):
 
-``` CSS
-.just-some-items {
-    overflow: hidden;
+{:.language-css}
+    .just-some-items {
+        overflow: hidden;
 
-    height: 2em;
-    padding-right: 2.4em;
-    margin: 0;
-    }
-.just-some-item {
-    float: left;
+        height: 2em;
+        padding-right: 2.4em;
+        margin: 0;
+        }
+    .just-some-item {
+        float: left;
 
-    margin-right: 0.5em;
+        margin-right: 0.5em;
 
-    line-height: 2em;
-    }
-.just-some-item:last-child {
-    position: absolute;
+        line-height: 2em;
+        }
+    .just-some-item:last-child {
+        position: absolute;
 
-    display: inline-block;
+        display: inline-block;
 
-    width: 2.4em;
-    }
-```
+        width: 2.4em;
+        }
 
 Даже зная, что происходит внутри, когда я увидел этот код в первый раз, я не сразу разобрался. А происходит тут следующее:
 
