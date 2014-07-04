@@ -178,7 +178,7 @@ So, if we would then call this function at the end of the document:
 
 We would get what we want.
 
-However, there are a few things to improve in this function: we do not want to always write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like <span class="sidenote" id="bubbling">`palm`, `portable`, `desk` (* I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry))</span> and so on. With those improvements and all the previous steps the resulting code would be this:
+However, there are a few things to improve in this function: we do not want to always write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like <span class="sidenote" id="keywords">`palm`, `portable`, `desk` (* I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry))</span> and so on. With those improvements and all the previous steps the resulting code would be this:
 
 ### Resulting code {#result}
 
