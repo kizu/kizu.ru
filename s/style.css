@@ -975,6 +975,20 @@ h1 > sup > .link {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
 }
 
+.b-figure_outer {
+  float: right;
+  margin-right: -225px;
+  max-width: 570px;
+}
+
+@media (max-width: 960px) {
+  .b-figure_outer {
+    float: none;
+    margin-right: 0;
+    max-width: 100%;
+  }
+}
+
 .demo {
   position: relative;
   overflow: hidden;
@@ -1148,31 +1162,21 @@ h6:hover > .header-anchor {
 }
 
 @-webkit-keyframes target-fade {
-  0% {
+  from {
     background-color: rgba(255,255,0,0.8);
   }
 
-  100% {
-    background-color: rgba(255,255,0,0.15);
-  }
-}
-
-@-ms-keyframes target-fade {
-  0% {
-    background-color: rgba(255,255,0,0.8);
-  }
-
-  100% {
+  to {
     background-color: rgba(255,255,0,0.15);
   }
 }
 
 @keyframes target-fade {
-  0% {
+  from {
     background-color: rgba(255,255,0,0.8);
   }
 
-  100% {
+  to {
     background-color: rgba(255,255,0,0.15);
   }
 }

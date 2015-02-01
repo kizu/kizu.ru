@@ -100,7 +100,7 @@ $content_width = 42*rem
   & > pre,
   & > dl,
   & > .demo_seamless,
-  & > .feedback{", h1.title, .page:not(.page_post) .footer > .copy"}
+  & > .feedback{", /h1.title, /.page:not(.page_post) .footer > .copy"}
     width: $content_width
     max-width: 100%
     margin-left: auto
@@ -763,6 +763,17 @@ h1 > sup
 
   border-radius: 3px
   box-shadow: 0 0 0 1px rgba(0,0,0,.2)
+
+.b-figure_outer
+  float: right
+  margin-right: -225px
+  max-width: 570px
+
+  @media (max-width: 960px)
+    float: none
+    display: block
+    margin: 0 auto
+    max-width: 100%
 
 .demo
   position: relative
