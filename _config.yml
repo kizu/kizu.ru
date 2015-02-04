@@ -1,6 +1,6 @@
 safe: true
 markdown: kramdown
-pygments: true
+highlighter: pygments
 permalink: /:categories/:title
 exclude: [stylobate, all.styl, style.styl, style_ie.styl, font_regular.styl]
 
