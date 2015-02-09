@@ -3,6 +3,10 @@
 
 docpadConfig = {
     plugins:
+        multilang:
+            languages: ['en', 'ru']
+            defaultLanguage: 'ru'
+
         stylus:
             stylusLibraries:
                 nib: false
@@ -13,17 +17,20 @@ docpadConfig = {
 
     events:
         renderBefore: () ->
-
-            # Rewrite `pages/` to the root and `posts/` to the `blog/`.
-            this.docpad.getCollection('documents').forEach (page) ->
-                newOutPath = page.get('outPath')
+            this.docpad.getCollection('documents').forEach (document) ->
+                # Rewrite `pages/` to the root and `posts/` to the `blog/`.
+                newOutPath = document.get('outPath')
                     .replace('/pages/', '/')
                     .replace('/posts/', '/blog/')
-                newUrl = page.get('url')
+                newUrl = document.get('url')
                     .replace('pages/', '')
                     .replace('posts/', 'blog/')
-                page.set('outPath', newOutPath)
-                page.setUrl(newUrl)
+                document.set('outPath', newOutPath)
+                document.setUrl(newUrl)
+
+            this.docpad.getCollection('html').forEach (document) ->
+                # Set the default layout
+                document.setMetaDefaults(layout: 'default')
 }
 
 module.exports = docpadConfig

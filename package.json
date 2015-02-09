@@ -11,7 +11,8 @@
     "docpad": "~6.69.2",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-jade": "~2.9.0",
-    "docpad-plugin-stylus": "~2.9.0"
+    "docpad-plugin-stylus": "~2.9.0",
+    "docpad-plugin-multilang": "~2.0.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {

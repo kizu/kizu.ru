@@ -1,11 +1,13 @@
 doctype html
-title ololo
+html(lang=document.lang ? document.lang : false)
+  head
+    title ololo
 
-- var docs = getCollection("html").toJSON()
+  body
+    - var docs = getCollection("html").toJSON()
+    ul
+      - for doc in docs
+        li: a(href=doc.url)= doc.name
 
-ul
-  - for doc in docs
-    li: a(href=doc.url)= doc.name
 
-
-!= content
+    != content
