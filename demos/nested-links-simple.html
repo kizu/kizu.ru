@@ -1,0 +1,29 @@
+---
+
+layout: demo
+
+injected: true
+
+---
+
+<style>
+
+.demo-simple:hover {
+    color: red !important;
+}
+
+.demo-simple .demo-simple:hover {
+    color: lime !important;
+}
+
+</style>
+
+<a class="demo-simple" href="#Foo">
+    Foo
+    <object>
+        <a class="demo-simple" href="#Bar">
+            Bar
+        </a>
+    </object>
+    Baz
+</a>

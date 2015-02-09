@@ -907,6 +907,11 @@ h1 > sup > .link {
   background: rgba(0,0,0,0.1);
 }
 
+.figure a:hover {
+  text-decoration: underline;
+  background-image: none;
+}
+
 .b-figure_outer {
   float: right;
   margin-right: -225px;
