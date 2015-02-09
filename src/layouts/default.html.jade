@@ -1,0 +1,11 @@
+doctype html
+title ololo
+
+- var docs = getCollection("html").toJSON()
+
+ul
+  - for doc in docs
+    li: a(href=doc.url)= doc.name
+
+
+!= content
