@@ -6,8 +6,6 @@ layout: post
 
 published: true
 
-invisible: true
-
 thanks_to:
     - "[Fev](http://taerin.deviantart.com/) for the illustration"
 
