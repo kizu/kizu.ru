@@ -15,7 +15,7 @@ thanks_to:
 
 # Nested links
 
-![Cats playing nested links](/pictures/nested-links.jpg){:.b-figure .b-figure_outer width="570" height="451"}
+![Cats playing nested links](/pictures/nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}
 
 
 ## The problem
