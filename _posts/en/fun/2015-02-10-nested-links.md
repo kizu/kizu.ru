@@ -145,6 +145,6 @@ At first I wanted to describe all the possible use cases for the nested links
 
 The one thing I’d like to say in the end is that that trick with an object could be applied for any content that you’d like to use somewhere where the specs forbid you to.
 
-As an example, there are a bunch of new tags in the latest specs that you already should know, like `details` and `figure`. Guess what: by specs you can use them only in flow-level contexts: you can’t have pictures with captions illustrating some word inside a paragraph, you can’t have a description or footnotes for some words inside a paragraph or a heading (and what other than `details` tag would fit for this?), you cat have a lot of cases that someone doing specs couldn’t think of.
+As an example, there are a bunch of new tags in the latest specs that you already should know, like `details` and `figure`. Guess what: by specs you can use them only in flow-level contexts: you can’t have pictures with captions illustrating some word inside a paragraph, you can’t have a description or footnotes for some words inside a paragraph or a heading (and what other than `details` tag would fit for this?), you can’t have a lot of cases that someone doing specs couldn’t think of.
 
 The `<object>` trick solves all those problems. The question is only if such usage would be feasible for you. And I’d say that a lot of restrictions on specs are useless and an ability to work around them, with valid arguments, is priceless.
