@@ -120,7 +120,7 @@ I don’t know of any easy solution for this problem in old IE. At the very 
 
 You’d lose some functionality there, but it could be ok for the most cases. <span class="sidenote" id="try-expressions">If not (* Curious ones could think about if it is possible to make a fallback using expressions)</span>, you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
 
-## It it valid?
+## Is it valid?
 
 Nope, not even close. It is not valid, because we don’t have any of the required attributes on an object. We could set some dummy, but [valid mime-type](http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type), like `type="lol/wut"`, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.
 
