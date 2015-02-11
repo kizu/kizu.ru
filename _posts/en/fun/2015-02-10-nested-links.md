@@ -53,7 +53,7 @@ And a live example:
 
 [demo:nested-links-broken]
 
-However, there are cases when you’d actually want to nest one link inside another, without looking at the restrictions.
+However, there are cases when you’d actually want to nest one link inside another despite the restrictions.
 
 So, once again, while working on one task I stumbled upon such case. I happen to see and use different workarounds for it before, like emulation of the nested links with JS (for example, with banal `onclick`), or positioning one of the links around the shared wrapper (see [such solution](http://jsfiddle.net/csswizardry/rxsna/) by Harry Roberts), but all those workarounds wouldn’t work in all cases, and wouldn’t work perfectly. We’d either lose the nativity of link, trying to emulate everything from scratch, either won’t be able to make a workaround work just like proper nested elements would.
 
@@ -83,7 +83,7 @@ What we do there is just placing an object between those links. Yep, it wor
 
 What are objects, in theory? They are some external entities, with the type set by the `type` attribute and the content or a link to it placed into the `data` attribute. And the content between the opening and closing `object` tags is, in fact, a fallback, and it would be shown only when browser wouldn’t be capable of displaying the object defined in the attributes. Like, for example, if you won’t have an installed plugin.
 
-And if you’d write some gibberish MIME-type into the `type` attribute, browser wouldn’t understand it and would go straight into displaying the fallback. And, in fact, it would do the same even if you’d omit those “required” attributes at all.
+And if you’d write some gibberish MIME-type into the `type` attribute, browser wouldn’t understand it and would go straight to displaying the fallback. And, in fact, it would do the same even if you’d omit those “required” attributes at all.
 
 This way, after wrapping any HTML with such atributeless `<object>` we would get just a wrapper element for this content. But a wrapper with an unusual trait: any content inside of it would be treated by browser’s parser without looking at the object’s context. So, using this trait we can, finally, nest one link into another, separating them for parser.
 
@@ -97,11 +97,11 @@ Not all of the browsers had this behavior from the start.
 
 - Firefox — from the 4th.
 
-- Opera — at least from 9th (maybe even earlier — I didn’t dig deeper that that).
+- Opera — at least from 9th (maybe even earlier — I didn’t dig deeper than that).
 
 - Webkits — all that I checked: Safari at least from 5.1, Chrome — from 14, etc.
 
-Obviously, the only browsers we’d need support with such conditions are old IE, all other browsers already behave properly in all of the widely supported versions.
+Obviously, the only browsers we’d need to support with such conditions are old IE, all other browsers already behave properly in all of the widely supported versions.
 
 
 ### IE fallback
@@ -126,7 +126,7 @@ Nope, not even close. It is not valid, because we don’t have any of the re
 
 Obviously, validator is a tool not showing anything but the formal specifications compliancy. In our case the usage of links inside objects is completely reasonable and won’t break anything for anyone if we’d make things in a proper way.
 
-More than that, I do not see any reasons at all why specs should’t drop those restrictions and allow us to nest the links. No reasons. Nope. There are a lot of cases where this is a crucial requirement, and right now all we have are workarounds and “hacks” like this one.
+More than that, I do not see any reasons at all why specs should’t drop those restrictions and allow us to nest the links. No reasons. None. There are a lot of cases where this is a crucial requirement, and right now all we have are workarounds and “hacks” like this one.
 
 
 ## Usage examples
