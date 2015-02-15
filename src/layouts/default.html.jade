@@ -9,5 +9,14 @@ html(lang=document.lang ? document.lang : false)
     //-   - for doc in docs
     //-     li: a(href=doc.url)= doc.name
 
+    table
+      caption metadata
+      tr
+        th key
+        th value
+      tr
+        td date
+        td= document.date
+
 
     != content
