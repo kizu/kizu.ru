@@ -2,8 +2,6 @@
 
 categories: en fun
 
-published: true
-
 ---
 
 # Rotated text

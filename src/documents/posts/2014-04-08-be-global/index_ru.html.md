@@ -1,14 +1,3 @@
----
-
-categories: blog
-
-published: true
-
-thanks_to:
-    - "[Fev](http://taerin.deviantart.com/) за иллюстрацию"
-
----
-
 # Будьте глобальными
 
 ![Котики мыслят глобально](be-global.jpg){:.b-figure width="756" height="423"}

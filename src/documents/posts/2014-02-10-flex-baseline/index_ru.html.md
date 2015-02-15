@@ -1,14 +1,3 @@
----
-
-categories: blog
-
-published: true
-
-thanks_to:
-    - "[Fev](http://taerin.deviantart.com/) за иллюстрацию"
-
----
-
 # Битва за базовую линию
 
 ![Котики](flex-baseline.jpg){:.b-figure width="848" height="536"}

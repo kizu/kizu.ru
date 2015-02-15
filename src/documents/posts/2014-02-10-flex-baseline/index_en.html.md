@@ -1,14 +1,3 @@
----
-
-categories: en blog
-
-published: true
-
-thanks_to:
-    - "[Fev](http://taerin.deviantart.com/) for kittens"
-
----
-
 # Battle for baseline
 
 ![Kitties](flex-baseline.jpg){:.b-figure width="848" height="536"}

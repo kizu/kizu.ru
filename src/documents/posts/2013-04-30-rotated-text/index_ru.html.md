@@ -2,8 +2,6 @@
 
 categories: fun
 
-published: true
-
 ---
 
 # Повёрнутый текст

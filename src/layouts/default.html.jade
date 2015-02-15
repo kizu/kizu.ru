@@ -17,6 +17,13 @@ html(lang=document.lang ? document.lang : false)
       tr
         td date
         td= document.date
-
+      if document.thanks_to
+        tr
+          td thanks_to
+          td= document.thanks_to
+      if document.categories
+        tr
+          td categories
+          td= document.categories
 
     != content

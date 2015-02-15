@@ -2,8 +2,6 @@
 
 categories: en issues
 
-published: true
-
 ---
 
 # Markdowning YAML for Jekyll

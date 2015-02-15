@@ -1,14 +1,3 @@
----
-
-categories: fun
-
-published: true
-
-thanks_to:
-    - "[Fev](http://taerin.deviantart.com/) за иллюстрацию"
-
----
-
 # Вложенные ссылки
 
 ![Котики играют во вложенные ссылки](nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}

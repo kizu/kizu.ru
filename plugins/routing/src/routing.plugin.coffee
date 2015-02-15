@@ -1,8 +1,5 @@
-# Export Plugin
 module.exports = (BasePlugin) ->
-    # Define Plugin
     class RoutingPlugin extends BasePlugin
-        # Plugin name
         name: 'routing'
 
         # Configuration
@@ -12,7 +9,6 @@ module.exports = (BasePlugin) ->
         config:
             routes: []
 
-        # Render some content synchronously
         renderBefore: (opts) ->
             config = @config
             docpad = @docpad

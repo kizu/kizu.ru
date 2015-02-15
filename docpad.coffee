@@ -2,6 +2,9 @@
 # http://docpad.org/docs/config
 
 docpadConfig = {
+    # Skip files starting from underscore from scanning by DocPad
+    ignoreCustomPatterns: /^_/
+
     plugins:
         routing:
             routes:

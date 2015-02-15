@@ -5,8 +5,6 @@ categories: issues
 thanks_to:
     - "[Артёму Сапегину](@sapegin) за уместные замечания"
 
-published: true
-
 ---
 
 # Новые фичи в Стайлусе

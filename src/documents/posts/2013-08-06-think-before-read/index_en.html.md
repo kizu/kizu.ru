@@ -2,8 +2,6 @@
 
 categories: en blog
 
-published: true
-
 invisible: true
 
 ---

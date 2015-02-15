@@ -5,8 +5,6 @@ categories: en issues
 thanks_to:
     - "[Ian Devlin](@iandevlin) for the proofreading"
 
-published: true
-
 ---
 
 # New Stylus Features

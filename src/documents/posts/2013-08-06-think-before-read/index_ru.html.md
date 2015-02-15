@@ -2,8 +2,6 @@
 
 categories: blog
 
-published: true
-
 ---
 
 # Думать перед чтением

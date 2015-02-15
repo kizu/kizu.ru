@@ -1,14 +1,3 @@
----
-
-categories: en fun
-
-published: true
-
-thanks_to:
-    - "[Fev](http://taerin.deviantart.com/) for the illustration"
-
----
-
 # Nested links
 
 ![Cats playing nested links](nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}

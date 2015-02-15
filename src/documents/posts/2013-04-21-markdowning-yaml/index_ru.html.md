@@ -2,8 +2,6 @@
 
 categories: issues
 
-published: true
-
 ---
 
 # Маркдауним YAML для Jekyll
