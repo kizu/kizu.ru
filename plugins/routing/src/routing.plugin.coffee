@@ -6,6 +6,9 @@ module.exports = (BasePlugin) ->
         name: 'routing'
 
         # Configuration
+        # TODO: Should there be different types of routing?
+        #       Like based not only on paths, with replaces,
+        #       but also according to different metadata etc.
         config:
             routes: []
 
