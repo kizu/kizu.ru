@@ -6,19 +6,20 @@ module.exports = (BasePlugin) ->
         name: 'metadefaults'
 
         config:
-            ololo: []
+            # TODO: options for disabling date and not rewriting url because of it
+            date: true
 
         # Render some content synchronously
         renderBefore: (opts) ->
             config = @config
             docpad = @docpad
+            medaDateRegex = ///([0-9]{4}-[0-9]{2}-[0-9]{2})-///
 
             this.docpad.getCollection('documents').forEach (document) ->
                 newOutPath = document.get('outPath')
                 newUrl = document.get('url')
-                medaDateRegex = ///[0-9]{4}-[0-9]{2}-[0-9]{2}///
                 dateString = document.attributes.relativeBase.match(medaDateRegex)
-                dateString = dateString && dateString[0]
+                dateString = dateString && dateString[1]
 
                 if dateString
                     document.setMeta { date: new Date(dateString) }

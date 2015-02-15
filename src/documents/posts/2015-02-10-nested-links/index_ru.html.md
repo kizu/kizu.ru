@@ -11,7 +11,7 @@ thanks_to:
 
 # Вложенные ссылки
 
-![Котики играют во вложенные ссылки](/pictures/nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}
+![Котики играют во вложенные ссылки](nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}
 
 
 ## Проблема
