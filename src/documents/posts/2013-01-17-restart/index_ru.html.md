@@ -2,8 +2,6 @@
 
 categories: issues
 
-layout: post
-
 date: 2013-01-17 18:00:00
 
 ---

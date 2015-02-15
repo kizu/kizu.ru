@@ -2,8 +2,6 @@
 
 categories: en issues
 
-layout: post
-
 published: true
 
 ---

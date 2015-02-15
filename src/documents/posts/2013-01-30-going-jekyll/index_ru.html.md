@@ -2,8 +2,6 @@
 
 categories: issues
 
-layout: post
-
 ---
 
 # Jekyll

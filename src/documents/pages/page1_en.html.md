@@ -1,3 +1,0 @@
-# Page one
-
-Hello!

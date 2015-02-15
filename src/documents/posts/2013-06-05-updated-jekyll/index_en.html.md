@@ -2,8 +2,6 @@
 
 categories: en blog
 
-layout: post
-
 published: true
 
 ---

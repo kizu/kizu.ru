@@ -2,8 +2,6 @@
 
 categories: en fun
 
-layout: post
-
 published: true
 
 invisible: true

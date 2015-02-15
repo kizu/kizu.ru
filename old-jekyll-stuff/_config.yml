@@ -32,62 +32,46 @@ prose:
 
             categories: drafts
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/fun": |
 
             categories: fun
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/issues": |
 
             categories: issues
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/blog": |
 
             categories: blog
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/en": |
 
             categories: en drafts
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/en/fun": |
 
             categories: en fun
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/en/issues": |
 
             categories: en issues
 
-            layout: post
-
-            published: "true"
+                        published: "true"
 
         "_posts/en/blog": |
 
             categories: en blog
 
-            layout: post
-
-            published: "true"
+                        published: "true"

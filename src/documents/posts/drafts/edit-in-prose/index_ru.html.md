@@ -2,8 +2,6 @@
 
 categories: issues
 
-layout: post
-
 published: true
 
 invisible: true

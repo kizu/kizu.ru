@@ -1,0 +1,33 @@
+{
+    "name": "docpad-plugin-metadefaults",
+    "version": "2.0.0",
+    "description": "DocPad plugin that adds the ability to better route urls from src to out",
+    "homepage": "https://github.com/kizu/docpad-plugin-metadefaults",
+    "keywords": [
+        "docpad",
+        "docpad-plugin",
+        "metadefaults",
+        "rewrite"
+    ],
+    "author": "Roman Komarov <kizmarh@ya.ru> (http://kizu.ru/en/)",
+    "maintainers": [
+        "Roman Komarov <kizmarh@ya.ru> (https://github.com/kizu/)"
+    ],
+    "contributors": [
+        "Roman Komarov <kizmarh@ya.ru> (https://github.com/kizu/)"
+    ],
+    "bugs": {
+        "url": "https://github.com/kizu/docpad-plugin-metadefaults/issues"
+    },
+    "repository" : {
+        "type": "git",
+        "url": "https://github.com/kizu/docpad-plugin-metadefaults.git"
+    },
+    "engines" : {
+        "node": ">=0.8"
+    },
+    "peerDependencies": {
+        "docpad": "6"
+    },
+    "main": "./src/metadefaults.plugin.coffee"
+}

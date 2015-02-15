@@ -2,8 +2,6 @@
 
 categories: issues
 
-layout: post
-
 thanks_to:
     - "[Артёму Сапегину](@sapegin) за уместные замечания"
 

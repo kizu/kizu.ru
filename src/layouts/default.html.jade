@@ -4,10 +4,10 @@ html(lang=document.lang ? document.lang : false)
     title ololo
 
   body
-    - var docs = getCollection("html").toJSON()
-    ul
-      - for doc in docs
-        li: a(href=doc.url)= doc.name
+    //- - var docs = getCollection("html").toJSON()
+    //- ul
+    //-   - for doc in docs
+    //-     li: a(href=doc.url)= doc.name
 
 
     != content

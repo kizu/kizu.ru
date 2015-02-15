@@ -1,7 +1,5 @@
 ---
 
-layout: post
-
 categories: en projects
 
 ---

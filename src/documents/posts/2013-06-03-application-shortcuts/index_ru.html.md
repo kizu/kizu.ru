@@ -2,8 +2,6 @@
 
 categories: blog
 
-layout: post
-
 published: true
 
 ---

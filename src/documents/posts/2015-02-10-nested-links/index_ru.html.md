@@ -2,8 +2,6 @@
 
 categories: fun
 
-layout: post
-
 published: true
 
 thanks_to:
