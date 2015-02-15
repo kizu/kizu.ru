@@ -438,7 +438,7 @@ h1.title,
 
 .title {
   padding-top: 27px;
-  text-indent: -5.3999999999999995px;
+  text-indent: -5.399999999999999px;
 }
 
 .title A:not(:hover) {
@@ -678,7 +678,7 @@ H1 {
   position: relative;
   font-size: 63px;
   padding-top: 18px;
-  margin-left: -5.3999999999999995px;
+  margin-left: -5.399999999999999px;
 }
 
 H2 {
@@ -730,6 +730,17 @@ OL > LI:before {
   content: counter(list) ". ";
 }
 
+BLOCKQUOTE {
+  position: relative;
+  left: -1px;
+  padding-left: 1em;
+  padding-left: 2.5vw;
+  border-left: 1px solid rgba(37,34,14,0.5);
+  margin-left: -1em;
+  margin-left: -2.5vw;
+  text-align: left;
+}
+
 @media (max-width: 550px) {
   body {
     line-height: 31.5px;
@@ -776,12 +787,12 @@ OL > LI:before {
   H1.title {
     font-size: 45px;
     padding-top: 36px;
-    text-indent: -2.6999999999999997px;
+    text-indent: -2.7px;
   }
 
   H1 {
     font-size: 31.5px;
-    margin-left: -2.6999999999999997px;
+    margin-left: -2.7px;
   }
 
   .content header H1 {
@@ -894,6 +905,26 @@ h1 > sup > .link {
   margin: 0 9px 0 -0.3em;
   margin: 0 2.5vw 0 -0.3em;
   background: rgba(0,0,0,0.1);
+}
+
+.figure a:hover {
+  text-decoration: underline;
+  background-image: none;
+}
+
+.b-figure_outer {
+  float: right;
+  margin-right: -225px;
+  max-width: 570px;
+}
+
+@media (max-width: 960px) {
+  .b-figure_outer {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
 }
 
 .demo {
@@ -1043,31 +1074,21 @@ h6:hover > .header-anchor {
 }
 
 @-webkit-keyframes target-fade {
-  0% {
+  from {
     background-color: rgba(255,255,0,0.8);
   }
 
-  100% {
-    background-color: rgba(255,255,0,0.15);
-  }
-}
-
-@-ms-keyframes target-fade {
-  0% {
-    background-color: rgba(255,255,0,0.8);
-  }
-
-  100% {
+  to {
     background-color: rgba(255,255,0,0.15);
   }
 }
 
 @keyframes target-fade {
-  0% {
+  from {
     background-color: rgba(255,255,0,0.8);
   }
 
-  100% {
+  to {
     background-color: rgba(255,255,0,0.15);
   }
 }

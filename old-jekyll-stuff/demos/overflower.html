@@ -1,6 +1,6 @@
 ---
 layout: demo
-height: 20em
+height: 28em
 ---
 
 <style>
@@ -47,12 +47,14 @@ height: 20em
             padding: 0 0 0 0.5em;
             margin: -2.25em 0 0; /* or 100%, but bugs in Fx */
             }
-.b-overflower_line {
+
+
+.b-overflower_gradient {
     background: rgb(222,222,200);
     background: rgba(222,222,200,1);
     }
-    .b-overflower_line .b-overflower-shield-in:before,
-    .b-overflower_line .b-overflower-shield-extra {
+    .b-overflower_gradient .b-overflower-shield-in:before,
+    .b-overflower_gradient .b-overflower-shield-extra {
         content: "";
         position: absolute;
         top: 0;
@@ -68,26 +70,56 @@ height: 20em
         }
 
 
-.b-overflower-wrap_inline {
-    display: inline-block;
-
-    max-width: 100%;
-
-    vertical-align: top;
+.b-overflower_ellipsis {
+    background: rgb(160,222,200);
+    background: rgba(160,222,200,1);
     }
-    .b-overflower-wrap_inline .b-overflower {
-        background: rgb(160,222,200);
+    .b-overflower_ellipsis .b-overflower-shield-in:before,
+    .b-overflower_ellipsis .b-overflower-shield-extra {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+        content: "…";
+
+        padding-top: 0.5em;
+
         background: rgba(160,222,200,1);
         }
-        .b-overflower-wrap_inline .b-overflower-shield-in:before,
-        .b-overflower-wrap_inline .b-overflower-shield-extra {
-            content: "…";
 
-            width: auto;
-            padding-top: 0.5em;
 
-            background: rgba(160,222,200,1);
-            }
+.b-overflower_reversed {
+    background: rgb(222,200,222);
+    background: rgba(222,200,222,1);
+    direction: rtl;
+    }
+    .b-overflower_reversed .b-overflower-content {
+        direction: ltr;
+        max-width: none;
+        }
+    .b-overflower_reversed .b-overflower-shield-in {
+        right: auto;
+        left: 0.5em;
+
+        padding-right: 0;
+        padding-left: 0.5em;
+        }
+    .b-overflower_reversed .b-overflower-shield-in:before,
+    .b-overflower_reversed .b-overflower-shield-extra {
+        right: auto;
+        left: -0.6em;
+        padding-left: 0.6em;
+        padding-right: 0.25em;
+
+        background: rgba(222,200,222,1);
+        background: -webkit-linear-gradient(left, rgba(222,200,222,1) 90%, rgba(222,200,222,0));
+        background:    -moz-linear-gradient(left, rgba(222,200,222,1) 90%, rgba(222,200,222,0));
+        background:     linear-gradient(to right, rgba(222,200,222,1) 90%, rgba(222,200,222,0));
+        }
+
 
 /* Lazy IE Hacks */
 *+HTML .b-overflower-content,
@@ -95,6 +127,15 @@ height: 20em
 *+HTML .b-overflower-wrap_inline {
     display: inline;
     zoom: 1;
+    }
+
+/* Works in inline context too */
+.b-overflower-wrap_inline {
+    display: inline-block;
+
+    max-width: 100%;
+
+    vertical-align: top;
     }
 
 </style>
@@ -105,21 +146,21 @@ height: 20em
     <div class="b-section-inset-in">
 
         <div style="width:60%;margin:0 auto">
-            <div class="b-overflower b-overflower_line">
+            <div class="b-overflower b-overflower_gradient">
                 <div class="b-overflower-content">
                     There is a lot of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                  </div
                 ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="There is a lot of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></div></div>
             </div>
 
-            <div class="b-overflower b-overflower_line">
+            <div class="b-overflower b-overflower_gradient">
                 <div class="b-overflower-content">
                     And just a few words
                  </div
                 ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="And just a few words"></div></div>
             </div>
 
-            <div class="b-overflower b-overflower_line">
+            <div class="b-overflower b-overflower_gradient">
                 <div class="b-overflower-content">
                     And some more words to test this item while resising the window
                  </div
@@ -135,7 +176,7 @@ height: 20em
         <div style="width:60%;margin:0 auto">
 
             <div class="b-overflower-wrap b-overflower-wrap_inline">
-                <div class="b-overflower b-overflower_line">
+                <div class="b-overflower b-overflower_ellipsis">
                     <div class="b-overflower-content">
                         There is a lot of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                      </div
@@ -144,7 +185,7 @@ height: 20em
             </div>
 
             <div class="b-overflower-wrap b-overflower-wrap_inline">
-                <div class="b-overflower b-overflower_line">
+                <div class="b-overflower b-overflower_ellipsis">
                     <div class="b-overflower-content">
                         And just a few words
                     </div
@@ -153,9 +194,44 @@ height: 20em
             </div>
 
             <div class="b-overflower-wrap b-overflower-wrap_inline">
-                <div class="b-overflower b-overflower_line">
+                <div class="b-overflower b-overflower_ellipsis">
                     <div class="b-overflower-content">
                         And some more words to test this item while resising the window
+                     </div
+                    ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="And some more words to test this item while resising the window"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Block with a reversed non-native ellipsis.</h4>
+<div class="b-section-inset" style="height:9em;">
+    <div class="b-section-inset-in">
+        <div style="width:60%;margin:0 auto">
+
+            <div class="b-overflower-wrap b-overflower-wrap_inline">
+                <div class="b-overflower b-overflower_ellipsis b-overflower_reversed">
+                    <div class="b-overflower-content">
+                        There is a lot of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                     </div
+                    ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="There is a lot of text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></div></div>
+                </div>
+            </div>
+
+            <div class="b-overflower-wrap b-overflower-wrap_inline">
+                <div class="b-overflower b-overflower_ellipsis b-overflower_reversed">
+                    <div class="b-overflower-content">
+                        And just a few words.
+                    </div
+                   ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="And just a few words"></div></div>
+                </div>
+            </div>
+
+            <div class="b-overflower-wrap b-overflower-wrap_inline">
+                <div class="b-overflower b-overflower_ellipsis b-overflower_reversed">
+                    <div class="b-overflower-content">
+                        And some more words to test this item while resising the window.
                      </div
                     ><div class="b-overflower-shield"><div class="b-overflower-shield-in" title="And some more words to test this item while resising the window"></div></div>
                 </div>

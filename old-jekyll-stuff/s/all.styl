@@ -100,7 +100,7 @@ $content_width = 42*rem
   & > pre,
   & > dl,
   & > .demo_seamless,
-  & > .feedback{", h1.title, .page:not(.page_post) .footer > .copy"}
+  & > .feedback{", /h1.title, /.page:not(.page_post) .footer > .copy"}
     width: $content_width
     max-width: 100%
     margin-left: auto
@@ -618,6 +618,19 @@ OL > LI:before
   content: counter(list) ". "
 
 
+BLOCKQUOTE
+  position: relative
+  left: -1px
+
+  padding-left: 1em
+  padding-left: 2.5vw
+  border-left: 1px solid rgba($dark, 0.5)
+  box-shadow: inset 1px 0 0 rgba($dark, 0.5)
+  margin-left: -1em
+  margin-left: -2.5vw
+
+  text-align: left
+
 // We could do this, but it don't recalculate on window resize -_-
 // @media (max-width: 882px)
 //   H1
@@ -763,6 +776,22 @@ h1 > sup
 
   border-radius: 3px
   box-shadow: 0 0 0 1px rgba(0,0,0,.2)
+
+  & a:hover
+    text-decoration: underline
+    text-shadow: none
+    background-image: none
+
+.b-figure_outer
+  float: right
+  margin-right: -225px
+  max-width: 500px
+
+  @media (max-width: 960px)
+    float: none
+    display: block
+    margin: 0 auto
+    max-width: 100%
 
 .demo
   position: relative
