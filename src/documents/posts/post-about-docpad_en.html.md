@@ -1,3 +1,0 @@
-# Post about docpad
-
-Hello!
