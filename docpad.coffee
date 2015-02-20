@@ -6,6 +6,10 @@ docpadConfig = {
     ignoreCustomPatterns: /^_/
 
     plugins:
+        metadefaults:
+            defaults:
+                layout: 'default'
+
         routing:
             routes:
                 '/pages/': '/'
@@ -22,12 +26,6 @@ docpadConfig = {
             stylusOptions:
                 compress: true
                 'include css': true
-
-    events:
-        renderBefore: () ->
-            this.docpad.getCollection('html').forEach (document) ->
-                # Set the default layout
-                document.setMetaDefaults(layout: 'default')
 }
 
 module.exports = docpadConfig

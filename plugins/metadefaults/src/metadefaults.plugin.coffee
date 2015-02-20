@@ -3,6 +3,9 @@ module.exports = (BasePlugin) ->
         name: 'metadefaults'
 
         config:
+            # The real metadefaults lol
+            defaults: {}
+
             # TODO: options for disabling date and not rewriting url because of it
             date: true
 
@@ -18,6 +21,9 @@ module.exports = (BasePlugin) ->
             medaDateRegex = ///([0-9]{4}-[0-9]{2}-[0-9]{2})-///
 
             metadataFiles = {}
+
+            this.docpad.getCollection('html').forEach (document) ->
+                document.setMetaDefaults(config.defaults)
 
             this.docpad.getCollection('documents').forEach (document) ->
                 newOutPath = document.get('outPath')
