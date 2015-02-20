@@ -10,7 +10,6 @@ docpadConfig = {
             defaults:
                 layout: 'default'
 
-        routing:
             routes:
                 '/pages/': '/'
                 '/posts/': '/blog/'
