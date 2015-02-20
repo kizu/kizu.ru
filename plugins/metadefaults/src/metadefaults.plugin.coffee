@@ -20,7 +20,8 @@ module.exports = (BasePlugin) ->
         renderBefore: (opts) ->
             config = @config
             docpad = @docpad
-            medaDateRegex = ///([0-9]{4}-[0-9]{2}-[0-9]{2})-///
+            metaDateRegex = ///([0-9]{4}-[0-9]{2}-[0-9]{2})-///
+            metaCategoryRegex = ///\(([^\)]+)\)-///
             metadataFiles = {}
 
             # Setting the defaults
@@ -31,7 +32,7 @@ module.exports = (BasePlugin) ->
             this.docpad.getCollection('documents').forEach (document) ->
                 newOutPath = document.get('outPath')
                 newUrl = document.get('url')
-                docmentAttrs = document.attributes
+                documentAttrs = document.attributes
 
                 # Routing
                 for own before, after of config.routes
@@ -40,13 +41,26 @@ module.exports = (BasePlugin) ->
 
                 # Date routing and metadata
                 if config.date
-                    dateString = docmentAttrs.relativeBase.match(medaDateRegex)
+                    dateString = documentAttrs.relativeBase.match(metaDateRegex)
                     dateString = dateString && dateString[1]
                     if dateString
                         document.setMeta { date: new Date(dateString) }
 
                         newOutPath = newOutPath.replace(dateString + '-', '')
                         newUrl = newUrl.replace(dateString + '-', '')
+
+                # Categories routing and metadata
+                if config.categories
+                    # FIXME: move before metadefaults?
+                    #        or not? As routing should be there?
+                    categoryString = documentAttrs.relativeBase.match(metaCategoryRegex)
+                    categoryString = categoryString && categoryString[1]
+                    if categoryString
+                        document.setMeta { categories: categoryString }
+
+                        newOutPath = newOutPath.replace('(' + categoryString + ')-', '')
+                        newUrl = newUrl.replace('(' + dateString + ')-', '')
+
 
                 # Setters
                 document.set('outPath', newOutPath)
@@ -56,15 +70,15 @@ module.exports = (BasePlugin) ->
                 # Works now only when placed in the same directory
                 # If there is a `lang` metadata set, then if there is an object witj
                 #   and appropriate key as a value, use it instead.
-                metadata = metadataFiles[docmentAttrs.fullDirPath]
+                metadata = metadataFiles[documentAttrs.fullDirPath]
                 unless metadata
                     metadataFile = null
                     try
-                        metadataFile = require(docmentAttrs.fullDirPath + '/_metadata.json')
+                        metadataFile = require(documentAttrs.fullDirPath + '/_metadata.json')
 
                     if metadataFile
                         metadata = metadataFile
-                        metadataFiles[docmentAttrs.fullDirPath] = metadata
+                        metadataFiles[documentAttrs.fullDirPath] = metadata
 
                 if metadata
                     actualMetadata = {}

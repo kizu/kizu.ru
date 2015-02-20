@@ -1,9 +1,3 @@
----
-
-categories: en blog
-
----
-
 # Application shortcuts
 
 Here is one workflow thing I use all the time and I want to share — using keyboard shortcuts to switch between applications.

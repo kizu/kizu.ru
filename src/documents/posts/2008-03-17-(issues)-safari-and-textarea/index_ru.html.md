@@ -1,7 +1,5 @@
 ---
-
-categories: issues old
-
+old: true
 ---
 
 # Сафари и его растягивающяяся textarea

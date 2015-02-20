@@ -9,6 +9,7 @@ docpadConfig = {
         metadefaults:
             defaults:
                 layout: 'default'
+                categories: 'blog'
 
             routes:
                 '/pages/': '/'
