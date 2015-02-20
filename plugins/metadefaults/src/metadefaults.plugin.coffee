@@ -6,7 +6,7 @@ module.exports = (BasePlugin) ->
             # The real metadefaults lol
             defaults: {}
 
-            # TODO: options for disabling date and not rewriting url because of it
+            # Date routing and metadata, set to false to disable
             date: true
 
             # TODO: options for disabling categories?
@@ -31,6 +31,7 @@ module.exports = (BasePlugin) ->
             this.docpad.getCollection('documents').forEach (document) ->
                 newOutPath = document.get('outPath')
                 newUrl = document.get('url')
+                docmentAttrs = document.attributes
 
                 # Routing
                 for own before, after of config.routes
@@ -38,14 +39,14 @@ module.exports = (BasePlugin) ->
                     newUrl = newUrl.replace(before.replace(/^\//,''), after.replace(/^\//,''))
 
                 # Date routing and metadata
-                docmentAttrs = document.attributes
-                dateString = docmentAttrs.relativeBase.match(medaDateRegex)
-                dateString = dateString && dateString[1]
-                if dateString
-                    document.setMeta { date: new Date(dateString) }
+                if config.date
+                    dateString = docmentAttrs.relativeBase.match(medaDateRegex)
+                    dateString = dateString && dateString[1]
+                    if dateString
+                        document.setMeta { date: new Date(dateString) }
 
-                    newOutPath = newOutPath.replace(dateString + '-', '')
-                    newUrl = newUrl.replace(dateString + '-', '')
+                        newOutPath = newOutPath.replace(dateString + '-', '')
+                        newUrl = newUrl.replace(dateString + '-', '')
 
                 # Setters
                 document.set('outPath', newOutPath)
