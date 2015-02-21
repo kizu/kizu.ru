@@ -1,7 +1,5 @@
 ---
 
-categories: en blog
-
 invisible: true
 
 ---

@@ -1,9 +1,3 @@
----
-
-categories: blog
-
----
-
 # Обновлённый Jekyll
 
 Недавно Jekyll стал совсем большим — [была выпущена](https://github.com/blog/1502-jekyll-turns-1-0) версия «1.0».

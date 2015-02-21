@@ -1,9 +1,3 @@
----
-
-categories: en blog
-
----
-
 # Updated Jekyll
 
 Not that long ago Jekyll become that big — version “1.0” [was released](https://github.com/blog/1502-jekyll-turns-1-0).

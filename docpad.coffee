@@ -13,7 +13,7 @@ docpadConfig = {
 
             routes:
                 '/pages/': '/'
-                '/posts/': '/blog/'
+                '/posts/': '/%categories%/'
 
         multilang:
             languages: ['en', 'ru']

@@ -10,7 +10,9 @@ module.exports = (BasePlugin) ->
             date: true
 
             # TODO: options for disabling categories?
-            categories: true
+            categories: {
+                defaultsAt: '/posts/'
+            }
 
             # TODO: Should there be different types of routing?
             #       Like based not only on paths, with replaces,
@@ -26,7 +28,15 @@ module.exports = (BasePlugin) ->
 
             # Setting the defaults
             this.docpad.getCollection('html').forEach (document) ->
-                document.setMetaDefaults(config.defaults)
+                actualMetaDefaults = {}
+                for key, value of config.defaults
+                    if key == 'categories'
+                        if config.categories && config.categories.defaultsAt && ('/' + document.attributes.relativeBase).indexOf(config.categories.defaultsAt) != -1
+                            actualMetaDefaults[key] = value
+                    else
+                        actualMetaDefaults[key] = value
+
+                document.setMetaDefaults(actualMetaDefaults)
 
             # Doing all the other stuff
             this.docpad.getCollection('documents').forEach (document) ->
@@ -51,8 +61,6 @@ module.exports = (BasePlugin) ->
 
                 # Categories routing and metadata
                 if config.categories
-                    # FIXME: move before metadefaults?
-                    #        or not? As routing should be there?
                     categoryString = documentAttrs.relativeBase.match(metaCategoryRegex)
                     categoryString = categoryString && categoryString[1]
                     if categoryString
@@ -60,11 +68,6 @@ module.exports = (BasePlugin) ->
 
                         newOutPath = newOutPath.replace('(' + categoryString + ')-', '')
                         newUrl = newUrl.replace('(' + dateString + ')-', '')
-
-
-                # Setters
-                document.set('outPath', newOutPath)
-                document.setUrl(newUrl)
 
                 # Set the metadata defaults from the associated metadata.json
                 # Works now only when placed in the same directory
@@ -90,3 +93,14 @@ module.exports = (BasePlugin) ->
                                 actualMetadata[key] = value_lang
 
                     document.setMetaDefaults(actualMetadata)
+
+                if config.categories && config.categories.defaultsAt && ('/' + documentAttrs.relativeBase).indexOf(config.categories.defaultsAt) != -1
+                    categoriesString = document.getMeta('categories') || config.defaults.categories
+                    if categoriesString
+                        categoriesString = categoriesString.replace(' ', '/')
+                        newOutPath = newOutPath.replace('%categories%', categoriesString)
+                        newUrl = newUrl.replace('%categories%', categoriesString)
+
+                # Setters
+                document.set('outPath', newOutPath)
+                document.setUrl(newUrl)

@@ -1,9 +1,3 @@
----
-
-categories: en blog
-
----
-
 # “Blog”
 
 Hello! As I wrote in a [post on the relaunch of my site](:restart), the main goal for the new version was to ease the process of adding new entries. However, beyond the technical side I completely forgot about _what exactly_ I wanted to write in that easy and simple way.
