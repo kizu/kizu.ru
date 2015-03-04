@@ -69,7 +69,7 @@ And — found a proper solution. HTML-only one, by the way, the one that give
 {:.language-html}
     <a href="#a">
         Foo
-        <object>
+        <object type="lol/wut">
             <a href="#b">
                 Bar
             </a>
@@ -83,7 +83,7 @@ What we do there is just placing an object between those links. Yep, it wor
 
 What are objects, in theory? They are some external entities, with the type set by the `type` attribute and the content or a link to it placed into the `data` attribute. And the content between the opening and closing `object` tags is, in fact, a fallback, and it would be shown only when browser wouldn’t be capable of displaying the object defined in the attributes. Like, for example, if you won’t have an installed plugin.
 
-And if you’d write some gibberish MIME-type into the `type` attribute, browser wouldn’t understand it and would go straight to displaying the fallback. And, in fact, it would do the same even if you’d omit those “required” attributes at all.
+And if you’d write some gibberish MIME-type into the `type` attribute, browser wouldn’t understand it and would go straight to displaying the fallback. And, <span class="sidenote" id="try-expressions">in fact (* Actually, see the [Update](#update-from-2015-03-05))</span>, it would do the same even if you’d omit those “required” attributes at all.
 
 This way, after wrapping any HTML with such atributeless `<object>` we would get just a wrapper element for this content. But a wrapper with an unusual trait: any content inside of it would be treated by browser’s parser without looking at the object’s context. So, using this trait we can, finally, nest one link into another, separating them for parser.
 
@@ -146,3 +146,7 @@ The one thing I’d like to say in the end is that that trick with an object
 As an example, there are a bunch of new tags in the latest specs that you already should know, like `details` and `figure`. Guess what: by specs you can use them only in flow-level contexts: you can’t have pictures with captions illustrating some word inside a paragraph, you can’t have a description or footnotes for some words inside a paragraph or a heading (and what other than `details` tag would fit for this?), you can’t have a lot of cases that someone doing specs couldn’t think of.
 
 The `<object>` trick solves all those problems. The question is only if such usage would be feasible for you. And I’d say that a lot of restrictions on specs are useless and an ability to work around them, with valid arguments, is priceless.
+
+## Update from 2015-03-05
+
+[Vladimir Rodkin](https://github.com/VovanR) found out that Firefox’ Flashblock plugin removes “broken objects”, and it treats attributeless `<object>` as such. Adding unknown mime-type like `type="lol/wut"` fixes this problem and Fx starts to show the object properly.
