@@ -1,8 +1,8 @@
 # New Stylus Features
 
-Not so long ago I <span class="sidenote" id="maintaining">became a maintainer (* I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya))</span> for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
+Not so long ago I [became a maintainer](*maintaining "I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya)") for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
 
-At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one <span class="sidenote" id="example-sidenote">new tech (* you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result))</span> that is now possible in the new Stylus, but I'll describe the new features for a start.
+At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one [new tech](*example-sidenote "you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result)") that is now possible in the new Stylus, but I'll describe the new features for a start.
 
 ## Block mixins {#block-mixins}
 
@@ -17,7 +17,7 @@ The syntax for passing the block is rather simple: we call a mixin using a `+` p
 {:.language-styl}
 
 
-After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using <span class="sidenote" id="block-call">an interpolation (* there is a possibility we would add a way of using it without interpolation in the future though)</span>:
+After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using [an interpolation](*block-call "there is a possibility we would add a way of using it without interpolation in the future though"):
 
     foo()
       width: 20px
@@ -65,7 +65,7 @@ As I already mentioned, in the latest releases of Stylus we added (and polished 
     }
 {:.language-javascript}
 
-As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas <span class="sidenote" id="codestyle">are not (* And as with all other optional syntax features of Stylus, you should use a consistent codestyle in your stylesheets, otherwise your code would be messy as hell)</span>.
+As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas [are not](*codestyle "And as with all other optional syntax features of Stylus, you should use a consistent codestyle in your stylesheets, otherwise your code would be messy as hell").
 
 Then, after you defined a hash, you could add new properties to it or redefine old ones using dots or square brackets:
 
@@ -165,7 +165,7 @@ So, if we would then call this function at the end of the document:
 
 We would get what we want.
 
-However, there are a few things to improve in this function: we do not want to always write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like <span class="sidenote" id="keywords">`palm`, `portable`, `desk` (* I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry))</span> and so on. With those improvements and all the previous steps the resulting code would be this:
+However, there are a few things to improve in this function: we do not want to always write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like [`palm`, `portable`, `desk`](*keywords "I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry)") and so on. With those improvements and all the previous steps the resulting code would be this:
 
 ### Resulting code {#result}
 

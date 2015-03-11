@@ -2,7 +2,7 @@
 
 I love SVG and what I don't like is how browsers don't tend to improve in the support for them. And while some time ago it could be called “a chicken and egg problem” — there were no support because of lack of usage and developer interest, as well as developers didn't look at SVG because there were a lot of bugs and inconsistency everywhere.
 
-But in the last year or two I saw a lot of articles on SVG and a lot of people use it more and <span class="sidenote" id="articles">more (* for example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](http://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG)</span>. I'd say it's what “Retina” did, but whatever.
+But in the last year or two I saw a lot of articles on SVG and a lot of people use it more and [more](*articles "for example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](http://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG"). I'd say it's what “Retina” did, but whatever.
 
 Anyway, I'd like to talk about one of those hard-needed features that won't ship there anytime soon: SVG Stacks. You can be familiar with this idea from [this great article of Simurai](http://simurai.com/post/20251013889/svg-stacks) — the point is to have different SVG images inside one file and to show only the one we need using `:target` in CSS embedded in SVG and urls like `url(stack.svg#foo)`.
 
@@ -51,8 +51,7 @@ The SVG itself would look like this:
         <path class="icon" id="print" d="M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5"></path>
     </svg>
 
-And the <span class="sidenote" id="webkit-bug">_basic_ (* there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the 
-)</span> CSS would look this way:
+And the [_basic_](*webkit-bug "there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the …") CSS would look this way:
 
 {:.language-css}
     .icon-wrapper {
@@ -77,13 +76,13 @@ And the <span class="sidenote" id="webkit-bug">_basic_ (* there is a bug in Webk
     .icon_print          { width: 120px; height: 600px; }
     .icon_print:hover    { width: 600px; height: 120px; }
 
-I guess you already got the idea? While we can't use `:target`, you could already know that we can use <span class="sidenote" id="clowncar">media queries in SVG (* See, for example [Clown Car Technique](http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/) by Estelle)</span>.
+I guess you already got the idea? While we can't use `:target`, you could already know that we can use [media queries in SVG](*clowncar "See, for example [Clown Car Technique](http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/) by Estelle").
 
 So, we hide all the icons inside an SVG and then showing them when the specific media queries are triggered.
 
 Some notes on some things in code you're already wondering on:
 
-1. We should use `<img/>` (or any similar method) instead of SVG in CSS backgrounds, 'cause there are a lot of <span class="sidenote" id="svg-in-css">issues (* )</span> with backgrounds in different browsers. And that's sad, 'cause we could use only one element in HTML for those icons then, using `background-image` or pseudo-elements.
+1. We should use `<img/>` (or any similar method) instead of SVG in CSS backgrounds, 'cause there are a lot of [issues](*svg-in-css "…") with backgrounds in different browsers. And that's sad, 'cause we could use only one element in HTML for those icons then, using `background-image` or pseudo-elements.
 
 2. I've used a wrapper to show only the actual part of the SVG, hiding the extra canvas that is needed only for media queries. However, if you're ok with absolute positioning, you could use it along with `clip` to hide the extras:
 

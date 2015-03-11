@@ -14,7 +14,7 @@ Here is an example: all three blocks have `display: inline-block`, the first one
 
 [demo:flex-baseline1]
 
-You <span class="sidenote" id="safari">can see (* btw, in the latest Safari the block with `overflow` don't behave according to the specs)</span> where each block has its baseline in this example.
+You [can see](*safari "btw, in the latest Safari the block with `overflow` don't behave according to the specs") where each block has its baseline in this example.
 
 ## inline-table
 
@@ -62,7 +62,7 @@ In IE flexbox with the set width wouldn't have wrapped text inside of it. That's
 
 Opera has a similar bug — the element inside a flexbox would have width set to content. The only fix I found is adding `flex-direction: column` to flexbox. As there would be only one element inside our wrapper it won't affect anything else.
 
-There, <span class="sidenote" id="without-fallbacks">now it's perfect (* No fallbacks for older browsers though, but this slightly falls out of this post's scope)</span>, there is the last example with different variants of blocks and with the wrapping blocks:
+There, [now it's perfect](*without-fallbacks "No fallbacks for older browsers though, but this slightly falls out of this post's scope"), there is the last example with different variants of blocks and with the wrapping blocks:
 
 [demo:flex-baseline7]
 

@@ -105,7 +105,7 @@ I don’t know of any easy solution for this problem in old IE. At the very 
         </object>
     </a>
 
-You’d lose some functionality there, but it could be ok for the most cases. <span class="sidenote" id="try-expressions">If not (* Curious ones could think about if it is possible to make a fallback using expressions)</span>, you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
+You’d lose some functionality there, but it could be ok for the most cases. [If not](*try-expressions "Curious ones could think about if it is possible to make a fallback using expressions"), you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
 
 ## Is it valid?
 
