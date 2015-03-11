@@ -6,6 +6,8 @@ docpadConfig = {
     ignoreCustomPatterns: /^_/
 
     plugins:
+        markedrenderers: require('./markedrenderers.coffee')
+
         metadefaults:
             defaults:
                 layout: 'default'
@@ -27,7 +29,5 @@ docpadConfig = {
                 compress: true
                 'include css': true
 }
-
-docpadConfig.plugins.marked = require('./markedRenderer.js')
 
 module.exports = docpadConfig
