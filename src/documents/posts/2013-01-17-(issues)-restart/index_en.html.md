@@ -46,7 +46,7 @@ Design, on the other hand, is almost stable. Yeah, there would be changes and
 
 1. The Font. I spend a lot of attention to it. There is a lot of the Font: I’ve chosen a big one for body, big enough for me at least. If it seems too big for you — you could reduce it using your browser or just sit farther from the display. I think it’s better to please those who are not that good at looking at small letters than those with eagle eyes.
 
-    Also, the font is serif. The sad part is that my blog is both on English and on Russian — and there are very few good free fonts with cyrillic subset. And a little more paid ones. I’ve chosen to pay. The font is “[21 cent](http://www.letterhead.ru/Fonts/21cent.html)” by [Letterhead Studio](http://www.letterhead.ru). Don’t know why, but I really like this font. I bought it from [myfonts.net](http://www.myfonts.com/fonts/letterheadrussia/21-cent/) — it’s nice they have it ’cause almost all other paid font providers are somewhat greedy — I don’t think paying monthly fee for a font is nice.
+    Also, the font is serif. The sad part is that my blog is both on English and on Russian — and there are very few good free fonts with cyrillic subset. And a little more paid ones. I’ve chosen to pay. The font is [“21 cent”](http://www.letterhead.ru/Fonts/21cent.html) by [Letterhead Studio](http://www.letterhead.ru). Don’t know why, but I really like this font. I bought it from [myfonts.net](http://www.myfonts.com/fonts/letterheadrussia/21-cent/) — it’s nice they have it ’cause almost all other paid font providers are somewhat greedy — I don’t think paying monthly fee for a font is nice.
 
     The whole font story is really tough and long. You can guess if it would translate into an article someday.
 

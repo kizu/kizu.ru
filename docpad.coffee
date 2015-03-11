@@ -28,4 +28,6 @@ docpadConfig = {
                 'include css': true
 }
 
+docpadConfig.plugins.marked = require('./markedRenderer.js')
+
 module.exports = docpadConfig
