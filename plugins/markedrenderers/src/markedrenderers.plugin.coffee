@@ -1,3 +1,5 @@
+customAttributesCache = null
+
 module.exports = (BasePlugin) ->
     class MarkedrenderersPlugin extends BasePlugin
         name: 'markedrenderers'
@@ -148,7 +150,7 @@ module.exports = (BasePlugin) ->
                 afterContent = args.afterContent || ''
                 attributes = ''
                 for attributeName, attributeValue of args.attributes
-                    if attributeValue
+                    if attributeValue or attributeValue == ''
                         attributes += ' ' + attributeName + '="' + attributeValue.trim() + '"'
 
                 if !args.tagName

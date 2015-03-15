@@ -2,9 +2,38 @@ marked = require('./node_modules/docpad-plugin-marked/node_modules/marked')
 
 module.exports = {
     heading: [
+        # Adding attributes
+        (args) ->
+            customAttributes = args.original.text.match(/\s*\{:?([#.][^}]+|[a-z-]+=(?:['"]|&quot;|&#39;)[^}]*)\}\s*$/)
+            if customAttributes
+                args.original.text = args.original.text.substr(0, args.original.text.length - customAttributes[0].length)
+                customAttributes = customAttributes[1]
+                customClasses = customAttributes.match(/\.([^\s#.]+)/g)
+                customID = customAttributes.match(/#(?!39;)([^\s.]+)/g)
+                customAttributes = customAttributes.match(/[a-z-]+=(['"]|&quot;|&#39;).*\1/g)
+
+                if customID
+                    args.attributes.id = customID[0].substr(1)
+                    args.hasCustomID = true
+
+                if customClasses
+                    for customClass in customClasses
+                        args.attributes.class+= ' ' + customClass.substr(1)
+                if customAttributes
+                    for customAttribute in customAttributes
+                        customAttributeName = customAttribute.match(/[a-z-]+/)[0]
+                        customAttributeValue = customAttribute.match(/\=(['"]|&quot;|&#39;)(.*)\1/)[2]
+
+                        if customAttributeName != 'class'
+                            args.attributes[customAttributeName] = customAttributeValue
+                        else
+                            args.attributes.class+= ' ' + customAttributeValue
+            return args
+
         # Proper headers with cyrillic symbols
         (args) ->
-            args.attributes.id = args.original.raw.toLowerCase().replace(/[^a-zа-я0-9_]+/g, '-')
+            unless args.hasCustomID
+                args.attributes.id = args.original.text.toLowerCase().replace(/[^a-zа-я0-9_]+/g, '-')
             return args
 
         # Adding anchors
