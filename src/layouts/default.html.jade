@@ -1,7 +1,7 @@
 doctype html
 html(lang=document.lang ? document.lang : false)
   head
-    title ololo
+    title= document.title || "Whatever, no title"
 
   body
     //- - var docs = getCollection("html").toJSON()

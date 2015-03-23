@@ -1,3 +1,7 @@
+# TODO: wrap in `try`, use later only if there is marked plugin,
+#       and if the setting is set, throw a warning
+marked = require('./../../../node_modules/docpad-plugin-marked/node_modules/marked')
+
 module.exports = (BasePlugin) ->
     class MetadefaultsPlugin extends BasePlugin
         name: 'metadefaults'
@@ -37,6 +41,22 @@ module.exports = (BasePlugin) ->
                         actualMetaDefaults[key] = value
 
                 document.setMetaDefaults(actualMetaDefaults)
+
+                # Default title from markdown
+                # TODO: add options for disabling at all and for disabling removing from body
+                markedRenderer = new marked.Renderer()
+                markedRenderer.heading = (text, level) ->
+                  return text
+
+                # TODO: Add check for markdown in source
+                documentBodyLines = document.get('body').split('\n')
+                firstLine = documentBodyLines[0]
+                if firstLine and firstLine.trim()[0] == '#'
+                    titleText = marked(firstLine, {renderer: markedRenderer});
+                    unless document.getMeta('title')
+                        document.setMeta('title', titleText)
+                        documentBodyLines.splice(0, 1)
+                        document.set('body', documentBodyLines.join('\n'))
 
             # Doing all the other stuff
             this.docpad.getCollection('documents').forEach (document) ->
