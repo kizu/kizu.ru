@@ -1,0 +1,122 @@
+module.exports = {
+    fun:
+        ru: "Эксперименты"
+        en: "Experiments"
+
+    fun_in:
+        ru: "Экспериментах"
+        en: "Experiments"
+
+    issues:
+        ru: "Заметки"
+        en: "Issues"
+
+    issues_in:
+        ru: "Заметках"
+        en: "Issues"
+
+    projects:
+        ru: "Проекты"
+        en: "Projects"
+
+    projects_in:
+        ru: "Проектах"
+        en: "Projects"
+
+    blog:
+        ru: "Блог"
+        en: "Blog"
+
+    blog_in:
+        ru: "блоге"
+        en: "the Blog"
+
+    old:
+        ru: "Старое"
+        en: "Old"
+
+    old_in:
+        ru: "Старом"
+        en: "Old"
+
+    name:
+        ru: "Роман Комаров"
+        en: "Roman Komarov"
+
+    twitter_name:
+        ru: "ki_zu"
+        en: "kizmarh"
+
+    twitter_follow:
+        ru: "Читайте меня в твиттере"
+        en: "Follow me on twitter"
+
+    published:
+        ru: "Опубликовано"
+        en: "Published on"
+
+    drafted:
+        ru: "Черновик от"
+        en: "Draft from"
+
+    thanks_to:
+        ru: "Спасибо"
+        en: "Thanks to"
+
+    in:
+        ru: "в"
+        en: "in"
+
+    link_to_part:
+        ru: "Ссылка на это место"
+        en: "Link to this place"
+
+    feedback_text1:
+        ru: "Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете или"
+        en: "If you've spotted a typo or a mistake, or wish to add something on, you could either"
+
+    feedback_issue:
+        ru: "написать мне об этом"
+        en: "write me about this"
+
+    feedback_text2:
+        ru: "на Гитхабе, или"
+        en: "on GitHub, either"
+
+    feedback_edit:
+        ru: "поправить статью"
+        en: "edit this article"
+
+    feedback_text3:
+        ru: "с помощью"
+        en: "with"
+
+    feedback_for:
+        ru: "Отзыв на"
+        en: "Feedback for"
+
+    screenshot:
+        ru: "Скриншот"
+        en: "Screenshot"
+
+    html_demo:
+        ru: "Живой пример"
+        en: "Live example"
+
+    look_at_the_demo:
+        ru: "Посмотрите на демо"
+        en: "Look at the demo"
+
+    embedded_in_the_post:
+        ru: "встроенное в пост"
+        en: "embedded in the post"
+
+    laquo:
+        ru: "«"
+        en: "“"
+
+    raquo:
+        ru: "»"
+        en: "”"
+
+}

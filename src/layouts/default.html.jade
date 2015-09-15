@@ -1,7 +1,37 @@
+- var lang = document.lang
+- var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
+
 doctype html
-html(lang=document.lang ? document.lang : false)
+//- <html class="page page_{{ lang }} page_{{ page.page_type }}{% if category != "" %} page_{{ category }}{% endif %}">
+html(lang=lang ? lang : false)
+
   head
-    title= document.title || "Whatever, no title"
+    //- All the important meta stuff
+    meta(
+      charset="utf-8")
+    meta(
+      viewport="width=device-width")
+    meta(
+      http-equiv="X-UA-Compatible",
+      content="IE=EmulateIE7,IE=edge")
+
+    //- The title!
+    title= (document.title || "Whatever, no title") + " — kizu.ru" + (lang == "en" ? "/en" : '')
+
+    //- The link to RSS/Atom
+    link(
+      rel="alternate",
+      type="application/atom+xml",
+      title="Atom feed",
+      href="http://feeds.feedburner.com/kizu" + (lang == "en" ? "ruen" : ''))
+
+    //- TODO: alternate languages only if page have translation
+    //-       make this “have translation” at multilang plugin
+
+    //- The styles!
+    link(
+      rel="stylesheet",
+      href= site.rootUrl + "s/style.css")
 
   body
     //- - var docs = getCollection("html").toJSON()
@@ -9,14 +39,25 @@ html(lang=document.lang ? document.lang : false)
     //-   - for doc in docs
     //-     li: a(href=doc.url)= doc.name
 
-    table
-      caption metadata
+    table.debug
       tr
         th key
         th value
       tr
         td date
         td= document.date
+      if site.url
+        tr
+          td url
+          td= site.url
+      if site.rootUrl
+        tr
+          td rootUrl
+          td= site.rootUrl
+      if lang
+        tr
+          td lang
+          td= lang
       if document.thanks_to
         tr
           td thanks_to
@@ -26,4 +67,45 @@ html(lang=document.lang ? document.lang : false)
           td categories
           td= document.categories
 
+    //- TODO: Should we have different layouts for different stuff?
+
+    header.header(role="banner")
+      h1.title
+        //- TODO: Don't show on index page
+        a(
+          href="/" + lang_prefix
+          )= loc('name')
+
+      //- TODO: add links to translation if there are such
+      ul.languages
+        //- TODO: add bemto
+        //- TODO: add functions for getting the root of the given lang
+        if lang == 'en'
+          li.language.language_current(
+            data-short="en")
+            = "in english"
+          li.language
+            a.language__link(
+              data-short="ru",
+              title="Для этой статьи нет перевод, но для многих других — есть",
+              href="/")
+              = "по-русски*"
+        else
+          li.language
+            a.language__link(
+              data-short="en",
+              title="No translation for this article (yet?), but a lot of other english pages are available!",
+              href="/en/")
+              = "in english*"
+          li.language.language_current(
+            data-short="ru")
+            = "по-русски"
+
+
+
+
     != content
+
+    //- TODO: Lazy loading the fonts
+    //- TODO: Prism.js
+    //- TODO: Metrika

@@ -1,7 +1,22 @@
 # DocPad Configuration File
 # http://docpad.org/docs/config
 
+# TODO: make all this as a part of `multilang` plugin
+loc_strings = require('./loc_strings.coffee')
+
 docpadConfig = {
+    # Global stuff for templates
+    templateData:
+        site:
+            url: 'http://kizu.ru'
+            rootUrl: '/' # Could be overrided for different environments
+
+        # Localized
+        # TODO: optional second param for overriding lang
+        loc: (string) ->
+            loc_strings[string][@document.lang]
+
+
     # Skip files starting from underscore from scanning by DocPad
     ignoreCustomPatterns: /^_/
 
@@ -21,13 +36,6 @@ docpadConfig = {
             languages: ['en', 'ru']
             defaultLanguage: 'ru'
 
-        stylus:
-            stylusLibraries:
-                nib: false
-                'autoprefixer-stylus': true
-            stylusOptions:
-                compress: true
-                'include css': true
 }
 
 module.exports = docpadConfig
