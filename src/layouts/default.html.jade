@@ -1,6 +1,5 @@
 - var lang = document.lang
 - var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
-
 doctype html
 //- <html class="page page_{{ lang }} page_{{ page.page_type }}{% if category != "" %} page_{{ category }}{% endif %}">
 html(lang=lang ? lang : false)
@@ -29,9 +28,10 @@ html(lang=lang ? lang : false)
     //-       make this “have translation” at multilang plugin
 
     //- The styles!
-    link(
-      rel="stylesheet",
-      href= site.rootUrl + "s/style.css")
+    //- link(
+    //-   rel="stylesheet",
+    //-   href= site.rootUrl + "s/style.css")
+    != getBlock("styles").add(["/s/style.css"]).toHTML()
 
   body
     //- - var docs = getCollection("html").toJSON()
@@ -105,6 +105,8 @@ html(lang=lang ? lang : false)
 
 
     != content
+
+    != getBlock('scripts').toHTML()
 
     //- TODO: Lazy loading the fonts
     //- TODO: Prism.js

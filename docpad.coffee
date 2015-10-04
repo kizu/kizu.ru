@@ -5,7 +5,7 @@
 loc_strings = require('./loc_strings.coffee')
 
 docpadConfig = {
-    # Disable warnings for private plugins
+    # Using just coffee for local plugins
     warnUncompiledPrivatePlugins: false
 
     # Global stuff for templates
@@ -32,6 +32,7 @@ docpadConfig = {
                 categories: 'blog'
 
             routes:
+                '/styles/': '/s/'
                 '/pages/': '/'
                 '/posts/': '/%categories%/'
 
