@@ -1,6 +1,6 @@
 # TODO: wrap in `try`, use later only if there is marked plugin,
 #       and if the setting is set, throw a warning
-marked = require('./../../../node_modules/docpad-plugin-marked/node_modules/marked')
+marked = require('./../../../node_modules/marked')
 
 module.exports = (BasePlugin) ->
     class MetadefaultsPlugin extends BasePlugin

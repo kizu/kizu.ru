@@ -1,4 +1,5 @@
 {
+    "private": true,
     "name": "docpad-plugin-markedrenderers",
     "version": "2.0.0",
     "description": "DocPad plugin that adds the ability to better route urls from src to out",

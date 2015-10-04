@@ -5,6 +5,9 @@
 loc_strings = require('./loc_strings.coffee')
 
 docpadConfig = {
+    # Disable warnings for private plugins
+    warnUncompiledPrivatePlugins: false
+
     # Global stuff for templates
     templateData:
         site:
