@@ -17,7 +17,6 @@ HTML specification have a lot of different restrictions. And I have my doubt
 
 And if you’d do this, browser’s parser won’t understand you and, as soon as it’d see the opening tag for the nested link, it would close the first one right there:
 
-{:.language-html}
     <a href="#Foo">
         Foo
         <a href="#Bar">
@@ -26,15 +25,18 @@ And if you’d do this, browser’s parser won’t understand you and, as soo
         Baz
     </a>
 
+    {:.language-html}
+
 in the eyes of the browser would be something like that —
 
-{:.language-html}
     <a href="#Foo">
         Foo
         </a><a href="#Bar">
             Bar
         </a>
         Baz
+
+    {:.language-html}
 
 And a live example:
 
@@ -53,7 +55,6 @@ And — found a proper solution. HTML-only one, by the way, the one that give
 
 [demo:nested-links-simple]
 
-{:.language-html}
     <a href="#a">
         Foo
         <object>
@@ -63,6 +64,8 @@ And — found a proper solution. HTML-only one, by the way, the one that give
         </object>
         Baz
     </a>
+
+    {:.language-html}
 
 What we do there is just placing an object between those links. Yep, it works: all parsers of modern browsers suddenly see those links independently, and won’t break your markup anymore. Hooray.
 
@@ -95,7 +98,6 @@ Obviously, the only browsers we’d need to support with such conditions are ol
 
 I don’t know of any easy solution for this problem in old IE. At the very least you could try to somehow fix it by “removing” the nested links using conditional comments:
 
-{:.language-html}
     <a href="…">
         content of the main link…
         <object>
@@ -104,6 +106,8 @@ I don’t know of any easy solution for this problem in old IE. At the very 
             <!--[if gte IE 9]><!--></a><!--<![endif]-->
         </object>
     </a>
+
+    {:.language-html}
 
 You’d lose some functionality there, but it could be ok for the most cases. [If not](*try-expressions "Curious ones could think about if it is possible to make a fallback using expressions"), you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
 

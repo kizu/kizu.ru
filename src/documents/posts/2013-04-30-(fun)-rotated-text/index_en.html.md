@@ -18,7 +18,8 @@ I managed to make this work with one assumption — we would need to know t
                 Rotated foo
             </span>
         </span>
-    {:.language-html}
+    
+        {:.language-html}
 
 2. Wrapper would get those styles:
 
@@ -29,7 +30,8 @@ I managed to make this work with one assumption — we would need to know t
             width: 1.5em;
             line-height: 1.5;
         }
-    {:.language-css}
+    
+        {:.language-css}
 
     Here we make our element to be inline-block (that’s not critical, the block display would work too, but inline-block is often handier), then we remove all the extra things using overflow (we would need this later) and set the width to the current elements’ height — the mentioned assumption (and `line-height` is placed here as an example of what defines the blocks’ height).
 
@@ -42,7 +44,8 @@ I managed to make this work with one assumption — we would need to know t
             transform: translate(0,100%) rotate(-90deg);
             transform-origin: 0 0;
         }
-    {:.language-css}
+    
+        {:.language-css}
 
 4. And now the key part of my solution: we need to make this inner element to be _square_ — this would make the resulting element to have the height of its width, and the width would be equal to the assumed height on the wrapper. So, to make an element squarish we use this trick:
 
@@ -51,7 +54,8 @@ I managed to make this work with one assumption — we would need to know t
             float: left;
             margin-top: 100%;
         }
-    {:.language-css}
+    
+        {:.language-css}
 
     Not that hard, but not a lot of people remember that top and bottom paddings and margins set in percents are using the width of the parent element, not its height. This behavior is not widely used, but here is a case where it’s useful at last.
 

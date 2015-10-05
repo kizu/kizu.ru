@@ -32,6 +32,7 @@ docpadConfig = {
                 categories: 'blog'
 
             routes:
+                '/scripts/': '/j/'
                 '/styles/': '/s/'
                 '/pages/': '/'
                 '/posts/': '/%categories%/'

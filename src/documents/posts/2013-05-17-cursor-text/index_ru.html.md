@@ -20,7 +20,8 @@
     input[type=text]:focus, input[type=password]:focus, textarea:focus {
         cursor: text;
     }
-{:.language-css}
+
+    {:.language-css}
 
 <small>Понятное дело, что вместо `input[type=text]` будет или класс, или перечисление всех возможных текстовых полей.</small>
 

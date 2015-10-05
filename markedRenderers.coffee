@@ -1,34 +1,42 @@
 marked = require('./node_modules/marked')
 
+# Adding attributes
+handleAttributes = (args) ->
+    content = args.original.text && 'text' || 'code'
+    customAttributes = args.original[content].match(/\s*\{:?([#.][^}]+|[a-z-]+=(?:['"]|&quot;|&#39;)[^}]*)\}\s*$/)
+    if customAttributes
+        args.original[content] = args.original[content].substr(0, args.original[content].length - customAttributes[0].length)
+        customAttributes = customAttributes[1]
+        customClasses = customAttributes.match(/\.([^\s#.]+)/g)
+        customID = customAttributes.match(/#(?!39;)([^\s.]+)/g)
+        customAttributes = customAttributes.match(/[a-z-]+=(['"]|&quot;|&#39;).*\1/g)
+
+        if customID
+            args.attributes.id = customID[0].substr(1)
+            args.hasCustomID = true
+
+        if customClasses
+            for customClass in customClasses
+                args.attributes.class+= ' ' + customClass.substr(1)
+        if customAttributes
+            for customAttribute in customAttributes
+                customAttributeName = customAttribute.match(/[a-z-]+/)[0]
+                customAttributeValue = customAttribute.match(/\=(['"]|&quot;|&#39;)(.*)\1/)[2]
+
+                if customAttributeName != 'class'
+                    args.attributes[customAttributeName] = customAttributeValue
+                else
+                    args.attributes.class+= ' ' + customAttributeValue
+    return args
+
+
 module.exports = {
+    code: [
+        (args) -> handleAttributes(args)
+    ]
+
     heading: [
-        # Adding attributes
-        (args) ->
-            customAttributes = args.original.text.match(/\s*\{:?([#.][^}]+|[a-z-]+=(?:['"]|&quot;|&#39;)[^}]*)\}\s*$/)
-            if customAttributes
-                args.original.text = args.original.text.substr(0, args.original.text.length - customAttributes[0].length)
-                customAttributes = customAttributes[1]
-                customClasses = customAttributes.match(/\.([^\s#.]+)/g)
-                customID = customAttributes.match(/#(?!39;)([^\s.]+)/g)
-                customAttributes = customAttributes.match(/[a-z-]+=(['"]|&quot;|&#39;).*\1/g)
-
-                if customID
-                    args.attributes.id = customID[0].substr(1)
-                    args.hasCustomID = true
-
-                if customClasses
-                    for customClass in customClasses
-                        args.attributes.class+= ' ' + customClass.substr(1)
-                if customAttributes
-                    for customAttribute in customAttributes
-                        customAttributeName = customAttribute.match(/[a-z-]+/)[0]
-                        customAttributeValue = customAttribute.match(/\=(['"]|&quot;|&#39;)(.*)\1/)[2]
-
-                        if customAttributeName != 'class'
-                            args.attributes[customAttributeName] = customAttributeValue
-                        else
-                            args.attributes.class+= ' ' + customAttributeValue
-            return args
+        (args) -> handleAttributes(args)
 
         # Proper headers with cyrillic symbols
         (args) ->
@@ -41,6 +49,7 @@ module.exports = {
             args.beforeContent = '<a class="header-anchor" href="#' + args.attributes.id + '"></a>'
             return args
     ]
+
     link: [
         # Adding `link` class
         (args) ->

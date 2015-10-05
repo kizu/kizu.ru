@@ -106,7 +106,7 @@ html(lang=lang ? lang : false)
 
     != content
 
-    != getBlock('scripts').toHTML()
+    != getBlock('scripts').add(["/j/prism.js"]).toHTML()
 
     //- TODO: Lazy loading the fonts
     //- TODO: Prism.js

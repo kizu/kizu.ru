@@ -18,7 +18,6 @@ Well, the code wouldn't be that elegant as with original SVG Stacks idea, but wh
 
 The HTML for those icons is this:
 
-{:.language-html}
     <span class="icon-wrapper">
         <img class="icon icon_download" src="test3.svg" alt="">
     </span>
@@ -29,9 +28,10 @@ The HTML for those icons is this:
         <img class="icon icon_print" src="test3.svg" alt="">
     </span>
 
+    {:.language-html}
+
 The SVG itself would look like this:
 
-{:.language-markup}
     <svg xmlns="http://www.w3.org/2000/svg">
         <style>
     
@@ -51,9 +51,11 @@ The SVG itself would look like this:
         <path class="icon" id="print" d="M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5"></path>
     </svg>
 
+    {:.language-markup}
+
+
 And the [_basic_](*webkit-bug "there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the …") CSS would look this way:
 
-{:.language-css}
     .icon-wrapper {
         display: inline-block;
         vertical-align: top;
@@ -76,6 +78,8 @@ And the [_basic_](*webkit-bug "there is a bug in Webkit preventing the icons to 
     .icon_print          { width: 120px; height: 600px; }
     .icon_print:hover    { width: 600px; height: 120px; }
 
+    {:.language-css}
+
 I guess you already got the idea? While we can't use `:target`, you could already know that we can use [media queries in SVG](*clowncar "See, for example [Clown Car Technique](http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/) by Estelle").
 
 So, we hide all the icons inside an SVG and then showing them when the specific media queries are triggered.
@@ -86,11 +90,12 @@ Some notes on some things in code you're already wondering on:
 
 2. I've used a wrapper to show only the actual part of the SVG, hiding the extra canvas that is needed only for media queries. However, if you're ok with absolute positioning, you could use it along with `clip` to hide the extras:
 
-    {:.language-css}
         .icon_absolute {
             position: absolute;
             clip: rect(0, 16px, 16px, 0);
         }
+        
+        {:.language-css}
         
 3. An important part: your `<svg>` tag should be without `width`, `height` or `viewBox` attributes. This would make icons to not resize when the container resizes, so we could actually change the size of `<img/>` containing the SVG without resizing the icons.
 

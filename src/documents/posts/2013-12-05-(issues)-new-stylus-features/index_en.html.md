@@ -14,7 +14,8 @@ The syntax for passing the block is rather simple: we call a mixin using a `+` p
       // The block we want to pass
       width: 10px
       height: 10px
-{:.language-styl}
+
+    {:.language-styl}
 
 
 After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using [an interpolation](*block-call "there is a possibility we would add a way of using it without interpolation in the future though"):
@@ -23,7 +24,8 @@ After we passed the block to the mixin, this block becomes available inside of i
       width: 20px
       .foo
         {block}
-{:.language-styl}
+
+    {:.language-styl}
 
 Or we could pass this as a variable to the next mixin, or use it in any other way.
 
@@ -34,7 +36,8 @@ Anyway, if you've called a mixin above like this:
         padding: 0
         .baz
           height: 20px    
-{:.language-styl}
+
+    {:.language-styl}
 
 You would get this:
 
@@ -47,7 +50,8 @@ You would get this:
     .bar .foo .baz {
       height: 20px;
     }
-{:.language-css}
+
+    {:.language-css}
 
 With block mixins we have a way of wrapping blocks with mixins and then wrapping them with anything. This feature is often used for handling media-queries, and my example that you'll see later in this article is also from the rwd area.
 
@@ -63,7 +67,8 @@ As I already mentioned, in the latest releases of Stylus we added (and polished 
         '10%': yeah
       }
     }
-{:.language-javascript}
+
+    {:.language-javascript}
 
 As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas [are not](*codestyle "And as with all other optional syntax features of Stylus, you should use a consistent codestyle in your stylesheets, otherwise your code would be messy as hell").
 
@@ -71,7 +76,8 @@ Then, after you defined a hash, you could add new properties to it or redefine o
 
     foo.bar = 20px
     foo['whatever'] = 'hello'
-{:.language-styl}
+
+    {:.language-styl}
 
 The differences are simple: while you could use only idents with the dot syntax, with square brackets you could pass any string containing any symbols, or use a variable instead. So, the brackets are more flexible, while the dot is not.
 
@@ -89,7 +95,8 @@ As an example, you can take this small chunk of code:
 
     if match(':(before|after)', selector())
       content: ''
-{:.language-styl}
+
+    {:.language-styl}
 
 Here we check if the selector has any pseudo-elements in it and if so — we apply the `content`. This could be useful if we have some mixin, containing styles that could be applied both to a normal element and to a pseudo one.
 
@@ -106,7 +113,8 @@ The only downside of this method is the grouping itself — the selectors would 
 For the start we need an object where we would store the cached blocks:
 
     $media_cache = {}
-{:.language-styl}
+
+    {:.language-styl}
 
 Then we would need a mixin which we could use instead of media-queries, its basic form would be this:
 
@@ -114,7 +122,8 @@ Then we would need a mixin which we could use instead of media-queries, its basi
       unless $media_cache[$condition]
         $media_cache[$condition] = ()
       push($media_cache[$condition], block)
-{:.language-styl}
+
+    {:.language-styl}
 
 This mixin's logic is rather simple: if we don't have a list for the blocks for a given condition, we initialize it then we pass the block to this list.
 
@@ -123,14 +132,16 @@ It won't be enough for us actually: this mixin could be used only this way:
     +media('(max-width:640px)')
       .foo
         display: block;
-{:.language-styl}
+
+    {:.language-styl}
 
 We could only pass full blocks to it, but couldn't use the bubbling:
 
     .foo
       +media('(max-width:640px)')
         display: block;
-{:.language-styl}
+
+    {:.language-styl}
 
 The code of our `media` mixin doesn't know anything about the context, the selector where we called it — yet. Here the new `selector()` function and an extra helper mixin are required, and with them `media` mixin would look like this:
 
@@ -143,7 +154,8 @@ The code of our `media` mixin doesn't know anything about the context, the selec
       +helper($condition)
         {selector()}
           {block}
-{:.language-styl}
+
+    {:.language-styl}
 
 To save the context we move the initial code of this mixin inside a helper mixin, then call it passing the `block` inside the interpolated` selector()`.
 
@@ -154,14 +166,16 @@ So, as we now wrap the code with a mixin, it won't build automatically. We would
         @media $media
           for $block in $blocks
             {$block}
-{:.language-styl}
+
+    {:.language-styl}
 
 It is rather easy: we iterate through the cache, taking the condition — `$media`, and the list of all the blocks that were called with it — `$blocks`, then we create the media-query with that condition and inside of it iterate through all the blocks, yielding all of them one by one.
 
 So, if we would then call this function at the end of the document:
 
     apply_media_cache()
-{:.language-styl}
+
+    {:.language-styl}
 
 We would get what we want.
 
@@ -206,7 +220,8 @@ However, there are a few things to improve in this function: we do not want to a
 
     // Here we call all the cached styles
     apply_media_cache()
-{:.language-styl}
+
+    {:.language-styl}
 
 Then we could write our stylesheets like this:
 
@@ -236,7 +251,8 @@ Then we could write our stylesheets like this:
 
       +media('(min-width: 500px) and (max-width: 700px)')
         height: 50px
-{:.language-styl}
+
+    {:.language-styl}
 
 And get this result afterwards:
 
@@ -275,7 +291,8 @@ And get this result afterwards:
         height: 50px;
       }
     }
-{:.language-css}
+
+    {:.language-css}
 
 In the resulting code we can see that we added the hash with aliases, we can also call the mixin with conditions lacking parentheses.
 

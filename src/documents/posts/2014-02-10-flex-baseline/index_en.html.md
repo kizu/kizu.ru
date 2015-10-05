@@ -68,7 +68,6 @@ There, [now it's perfect](*without-fallbacks "No fallbacks for older browsers th
 
 The resulting code for this example would be:
 
-{:.language-css}
     .flex {
         display: -ms-inline-flexbox;
         display: -webkit-inline-flex;
@@ -94,6 +93,8 @@ The resulting code for this example would be:
         display: block;
         padding-top: 10px;
         }
+
+    {:.language-css}
 
 ## Overall {#resume}
 

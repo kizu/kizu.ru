@@ -68,7 +68,6 @@
 
 Код получается таким:
 
-{:.language-css}
     .flex {
         display: -ms-inline-flexbox;
         display: -webkit-inline-flex;
@@ -94,6 +93,8 @@
         display: block;
         padding-top: 10px;
         }
+
+    {:.language-css}
 
 ## Итого {#resume}
 

@@ -9,14 +9,18 @@
 
 Вот примерное решение:
 
-{:.language-html}
     lalala<i class="wbr"></i>lalala
 
-{:.language-css}
+    {:.language-html}
+
+и
+
     WBR,
     .wbr {
         display: inline-block;
         }
+
+    {:.language-css}
 
 Единственный момент, который остаётся за рамками эмуляции: в IE `WBR` может создавать разрыв строки при `white-space:nowrap`.
 
