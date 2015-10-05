@@ -1,0 +1,23 @@
+// # Main: content block
+.Main
+  cursor: text
+
+  // Aligning stuff properly
+  // TODO: Move to mixin/extend
+  & > *,
+  /h1.title,
+  /.Page:not(.Page_post) .Page-Copy
+    width: $size.content
+    max-width: 100%
+    margin-left: auto
+    margin-right: auto
+
+    text-align: left
+
+  // Better table
+  & > table
+    display: inline-block
+
+  // ???
+  & header h1
+    padding-bottom: 2.5*$size.base

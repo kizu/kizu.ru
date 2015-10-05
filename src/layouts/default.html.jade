@@ -1,8 +1,59 @@
-- var lang = document.lang
-- var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
+-
+  var lang = document.lang
+  var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
+
+  var categories = document.categories
+  var is_post = !!document.categories
+  var page_type = 'index'
+
+  if (is_post) {
+    page_type = 'post'
+  }
+
+  var page_class = 'Page_' + page_type
+
+  if (lang) {
+    page_class += ' Page_' + lang
+  }
+
+
+mixin debug()
+  //- - var docs = getCollection("html").toJSON()
+  //- ul
+  //-   - for doc in docs
+  //-     li: a(href=doc.url)= doc.name
+
+  table.debug
+    tr
+      th key
+      th value
+    tr
+      td date
+      td= document.date
+    if site.url
+      tr
+        td url
+        td= site.url
+    if site.rootUrl
+      tr
+        td rootUrl
+        td= site.rootUrl
+    if lang
+      tr
+        td lang
+        td= lang
+    if document.thanks_to
+      tr
+        td thanks_to
+        td= document.thanks_to
+    if document.categories
+      tr
+        td categories
+        td= document.categories
+
+
 doctype html
-//- <html class="page page_{{ lang }} page_{{ page.page_type }}{% if category != "" %} page_{{ category }}{% endif %}">
-html(lang=lang ? lang : false)
+html.Page(class=page_class, lang=lang ? lang : false)
 
   head
     //- All the important meta stuff
@@ -33,44 +84,11 @@ html(lang=lang ? lang : false)
     //-   href= site.rootUrl + "s/style.css")
     != getBlock("styles").add(["/s/style.css"]).toHTML()
 
-  body
-    //- - var docs = getCollection("html").toJSON()
-    //- ul
-    //-   - for doc in docs
-    //-     li: a(href=doc.url)= doc.name
+  body.Page-Body
+    +debug
 
-    table.debug
-      tr
-        th key
-        th value
-      tr
-        td date
-        td= document.date
-      if site.url
-        tr
-          td url
-          td= site.url
-      if site.rootUrl
-        tr
-          td rootUrl
-          td= site.rootUrl
-      if lang
-        tr
-          td lang
-          td= lang
-      if document.thanks_to
-        tr
-          td thanks_to
-          td= document.thanks_to
-      if document.categories
-        tr
-          td categories
-          td= document.categories
-
-    //- TODO: Should we have different layouts for different stuff?
-
-    header.header(role="banner")
-      h1.title
+    header.Page-Header(role="banner")
+      h1.Page-Title
         //- TODO: Don't show on index page
         a(
           href="/" + lang_prefix
@@ -104,7 +122,23 @@ html(lang=lang ? lang : false)
 
 
 
-    != content
+    if is_post
+      article.Page-Content(role="main")
+        .LiquidLayout
+          .Main.LiquidLayout-Content
+            != content
+    else
+      .Page-Content.Main(role="main")
+        != content
+
+    footer.Page-Footer
+      p.Page-Copy
+        = "© 2015 " + loc('name') + "."
+        a.Link.Link_wrapper.Link_twitter(href="https://twitter.com/" + loc('twitter_name'))
+          img.Ico(alt="Twitter", src="http://favicon.yandex.net/favicon/twitter.com", title="Twitter")
+          span.Link-Inner
+            = loc('twitter_follow')
+          = "!"
 
     != getBlock('scripts').add(["/j/prism.js"]).toHTML()
 

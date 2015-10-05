@@ -1,0 +1,12 @@
+// # LiquidLayout
+
+.LiquidLayout
+  @media (min-width: 820px)
+    margin: 0 auto
+    max-width: $size.content + 2*$size.sidebar
+
+  &-Content
+    counter-reset: sidenote
+
+    max-width: $size.content
+    margin: 0 $size.sidebar 0 auto

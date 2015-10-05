@@ -46,14 +46,14 @@ module.exports = {
 
         # Adding anchors
         (args) ->
-            args.beforeContent = '<a class="header-anchor" href="#' + args.attributes.id + '"></a>'
+            args.beforeContent = '<a class="Header-Anchor" href="#' + args.attributes.id + '"></a>'
             return args
     ]
 
     link: [
         # Adding `link` class
         (args) ->
-            args.attributes.class += ' link'
+            args.attributes.class += ' Link'
             return args
 
         # Handling `@username` twitter links
@@ -69,10 +69,10 @@ module.exports = {
         # Wrapping quoted link content for better underlines
         (args) ->
             initialText = args.original.text
-            args.original.text = args.original.text.replace(/^“([^”]+)”$/, '“<span class="link__inner">$1</span>”')
-            args.original.text = args.original.text.replace(/^«([^»]+)»$/, '«<span class="link__inner">$1</span>»')
+            args.original.text = args.original.text.replace(/^“([^”]+)”$/, '“<span class="Link-Inner">$1</span>”')
+            args.original.text = args.original.text.replace(/^«([^»]+)»$/, '«<span class="Link-Inner">$1</span>»')
             if initialText != args.original.text
-                args.attributes.class += ' link_wrapper'
+                args.attributes.class += ' Link_wrapper'
             return args
 
         # Creating sidenotes for `href`s starting with `*`
@@ -80,19 +80,19 @@ module.exports = {
             if args.original.href[0] == '*'
                 id = args.original.href.substr(1)
 
-                args.before += '<span class="sidenote-wrapper">'
+                args.before += '<span class="Sidenote-Wrapper">'
 
-                args.attributes.class = 'sidenote-context'
+                args.attributes.class = 'Sidenote-Context'
                 args.attributes.id = id
                 args.attributes.href = '#' + id
 
-                args.after  +=     '<span class="sidenote">'
-                args.after  +=         '<span class="sidenote-misc"> (</span>'
+                args.after  +=     '<span class="Sidenote">'
+                args.after  +=         '<span class="Sidenote-Misc"> (</span>'
                 args.after  +=         marked(args.original.title, options).replace(/^\s*<p>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1')
-                args.after  +=         '<span class="sidenote-misc">)</span>'
+                args.after  +=         '<span class="Sidenote-Misc">)</span>'
                 args.after  +=     '</span>'
 
-                args.after  +=     '<a class="sidenote-close" href="#x"></a>'
+                args.after  +=     '<a class="Sidenote-Close" href="#x"></a>'
                 args.after  += '</span>'
 
                 args.attributes.title = null
