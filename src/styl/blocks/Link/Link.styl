@@ -1,0 +1,33 @@
+.Link
+
+  &_wrapper
+    white-space: nowrap // Would be a class for multiline links
+
+    @media (max-width: 550px)
+      white-space: normal
+
+    &:hover
+      background-repeat: no-repeat
+
+      & ^[0]-Inner
+        padding-top: inherit
+        padding-bottom: inherit
+        background: inherit
+        background-repeat: repeat-x
+
+    & .ico
+      margin-top: -4px
+
+      vertical-align: middle
+
+  &_pseudo
+    &,
+    &^[0]_wrapper ^[0]-Inner
+      text-decoration: none
+      border-bottom: 1px dotted
+
+    &^[0]_wrapper
+      border-bottom: 0
+
+  &_text
+    color: inherit

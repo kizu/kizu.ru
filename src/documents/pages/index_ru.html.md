@@ -1,41 +1,10 @@
-# Главная страница
 
-## Some header {:.hello}
+[Блог](blog/) • [Заметки](issues/) • [Эксперименты](fun/) • [Проекты](projects/)
+{:.nav}
 
-## Some header {.hello}
-
-## Some header {#asdsa}
-
-## Some header {:#asdsa}
-
-## Some header {:#asdsa.dsd .sdsd}
-
-## Some header {:#asdsa.dsd .sdsd.as}
-
-## Some header {alt=""}
-
-## Some header {alt="double"}
-
-## Some header {alt='single'}
-
-## Some header {:#asddas title="asdas" alt='whatever'}
-
-Quoted: [“Hello, world!”](http://kizu.ru)
-
-Quoted: [«Привет, мир!»](http://kizu.ru)
-
-Twitter: [@ki_zu](@ki_zu)
-
-GitHub: [gh:kizu](gh:kizu)
-
-Email: [kizu@kizu.ru](kizu@kizu.ru)
-
-GFM: http://kizu.ru
-
-Reference: [Referenced][]
+Привет. Я работаю разработчиком интерфейсов в [Яндексе](http://yandex.ru/) и участвую в жизни сообщества [«Веб-стандарты»](http://web-standards.ru/).
 
 
+Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над несколькими опенсорсными проектами: [Stylus](gh:stylus/stylus), [Хаяку](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
 
-
-
-[Referenced]: http://kizu.ru "Title!"
+Иногда я выступаю с докладами на конференциях, например на [Я.Субботниках](https://tech.yandex.ru/people/377/) и [Web Standards Days](http://webstandardsdays.ru). В 2012 даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session), а в 2013 — [ещё одну там же](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source).

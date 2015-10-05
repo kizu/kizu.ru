@@ -1,2 +1,60 @@
 img
   border: 0
+
+
+::selection
+  text-shadow: none !important
+  background: #B1D2FB
+
+
+// Links
+A
+  &,
+  /.demo-toggler-item
+    padding: 0.3em 0 0.287em // Magic!
+
+    cursor: pointer
+
+    color: $color.link
+    text-decoration: none
+
+  .Main &:visited:not(:hover),
+  /.prevnext > .Link:visited:not(:hover)
+    color: $color.visited
+
+  &:hover
+    &,
+    /.demo-toggler-item:hover
+      color: $color.link
+
+      text-shadow: -1px 0 $color.body, 1px 0 $color.body, -2px -1px $color.body, 2px -1px $color.body,
+                    0 -1px $color.body, 0 -2px $color.body, 0 -3px $color.body, 0 -4px $color.body, 0 -5px $color.body, 0 -6px $color.body
+
+      background: repeat-x linear-gradient(
+        $color.link,
+        $color.link 1px,
+        rgba($color.white, 0.9) 1px,
+        rgba($color.white, 0.9) 2px,
+        transparent 2px)
+
+      background-size: 1px 0.44em
+      background-position: -9px 100%
+
+    .Page-Title &
+      background-image: linear-gradient($color.link, $color.link 2px, rgba($color.white, 0.9) 2px, rgba($color.white, 0.9) 3px, transparent 3px)
+      background-size: 1px 0.47em
+      text-shadow: 0 1px rgba($color.white, 0.9), -2px 0 $color.distant, 2px 0 $color.distant
+
+    .Page-Header &,
+    .Page-Footer &
+      background-size: 1px 0.45em
+
+      .Page_post &
+        text-shadow: -1px 0 $color.distant, 1px 0 $color.distant, -2px -1px $color.distant, 2px -1px $color.distant,
+                      0 -1px $color.distant, 0 -2px $color.distant, 0 -3px $color.distant, 0 -4px $color.distant, 0 -5px $color.distant, 0 -6px $color.distant, 0 -7px $color.distant
+
+    .feedback > &,
+    .published > &,
+    .thanks-to > &,
+    .nav > &
+      background-size: 1px .47em

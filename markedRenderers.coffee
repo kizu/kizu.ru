@@ -27,10 +27,15 @@ handleAttributes = (args) ->
                     args.attributes[customAttributeName] = customAttributeValue
                 else
                     args.attributes.class+= ' ' + customAttributeValue
+
     return args
 
 
 module.exports = {
+    paragraph: [
+        (args) -> handleAttributes(args)
+    ]
+
     code: [
         (args) -> handleAttributes(args)
     ]
@@ -88,7 +93,7 @@ module.exports = {
 
                 args.after  +=     '<span class="Sidenote">'
                 args.after  +=         '<span class="Sidenote-Misc"> (</span>'
-                args.after  +=         marked(args.original.title, options).replace(/^\s*<p>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1')
+                args.after  +=         marked(args.original.title, options).replace(/^\s*<p(?: class="")?>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1')
                 args.after  +=         '<span class="Sidenote-Misc">)</span>'
                 args.after  +=     '</span>'
 
