@@ -1,0 +1,96 @@
+p,
+ul,
+ol,
+dl,
+blockquote,
+hr,
+code,
+pre,
+table
+  padding: 0
+  margin: 0 0 2*$size.base
+
+li,
+li > p
+  padding: 0
+  margin: 0 0 su
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  padding: 0
+  margin: 0
+
+  line-height: 1
+  font-weight: normal
+  word-wrap: break-word
+
+  & > .hanger:first-child
+    position: absolute
+
+    width: 1.5em
+    margin-left: -1.5em
+
+    text-align: right
+
+h1
+  position: relative
+  font-size: 3.5*$size.base
+  padding-top: 2*$size.base
+  margin-left: -0.3*$size.base
+
+h2
+  position: relative
+  font-size: 2.5*$size.base
+  padding-bottom: 1*$size.base
+
+h3
+  font-size: 2*$size.base
+  padding-top: 1*$size.base
+  padding-bottom: 1*$size.base
+
+h4,
+h5,
+h6
+  font-size: 1*$size.base
+  padding-bottom: 1*$size.base
+
+ol
+  counter-reset: list
+
+li
+  list-style-type: none // Fixme: screenreaders would die out?
+
+  & &
+    padding-left: 1.5*$size.base
+
+  &:before
+    content: "— "
+    position: absolute
+    display: inline-block
+    width: 1.5*$size.base
+    margin-left: -1.5*$size.base
+    text-align: right
+
+  ol > &
+    counter-increment: list
+
+    &:before
+      content: counter(list) ". "
+
+
+blockquote
+  position: relative
+  left: -1px
+
+  padding-left: 1em
+  padding-left: 2.5vw
+  border-left: 1px solid rgba($color.dark, 0.5)
+  box-shadow: inset 1px 0 0 rgba($color.dark, 0.5)
+  margin-left: -1em
+  margin-left: -2.5vw
+
+  text-align: left

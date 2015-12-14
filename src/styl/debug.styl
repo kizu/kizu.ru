@@ -1,12 +1,40 @@
 // ## Debug stuff
 .debug
-  display: none
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
 
-  box-sizing: border-box
-  width: 100%
-  padding: 1em 2em
-  border: 2px solid
+  &:target ~ .Page-Content
+    background-image: linear-gradient(rgba(#000, 0.1) $size.base, rgba(#000, 0) $size.base)
+    background-size: 2*$size.base 2*$size.base
 
-  & > * > tr > th,
-  & > * > tr > td
-    text-align: left
+  &-content
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+
+    overflow: hidden
+    overflow-y: auto
+
+    max-height: $size.header
+
+    font-size: 0.5em
+    line-height: 1.5
+
+    &:not(:target)
+      pointer-events: none
+
+      ^[0]:not(:target) &
+        display: none
+
+  & > table
+    box-sizing: border-box
+    width: 100%
+    padding: 1em 2em
+    border: 2px solid
+
+    & > * > tr > th,
+    & > * > tr > td
+      text-align: left

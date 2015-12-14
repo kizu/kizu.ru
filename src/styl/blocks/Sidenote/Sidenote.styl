@@ -151,13 +151,16 @@
       float: right
       clear: right
 
-      width: 10.5*$size.base
-      padding: 0.5*$size.base
+      width: $size.sidebar - 1*$size.base
+      // TODO: find out how the 3px is calculated
+      padding-top: 0.5*$size.base - 3px
+      padding-bottom: 0.5*$size.base + 3px
+      padding-right: 0.5*$size.base
       padding-left: 1.5*$size.base
-      margin: -0.125em -12.5*$size.base 0 0
+      margin: 0 -1*($size.sidebar + $size.base) 0 0
 
-      font-size: 0.89*$size.base
-      line-height: 1.5em
+      font-size: $size.smalltext
+      line-height: 1.5*$size.base
 
       color: inherit
 

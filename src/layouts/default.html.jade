@@ -23,33 +23,35 @@ mixin debug()
   //-   - for doc in docs
   //-     li: a(href=doc.url)= doc.name
 
-  table.debug
-    tr
-      th key
-      th value
-    tr
-      td date
-      td= document.date
-    if site.url
-      tr
-        td url
-        td= site.url
-    if site.rootUrl
-      tr
-        td rootUrl
-        td= site.rootUrl
-    if lang
-      tr
-        td lang
-        td= lang
-    if document.thanks_to
-      tr
-        td thanks_to
-        td= document.thanks_to
-    if document.categories
-      tr
-        td categories
-        td= document.categories
+  .debug#debug
+    .debug-content#debug-active
+      table
+        tr
+          th key
+          th value
+        tr
+          td date
+          td= document.date
+        if site.url
+          tr
+            td url
+            td= site.url
+        if site.rootUrl
+          tr
+            td rootUrl
+            td= site.rootUrl
+        if lang
+          tr
+            td lang
+            td= lang
+        if document.thanks_to
+          tr
+            td thanks_to
+            td= document.thanks_to
+        if document.categories
+          tr
+            td categories
+            td= document.categories
 
 
 doctype html
@@ -126,6 +128,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
       article.Page-Content(role="main")
         .LiquidLayout
           .Main.LiquidLayout-Content
+            header
+              h1= document.title
             != content
     else
       .Page-Content.Main(role="main")

@@ -20,12 +20,13 @@ use($node_modules_src + '/stylobuild')
 // ## Settings
 $size = {}
 $size['base'] = 18px           // ex rem
-$size['body'] = 23px           // ex rem
+$size['text'] = 23px           // ex body size
+$size['smalltext'] = 16px      // ex 0.89em
 $size['footer'] =    6 * $size.base // ex footer_size
 $size['header'] =    6 * $size.base // ex header_size
 $size['page_min'] = 22 * $size.base
 $size['content'] =  42 * $size.base
-$size['sidebar'] =  11.5 * $size.base
+$size['sidebar'] =  15 * $size.base
 
 $color = {}
 $color['dark'] = #25220E // ex dark
@@ -51,7 +52,7 @@ $z-index = {
 @require $styl_src + '/debug'
 
 // ## Generic stuff
-@require $styl_src + '/generic'
+@require $styl_src + '/generic/**/*.styl'
 
 // ## Main Blocks
 @require $styl_src + '/blocks/**/*.styl'
