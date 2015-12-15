@@ -53,10 +53,9 @@ module.exports = (BasePlugin) ->
                 firstLine = documentBodyLines[0]
                 if firstLine and firstLine.trim()[0] == '#'
                     titleText = marked(firstLine, {renderer: markedRenderer});
-                    unless document.getMeta('title')
-                        document.setMeta('title', titleText)
-                        documentBodyLines.splice(0, 1)
-                        document.set('body', documentBodyLines.join('\n'))
+                    document.setMeta('title', titleText)
+                    documentBodyLines.splice(0, 1)
+                    document.set('body', documentBodyLines.join('\n'))
 
             # Doing all the other stuff
             this.docpad.getCollection('documents').forEach (document) ->
