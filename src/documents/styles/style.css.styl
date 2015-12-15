@@ -11,7 +11,10 @@
 $node_modules_src = '../../../node_modules'
 $styl_src = '../../styl'
 
-use($node_modules_src + '/stylobuild')
+use($node_modules_src + '/stylobuild', {
+  minifier: false
+})
+
 @import $styl_src + '/css/prism.css'
 @import $styl_src + '/font_regular'
 @import $styl_src + '/keyframes'
@@ -37,6 +40,7 @@ $color['text'] = rgba($color.dark, 0.92) // ex body_text
 $color['link'] = #0985CE // ex body_link
 $color['visited'] = #8C64B4 // ex body_link_visited
 $color['distant'] = blend(rgba($color.dark, 0.05), $color.body) // ex distant_bg
+$color['distant_text'] = rgba($color.dark, 0.48)
 $color['highlight'] = rgba(yellow, 0.8)
 
 $font = {}

@@ -1,4 +1,4 @@
-# New Stylus Features
+# [N][ss03]ew Stylus [F][ss03]eatures
 
 Not so long ago I [became a maintainer](*maintaining "I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya)") for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
 

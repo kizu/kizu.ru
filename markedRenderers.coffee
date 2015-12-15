@@ -47,10 +47,41 @@ module.exports = {
     heading: [
         (args) -> handleAttributes(args)
 
+        # Apply linkless links as spans with classes
+        (args) ->
+            args.original.text = args.original.text.replace(/\[([^\]]+)\]\[([^\s\]]+(?:\s+[^\s\]]+)*)\]/g, '<span class="$2">$1</span>')
+            return args
+
+        # Apply typographic classes to first letters
+        (args) ->
+            if args.original.text[0].match(/[A-ZА-Я“«]/)
+                firstLetter = args.original.text[0]
+                hang = 'm'
+                alt = 'ss01 '
+
+                if 'СC'.indexOf(firstLetter) > -1
+                    alt = 'ss02 '
+                if 'КТ'.indexOf(firstLetter) > -1
+                    alt = 'ss04 '
+                if '“'.indexOf(firstLetter) > -1
+                    alt = ''
+
+                if 'АAФДЗОOЖЭЯQSGZCС'.indexOf(firstLetter) > -1
+                    hang = 'xs'
+                if 'Ч'.indexOf(firstLetter) > -1
+                    hang = 'l'
+                if '“«'.indexOf(firstLetter) > -1
+                    hang = 'quote'
+
+                firstLetter = '<span class="' + alt + 'hang-' + hang + '">' + firstLetter + '</span>'
+                args.original.text = firstLetter + args.original.text.slice(1)
+
+            return args
+
         # Proper headers with cyrillic symbols
         (args) ->
             unless args.hasCustomID
-                args.attributes.id = args.original.text.toLowerCase().replace(/[^a-zа-я0-9_]+/g, '-')
+                args.attributes.id = args.original.text.replace(/<(?:.|\n)*?>/gm, '').toLowerCase().replace(/[^a-zа-я0-9_]+/g, '-')
             return args
 
         # Adding anchors

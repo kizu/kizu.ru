@@ -35,6 +35,27 @@
     background: $color.distant
 
 
+  &-Header
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+
+    overflow: hidden
+
+    height: $size.header
+    // TODO: move those paddings to mixin?
+    padding-right: 0.5*$size.base
+    padding-right: 2.5vw
+    padding-left: $size.base
+    padding-left: 5vw
+
+    white-space: nowrap
+
+    ^[0]_post &
+      position: fixed
+
+
   // ## Page-Body: `<body>` stuff
   &-Body
     position: relative
@@ -78,4 +99,9 @@
 
   // ## Page-Title: Page's title
   &-Title
-    // TODO
+    padding-top: 1.5*$size.base
+    text-indent: -0.09em
+
+    &-Link
+      &:not(:hover)
+        color: $color.distant_text

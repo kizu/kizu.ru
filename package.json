@@ -15,7 +15,7 @@
     "docpad-plugin-multilang": "~2.0.0",
     "docpad-plugin-stylus": "~2.11.0",
     "stylobuild": "~0.7.0",
-    "stylus": "git://github.com/stylus/stylus.git#feature-selector-refs"
+    "stylus": "~0.53.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {

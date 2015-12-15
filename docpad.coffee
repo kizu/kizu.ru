@@ -24,6 +24,12 @@ docpadConfig = {
     ignoreCustomPatterns: /^_/
 
     plugins:
+        stylus:
+            stylusRequire: require('stylus')
+            stylusOptions:
+                sourcemap:
+                    inline: true
+
         markedrenderers: require('./markedrenderers.coffee')
 
         metadefaults:

@@ -3,12 +3,14 @@
   var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
 
   var categories = document.categories
-  var is_post = !!document.categories
   var page_type = 'index'
+  var is_post = !!document.categories
 
   if (is_post) {
     page_type = 'post'
   }
+
+  var is_index = (page_type == 'index')
 
   var page_class = 'Page_' + page_type
 
@@ -68,7 +70,9 @@ html.Page(class=page_class, lang=lang ? lang : false)
       content="IE=EmulateIE7,IE=edge")
 
     //- The title!
-    title= (document.title || "Whatever, no title") + " — kizu.ru" + (lang == "en" ? "/en" : '')
+    - pageTitle = document.title || "Whatever, no title"
+    - pageTitle = pageTitle.replace(/<(?:.|\n)*?>/gm, '');
+    title= pageTitle + " — kizu.ru" + (lang == "en" ? "/en" : '')
 
     //- The link to RSS/Atom
     link(
@@ -91,10 +95,12 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
     header.Page-Header(role="banner")
       h1.Page-Title
-        //- TODO: Don't show on index page
-        a(
-          href="/" + lang_prefix
-          )= loc('name')
+        if is_index
+          = loc('name')
+        else
+          a.Page-Title-Link(
+            href="/" + lang_prefix
+            )= loc('name')
 
       //- TODO: add links to translation if there are such
       ul.languages
@@ -129,7 +135,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
         .LiquidLayout
           .Main.LiquidLayout-Content
             header
-              h1= document.title
+              h1!= document.title
             != content
     else
       .Page-Content.Main(role="main")
@@ -144,8 +150,18 @@ html.Page(class=page_class, lang=lang ? lang : false)
             = loc('twitter_follow')
           = "!"
 
+    script.
+      /* Lazy loading the fonts */
+      var h = document.getElementsByTagName('head')[0];
+      var link = document.createElement('link');
+      link.href = '/s/font.css';
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      h.appendChild(link);
+
     != getBlock('scripts').add(["/j/prism.js"]).toHTML()
 
+
+
     //- TODO: Lazy loading the fonts
-    //- TODO: Prism.js
     //- TODO: Metrika
