@@ -2,22 +2,21 @@ code,
 pre,
 kbd
   font-family: Monaco, Consolas, monospace, monospace // FIXME: Do we still need double monospace?
-  font-size: 0.87em // FIXME: how is that calculated?
+  font-size: $size.codetext
+  line-height: 1
 
+// Restoring the nested code
 pre > code
   font-size: 1em
+  line-height: 2*$size.base
 
 pre
   position: relative
-  left: -1*$size.base
 
   overflow: hidden
 
   // FIXME: Add ws:pre and scrollbars on small sizes?
   // overflow-x: auto
-
-li pre
-  left: 0
 
 p code
   line-height: 1
@@ -26,7 +25,7 @@ pre > code
   display: inline-block
   vertical-align: top
 
-  padding: 0.5*$size.base 1*$size.base
+  padding: 0
   margin-bottom: 0
 
   // FIXME: find out better way to visualize code blocks

@@ -21,7 +21,8 @@ use($node_modules_src + '/stylobuild')
 $size = {}
 $size['base'] = 18px           // ex rem
 $size['text'] = 23px           // ex body size
-$size['smalltext'] = 16px      // ex 0.89em
+$size['smalltext'] = 16px      // ex 0.89*rem
+$size['codetext'] =  0.87em    // should be smaller than the main text anywhere
 $size['footer'] =    6 * $size.base // ex footer_size
 $size['header'] =    6 * $size.base // ex header_size
 $size['page_min'] = 22 * $size.base

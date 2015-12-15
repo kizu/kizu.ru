@@ -34,6 +34,10 @@ handleAttributes = (args) ->
 module.exports = {
     paragraph: [
         (args) -> handleAttributes(args)
+
+        # TODO: Add typography here
+        # (args) ->
+        #     return args
     ]
 
     code: [
