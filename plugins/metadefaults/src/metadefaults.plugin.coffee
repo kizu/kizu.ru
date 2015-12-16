@@ -86,6 +86,7 @@ module.exports = (BasePlugin) ->
                     document.set('body', documentBodyLines.join('\n'))
 
             # Doing all the other stuff
+            # FIXME: fix all the `out` paths in a proper way!
             this.docpad.getCollection('documents').forEach (document) ->
                 newOutPath = document.get('outPath')
                 newUrl = document.get('url')
