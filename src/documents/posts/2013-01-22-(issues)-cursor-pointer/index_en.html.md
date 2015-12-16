@@ -4,7 +4,7 @@ thanks_to: "[Shagen Ogandzhanyan](@shabunc) for some proofreading"
 
 ---
 
-# [C][ss02]orrect [C][ss03]ursor on [A][ss02]ctive [E][ss03]lements
+# Correct Cursor on Active Elements
 
 Every active element must have a set `cursor` on hover. And it should be `cursor:pointer` in most cases.
 

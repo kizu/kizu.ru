@@ -46,8 +46,35 @@ module.exports = (BasePlugin) ->
                 # TODO: add options for disabling at all and for disabling removing from body
                 markedRenderer = new marked.Renderer()
                 markedRenderer.heading = (text, level) ->
-                  # Apply linkless links as spans with classes
-                  return text.replace(/\[([^\]]+)\]\[([^\s\]]+(?:\s+[^\s\]]+)*)\]/g, '<span class="$2">$1</span>')
+                    result = text
+
+                    # Apply linkless links as spans with classes
+
+                    if result[0].match(/[A-ZА-Я“«]/)
+                        firstLetter = result[0]
+                        hang = 'm'
+                        alt = 'ss01 '
+
+                        if 'СC'.indexOf(firstLetter) > -1
+                            alt = 'ss02 '
+                        if 'КТ'.indexOf(firstLetter) > -1
+                            alt = 'ss04 '
+                        if '“'.indexOf(firstLetter) > -1
+                            alt = ''
+
+                        if 'АAФДЗОOЖЭЯQSGZCС'.indexOf(firstLetter) > -1
+                            hang = 'xs'
+                        if 'Ч'.indexOf(firstLetter) > -1
+                            hang = 'l'
+                        if '“«'.indexOf(firstLetter) > -1
+                            hang = 'quote'
+
+                        firstLetter = '<span class="' + alt + 'hang-' + hang + '">' + firstLetter + '</span>'
+                        result = firstLetter + result.slice(1)
+
+                    result = result.replace(/\[([^\]]+)\]\[([^\s\]]+(?:\s+[^\s\]]+)*)\]/g, '<span class="$2">$1</span>')
+
+                    return result
 
                 # TODO: Add check for markdown in source
                 documentBodyLines = document.get('body').split('\n')

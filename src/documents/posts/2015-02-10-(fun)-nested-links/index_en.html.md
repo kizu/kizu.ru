@@ -1,4 +1,4 @@
-# [N][ss03]ested [L][ss03]ink[s][ss01]
+# Nested Link[s][ss01]
 
 ![Cats playing nested links](nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}
 

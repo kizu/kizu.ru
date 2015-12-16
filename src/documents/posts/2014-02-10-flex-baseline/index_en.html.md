@@ -1,4 +1,4 @@
-# [B][ss03]attle for [B][ss01]aselin[e][ss01]
+# Battle for Baseline
 
 ![Kitties](flex-baseline.jpg){:.b-figure width="848" height="536"}
 
