@@ -1,5 +1,13 @@
 marked = require('./node_modules/marked')
 
+posthtml = require('posthtml')
+
+Hypher = require('./node_modules/hypher')
+english = require('./node_modules/hyphenation.en-us')
+russian = require('./node_modules/hyphenation.ru')
+h_en = new Hypher(english)
+h_ru = new Hypher(russian)
+
 # Adding attributes
 handleAttributes = (args) ->
     content = args.original.text && 'text' || 'code'
@@ -34,6 +42,21 @@ handleAttributes = (args) ->
 module.exports = {
     paragraph: [
         (args) -> handleAttributes(args)
+
+        (args) ->
+            ph = posthtml()
+                .use( (tree) ->
+                    tree.walk((node) ->
+                        if (typeof(node) == 'string' && !/^\n\s*$/.test(node))
+                            return h_ru.hyphenateText(h_en.hyphenateText(node))
+                        else
+                            return node
+                        )
+                    return tree
+                    )
+                .process(args.original.text, { sync: true })
+            args.original.text = ph.html.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
+            return args
 
         # TODO: Add typography here
         # (args) ->

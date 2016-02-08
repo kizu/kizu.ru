@@ -127,3 +127,11 @@ blockquote
 .ss08 { -webkit-font-feature-settings: "ss08"; font-feature-settings: "ss08" }
 .ss09 { -webkit-font-feature-settings: "ss09"; font-feature-settings: "ss09" }
 .ss10 { -webkit-font-feature-settings: "ss10"; font-feature-settings: "ss10" }
+
+.shy
+  &:after
+    content: "\AD"
+
+    @supports (-webkit-appearance: none)
+      &
+        content: "\AD\2062"

@@ -15,7 +15,11 @@
     "docpad-plugin-multilang": "~2.0.0",
     "docpad-plugin-stylus": "~2.11.0",
     "stylobuild": "~0.7.0",
-    "stylus": "~0.53.0"
+    "stylus": "~0.53.0",
+    "posthtml": "0.8.2",
+    "hypher": "0.2.4",
+    "hyphenation.en-us": "~0.2.1",
+    "hyphenation.ru": "~0.2.1"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
