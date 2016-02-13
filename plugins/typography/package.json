@@ -1,0 +1,34 @@
+{
+    "private": true,
+    "name": "docpad-plugin-typography",
+    "version": "2.0.0",
+    "description": "DocPad plugin that adds a lot of typography quirks",
+    "homepage": "https://github.com/kizu/docpad-plugin-typography",
+    "keywords": [
+        "docpad",
+        "docpad-plugin",
+        "typography",
+        "rewrite"
+    ],
+    "author": "Roman Komarov <kizmarh@ya.ru> (http://kizu.ru/en/)",
+    "maintainers": [
+        "Roman Komarov <kizmarh@ya.ru> (https://github.com/kizu/)"
+    ],
+    "contributors": [
+        "Roman Komarov <kizmarh@ya.ru> (https://github.com/kizu/)"
+    ],
+    "bugs": {
+        "url": "https://github.com/kizu/docpad-plugin-typography/issues"
+    },
+    "repository" : {
+        "type": "git",
+        "url": "https://github.com/kizu/docpad-plugin-typography.git"
+    },
+    "engines" : {
+        "node": ">=0.8"
+    },
+    "peerDependencies": {
+        "docpad": "6"
+    },
+    "main": "./src/typography.plugin.coffee"
+}

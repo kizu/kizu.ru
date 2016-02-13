@@ -150,7 +150,7 @@ module.exports = (BasePlugin) ->
                 afterContent = args.afterContent || ''
                 attributes = ''
                 for attributeName, attributeValue of args.attributes
-                    if attributeValue or attributeValue == ''
+                    if attributeValue or (attributeValue == '' and attributeName != 'class')
                         attributes += ' ' + attributeName + '="' + attributeValue.trim() + '"'
 
                 if !args.tagName

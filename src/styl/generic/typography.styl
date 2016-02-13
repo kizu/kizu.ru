@@ -8,12 +8,15 @@ code,
 pre,
 table
   padding: 0
-  margin: 0 0 2*$size.base
+  margin: 2*$size.base 0 0
 
 li,
 li > p
   padding: 0
-  margin: 0 0 su
+  margin: $size.base 0 0
+
+p + p
+  margin-top: 0
 
 h1,
 h2,
@@ -46,14 +49,16 @@ h1
 
 h2
   position: relative
-  font-size: 2.5*$size.base
-  line-height: 3*$size.base
-  padding-top: 1*$size.base
+  font-size: 2*$size.base
+  line-height: 2*$size.base
+  padding-top: 3*$size.base
   padding-bottom: 1*$size.base
 
 h3
-  font-size: 2*$size.base
-  padding-top: 1*$size.base
+  font-size: 1.5*$size.base
+  line-height: 2*$size.base
+
+  padding-top: 2*$size.base
   padding-bottom: 1*$size.base
 
 h4,
@@ -129,6 +134,8 @@ blockquote
 .ss10 { -webkit-font-feature-settings: "ss10"; font-feature-settings: "ss10" }
 
 .shy
+  font-family: 'Cent-Regular21-HangingHyphen', 'Cent-Regular21', Georgia, serif
+
   &:after
     content: "\AD"
 

@@ -19,7 +19,8 @@
     "posthtml": "0.8.2",
     "hypher": "0.2.4",
     "hyphenation.en-us": "~0.2.1",
-    "hyphenation.ru": "~0.2.1"
+    "hyphenation.ru": "~0.2.1",
+    "richtypo": "1.0.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {

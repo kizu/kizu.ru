@@ -61,13 +61,15 @@ em, i, .date, .breadcrumbs, .published, .thanks-to, blockquote {
     }
 
 .Page-Content h1 {
-    font-size: 55px;
+    font-size: 54px;
 }
 
-h2 {
-    font-size: 44px;
-}
+// Move here proper fallback sizes
 
-h3 {
-    font-size: 30px;
-}
+// h2 {
+//     font-size: 44px;
+// }
+
+// h3 {
+//     font-size: 30px;
+// }
