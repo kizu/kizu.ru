@@ -117,11 +117,10 @@ html.Page(class=page_class, lang=lang ? lang : false)
     //- TODO: alternate languages only if page have translation
     //-       make this “have translation” at multilang plugin
 
-    //- The styles!
-    //- link(
-    //-   rel="stylesheet",
-    //-   href= site.rootUrl + "s/style.css")
-    != getBlock("styles").add(["/s/style.css"]).toHTML()
+    The styles!
+    link(
+      rel="stylesheet",
+      href= "/s/style.css")
 
   body.Page-Body
     +debug

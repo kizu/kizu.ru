@@ -16,6 +16,12 @@ li > p
   margin: $size.base 0 0
 
 p
+  text-indent: 2*$size.base
+
+  & > *,
+  li > &:first-child
+    text-indent: 0
+
   h1 + &,
   h2 + &,
   h3 + &,
@@ -24,12 +30,6 @@ p
   h6 + &,
   & + &
     margin-top: 0
-
-  & + &
-    text-indent: 2*$size.base
-
-    & > *
-      text-indent: 0
 
 h1,
 h2,

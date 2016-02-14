@@ -10,7 +10,6 @@
   "dependencies": {
     "docpad": "~6.78.4",
     "docpad-plugin-jade": "~2.10.0",
-    "docpad-plugin-livereload": "~2.6.1",
     "docpad-plugin-marked": "~2.3.0",
     "docpad-plugin-multilang": "~2.0.0",
     "docpad-plugin-stylus": "~2.11.0",
