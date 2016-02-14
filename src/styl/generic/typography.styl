@@ -15,8 +15,21 @@ li > p
   padding: 0
   margin: $size.base 0 0
 
-p + p
-  margin-top: 0
+p
+  h1 + &,
+  h2 + &,
+  h3 + &,
+  h4 + &,
+  h5 + &,
+  h6 + &,
+  & + &
+    margin-top: 0
+
+  & + &
+    text-indent: 2*$size.base
+
+    & > *
+      text-indent: 0
 
 h1,
 h2,
@@ -108,6 +121,13 @@ blockquote
 
   text-align: left
 
+  & p
+    text-indent: 0
+    margin-top: 2*$size.base
+
+    &:first-child
+      margin-top: 0
+
 
 // Classes for hanging blocks
 .hang-xs
@@ -136,6 +156,29 @@ blockquote
 .ss08 { -webkit-font-feature-settings: "ss08"; font-feature-settings: "ss08" }
 .ss09 { -webkit-font-feature-settings: "ss09"; font-feature-settings: "ss09" }
 .ss10 { -webkit-font-feature-settings: "ss10"; font-feature-settings: "ss10" }
+
+// FIXME: why won't it work properly with big caps?
+abbr
+  display: inline-block // So the first-letter would work
+
+  text-transform: uppercase
+  font-variant-caps: small-caps
+  -ms-font-feature-settings: "smcp" 0
+
+  @supports (font-variant-caps: small-caps) or (-webkit-font-feature-settings: "smcp")
+    font-size: 0.956521739em
+    text-transform: lowercase
+
+  @supports (font-variant-caps: small-caps) or (font-feature-settings: "smcp")
+    font-size: 0.956521739em
+    text-transform: lowercase
+
+  @supports not (font-variant-caps: small-caps)
+    -webkit-font-feature-settings: "smcp"
+    font-feature-settings: "smcp"
+
+  &.starting::first-letter
+    text-transform: uppercase
 
 .shy
   font-family: 'Cent-Regular21-HangingHyphen', 'Cent-Regular21', Georgia, serif

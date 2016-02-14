@@ -32,7 +32,7 @@ module.exports = (BasePlugin) ->
                                     if lang == 'ru'
                                         textNode = h_ru.hyphenateText(textNode)
                                     else
-                                        textNode = h_ru.hyphenateText(textNode)
+                                        textNode = h_en.hyphenateText(textNode)
                                 return textNode
                                 )
                             return tree
@@ -44,6 +44,11 @@ module.exports = (BasePlugin) ->
 
                     # Typography
                     content = richtypo.rich(content, lang)
+
+                    # TODO: Make other abbreviations too, like JS, W3C etc.
+
+                    # Mark the starting abbrs
+                    content = content.replace(new RegExp('(<(?:p|li)>|[\.\?\!\…](?:[  ]|&nbsp;))<abbr>([A-ZА-Я]+</abbr>)', 'g'),'$1<abbr class="starting">$2')
 
                     # Replace soft hyphens with special spans
                     content = content.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
