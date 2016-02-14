@@ -2,7 +2,7 @@
 
 Not so long ago I [became a maintainer](*maintaining "I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya)") for [Stylus](gh:LearnBoost/stylus) CSS preprocessor.
 
-At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one [new tech](*example-sidenote "you can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result)") that is now possible in the new Stylus, but I'll describe the new features for a start.
+At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one [new tech](*example-sidenote "You can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result)") that is now possible in the new Stylus, but I'll describe the new features for a start.
 
 ## Block mixins {#block-mixins}
 
@@ -18,7 +18,7 @@ The syntax for passing the block is rather simple: we call a mixin using a `+` p
     {:.language-styl}
 
 
-After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using [an interpolation](*block-call "there is a possibility we would add a way of using it without interpolation in the future though"):
+After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using [an interpolation](*block-call "There is a possibility we would add a way of using it without interpolation in the future though"):
 
     foo()
       width: 20px

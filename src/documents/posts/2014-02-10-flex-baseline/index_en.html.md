@@ -14,7 +14,7 @@ Here is an example: all three blocks have `display: inline-block`, the first one
 
 [demo:flex-baseline1]
 
-You [can see](*safari "btw, in the latest Safari the block with `overflow` don't behave according to the specs") where each block has its baseline in this example.
+You [can see](*safari "Btw, in the latest Safari the block with `overflow` don't behave according to the specs") where each block has its baseline in this example.
 
 ## inline-table
 

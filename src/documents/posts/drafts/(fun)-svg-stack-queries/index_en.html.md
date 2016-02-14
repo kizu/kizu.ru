@@ -2,7 +2,7 @@
 
 I love SVG and what I don't like is how browsers don't tend to improve in the support for them. And while some time ago it could be called “a chicken and egg problem” — there were no support because of lack of usage and developer interest, as well as developers didn't look at SVG because there were a lot of bugs and inconsistency everywhere.
 
-But in the last year or two I saw a lot of articles on SVG and a lot of people use it more and [more](*articles "for example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](http://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG"). I'd say it's what “Retina” did, but whatever.
+But in the last year or two I saw a lot of articles on SVG and a lot of people use it more and [more](*articles "For example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](http://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG"). I'd say it's what “Retina” did, but whatever.
 
 Anyway, I'd like to talk about one of those hard-needed features that won't ship there anytime soon: SVG Stacks. You can be familiar with this idea from [this great article of Simurai](http://simurai.com/post/20251013889/svg-stacks) — the point is to have different SVG images inside one file and to show only the one we need using `:target` in CSS embedded in SVG and urls like `url(stack.svg#foo)`.
 
@@ -54,7 +54,7 @@ The SVG itself would look like this:
     {:.language-markup}
 
 
-And the [_basic_](*webkit-bug "there is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the …") CSS would look this way:
+And the [_basic_](*webkit-bug "There is a bug in Webkit preventing the icons to be shown on page load. You could fix it with something that would cause a reflow, like an animation, you can see how I applied it in the …") CSS would look this way:
 
     .icon-wrapper {
         display: inline-block;
