@@ -33,24 +33,23 @@ module.exports = (BasePlugin) ->
                                         textNode = h_ru.hyphenateText(textNode)
                                     else
                                         textNode = h_ru.hyphenateText(textNode)
-
-                                    textNode = richtypo.rich(textNode, lang)
-
                                 return textNode
                                 )
                             return tree
                             )
                         .process(content, { sync: true }).html
 
-                    # Handling the last characters of paragraphs
-                    # content = content.replace(
-                    #     new RegExp('(\u00AD| ?)([а-яa-z_-]{1,6}[\.\?\!]?<\/p>)', 'gi'),
-                    #     (m, p1, p2) ->
-                    #         return (p1 == ' ' ? '&nbsp;' : '') + p2.replace(new RegExp('\u00AD', 'g'), '')
-                    #     )
+                    # Removing the last soft hyphen when the result is short
+                    content = content.replace(new RegExp('\u00AD([a-zа-я]{1,4}[\.\,\:\?\!\…]?\s*</(?:p|h2|h3|h4)>)', 'gi'),'$1')
+
+                    # Typography
+                    content = richtypo.rich(content, lang)
 
                     # Replace soft hyphens with special spans
-                    opts.content = content.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
+                    content = content.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
+
+                    # Replacing the actual content
+                    opts.content = content
 
         (args) ->
             return args

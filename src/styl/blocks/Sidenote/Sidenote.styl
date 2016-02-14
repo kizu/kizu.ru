@@ -125,12 +125,6 @@
 
   // ## Sidenote itself
   &
-    &:first-letter
-      text-transform: uppercase
-
-    &::after
-      content: '.'
-
     @media (max-width: 819px)
       visibility: hidden
 
@@ -152,20 +146,27 @@
       float: right
       clear: right
 
-      width: $size.sidebar - 3*$size.base
+      width: $size.sidebar - 4*$size.base
       // TODO: find out how the 3px is calculated
       padding-top: 0.5*$size.base - 3px
       padding-bottom: 0.5*$size.base + 3px
-      padding-right: 0.5*$size.base
+      padding-right: 1.5*$size.base
       padding-left: 1.5*$size.base
-      margin: 0 -1*($size.sidebar + $size.base) 0 0
+      margin: 1px -1*($size.sidebar + $size.base) 0 0
 
+      text-align: left
+
+      font-family: "Helvetica Neue", Arial, sans-serif
       font-size: $size.smalltext
-      line-height: 1.5*$size.base
+      line-height: 1.25*$size.base
 
       color: inherit
 
       border-radius: 3px
+
+      & em
+        font-family: "Helvetica Neue", Arial, sans-serif
+        font-style: italic
 
       &::before
         content: counter(sidenote) ". "
@@ -173,11 +174,8 @@
         left: 0.5*$size.base
 
         width: 1*$size.base
-        margin-top: 1px
 
         text-align: right
-
-        font-size: 0.7*$size.base
 
         color: rgba($color.text, 0.5)
 
