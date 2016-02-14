@@ -18,13 +18,40 @@
     page_class += ' Page_' + lang
   }
 
-  var url = '/' + document.outPath.replace(/^.+\/out\//,'').replace('/index.html', '/')
+  var url = document.outPath.replace(/^.+\/out\/(.+)\/index\.html/, '/$1/')
+
+  var pages = getCollection("html")
+  if (pages) {
+    pages = pages && pages.toJSON().sort(function(a, b){
+      return new Date(b.date) - new Date(a.date)
+    })
+    pages.map(function(post){
+      post.url = post.outPath.replace(/^.+\/out\/(.+)\/index\.html/, '/$1/')
+      post.title = post.title ? post.title.replace(/<(?:.|\n)*?>/gm, '') : 'no title lol'
+      return post
+    })
+  }
+
+  var posts = pages.filter(function(page) {
+    return page.lang == lang && page.categories && (page.outPath.indexOf('/drafts/') <= 0) && (page.outPath.indexOf('/old/') <= 0)
+  })
+
+  var next
+  var prev
+
+  for (var i = 0; i < posts.length; i++) {
+    // Get prev and next posts
+    if (posts[i].url == url) {
+      if (i > 0) {
+        next = posts[i - 1]
+      }
+      if (i < (posts.length - 1)) {
+        prev = posts[i + 1]
+      }
+    }
+  }
 
 mixin debug()
-  //- - var docs = getCollection("html").toJSON()
-  //- ul
-  //-   - for doc in docs
-  //-     li: a(href=doc.url)= doc.name
 
   .debug#debug
     .debug-content#debug-active
@@ -38,6 +65,12 @@ mixin debug()
         tr
           td url
           td= url
+        tr
+          td prev
+          td= prev && prev.url
+        tr
+          td next
+          td= next && next.url
         if lang
           tr
             td lang
@@ -151,6 +184,15 @@ html.Page(class=page_class, lang=lang ? lang : false)
             != content
     else
       .Page-Content.Main(role="main")
+        if is_index
+          -
+          if posts
+            ul
+              - for post in posts
+                li
+                  a(href=post.url)
+                    = post.title
+
         != content
 
     footer.Page-Footer
