@@ -17,6 +17,8 @@ var marked = require('marked');
 var jade = require('gulp-jade');
 var stylus = require('stylus');
 
+var typography = require(process.cwd() + '/gulpfile.js/typography.js')
+
 // Constants
 var pathRegex = new RegExp([
         '^',
@@ -30,7 +32,6 @@ var pathRegex = new RegExp([
         '$'
     ].join(''));
 
-
 // Future options
 
 var defaultLanguage = 'ru'
@@ -38,9 +39,14 @@ var postsDir = './src/documents/posts/'
 
 // Global stuff
 var documents = [];
-
+var loc_strings = {};
 
 // Helper functions
+
+var rerequire = function(path) {
+    delete require.cache[require.resolve(path)];
+    return require(path);
+}
 
 var storeDocument = function(stream, file) {
     var document = {};
@@ -102,7 +108,10 @@ var storeDocument = function(stream, file) {
 
     document.url = (document.lang != defaultLanguage ? document.lang + '/' : '') + document.categories.join('/') + '/' + document.slug + '/';
 
+    // Transform markdown to HTML
     document.content = marked(file.contents.toString());
+
+    document.content = typography(document.content, document.lang);
 
     // console.log(document);
     documents.push(document);
@@ -117,7 +126,7 @@ var writeDocument = function(document) {
         'config': {
             'defaultLanguage': defaultLanguage
         },
-        'loc': function(locString){ return 'loc string for ' + locString; }
+        'loc': function(locString){ return loc_strings[locString] && loc_strings[locString][document.lang] || 'No loc string found!' }
     };
     return gulp.src('./src/layouts/default.jade')
         .pipe(data(function(){return jadeData}))
@@ -163,6 +172,7 @@ gulp.task('collect-documents', function(done) {
 });
 
 gulp.task('write-documents', function(done) {
+    loc_strings = rerequire(process.cwd() + '/gulpfile.js/loc_strings.json');
     each(documents, writeDocument, done);
 });
 
@@ -206,7 +216,7 @@ gulp.task('watch', ['express', 'build'], function() {
     watch('./src/documents/posts/**/*', function() { gulp.start('documents'); });
 
     // Watch jade layouts and rewrite documents without recollecting
-    watch('./src/layouts/*.jade', function() { gulp.start('write-documents'); });
+    watch(['./src/layouts/*.jade', './gulpfile.js/loc_strings.json'], function() { gulp.start('write-documents'); });
 
     // Watch .styl files and rebuild all the styles
     watch('./src/styl/**/*.styl', function() { gulp.start('styles'); });
