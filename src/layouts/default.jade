@@ -18,7 +18,7 @@
     page_class += ' Page_' + lang
   }
 
-  var url = document.url
+  var url = '/' + document.url
 
   var pages = documents
   if (pages) {
@@ -141,7 +141,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
             data-short="en")
             = "in english"
           li.Page-Language
-            if document.availableTranslations && document.availableTranslations.indexOf('ru') > -1
+            if document.translations && document.translations.ru
               a.Page-Language-Link(
                 data-short="ru",
                 href = url.replace('/en/', '/'))
@@ -154,7 +154,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
                 = "по-русски*"
         else
           li.Page-Language
-            if document.availableTranslations && document.availableTranslations.indexOf('en') > -1
+            if document.translations && document.translations.en
               a.Page-Language-Link(
                 data-short="en",
                 href = '/en' + url)
@@ -211,7 +211,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
       h.appendChild(link);
 
 
-    script(src='j/prism.js')
+    script(src='/j/prism.js')
 
 
     //- TODO: Lazy loading the fonts

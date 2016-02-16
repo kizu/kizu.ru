@@ -7,9 +7,11 @@ var runSequence = require('run-sequence');
 var foreach = require('gulp-foreach');
 var data = require('gulp-data');
 var each = require('each-done');
+var source = require('vinyl-source-stream');
 
 var marked = require('marked');
 var jade = require('gulp-jade');
+var stylus = require('stylus');
 
 // Constants
 var pathRegex = new RegExp([
@@ -128,9 +130,25 @@ var writeResources = function(document) {
         .pipe(gulp.dest('./out/'));
 };
 
+var buildStylus = function(stream, stylesheet) {
+    style = stylus(stylesheet.contents.toString())
+        .set('filename', stylesheet.base + stylesheet.relative)
+        .set('include css', true)
+        .set('sourcemap', { 'inline': true });
+    style.render(function(err, output) {
+        if (err) {
+            console.error(err);
+        } else {
+            var stylesheetStream = source('style.css');
+            stylesheetStream.end(output);
+            stylesheetStream.pipe(gulp.dest('./out/s/'));
+        }
+    }); 
+};
+
 // Tasks
 
-gulp.task('collect-documents', function() {
+gulp.task('collect-documents', function(done) {
     documents = [];
 
     return gulp
@@ -147,6 +165,27 @@ gulp.task('write-resources', function(done) {
     each(documents, writeResources, done);
 });
 
-gulp.task('default', function(done) {
+gulp.task('documents', function(done) {
     runSequence('collect-documents', ['write-documents', 'write-resources'], done);
 });
+
+gulp.task('styles', function(done) {
+    gulp
+        .src('./src/documents/styles/style.styl')
+        .pipe(foreach(buildStylus))
+    
+    return gulp
+        .src('./src/documents/styles/*.css')
+        .pipe(gulp.dest('./out/s/'));
+        
+    
+});
+
+gulp.task('scripts', function(done) {
+    return gulp
+        .src('./src/documents/scripts/*')
+        .pipe(gulp.dest('./out/j/'));
+});
+
+
+gulp.task('default', ['documents', 'styles', 'scripts']);
