@@ -26,7 +26,7 @@
       return new Date(b.date) - new Date(a.date)
     })
     pages.map(function(post){
-      post.title = post.title ? post.title.replace(/<(?:.|\n)*?>/gm, '') : 'no title lol'
+      post.title = post.title || 'no title lol'
       return post
     })
   }
@@ -177,7 +177,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
         .LiquidLayout
           .Main.LiquidLayout-Content
             header
-              h1!= document.title
+              != document.titleHTML
             != document.content
     else
       .Page-Content.Main(role="main")

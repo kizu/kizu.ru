@@ -77,9 +77,12 @@ module.exports = {
                 if ('Ч'.indexOf(firstLetter) > -1) {
                     hang = 'l';
                 }
-                if ('“«'.indexOf(firstLetter) > -1) {
-                    hang = 'quote';
-                }
+
+                // Disabled as when centering it would look bad.
+                // TODO: pass a param there for alignment, then maybe wrap the last chars too if centering.
+                // if ('“«'.indexOf(firstLetter) > -1) {
+                //     hang = 'quote';
+                // }
 
                 firstLetter = '<span class="' + alt + 'hang-' + hang + '">' + firstLetter + '</span>';
                 args.original.text = firstLetter + args.original.text.slice(1);

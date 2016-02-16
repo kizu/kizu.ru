@@ -15,6 +15,8 @@ var source = require('vinyl-source-stream');
 
 var jade = require('gulp-jade');
 var stylus = require('stylus');
+var posthtml = require('posthtml');
+var yamlFront = require('yaml-front-matter');
 
 var typography = require(process.cwd() + '/gulpfile.js/typography.js');
 var marked_overloaded = require(process.cwd() + '/gulpfile.js/marked_overloaded.js');
@@ -27,7 +29,7 @@ var pathRegex = new RegExp([
         '(?:(\\d{4}-\\d{2}-\\d{2})-)?', // Date,            like `2015-12-02`
         '(\\([^\\)]+\\)-)?',            // Categories       like `(issues old)`
         '(?!index)([^\/\\.\\_]+)',      // Slug             like `whatever-title`
-        '(?:\/(index))?',                   // Is in folder     like `/index`
+        '(?:\/(index))?',               // Is in folder     like `/index`
         '(?:_(\\w{2}))?',               // Lang             like `en`
         '((?:\\.[^\\.\\/]+)+)',         // Extension[s]     like `.md`
         '$'
@@ -35,8 +37,8 @@ var pathRegex = new RegExp([
 
 // Future options
 
-var defaultLanguage = 'ru'
-var postsDir = './src/documents/posts/'
+var defaultLanguage = 'ru';
+var postsDir = './src/documents/posts/';
 
 // Global stuff
 var documents = [];
@@ -54,15 +56,15 @@ var storeDocument = function(stream, file) {
 
     document.relativePath = file.relative;
 
-    var pathData = file.relative.match(pathRegex)
+    var pathData = file.relative.match(pathRegex);
     if (pathData) {
-        document.path = pathData[1]
-        document.date = pathData[2]
-        document.categories = pathData[3]
-        document.slug = pathData[4]
-        document.isInFolder = pathData[5]
-        document.lang = pathData[6]
-        document.extension = pathData[7]
+        document.path = pathData[1];
+        document.date = pathData[2];
+        document.categories = pathData[3];
+        document.slug = pathData[4];
+        document.isInFolder = pathData[5];
+        document.lang = pathData[6];
+        document.extension = pathData[7];
     }
 
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
@@ -94,7 +96,7 @@ var storeDocument = function(stream, file) {
                 if (!document.resources) {
                     document.resources = [];
                 }
-                document.resources.push(fileName)
+                document.resources.push(fileName);
             }
         };
 
@@ -112,7 +114,35 @@ var storeDocument = function(stream, file) {
     // Transform markdown to HTML
     // TODO: Move to its own process, so we could watch just renderers and stuff
     // TODO: get the title from markdown
-    document.content = marked_overloaded(file.contents.toString(), marked_renderers); 
+    document.rawContent = file.contents.toString();
+    document.YAMLmetadata = yamlFront.loadFront(document.rawContent);
+    var content = document.YAMLmetadata.__content;
+    delete document.YAMLmetadata.__content;
+
+    document.content = marked_overloaded(content, marked_renderers);
+    var splittedContent = document.content.split('\n');
+    // TODO: can this be made using just one posthtml pass?
+    var firstLine = posthtml().process(splittedContent[0], { sync: true });
+    if (firstLine.tree[0].tag == 'h1') {
+        document.titleHTML = splittedContent[0];
+        firstLine = posthtml()
+            .use( function(tree) {
+                var result = '';
+                tree.walk(function(node) {
+                    textNode = node
+                    if (typeof(textNode) == 'string') {
+                        result += textNode;
+                    }
+                    return textNode
+                    });
+                return result
+            })
+            .process(document.titleHTML, { sync: true });
+
+        document.title = firstLine.html;
+        splittedContent.splice(0, 1);
+        document.content = splittedContent.join('\n');
+    }
 
     document.content = typography(document.content, document.lang);
 
@@ -160,7 +190,7 @@ var buildStylus = function(stream, stylesheet) {
             stylesheetStream.pipe(gulp.dest('./out/s/'));
         }
     });
-    return stream
+    return stream;
 };
 
 // Tasks
