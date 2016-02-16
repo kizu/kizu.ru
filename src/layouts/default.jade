@@ -1,6 +1,6 @@
 -
   var lang = document.lang
-  var lang_prefix = document.lang == docpad.config.plugins.multilang.defaultLanguage ? '' : document.lang
+  var lang_prefix = document.lang == config.defaultLanguage ? '' : document.lang
 
   var categories = document.categories
   var page_type = 'index'
@@ -18,22 +18,21 @@
     page_class += ' Page_' + lang
   }
 
-  var url = document.outPath.replace(/^.+\/out\/(.+)\/index\.html/, '/$1/')
+  var url = document.url
 
-  var pages = getCollection("html")
+  var pages = documents
   if (pages) {
-    pages = pages && pages.toJSON().sort(function(a, b){
+    pages = pages.sort(function(a, b){
       return new Date(b.date) - new Date(a.date)
     })
     pages.map(function(post){
-      post.url = post.outPath.replace(/^.+\/out\/(.+)\/index\.html/, '/$1/')
       post.title = post.title ? post.title.replace(/<(?:.|\n)*?>/gm, '') : 'no title lol'
       return post
     })
   }
 
   var posts = pages.filter(function(page) {
-    return page.lang == lang && page.categories && (page.outPath.indexOf('/drafts/') <= 0) && (page.outPath.indexOf('/old/') <= 0)
+    return page.lang == lang && page.categories && (page.relativePath.indexOf('drafts/') <= 0) && (page.relativePath.indexOf('old)') <= 0)
   })
 
   var next
@@ -117,7 +116,6 @@ html.Page(class=page_class, lang=lang ? lang : false)
     //- TODO: alternate languages only if page have translation
     //-       make this “have translation” at multilang plugin
 
-    The styles!
     link(
       rel="stylesheet",
       href= "/s/style.css")
@@ -180,7 +178,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
           .Main.LiquidLayout-Content
             header
               h1!= document.title
-            != content
+            != document.content
     else
       .Page-Content.Main(role="main")
         if is_index
@@ -192,7 +190,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
                   a(href=post.url)
                     = post.title
 
-        != content
+        != document.content
 
     footer.Page-Footer
       p.Page-Copy
@@ -212,8 +210,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
       link.rel = 'stylesheet';
       h.appendChild(link);
 
-    != getBlock('scripts').add(["/j/prism.js"]).toHTML()
 
+    script(src='j/prism.js')
 
 
     //- TODO: Lazy loading the fonts

@@ -1,28 +1,32 @@
 {
   "private": true,
-  "name": "docpad-test.docpad",
-  "version": "0.1.0",
-  "description": "Docpad test",
-  "engines": {
-    "node": "0.10",
-    "npm": ">=2.5.0"
+  "name": "newestest-kizu-ru",
+  "author": "Roman Komarov <kizmarh@ya.ru> (http://kizu.ru/en/)",
+  "description": "Gulp-based version of kizu.ru generation stuff",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/kizu/new-site#readme",
+  "bugs": {
+    "url": "http://github.com/kizu/new-site/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kizu/new-site.git"
+  },
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
   },
   "dependencies": {
-    "docpad": "~6.78.4",
-    "docpad-plugin-jade": "~2.10.0",
-    "docpad-plugin-marked": "~2.3.0",
-    "docpad-plugin-multilang": "~2.0.0",
-    "docpad-plugin-stylus": "~2.11.0",
-    "stylobuild": "~0.7.0",
-    "stylus": "git://github.com/stylus/stylus#rc-0.54",
-    "posthtml": "0.8.2",
-    "hypher": "0.2.4",
-    "hyphenation.en-us": "~0.2.1",
-    "hyphenation.ru": "~0.2.1",
-    "richtypo": "1.0.0"
-  },
-  "main": "node_modules/docpad/bin/docpad-server",
-  "scripts": {
-    "start": "node_modules/docpad/bin/docpad-server"
+    "each-done": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.1",
+    "gulp-data": "^1.2.1",
+    "gulp-foreach": "^0.1.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "marked": "^0.3.5",
+    "run-sequence": "^1.1.5"
   }
 }
