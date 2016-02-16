@@ -13,11 +13,12 @@ var data = require('gulp-data');
 var each = require('each-done');
 var source = require('vinyl-source-stream');
 
-var marked = require('marked');
 var jade = require('gulp-jade');
 var stylus = require('stylus');
 
-var typography = require(process.cwd() + '/gulpfile.js/typography.js')
+var typography = require(process.cwd() + '/gulpfile.js/typography.js');
+var marked_overloaded = require(process.cwd() + '/gulpfile.js/marked_overloaded.js');
+var marked_renderers = require(process.cwd() + '/gulpfile.js/marked_renderers.js');
 
 // Constants
 var pathRegex = new RegExp([
@@ -109,7 +110,9 @@ var storeDocument = function(stream, file) {
     document.url = (document.lang != defaultLanguage ? document.lang + '/' : '') + document.categories.join('/') + '/' + document.slug + '/';
 
     // Transform markdown to HTML
-    document.content = marked(file.contents.toString());
+    // TODO: Move to its own process, so we could watch just renderers and stuff
+    // TODO: get the title from markdown
+    document.content = marked_overloaded(file.contents.toString(), marked_renderers); 
 
     document.content = typography(document.content, document.lang);
 
