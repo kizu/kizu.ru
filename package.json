@@ -19,14 +19,21 @@
     "build": "gulp"
   },
   "dependencies": {
-    "each-done": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-cli": "^1.2.1",
-    "gulp-data": "^1.2.1",
-    "gulp-foreach": "^0.1.0",
-    "gulp-jade": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "marked": "^0.3.5",
-    "run-sequence": "^1.1.5"
+    "each-done": "~1.0.0",
+    "gulp": "~3.9.1",
+    "gulp-cli": "~1.2.1",
+    "gulp-data": "~1.2.1",
+    "gulp-foreach": "~0.1.0",
+    "gulp-jade": "~1.1.0",
+    "gulp-rename": "~1.2.2",
+    "marked": "~0.3.5",
+    "run-sequence": "~1.1.5",
+    "stylobuild": "~0.7.0",
+    "stylus": "git://github.com/stylus/stylus#rc-0.54",
+    "posthtml": "0.8.2",
+    "hypher": "0.2.4",
+    "hyphenation.en-us": "~0.2.1",
+    "hyphenation.ru": "~0.2.1",
+    "richtypo": "1.0.0"
   }
 }
