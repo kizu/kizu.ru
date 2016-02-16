@@ -1,7 +1,11 @@
 // Requires
 var fs = require('fs');
+var express = require('express');
 
 var gulp = require('gulp');
+var watch = require('gulp-watch');
+var gutil = require('gulp-util');
+var gulpif = require('gulp-if');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var foreach = require('gulp-foreach');
@@ -115,8 +119,8 @@ var writeDocument = function(document) {
         },
         'loc': function(locString){ return 'loc string for ' + locString; }
     };
-    gulp.src('./src/layouts/default.jade')
-        .pipe(data(() => jadeData))
+    return gulp.src('./src/layouts/default.jade')
+        .pipe(data(function(){return jadeData}))
         .pipe(jade({ pretty: true }))
         .pipe(rename({ dirname: document.url }))
         .pipe(rename({ basename: 'index' }))
@@ -125,7 +129,7 @@ var writeDocument = function(document) {
 
 var writeResources = function(document) {
     // TODO: properly detect those resources to write and probably rename
-    gulp.src([postsDir + document.initialUrl + '*', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
+    return gulp.src([postsDir + document.initialUrl + '*', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
         .pipe(rename({ dirname: document.url }))
         .pipe(gulp.dest('./out/'));
 };
@@ -143,7 +147,8 @@ var buildStylus = function(stream, stylesheet) {
             stylesheetStream.end(output);
             stylesheetStream.pipe(gulp.dest('./out/s/'));
         }
-    }); 
+    });
+    return stream
 };
 
 // Tasks
@@ -169,16 +174,18 @@ gulp.task('documents', function(done) {
     runSequence('collect-documents', ['write-documents', 'write-resources'], done);
 });
 
-gulp.task('styles', function(done) {
-    gulp
+gulp.task('styles', ['styl', 'css']);
+
+gulp.task('styl', function(done) {
+    return gulp
         .src('./src/documents/styles/style.styl')
-        .pipe(foreach(buildStylus))
-    
+        .pipe(foreach(buildStylus));
+});
+
+gulp.task('css', function(done) {
     return gulp
         .src('./src/documents/styles/*.css')
         .pipe(gulp.dest('./out/s/'));
-        
-    
 });
 
 gulp.task('scripts', function(done) {
@@ -187,5 +194,22 @@ gulp.task('scripts', function(done) {
         .pipe(gulp.dest('./out/j/'));
 });
 
+gulp.task('express', function() {
+  express().use(express.static('./out/')).listen(4000);
+  gutil.log('Server is running on http://localhost:4000');
+});
 
-gulp.task('default', ['documents', 'styles', 'scripts']);
+gulp.task('build', ['documents', 'styles', 'scripts']);
+
+gulp.task('watch', ['express', 'build'], function() {
+    // Watching documents and rebuilding all of them
+    watch('./src/documents/posts/**/*', function() { gulp.start('documents'); });
+
+    // Watch jade layouts and rewrite documents without recollecting
+    watch('./src/layouts/*.jade', function() { gulp.start('write-documents'); });
+
+    // Watch .styl files and rebuild all the styles
+    watch('./src/styl/**/*.styl', function() { gulp.start('styles'); });
+});
+
+gulp.task('default', ['watch']);
