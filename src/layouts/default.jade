@@ -139,35 +139,35 @@ html.Page(class=page_class, lang=lang ? lang : false)
         if lang == 'en'
           li.Page-Language.is-current(
             data-short="en")
-            = "in english"
+            = loc('in_lang', 'en')
           li.Page-Language
             if document.translations && document.translations.ru
               a.Page-Language-Link(
                 data-short="ru",
                 href = url.replace('/en/', '/'))
-                = "по-русски"
+                = loc('in_lang', 'ru')
             else
               a.Page-Language-Link(
                 data-short="ru",
-                title="Для этой статьи нет перевода, но для многих других — есть",
+                title=loc('no_translation', 'ru'),
                 href="/")
-                = "по-русски*"
+                = loc('in_lang', 'ru') + '*'
         else
           li.Page-Language
             if document.translations && document.translations.en
               a.Page-Language-Link(
                 data-short="en",
                 href = '/en' + url)
-                = "in english"
+                = loc('in_lang', 'en')
             else
               a.Page-Language-Link(
                 data-short="en",
-                title="No translation for this article (yet?), but a lot of other english pages are available!",
+                title=loc('no_translation', 'en'),
                 href="/en/")
-                = "in english*"
+                = loc('in_lang', 'en') + '*'
           li.Page-Language.is-current(
             data-short="ru")
-            = "по-русски"
+            = loc('in_lang', 'ru')
 
 
 

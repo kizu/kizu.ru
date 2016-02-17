@@ -36,8 +36,8 @@ var pathRegex = new RegExp([
     ].join(''));
 
 // Future options
-
-var defaultLanguage = 'ru';
+var languages = ['ru', 'en']; // Default should be `['en']`
+var defaultLanguage = 'ru';   // Default should be `'en'`
 var postsDir = './src/documents/posts/';
 
 // Global stuff
@@ -159,7 +159,7 @@ var writeDocument = function(document) {
         'config': {
             'defaultLanguage': defaultLanguage
         },
-        'loc': function(locString){ return loc_strings[locString] && loc_strings[locString][document.lang] || 'No loc string found!' }
+        'loc': function(locString, lang){ return loc_strings[locString] && loc_strings[locString][lang || document.lang] || 'No loc string found!' }
     };
     return gulp.src('./src/layouts/default.jade')
         .pipe(data(function(){return jadeData}))

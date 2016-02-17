@@ -118,5 +118,13 @@
     "raquo": {
         "ru": "»",
         "en": "”"
+    },
+    "in_lang": {
+        "ru": "по-русски",
+        "en": "in english"
+    },
+    "no_translation": {
+        "ru": "Для этой статьи нет перевода, но для многих других — есть",
+        "en": "No translation for this article (yet?), but a lot of other english pages are available!"
     }
 }
