@@ -1,3 +1,5 @@
+@require 'typography'
+
 code,
 pre,
 kbd
@@ -10,6 +12,12 @@ pre
 
   overflow: hidden
 
+  padding: $size.base 0
+  margin: $size.base 0 -1*$size.base
+
+  background: rgba($color.white, 0.8) // Or rgba($color.text, 0.05)?
+  border-radius: 2px
+
   // FIXME: Add ws:pre and scrollbars on small sizes?
   // overflow-x: auto
 
@@ -17,7 +25,7 @@ pre > code
   display: inline-block
   vertical-align: top
 
-  padding: 0 0 0 2*$size.base
+  padding: 0 0 0 $size.indent
   margin-top: 0
 
   // Restoring the nested code

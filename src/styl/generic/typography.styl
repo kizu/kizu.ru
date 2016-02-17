@@ -16,7 +16,7 @@ li > p
   margin: $size.base 0 0
 
 p
-  text-indent: 2*$size.base
+  text-indent: $size.indent
 
   & > *,
   li > &:first-child
@@ -31,7 +31,8 @@ h3,
 h4,
 h5,
 h6
-  padding: 0
+  box-sizing: border-box
+  padding: 0 $size.indent
   margin: 0
 
   line-height: 1
@@ -82,19 +83,20 @@ ol
   counter-reset: list
 
 li
+  padding-left: 2*$size.indent
+
   text-align: left
   list-style-type: none // Fixme: screenreaders would die out?
 
-  & &
-    padding-left: 1.5*$size.base
-
   &:before
     content: "— "
+
     position: absolute
-    display: inline-block
-    width: 1.5*$size.base
-    margin-left: -1.5*$size.base
-    text-align: right
+
+    width: $size.indent
+    margin-left: -1*$size.indent
+
+    text-align: left
 
   ol > &
     counter-increment: list
