@@ -196,3 +196,34 @@ abbr
     @supports (-webkit-appearance: none)
       &
         content: "\AD\2062"
+
+
+.Anchor
+  display: inline-block
+
+  width: 0
+  padding-top: 0
+  padding-right: 1em
+  margin: -0.5em 0 -0.5em -1em
+
+  text-shadow: none
+
+  opacity: 0
+  transform: translate(100%, 0)
+  transition: opacity 0.3s 1s, transform 0.3s 1s
+
+  h1 > &
+    display: none
+
+  *:hover > &
+    text-shadow: none
+    background-repeat: no-repeat
+    background-size: 0.8em 0.44em
+    background-position: 0 100%
+
+    opacity: 1
+    transform: translate(0, 0)
+    transition: opacity 0.3s 0.3s, transform 0.3s 0.3s
+
+  &:before
+    content: "¶"

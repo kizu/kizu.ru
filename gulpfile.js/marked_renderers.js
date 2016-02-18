@@ -98,7 +98,7 @@ module.exports = {
         },
         function(args) {
             // Adding anchors
-            args.beforeContent = '<a class="Header-Anchor" href="#' + args.attributes.id + '"></a>';
+            args.beforeContent = '<a class="Anchor" href="#' + args.attributes.id + '"></a>';
             return args;
         }
 
