@@ -148,7 +148,7 @@
       clear: right
 
       width: $size.sidebar - 4*$size.base
-      padding: 0.625*$size.base 1.5*$size.base
+      padding: 0.61111*$size.base 1.5*$size.base
       margin: -4px -1*($size.sidebar + $size.base) 4px 0
 
       text-align: left
@@ -164,6 +164,9 @@
       & em
         font-family: $font.small
         font-style: italic
+
+      & a:hover
+        text-shadow: -1px 0 $color.body, 1px 0 $color.body
 
       &::before
         content: counter(sidenote) ". "
