@@ -120,28 +120,28 @@ var storeDocument = function(stream, file) {
     delete document.YAMLmetadata.__content;
 
     document.content = marked_overloaded(content, marked_renderers);
-    var splittedContent = document.content.split('\n');
     // TODO: can this be made using just one posthtml pass?
-    var firstLine = posthtml().process(splittedContent[0], { sync: true });
-    if (firstLine.tree[0].tag == 'h1') {
-        document.titleHTML = splittedContent[0];
-        firstLine = posthtml()
-            .use( function(tree) {
-                var result = '';
-                tree.walk(function(node) {
-                    textNode = node
-                    if (typeof(textNode) == 'string') {
-                        result += textNode;
-                    }
-                    return textNode
-                    });
-                return result
-            })
-            .process(document.titleHTML, { sync: true });
+    if (document.content.substr(0, 4) === '<h1 ') {
+        var firstLine = document.content.substr(0, document.content.indexOf('</h1>') + 5);
+        if (firstLine) {
+            document.titleHTML = firstLine;
+            firstLine = posthtml()
+                .use( function(tree) {
+                    var result = '';
+                    tree.walk(function(node) {
+                        textNode = node
+                        if (typeof(textNode) == 'string') {
+                            result += textNode;
+                        }
+                        return textNode
+                        });
+                    return result
+                })
+                .process(document.titleHTML, { sync: true });
 
-        document.title = firstLine.html;
-        splittedContent.splice(0, 1);
-        document.content = splittedContent.join('\n');
+            document.title = firstLine.html;
+            document.content = document.content.replace(document.titleHTML, '');
+        }
     }
 
     document.content = typography(document.content, document.lang);
