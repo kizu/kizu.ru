@@ -12,11 +12,11 @@ $node_modules_src = '../../../node_modules'
 $styl_src = '../../styl'
 
 use($node_modules_src + '/stylobuild', {
-  minifier: false
+  minifier: 'csswring'
 })
 
+@import $styl_src + '/fonts/regular'
 @import $styl_src + '/css/prism.css'
-@import $styl_src + '/font_regular'
 @import $styl_src + '/keyframes'
 
 
@@ -45,7 +45,7 @@ $color['distant_text'] = rgba($color.dark, 0.48)
 $color['highlight'] = rgba(yellow, 0.8)
 
 $font = {}
-$font['regular'] = 'Cent-Regular21', Georgia, serif
+$font['regular'] = '21Cent-Regular', Georgia, serif
 $font['small'] = Helvetica Neue, Arial, sans-serif
 
 $z-index = {

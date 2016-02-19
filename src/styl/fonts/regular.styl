@@ -1,0 +1,16 @@
+@require 'add-font'
+
+font-license()
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/306f31")
+
+// Glyphs removed:
+// 00A1-00A5, 00A8, 00AF, 00B8, 00BF, 00C0-00D6, 00D8-00F6, 00F8-017E, 0402-040F, 0452-0491,
+// afii10056small-Imacronsmall, afii10061small.alt-afii10109.alt
+
+add-font('21Cent-Regular')
+
+add-font('21Cent-Regular_hyphen')
+
+/* Bold, italic and black styles are lazyloaded from the end of the body by script, so the page would load faster */

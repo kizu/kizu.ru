@@ -180,12 +180,14 @@ var buildStylus = function(stream, stylesheet) {
     style = stylus(stylesheet.contents.toString())
         .set('filename', stylesheet.base + stylesheet.relative)
         .set('include css', true)
-        .set('sourcemap', { 'inline': true });
+    if (stylesheet.relative === 'style.styl') {
+        style.set('sourcemap', { 'inline': true });
+    }
     style.render(function(err, output) {
         if (err) {
             console.error(err);
         } else {
-            var stylesheetStream = source('style.css');
+            var stylesheetStream = source(stylesheet.relative.replace('.styl', '.css'));
             stylesheetStream.end(output);
             stylesheetStream.pipe(gulp.dest('./out/s/'));
         }
@@ -217,18 +219,10 @@ gulp.task('documents', function(done) {
     runSequence('collect-documents', ['write-documents', 'write-resources'], done);
 });
 
-gulp.task('styles', ['styl', 'css']);
-
 gulp.task('styl', function(done) {
     return gulp
-        .src('./src/documents/styles/style.styl')
+        .src('./src/documents/styles/*.styl')
         .pipe(foreach(buildStylus));
-});
-
-gulp.task('css', function(done) {
-    return gulp
-        .src('./src/documents/styles/*.css')
-        .pipe(gulp.dest('./out/s/'));
 });
 
 gulp.task('scripts', function(done) {
@@ -242,7 +236,7 @@ gulp.task('express', function() {
   gutil.log('Server is running on http://localhost:4000');
 });
 
-gulp.task('build', ['documents', 'styles', 'scripts']);
+gulp.task('build', ['documents', 'styl', 'scripts']);
 
 gulp.task('watch', ['express', 'build'], function() {
     // Watching documents and rebuilding all of them
@@ -252,7 +246,7 @@ gulp.task('watch', ['express', 'build'], function() {
     watch(['./src/layouts/*.jade', './gulpfile.js/loc_strings.json'], function() { gulp.start('write-documents'); });
 
     // Watch .styl files and rebuild all the styles
-    watch('./src/styl/**/*.styl', function() { gulp.start('styles'); });
+    watch(['./src/documents/styles/*.styl', './src/styl/**/*.styl'], function() { gulp.start('styl'); });
 });
 
 gulp.task('default', ['watch']);
