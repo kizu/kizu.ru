@@ -43,6 +43,10 @@ var postsDir = './src/documents/posts/';
 // Global stuff
 var documents = [];
 var loc_strings = {};
+var documentsByLang = {};
+for (var i = 0; i < languages.length; i++) {
+    documentsByLang[languages[i]] = [];
+};
 
 // Helper functions
 
@@ -146,6 +150,13 @@ var storeDocument = function(stream, file) {
 
     document.content = typography(document.content, document.lang);
 
+    // FIXME: combine all the metadata from different sources beforehand
+    if (document.relativePath.indexOf('drafts/') === -1 || document.YAMLmetadata.invisible) {
+        documentsByLang[document.lang].push(document);
+    } else {
+        document.isDraft = true;
+    }
+
     // console.log(document);
     documents.push(document);
 
@@ -154,7 +165,7 @@ var storeDocument = function(stream, file) {
 
 var writeDocument = function(document) {
     var jadeData = {
-        'documents': documents,
+        'documents': documentsByLang[document.lang],
         'document': document,
         'config': {
             'defaultLanguage': defaultLanguage
@@ -197,13 +208,37 @@ var buildStylus = function(stream, stylesheet) {
 
 // Tasks
 
-gulp.task('collect-documents', function(done) {
+gulp.task('get-documents', function(done) {
     documents = [];
 
     return gulp
         .src(postsDir + '**/*.md')
         .pipe(foreach(storeDocument));
 
+});
+
+gulp.task('classify-documents', function(done) {
+    // Do everything for each lang group
+    for (var i = 0; i < languages.length; i++) {
+        var docs = documentsByLang[languages[i]];
+
+        // Sort docs by date
+        docs.sort(function(a, b){
+            return new Date(b.date) - new Date(a.date);
+        });
+
+        for (var j = 0; j < docs.length; j++) {
+            var current = docs[j];
+            if (j !== 0) {
+                current.next = docs[j - 1];
+            }
+            if (j !== docs.length - 1) {
+                current.prev = docs[j + 1];
+            }
+        };
+    };
+
+    done();
 });
 
 gulp.task('write-documents', function(done) {
@@ -216,7 +251,7 @@ gulp.task('write-resources', function(done) {
 });
 
 gulp.task('documents', function(done) {
-    runSequence('collect-documents', ['write-documents', 'write-resources'], done);
+    runSequence('get-documents', 'classify-documents', ['write-documents', 'write-resources'], done);
 });
 
 gulp.task('styl', function(done) {

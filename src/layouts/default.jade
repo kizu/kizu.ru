@@ -20,36 +20,6 @@
 
   var url = '/' + document.url
 
-  var pages = documents
-  if (pages) {
-    pages = pages.sort(function(a, b){
-      return new Date(b.date) - new Date(a.date)
-    })
-    pages.map(function(post){
-      post.title = post.title || 'no title lol'
-      return post
-    })
-  }
-
-  var posts = pages.filter(function(page) {
-    return page.lang == lang && page.categories && (page.relativePath.indexOf('drafts/') <= 0) && (page.relativePath.indexOf('old)') <= 0)
-  })
-
-  var next
-  var prev
-
-  for (var i = 0; i < posts.length; i++) {
-    // Get prev and next posts
-    if ('/' + posts[i].url == url) {
-      if (i > 0) {
-        next = posts[i - 1]
-      }
-      if (i < (posts.length - 1)) {
-        prev = posts[i + 1]
-      }
-    }
-  }
-
 mixin debug()
 
   .debug#debug
@@ -66,10 +36,10 @@ mixin debug()
           td= url
         tr
           td prev
-          td= prev && prev.url
+          td= document.prev && document.prev.url
         tr
           td next
-          td= next && next.url
+          td= document.next && document.next.url
         if lang
           tr
             td lang
@@ -183,9 +153,9 @@ html.Page(class=page_class, lang=lang ? lang : false)
       .Page-Content.Main(role="main")
         if is_index
           -
-          if posts
+          if documents
             ul
-              - for post in posts
+              - for post in documents
                 li
                   a(href=post.url)
                     = post.title
