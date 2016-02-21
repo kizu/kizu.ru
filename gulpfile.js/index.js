@@ -21,6 +21,7 @@ var yamlFront = require('yaml-front-matter');
 var typography = require(process.cwd() + '/gulpfile.js/typography.js');
 var marked_overloaded = require(process.cwd() + '/gulpfile.js/marked_overloaded.js');
 var marked_renderers = require(process.cwd() + '/gulpfile.js/marked_renderers.js');
+var handle_demos = require(process.cwd() + '/gulpfile.js/handle_demos.js');
 
 // Constants
 var pathRegex = new RegExp([
@@ -73,6 +74,7 @@ var storeDocument = function(stream, file) {
 
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
     document.filename = (document.isInFolder || '') + (document.lang && '.' + document.lang || '') + document.extension;
+    document.resources = {};
 
     if (document.categories) {
         document.categories = document.categories.replace(/^\((.+)\)-$/, '$1').split(' ');
@@ -85,7 +87,7 @@ var storeDocument = function(stream, file) {
         var directory = file.base + document.initialUrl;
 
         // TODO: rewrite this stuff hardly!
-        var getResource = function(fileName) {
+        var getTranslations = function(fileName) {
             if (document.lang !== 'en' && fileName === (document.isInFolder || '') + '.en' + document.extension) {
                 if (!document.translations) {
                     document.translations = {};
@@ -96,18 +98,13 @@ var storeDocument = function(stream, file) {
                     document.translations = {};
                 }
                 document.translations.ru = true;
-            } else if (fileName.substr(fileName.length - 3) !== '.md' && fileName[0] !== '.') {
-                if (!document.resources) {
-                    document.resources = [];
-                }
-                document.resources.push(fileName);
             }
         };
 
-        var resources = fs.readdirSync(directory);
-        if (resources) {
-            for (var i = 0; i < resources.length; i++) {
-                getResource(resources[i]);
+        var neighbouringFiles = fs.readdirSync(directory);
+        if (neighbouringFiles) {
+            for (var i = 0; i < neighbouringFiles.length; i++) {
+                getTranslations(neighbouringFiles[i]);
             }
         }
 
@@ -164,6 +161,8 @@ var storeDocument = function(stream, file) {
 };
 
 var writeDocument = function(document) {
+    document.content = handle_demos(document);
+
     var jadeData = {
         'documents': documentsByLang[document.lang],
         'document': document,
@@ -180,19 +179,10 @@ var writeDocument = function(document) {
         .pipe(gulp.dest('./out/'));
 };
 
-var compileResource = function(document) {
+var handleResource = function(document) {
     return function(stream, resource) {
         var resultStream = stream;
-        if (resource.history[0].match(/\.html$/)) {
-            var contents = resource._contents.toString();
-            var YAMLmetadata = yamlFront.loadFront(contents);
-            if (YAMLmetadata && YAMLmetadata.layout) {
-                YAMLmetadata.content = YAMLmetadata.__content
-                resultStream = gulp.src('./src/layouts/' + YAMLmetadata.layout + '.jade')
-                    .pipe(data(function(){return YAMLmetadata}))
-                    .pipe(jade({ pretty: true }));
-            }
-        }
+
         var documentName = document.url.match(/\/([^\/]+)\/$/);
         documentName = documentName && documentName[1];
         var resPath = resource.history[0].match(new RegExp('[\/\-]' + documentName + '\/(.+\/)?([^\/]+)\\.([^\\.]+)$'));
@@ -201,8 +191,31 @@ var compileResource = function(document) {
         }
         var resName = resPath[2];
         var finalPath = document.url;
-        if (resPath && resPath[1]) {
+        if (resPath[1]) {
             finalPath += resPath[1];
+        }
+
+        if (resource.history[0].match(/\.html$/)) {
+            var contents = resource._contents.toString();
+            var YAMLmetadata = yamlFront.loadFront(contents);
+            YAMLmetadata.content = YAMLmetadata.__content
+
+            // Store the resource
+            var resRelName = resName;
+            if (resPath[1]) {
+                resRelName = resPath[1] + resRelName;
+            }
+            YAMLmetadata.relName = resRelName;
+            document.resources[resName] = YAMLmetadata;
+
+            // Compile and write if the resource is not injected
+            if (YAMLmetadata && YAMLmetadata.layout && !YAMLmetadata.injected) {
+                resultStream = gulp.src('./src/layouts/' + YAMLmetadata.layout + '.jade')
+                    .pipe(data(function(){return YAMLmetadata}))
+                    .pipe(jade({ pretty: true }));
+            } else {
+                return stream;
+            }
         }
         return resultStream
             .pipe(rename({ dirname: finalPath }))
@@ -211,10 +224,10 @@ var compileResource = function(document) {
 
     }
 }
-var writeResources = function(document) {
+var handleResources = function(document) {
     // TODO: properly detect those resources to write and probably rename
     return gulp.src([postsDir + document.initialUrl + '**', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
-        .pipe(foreach(compileResource(document)))
+        .pipe(foreach(handleResource(document)))
 };
 
 var buildStylus = function(stream, stylesheet) {
@@ -276,12 +289,12 @@ gulp.task('write-documents', function(done) {
     each(documents, writeDocument, done);
 });
 
-gulp.task('write-resources', function(done) {
-    each(documents, writeResources, done);
+gulp.task('handle-resources', function(done) {
+    each(documents, handleResources, done);
 });
 
 gulp.task('documents', function(done) {
-    runSequence('get-documents', 'classify-documents', ['write-documents', 'write-resources'], done);
+    runSequence('get-documents', 'classify-documents', 'handle-resources', 'write-documents', done);
 });
 
 gulp.task('styl', function(done) {
