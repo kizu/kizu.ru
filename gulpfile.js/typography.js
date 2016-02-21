@@ -31,9 +31,6 @@ module.exports = function(text, lang) {
 
     // TODO: Make other abbreviations too, like JS, W3C etc.
 
-    // Mark the starting abbrs
-    result = result.replace(new RegExp('(<(?:p|li)>|[\.\?\!\…](?:[  ]|&nbsp;))<abbr>([A-ZА-Я]+</abbr>)', 'g'),'$1<abbr class="starting">$2')
-
     // Replace soft hyphens with special spans
     result = result.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
 

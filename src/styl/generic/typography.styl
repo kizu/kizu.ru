@@ -171,27 +171,6 @@ header
 .ss09 { -webkit-font-feature-settings: "ss09"; font-feature-settings: "ss09" }
 .ss10 { -webkit-font-feature-settings: "ss10"; font-feature-settings: "ss10" }
 
-// FIXME: why won't it work properly with big caps?
-abbr
-  display: inline-block // So the first-letter would work
-
-  text-transform: uppercase
-  font-variant-caps: small-caps
-  -ms-font-feature-settings: "smcp" 0
-
-  @supports (font-variant-caps: small-caps) or (-webkit-font-feature-settings: "smcp")
-    text-transform: lowercase
-
-  @supports (font-variant-caps: small-caps) or (font-feature-settings: "smcp")
-    text-transform: lowercase
-
-  @supports not (font-variant-caps: small-caps)
-    -webkit-font-feature-settings: "smcp"
-    font-feature-settings: "smcp"
-
-  &.starting::first-letter
-    text-transform: uppercase
-
 .shy
   font-family: '21Cent-Regular_hyphen', Georgia, serif
 
