@@ -85,7 +85,7 @@ I won't describe [all the features](http://learnboost.github.io/stylus/docs/hash
 
 ## `selector()` function {#selector}
 
-There is now one small but important feature in Stylus — `selector()`. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn't _get_ the compiled selector, they only existed in the compiled CSS.
+There is now one small but important feature in Stylus — `selector()`. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn't **get** the compiled selector, they only existed in the compiled CSS.
 
 But now, using `selector()` function that returns the current compiled selector, you could do a lot of useful things, like check the selector for something using the `match()` function, or use it for something else. It is already very useful, and it would become even more so in future releases.
 

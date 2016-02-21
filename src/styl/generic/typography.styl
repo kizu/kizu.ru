@@ -140,7 +140,7 @@ h5,
 h6,
 header
   & + *
-    margin-top: 0
+    margin-top: 0 !important
 
 
 // Classes for hanging blocks
@@ -180,11 +180,9 @@ abbr
   -ms-font-feature-settings: "smcp" 0
 
   @supports (font-variant-caps: small-caps) or (-webkit-font-feature-settings: "smcp")
-    font-size: 0.956521739em
     text-transform: lowercase
 
   @supports (font-variant-caps: small-caps) or (font-feature-settings: "smcp")
-    font-size: 0.956521739em
     text-transform: lowercase
 
   @supports not (font-variant-caps: small-caps)
@@ -215,6 +213,8 @@ abbr
 
   text-shadow: none
 
+  line-height: 1
+
   opacity: 0
   transform: translate(100%, 0)
   transition: opacity 0.3s 1s, transform 0.3s 1s
@@ -225,7 +225,7 @@ abbr
   *:hover > &
     text-shadow: none
     background-repeat: no-repeat
-    background-size: 0.8em 0.44em
+    background-size: 0.6em 0.45em
     background-position: 0 100%
 
     opacity: 1
@@ -233,4 +233,5 @@ abbr
     transition: opacity 0.3s 0.3s, transform 0.3s 0.3s
 
   &:before
-    content: "¶"
+    content: "#"
+    font-feature-settings: "smcp"

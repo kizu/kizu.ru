@@ -3,18 +3,32 @@
 code,
 pre,
 kbd
+  font-feature-settings: "lnum", "onum" 0
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  code,
+  kbd
+    // Faux bold, yeah, but better than nothing
+    font-weight: bold
+
+pre,
+pre > code
   font-family: Monaco, Consolas, monospace, monospace // FIXME: Do we still need double monospace?
   font-size: $size.codetext
   line-height: 1
-  font-feature-settings: "lnum", "onum" 0
 
 pre
   position: relative
 
   overflow: hidden
 
-  padding: $size.base 0
-  margin: $size.base 0 -1*$size.base
+  padding: 1.5*$size.base 0
+  margin: 1.5*$size.base 0 -0.5*$size.base
 
   background: rgba($color.white, 0.8) // Or rgba($color.text, 0.05)?
   border-radius: 2px
@@ -31,4 +45,4 @@ pre > code
 
   // Restoring the nested code
   font-size: 1em
-  line-height: 2*$size.base
+  line-height: 1.5*$size.base
