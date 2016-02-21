@@ -180,11 +180,41 @@ var writeDocument = function(document) {
         .pipe(gulp.dest('./out/'));
 };
 
+var compileResource = function(document) {
+    return function(stream, resource) {
+        var resultStream = stream;
+        if (resource.history[0].match(/\.html$/)) {
+            var contents = resource._contents.toString();
+            var YAMLmetadata = yamlFront.loadFront(contents);
+            if (YAMLmetadata && YAMLmetadata.layout) {
+                YAMLmetadata.content = YAMLmetadata.__content
+                resultStream = gulp.src('./src/layouts/' + YAMLmetadata.layout + '.jade')
+                    .pipe(data(function(){return YAMLmetadata}))
+                    .pipe(jade({ pretty: true }));
+            }
+        }
+        var documentName = document.url.match(/\/([^\/]+)\/$/);
+        documentName = documentName && documentName[1];
+        var resPath = resource.history[0].match(new RegExp('[\/\-]' + documentName + '\/(.+\/)?([^\/]+)\\.([^\\.]+)$'));
+        if (!resPath) {
+            return stream;
+        }
+        var resName = resPath[2];
+        var finalPath = document.url;
+        if (resPath && resPath[1]) {
+            finalPath += resPath[1];
+        }
+        return resultStream
+            .pipe(rename({ dirname: finalPath }))
+            .pipe(rename({ basename: resName }))
+            .pipe(gulp.dest('./out/'));
+
+    }
+}
 var writeResources = function(document) {
     // TODO: properly detect those resources to write and probably rename
-    return gulp.src([postsDir + document.initialUrl + '*', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
-        .pipe(rename({ dirname: document.url }))
-        .pipe(gulp.dest('./out/'));
+    return gulp.src([postsDir + document.initialUrl + '**', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
+        .pipe(foreach(compileResource(document)))
 };
 
 var buildStylus = function(stream, stylesheet) {
