@@ -30,7 +30,7 @@ var pathRegex = new RegExp([
         '(\\([^\\)]+\\)-)?',            // Categories       like `(issues old)`
         '(?!index)([^\/\\.\\_]+)',      // Slug             like `whatever-title`
         '(?:\/(index))?',               // Is in folder     like `/index`
-        '(?:_(\\w{2}))?',               // Lang             like `en`
+        '(?:\\.(\\w{2}))?',             // Lang             like `en`
         '((?:\\.[^\\.\\/]+)+)',         // Extension[s]     like `.md`
         '$'
     ].join(''));
@@ -72,7 +72,7 @@ var storeDocument = function(stream, file) {
     }
 
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
-    document.filename = (document.isInFolder || '') + (document.lang && '_' + document.lang || '') + document.extension;
+    document.filename = (document.isInFolder || '') + (document.lang && '.' + document.lang || '') + document.extension;
 
     if (document.categories) {
         document.categories = document.categories.replace(/^\((.+)\)-$/, '$1').split(' ');
@@ -86,12 +86,12 @@ var storeDocument = function(stream, file) {
 
         // TODO: rewrite this stuff hardly!
         var getResource = function(fileName) {
-            if (document.lang !== 'en' && fileName === (document.isInFolder || '') + '_en' + document.extension) {
+            if (document.lang !== 'en' && fileName === (document.isInFolder || '') + '.en' + document.extension) {
                 if (!document.translations) {
                     document.translations = {};
                 }
                 document.translations.en = true;
-            } else if (document.lang !== 'ru' && fileName === (document.isInFolder || '') + '_ru' + document.extension) {
+            } else if (document.lang !== 'ru' && fileName === (document.isInFolder || '') + '.ru' + document.extension) {
                 if (!document.translations) {
                     document.translations = {};
                 }
