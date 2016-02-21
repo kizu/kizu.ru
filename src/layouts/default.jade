@@ -17,6 +17,10 @@
   if (lang) {
     page_class += ' Page_' + lang
   }
+  var hasSidenotes = document.content.match(/"Sidenote"/g);
+  if (hasSidenotes && hasSidenotes.length === 1) {
+    page_class += ' with-lonely-sidenote'
+  }
 
   var url = '/' + document.url
 
