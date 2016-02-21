@@ -61,7 +61,7 @@ module.exports = {
                 var hang = 'm';
                 var alt = 'ss01 ';
 
-                if ('СC'.indexOf(firstLetter) > -1) {
+                if ('СCЭ'.indexOf(firstLetter) > -1) {
                     alt = 'ss02 ';
                 }
                 if ('КТ'.indexOf(firstLetter) > -1) {
