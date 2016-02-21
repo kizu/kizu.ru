@@ -47,7 +47,7 @@
       // FIXME: Magic numbers
       content: counter(sidenote)
       position: relative
-      top: -0.6*$size.base
+      top: -0.555*$size.base
 
       cursor: pointer
 
@@ -56,11 +56,12 @@
       padding: 0 1px
       // margin: 0 -0.7em 0 0 // was disabled by error
 
-      font: 14px/1 $font.small
-      font-size: 0.7*$size.base
+      font-size: $size.base
       line-height: 1
 
       color: rgba($color.text, 0.6)
+
+      font-feature-settings: "smcp"
 
       .with-lonely-sidenote &
         content: "*"
@@ -156,6 +157,7 @@
       font-family: $font.small
       font-size: $size.smalltext
       line-height: 1.25*$size.base
+      font-feature-settings: "lnum", "onum" 0
 
       color: inherit
 
