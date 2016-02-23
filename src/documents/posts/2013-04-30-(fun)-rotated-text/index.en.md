@@ -12,7 +12,6 @@ I managed to make this work with one assumption — we would need to know t
 
 1. We would need to have an extra element. HTML for each block would be like this:
 
-
         <span class="rotated-text">
             <span class="rotated-text__inner">
                 Rotated foo
