@@ -1,6 +1,6 @@
 # Nested Link[s][ss01]
 
-![Cats playing nested links](nested-links.jpg "{:width='500' height='375'}")
+![Cats playing nested links](nested-links.jpg "{:width='640' height='480'}")
 
 
 ## The problem

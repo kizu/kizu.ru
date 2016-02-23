@@ -1,6 +1,6 @@
 # Battle for Baseline
 
-![Kitties](flex-baseline.jpg "{:width='848' height='536'}")
+![Kitties](flex-baseline.jpg "{:width='756' height='478'}")
 
 The best solution for inline blocks were, well, inline-blocks. I used to like them, because you could solve a lot of tasks with them. But they're not ideal. They're not capable of doing baseline vertical aligning *right*. And the problems come straight from the [specs][vertical-align], just read the last two paragraphs to see the problems:
 
