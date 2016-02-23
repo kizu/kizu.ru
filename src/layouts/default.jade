@@ -183,6 +183,15 @@ html.Page(class=page_class, lang=lang ? lang : false)
     footer.Page-Footer
       .LiquidLayout
         .LiquidLayout-Content
+          nav.PrevNext
+            if document.prev
+              a.Link.Link_wrapper.Link_prev(href='/' + document.prev.url)
+                span.Link-Inner
+                  = document.prev.title
+            if document.next
+              a.Link.Link_wrapper.Link_next(href='/' + document.next.url)
+                span.Link-Inner
+                  = document.next.title
           p.Page-Copy
             = "© 2016 " + loc('name') + ". "
             a.Link.Link_wrapper(href="https://twitter.com/" + loc('twitter_name'))

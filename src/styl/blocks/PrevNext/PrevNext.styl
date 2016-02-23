@@ -1,0 +1,27 @@
+.PrevNext
+  display: flex
+  flex-wrap: wrap
+  align-items: baseline
+
+  font-size: $size.base
+
+  padding-top: 0.5*$size.base
+
+  & .Link_prev
+    padding-left: 0.5*$size.base
+    padding-left: 2.5vw
+    margin-left: -0.5*$size.base
+    margin-left: -2.5vw
+    margin-right: auto
+
+    &:before
+      content: "← "
+
+  & .Link_next
+    padding-right: 0.5*$size.base
+    padding-right: 2.5vw
+    margin-right: -0.5*$size.base
+    margin-right: -2.5vw
+
+    &:after
+      content: " →"

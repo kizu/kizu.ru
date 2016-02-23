@@ -45,9 +45,6 @@ var postsDir = './src/documents/posts/';
 var documents = [];
 var loc_strings = {};
 var documentsByLang = {};
-for (var i = 0; i < languages.length; i++) {
-    documentsByLang[languages[i]] = [];
-};
 
 // Helper functions
 
@@ -253,6 +250,9 @@ var buildStylus = function(stream, stylesheet) {
 
 gulp.task('get-documents', function(done) {
     documents = [];
+    for (var i = 0; i < languages.length; i++) {
+        documentsByLang[languages[i]] = [];
+    };
 
     return gulp
         .src(postsDir + '**/*.md')
