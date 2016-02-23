@@ -1,10 +1,30 @@
 // We'll need to render stuff inside our stuff
 marked = require('marked');
 
+var customAttributesRegex = /\s*\{:?([#.][^}]+|[a-z-]+=(?:['"]|&quot;|&#39;)[^}]*)\}\s*$/;
+
+var handleTitleAttributes = function(args) {
+    if (args.attributes.title) {
+        var customAttributes = args.attributes.title.match(customAttributesRegex);
+        if (customAttributes) {
+            var text = args.original.text || '';
+            args.original.text = text + customAttributes[0].replace(/&#39;/g, '"');
+            args.attributes.title = args.attributes.title.replace(customAttributes[0], '');
+            if (args.attributes.title === '') {
+                delete args.attributes.title;
+            }
+        }
+    }
+    return args;
+};
+
 var handleAttributes = function(args) {
     var content = args.original.text && 'text' || 'code';
+    if (!args.original[content]) {
+        return args;
+    }
 
-    var customAttributes = args.original[content].match(/\s*\{:?([#.][^}]+|[a-z-]+=(?:['"]|&quot;|&#39;)[^}]*)\}\s*$/);
+    var customAttributes = args.original[content].match(customAttributesRegex);
 
     if (customAttributes) {
         args.original[content] = args.original[content].substr(0, args.original[content].length - customAttributes[0].length);
@@ -36,9 +56,14 @@ var handleAttributes = function(args) {
         }
     }
     return args;
-}
+};
 
 module.exports = {
+    'image': [
+        function(args) { return handleTitleAttributes(args); },
+        function(args) { return handleAttributes(args); }
+    ],
+
     'paragraph': [
         function(args) { return handleAttributes(args); }
     ],

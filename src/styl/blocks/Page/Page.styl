@@ -45,8 +45,8 @@
 
     height: $size.header
     // TODO: move those paddings to mixin?
-    overflow: 0 0.5*$size.base
-    overflow: 0 2.5vw
+    padding: 0 0.5*$size.base
+    padding: 0 2.5vw
 
     white-space: nowrap
 
@@ -148,3 +148,35 @@
     &-Link
       &:not(:hover)
         color: $color.distant_text
+
+  &-Footer
+    position: absolute
+    right: 0
+    bottom: 0
+    left: 0
+
+    overflow: hidden
+
+    height: $size.footer
+    padding: 0 0.5*$size.base
+    padding: 0 2.5vw
+
+    .Page_post &
+      position: fixed
+      background: $color.distant
+
+  &-Copy
+    display: flex
+    align-items: baseline
+
+    padding-top: $size.base
+    margin-bottom: 0
+
+    text-align: left
+    text-indent: 0
+
+    font-size: $size.base
+    color: rgba($color.dark, 0.62)
+
+    & > .Link_wrapper
+      margin-left: auto

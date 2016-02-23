@@ -3,12 +3,18 @@
 .LiquidLayout
   @media (min-width: 820px)
     margin: 0 auto
-    max-width: $size.content + 2*$size.sidebar
+
+    .Page.without-sidebar
+      max-width: $size.content
+
+    .Page:not(.without-sidebar)
+      max-width: $size.content + 2*$size.sidebar
 
   &-Content
-    counter-reset: sidenote
+    .Page:not(.without-sidebar) &
+      counter-reset: sidenote
 
-    max-width: $size.content
+      max-width: $size.content
 
-    @media (min-width: 820px)
-      margin: 0 $size.sidebar 0 auto
+      @media (min-width: 820px)
+        margin: 0 $size.sidebar 0 auto

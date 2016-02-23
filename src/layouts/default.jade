@@ -18,11 +18,23 @@
     page_class += ' Page_' + lang
   }
   var hasSidenotes = document.content.match(/"Sidenote"/g);
-  if (hasSidenotes && hasSidenotes.length === 1) {
-    page_class += ' with-lonely-sidenote'
+  var hasSidepicture = document.content.match(/"Sidepicture"/g);
+  if (hasSidenotes) {
+    if (hasSidenotes.length === 1) {
+      page_class += ' with-lonely-sidenote'
+    }
+  } else if (!hasSidepicture) {
+      page_class += ' without-sidebar'
   }
 
   var url = '/' + document.url
+
+mixin optionalTag(condition)
+  if condition
+    div&attributes(attributes)
+      block
+  else
+    block
 
 mixin debug()
 
@@ -98,50 +110,52 @@ html.Page(class=page_class, lang=lang ? lang : false)
     +debug
 
     header.Page-Header(role="banner")
-      h1.Page-Title
-        if is_index
-          = loc('name')
-        else
-          a.Page-Title-Link(
-            href="/" + lang_prefix
-            )= loc('name')
+      .LiquidLayout
+        .LiquidLayout-Content
+          h1.Page-Title
+            if is_index
+              = loc('name')
+            else
+              a.Page-Title-Link(
+                href="/" + lang_prefix
+                )= loc('name')
 
-      //- TODO: add links to translation if there are such
-      ul.Page-Languages
-        //- TODO: add bemto
-        //- TODO: add functions for getting the root of the given lang
-        if lang == 'en'
-          li.Page-Language.is-current(
-            data-short="en")
-            = loc('in_lang', 'en')
-          li.Page-Language
-            if document.translations && document.translations.ru
-              a.Page-Language-Link(
-                data-short="ru",
-                href = url.replace('/en/', '/'))
-                = loc('in_lang', 'ru')
-            else
-              a.Page-Language-Link(
-                data-short="ru",
-                title=loc('no_translation', 'ru'),
-                href="/")
-                = loc('in_lang', 'ru') + '*'
-        else
-          li.Page-Language
-            if document.translations && document.translations.en
-              a.Page-Language-Link(
-                data-short="en",
-                href = '/en' + url)
+          //- TODO: add links to translation if there are such
+          ul.Page-Languages
+            //- TODO: add bemto
+            //- TODO: add functions for getting the root of the given lang
+            if lang == 'en'
+              li.Page-Language.is-current(
+                data-short="en")
                 = loc('in_lang', 'en')
+              li.Page-Language
+                if document.translations && document.translations.ru
+                  a.Page-Language-Link(
+                    data-short="ru",
+                    href = url.replace('/en/', '/'))
+                    = loc('in_lang', 'ru')
+                else
+                  a.Page-Language-Link(
+                    data-short="ru",
+                    title=loc('no_translation', 'ru'),
+                    href="/")
+                    = loc('in_lang', 'ru') + '*'
             else
-              a.Page-Language-Link(
-                data-short="en",
-                title=loc('no_translation', 'en'),
-                href="/en/")
-                = loc('in_lang', 'en') + '*'
-          li.Page-Language.is-current(
-            data-short="ru")
-            = loc('in_lang', 'ru')
+              li.Page-Language
+                if document.translations && document.translations.en
+                  a.Page-Language-Link(
+                    data-short="en",
+                    href = '/en' + url)
+                    = loc('in_lang', 'en')
+                else
+                  a.Page-Language-Link(
+                    data-short="en",
+                    title=loc('no_translation', 'en'),
+                    href="/en/")
+                    = loc('in_lang', 'en') + '*'
+              li.Page-Language.is-current(
+                data-short="ru")
+                = loc('in_lang', 'ru')
 
 
 
@@ -167,13 +181,14 @@ html.Page(class=page_class, lang=lang ? lang : false)
         != document.content
 
     footer.Page-Footer
-      p.Page-Copy
-        = "© 2015 " + loc('name') + "."
-        a.Link.Link_wrapper.Link_twitter(href="https://twitter.com/" + loc('twitter_name'))
-          img.Ico(alt="Twitter", src="http://favicon.yandex.net/favicon/twitter.com", title="Twitter")
-          span.Link-Inner
-            = loc('twitter_follow')
-          = "!"
+      .LiquidLayout
+        .LiquidLayout-Content
+          p.Page-Copy
+            = "© 2016 " + loc('name') + ". "
+            a.Link.Link_wrapper(href="https://twitter.com/" + loc('twitter_name'))
+              span.Link-Inner
+                = loc('twitter_follow')
+              = "!"
 
     script.
       //- Detect Woff2, via filamentgroup/woff2-feature-test and PRs to it

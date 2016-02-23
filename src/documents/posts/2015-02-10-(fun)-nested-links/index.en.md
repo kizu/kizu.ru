@@ -1,6 +1,6 @@
 # Nested Link[s][ss01]
 
-![Cats playing nested links](nested-links.jpg){:.b-figure .b-figure_outer width="500" height="375"}
+![Cats playing nested links](nested-links.jpg "{:.Sidepicture width='500' height='375'}")
 
 
 ## The problem

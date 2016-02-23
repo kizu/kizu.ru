@@ -1,6 +1,6 @@
 # The flow of display
 
-![How is this puzzle solved?](/pictures/the-flow-of-display.jpg){:.b-figure width="756" height="382"}
+![How is this puzzle solved?](/pictures/the-flow-of-display.jpg "{:width='756' height='382'}")
 
 There are a lot of subtle nuances in CSS. Sometimes you look at the code and wonder “why is it working at all?!”, and as more experienced you become, the less often it happens.
 
