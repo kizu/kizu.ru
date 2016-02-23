@@ -31,8 +31,7 @@ h3,
 h4,
 h5,
 h6
-  padding: 0 $size.indent
-  margin: 0
+  margin: 2*$size.base $size.indent 0
 
   line-height: 1
   font-weight: normal
@@ -56,8 +55,6 @@ h6
 h1
   position: relative
 
-  padding-top: 2*$size.base
-
   text-align: center
 
   font-size: 3.5*$size.base
@@ -69,14 +66,12 @@ h2
   position: relative
   font-size: 2*$size.base
   line-height: 2*$size.base
-  padding-top: 3*$size.base
   padding-bottom: 1*$size.base
 
 h3
   font-size: 1.5*$size.base
   line-height: 2*$size.base
 
-  padding-top: 2*$size.base
   padding-bottom: 1*$size.base
 
 h4,
@@ -132,13 +127,11 @@ blockquote
       margin-top: 0
 
 
-h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-header
+h6
   & + *
     margin-top: 0 !important
 
