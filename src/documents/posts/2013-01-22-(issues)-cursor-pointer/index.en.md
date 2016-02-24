@@ -72,7 +72,7 @@ Further more — there already a lot of links that don’t look like ones and
 
 There is a great example from one company’s service:
 
-![Active areas example](/pictures/cursor-pointer.png)
+![Active areas example](cursor-pointer.png)
 
 You could try to guess which marked elements are links, which are not; which have `cursor:pointer`, which don’t. What would happen when you’ll hover or click any of those elements? You can think for a while, and I’ll give you an answer later.
 
@@ -82,7 +82,7 @@ We could find a lot of examples with buttons, links and their states would co
 
 And let’s get back to one strange service:
 
-![Active areas example](/pictures/cursor-pointer.png)
+![Active areas example](cursor-pointer.png)
 
 So, what’s there?
 

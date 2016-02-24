@@ -177,7 +177,7 @@ var storeDocument = function(stream, file) {
             document.metadata[key] = marked_overloaded(document.metadata[key], marked_renderers).replace(/^<p>((?:(?!<p>).)+)<\/p>\s*$/, '$1');
         }
     }
-    if (document.relativePath.indexOf('drafts/') === -1 || !document.metadata.invisible) {
+    if (document.relativePath.indexOf('drafts/') === -1 && !document.metadata.invisible) {
         documentsByLang[document.lang].push(document);
     } else {
         document.isDraft = true;
