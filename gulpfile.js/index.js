@@ -17,6 +17,7 @@ var jade = require('gulp-jade');
 var stylus = require('stylus');
 var posthtml = require('posthtml');
 var yamlFront = require('yaml-front-matter');
+var moment = require('moment');
 
 var typography = require(process.cwd() + '/gulpfile.js/typography.js');
 var marked_overloaded = require(process.cwd() + '/gulpfile.js/marked_overloaded.js');
@@ -101,7 +102,11 @@ var storeDocument = function(stream, file) {
         var neighbouringFiles = fs.readdirSync(directory);
         if (neighbouringFiles) {
             for (var i = 0; i < neighbouringFiles.length; i++) {
-                getTranslations(neighbouringFiles[i]);
+                if (neighbouringFiles[i] === '_data.json') {
+                    document.metadataFile = require(directory + '_data.json');
+                } else {
+                    getTranslations(neighbouringFiles[i]);
+                }
             }
         }
 
@@ -144,8 +149,35 @@ var storeDocument = function(stream, file) {
 
     document.content = typography(document.content, document.lang);
 
-    // FIXME: combine all the metadata from different sources beforehand
-    if (document.relativePath.indexOf('drafts/') === -1 || document.YAMLmetadata.invisible) {
+    // Combining all the metadata
+    document.metadata = {}
+    if (document.YAMLmetadata) {
+        for (key in document.YAMLmetadata) {
+            if (!document.metadata[key]) {
+                document.metadata[key] = document.YAMLmetadata[key];
+            }
+        }
+        delete document.YAMLmetadata;
+    }
+    if (document.metadataFile) {
+        for (key in document.metadataFile) {
+            if (!document.metadata[key]) {
+                var value = document.metadataFile[key];
+                if (value[document.lang]) {
+                    document.metadata[key] = value[document.lang];
+                } else {
+                    document.metadata[key] = value;
+                }
+            }
+        }
+        delete document.metadataFile;
+    }
+    for (key in document.metadata) {
+        if (typeof document.metadata[key] === 'string') {
+            document.metadata[key] = marked_overloaded(document.metadata[key], marked_renderers).replace(/^<p>((?:(?!<p>).)+)<\/p>\s*$/, '$1');
+        }
+    }
+    if (document.relativePath.indexOf('drafts/') === -1 || !document.metadata.invisible) {
         documentsByLang[document.lang].push(document);
     } else {
         document.isDraft = true;
@@ -159,14 +191,50 @@ var storeDocument = function(stream, file) {
 
 var writeDocument = function(document) {
     document.content = handle_demos(document);
-
+    var loc = function(locString, lang) {
+        return loc_strings[locString] && loc_strings[locString][lang || document.lang] || 'No loc string found!'
+    };
     var jadeData = {
         'documents': documentsByLang[document.lang],
         'document': document,
         'config': {
             'defaultLanguage': defaultLanguage
         },
-        'loc': function(locString, lang){ return loc_strings[locString] && loc_strings[locString][lang || document.lang] || 'No loc string found!' }
+        'loc': loc,
+        'comma_and_join': function(array) {
+            if (typeof array === 'string') {
+                return array;
+            }
+            var result = '';
+            for (var i = 0; i < array.length; i++) {
+                if (i > 0) {
+                    if (array.length > 1) {
+                        if (i !== (array.length - 1)) {
+                            result += ',';
+                        } else {
+                            result += ' ' + loc('and');
+                        }
+                    }
+                    result += ' ';
+                }
+                result += array[i];
+            }
+            return result;
+        },
+        'published_format': function(date) {
+            date = moment(date).locale(document.lang);
+            var now = moment();
+            var result = date.format('LL');
+            // Don't show the current year
+            if (now.year() === date.year()) {
+                result = result.replace(/, \d{4}|\d{4} г\./, '');
+            }
+            // In russian months should be lowercase when in middle
+            if (document.lang === 'ru') {
+                result = result.toLowerCase();
+            }
+            return result;
+        }
     };
     return gulp.src('./src/layouts/default.jade')
         .pipe(data(function(){return jadeData}))

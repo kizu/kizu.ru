@@ -167,6 +167,32 @@ html.Page(class=page_class, lang=lang ? lang : false)
             header
               != document.titleHTML
             != document.content
+
+            p.Metadata.Published
+              - var published = loc('published')
+              = published
+              = " "
+              = published_format(document.date)
+              if document.categories
+                = " " + loc('in')
+                - for (var i = 0; i < document.categories.length; i++)
+                  if i > 0
+                    = ","
+                  = " "
+                  a.Link(href='../')
+                    = loc(document.categories[i] + '_in')
+                = "."
+              else
+                if published.indexOf('.') === -1
+                  = "."
+
+            if document.metadata.thanks_to
+              p.Metadata.ThanksTo
+                = loc('thanks_to')
+                = " "
+                != document.metadata.thanks_to
+                = "."
+
     else
       .Page-Content.Main(role="main")
         if is_index

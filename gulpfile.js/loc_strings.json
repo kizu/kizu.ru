@@ -67,6 +67,10 @@
         "ru": "в",
         "en": "in"
     },
+    "and": {
+        "ru": "и",
+        "en": "and"
+    },
     "link_to_part": {
         "ru": "Ссылка на это место",
         "en": "Link to this place"
