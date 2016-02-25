@@ -38,8 +38,10 @@ var pathRegex = new RegExp([
     ].join(''));
 
 // Future options
-var languages = ['ru', 'en']; // Default should be `['en']`
-var defaultLanguage = 'ru';   // Default should be `'en'`
+var site = {}
+site.languages = ['ru', 'en']; // Default should be `['en']`
+site.defaultLanguage = 'ru';   // Default should be `'en'`
+site.debug = false;
 var postsDir = './src/documents/posts/';
 
 // Global stuff
@@ -112,7 +114,7 @@ var storeDocument = function(stream, file) {
 
     }
 
-    document.url = (document.lang != defaultLanguage ? document.lang + '/' : '') + document.categories.join('/') + '/' + document.slug + '/';
+    document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + document.categories.join('/') + '/' + document.slug + '/';
 
     // Transform markdown to HTML
     // TODO: Move to its own process, so we could watch just renderers and stuff
@@ -197,9 +199,7 @@ var writeDocument = function(document) {
     var jadeData = {
         'documents': documentsByLang[document.lang],
         'document': document,
-        'config': {
-            'defaultLanguage': defaultLanguage
-        },
+        'site': site,
         'loc': loc,
         'comma_and_join': function(array) {
             if (typeof array === 'string') {
@@ -299,7 +299,8 @@ var buildStylus = function(stream, stylesheet) {
     style = stylus(stylesheet.contents.toString())
         .set('filename', stylesheet.base + stylesheet.relative)
         .set('include css', true)
-    if (stylesheet.relative === 'style.styl') {
+        .define('site', site, true)
+    if (site.debug && stylesheet.relative === 'style.styl') {
         style.set('sourcemap', { 'inline': true });
     }
     style.render(function(err, output) {
@@ -318,8 +319,8 @@ var buildStylus = function(stream, stylesheet) {
 
 gulp.task('get-documents', function(done) {
     documents = [];
-    for (var i = 0; i < languages.length; i++) {
-        documentsByLang[languages[i]] = [];
+    for (var i = 0; i < site.languages.length; i++) {
+        documentsByLang[site.languages[i]] = [];
     };
 
     return gulp
@@ -330,8 +331,8 @@ gulp.task('get-documents', function(done) {
 
 gulp.task('classify-documents', function(done) {
     // Do everything for each lang group
-    for (var i = 0; i < languages.length; i++) {
-        var docs = documentsByLang[languages[i]];
+    for (var i = 0; i < site.languages.length; i++) {
+        var docs = documentsByLang[site.languages[i]];
 
         // Sort docs by date
         docs.sort(function(a, b){

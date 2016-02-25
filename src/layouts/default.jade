@@ -1,6 +1,6 @@
 -
   var lang = document.lang
-  var lang_prefix = document.lang == config.defaultLanguage ? '' : document.lang
+  var lang_prefix = document.lang == site.defaultLanguage ? '' : document.lang
 
   var categories = document.categories
   var page_type = 'index'
@@ -107,7 +107,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
       href= "/s/style.css")
 
   body.Page-Body
-    +debug
+    if site.debug
+      +debug
 
     header.Page-Header(role="banner")
       .LiquidLayout
