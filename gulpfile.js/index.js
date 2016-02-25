@@ -37,12 +37,8 @@ var pathRegex = new RegExp([
         '$'
     ].join(''));
 
-// Future options
-var site = {}
-site.languages = ['ru', 'en']; // Default should be `['en']`
-site.defaultLanguage = 'ru';   // Default should be `'en'`
-site.debug = false;
-var postsDir = './src/documents/posts/';
+// All the site's options and settings
+var site = require(process.cwd() + '/site.json')
 
 // Global stuff
 var documents = [];
@@ -79,7 +75,7 @@ var storeDocument = function(stream, file) {
     if (document.categories) {
         document.categories = document.categories.replace(/^\((.+)\)-$/, '$1').split(' ');
     } else {
-        document.categories = ['blog'];
+        document.categories = [site.defaultCategory];
     }
 
     // TODO: properly handle filename and the case when the resources are not in dir
@@ -236,12 +232,12 @@ var writeDocument = function(document) {
             return result;
         }
     };
-    return gulp.src('./src/layouts/default.jade')
+    return gulp.src(site.layoutsDir + site.defaultLayout)
         .pipe(data(function(){return jadeData}))
         .pipe(jade({ pretty: true }))
         .pipe(rename({ dirname: document.url }))
         .pipe(rename({ basename: 'index' }))
-        .pipe(gulp.dest('./out/'));
+        .pipe(gulp.dest(site.output));
 };
 
 var handleResource = function(document) {
@@ -275,7 +271,7 @@ var handleResource = function(document) {
 
             // Compile and write if the resource is not injected
             if (YAMLmetadata && YAMLmetadata.layout && !YAMLmetadata.injected) {
-                resultStream = gulp.src('./src/layouts/' + YAMLmetadata.layout + '.jade')
+                resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
                     .pipe(data(function(){return YAMLmetadata}))
                     .pipe(jade({ pretty: true }));
             } else {
@@ -285,13 +281,13 @@ var handleResource = function(document) {
         return resultStream
             .pipe(rename({ dirname: finalPath }))
             .pipe(rename({ basename: resName }))
-            .pipe(gulp.dest('./out/'));
+            .pipe(gulp.dest(site.output));
 
     }
 }
 var handleResources = function(document) {
     // TODO: properly detect those resources to write and probably rename
-    return gulp.src([postsDir + document.initialUrl + '**', '!' + postsDir + document.initialUrl + '*.md', '!' + postsDir + document.initialUrl + '_*'])
+    return gulp.src([site.postsDir + document.initialUrl + '**', '!' + site.postsDir + document.initialUrl + '*.md', '!' + site.postsDir + document.initialUrl + '_*'])
         .pipe(foreach(handleResource(document)))
 };
 
@@ -309,7 +305,7 @@ var buildStylus = function(stream, stylesheet) {
         } else {
             var stylesheetStream = source(stylesheet.relative.replace('.styl', '.css'));
             stylesheetStream.end(output);
-            stylesheetStream.pipe(gulp.dest('./out/s/'));
+            stylesheetStream.pipe(gulp.dest(site.stylesOutput));
         }
     });
     return stream;
@@ -324,7 +320,7 @@ gulp.task('get-documents', function(done) {
     };
 
     return gulp
-        .src(postsDir + '**/*.md')
+        .src(site.postsDir + '**/*.md')
         .pipe(foreach(storeDocument));
 
 });
@@ -368,32 +364,32 @@ gulp.task('documents', function(done) {
 
 gulp.task('styl', function(done) {
     return gulp
-        .src('./src/documents/styles/*.styl')
+        .src(site.stylesDir + '*.styl')
         .pipe(foreach(buildStylus));
 });
 
 gulp.task('scripts', function(done) {
     return gulp
-        .src('./src/documents/scripts/*')
-        .pipe(gulp.dest('./out/j/'));
+        .src(site.scriptsDir + '*')
+        .pipe(gulp.dest(site.scriptsOutput));
 });
 
 gulp.task('express', function() {
-  express().use(express.static('./out/')).listen(4000);
-  gutil.log('Server is running on http://localhost:4000');
+  express().use(express.static(site.output)).listen(site.watchPort);
+  gutil.log('Server is running on http://localhost:' + site.watchPort);
 });
 
 gulp.task('build', ['documents', 'styl', 'scripts']);
 
 gulp.task('watch', ['express', 'build'], function() {
     // Watching documents and rebuilding all of them
-    watch('./src/documents/posts/**/*', function() { gulp.start('documents'); });
+    watch(site.postsDir + '**/*', function() { gulp.start('documents'); });
 
     // Watch jade layouts and rewrite documents without recollecting
-    watch(['./src/layouts/*.jade', './gulpfile.js/loc_strings.json'], function() { gulp.start('write-documents'); });
+    watch([site.layoutsDir + '*.jade', './gulpfile.js/loc_strings.json'], function() { gulp.start('write-documents'); });
 
     // Watch .styl files and rebuild all the styles
-    watch(['./src/documents/styles/*.styl', './src/styl/**/*.styl'], function() { gulp.start('styl'); });
+    watch([site.stylesDir + '*.styl', './src/styl/**/*.styl'], function() { gulp.start('styl'); });
 });
 
 gulp.task('default', ['watch']);

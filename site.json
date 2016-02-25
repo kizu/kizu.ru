@@ -1,0 +1,15 @@
+{
+  "postsDir": "./src/documents/posts/",
+  "layoutsDir": "./src/layouts/",
+  "stylesDir": "./src/documents/styles/",
+  "scriptsDir": "./src/documents/scripts/",
+  "defaultLayout": "default.jade",
+  "output": "./out/",
+  "scriptsOutput": "./out/j/",
+  "stylesOutput": "./out/s/",
+  "languages": ["ru", "en"],
+  "defaultLanguage": "ru",
+  "defaultCategory": "blog",
+  "watchPort": 4000,
+  "debug": false
+}
