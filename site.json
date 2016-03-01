@@ -1,5 +1,6 @@
 {
   "postsDir": "./src/documents/posts/",
+  "pagesDir": "./src/documents/pages/",
   "layoutsDir": "./src/layouts/",
   "stylesDir": "./src/documents/styles/",
   "scriptsDir": "./src/documents/scripts/",

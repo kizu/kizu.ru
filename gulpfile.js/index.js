@@ -25,17 +25,42 @@ var marked_renderers = require(process.cwd() + '/gulpfile.js/marked_renderers.js
 var handle_demos = require(process.cwd() + '/gulpfile.js/handle_demos.js');
 
 // Constants
-var pathRegex = new RegExp([
-        '^',
-        '((?:[^\/]+\/)*)?',             // Path,            like `foo/bar/`
-        '(?:(\\d{4}-\\d{2}-\\d{2})-)?', // Date,            like `2015-12-02`
-        '(\\([^\\)]+\\)-)?',            // Categories       like `(issues old)`
-        '(?!index)([^\/\\.\\_]+)',      // Slug             like `whatever-title`
-        '(?:\/(index))?',               // Is in folder     like `/index`
-        '(?:\\.(\\w{2}))?',             // Lang             like `en`
-        '((?:\\.[^\\.\\/]+)+)',         // Extension[s]     like `.md`
-        '$'
-    ].join(''));
+var pathsParts = {
+    'start': '^',
+    'path': '((?:[^\/]+\/)*)?',             // like `foo/bar/`
+    'date': '(?:(\\d{4}-\\d{2}-\\d{2})-)?', // like `2015-12-02`
+    'categories': '(\\([^\\)]+\\)-)?',      // like `(issues old)`
+    'notIndex': '(?!index)',
+    'slug': '([^\/\\.\\_]+)',      // like `whatever-title`
+    'isInFolder': '(?:\/(index))?',         // like `/index`
+    'lang': '(?:\\.(\\w{2}))?',             // like `en`
+    'extensions': '((?:\\.[^\\.\\/]+)+)',   // like `.md`
+    'end': '$'
+};
+
+var pathRegexps = {
+    'post': new RegExp([
+            pathsParts.start,
+            pathsParts.path,
+            pathsParts.date,
+            pathsParts.categories,
+            pathsParts.notIndex,
+            pathsParts.slug,
+            pathsParts.isInFolder,
+            pathsParts.lang,
+            pathsParts.extensions,
+            pathsParts.end
+        ].join('')),
+    'page': new RegExp([
+            pathsParts.start,
+            pathsParts.path,
+            pathsParts.slug,
+            pathsParts.isInFolder,
+            pathsParts.lang,
+            pathsParts.extensions,
+            pathsParts.end
+        ].join(''))
+}
 
 // All the site's options and settings
 var site = require(process.cwd() + '/site.json')
@@ -54,18 +79,34 @@ var rerequire = function(path) {
 
 var storeDocument = function(stream, file) {
     var document = {};
+    if (file.base.match(new RegExp(site.postsDir + '$'))) {
+        document.type = 'post';
+    } else if (file.base.match(new RegExp(site.pagesDir + '$'))) {
+        document.type = 'page';
+    }
 
     document.relativePath = file.relative;
-
-    var pathData = file.relative.match(pathRegex);
-    if (pathData) {
-        document.path = pathData[1];
-        document.date = pathData[2];
-        document.categories = pathData[3];
-        document.slug = pathData[4];
-        document.isInFolder = pathData[5];
-        document.lang = pathData[6];
-        document.extension = pathData[7];
+    var pathData = file.relative.match(pathRegexps[document.type] || '');
+    if (!pathData) {
+        console.warn('No patdata found for ' + document.relativePath);
+        return stream;
+    } else {
+        // FIXME: not optimal -_-
+        if (document.type === 'post') {
+            document.path = pathData[1];
+            document.date = pathData[2];
+            document.categories = pathData[3];
+            document.slug = pathData[4];
+            document.isInFolder = pathData[5];
+            document.lang = pathData[6];
+            document.extension = pathData[7];
+        } else if (document.type === 'page') {
+            document.path = pathData[1];
+            document.slug = pathData[2];
+            document.isInFolder = pathData[3];
+            document.lang = pathData[4];
+            document.extension = pathData[5];
+        }
     }
 
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
@@ -74,7 +115,7 @@ var storeDocument = function(stream, file) {
 
     if (document.categories) {
         document.categories = document.categories.replace(/^\((.+)\)-$/, '$1').split(' ');
-    } else {
+    } else if (document.type === 'post') {
         document.categories = [site.defaultCategory];
     }
 
@@ -110,7 +151,11 @@ var storeDocument = function(stream, file) {
 
     }
 
-    document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + document.categories.join('/') + '/' + document.slug + '/';
+    document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + (document.categories ? document.categories.join('/') + '/' : '') + document.slug + '/';
+
+    if (document.type == 'page') {
+        document.url = document.url.replace(/(^|\/)index\/$/, '');
+    }
 
     // Transform markdown to HTML
     // TODO: Move to its own process, so we could watch just renderers and stuff
@@ -320,7 +365,7 @@ gulp.task('get-documents', function(done) {
     };
 
     return gulp
-        .src(site.postsDir + '**/*.md')
+        .src([site.postsDir + '**/*.md', site.pagesDir + '**/*.md'])
         .pipe(foreach(storeDocument));
 
 });
