@@ -13,7 +13,7 @@ module.exports = function(text, lang) {
     result = posthtml()
         .use( function(tree) {
             tree.walk(function(node) {
-                textNode = node
+                textNode = node;
                 if (typeof(textNode) == 'string') {
                     textNode = hyphers[lang].hyphenateText(textNode);
                 }

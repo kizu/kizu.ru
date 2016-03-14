@@ -192,6 +192,7 @@ var storeDocument = function(stream, file) {
         }
     }
 
+    document.titleHTML = typography(document.titleHTML, document.lang);
     document.content = typography(document.content, document.lang);
 
     // Combining all the metadata
