@@ -12,6 +12,8 @@ var foreach = require('gulp-foreach');
 var data = require('gulp-data');
 var each = require('each-done');
 var source = require('vinyl-source-stream');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 
 var jade = require('gulp-jade');
 var stylus = require('stylus');
@@ -404,7 +406,7 @@ gulp.task('handle-resources', function(done) {
 });
 
 gulp.task('documents', function(done) {
-    runSequence('get-documents', 'classify-documents', 'handle-resources', 'write-documents', done);
+    runSequence('get-documents', 'classify-documents', 'handle-resources', 'bundled-scripts', 'write-documents', done);
 });
 
 gulp.task('styl', function(done) {
@@ -413,9 +415,24 @@ gulp.task('styl', function(done) {
         .pipe(foreach(buildStylus));
 });
 
-gulp.task('scripts', function(done) {
+gulp.task('bundled-scripts', function(done) {
     return gulp
-        .src(site.scriptsDir + '*')
+        .src([
+            // './node_modules/fg-loadcss/src/loadCSS.js',
+            // './node_modules/fg-loadcss/src/onloadCSS.js',
+            // './src/js/fit-to-width.js',
+            // './src/js/loadfonts2.js'
+            './src/js/loadfonts.js'
+        ])
+        .pipe(concat('all.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(site.scriptsOutput));
+});
+
+gulp.task('other-scripts', function(done) {
+    return gulp
+        .src([site.scriptsDir + '*'])
+        .pipe(uglify())
         .pipe(gulp.dest(site.scriptsOutput));
 });
 
@@ -424,7 +441,11 @@ gulp.task('express', function() {
   gutil.log('Server is running on http://localhost:' + site.watchPort);
 });
 
-gulp.task('build', ['documents', 'styl', 'scripts']);
+gulp.task('build', ['documents', 'styl', 'other-scripts']);
+
+gulp.task('rebuild-scripts', function(done) {
+    runSequence('bundled-scripts', 'write-documents', done);
+});
 
 gulp.task('watch', ['express', 'build'], function() {
     // Watching documents and rebuilding all of them
@@ -435,6 +456,9 @@ gulp.task('watch', ['express', 'build'], function() {
 
     // Watch .styl files and rebuild all the styles
     watch([site.stylesDir + '*.styl', './src/styl/**/*.styl'], function() { gulp.start('styl'); });
+
+    // Watch script source files
+    watch(['./src/js/**/*.js'], function() { gulp.start('rebuild-scripts'); });
 });
 
 gulp.task('default', ['watch']);

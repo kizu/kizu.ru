@@ -73,6 +73,10 @@ module.exports = {
     ],
 
     heading: [
+        function(args) {
+            args.attributes.class += ' Heading';
+            return args;
+        },
         function(args) { return handleAttributes(args); },
         function(args) {
             // Apply linkless links as spans with classes
@@ -125,6 +129,12 @@ module.exports = {
             // Adding anchors
             args.beforeContent = '<a class="Anchor" href="#' + args.attributes.id + '"></a>';
             return args;
+        // },
+        // function(args) {
+        //     // Adding wrapper around content
+        //     args.beforeContent = '<span class="Heading-Content">' + args.beforeContent;
+        //     args.afterContent = '</span>';
+        //     return args;
         }
 
     ],
