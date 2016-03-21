@@ -1,5 +1,5 @@
 module.exports = function(document) {
-    return document.content.replace(/<p>\[demo:(.+)\]<\/p>/g, function(string, name){
+    document.content = document.content.replace(/<p>\[demo:(.+)\]<\/p>/g, function(string, name){
         var result = '';
         name = name.replace(/<[^>]+>/g, '');
         var demo = document.resources[name];

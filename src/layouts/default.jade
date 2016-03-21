@@ -195,7 +195,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
         != document.content
 
         if document.slug == 'all'
-          if documents
+          if posts
             if site.categories
               nav.Filter
                 //- Todo: list all categories automatically
@@ -212,7 +212,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
 
                 ul.Filter-Content
-                  - for post in documents
+                  - for post in posts
                     -
                       var classes = ''
                       if (post.categories) {

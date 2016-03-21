@@ -73,7 +73,7 @@ site.categories = [];
 // Global stuff
 var documents = [];
 var loc_strings = {};
-var documentsByLang = {};
+var allDocuments = {};
 
 // Helper functions
 
@@ -241,9 +241,22 @@ var storeDocument = function(stream, file) {
         }
     }
 
-    if (document.type === 'post' && document.relativePath.indexOf('drafts/') === -1 && !document.metadata.invisible) {
-        documentsByLang[document.lang].push(document);
+    // TODO: Make those allDocuments fillers to functions you could access in API
+    //       Like pushing another function to this API to add another type of categorization
+    if (!allDocuments[document.lang].documentsBySlug[document.slug]) {
+        allDocuments[document.lang].documentsBySlug[document.slug] = document;
     } else {
+        console.warn('There is already a document with this slug: “' + document.slug +'”');
+    }
+
+    if (document.relativePath.indexOf('drafts/') === -1 && !document.metadata.invisible) {
+        if (document.type === 'post') {
+            allDocuments[document.lang].posts.push(document);
+        } else {
+            allDocuments[document.lang].pages.push(document);
+        }
+    } else {
+        allDocuments[document.lang].drafts.push(document);
         document.isDraft = true;
     }
 
@@ -253,8 +266,21 @@ var storeDocument = function(stream, file) {
     return stream;
 };
 
+var postprocessContent = function(document) {
+    document.content = document.content.replace(/href=":([a-z]+)"/i, function(m, slug) {
+        var foundDoc = allDocuments[document.lang].documentsBySlug[slug];
+        if (foundDoc) {
+            return 'href="/' + foundDoc.url + '"';
+        } else {
+            console.error('There is no document with this slug: “' + slug + '”');
+        }
+    });
+};
+
 var writeDocument = function(document) {
-    document.content = handle_demos(document);
+    handle_demos(document);
+    postprocessContent(document);
+
     var loc = function(locString, lang) {
         var locSource;
         if (typeof locString === 'string') {
@@ -268,8 +294,9 @@ var writeDocument = function(document) {
             console.warn('No loc string found for ' + locString);
         }
     };
+
     var jadeData = {
-        'documents': documentsByLang[document.lang],
+        'posts': allDocuments[document.lang].posts,
         'document': document,
         'site': site,
         'loc': loc,
@@ -308,6 +335,7 @@ var writeDocument = function(document) {
             return result;
         }
     };
+
     return gulp.src(site.layoutsDir + site.defaultLayout)
         .pipe(data(function(){return jadeData}))
         .pipe(jade({ pretty: true }))
@@ -392,7 +420,12 @@ var buildStylus = function(stream, stylesheet) {
 gulp.task('get-documents', function(done) {
     documents = [];
     for (var i = 0; i < site.languages.length; i++) {
-        documentsByLang[site.languages[i]] = [];
+        allDocuments[site.languages[i]] = {
+            'posts': [],
+            'pages': [],
+            'drafts': [],
+            'documentsBySlug': {}
+        };
     };
 
     return gulp
@@ -404,7 +437,7 @@ gulp.task('get-documents', function(done) {
 gulp.task('classify-documents', function(done) {
     // Do everything for each lang group
     for (var i = 0; i < site.languages.length; i++) {
-        var docs = documentsByLang[site.languages[i]];
+        var docs = allDocuments[site.languages[i]].posts;
 
         // Sort docs by date
         docs.sort(function(a, b){

@@ -1,8 +1,4 @@
-[Блог](blog/) • [Заметки](issues/) • [Эксперименты](fun/) • [Проекты](projects/)
-{:.nav}
-
 Привет. Я работаю разработчиком интерфейсов в [Яндексе](http://yandex.ru/) и участвую в жизни сообщества [«Веб-стандарты»](http://web-standards.ru/).
-
 
 Я люблю [экспериментировать с CSS](fun/) и стремлюсь делать это максимально эффективно, поэтому я работаю над несколькими опенсорсными проектами: [Stylus](gh:stylus/stylus), [Хаяку](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) и [другими](gh:kizu?tab=repositories).
 
