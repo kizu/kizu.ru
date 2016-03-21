@@ -1,0 +1,31 @@
+.Filter
+  &-Target
+    position: fixed
+    top: 0
+    visibility: hidden
+    clip: rect(1px,1px,1px,1px)
+
+  &-Nav
+    text-align: left
+
+    &-Item
+      display: inline-block
+
+      &:before
+        content: ""
+
+  &-Nav-Item_everything,
+  &-Target:target ~ &-Content > &-Item
+    display: none
+
+  .Filter-Target
+    &:target ~ .Filter-Nav > .Filter-Nav-Item_everything
+      display: inline-block
+
+  $categories = site.categories
+  $selector = ()
+  for $category in $categories
+    push($selector, '.Filter-Target[id=%s]:target ~ .Filter-Content > .Filter-Item_category_%s' % ($category unquote($category)))
+  $selector = join(', ', $selector)
+  {$selector}
+    display: block

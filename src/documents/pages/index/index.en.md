@@ -1,3 +1,10 @@
-# Main Page
+[Blog](blog/) • [Issues](issues/) • [Experiments](fun/) • [Projects](projects/)
+{:.nav}
 
-Hello!
+Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of Russian “[Web Standards](http://web-standards.ru/about/en/)” community.
+
+I love to [experiment on CSS](fun/) and trying to do this as efficient as I can. For do so I work on different open source projects to fasten the web development: [Hayaku](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) and [others](gh:kizu?tab=repositories).
+
+Sometimes I talk about different web-developer stuff at conferences, mostly Russian ones, but I managed to [give a talk](http://vimeo.com/51897358) at [Fronteers Jam Session in 2012](http://fronteers.nl/congres/2012/jam-session), and then [another in 2013](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source) at the same place.
+
+And I’ll going to blog a lot at this site — I’ve remade it from scratch and did everything so I would actually do it and write articles. Read more on that in the [corresponding article](:restart).

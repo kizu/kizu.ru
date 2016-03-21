@@ -3,16 +3,9 @@
   var lang_prefix = document.lang == site.defaultLanguage ? '' : document.lang
 
   var categories = document.categories
-  var page_type = 'index'
-  var is_post = !!document.categories
+  var page_type = document.type
 
-  if (is_post) {
-    page_type = 'post'
-  }
-
-  var is_index = (page_type == 'index')
-
-  var page_class = 'Page_' + page_type
+  var page_class = 'Page_' + document.type
 
   if (lang) {
     page_class += ' Page_' + lang
@@ -114,7 +107,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
       .LiquidLayout
         .LiquidLayout-Content
           h1.Page-Title
-            if is_index
+            if document.type == 'index'
               = loc('name')
             else
               a.Page-Title-Link(
@@ -160,8 +153,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
 
 
-
-    if is_post
+    if document.type == 'post'
       article.Page-Content(role="main")
         .LiquidLayout
           .Main.LiquidLayout-Content
@@ -196,16 +188,43 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
     else
       .Page-Content.Main(role="main")
-        if is_index
-          -
-          if documents
-            ul
-              - for post in documents
-                li
-                  a(href=post.url)
-                    = post.title
+        if document.type != 'index'
+          header
+            != document.titleHTML
 
         != document.content
+
+        if document.slug == 'all'
+          if documents
+            if site.categories
+              nav.Filter
+                //- Todo: list all categories automatically
+                - for (var i = 0; i < site.categories.length; i++)
+                  a.Filter-Target(id=site.categories[i])
+
+                ul.Filter-Nav
+                  - for (var i = 0; i < site.categories.length; i++)
+                    li.Filter-Nav-Item
+                      a.Filter-Nav-Link(href="#" + site.categories[i])= loc(site.categories[i])
+
+                  li.Filter-Nav-Item.Filter-Nav-Item_everything
+                    a.Filter-Nav-Link(href="#all")= loc({ru: 'Всё', en: 'Everything'})
+
+
+                ul.Filter-Content
+                  - for post in documents
+                    -
+                      var classes = ''
+                      if (post.categories) {
+                        classes += post.categories.map(function(p){ return 'Filter-Item_category_' + p; }).join(' ')
+                      }
+
+                    li.Filter-Item(class=classes)
+                      a(href='/' + post.url)
+                        = post.title
+
+                      = " — "
+                      em.published= published_format(post.date)
 
     footer.Page-Footer
       .LiquidLayout

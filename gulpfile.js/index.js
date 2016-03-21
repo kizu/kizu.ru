@@ -32,7 +32,7 @@ var pathsParts = {
     'path': '((?:[^\/]+\/)*)?',             // like `foo/bar/`
     'date': '(?:(\\d{4}-\\d{2}-\\d{2})-)?', // like `2015-12-02`
     'categories': '(\\([^\\)]+\\)-)?',      // like `(issues old)`
-    'notIndex': '(?!index)',
+    'notIndex': '(?!(?!^)index)',
     'slug': '([^\/\\.\\_]+)',      // like `whatever-title`
     'isInFolder': '(?:\/(index))?',         // like `/index`
     'lang': '(?:\\.(\\w{2}))?',             // like `en`
@@ -56,6 +56,7 @@ var pathRegexps = {
     'page': new RegExp([
             pathsParts.start,
             pathsParts.path,
+            pathsParts.notIndex,
             pathsParts.slug,
             pathsParts.isInFolder,
             pathsParts.lang,
@@ -66,6 +67,8 @@ var pathRegexps = {
 
 // All the site's options and settings
 var site = require(process.cwd() + '/site.json')
+site.categories = [];
+
 
 // Global stuff
 var documents = [];
@@ -155,8 +158,12 @@ var storeDocument = function(stream, file) {
 
     document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + (document.categories ? document.categories.join('/') + '/' : '') + document.slug + '/';
 
-    if (document.type == 'page') {
+    if (document.type === 'page') {
         document.url = document.url.replace(/(^|\/)index\/$/, '');
+
+        if (document.slug === 'index') {
+            document.type = 'index';
+        }
     }
 
     // Transform markdown to HTML
@@ -223,7 +230,18 @@ var storeDocument = function(stream, file) {
             document.metadata[key] = marked_overloaded(document.metadata[key], marked_renderers).replace(/^<p>((?:(?!<p>).)+)<\/p>\s*$/, '$1');
         }
     }
-    if (document.relativePath.indexOf('drafts/') === -1 && !document.metadata.invisible) {
+
+    // TODO: replace with proper indicies
+    // Also, they should be _by langs_, like now in en there are no olds
+    if (document.categories) {
+        for (var i = 0; i < document.categories.length; i++) {
+            if (site.categories.indexOf(document.categories[i]) == -1) {
+                site.categories.push(document.categories[i]);
+            }
+        }
+    }
+
+    if (document.type === 'post' && document.relativePath.indexOf('drafts/') === -1 && !document.metadata.invisible) {
         documentsByLang[document.lang].push(document);
     } else {
         document.isDraft = true;
@@ -238,7 +256,17 @@ var storeDocument = function(stream, file) {
 var writeDocument = function(document) {
     document.content = handle_demos(document);
     var loc = function(locString, lang) {
-        return loc_strings[locString] && loc_strings[locString][lang || document.lang] || 'No loc string found!'
+        var locSource;
+        if (typeof locString === 'string') {
+            locSource = loc_strings[locString];
+        } else {
+            locSource = locString;
+        }
+        if (locSource) {
+            return locSource[lang || document.lang];
+        } else {
+            console.warn('No loc string found for ' + locString);
+        }
     };
     var jadeData = {
         'documents': documentsByLang[document.lang],
@@ -407,7 +435,7 @@ gulp.task('handle-resources', function(done) {
 });
 
 gulp.task('documents', function(done) {
-    runSequence('get-documents', 'classify-documents', 'handle-resources', 'bundled-scripts', 'write-documents', done);
+    runSequence('get-documents', 'classify-documents', 'styl', 'handle-resources', 'bundled-scripts', 'write-documents', done);
 });
 
 gulp.task('styl', function(done) {
@@ -442,7 +470,7 @@ gulp.task('express', function() {
   gutil.log('Server is running on http://localhost:' + site.watchPort);
 });
 
-gulp.task('build', ['documents', 'styl', 'other-scripts']);
+gulp.task('build', ['documents', 'other-scripts']);
 
 gulp.task('rebuild-scripts', function(done) {
     runSequence('bundled-scripts', 'write-documents', done);
@@ -450,7 +478,7 @@ gulp.task('rebuild-scripts', function(done) {
 
 gulp.task('watch', ['express', 'build'], function() {
     // Watching documents and rebuilding all of them
-    watch(site.postsDir + '**/*', function() { gulp.start('documents'); });
+    watch([site.postsDir + '**/*', site.pagesDir + '**/*'], function() { gulp.start('documents'); });
 
     // Watch jade layouts and rewrite documents without recollecting
     watch([site.layoutsDir + '*.jade', './gulpfile.js/loc_strings.json'], function() { gulp.start('write-documents'); });
