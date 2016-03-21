@@ -11,6 +11,8 @@
   "languages": ["ru", "en"],
   "defaultLanguage": "ru",
   "defaultCategory": "blog",
+  "production_url": "/",
+  "root_url": "/",
   "watchPort": 4000,
   "debug": false
 }

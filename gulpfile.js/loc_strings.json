@@ -130,5 +130,9 @@
     "no_translation": {
         "ru": "Для этой статьи нет перевода, но для многих других — есть",
         "en": "No translation for this article (yet?), but a lot of other english pages are available!"
+    },
+    "page_is_moved": {
+        "ru": "Эта страница навсегда перемещена по новому адресу",
+        "en": "This page is permanently moved to a new address"
     }
 }

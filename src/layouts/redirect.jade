@@ -1,0 +1,15 @@
+-
+  var target = document.metadata.target || document.metadata.permalink
+  var newUrl = site.production_url + target
+
+doctype html
+title= loc('page_is_moved')
+meta(http-equiv="refresh", content="5;URL='" + newUrl + "'")
+
+//- FIXME: Insert metrika here
+script!= 'window.location.href="' + newUrl + '"+(window.location.hash||"")'
+h1
+  a(href=newUrl)
+    = loc('page_is_moved')
+    = ': '
+    = newUrl

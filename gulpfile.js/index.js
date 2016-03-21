@@ -231,6 +231,10 @@ var storeDocument = function(stream, file) {
         }
     }
 
+    if (document.metadata.permalink) {
+        document.url = document.metadata.permalink;
+    }
+
     // TODO: replace with proper indicies
     // Also, they should be _by langs_, like now in en there are no olds
     if (document.categories) {
@@ -336,7 +340,15 @@ var writeDocument = function(document) {
         }
     };
 
-    return gulp.src(site.layoutsDir + site.defaultLayout)
+    var layout = site.defaultLayout;
+    if (document.metadata.layout) {
+        layout = document.metadata.layout;
+        if (!layout.match(/\.jade$/)) {
+            layout = layout + '.jade';
+        }
+    }
+
+    return gulp.src(site.layoutsDir + layout)
         .pipe(data(function(){return jadeData}))
         .pipe(jade({ pretty: true }))
         .pipe(rename({ dirname: document.url }))
