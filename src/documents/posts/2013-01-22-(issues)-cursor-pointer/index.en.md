@@ -28,11 +28,11 @@ Changing of the cursor is the most natural, noticeable and obvious feedback yo
 
 ### Delimitation of the active area
 
-There are a lot of cases when you should hint to the user he could click already. You could often want to increase the clickable area of different elements, like for small icons or for menu items placed near the window edges. In those cases adding a cursor on hover would help user to find out when he could click on an element.
+There are a lot of cases when you should hint to the users that they could click already. You could often want to increase the clickable area of different elements, like for small icons or for menu items placed near the window edges. In those cases adding a cursor on hover would help users to find out when they could click on an element.
 
 In some cases, when there are adjacent elements, the cursor wouldn’t be enough to tell which element is hovered — in those cases you should change the visual state of those elements.
 
-Anyway, if you’d hint user when to use any specific active element, user would know it and it would be easier for him to use the UI next time — he’d need to aim with less precision, because he’d know that active area of an element could be bigger than it can be seen. And when he’d move the cursor he could click right at the moment the cursor would change. Otherwise, if an element don’t change its cursor on hover, the user would need to aim carefully to hit the area of a small element like icon or checkbox.
+Anyway, if you’d hint users when to use any specific active element, users would know it and it would be easier for them to use the UI next time — they’d need to aim with less precision, because they’d know that active area of an element could be bigger than it can be seen. And when they’d move the cursor they could click right at the moment the cursor would change. Otherwise, if an element don’t change its cursor on hover, the users would need to aim carefully to hit the area of a small element like icon or checkbox.
 
 And I could argue if someone would say the active area of an element should be as big as its visual representation, but I’ll keep my arguments on this topic for another article.
 
@@ -66,9 +66,9 @@ In fact, you should forget the “pointer is for links” thing a long ago.
 
 Well, yeah — links are not buttons, and buttons are not links. But that doesn’t mean the behavior of hover for links and buttons should differ.
 
-Nobody would expect an ability to open something in a new tab from the button. In each case both the links and the buttons would have their context where user could either await the link’s behavior, either he would just use the control he have. And it really doesn’t matter which cursor the user would see — if a user would see a cursor in a links’ context, he would treat it as a link. But if the user won’t expect a link, the button underneath would be ok. If a user would like to attach a file, he won’t need the link’s behavior. If user would like to send a form, he would just do it, even if there’d be a `cursor:pointer` on it, the user won’t go away and won’t try to open it in a new window — he already know how to use search forms. The only place when the user would be confused — if you’d do it reverse: make a button look like a link — be blue and underlined.
+Nobody would expect an ability to open something in a new tab from the button. In each case both the links and the buttons would have their context where users could either await the link’s behavior, either they would just use the control they have. And it really doesn’t matter which cursor the users would see — if users would see a cursor in a links’ context, they would treat it as a link. But if users won’t expect a link, the button underneath would be ok. If users would like to attach a file, they won’t need the link’s behavior. If users would like to send a form, they would just do it, even if there’d be a `cursor:pointer` on it, the users won’t go away and won’t try to open it in a new window — they already know how to use search forms. The only place when the users would be confused — if you’d do it reverse: make a button look like a link — be blue and underlined.
 
-Further more — there already a lot of links that don’t look like ones and other elements that are disguised as links. Different dropdown handles, filters, cuts, closing icons, “cancel” links — a lot of sites have a lot of elements using different tags in HTML for them and having this `cursor:pointer`. Why would then simple buttons or selects have default cursor instead of the one all other controls have?
+Further more — there are already a lot of links that don’t look like ones and other elements that are disguised as links. Different dropdown handles, filters, cuts, closing icons, “cancel” links — a lot of sites have a lot of elements using different tags in HTML for them and having this `cursor:pointer`. Why would then simple buttons or selects have default cursor instead of the one all other controls have?
 
 There is a great example from one company’s service:
 
@@ -76,7 +76,7 @@ There is a great example from one company’s service:
 
 You could try to guess which marked elements are links, which are not; which have `cursor:pointer`, which don’t. What would happen when you’ll hover or click any of those elements? You can think for a while, and I’ll give you an answer later.
 
-If you’d say straightforwardly “only everything that have `href` must have a cursor”then there could be a lot of confusing things appear. For example, if there would be one element visually, but with different tags underneath  (like [bootstrap’s buttons](http://twitter.github.com/bootstrap/base-css.html#buttons) are),then it would be strange and confusing if there’d be a difference between the button made of `<a>` and `<button>`. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you’d make the `default` one, then it would become really confusing, ’cause there could be a disabled state for this button and you would need to spot the change of the button’s background in order to know could it be pressed or no. And then if you’d remove the `cursor:pointer` from an actual link it won’t be any better, so the only proper way is to have `cursor:pointer` in both cases.
+If you’d say straightforwardly “only everything that have `href` must have a cursor” then a lot of confusing things could appear. For example, if there would be one element visually, but with different tags underneath (like [bootstrap’s buttons](http://twitter.github.com/bootstrap/base-css.html#buttons) are), then it would be strange and confusing if there’d be a difference between the button made of `<a>` and `<button>`. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you’d make the `default` one, then it would become really confusing, ’cause there could be a disabled state for this button and you would need to spot the change of the button’s background in order to know could it be pressed or no. And then if you’d remove the `cursor:pointer` from an actual link it won’t be any better, so the only proper way is to have `cursor:pointer` in both cases.
 
 We could find a lot of examples with buttons, links and their states would conflict with each other and the overall UX. Making the `cursor:pointer` to mark only actionable elements makes sense and won’t create any conflicts other than slight discomfort for some persons.
 
@@ -120,13 +120,13 @@ Here is another, different from habit ones, argument. If there would be a lo
 
 But that’s not a proper argument, it’s a pointer for one of another problems:
 
-1. Active elements could be placed not that close one to another. In that case it would be harder for user to hit those elements and there would be symptomatic flickering when you’d move the cursor from one such element to another. Ideally, those elements should have continuous active areas. And to delimit different elements in that case you should use the visual hover like changing background and not the cursorless gaps.
+1. Active elements could be placed not that close one to another. In that case it would be harder for users to hit those elements and there would be symptomatic flickering when you’d move the cursor from one such element to another. Ideally, those elements should have continuous active areas. And to delimit different elements in that case you should use the visual hover like changing background and not the cursorless gaps.
 
 2. Another problem — cluttered interface. If you’d have whole page covered in active elements, then — yeah — the cursor would change a lot (however, it already changes a lot when you hover over text or other static elements). When you have a lot of active areas, it could be that you need to simplify something there.
 
 ## Recap
 
-In ideal situation every active element should have a distinct visual hover state. But even with such state it won’t hurt to add a `cursor:pointer` — it would only add clarity and would remove possible UI conflicts. And if you can’t find how to make a visual state on hover, adding pointer would be enough for most cases (however, if you’re working with a designer, it would be better to ask him to give you a correct visual hover state).
+In ideal situation every active element should have a distinct visual hover state. But even with such state it won’t hurt to add a `cursor:pointer` — it would only add clarity and would remove possible UI conflicts. And if you can’t find how to make a visual state on hover, adding pointer would be enough for most cases (however, if you’re working with a designer, it would be better to ask them to give you a correct visual hover state).
 
 And there are just no other arguments against cursor over active elements than user habits. And there would be more happy users than those who moan.
 

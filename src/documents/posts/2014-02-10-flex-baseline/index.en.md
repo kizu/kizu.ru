@@ -98,7 +98,7 @@ The resulting code for this example would be:
 
 ## Overall {#resume}
 
-Ah, Firefox! Without his bugs (and IE's one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
+Ah, Firefox! Without its bugs (and IE's one) we could use only one element per block. Also, if you'll need just multiline inline blocks, and you're not afraid of tables, you could use `display: inline-table`.
 
 
 But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you'd want to write even better code in the future, I'd recommend you to go and vote for the [corresponding][bug1] [bugs][bug2] at bugzilla.
