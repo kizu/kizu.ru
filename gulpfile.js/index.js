@@ -159,7 +159,7 @@ var storeDocument = function(stream, file) {
     document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + (document.categories ? document.categories.join('/') + '/' : '') + document.slug + '/';
 
     if (document.type === 'page') {
-        document.url = document.url.replace(/(^|\/)index\/$/, '');
+        document.url = (document.path || '') + document.url.replace(/(^|\/)index\/$/, '');
 
         if (document.slug === 'index') {
             document.type = 'index';
@@ -375,23 +375,26 @@ var handleResource = function(document) {
         if (resource.history[0].match(/\.html$/)) {
             var contents = resource._contents.toString();
             var YAMLmetadata = yamlFront.loadFront(contents);
-            YAMLmetadata.content = YAMLmetadata.__content
+            // If there is any metadata for html page, treat it as an embedded resource
+            if (Object.keys(YAMLmetadata).length > 1) {
+                YAMLmetadata.content = YAMLmetadata.__content
+    
+                // Store the resource
+                var resRelName = resName;
+                if (resPath[1]) {
+                    resRelName = resPath[1] + resRelName;
+                }
+                YAMLmetadata.relName = resRelName;
+                document.resources[resName] = YAMLmetadata;
 
-            // Store the resource
-            var resRelName = resName;
-            if (resPath[1]) {
-                resRelName = resPath[1] + resRelName;
-            }
-            YAMLmetadata.relName = resRelName;
-            document.resources[resName] = YAMLmetadata;
-
-            // Compile and write if the resource is not injected
-            if (YAMLmetadata && YAMLmetadata.layout && !YAMLmetadata.injected) {
-                resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
-                    .pipe(data(function(){return YAMLmetadata}))
-                    .pipe(jade({ pretty: true }));
-            } else {
-                return stream;
+                // Compile and write if the resource is not injected
+                if (YAMLmetadata.layout && !YAMLmetadata.injected) {
+                    resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
+                        .pipe(data(function(){return YAMLmetadata}))
+                        .pipe(jade({ pretty: true }));
+                } else {
+                    return stream;
+                }
             }
         }
         return resultStream
@@ -403,7 +406,14 @@ var handleResource = function(document) {
 }
 var handleResources = function(document) {
     // TODO: properly detect those resources to write and probably rename
-    return gulp.src([site.postsDir + document.initialUrl + '**', '!' + site.postsDir + document.initialUrl + '*.md', '!' + site.postsDir + document.initialUrl + '_*'])
+    return gulp.src([
+        site.postsDir + document.initialUrl + '**',
+        '!' + site.postsDir + document.initialUrl + '*.md',
+        '!' + site.postsDir + document.initialUrl + '_*',
+        site.pagesDir + document.initialUrl + '**',
+        '!' + site.pagesDir + document.initialUrl + '*.md',
+        '!' + site.pagesDir + document.initialUrl + '_*'
+        ])
         .pipe(foreach(handleResource(document)))
 };
 
@@ -505,13 +515,13 @@ gulp.task('bundled-scripts', function(done) {
 
 gulp.task('raw-files', function(done) {
     return gulp
-        .src([site.rawDir + '*'])
+        .src(site.rawDir + '**/*')
         .pipe(gulp.dest(site.output));
 });
 
 gulp.task('other-scripts', function(done) {
     return gulp
-        .src([site.scriptsDir + '*'])
+        .src(site.scriptsDir + '*')
         .pipe(uglify())
         .pipe(gulp.dest(site.scriptsOutput));
 });
