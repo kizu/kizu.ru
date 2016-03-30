@@ -4,6 +4,7 @@
   "layoutsDir": "./src/layouts/",
   "stylesDir": "./src/documents/styles/",
   "scriptsDir": "./src/documents/scripts/",
+  "rawDir": "./src/documents/raw/",
   "defaultLayout": "default.jade",
   "output": "./out/",
   "scriptsOutput": "./out/j/",

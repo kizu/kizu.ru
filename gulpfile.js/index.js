@@ -503,6 +503,12 @@ gulp.task('bundled-scripts', function(done) {
         .pipe(gulp.dest(site.scriptsOutput));
 });
 
+gulp.task('raw-files', function(done) {
+    return gulp
+        .src([site.rawDir + '*'])
+        .pipe(gulp.dest(site.output));
+});
+
 gulp.task('other-scripts', function(done) {
     return gulp
         .src([site.scriptsDir + '*'])
@@ -515,7 +521,7 @@ gulp.task('express', function() {
   gutil.log('Server is running on http://localhost:' + site.watchPort);
 });
 
-gulp.task('build', ['documents', 'other-scripts']);
+gulp.task('build', ['documents', 'other-scripts', 'raw-files']);
 
 gulp.task('rebuild-scripts', function(done) {
     runSequence('bundled-scripts', 'write-documents', done);
