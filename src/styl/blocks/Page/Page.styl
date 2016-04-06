@@ -57,11 +57,10 @@
   &-Languages
     position: absolute
     top: 2*$size.base
-    right: 0.5em
-    right: calc(unquote("(100% - 42rem) / 2"))
+    right: 0.5*$size.base
+    right: 2.5vw
 
-    height: 0
-    padding: 0
+    padding: 0 1.5*$size.base
     margin: 0
 
     text-align: left
@@ -71,13 +70,15 @@
 
     color: rgba($color.dark, 0.25)
 
-    @media (max-width: 820px)
-      right: 0.5*$size.base
-      right: 4vw
+    .Page:not(.without-sidebar) &
+      left: 100%
+      right: auto
 
-    @media (max-width: 576px)
-      top: 0.3em
-      right: 0.5em
+      width: $size.sidebar - 4*$size.base
+
+      @media (max-width: 820px)
+        left: auto
+        right: 0
 
   &-Language
     margin: 0
