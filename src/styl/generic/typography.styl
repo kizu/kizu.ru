@@ -167,6 +167,11 @@ blockquote
       &
         content: "\AD\2062"
 
+.thinsp
+  @supports (-webkit-appearance: none)
+    &:after
+      content: ""
+      display: inline-block
 
 .Anchor
   display: inline-block
