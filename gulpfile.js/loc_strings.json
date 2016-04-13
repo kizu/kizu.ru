@@ -76,7 +76,7 @@
         "en": "Link to this place"
     },
     "feedback_text1": {
-        "ru": "Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете или",
+        "ru": "Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете",
         "en": "If you've spotted a typo or a mistake, or wish to add something on, you could either"
     },
     "feedback_issue": {
@@ -84,12 +84,12 @@
         "en": "write me about this"
     },
     "feedback_text2": {
-        "ru": "на Гитхабе, или",
-        "en": "on GitHub, either"
+        "ru": ", или",
+        "en": ", or"
     },
     "feedback_edit": {
-        "ru": "поправить статью",
-        "en": "edit this article"
+        "ru": "поправить статью прямо на Гитхабе",
+        "en": "edit this article on Github"
     },
     "feedback_text3": {
         "ru": "с помощью",

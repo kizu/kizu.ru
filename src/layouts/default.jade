@@ -186,6 +186,19 @@ html.Page(class=page_class, lang=lang ? lang : false)
                 != document.metadata.thanks_to
                 = "."
 
+            aside.Feedback
+              - var issueTitle = loc('feedback_for') + ' ' + loc('laquo') + document.title + loc('raquo')
+              p
+                = loc('feedback_text1')
+                = " "
+                a.Link(href="https://github.com/kizu/kizu.github.com/issues/new?title=" + encodeURIComponent(issueTitle))
+                  = loc('feedback_issue')
+                = loc('feedback_text2')
+                = " "
+                a.Link(href=site.srcRoot + document.srcPath)
+                  = loc('feedback_edit')
+                = "."
+
     else
       .Page-Content.Main(role="main")
         if document.type != 'index'

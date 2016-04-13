@@ -114,6 +114,7 @@ var storeDocument = function(stream, file) {
         }
     }
 
+    document.srcPath = file.base.substr(process.cwd().length) + file.relative
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
     document.filename = (document.isInFolder || '') + (document.lang && '.' + document.lang || '') + document.extension;
     document.resources = {};
