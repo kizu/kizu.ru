@@ -207,7 +207,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
         != document.content
 
-        if document.slug == 'all'
+        if document.slug == 'everything'
           if posts
             if site.categories
               nav.Filter
@@ -221,7 +221,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
                       a.Filter-Nav-Link(href="#" + site.categories[i])= loc(site.categories[i])
 
                   li.Filter-Nav-Item.Filter-Nav-Item_everything
-                    a.Filter-Nav-Link(href="#all")= loc({ru: 'Всё', en: 'Everything'})
+                    a.Filter-Nav-Link(href="#everything")= loc({ru: 'Всё', en: 'Everything'})
 
 
                 ul.Filter-Content
