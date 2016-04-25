@@ -40,7 +40,7 @@
 
 Живой пример:
 
-[demo:nested-links-broken]
+[partial:nested-links-broken]
 
 Однако, существуют сценарии, в которых захочется положить одну ссылку в другую, не обращая внимание на запреты.
 
@@ -53,7 +53,7 @@
 
 ## Решение
 
-[demo:nested-links-simple]
+[partial:nested-links-simple]
 
     <a href="#a">
         Foo

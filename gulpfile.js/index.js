@@ -24,7 +24,7 @@ var moment = require('moment');
 var typography = require(process.cwd() + '/gulpfile.js/typography.js');
 var marked_overloaded = require(process.cwd() + '/gulpfile.js/marked_overloaded.js');
 var marked_renderers = require(process.cwd() + '/gulpfile.js/marked_renderers.js');
-var handle_demos = require(process.cwd() + '/gulpfile.js/handle_demos.js');
+var handle_partials = require(process.cwd() + '/gulpfile.js/handle_partials.js');
 
 // Constants
 var pathsParts = {
@@ -283,7 +283,7 @@ var postprocessContent = function(document) {
 };
 
 var writeDocument = function(document) {
-    handle_demos(document);
+    handle_partials(document);
     postprocessContent(document);
 
     var loc = function(locString, lang) {
@@ -373,29 +373,27 @@ var handleResource = function(document) {
             finalPath += resPath[1];
         }
 
-        if (resource.history[0].match(/\.html$/)) {
+        if (resource.history[0].match(/\.(html|jade)$/)) {
             var contents = resource._contents.toString();
             var YAMLmetadata = yamlFront.loadFront(contents);
             // If there is any metadata for html page, treat it as an embedded resource
-            if (Object.keys(YAMLmetadata).length > 1) {
-                YAMLmetadata.content = YAMLmetadata.__content
-    
-                // Store the resource
-                var resRelName = resName;
-                if (resPath[1]) {
-                    resRelName = resPath[1] + resRelName;
-                }
-                YAMLmetadata.relName = resRelName;
-                document.resources[resName] = YAMLmetadata;
+            YAMLmetadata.content = YAMLmetadata.__content
 
-                // Compile and write if the resource is not injected
-                if (YAMLmetadata.layout && !YAMLmetadata.injected) {
-                    resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
-                        .pipe(data(function(){return YAMLmetadata}))
-                        .pipe(jade({ pretty: true }));
-                } else {
-                    return stream;
-                }
+            // Store the resource
+            var resRelName = resName;
+            if (resPath[1]) {
+                resRelName = resPath[1] + resRelName;
+            }
+            YAMLmetadata.relName = resRelName;
+            document.resources[resName] = YAMLmetadata;
+
+            // Compile and write if the resource is not injected
+            if (YAMLmetadata.layout) {
+                resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
+                    .pipe(data(function(){return YAMLmetadata}))
+                    .pipe(jade({ pretty: true }));
+            } else {
+                return stream;
             }
         }
         return resultStream

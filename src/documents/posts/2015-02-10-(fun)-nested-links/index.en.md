@@ -40,7 +40,7 @@ in the eyes of the browser would be something like that —
 
 And a live example:
 
-[demo:nested-links-broken]
+[partial:nested-links-broken]
 
 However, there are cases when you’d actually want to nest one link inside another despite the restrictions.
 
@@ -53,7 +53,7 @@ And — found a proper solution. HTML-only one, by the way, the one that give
 
 ## The solution
 
-[demo:nested-links-simple]
+[partial:nested-links-simple]
 
     <a href="#a">
         Foo

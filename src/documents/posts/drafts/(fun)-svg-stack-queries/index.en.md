@@ -12,7 +12,7 @@ I'd like to show you how we can achieve something similar today.
 
 It is a hack, it is an experiment, it have its flaws and it was not tested in production. But hey!
 
-[demo:svg-stack-queries]
+[partial:svg-stack-queries]
 
 Well, the code wouldn't be that elegant as with original SVG Stacks idea, but what I did is a Proof of Concept.
 

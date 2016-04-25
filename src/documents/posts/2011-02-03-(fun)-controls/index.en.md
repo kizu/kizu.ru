@@ -1,6 +1,6 @@
 # Custom CSS3 controls
 
-[demo:controls]
+[partial:controls]
 
 This experiment features the heavy-css-styled radio-buttons, made without any use of JS using the `:checked` pseudo-class. And with somewhat graceful degradation for some old browsers.
 

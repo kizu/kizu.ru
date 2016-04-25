@@ -6,4 +6,4 @@
 
 Resize the browser’s window to see the switching of overflow effect.
 
-[demo:overflower]
+[partial:overflower]

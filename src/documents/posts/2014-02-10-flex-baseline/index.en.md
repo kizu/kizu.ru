@@ -12,7 +12,7 @@ Those rules make only onelined simple inline-blocks usable with `vertical-align:
 
 Here is an example: all three blocks have `display: inline-block`, the first one is simple oneliner, but with bigger padding, second one is multiline, but has smaller font-size and the third one has `overflow: auto`.
 
-[demo:flex-baseline1]
+[partial:flex-baseline1]
 
 You [can see](*safari "Btw, in the latest Safari the block with `overflow` don't behave according to the specs") where each block has its baseline in this example.
 
@@ -20,7 +20,7 @@ You [can see](*safari "Btw, in the latest Safari the block with `overflow` don't
 
 Actually, there was one place in CSS, where the baseline aligning worked *properly*: `display: inline-table`. If we'd use it instead of inline-blocks in our example, we'd get almost what we tried to achieve:
 
-[demo:flex-baseline2]
+[partial:flex-baseline2]
 
 You can see an obvious flaw: the `overflow: auto` is not working. And you shouldn't forget that you'll need to have `table-layout: fixed`. So, `inline-table` is nice as long as we don't need `overflow` other than `visible`.
 
@@ -28,7 +28,7 @@ You can see an obvious flaw: the `overflow: auto` is not working. And you should
 
 So, can we do a block both with the proper baseline and with some `overflow`? It seems we can, using flexboxes — `display: inline-flex`. In [theory][flex-baselines] they have a proper baseline position in all complex cases, but what would we get in practice?
 
-[demo:flex-baseline3]
+[partial:flex-baseline3]
 
 If you'd look at this example in any browser other than Firefox, you'll see nicely aligned blocks (yep, even in IE10 and Opera 12).
 
@@ -38,7 +38,7 @@ But in Fx the block with `overflow: auto`, suddenly, behaves just like the inlin
 
 It is nice we could align `inline-flex` blocks with the baselines of other blocks, if only there wasn't this Fx bug… But what if we'd go and try to align not different `inline-flex` blocks, but their children?
 
-[demo:flex-baseline4]
+[partial:flex-baseline4]
 
 Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow, for elements inside flexbox we would need to use `flex-wrap` to wrap them. And guess what? Firefox didn't support this property until 28.0.
 
@@ -46,11 +46,11 @@ Oh, it works. But… While multiple `inline-flex` blocks could wrap on overflow,
 
 But hey! If `inline-flex` is properly aligned alongside other blocks and the nested block with `overflow: auto` also has a proper baseline, then what if we'd combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:
 
-[demo:flex-baseline5]
+[partial:flex-baseline5]
 
 In most browsers you won't see any changes, but when we'll look at Fx, we would see that the blocks now won't have baseline at their bottom margin edge. But they won't have it at the proper place either — they're shifted from the baseline of other blocks a little. Let's measure it — 10 pixels. Hey, it is our padding! By removing paddings from each side we found that the problem is at the top padding — when we remove it everything works great. So, if the bug is in the padding ([and I reported it too][bug2]), how could we workaround it? Let's remove it and replace with a pseudo-element:
 
-[demo:flex-baseline6]
+[partial:flex-baseline6]
 
 Perfect!
 
@@ -64,7 +64,7 @@ Opera has a similar bug — the element inside a flexbox would have width set to
 
 There, [now it's perfect](*without-fallbacks "No fallbacks for older browsers though, but this slightly falls out of this post's scope"), there is the last example with different variants of blocks and with the wrapping blocks:
 
-[demo:flex-baseline7]
+[partial:flex-baseline7]
 
 The resulting code for this example would be:
 

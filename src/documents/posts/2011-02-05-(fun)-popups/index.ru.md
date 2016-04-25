@@ -1,3 +1,3 @@
 # Попапы и дропдауны
 
-[demo:popups]
+[partial:popups]

@@ -66,13 +66,13 @@ And just some basic examples of usage:
 
 An obvious example — compact table headers what don’t take that much of horizontal space:
 
-[demo:rotated-text]
+[partial:rotated-text]
 
 ## “Bookshelf”
 
 As all the rotated blocks have fair place in a flow, you could arrange them in a row so they won’t overlap each other and the height of the whole row would be equal to the “highest” of them:
 
-[demo:rotated-text_books]
+[partial:rotated-text_books]
 
 So, that’s it.
 
