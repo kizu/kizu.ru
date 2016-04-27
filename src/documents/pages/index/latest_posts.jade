@@ -1,1 +1,8 @@
-p= "ОЛОЛО ПОСЛЕДНИЕ ПОСТЫ"
+ul
+  - for post in posts.slice(0, 3)
+    li
+      a(href='/' + post.url)
+        = post.title
+
+      = " — "
+      em.published= published_format(post.date)

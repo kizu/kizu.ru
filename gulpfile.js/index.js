@@ -15,7 +15,8 @@ var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var jade = require('gulp-jade');
+var jade = require(process.cwd() + '/node_modules/gulp-jade/node_modules/jade');
+var gulpJade = require('gulp-jade');
 var stylus = require('stylus');
 var posthtml = require('posthtml');
 var yamlFront = require('yaml-front-matter');
@@ -282,10 +283,7 @@ var postprocessContent = function(document) {
     });
 };
 
-var writeDocument = function(document) {
-    handle_partials(document);
-    postprocessContent(document);
-
+var getJadeData = function(document) {
     var loc = function(locString, lang) {
         var locSource;
         if (typeof locString === 'string') {
@@ -299,8 +297,8 @@ var writeDocument = function(document) {
             console.warn('No loc string found for ' + locString);
         }
     };
-
-    var jadeData = {
+    
+    return {
         'posts': allDocuments[document.lang].posts,
         'document': document,
         'site': site,
@@ -340,6 +338,13 @@ var writeDocument = function(document) {
             return result;
         }
     };
+};
+
+var writeDocument = function(document) {
+    handle_partials(document);
+    postprocessContent(document);
+
+    var jadeData = getJadeData(document);
 
     var layout = site.defaultLayout;
     if (document.metadata.layout) {
@@ -351,7 +356,7 @@ var writeDocument = function(document) {
 
     return gulp.src(site.layoutsDir + layout)
         .pipe(data(function(){return jadeData}))
-        .pipe(jade({ pretty: true }))
+        .pipe(gulpJade({ pretty: true }))
         .pipe(rename({ dirname: document.url }))
         .pipe(rename({ basename: 'index' }))
         .pipe(gulp.dest(site.output));
@@ -361,9 +366,8 @@ var handleResource = function(document) {
     return function(stream, resource) {
         var resultStream = stream;
 
-        var documentName = document.url.match(/\/([^\/]+)\/$/);
-        documentName = documentName && documentName[1];
-        var resPath = resource.history[0].match(new RegExp('[\/\-]' + documentName + '\/(.+\/)?([^\/]+)\\.([^\\.]+)$'));
+        var resPath = resource.history[0].match(new RegExp('[\/\-]' + document.slug + '\/(.+\/)?([^\/]+)\\.([^\\.]+)$'));
+
         if (!resPath) {
             return stream;
         }
@@ -377,7 +381,12 @@ var handleResource = function(document) {
             var contents = resource._contents.toString();
             var YAMLmetadata = yamlFront.loadFront(contents);
             // If there is any metadata for html page, treat it as an embedded resource
-            YAMLmetadata.content = YAMLmetadata.__content
+            YAMLmetadata.content = YAMLmetadata.__content;
+
+            // FIXME: detect extentsion properly
+            if (resource.history[0].match(/\.jade$/)) {
+                YAMLmetadata.content = jade.compile(YAMLmetadata.content, { pretty: true })(getJadeData(document));
+            }
 
             // Store the resource
             var resRelName = resName;
@@ -391,7 +400,7 @@ var handleResource = function(document) {
             if (YAMLmetadata.layout) {
                 resultStream = gulp.src(site.layoutsDir + YAMLmetadata.layout + '.jade')
                     .pipe(data(function(){return YAMLmetadata}))
-                    .pipe(jade({ pretty: true }));
+                    .pipe(gulpJade({ pretty: true }));
             } else {
                 return stream;
             }
@@ -480,11 +489,11 @@ gulp.task('classify-documents', function(done) {
 });
 
 gulp.task('write-documents', function(done) {
-    loc_strings = rerequire(process.cwd() + '/gulpfile.js/loc_strings.json');
     each(documents, writeDocument, done);
 });
 
 gulp.task('handle-resources', function(done) {
+    loc_strings = rerequire(process.cwd() + '/gulpfile.js/loc_strings.json');
     each(documents, handleResources, done);
 });
 
