@@ -1,5 +1,5 @@
 ---
 layout: 'redirect'
 permalink: 'blog/'
-target: 'all/#blog'
+target: 'everything/#blog'
 ---

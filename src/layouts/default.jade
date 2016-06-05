@@ -20,7 +20,9 @@
       page_class += ' without-sidebar'
   }
 
-  var url = '/' + document.url + '/'
+  var url = '/' + document.url + (document.url.slice(-1) === '/' ? '' : '/')
+  if (url == '//')
+    url = '/'
 
 mixin optionalTag(condition)
   if condition

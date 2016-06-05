@@ -1,5 +1,5 @@
 ---
 layout: 'redirect'
 permalink: 'fun/'
-target: 'all/#fun'
+target: 'everything/#fun'
 ---

@@ -1,5 +1,5 @@
 ---
 layout: 'redirect'
 permalink: 'issues/'
-target: 'all/#issues'
+target: 'everything/#issues'
 ---

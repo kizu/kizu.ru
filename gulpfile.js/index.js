@@ -245,7 +245,7 @@ var storeDocument = function(stream, file) {
     // Also, they should be _by langs_, like now in en there are no olds
     if (document.categories) {
         for (var i = 0; i < document.categories.length; i++) {
-            if (site.categories.indexOf(document.categories[i]) == -1) {
+            if (site.categories.indexOf(document.categories[i]) == -1 && document.categories[i] !== 'old') {
                 site.categories.push(document.categories[i]);
             }
         }

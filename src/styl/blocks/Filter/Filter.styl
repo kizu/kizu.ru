@@ -6,21 +6,46 @@
     clip: rect(1px,1px,1px,1px)
 
   &-Nav
+    display: flex
+    justify-content: space-between
+
+    border: 1px solid $color.misc
+    padding: 3px 2*$size.base 0
+    margin: (2*$size.base - 4px) -1px
+    border-radius: 9em/9em
+
     text-align: left
+
+    &-Link
+      color: $color.link !important
 
     &-Item
       display: inline-block
 
+      padding: 0
+      margin: 0
+
       &:before
         content: ""
 
-  &-Nav-Item_everything,
   &-Target:target ~ &-Content > &-Item
     display: none
 
-  .Filter-Target
-    &:target ~ .Filter-Nav > .Filter-Nav-Item_everything
-      display: inline-block
+  for $i in 1..6
+    &-Target:nth-child({$i}):target ~ &-Nav > &-Nav-Item:nth-child({$i + 1}) > &-Nav-Link
+      pointer-events: none
+
+      color: $color.misc !important
+
+  &-Nav-Item_everything > &-Nav-Link
+    pointer-events: none
+
+    color: $color.misc !important
+
+    ^[0]-Target:target ~ ^[0]-Nav > &
+      pointer-events: all
+
+      color: $color.link !important
 
   $categories = site.categories
   $selector = ()
