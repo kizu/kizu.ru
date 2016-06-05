@@ -1,7 +1,27 @@
-Hello. I’m Front-end Web Developer at [Yandex](http://yandex.com) and a member of Russian “[Web Standards](http://web-standards.ru/about/en/)” community.
+## Hello!
 
-I love to [experiment on CSS](fun/) and trying to do this as efficient as I can. For do so I work on different open source projects to fasten the web development: [Hayaku](http://hayakubundle.com), [jekyller](gh:shower/jekyller), [bemto](gh:kizu/bemto) and [others](gh:kizu?tab=repositories).
+I’m working as a Front-end Web Developer at [Yandex](http://yandex.com) (to be more specific — at [Yandex.Mail](https://mail.yandex.com/)), occasionally doing different stuff for Russian [“Web Standards”](http://web-standards.ru/about/en/) community, commiting to open source projects, experimenting on CSS, and blogging on this site.
 
-Sometimes I talk about different web-developer stuff at conferences, mostly Russian ones, but I managed to [give a talk](http://vimeo.com/51897358) at [Fronteers Jam Session in 2012](http://fronteers.nl/congres/2012/jam-session), and then [another in 2013](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source) at the same place.
 
-And I’ll going to blog a lot at this site — I’ve remade it from scratch and did everything so I would actually do it and write articles. Read more on that in the [corresponding article](:restart).
+### The latest publications
+
+[partial:latest_posts]
+
+See also [the whole list of publications](everything/).
+
+
+### Projects
+
+I created [Hayaku](http://hayakubundle.com), [Jekiller](gh:shower/jekyller) and [Bemto](gh:kizu/bemto), I'm a maintainer of [Stylus](gh:stylus/stylus), and sometimes commiting in different ways to other open source projects.
+
+
+### Talks
+
+Sometimes I talk about different front-end stuff at conferences, mostly Russian ones, but I managed to [give a talk](http://vimeo.com/51897358) at [Fronteers Jam Session in 2012](http://fronteers.nl/congres/2012/jam-session), and then [another one in 2013](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source) at the same place.
+
+
+### How to contact me
+
+The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
+
+I participate at different social networks, but there is no point to list them there. The chances are — _I do not want to add you to my professional network on LinkedIn_, but if you'd go and [look at all the cats in my instagram](https://instagram.com/ki_zu) — I'll be happy.

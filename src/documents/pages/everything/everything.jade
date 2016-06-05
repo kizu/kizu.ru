@@ -1,0 +1,30 @@
+if posts
+  if site.categories
+    nav.Filter
+      //- Todo: list all categories automatically
+      - for (var i = 0; i < site.categories.length; i++)
+        a.Filter-Target(id=site.categories[i])
+
+      ul.Filter-Nav
+        - for (var i = 0; i < site.categories.length; i++)
+          li.Filter-Nav-Item
+            a.Filter-Nav-Link(href="#" + site.categories[i])= loc(site.categories[i])
+
+        li.Filter-Nav-Item.Filter-Nav-Item_everything
+          a.Filter-Nav-Link(href="#everything")= loc({ru: 'Всё', en: 'Everything'})
+
+
+      ul.Filter-Content
+        - for post in posts
+          -
+            var classes = ''
+            if (post.categories) {
+              classes += post.categories.map(function(p){ return 'Filter-Item_category_' + p; }).join(' ')
+            }
+
+          li.Filter-Item(class=classes)
+            a(href='/' + post.url)
+              = post.title
+
+            = " — "
+            em.published= published_format(post.date)

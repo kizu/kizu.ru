@@ -8,7 +8,7 @@ code,
 pre,
 table
   padding: 0
-  margin: 2*$size.base 0 0
+  margin: $size.base 0 0
 
 li,
 li > p
@@ -27,7 +27,9 @@ p
 
 .Page-Title,
 .Heading
-  margin: 2*$size.base $size.indent 0
+  margin-top: 2*$size.base
+  margin-right: $size.indent
+  margin-left: $size.indent
 
   line-height: 1
   word-wrap: break-word
@@ -61,19 +63,19 @@ h2
   position: relative
   font-size: 2*$size.base
   line-height: 2*$size.base
-  padding-bottom: 1*$size.base
+  margin-bottom: 1*$size.base
 
 h3
   font-size: 1.5*$size.base
   line-height: 2*$size.base
 
-  padding-bottom: 1*$size.base
+  margin-bottom: 1*$size.base
 
 h4,
 h5,
 h6
   font-size: 1*$size.base
-  padding-bottom: 1*$size.base
+  margin-bottom: 1*$size.base
 
 ol
   counter-reset: list
