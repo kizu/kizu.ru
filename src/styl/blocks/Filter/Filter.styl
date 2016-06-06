@@ -6,18 +6,34 @@
     clip: rect(1px,1px,1px,1px)
 
   &-Nav
-    display: flex
-    justify-content: space-between
+    display: inline-flex
 
+    padding: 0
     border: 1px solid $color.misc
-    padding: 3px 2*$size.base 0
-    margin: (2*$size.base - 4px) -1px
-    border-radius: 9em/9em
+    margin: ($size.base - 4px) -1px ($size.base - 1px)
+    border-radius: 9em
 
     text-align: left
 
     &-Link
+      display: block
+
+      padding: 3px $size.base 0
+
       color: $color.link !important
+      text-shadow: none !important
+      background: none !important
+
+      &:hover
+        background: $color.distant !important
+
+      ../-Item:first-child > &
+        padding-left: 2*$size.base
+        border-radius: @border-radius 0 0 @border-radius
+
+      ../-Item:last-child > &
+        padding-right: 2*$size.base
+        border-radius: 0 @border-radius @border-radius 0
 
     &-Item
       display: inline-block
@@ -36,16 +52,21 @@
       pointer-events: none
 
       color: $color.misc !important
+      background: $color.distant !important
 
   &-Nav-Item_everything > &-Nav-Link
     pointer-events: none
 
     color: $color.misc !important
+    background: $color.distant !important
 
     ^[0]-Target:target ~ ^[0]-Nav > &
       pointer-events: all
 
       color: $color.link !important
+
+      &:not(:hover)
+        background: none !important
 
   $categories = site.categories
   $selector = ()

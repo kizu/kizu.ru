@@ -81,11 +81,19 @@
         right: 0
 
   &-Language
+    padding-left: 1.5*$size.base
     margin: 0
 
+    &:before
+      margin-left: -1.5*$size.base
+      width: 1.5*$size.base
+
     @media (max-width: 820px)
-      width: 0
       overflow: hidden
+
+      width: 0
+      padding-left: 0
+
       text-align: right
 
       &:before,

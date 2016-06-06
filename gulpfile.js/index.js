@@ -245,7 +245,8 @@ var storeDocument = function(stream, file) {
     // Also, they should be _by langs_, like now in en there are no olds
     if (document.categories) {
         for (var i = 0; i < document.categories.length; i++) {
-            if (site.categories.indexOf(document.categories[i]) == -1 && document.categories[i] !== 'old') {
+            // TODO: move ignored categories to a var? Or make later the filter to show olny proper categories (> than one?)
+            if (site.categories.indexOf(document.categories[i]) == -1 && document.categories[i] !== 'old' && document.categories[i] !== 'projects') {
                 site.categories.push(document.categories[i]);
             }
         }
