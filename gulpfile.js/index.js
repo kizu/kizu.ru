@@ -118,6 +118,7 @@ var storeDocument = function(stream, file) {
     document.srcPath = file.base.substr(process.cwd().length) + file.relative
     document.initialUrl = (document.path || '') + (document.date && document.date + '-' || '') + (document.categories || '') + document.slug + '/';
     document.filename = (document.isInFolder || '') + (document.lang && '.' + document.lang || '') + document.extension;
+    document.lang_prefix = (document.lang == site.defaultLanguage) ? '' : (document.lang + '/');
     document.resources = {};
 
     if (document.categories) {
@@ -159,9 +160,11 @@ var storeDocument = function(stream, file) {
     }
 
     document.url = (document.lang != site.defaultLanguage ? document.lang + '/' : '') + (document.categories ? document.categories.join('/') + '/' : '') + document.slug + '/';
+    document.basename = 'index';
+    document.extname = '.html';
 
     if (document.type === 'page') {
-        document.url = (document.path || '') + document.url.replace(/(^|\/)index\/$/, '');
+        document.url = (document.path || '') + document.url.replace(/(^|\/)index\/$/, '/');
 
         if (document.slug === 'index') {
             document.type = 'index';
@@ -176,7 +179,9 @@ var storeDocument = function(stream, file) {
     var content = document.YAMLmetadata.__content;
     delete document.YAMLmetadata.__content;
 
+    document.rawContent = content;
     document.content = marked_overloaded(content, marked_renderers);
+
     // TODO: can this be made using just one posthtml pass?
     if (document.content.substr(0, 4) === '<h1 ') {
         var firstLine = document.content.substr(0, document.content.indexOf('</h1>') + 5);
@@ -241,6 +246,22 @@ var storeDocument = function(stream, file) {
         document.url = document.metadata.permalink;
     }
 
+    var checkURL = document.url.match(/^(.*\/)?([^\/]+)(\.[^\/]+)$/)
+    if (checkURL) {
+        document.url = checkURL[1] || '';
+        document.basename = checkURL[2];
+        document.extname = checkURL[3];
+    }
+
+    if (document.url == '/') {
+        document.url = '';
+    }
+
+    document.production_url = site.production_url + document.url;
+    if (document.basename + document.extname != 'index.html') {
+        document.production_url = document.production_url + document.basename + document.extname;
+    }
+
     // TODO: replace with proper indicies
     // Also, they should be _by langs_, like now in en there are no olds
     if (document.categories) {
@@ -271,15 +292,18 @@ var storeDocument = function(stream, file) {
         document.isDraft = true;
     }
 
+    document.simpleContent = marked_overloaded(document.rawContent, marked_renderers, { 'document': document, 'simpleContent': true });
+    document.simpleContent = typography(document.simpleContent, document.lang, { 'simpleContent': true });
+
     // console.log(document);
     documents.push(document);
 
     return stream;
 };
 
-var postprocessContent = function(document) {
-    document.content = document.content.replace(/href=":([a-z]+)"/i, function(m, slug) {
-        var foundDoc = allDocuments[document.lang].documentsBySlug[slug];
+var postprocessContent = function(content, options) {
+    return content.replace(/href=":([a-z]+)"/i, function(m, slug) {
+        var foundDoc = allDocuments[options.document.lang].documentsBySlug[slug];
         if (foundDoc) {
             return 'href="/' + foundDoc.url + '"';
         } else {
@@ -346,8 +370,10 @@ var getJadeData = function(document) {
 };
 
 var writeDocument = function(document) {
-    handle_partials(document);
-    postprocessContent(document);
+    document.content = handle_partials(document.content, { 'document': document });
+    document.content = postprocessContent(document.content, { 'document': document });
+    document.simpleContent = handle_partials(document.simpleContent, { 'site': site, 'document': document, 'simpleContent': true });
+    document.simpleContent = postprocessContent(document.simpleContent, { 'site': site, 'document': document, 'simpleContent': true });
 
     var jadeData = getJadeData(document);
 
@@ -363,7 +389,8 @@ var writeDocument = function(document) {
         .pipe(data(function(){return jadeData}))
         .pipe(gulpJade({ pretty: true }))
         .pipe(rename({ dirname: document.url }))
-        .pipe(rename({ basename: 'index' }))
+        .pipe(rename({ basename: document.basename }))
+        .pipe(rename({ extname: document.extname }))
         .pipe(gulp.dest(site.output));
 };
 

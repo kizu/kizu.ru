@@ -17,7 +17,7 @@
 
 ### Конференции
 
-Иногда я выступаю с докладами на конференциях, например на [Я.Субботниках](https://tech.yandex.ru/people/377/) и [Web Standards Days](http://webstandardsdays.ru). В 2012 даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session), а в 2013 — [ещё одну там же](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source).
+Иногда я выступаю с докладами на конференциях, например на [Я.Субботниках](https://tech.yandex.ru/people/377/) и [Web Standards Days](http://webstandardsdays.ru). В 2012 даже [рассказал десятиминутку](http://vimeo.com/51897358) на [Fronteers Jam Sessions](http://fronteers.nl/congres/2012/jam-session), а в 2013 — [ещё одну](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source).
 
 
 ### Как со мной связаться

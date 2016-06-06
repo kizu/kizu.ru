@@ -18,6 +18,18 @@ var handleTitleAttributes = function(args) {
     return args;
 };
 
+var handleImageAttributes = function(args, options) {
+    if (args.original.text) {
+        args.attributes.alt = args.original.text;
+    }
+    if (options && options.simpleContent) {
+        if (args.attributes.src && args.attributes.src.match(/^(?!https?:|\/).+/)) {
+            args.attributes.src = options.document.production_url + args.attributes.src;
+        }
+    }
+    return args;
+};
+
 var handleAttributes = function(args) {
     var content = args.original.text && 'text' || 'code';
     if (!args.original[content]) {
@@ -61,7 +73,8 @@ var handleAttributes = function(args) {
 module.exports = {
     'image': [
         function(args) { return handleTitleAttributes(args); },
-        function(args) { return handleAttributes(args); }
+        function(args) { return handleAttributes(args); },
+        function(args, options) { return handleImageAttributes(args, options); }
     ],
 
     'paragraph': [
@@ -73,8 +86,10 @@ module.exports = {
     ],
 
     heading: [
-        function(args) {
-            args.attributes.class += ' Heading';
+        function(args, options) {
+            if (!options.simpleContent) {
+                args.attributes.class += ' Heading';
+            }
             return args;
         },
         function(args) { return handleAttributes(args); },
@@ -83,9 +98,9 @@ module.exports = {
             args.original.text = args.original.text.replace(/\[([^\]]+)\]\[([^\s\]]+(?:\s+[^\s\]]+)*)\]/g, '<span class="$2">$1</span>');
             return args;
         },
-        function(args) {
+        function(args, options) {
             // Apply typographic classes to first letters
-            if (args.original.text[0].match(/[A-ZА-Я“«]/)) {
+            if (!options.simpleContent && args.original.text[0].match(/[A-ZА-Я“«]/)) {
                 var firstLetter = args.original.text[0];
                 var hang = 'm';
                 var alt = 'ss01 ';
@@ -125,9 +140,11 @@ module.exports = {
             }
             return args;
         },
-        function(args) {
+        function(args, options) {
             // Adding anchors
-            args.beforeContent = '<a class="Anchor" href="#' + args.attributes.id + '"></a>';
+            if (!options.simpleContent) {
+                args.beforeContent = '<a class="Anchor" href="#' + args.attributes.id + '"></a>';
+            }
             return args;
         // },
         // function(args) {
@@ -140,9 +157,11 @@ module.exports = {
     ],
 
     'link': [
-        function(args) {
+        function(args, options) {
             // Adding `link` class
-            args.attributes.class += ' Link';
+            if (!options.simpleContent) {
+                args.attributes.class += ' Link';
+            }
             return args;
         },
         function(args) {
@@ -155,13 +174,15 @@ module.exports = {
             args.attributes.href = args.attributes.href.replace(/^gh:/, 'https://github.com/');
             return args;
         },
-        function(args) {
+        function(args, options) {
             // Wrapping quoted link content for better underlines
-            initialText = args.original.text;
-            args.original.text = args.original.text.replace(/^“([^”]+)”$/, '“<span class="Link-Inner">$1</span>”');
-            args.original.text = args.original.text.replace(/^«([^»]+)»$/, '«<span class="Link-Inner">$1</span>»');
-            if (initialText != args.original.text) {
-                args.attributes.class += ' Link_wrapper';
+            if (!options.simpleContent) {
+                initialText = args.original.text;
+                args.original.text = args.original.text.replace(/^“([^”]+)”$/, '“<span class="Link-Inner">$1</span>”');
+                args.original.text = args.original.text.replace(/^«([^»]+)»$/, '«<span class="Link-Inner">$1</span>»');
+                if (initialText != args.original.text) {
+                    args.attributes.class += ' Link_wrapper';
+                }
             }
             return args;
         },

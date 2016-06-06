@@ -1,6 +1,5 @@
 -
   var lang = document.lang
-  var lang_prefix = document.lang == site.defaultLanguage ? '' : document.lang
 
   var categories = document.categories
   var page_type = document.type
@@ -113,7 +112,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
               = loc('name')
             else
               a.Page-Title-Link(
-                href="/" + lang_prefix
+                href="/" + document.lang_prefix
                 )= loc('name')
 
           //- TODO: add links to translation if there are such

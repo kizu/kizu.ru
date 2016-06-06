@@ -10,9 +10,13 @@
   "scriptsOutput": "./out/j/",
   "stylesOutput": "./out/s/",
   "languages": ["ru", "en"],
+  "author": {
+    "name": "Roman Komarov",
+    "email": "kizmarh@ya.ru"
+  },
   "defaultLanguage": "ru",
   "defaultCategory": "blog",
-  "production_url": "/",
+  "production_url": "http://kizu.ru/",
   "root_url": "/",
   "srcRoot": "https://github.com/kizu/new-site/blob/gulp-version",
   "watchPort": 4000,
