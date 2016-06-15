@@ -19,6 +19,9 @@ module.exports = function(text, lang, options) {
                     textNode = node;
                     if (typeof(textNode) == 'string') {
                         textNode = hyphers[lang].hyphenateText(textNode);
+                        if (lang !== 'en') {
+                            textNode = hyphers['en'].hyphenateText(textNode);
+                        }
                     }
                     return textNode
                     });
