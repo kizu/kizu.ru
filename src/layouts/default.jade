@@ -23,10 +23,17 @@
   if (url == '//')
     url = '/'
 
-mixin optionalTag(condition)
+mixin optionalTag(tag, condition)
   if condition
-    div&attributes(attributes)
-      block
+    if tag == 'span'
+      span&attributes(attributes)
+        block
+    else if tag == 'a'
+      a&attributes(attributes)
+        block
+    else
+      #{tag}&attributes(attributes)
+        block
   else
     block
 
@@ -108,12 +115,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
       .LiquidLayout
         .LiquidLayout-Content
           h1.Page-Title
-            if document.type == 'index'
+            +optionalTag('a', document.type != 'index').Page-Title-Link(href="/" + document.lang_prefix)
               = loc('name')
-            else
-              a.Page-Title-Link(
-                href="/" + document.lang_prefix
-                )= loc('name')
 
           //- TODO: add links to translation if there are such
           ul.Page-Languages
@@ -221,7 +224,12 @@ html.Page(class=page_class, lang=lang ? lang : false)
                 span.Link-Inner
                   = document.next.title
           p.Page-Copy
-            = "© 2016 " + loc('name') + ". "
+            +optionalTag('a', document.type != 'index').Link.Link_wrapper(href="/" + document.lang_prefix)
+              = "© 2016 "
+              +optionalTag('span', document.type != 'index').Link-Inner
+                = loc('name')
+              = ". "
+
             a.Link.Link_wrapper(href="https://twitter.com/" + loc('twitter_name'))
               span.Link-Inner
                 = loc('twitter_follow')
@@ -232,4 +240,10 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
     script(src='/j/prism.js')
 
-    //- FIXME: Insert metrika here
+    script(src="//mc.yandex.ru/metrika/watch.js")
+    script(type="text/javascript").
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    noscript
+      img(src="//mc.yandex.ru/watch/632758", style="position:absolute; left:-9990px;")
