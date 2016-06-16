@@ -24,7 +24,8 @@
       text-shadow: none !important
       background: none !important
 
-      &:hover
+      &:hover,
+      &:focus
         background: $color.distant !important
 
       ../-Item:first-child > &
@@ -65,7 +66,7 @@
 
       color: $color.link !important
 
-      &:not(:hover)
+      &:not(:hover):not(:focus)
         background: none !important
 
   $categories = site.categories

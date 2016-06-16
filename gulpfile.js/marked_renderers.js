@@ -147,7 +147,7 @@ module.exports = {
         function(args, options) {
             // Adding anchors
             if (!options.simpleContent) {
-                args.beforeContent = '<a class="Anchor" href="#' + args.attributes.id + '"></a>';
+                args.beforeContent = '<a class="Anchor" aria-hidden="true" href="#' + args.attributes.id + '"></a>';
             }
             return args;
         // },
@@ -207,7 +207,7 @@ module.exports = {
                 args.after  +=         '<span class="Sidenote-Misc">)</span>';
                 args.after  +=     '</span>';
 
-                args.after  +=     '<a class="Sidenote-Close" href="#x"></a>';
+                args.after  +=     '<a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a>';
                 args.after  += '</span>';
 
                 args.attributes.title = null;

@@ -204,7 +204,8 @@ blockquote
   h1 > &
     display: none
 
-  *:hover > &
+  *:hover > &,
+  &:focus
     text-shadow: none
     background-repeat: no-repeat
     background-size: 0.6em 0.45em
@@ -213,6 +214,9 @@ blockquote
     opacity: 1
     transform: translate(0, 0)
     transition: opacity 0.3s 0.3s, transform 0.3s 0.3s
+
+  &:focus
+    transition: none
 
   &:before
     content: "#"

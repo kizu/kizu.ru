@@ -27,4 +27,4 @@ if posts
               = post.title
 
             = " — "
-            em.published= published_format(post.date)
+            time.published(datetime=post.date)= published_format(post.date)

@@ -8,13 +8,15 @@ A
     color: $color.link
     text-decoration: none
 
-  .Main &:visited:not(:hover),
-  /.prevnext > .Link:visited:not(:hover)
+  .Main &:visited:not(:hover):not(:focus),
+  /.prevnext > .Link:visited:not(:hover):not(:focus)
     color: $color.visited
 
-  &:hover
+  &:hover,
+  &:focus
     &,
-    /.demo-toggler-item:hover
+    /.demo-toggler-item:hover,
+    /.demo-toggler-item:focus
       color: $color.link
 
       text-shadow: -1px 0 $color.body, 1px 0 $color.body, -2px -1px $color.body, 2px -1px $color.body,

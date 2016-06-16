@@ -101,8 +101,11 @@ html.Page(class=page_class, lang=lang ? lang : false)
       title="Atom feed",
       href="http://feeds.feedburner.com/kizu" + (lang == "en" ? "ruen" : ''))
 
-    //- TODO: alternate languages only if page have translation
-    //-       make this “have translation” at multilang plugin
+    if document.translations
+      link(
+        rel="alternate", hreflang="en", href=site.production_url.replace(/\/$/, '') + (lang == 'en' ? url : '/en' + url))
+      link(
+        rel="alternate", hreflang="ru", href=site.production_url.replace(/\/$/, '') + (lang == 'en' ? url.replace('/en/', '/') : url))
 
     link(
       rel="stylesheet",
@@ -119,7 +122,6 @@ html.Page(class=page_class, lang=lang ? lang : false)
             +optionalTag('a', document.type != 'index').Page-Title-Link(href="/" + document.lang_prefix)
               = loc('name')
 
-          //- TODO: add links to translation if there are such
           ul.Page-Languages
             //- TODO: add bemto
             //- TODO: add functions for getting the root of the given lang
@@ -170,7 +172,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
               - var published = loc('published')
               = published
               = " "
-              = published_format(document.date)
+              time(datetime=document.date)= published_format(document.date)
               if document.categories
                 = loc('_after_date') + " " + loc('in')
                 - for (var i = 0; i < document.categories.length; i++)
