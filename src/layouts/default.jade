@@ -206,7 +206,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
     else
       .Page-Content.Main(role="main")
-        if document.titleHTML
+        if document.titleHTML && (document.type != 'index')
           header
             != document.titleHTML
 
