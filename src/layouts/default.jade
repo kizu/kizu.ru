@@ -172,7 +172,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
               = " "
               = published_format(document.date)
               if document.categories
-                = " " + loc('in')
+                = loc('_after_date') + " " + loc('in')
                 - for (var i = 0; i < document.categories.length; i++)
                   if i > 0
                     = ","

@@ -2,7 +2,7 @@
 
 ## Hello!
 
-I’m working as a Front-end Web Developer at [Yandex](http://yandex.com) (to be more specific — at [Yandex.Mail](https://mail.yandex.com/)), occasionally doing different stuff for Russian [“Web Standards”](http://web-standards.ru/about/en/) community, commiting to open source projects, experimenting on CSS, and blogging on this site.
+I’m working as a Front-end Web Developer at [Yandex](http://yandex.com) (to be more specific — at [Yandex.Mail](https://mail.yandex.com/)), occasionally doing different stuff for Russian [“Web Standards”](http://web-standards.ru/about/en/) community, committing to open source projects, experimenting on CSS, and blogging on this site.
 
 
 ### The latest publications
@@ -14,7 +14,7 @@ See also [the whole list of publications](everything/).
 
 ### Projects
 
-I created [Hayaku](http://hayakubundle.com), [Jekiller](gh:shower/jekyller) and [Bemto](gh:kizu/bemto), I'm a maintainer of [Stylus](gh:stylus/stylus), and sometimes commiting in different ways to other open source projects.
+I created [Hayaku](http://hayakubundle.com), [Jekiller](gh:shower/jekyller), and [Bemto](gh:kizu/bemto); I'm a maintainer of [Stylus](gh:stylus/stylus), and sometimes committing in different ways to other open source projects.
 
 
 ### Talks
@@ -26,4 +26,4 @@ Sometimes I talk about different front-end stuff at conferences, mostly Russia
 
 The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
 
-I participate at different social networks, but there is no point to list them there. The chances are — _I do not want to add you to my professional network on LinkedIn_, but if you'd go and [look at all the cats in my instagram](https://instagram.com/ki_zu) — I'll be happy.
+I participate in different social networks, but there is no point to list them there. The chances are — _I do not want to add you to my professional network on LinkedIn_, but if you'd go and [look at all the cats in my Instagram](https://instagram.com/ki_zu) — I'll be happy.

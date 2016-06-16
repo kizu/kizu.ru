@@ -1,6 +1,6 @@
 # New Stylus Features
 
-Not so long ago I [became a maintainer](*maintaining "I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya)") for [Stylus](gh:LearnBoost/stylus) CSS preprocessor. At the end of the last week we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article I'll explain one [new tech](*example-sidenote "You can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result)") that is now possible in the new Stylus, but I'll describe the new features for a start.
+Not so long ago I [became a maintainer](*maintaining "I'll write someday later how this happened and what exactly I do there, but it worth to mention that I'm _a maintainer_, but the main _developer_ now is my colleague [Mikhail Korepanov](gh:panya)") for [Stylus](gh:LearnBoost/stylus) CSS preprocessor. At the end of the last week, we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article, I'll explain one [new tech](*example-sidenote "You can go straight to [its step-by-step explanation](#example), or to the [resulting code](#result)") that is now possible in the new Stylus, but I'll describe the new features for a start.
 
 ## Block mixins {#block-mixins}
 
@@ -51,11 +51,11 @@ You would get this:
 
     {:.language-css}
 
-With block mixins we have a way of wrapping blocks with mixins and then wrapping them with anything. This feature is often used for handling media-queries, and my example that you'll see later in this article is also from the rwd area.
+With block mixins, we have a way of wrapping blocks with mixins and then wrapping them with anything. This feature is often used for handling media queries, and my example that you'll see later in this article is also from the RWD area.
 
 ## Hashes {#hashes}
 
-As I already mentioned, in the latest releases of Stylus we added (and polished to a usable state) hashes as a data type. Hashes are objects with key-value pairs, they look rather simple:
+As I already mentioned, in the latest releases of Stylus we added (and polished to a usable state) hashes as a data type. Hashes are objects with key-value pairs, and they look rather simple:
 
     foo = {
       bar: 10px,
@@ -68,7 +68,7 @@ As I already mentioned, in the latest releases of Stylus we added (and polished 
 
     {:.language-javascript}
 
-As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas [are not](*codestyle "And as with all other optional syntax features of Stylus, you should use a consistent codestyle in your stylesheets, otherwise your code would be messy as hell").
+As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas [are not](*codestyle "And as with all other optional syntax features of Stylus, you should use a consistent code style in your stylesheets. Otherwise your code would be messy as hell").
 
 Then, after you defined a hash, you could add new properties to it or redefine old ones using dots or square brackets:
 
@@ -87,7 +87,7 @@ I won't describe [all the features](http://learnboost.github.io/stylus/docs/hash
 
 There is now one small but important feature in Stylus — `selector()`. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn't **get** the compiled selector, they only existed in the compiled CSS.
 
-But now, using `selector()` function that returns the current compiled selector, you could do a lot of useful things, like check the selector for something using the `match()` function, or use it for something else. It is already very useful, and it would become even more so in future releases.
+But now, using `selector()` function that returns the currently compiled selector, you could do a lot of useful things, like check the selector for something using the `match()` function, or use it for something else. It is already very useful, and it would become even more so in future releases.
 
 As an example, you can take this small chunk of code:
 
@@ -98,13 +98,13 @@ As an example, you can take this small chunk of code:
 
 Here we check if the selector has any pseudo-elements in it and if so — we apply the `content`. This could be useful if we have some mixin, containing styles that could be applied both to a normal element and to a pseudo one.
 
-## Example with cached media-queries {#example}
+## Example with cached media queries {#example}
 
-As a usage example of the new Stylus features, I'll give you a solution for one of those small responsive web design problems: the code you need to write for different viewport breakpoints. The problem is that the syntax of media-queries could be rather long, so you could either use bubbling media-queries which would result in not ideal CSS, or, in the race for bytes, you'll need to write all the overrides in one place, and that won't be very comfortable in a lot of situations.
+As a usage example of the new Stylus features, I'll give you a solution for one of those small, responsive web design problems: the code you need to write for different viewport breakpoints. The problem is that the syntax of media queries could be rather long, so you could either use bubbling media queries which would result in not ideal CSS, or, in the race for bytes, you'll need to write all the overrides in one place, and that won't be very comfortable in a lot of situations.
 
 However, in the new Stylus, with block mixins, hashes and the `selector()` function, you could work around this problem (and solve some others on your way to it).
 
-Briefly — we can create a mixin that could be used instead of media-queries and would cache the given blocks, combining them by conditions, so you could then output all of them using a second function.
+Briefly — we can create a mixin that could be used instead of media queries and would cache the given blocks, combining them by conditions, so you could then output all of them using the second function.
 
 The only downside of this method is the grouping itself — the selectors would be in a different order, so the specificity of the selectors could change.
 
@@ -114,7 +114,7 @@ For the start we need an object where we would store the cached blocks:
 
     {:.language-styl}
 
-Then we would need a mixin which we could use instead of media-queries, its basic form would be this:
+Then we would need a mixin which we could use instead of media queries; its basic form would be this:
 
     media($condition)
       unless $media_cache[$condition]
@@ -123,7 +123,7 @@ Then we would need a mixin which we could use instead of media-queries, its basi
 
     {:.language-styl}
 
-This mixin's logic is rather simple: if we don't have a list for the blocks for a given condition, we initialize it then we pass the block to this list.
+This mixin's logic is rather simple: if we don't have a list of the blocks for a given condition, we initialize it then we pass the block to this list.
 
 It won't be enough for us actually: this mixin could be used only this way:
 
@@ -167,7 +167,7 @@ So, as we now wrap the code with a mixin, it won't build automatically. We would
 
     {:.language-styl}
 
-It is rather easy: we iterate through the cache, taking the condition — `$media`, and the list of all the blocks that were called with it — `$blocks`, then we create the media-query with that condition and inside of it iterate through all the blocks, yielding all of them one by one.
+It is rather easy: we iterate through the cache, taking the condition — `$media`, and the list of all the blocks that were called with it — `$blocks`, then we create the media query with that condition and inside of it iterate through all the blocks, yielding all of them one by one.
 
 So, if we would then call this function at the end of the document:
 
@@ -177,7 +177,7 @@ So, if we would then call this function at the end of the document:
 
 We would get what we want.
 
-However, there are a few things to improve in this function: we do not want to always write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like [`palm`, `portable`, `desk`](*keywords "I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry)") and so on. With those improvements and all the previous steps the resulting code would be this:
+However, there are a few things to improve in this function: we do not want always to write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like [`palm`, `portable`, `desk`](*keywords "I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry)") and so on. With those improvements and all the previous steps the resulting code would be this:
 
 ### Resulting code {#result}
 
@@ -292,8 +292,8 @@ And get this result afterwards:
 
     {:.language-css}
 
-In the resulting code we can see that we added the hash with aliases, we can also call the mixin with conditions lacking parentheses.
+In the resulting code, we can see that we added the hash with aliases, we can also call the mixin with conditions lacking parentheses.
 
-By using this code we can now use media-queries bubbling anywhere we want and don't even need to think about the extra bytes — everything would be nciely grouped inside non-doubling media-queries. All thanks to the new Stylus features.
+By using this code we can now use media queries bubbling anywhere we want and don't even need to think about the extra bytes — everything would be nicely grouped inside non-doubling media queries. All thanks to the new Stylus features.
 
 Of course, this code is not ideal, and there could be a lot of ways to improve it, but my goal was to demonstrate the new features and how they work, after all.

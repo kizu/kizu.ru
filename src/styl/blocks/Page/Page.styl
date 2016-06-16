@@ -53,6 +53,9 @@
     ^[0]_post &
       position: fixed
 
+    ^[0]_index &
+      z-index: 99
+      height: $size.header + 1.5*$size.base
 
   &-Languages
     position: absolute
@@ -70,7 +73,10 @@
 
     color: rgba($color.dark, 0.25)
 
-    .Page:not(.without-sidebar) &
+    ^[0]_index &
+      top: 3.5*$size.base
+
+    ^[0]:not(.without-sidebar) &
       left: 100%
       right: auto
 
@@ -157,6 +163,9 @@
 
     text-indent: -0.09em
 
+    ^[0]_index &
+      padding-top: 3*$size.base
+
     @media (max-width: 820px)
       padding-top: 2*$size.base
       font-size: 2.5*$size.base
@@ -180,7 +189,7 @@
     & p
       margin-top: 0
 
-    .Page_post &
+    ^[0]_post &
       position: fixed
       background: $color.distant
 
