@@ -146,6 +146,8 @@
 
     background: $color.body
 
+    counter-reset: sidenote
+
     ^[0]_post &
       padding-top: 2*$size.base
       padding-bottom: 2*$size.base
@@ -185,6 +187,12 @@
     height: $size.footer
     padding: 0 0.5*$size.base
     padding: 0 2.5vw
+
+    & .Link
+      white-space: nowrap
+
+      @media (max-width: 820px)
+        white-space: normal
 
     & p
       margin-top: 0
