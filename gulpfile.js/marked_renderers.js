@@ -85,6 +85,10 @@ module.exports = {
         function(args) { return handleAttributes(args); }
     ],
 
+    'em': [
+        function(args) { return handleAttributes(args); }
+    ],
+
     heading: [
         function(args, options) {
             if (!options.simpleContent) {

@@ -7,6 +7,9 @@ module.exports = function(content, options) {
             console.warn('No partial found for', name);
         }
         if (!options.simpleContent) {
+            if (partial.outdented) {
+                result += '</div></div>';
+            }
             if (!partial.layout) {
                 if (partial.screenshot) {
                     result += '<input type="checkbox" class="Demo-Toggle" id="Demo_' + name + '_toggle" checked="checked" />';
@@ -28,6 +31,9 @@ module.exports = function(content, options) {
                 result += '<div class="Demo Figure" id="Demo_' + name + '">';
                 result += '<iframe class="Demo-Frame" ' + (partial.height ? ('style="height: ' + partial.height + '"') : 'height="240"') + ' width="100%" src="' + (partial.iframe_url ? partial.iframe_url : (partial.relName + '.html')) + '"></iframe>';
                 result += '</div>';
+            }
+            if (partial.outdented) {
+                result += '<div class="LiquidLayout"><div class="Main LiquidLayout-Content">';
             }
         } else {
             if (partial.screenshot) {
