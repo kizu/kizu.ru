@@ -59,11 +59,20 @@ h1
   .Main &
     font-size: 3*$size.base
 
+    @media (max-width: 820px)
+      font-size: 2*$size.base
+      line-height: 2*$size.base
+      margin-bottom: 1*$size.base
+
 h2
   position: relative
   font-size: 2*$size.base
   line-height: 2*$size.base
   margin-bottom: 1*$size.base
+
+  @media (max-width: 820px)
+    font-size: 1.5*$size.base
+    line-height: 2*$size.base
 
 h3
   font-size: 1.5*$size.base
