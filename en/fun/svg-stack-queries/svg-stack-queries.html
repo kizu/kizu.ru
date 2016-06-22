@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+
+@-webkit-keyframes init-svg {
+	from {
+		padding-bottom: 1px;
+	}
+	to {
+		padding-bottom: 0;
+	}
+}
+
+.icon-wrapper {
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	
+	width: 16px;
+	height: 16px;
+}
+
+.icon {
+	vertical-align: top;
+}
+
+.icon,
+.icon:hover {
+	/* Overcome bug in webkits on page load */
+	-webkit-animation: init-svg .2s; 
+}
+
+.icon_download	   { width: 120px; height: 240px; }
+.icon_download:hover { width: 240px; height: 120px; }
+
+.icon_next		{ width: 120px; height: 360px; }
+.icon_next:hover  { width: 360px; height: 120px; }
+
+.icon_print		{ width: 120px; height: 600px; }
+.icon_print:hover  { width: 600px; height: 120px; }
+
+</style>
+
+<span class="icon-wrapper">
+	<img class="icon icon_download" src="svg-media-stack.svg" alt="">
+</span>
+<span class="icon-wrapper">
+	<img class="icon icon_next" src="svg-media-stack.svg" alt="">
+</span>
+<span class="icon-wrapper">
+	<img class="icon icon_print" src="svg-media-stack.svg" alt="">
+</span>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

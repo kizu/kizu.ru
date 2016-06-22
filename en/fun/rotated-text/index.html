@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Rotated text — kizu.ru/en</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/rotated-text/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/fun/rotated-text/">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" href="/fun/rotated-text/" class="Page-Language-Link">по-русски</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="rotated-text"><a class="Anchor" aria-hidden="true" href="#rotated-text"></a><span class="ss01 hang-m">R</span>otated text</h1>
+          </header>
+<p>Once I al<span class="shy"></span>ready shared this so<span class="shy"></span>lu<span class="shy"></span>tion on twit<span class="shy"></span>ter, but this time I’m go<span class="shy"></span>ing to write a bit more on it.</p>
+<p><strong>The task</strong> is to get the text ro<span class="shy"></span>tated by 90 de<span class="shy"></span>grees.</p>
+<p><strong>The prob<span class="shy"></span>lem</strong>: it’s widely known that when you use <code>trans<span class="shy"></span>form</code>, the block be<span class="shy"></span>haves sim<span class="shy"></span>i<span class="shy"></span>lar to the <code>po<span class="shy"></span>si<span class="shy"></span>tion:rel<span class="shy"></span>a<span class="shy"></span>tive</code><nobr> —</nobr><span class="thinsp"> </span>its place in the flow is not changed af<span class="shy"></span>ter the trans<span class="shy"></span>for<span class="shy"></span>ma<span class="shy"></span>tion, so the change is only visual.</p>
+<p>How<span class="shy"></span>ever, rather of<span class="shy"></span>ten you’ll <em>need</em> to ro<span class="shy"></span>tate the block in a way the flow would change ei<span class="shy"></span>ther. Like if we’d want to put some ro<span class="shy"></span>tated blocks in a row, or if we’d want to have ver<span class="shy"></span>ti<span class="shy"></span>cal head<span class="shy"></span>ers in ta<span class="shy"></span><nobr>bles —</nobr><span class="thinsp"> </span>in those cases we would need the height of the block to be its width af<span class="shy"></span>ter the ro<span class="shy"></span>tate and vice versa.</p>
+<p>I man<span class="shy"></span>aged to make this work with one as<span class="shy"></span>sump<span class="shy"></span><nobr>tion —</nobr><span class="thinsp"> </span>we would need to know the height of the ro<span class="shy"></span>tated el<span class="shy"></span>e<span class="shy"></span>ment. In such case the so<span class="shy"></span>lu<span class="shy"></span>tion would be rather simple:</p>
+<ol>
+<li><p>We would need to have an ex<span class="shy"></span>tra el<span class="shy"></span>e<span class="shy"></span>ment. <abbr>HTML</abbr> for each block would be like this:</p>
+<pre><code class="language-html"> &lt;span class=&quot;ro<span class="shy"></span>tated-text&quot;&gt;
+     &lt;span class=&quot;ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner&quot;&gt;
+         Ro<span class="shy"></span>tated foo
+     &lt;/​span&gt;
+ &lt;/​span&gt;
+</code></pre>
+</li>
+<li><p>Wrap<span class="shy"></span>per would get those styles:</p>
+<pre><code class="language-css"> .ro<span class="shy"></span>tated-text {
+     dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+     over<span class="shy"></span>flow: hid<span class="shy"></span>den;
+
+     width: 1.5em;
+     line-height: 1.5;
+ }
+</code></pre>
+<p> Here we make our el<span class="shy"></span>e<span class="shy"></span>ment to be in<span class="shy"></span>line-block (that’s not crit<span class="shy"></span>i<span class="shy"></span>cal, the block dis<span class="shy"></span>play would work too, but in<span class="shy"></span>line-block is of<span class="shy"></span>ten hand<span class="shy"></span>ier), then we re<span class="shy"></span>move all the ex<span class="shy"></span>tra things us<span class="shy"></span>ing over<span class="shy"></span>flow (we would need this later) and set the width to the cur<span class="shy"></span>rent el<span class="shy"></span>e<span class="shy"></span>ments’ <nobr>height —</nobr><span class="thinsp"> </span>the men<span class="shy"></span>tioned as<span class="shy"></span>sump<span class="shy"></span>tion (and <code>line-height</code> is placed here as an ex<span class="shy"></span>am<span class="shy"></span>ple of what de<span class="shy"></span>fines the blocks’ height).</p>
+</li>
+<li><p>Then we make the in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ment to be in<span class="shy"></span>line-block too, so its width would be col<span class="shy"></span>lapsed to its con<span class="shy"></span>tent. Af<span class="shy"></span>ter this we make it have <code>white-space:nowrap</code>, so noth<span class="shy"></span>ing would wrap (be<span class="shy"></span>cause of the fixed width in the pre<span class="shy"></span>vi<span class="shy"></span>ous step), and then we ac<span class="shy"></span>tu<span class="shy"></span>ally ro<span class="shy"></span>tate the block from the left top cor<span class="shy"></span>ner us<span class="shy"></span>ing <code>trans<span class="shy"></span>form-ori<span class="shy"></span>gin</code> (for read<span class="shy"></span>abil<span class="shy"></span>ity the trans<span class="shy"></span>form prop<span class="shy"></span>er<span class="shy"></span>ties are given with<span class="shy"></span>out proper pre<span class="shy"></span>fixes):</p>
+<pre><code class="language-css"> .ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner {
+     dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+     white-space: nowrap;
+
+     trans<span class="shy"></span>form: trans<span class="shy"></span>late(0,100%) ro<span class="shy"></span>tate(-90deg);
+     trans<span class="shy"></span>form-ori<span class="shy"></span>gin: 0 0;
+ }
+</code></pre>
+</li>
+<li><p>And now the key part of my so<span class="shy"></span>lu<span class="shy"></span>tion: we need to make this in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ment to be <em>square</em><nobr> —</nobr><span class="thinsp"> </span>this would make the re<span class="shy"></span>sult<span class="shy"></span>ing el<span class="shy"></span>e<span class="shy"></span>ment to have the height of its width, and the width would be equal to the as<span class="shy"></span>sumed height on the wrap<span class="shy"></span>per. So, to make an el<span class="shy"></span>e<span class="shy"></span>ment squar<span class="shy"></span>ish we use this trick:</p>
+<pre><code class="language-css"> .ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner:af<span class="shy"></span>ter {
+     con<span class="shy"></span>tent: &quot;&quot;;
+     float: left;
+     mar<span class="shy"></span>gin-top: 100%;
+ }
+</code></pre>
+<p> Not that hard, but not a lot of peo<span class="shy"></span>ple re<span class="shy"></span>mem<span class="shy"></span>ber that top and bot<span class="shy"></span>tom paddings and mar<span class="shy"></span>gins set in per<span class="shy"></span>cents are us<span class="shy"></span>ing the width of the par<span class="shy"></span>ent el<span class="shy"></span>e<span class="shy"></span>ment, not its height. This be<span class="shy"></span>hav<span class="shy"></span>ior is not widely used, but here is a case where it’s use<span class="shy"></span>ful at last.</p>
+</li>
+</ol>
+<p>So, in the end we got a square el<span class="shy"></span>e<span class="shy"></span>ment, whose width is hid<span class="shy"></span>den by the over<span class="shy"></span>flow on wrap<span class="shy"></span>per and this el<span class="shy"></span>e<span class="shy"></span>ment could be used in any con<span class="shy"></span>text, so it would be af<span class="shy"></span>fected by <code>text-align</code> or <code>ver<span class="shy"></span>ti<span class="shy"></span>cal-align</code>. It is rather “fair” ro<span class="shy"></span>tated block.</p>
+<p>And just some ba<span class="shy"></span>sic ex<span class="shy"></span>am<span class="shy"></span>ples of usage:</p>
+<h2 class="Heading" id="table-headers"><a class="Anchor" aria-hidden="true" href="#table-headers"></a><span class="ss01 hang-m">T</span>able headers</h2>
+<p>An ob<span class="shy"></span>vi<span class="shy"></span>ous ex<span class="shy"></span>am<span class="shy"></span><nobr>ple —</nobr><span class="thinsp"> </span>com<span class="shy"></span>pact table head<span class="shy"></span>ers what don’t take that much of hor<span class="shy"></span>i<span class="shy"></span>zon<span class="shy"></span>tal space:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_rotated-text"><style>
+
+.rotated-text {
+    display: inline-block;
+    overflow: hidden;
+    width: 1.5em;
+    line-height: 1.5;
+}
+.rotated-text__inner {
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-transform: translate(0,100%) rotate(-90deg);
+       -moz-transform: translate(0,100%) rotate(-90deg);
+        -ms-transform: translate(0,100%) rotate(-90deg);
+         -o-transform: translate(0,100%) rotate(-90deg);
+            transform: translate(0,100%) rotate(-90deg);
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+}
+/* This element stretches the parent to be square
+   by using the mechanics of vertical margins  */
+.rotated-text__inner:before {
+    content: "";
+    float: left;
+    margin-top: 100%;
+}
+
+/* Just for better looking tables */
+.table-example {
+    display: inline-table;
+    vertical-align: top;
+    text-align: center;
+}
+
+</style>
+
+<table class="table-example" border="1" cellpadding="10">
+    <tr>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    First th
+                </span>
+            </span>
+        </th>
+        <td>Some cell</td>
+        <td>And another</td>
+    </tr>
+    <tr>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    Second th
+                </span>
+            </span>
+        </th>
+        <td>12</td>
+        <td>12314</td>
+    </tr>
+    <tr>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    Third th
+                </span>
+            </span>
+        </th>
+        <td>12</td>
+        <td>12314</td>
+    </tr>
+</table>
+
+<table class="table-example" border="1" cellpadding="10">
+    <tr>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    First th
+                </span>
+            </span>
+        </th>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    The Second th
+                </span>
+            </span>
+        </th>
+        <th>
+            <span class="rotated-text">
+                <span class="rotated-text__inner">
+                    Third th
+                </span>
+            </span>
+        </th>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>4</td>
+        <td>42</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>4</td>
+        <td>234</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>100</td>
+        <td>0</td>
+    </tr>
+</table>
+</div>
+<h2 class="Heading" id="-bookshelf-"><a class="Anchor" aria-hidden="true" href="#-bookshelf-"></a><span class="hang-m">“</span>Book<span class="shy"></span>shelf”</h2>
+<p>As all the ro<span class="shy"></span>tated blocks have fair place in a flow, you could arrange them in a row so they won’t over<span class="shy"></span>lap each other and the height of the whole row would be equal to the “high<span class="shy"></span>est” of them:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_rotated-text_books"><style>
+
+.rotated-text {
+    display: inline-block;
+    overflow: hidden;
+    width: 1.5em;
+    line-height: 1.5;
+}
+.rotated-text__inner {
+    display: inline-block;
+    white-space: nowrap;
+    -webkit-transform: translate(0,100%) rotate(-90deg);
+       -moz-transform: translate(0,100%) rotate(-90deg);
+        -ms-transform: translate(0,100%) rotate(-90deg);
+         -o-transform: translate(0,100%) rotate(-90deg);
+            transform: translate(0,100%) rotate(-90deg);
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+}
+/* This element stretches the parent to be square
+   by using the mechanics of vertical margins  */
+.rotated-text__inner:before {
+    content: "";
+    float: left;
+    margin-top: 100%;
+}
+
+.bookshelf {
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.book {
+    padding: 1em 0.5em;
+
+    vertical-align: bottom;
+    list-style: none;
+
+    -webkit-box-shadow: inset 0 0 0 1px #000;
+            box-shadow: inset 0 0 0 1px #000;
+}
+
+.book:before {
+    display: none;
+}
+
+.book__inner {
+    text-decoration: none;
+    vertical-align: middle;
+    text-align: center;
+
+    min-width: 8em;
+    padding: 0;
+
+    color: #000;
+    text-shadow: none !important;
+}
+
+</style>
+
+<ul class="bookshelf">
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Idiot</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Little Prince</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Roadside Picnic</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Flowers for Algernon</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">A Book of Five Rings</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Glass Bead Game</a></li>
+    <li class="book rotated-text" title="42!"><a class="book__inner rotated-text__inner" href="#book">The Hitchhiker's Guide to the Galaxy</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Hobbit</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">One Flew Over the Cuckoo's Nest</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">1984</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Mother Night</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">Speaker for the Dead</a></li>
+    <li class="book rotated-text"><a class="book__inner rotated-text__inner" href="#book">The Day of the Triffids</a></li>
+</ul>
+</div>
+<p>So, that’s it.</p>
+<p>Once again: we need to know the ini<span class="shy"></span>tial height of the ro<span class="shy"></span>tated block, so if we’d need to ro<span class="shy"></span>tate mul<span class="shy"></span>ti<span class="shy"></span>line blocks, we’d need to change their re<span class="shy"></span>sult<span class="shy"></span>ing width ac<span class="shy"></span>cord<span class="shy"></span>ingly.</p>
+<p>Also, this method could work in <nobr>IE —</nobr><span class="thinsp"> </span>by adding ma<span class="shy"></span>trix fil<span class="shy"></span>ter and con<span class="shy"></span>vert<span class="shy"></span>ing a <nobr>pseudo-el</nobr><span class="shy"></span>e<span class="shy"></span>ment to an ac<span class="shy"></span>tual <nobr>one —</nobr><span class="thinsp"> </span>but I’m lazy enough to do this. But if you’d like, you could make it by your<span class="shy"></span>self and even sub<span class="shy"></span>mit a Pull Re<span class="shy"></span>quests to <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text.html">those</a> <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text_books.html">ex<span class="shy"></span>am<span class="shy"></span>ples</a> :)</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2013-04-30">April 30, 2013</time>, in <a href="../" class="Link">Experiments</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CRotated%20text%E2%80%9D" class="Link">write me about this</a>, or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2013-04-30-(fun)-rotated-text/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/en/issues/markdowning-yaml/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Markdowning YAML for Jekyll</span></a><a href="/en/blog/hello-blog/" class="Link Link_wrapper Link_next"><span class="Link-Inner">“Blog”</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

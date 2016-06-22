@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+OPTION[LABEL] {
+	-moz-binding: url("select-label.xml#select-label");
+	}
+</style>
+<!--[if lte IE 7]><style>
+OPTION {
+	width:expression(
+		function(that){
+			if (that.label) {
+				that.innerHTML = that.label;
+				if (that.parentNode.currentStyle.width=='auto') {
+					that.parentNode.runtimeStyle.width = 'auto'; /*recalculating select's width*/
+				}
+			}
+			that.runtimeStyle.width = 'auto';
+		}(this));
+	}
+</style><![endif]-->
+<dl>
+	<dt>Чаще всего встречающийся селект</dt>
+	<dd>
+		<select>
+			<option>Please select something</option>
+			<option>option item 1</option>
+			<option>option item 2</option>
+			<option>option item 3</option>
+			<option>option item 4</option>
+		</select>
+	</dd>
+</dl>
+<dl>
+	<dt>«Правильный» вариант</dt>
+	<dd>
+		<select>
+			<option disabled="disabled" selected="selected" label="Please select something"></option>
+			<option>option item 1</option>
+			<option>option item 2</option>
+			<option>option item 3</option>
+			<option>option item 4</option>
+		</select>
+	</dd>
+</dl>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

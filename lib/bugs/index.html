@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru" class="Page Page_page Page_ru without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Подборка багов — kizu.ru</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li class="Page-Language"><a data-short="en" title="No translation for this article (yet?), but a lot of other english pages are available!" href="/en/" class="Page-Language-Link">in English*</a>
+            </li>
+            <li data-short="ru" class="Page-Language is-current">по-русски
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div role="main" class="Page-Content Main">
+      <header><h1 class="Heading" id="подборка-багов"><a class="Anchor" aria-hidden="true" href="#подборка-багов"></a><span class="ss01 hang-m">П</span>од<span class="shy"></span>бор<span class="shy"></span>ка ба<span class="shy"></span>гов</h1>
+      </header>
+<style>
+TABLE {
+    font-size:0.75em;
+    mar<span class="shy"></span>gin:0 0 1em;
+    text-align: left;
+    }
+
+    CAP<span class="shy"></span>TION {
+        font-size:2em;
+        text-align:left;
+        color:rgba(0,0,0,0.6);
+        }
+
+    TH {
+        text-align:left;
+        }
+
+    TD {
+        padding:.25em .5em .25em 0;
+        }
+
+    TABLE IFRAME {
+        height:16px;
+        width:16px;
+        bor<span class="shy"></span>der:0;
+        ver<span class="shy"></span>ti<span class="shy"></span>cal-align:mid<span class="shy"></span>dle;
+        }
+</style>
+
+<h2 class="Heading" id="опера"><a class="Anchor" aria-hidden="true" href="#опера"></a><span class="ss01 hang-xs">О</span>пера</h2>
+<table>
+ <thead>
+ <tr>
+ <th>test-case</th>
+ <th>?</th>
+ <th>При<span class="shy"></span>ме<span class="shy"></span>ча<span class="shy"></span>ния</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><a href="bug/-o-inline-block.html">:first-let<span class="shy"></span>ter для in<span class="shy"></span>line-block</a></td>
+ <td><iframe src="bug/-o-inline-block.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит Опе<span class="shy"></span>ра &lt; 10.50</td>
+ </tr>
+ <tr>
+ <td><a href="-o-strange1.html">Стран<span class="shy"></span>ный баг опе<span class="shy"></span>ры (слож<span class="shy"></span>ные усло<span class="shy"></span>вия)</a></td>
+ <td><iframe src="bug/-o-strange1.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит Опе<span class="shy"></span>ра &lt; 10.50</td>
+ </tr>
+
+ <tr>
+ <td><a href="-o-positioning.html">Баг опе<span class="shy"></span>ры с по<span class="shy"></span>зи<span class="shy"></span>ци<span class="shy"></span>о<span class="shy"></span>ни<span class="shy"></span>ро<span class="shy"></span>ва<span class="shy"></span>ни<span class="shy"></span>ем</a></td>
+ <td><iframe src="bug/-o-positioning.html"></iframe></td>
+ <td>pos:ab<span class="shy"></span>solute+top+bot<span class="shy"></span>tom+par<span class="shy"></span>ent-re<span class="shy"></span>size = no re<span class="shy"></span>paint<br></td>
+ </tr>
+ <tr>
+ <td><a href="bug/-o-scroll.html">скролл<span class="shy"></span>бар пе<span class="shy"></span>ре<span class="shy"></span>кры<span class="shy"></span>ва<span class="shy"></span>ет кон<span class="shy"></span>тент</a></td>
+ <td><iframe src="bug/-o-scroll.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит Опе<span class="shy"></span>ра &lt; 11.10</td>
+ </tr>
+ <tr>
+ <td><a href="-o-absolute-nowrap.html">аб<span class="shy"></span>со<span class="shy"></span>лют<span class="shy"></span>ный блок вра<span class="shy"></span>па<span class="shy"></span>ет но<span class="shy"></span>врап</a></td>
+ <td><iframe src="bug/-o-absolute-nowrap.html"></iframe></td>
+ </tr>
+ <tr>
+ <td><a href="bug/-o-text-shadow.html">тень не сра<span class="shy"></span>ба<span class="shy"></span>ты<span class="shy"></span>ва<span class="shy"></span>ет для <nobr>текст-де</nobr><span class="shy"></span>ко<span class="shy"></span>рейш<span class="shy"></span>на</a></td>
+ <td><iframe src="bug/-o-text-shadow.html"></iframe></td>
+ </tr>
+ <tr>
+ <td><a href="bug/-o-rotate.html">Про<span class="shy"></span>па<span class="shy"></span>да<span class="shy"></span>ю<span class="shy"></span>щий bgi</a></td>
+ <td><iframe src="bug/-o-rotate.html"></iframe></td>
+ <td><abbr>CSS</abbr>3 ro<span class="shy"></span>tate и over<span class="shy"></span>flow:hid<span class="shy"></span>den для ро<span class="shy"></span>ди<span class="shy"></span>те<span class="shy"></span>ля за<span class="shy"></span>став<span class="shy"></span>ля<span class="shy"></span>ют глю<span class="shy"></span>чить back<span class="shy"></span>ground-im<span class="shy"></span>age</td>
+ </tr>
+ <tr>
+ <td><a href="-o-inlines.html">Невра<span class="shy"></span>па<span class="shy"></span>ю<span class="shy"></span>щий<span class="shy"></span>ся пад<span class="shy"></span>динг</a></td>
+ <td><iframe src="bug/-o-inlines.html"></iframe></td>
+ </tr>
+ </tbody>
+</table>
+
+<p>Ну и вот несколь<span class="shy"></span>ко ещё «нефор<span class="shy"></span>ма<span class="shy"></span>ли<span class="shy"></span>зо<span class="shy"></span>ван<span class="shy"></span>ных» ба<span class="shy"></span>гов оперы:</p>
+<ul>
+ <li><a href="input-opacity.html">непро<span class="shy"></span>зрач<span class="shy"></span>ность стан<span class="shy"></span>дар<span class="shy"></span>ных ин<span class="shy"></span>пу<span class="shy"></span>тов в опе<span class="shy"></span>ре под мак</a> &lt; 10.70 build 8425.</li>
+ <li><a href="target.html">Псев<span class="shy"></span>до<span class="shy"></span>се<span class="shy"></span>лек<span class="shy"></span>тор :tar<span class="shy"></span>get и пе<span class="shy"></span>ре<span class="shy"></span>хо<span class="shy"></span>ды на<span class="shy"></span>зад-впе<span class="shy"></span>рёд по ис<span class="shy"></span>то<span class="shy"></span>рии</a></li>
+ <li><a href="-o-positioning2.html">fit to width</a></li>
+</ul>
+
+<h2 class="Heading" id="остальные"><a class="Anchor" aria-hidden="true" href="#остальные"></a><span class="ss01 hang-xs">О</span>стальные</h2>
+<table>
+ <thead>
+ <tr>
+ <th>test-case</th>
+ <th>?</th>
+ <th>При<span class="shy"></span>ме<span class="shy"></span>ча<span class="shy"></span>ния</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><a href="bug/rowspan.html">rows<span class="shy"></span>pan=&quot;0&quot;</a></td>
+ <td><iframe src="bug/rowspan.html"></iframe></td>
+ <td>все кро<span class="shy"></span>ме фф и опе<span class="shy"></span>ры (вне<span class="shy"></span>зап<span class="shy"></span>но!)</td>
+ </tr>
+
+ <tr>
+ <td><a href="bug/colspan.html">colspan=&quot;0&quot;</a></td>
+ <td><iframe src="bug/colspan.html"></iframe></td>
+ <td>все кро<span class="shy"></span>ме фф</td>
+ </tr>
+
+ <tr>
+ <td><a href="bug/textnode-fr.html">float:right, wsn и текст<span class="shy"></span>но<span class="shy"></span>да</a></td>
+ <td><iframe src="bug/textnode-fr.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит фф</td>
+ </tr>
+ <tr>
+ <td><a href="bug/textnode-fl.html">float:left, wsn и текст<span class="shy"></span>но<span class="shy"></span>да</a></td>
+ <td><iframe src="bug/textnode-fl.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит фф</td>
+ </tr>
+ <tr>
+ <td><a href="-moz-flfroh.html">float:left &gt; float:right + over<span class="shy"></span>flow:hid<span class="shy"></span>den</a></td>
+ <td><iframe src="bug/-moz-flfroh.html"></iframe></td>
+ <td>ту<span class="shy"></span>пит фф</td>
+ </tr>
+ </tbody>
+</table>
+
+<p>Ну и вот несколь<span class="shy"></span>ко ещё «нефор<span class="shy"></span>ма<span class="shy"></span>ли<span class="shy"></span>зо<span class="shy"></span>ван<span class="shy"></span>ных» багов:</p>
+<ul>
+ <li><a href="-webkit-selector.html">we<span class="shy"></span>bkit не об<span class="shy"></span>нов<span class="shy"></span>ля<span class="shy"></span>ет ди<span class="shy"></span>на<span class="shy"></span>ми<span class="shy"></span>че<span class="shy"></span>ски се<span class="shy"></span>лек<span class="shy"></span>то<span class="shy"></span>ры + и ~ даль<span class="shy"></span>ше пер<span class="shy"></span>во<span class="shy"></span>го эле<span class="shy"></span>мен<span class="shy"></span>та</a></li>
+ <li><a href="-moz-mautofloat.html">fire<span class="shy"></span>fox ту<span class="shy"></span>пит при ре<span class="shy"></span>сай<span class="shy"></span>зе с фло<span class="shy"></span>атом и ав<span class="shy"></span>то<span class="shy"></span>мар<span class="shy"></span>жи<span class="shy"></span>ном</a></li>
+</ul>
+
+    </div>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

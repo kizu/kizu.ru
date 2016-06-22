@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Jekyll — kizu.ru/en</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/issues/going-jekyll/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/issues/going-jekyll/">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" href="/issues/going-jekyll/" class="Page-Language-Link">по-русски</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="jekyll"><a class="Anchor" aria-hidden="true" href="#jekyll"></a><span class="ss01 hang-m">J</span>ekyll</h1>
+          </header>
+<p>In a <a class="Link" href="/en/issues/restart/">post on site re<span class="shy"></span>launch</a> I told I’ll write a lot of ar<span class="shy"></span>ti<span class="shy"></span>cles on Jekyll. That’s the first post in the se<span class="shy"></span>ries, an in<span class="shy"></span>tro<span class="shy"></span>duction.</p>
+<p>I won’t write on how to in<span class="shy"></span>stall <a class="Link" href="https://github.com/mojombo/jekyll">Jekyll</a>, how the files are struc<span class="shy"></span>tured there, and so <nobr>on —</nobr><span class="thinsp"> </span>there are al<span class="shy"></span>ready a lot of ar<span class="shy"></span>ti<span class="shy"></span>cles on that (look for some at the <a class="Link Link_wrapper" href="#links">“<span class="Link-Inner">links</span>”</a>). To de<span class="shy"></span>scribe Jekyll briefly, it’s a blog-aware sta<span class="shy"></span>tic site gen<span class="shy"></span>er<span class="shy"></span>a<span class="shy"></span>tor. An awe<span class="shy"></span>some one.</p>
+<h2 class="Heading" id="github-pages"><a class="Anchor" aria-hidden="true" href="#github-pages"></a><span class="ss01 hang-xs">G</span>itHub Pages</h2>
+<p>I need to tell one thing from the start: this and all other fu<span class="shy"></span>ture ar<span class="shy"></span>ti<span class="shy"></span>cles would be in the con<span class="shy"></span>text of <a class="Link" href="http://pages.github.com">GitHub Pages</a>. While GitHub al<span class="shy"></span>lows you to host any sta<span class="shy"></span>tic sites on it, there is also a way to host sites wrote with Jekyll. So, the Jekyll is the only way to ac<span class="shy"></span>tu<span class="shy"></span>ally gen<span class="shy"></span>er<span class="shy"></span>ate some<span class="shy"></span>thing right at GitHub with<span class="shy"></span>out use of any other ser<span class="shy"></span>vices or any front-end so<span class="shy"></span>lu<span class="shy"></span>tions.</p>
+<p>With Jekyll you can just cre<span class="shy"></span>ate a file in mark<span class="shy"></span>down, add a <abbr>YAML</abbr> front mat<span class="shy"></span>ter to <nobr>it —</nobr><span class="thinsp"> </span>and start writ<span class="shy"></span>ing. Af<span class="shy"></span>ter push<span class="shy"></span>ing this file to the repo on GitHub, the whole site would be re<span class="shy"></span>gen<span class="shy"></span>er<span class="shy"></span>ated and you’ll see the cor<span class="shy"></span>re<span class="shy"></span>spond<span class="shy"></span>ing post both as a page on your site and in all the list<span class="shy"></span>ings on other pages as well. And you could push your changes from any place: you could even use just GitHub’s site for this or any web app us<span class="shy"></span>ing GitHub’s <abbr>API</abbr>.</p>
+<p>And an<span class="shy"></span>other thing I need to men<span class="shy"></span>tion right from the start: a lot of things I’ll de<span class="shy"></span>scribe in the next ar<span class="shy"></span>ti<span class="shy"></span>cles could be made <em>so mush</em> eas<span class="shy"></span>ier us<span class="shy"></span>ing plu<span class="shy"></span>g<span class="shy"></span>ins. But I won’t go an easy <nobr>way —</nobr><span class="thinsp"> </span>I’d like to make every<span class="shy"></span>thing in a way more peo<span class="shy"></span>ple could use it: even in places where the plu<span class="shy"></span>g<span class="shy"></span>ins are dis<span class="shy"></span><nobr>abled —</nobr><span class="thinsp"> </span>as on GitHub Pages.</p>
+<h2 class="Heading" id="-hello-world-"><a class="Anchor" aria-hidden="true" href="#-hello-world-"></a><span class="hang-m">“</span>Hello world”</h2>
+<p>Min<span class="shy"></span>i<span class="shy"></span>mal doc<span class="shy"></span>u<span class="shy"></span>ment you’ll need to gen<span class="shy"></span>er<span class="shy"></span>ate a site on Jekyll should con<span class="shy"></span>tain the <a class="Link" href="http://en.wikipedia.org/wiki/YAML"><abbr>YAML</abbr></a> front mat<span class="shy"></span>ter with at least one <nobr>field —</nobr><span class="thinsp"> </span><code>lay<span class="shy"></span>out</code> (you could ac<span class="shy"></span>tu<span class="shy"></span>ally make one with<span class="shy"></span>out it, with empty <abbr>YAML</abbr> front mat<span class="shy"></span>ter, but in that case your page won’t have any lay<span class="shy"></span>out at all). So, the min<span class="shy"></span>i<span class="shy"></span>mal <code>hello-world.md</code> for Jekyll would look like</p>
+<pre><code>---
+lay<span class="shy"></span>out: de<span class="shy"></span>fault
+---
+
+Hello world!
+</code></pre>
+<p>In real world you’d like to add at least a ti<span class="shy"></span>tle or some other data, but for the most triv<span class="shy"></span>ial cases that’s the min<span class="shy"></span>i<span class="shy"></span>mal code to start from.</p>
+<h2 class="Heading" id="dates"><a class="Anchor" aria-hidden="true" href="#dates"></a><span class="ss01 hang-m">D</span>ates</h2>
+<p>One of the fea<span class="shy"></span>tures I like in Jekyll is its for<span class="shy"></span>mat for posts. You need to name the files as <code>YYYY-MM-DD-ti<span class="shy"></span>tle</code> and I think that’s awe<span class="shy"></span>some. It makes you to main<span class="shy"></span>tain a bet<span class="shy"></span>ter file hi<span class="shy"></span>er<span class="shy"></span>ar<span class="shy"></span>chy that would be sorted by date au<span class="shy"></span>to<span class="shy"></span>mat<span class="shy"></span>i<span class="shy"></span>cally, and also you won’t need to write the date in the post it<span class="shy"></span><nobr>self —</nobr><span class="thinsp"> </span>Jekyll would use the date from the file<span class="shy"></span>name. Yes, in some cases you’ll want to use the <code>pub<span class="shy"></span>lished</code> field in <abbr>YAML</abbr> to over<span class="shy"></span>ride the date from the file<span class="shy"></span>name, but it’s up to you. In most cases you won’t need it.</p>
+<h2 class="Heading" id="prose-io"><a class="Anchor" aria-hidden="true" href="#prose-io"></a><span class="ss01 hang-m">P</span>rose.io</h2>
+<p>And if you don’t like to fill up <abbr>YAML</abbr> by your<span class="shy"></span>self, and you don’t want to use any scripts for it (like it’s done in Jekyll Boot<span class="shy"></span>strap), you could use a ser<span class="shy"></span>vice like <a class="Link" href="http://prose.io">Prose.io</a>. This awe<span class="shy"></span>some ser<span class="shy"></span>vice al<span class="shy"></span>lows you to <a class="Link" href="http://prose.io/help/handbook.html#metadata_defaults">de<span class="shy"></span>scribe all the meta<span class="shy"></span>data de<span class="shy"></span>faults</a> in a con<span class="shy"></span>fig, so when you cre<span class="shy"></span>ate a new post us<span class="shy"></span>ing Prose, all the meta<span class="shy"></span>data would be filled for you (ac<span class="shy"></span>tu<span class="shy"></span>ally, in most ba<span class="shy"></span>sic cases you’d need to at least look at the meta<span class="shy"></span>data, but that’s an<span class="shy"></span>other story I’ll tell some<span class="shy"></span>day later).</p>
+<h2 class="Heading" id="links"><a class="Anchor" aria-hidden="true" href="#links"></a><span class="ss01 hang-m">L</span>inks</h2>
+<p>There is a lot of use<span class="shy"></span>ful info in the in<span class="shy"></span>ter<span class="shy"></span>nets on Jekyll, I’ll try to sum all the use<span class="shy"></span>ful links in this post for you (and for my<span class="shy"></span>self). There are links that would help you to start with Jekyll, and the links that are use<span class="shy"></span>ful all the time you’re tin<span class="shy"></span>ker<span class="shy"></span>ing with the logic be<span class="shy"></span>hind Jekyl<span class="shy"></span>l’s tem<span class="shy"></span>plates.</p>
+<ul>
+<li><a class="Link" href="http://jekyllrb.com">Jekyl<span class="shy"></span>l’s of<span class="shy"></span>fi<span class="shy"></span>cial site</a>;</li>
+<li><a class="Link" href="http://prose.io/help/handbook.html">con<span class="shy"></span>fig<span class="shy"></span>ur<span class="shy"></span>ing Prose.io for Jekyll</a>.</li>
+</ul>
+<p>There are also a lot of help<span class="shy"></span>ful pages on Jekyll in the <a class="Link" href="http://jekyllbootstrap.com">Jekyll Boot<span class="shy"></span>strap</a> pro<span class="shy"></span>ject. I found those ones to be the most useful:</p>
+<ul>
+<li><a class="Link" href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html">In<span class="shy"></span>tro<span class="shy"></span>duc<span class="shy"></span>tion to Jekyll</a>;</li>
+<li><a class="Link" href="http://jekyllbootstrap.com/api/template-data-api.html">tem<span class="shy"></span>plate data <abbr>API</abbr></a>.</li>
+</ul>
+<p>Jekyll uses <a class="Link" href="http://www.liquidmarkup.org">Liq<span class="shy"></span>uid</a> for tem<span class="shy"></span>plat<span class="shy"></span>ing. GitHub re<span class="shy"></span>cently <a class="Link" href="https://github.com/blog/1366-github-pages-updated-to-jekyll-0-12-0">up<span class="shy"></span>dated Jekyll</a>, so now you could use al<span class="shy"></span>most all the tags from the docs:</p>
+<ul>
+<li><a class="Link" href="https://github.com/shopify/liquid/wiki/liquid-for-designers">list of all the de<span class="shy"></span>fault liq<span class="shy"></span>uid tags</a>;</li>
+<li><a class="Link" href="https://github.com/mojombo/jekyll/wiki/liquid-extensions">ex<span class="shy"></span>tra liq<span class="shy"></span>uid tags avail<span class="shy"></span>able in Jekyll</a>.</li>
+</ul>
+<p>Be<span class="shy"></span>fore this up<span class="shy"></span>date you could<span class="shy"></span>n’t use the pow<span class="shy"></span>er<span class="shy"></span>ful <code>split</code> <nobr>tag —</nobr><span class="thinsp"> </span>al<span class="shy"></span>most the only way to make a lot of dif<span class="shy"></span>fer<span class="shy"></span>ent things with Jekyll (guess <nobr>what —</nobr><span class="thinsp"> </span>there would be some ar<span class="shy"></span>ti<span class="shy"></span>cle on me hack<span class="shy"></span>ing with that tag).</p>
+<p>For writ<span class="shy"></span>ing posts I rec<span class="shy"></span>om<span class="shy"></span>mend to use mark<span class="shy"></span>down. While there are other ways, like plain <abbr>HTML</abbr> or Tex<span class="shy"></span>tile, for most cases the mark<span class="shy"></span>down would fit the best.</p>
+<ul>
+<li>For a mark<span class="shy"></span>down en<span class="shy"></span>gine I’d rec<span class="shy"></span>om<span class="shy"></span>mend to use <a class="Link" href="http://kramdown.rubyforge.org">kram<span class="shy"></span>down</a><nobr> —</nobr><span class="thinsp"> </span>it’s the best op<span class="shy"></span>tion so far, I’d write why in one of the next ar<span class="shy"></span>ti<span class="shy"></span>cles.</li>
+<li>For con<span class="shy"></span>fig<span class="shy"></span>ur<span class="shy"></span>ing the site or any spe<span class="shy"></span>cific post you’ll need to use <a class="Link" href="http://en.wikipedia.org/wiki/YAML"><abbr>YAML</abbr></a><nobr> —</nobr><span class="thinsp"> </span>so if you’re not fa<span class="shy"></span>mil<span class="shy"></span>iar with its syn<span class="shy"></span><nobr>tax —</nobr><span class="thinsp"> </span>go and read about it, it’s nice.</li>
+</ul>
+<p>Over<span class="shy"></span>all, I’m very happy I’ve cho<span class="shy"></span>sen the Jekyll for my new site. There are a lot of is<span class="shy"></span>sues with Liq<span class="shy"></span>uid tem<span class="shy"></span>plates, but the over<span class="shy"></span>all re<span class="shy"></span>sult has been worth it.</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2013-01-30">January 30, 2013</time>, in <a href="../" class="Link">Articles</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CJekyll%E2%80%9D" class="Link">write me about this</a>, or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2013-01-30-(issues)-going-jekyll/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/en/issues/cursor-pointer/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Correct Cursor on Active Elements</span></a><a href="/en/issues/markdowning-yaml/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Markdowning YAML for Jekyll</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

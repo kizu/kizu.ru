@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru" class="Page Page_post Page_ru without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Автоматический резиновый шеврон — kizu.ru</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li class="Page-Language"><a data-short="en" title="No translation for this article (yet?), but a lot of other english pages are available!" href="/en/" class="Page-Language-Link">in English*</a>
+            </li>
+            <li data-short="ru" class="Page-Language is-current">по-русски
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="автоматический-резиновый-шеврон"><a class="Anchor" aria-hidden="true" href="#автоматический-резиновый-шеврон"></a><span class="ss01 hang-xs">А</span>вто<span class="shy"></span>ма<span class="shy"></span>ти<span class="shy"></span>че<span class="shy"></span>ский ре<span class="shy"></span>зи<span class="shy"></span>но<span class="shy"></span>вый шев<span class="shy"></span>рон</h1>
+          </header>
+<p>Всё до<span class="shy"></span>воль<span class="shy"></span>но про<span class="shy"></span>сто: толь<span class="shy"></span>ко <abbr>CSS</abbr> и <abbr>HTML</abbr>, хотя <abbr>HTML</abbr> в ито<span class="shy"></span>ге по<span class="shy"></span>лу<span class="shy"></span>ча<span class="shy"></span>ет<span class="shy"></span>ся ужа<span class="shy"></span>са<span class="shy"></span>ющим.</p>
+<p>Смысл это<span class="shy"></span>го экс<span class="shy"></span>пе<span class="shy"></span>ри<span class="shy"></span>мен<span class="shy"></span>та вот в чём: в дроп<span class="shy"></span>да<span class="shy"></span>ун, ко<span class="shy"></span>то<span class="shy"></span>рый по<span class="shy"></span>ка<span class="shy"></span>зы<span class="shy"></span>ва<span class="shy"></span>ет<span class="shy"></span>ся по кли<span class="shy"></span>ку на «ещё», ав<span class="shy"></span>то<span class="shy"></span>ма<span class="shy"></span>ти<span class="shy"></span>че<span class="shy"></span>ски по<span class="shy"></span>ме<span class="shy"></span>ща<span class="shy"></span>ют<span class="shy"></span>ся все пунк<span class="shy"></span>ты, ко<span class="shy"></span>то<span class="shy"></span>рые не по<span class="shy"></span>ме<span class="shy"></span>сти<span class="shy"></span>лись в одну строч<span class="shy"></span>ку по ши<span class="shy"></span>рине. При этом за<span class="shy"></span>ра<span class="shy"></span>нее неиз<span class="shy"></span>вест<span class="shy"></span>но ни ко<span class="shy"></span>ли<span class="shy"></span>че<span class="shy"></span>ство эле<span class="shy"></span>мен<span class="shy"></span>тов, ни их ши<span class="shy"></span>ри<span class="shy"></span>на, ни ши<span class="shy"></span>ри<span class="shy"></span>на ро<span class="shy"></span>ди<span class="shy"></span>те<span class="shy"></span>ля<nobr> —</nobr><span class="thinsp"> </span>и всё это без JS.</p>
+</div></div><div class="Demo Demo_injected Figure" id="Demo_chevron">
+
+<style>
+/*_*/
+
+#Demo_chevron {
+    background: #FFF;
+    }
+
+/* Fix for +/~ selectors in webkit */
+@-webkit-keyframes bugfix { from { padding: 0; } to { padding: 0; } }
+.b-chevron {
+    -webkit-animation: bugfix infinite 1s;
+    }
+
+.b-chevron {
+    display: inline-block;
+    position: relative;
+
+    height: 2em;
+    margin: 1em 0 1em;
+
+    vertical-align: top;
+
+    font: 12.8px/1.25 Arial, sans-serif;
+    }
+
+.b-chevron-in {
+    height: 2em;
+    padding: 0 0 0 3em;
+
+    overflow: hidden;
+    }
+
+
+.b-chevron-item {
+    position: relative;
+
+    display: inline-block;
+    height: 2em;
+    margin: 0 0 0 -3em;
+
+    white-space: nowrap;
+
+    background: #FFF;
+    }
+.b-chevron-helper+.b-chevron-item {
+    padding: 0 3em 0 0;
+    }
+    .b-chevron-item-in:link,
+    .b-chevron-item-in:visited {
+        margin: 0 1em 0 0;
+
+        color: #1A3DC1;
+        }
+
+    .b-chevron-handle {
+        position: absolute;
+
+        border-bottom: 1px dotted;
+
+        cursor: pointer;
+
+        line-height: 1.08;
+
+        color: #1A3DC1;
+        }
+    .b-chevron-handle:after {
+        content: "▼";
+        position: absolute;
+
+        padding: 0 0 0 0.2em;
+        margin: 0.4em 0 0;
+
+        font-size: 80%;
+        text-decoration: none;
+        }
+    .b-chevron-handle:hover {
+        color: #F00;
+        }
+
+
+.b-chevron-helper {
+    position: fixed;
+    top: 0;
+    left: -100px;
+    }
+
+.b-chevron-helper:checked + .b-chevron-item + .b-chevron-wrap {
+    position: absolute;
+    top: 2.4em;
+    right: 3px;
+    z-index: 999;
+
+    font: 11px/1.25 Verdana,sans-serif;
+
+    background: #FFF;
+    background: rgba(255,255,255,0.95);
+
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.8), 0 2px 15px rgba(0,0,0,0.7);
+       -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.8), 0 2px 15px rgba(0,0,0,0.7);
+         -o-box-shadow: 0 1px 5px rgba(0,0,0,0.8), 0 2px 15px rgba(0,0,0,0.7);
+            box-shadow: 0 1px 5px rgba(0,0,0,0.8), 0 2px 15px rgba(0,0,0,0.7);
+
+    -webkit-border-radius: 0.4em;
+       -moz-border-radius: 0.4em;
+            border-radius: 0.4em;
+    }
+.b-chevron-helper:checked + .b-chevron-item + .b-chevron-wrap:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 13px;
+
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 0;
+
+    background: #FFF;
+    background: rgba(255,255,255,0.95);
+    background: -webkit-gradient(linear,left bottom,right top,color-stop(.5, rgba(255,255,255,0.95)),color-stop(.5, transparent));
+
+    -webkit-transform: rotate(135deg);
+       -moz-transform: rotate(135deg);
+         -o-transform: rotate(135deg);
+            transform: rotate(135deg);
+    -webkit-box-shadow: -3px 3px 3px rgba(0,0,0,0.3);
+       -moz-box-shadow: -3px 3px 3px rgba(0,0,0,0.3);
+         -o-box-shadow: -3px 3px 3px rgba(0,0,0,0.3);
+            box-shadow: -3px 3px 3px rgba(0,0,0,0.3);
+    }
+
+/* In the following selectors the “+ .b-chevron-item +” part is bugging in opera, so I relaced them with “~” */
+.b-chevron-helper:checked /* + .b-chevron-item + */ ~ .b-chevron-wrap .b-chevron-item {
+    display: block;
+    padding: 0;
+    margin: 0;
+
+    background: none;
+    }
+
+.b-chevron-helper:checked /* + .b-chevron-item + */ ~ .b-chevron-wrap .b-chevron-item-in {
+    display: block;
+
+    padding: 0.5em 1em;
+    margin: 0;
+
+    line-height: 1.25;
+    background: none;
+    }
+
+.b-chevron-helper:checked /* + .b-chevron-item + */ ~ .b-chevron-wrap .b-chevron-handle {
+    display: none;
+    }
+
+.b-chevron-paranja {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: rgba(0,0,0,0);
+    }
+    .b-chevron-helper:checked+.b-chevron-paranja {
+        display: none;
+        }
+
+</style>
+<div class="b-section-inset">
+    <div class="b-section-inset-in">
+        <div class="b-chevron">
+            <input class="b-chevron-helper" type="radio" name="chevron01" id="Helper00" checked="checked"/>
+            <label for="Helper00" class="b-chevron-paranja"></label>
+            <div class="b-chevron-in"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper01"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">1. Lorem ipsum</a><label          class="b-chevron-handle" for="Helper01">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper02"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">2. Dolor sit</a><label            class="b-chevron-handle" for="Helper02">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper03"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">3. Amet consectetur</a><label     class="b-chevron-handle" for="Helper03">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper04"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">4. Adipisicing aelit</a><label    class="b-chevron-handle" for="Helper04">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper05"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">5. Sed do</a><label               class="b-chevron-handle" for="Helper05">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper06"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">6. Eiusmod tempor</a><label       class="b-chevron-handle" for="Helper06">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper07"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">7. Incididunt ut</a><label        class="b-chevron-handle" for="Helper07">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper08"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">8. Labore et</a><label            class="b-chevron-handle" for="Helper08">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper09"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">9. Dolore magna</a><label         class="b-chevron-handle" for="Helper09">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper10"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">10. Aliqua ut</a><label            class="b-chevron-handle" for="Helper10">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper11"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">11. Enim ad</a><label              class="b-chevron-handle" for="Helper11">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper12"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">12. Minim veniam</a><label         class="b-chevron-handle" for="Helper12">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper13"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">13. Quis nostrud</a><label         class="b-chevron-handle" for="Helper13">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper14"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">14. Exercitation ullamco</a><label class="b-chevron-handle" for="Helper14">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper15"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">15. Laboris nisi</a><label         class="b-chevron-handle" for="Helper15">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper16"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">16. Ut aliquip</a><label           class="b-chevron-handle" for="Helper16">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper17"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">17. Ex ea</a><label                class="b-chevron-handle" for="Helper17">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper18"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">18. Commodo consequat</a><label    class="b-chevron-handle" for="Helper18">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper19"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">19. Duis aute</a><label            class="b-chevron-handle" for="Helper19">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper20"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">20. Irure dolor</a><label          class="b-chevron-handle" for="Helper20">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper21"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">21. In reprehenderit</a><label     class="b-chevron-handle" for="Helper21">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper22"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">22. In voluptate</a><label         class="b-chevron-handle" for="Helper22">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper23"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">23. Velit esse</a><label           class="b-chevron-handle" for="Helper23">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper24"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">24. Cillum dolore</a><label        class="b-chevron-handle" for="Helper24">more</label></span><span class="b-chevron-wrap"><input class="b-chevron-helper" type="radio" name="chevron01" id="Helper25"
+              /><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">25. Eu fugiat</a><label            class="b-chevron-handle" for="Helper25">more</label></span><span class="b-chevron-wrap"
+               ><span class="b-chevron-item"><a class="b-chevron-item-in" href="#">26. Nulla pariatur</a></span></span></span></span></span></span>
+            </div>
+        </div>
+    </div>
+</div>
+</div><div class="LiquidLayout"><div class="Main LiquidLayout-Content">
+<p>По<span class="shy"></span>из<span class="shy"></span>ме<span class="shy"></span>няй<span class="shy"></span>те раз<span class="shy"></span>мер окна для де<span class="shy"></span>мон<span class="shy"></span>стра<span class="shy"></span>ции ра<span class="shy"></span>бо<span class="shy"></span>ты шев<span class="shy"></span>ро<span class="shy"></span>на. Ра<span class="shy"></span>бо<span class="shy"></span>то<span class="shy"></span>спо<span class="shy"></span>соб<span class="shy"></span>ность про<span class="shy"></span>ве<span class="shy"></span>ря<span class="shy"></span>лась толь<span class="shy"></span>ко в со<span class="shy"></span>вре<span class="shy"></span>мен<span class="shy"></span>ных !IE бра<span class="shy"></span>у<span class="shy"></span>зерах.</p>
+<p>Ду<span class="shy"></span>маю, не сто<span class="shy"></span>ит осо<span class="shy"></span>бо объ<span class="shy"></span>яс<span class="shy"></span>нять по<span class="shy"></span>че<span class="shy"></span>му та<span class="shy"></span>кое, на са<span class="shy"></span>мом деле, луч<span class="shy"></span>ше де<span class="shy"></span>лать при по<span class="shy"></span>мо<span class="shy"></span>щи явас<span class="shy"></span>крип<span class="shy"></span>та, но дан<span class="shy"></span>ный при<span class="shy"></span>мер, как и мно<span class="shy"></span>гие мои дру<span class="shy"></span>гие экс<span class="shy"></span>пе<span class="shy"></span>ри<span class="shy"></span>мен<span class="shy"></span>ты, со<span class="shy"></span>зда<span class="shy"></span>вал<span class="shy"></span>ся, ско<span class="shy"></span>рее, как proof of con<span class="shy"></span>cept и ис<span class="shy"></span>сле<span class="shy"></span>до<span class="shy"></span>ва<span class="shy"></span>ние воз<span class="shy"></span>мож<span class="shy"></span>но<span class="shy"></span>стей при<span class="shy"></span>ме<span class="shy"></span>не<span class="shy"></span>ния раз<span class="shy"></span>ных се<span class="shy"></span>лек<span class="shy"></span>то<span class="shy"></span>ров и их со<span class="shy"></span>че<span class="shy"></span>таний.</p>
+
+          <p class="Metadata Published">Опубликовано 
+            <time datetime="2011-04-03">3 апреля 2011 г.</time> в <a href="../" class="Link">Экспериментах</a>.
+          </p>
+          <aside class="Feedback">
+            <p>Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете <a href="https://github.com/kizu/kizu.github.com/issues/new?title=%D0%9E%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BD%D0%B0%20%C2%AB%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%80%D0%B5%D0%B7%D0%B8%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9%20%D1%88%D0%B5%D0%B2%D1%80%D0%BE%D0%BD%C2%BB" class="Link">написать мне об этом</a>, или <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2011-04-03-(fun)-chevron/index.ru.md" class="Link">поправить статью прямо на Гитхабе</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/fun/overflower/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Эмуляция text-overflow</span></a><a href="/issues/tap-to-padding/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Паддинги в вёрстке под iOS</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

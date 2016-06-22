@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru" class="Page Page_post Page_ru without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Попапы и дропдауны — kizu.ru</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/popups/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/fun/popups/">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li class="Page-Language"><a data-short="en" href="/en/fun/popups/" class="Page-Language-Link">in English</a>
+            </li>
+            <li data-short="ru" class="Page-Language is-current">по-русски
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="попапы-и-дропдауны"><a class="Anchor" aria-hidden="true" href="#попапы-и-дропдауны"></a><span class="ss01 hang-m">П</span>опа<span class="shy"></span>пы и дроп<span class="shy"></span>да<span class="shy"></span>у<span class="shy"></span>ны</h1>
+          </header>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_popups"><style>
+/*_*/
+
+/* Dropdowns
+-----------------------------*/
+.b-dropdown {
+    position: relative;
+    display: inline-block;
+    }
+.b-dropdown-handle {
+    border-bottom: 1px dotted;
+
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+
+    position: relative;
+    z-index: 9;
+
+    color: blue;
+    }
+    .b-dropdown-helper:checked+.b-dropdown .b-dropdown-handle {
+        z-index: auto;
+        }
+    .b-dropdown-handle:hover {
+        color: #F00;
+        }
+
+.b-dropdown-popup {
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    z-index: 9;
+
+    visibility: hidden;
+    opacity: 0;
+
+    margin: 10px 0 0;
+
+    font-size: .8571em;
+
+    -webkit-transition: opacity .2s, visibility .2s;
+       -moz-transition: opacity .2s, visibility .2s;
+         -o-transition: opacity .2s, visibility .2s;
+            transition: opacity .2s, visibility .2s;
+    }
+    .b-dropdown-helper:checked+.b-dropdown .b-dropdown-popup {
+        visibility: inherit;
+        opacity: 1;
+        -webkit-transition: opacity .2s;
+           -moz-transition: opacity .2s;
+             -o-transition: opacity .2s;
+                transition: opacity .2s;
+        }
+    .b-dropdown-popup-in {
+        position: relative;
+
+        display: block;
+
+        height: 0;
+        }
+        .b-dropdown-popup-inin {
+            position: relative;
+            left: 50%;
+
+            display: block;
+
+            white-space: nowrap;
+
+            background: #FFF;
+            background: rgba(255,255,255,0.95);
+
+            -webkit-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+               -moz-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+                 -o-box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+                    box-shadow: 0 1px 5px -1px rgba(0,0,0,0.8), 0 2px 15px -5px rgba(0,0,0,0.7);
+
+            -webkit-border-radius: .4em;
+               -moz-border-radius: .4em;
+                    border-radius: .4em;
+            }
+            .b-dropdown-link {
+                position: relative;
+
+                display: block;
+
+                padding: .3em 1em;
+
+                text-decoration: none;
+                color: #000 !important;
+                }
+                A.b-dropdown-link:hover {
+                    background: rgba(120,200,255,0.9);
+                    text-shadow: none;
+                    color: #000 !important;
+                    }
+                    .b-dropdown-link:first-child {
+                        -webkit-border-radius: .4em .4em 0 0;
+                           -moz-border-radius: .4em .4em 0 0;
+                                border-radius: .4em .4em 0 0;
+                        }
+                    .b-dropdown-link:last-child {
+                        -webkit-border-radius: 0 0 .4em .4em;
+                           -moz-border-radius: 0 0 .4em .4em;
+                                border-radius: 0 0 .4em .4em;
+                        }
+            .b-dropdown-popup-inin:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+
+                width: 10px;
+                height: 10px;
+                margin: -5px 0 0 -5px;
+
+                background: #FFF;
+                background: rgba(255,255,255,0.95);
+
+                -webkit-transform: rotate(135deg);
+                   -moz-transform: rotate(135deg);
+                     -o-transform: rotate(135deg);
+                        transform: rotate(135deg);
+                -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                   -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                     -o-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                        box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.3);
+                }
+.b-paranja {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 8;
+
+    opacity: 0;
+    }
+    .b-paranja-helper:checked+.b-paranja {
+        display: none;
+        }
+
+/* Popups
+-----------------------------*/
+.b-popup-paranja {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    background: rgba(0,0,0,0.6) !important;
+    cursor: default;
+
+    visibility: hidden;
+    opacity: 0;
+
+    -webkit-transition: opacity .4s, visibility .4s;
+       -moz-transition: opacity .4s, visibility .4s;
+         -o-transition: opacity .4s, visibility .4s;
+            transition: opacity .4s, visibility .4s;
+    }
+
+.b-popup {
+    position: fixed;
+    top: -100px;
+    right: 0;
+    left: 0;
+    z-index: 10;
+
+    opacity: 0;
+    visibility: hidden;
+
+    height: 0;
+
+    text-align: center;
+
+    -webkit-transition: opacity .4s, visibility .4s, top .4s;
+       -moz-transition: opacity .4s, visibility .4s, top .4s;
+         -o-transition: opacity .4s, visibility .4s, top .4s;
+            transition: opacity .4s, visibility .4s, top .4s;
+    }
+    .b-popup-in {
+        position: relative;
+
+        display: inline-block;
+
+        max-width: 80%;
+        padding: 1.375em 1.375em 0;
+        margin: 5em 0;
+
+        text-align: left;
+
+        background: #FFF;
+
+        -webkit-border-radius: 1em;
+           -moz-border-radius: 1em;
+                border-radius: 1em;
+        -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+           -moz-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+             -o-box-shadow: 0 0 5px rgba(0,0,0,0.7);
+                box-shadow: 0 0 5px rgba(0,0,0,0.7);
+        }
+
+.b-popup-paranja:target {
+    visibility: inherit;
+    opacity: 1;
+    -webkit-transition: opacity .4s;
+       -moz-transition: opacity .4s;
+         -o-transition: opacity .4s;
+            transition: opacity .4s;
+    }
+.b-popup-paranja:target+.b-popup {
+    visibility: inherit;
+    opacity: 1;
+    top: 0;
+    -webkit-transition: opacity .4s, top .4s;
+       -moz-transition: opacity .4s, top .4s;
+         -o-transition: opacity .4s, top .4s;
+            transition: opacity .4s, top .4s;
+    }
+
+.b-popup-closer {
+    position: absolute;
+    top: -0.75em;
+    left: -0.75em;
+
+    width: 1.7em;
+    height: 1.2em;
+
+    text-align: center;
+    line-height: 1.4em;
+
+    text-decoration: none;
+
+    background: #333 !important;
+    background: rgba(0,0,0,0.7) !important;
+
+    -webkit-border-radius: 1em;
+       -moz-border-radius: 1em;
+            border-radius: 1em;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+       -moz-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+         -o-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+            box-shadow: 0 0 4px rgba(0,0,0,0.7);
+    }
+    .b-popup-closer:before {
+        content: "×";
+
+        font-size: 1.2em;
+
+        color: rgba(255,255,255,0.9);
+        text-shadow: 0 -1px rgba(0,0,0,0.9);
+        }
+
+@media (max-device-width: 1024px) {
+/* Fixing iOS bug with visibility+opacity transitions */
+.b-popup,
+.b-dropdown-popup,
+.b-popup-paranja {
+    opacity: 1 !important;
+    }
+
+/* Since position:fixed works badly, must hide them at all */
+.b-paranja,
+.b-popup-paranja {
+    display: none;
+}
+}
+</style>
+
+<h2 class="Heading">Dropdowns</h2>
+<p>
+    Here are simple dropdowns, made using radiobuttons:
+    <input type="radio" id="Dropdown1" class="b-dropdown-helper" name="dropdowns" hidden="hidden"/>
+    <span class="b-dropdown">
+        <label class="b-dropdown-handle" for="Dropdown1">Hello, I'm a dropdown!</label>
+        <span class="b-dropdown-popup">
+            <span class="b-dropdown-popup-in">
+                <span class="b-dropdown-popup-inin">
+                    <a class="b-dropdown-link" href="#one">First link</a>
+                    <a class="b-dropdown-link" href="#two">Second link</a>
+                    <a class="b-dropdown-link" href="#three">Third link</a>
+                    <a class="b-dropdown-link" href="#four">Fourth link</a>
+                </span>
+            </span>
+        </span>
+    </span>
+    and
+    <input type="radio" id="Dropdown2" class="b-dropdown-helper" name="dropdowns" hidden="hidden"/>
+    <span class="b-dropdown">
+        <label class="b-dropdown-handle" for="Dropdown2">just another one</label>.
+        <span class="b-dropdown-popup">
+            <span class="b-dropdown-popup-in">
+                <span class="b-dropdown-popup-inin">
+                    <a class="b-dropdown-link" href="#one">Bang!</a>
+                    <a class="b-dropdown-link" href="#two">Kabang!</a>
+                </span>
+            </span>
+        </span>
+    </span>
+</p>
+<h2 class="Heading">Popups</h2>
+<p>Here is a popup:: <a href="#SomePopup1">click me</a>! It use the hash in the address and the :target pseudo-class.</p>
+<a id="SomePopup1" class="b-popup-paranja" href="#x"></a>
+<div class="b-popup">
+    <div class="b-popup-in">
+        <p>Here is some dope popup's content, ok.</p>
+        <p>Well, and a little more of it.</p>
+
+        <a class="b-popup-closer" href="#x"></a>
+    </div>
+</div>
+<p>And here is  <a href="#SomePopup2">Another popup</a>, just for an example, also it have one nested drowdown and a link to the first popup..</p>
+<a id="SomePopup2" class="b-popup-paranja" href="#x"></a>
+<div class="b-popup">
+    <div class="b-popup-in">
+        <p>
+            So, you can call another popup from here, though this one would close, 'cause the :target used instead of :checked:
+            <a href="#SomePopup1">Wooosh!</a>
+            or you can call right here
+            <input type="radio" id="Dropdown3" class="b-dropdown-helper" name="dropdowns2" hidden="hidden"/>
+            <span class="b-dropdown">
+                <label class="b-dropdown-handle" for="Dropdown3">another dropdown</label>
+                <span class="b-dropdown-popup">
+                    <span class="b-dropdown-popup-in">
+                        <span class="b-dropdown-popup-inin">
+                            <a class="b-dropdown-link" href="/en/">Go back to the homepage</a>
+
+                            <a class="b-dropdown-link" href="http://twitter.com/#!/kizmarh">Or follow me in twitter!</a>
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <!-- Helper blocks (paranja for inner dropdown) -->
+        <input type="radio" id="Paranja2" class="b-paranja-helper" name="dropdowns2" checked="checked" hidden="hidden" />
+        <label class="b-paranja" for="Paranja2"></label>
+
+        <a class="b-popup-closer" href="#x"></a>
+    </div>
+</div>
+
+
+
+<!-- Helper blocks (paranja for dropdowns) -->
+<input type="radio" id="Paranja" class="b-paranja-helper" name="dropdowns" checked="checked" hidden="hidden" />
+<label class="b-paranja" for="Paranja"></label>
+</div>
+
+          <p class="Metadata Published">Опубликовано 
+            <time datetime="2011-02-05">5 февраля 2011 г.</time> в <a href="../" class="Link">Экспериментах</a>.
+          </p>
+          <aside class="Feedback">
+            <p>Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете <a href="https://github.com/kizu/kizu.github.com/issues/new?title=%D0%9E%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BD%D0%B0%20%C2%AB%D0%9F%D0%BE%D0%BF%D0%B0%D0%BF%D1%8B%20%D0%B8%20%D0%B4%D1%80%D0%BE%D0%BF%D0%B4%D0%B0%D1%83%D0%BD%D1%8B%C2%BB" class="Link">написать мне об этом</a>, или <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2011-02-05-(fun)-popups/index.ru.md" class="Link">поправить статью прямо на Гитхабе</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/fun/controls/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Кастомные контролы без яваскрипта</span></a><a href="/fun/filters/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Фильтры элементов без яваскрипта</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru" class="Page Page_post Page_ru without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>WBR и его эмуляция — kizu.ru</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li class="Page-Language"><a data-short="en" title="No translation for this article (yet?), but a lot of other english pages are available!" href="/en/" class="Page-Language-Link">in English*</a>
+            </li>
+            <li data-short="ru" class="Page-Language is-current">по-русски
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="wbr-и-его-эмуляция"><a class="Anchor" aria-hidden="true" href="#wbr-и-его-эмуляция"></a><span class="ss01 hang-m">W</span>BR и его эму<span class="shy"></span>ля<span class="shy"></span>ция</h1>
+          </header>
+<p>Неко<span class="shy"></span>то<span class="shy"></span>рые, на<span class="shy"></span>вер<span class="shy"></span>ное, зна<span class="shy"></span>ют про тег <code>WBR</code>, ко<span class="shy"></span><nobr>гда-то</nobr> дав<span class="shy"></span>но ис<span class="shy"></span>поль<span class="shy"></span>зо<span class="shy"></span>вав<span class="shy"></span>ший<span class="shy"></span>ся для того, что<span class="shy"></span>бы пе<span class="shy"></span>ре<span class="shy"></span>но<span class="shy"></span>сить слиш<span class="shy"></span>ком длин<span class="shy"></span>ные сло<span class="shy"></span>ва, если воз<span class="shy"></span>ни<span class="shy"></span>ка<span class="shy"></span>ет та<span class="shy"></span>кая необ<span class="shy"></span>хо<span class="shy"></span>ди<span class="shy"></span>мость. Ос<span class="shy"></span>нов<span class="shy"></span>ные про<span class="shy"></span>бле<span class="shy"></span>мы это<span class="shy"></span>го тега две:</p>
+<ul>
+<li>он не ра<span class="shy"></span>бо<span class="shy"></span>та<span class="shy"></span>ет в Опе<span class="shy"></span>ре</li>
+<li>он не ва<span class="shy"></span>лид<span class="shy"></span>ный</li>
+</ul>
+<p>К сча<span class="shy"></span>стью, эму<span class="shy"></span>ли<span class="shy"></span>ро<span class="shy"></span>вать его до<span class="shy"></span>ста<span class="shy"></span>точ<span class="shy"></span>но лег<span class="shy"></span>ко. Кро<span class="shy"></span>ме того, при по<span class="shy"></span>мо<span class="shy"></span>щи этой эму<span class="shy"></span>ля<span class="shy"></span>ции мож<span class="shy"></span>но по<span class="shy"></span>чи<span class="shy"></span>нить по<span class="shy"></span>ве<span class="shy"></span>де<span class="shy"></span>ние тега в Опере.</p>
+<p>Вот при<span class="shy"></span>мер<span class="shy"></span>ное ре<span class="shy"></span>шение:</p>
+<pre><code class="language-html">lalala&lt;i class=&quot;wbr&quot;&gt;&lt;/​​i&gt;lalala
+</code></pre>
+<p>и</p>
+<pre><code class="language-css">WBR,
+.wbr {
+    dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+    }
+</code></pre>
+<p>Един<span class="shy"></span>ствен<span class="shy"></span>ный мо<span class="shy"></span>мент, ко<span class="shy"></span>то<span class="shy"></span>рый оста<span class="shy"></span>ёт<span class="shy"></span>ся за рам<span class="shy"></span>ка<span class="shy"></span>ми эму<span class="shy"></span>ля<span class="shy"></span>ции: в IE <code>WBR</code> мо<span class="shy"></span>жет со<span class="shy"></span>зда<span class="shy"></span>вать раз<span class="shy"></span>рыв стро<span class="shy"></span>ки при <code>white-space:nowrap</code>.</p>
+
+          <p class="Metadata Published">Опубликовано 
+            <time datetime="2009-05-19">19 мая 2009 г.</time> в <a href="../" class="Link">Заметках</a>, <a href="../" class="Link">Старом</a>.
+          </p>
+          <aside class="Feedback">
+            <p>Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете <a href="https://github.com/kizu/kizu.github.com/issues/new?title=%D0%9E%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BD%D0%B0%20%C2%ABWBR%20%D0%B8%20%D0%B5%D0%B3%D0%BE%20%D1%8D%D0%BC%D1%83%D0%BB%D1%8F%D1%86%D0%B8%D1%8F%C2%BB" class="Link">написать мне об этом</a>, или <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2009-05-19-(issues old)-wbr/index.ru.md" class="Link">поправить статью прямо на Гитхабе</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/issues/old/sup-and-sub/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Стили для верхнего и нижнего индекса в CSS</span></a><a href="/fun/rounded-inner-corners/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Скруглённые внутренние углы</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

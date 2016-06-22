@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Nested Links — kizu.ru/en</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/nested-links/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/fun/nested-links/">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" href="/fun/nested-links/" class="Page-Language-Link">по-русски</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="nested-links"><a class="Anchor" aria-hidden="true" href="#nested-links"></a><span class="ss01 hang-m">N</span>ested Link<span class="ss01">s</span></h1>
+          </header>
+<p><img src="nested-links.jpg" width="640" height="480" alt="Cats playing nested links"></p>
+<h2 class="Heading" id="the-problem"><a class="Anchor" aria-hidden="true" href="#the-problem"></a><span class="ss01 hang-m">T</span>he problem</h2>
+<p><abbr>HTML</abbr> spec<span class="shy"></span>i<span class="shy"></span>fi<span class="shy"></span>ca<span class="shy"></span>tion has a lot of dif<span class="shy"></span>fer<span class="shy"></span>ent re<span class="shy"></span>stric<span class="shy"></span>tions. And I have my doubts about the fea<span class="shy"></span>si<span class="shy"></span>bil<span class="shy"></span>ity of many of those. One ex<span class="shy"></span>am<span class="shy"></span>ple which I stum<span class="shy"></span>ble upon rather of<span class="shy"></span><nobr>ten —</nobr><span class="thinsp"> </span>nested links.</p>
+<p><a class="Link" href="http://www.w3.org/TR/html5/text-level-semantics.html#the-a-element">Spec</a> straightly for<span class="shy"></span>bids such nesting:</p>
+<blockquote>
+<p>The <strong>a</strong> el<span class="shy"></span>ement</p>
+<p>[…]</p>
+<p>Con<span class="shy"></span>tent model: trans<span class="shy"></span>par<span class="shy"></span>ent, but there must be no <a class="Link" href="http://www.w3.org/TR/html5/dom.html#interactive-content-0">in<span class="shy"></span>ter<span class="shy"></span>ac<span class="shy"></span>tive</a> con<span class="shy"></span>tent de<span class="shy"></span>scendant.</p>
+</blockquote>
+<p>And if you’d do this, browser’s parser won’t un<span class="shy"></span>der<span class="shy"></span>stand you and, as soon as it’d see the open<span class="shy"></span>ing tag for the nested link, it would close the first one right there:</p>
+<pre><code class="language-html">&lt;a href=&quot;#Foo&quot;&gt;
+    Foo
+    &lt;a href=&quot;#Bar&quot;&gt;
+        Bar
+    &lt;/​a&gt;
+    Baz
+&lt;/​a&gt;
+</code></pre>
+<p>in the eyes of the browser would be some<span class="shy"></span>thing like <nobr>that&#8202;—</nobr></p>
+<pre><code class="language-html">&lt;a href=&quot;#Foo&quot;&gt;
+    Foo
+    &lt;/​a&gt;&lt;a href=&quot;#Bar&quot;&gt;
+        Bar
+    &lt;/​a&gt;
+    Baz
+</code></pre>
+<p>And a live ex<span class="shy"></span>ample:</p>
+<div class="Demo Figure" id="Demo_nested-links-broken"><iframe class="Demo-Frame" style="height: 1.5em" width="100%" src="examples/nested-links-broken.html"></iframe></div>
+<p>How<span class="shy"></span>ever, there are cases when you’d want to nest one link in<span class="shy"></span>side an<span class="shy"></span>other de<span class="shy"></span>spite the re<span class="shy"></span>stric<span class="shy"></span>tions.</p>
+<p>So, once again, while work<span class="shy"></span>ing on one task I stum<span class="shy"></span>bled upon such case. I hap<span class="shy"></span>pen to see and use dif<span class="shy"></span>fer<span class="shy"></span>ent workarounds for it be<span class="shy"></span>fore, like an em<span class="shy"></span>u<span class="shy"></span>la<span class="shy"></span>tion of the nested links with JS (for ex<span class="shy"></span>am<span class="shy"></span>ple, with ba<span class="shy"></span>nal <code>onclick</code>), or po<span class="shy"></span>si<span class="shy"></span>tion<span class="shy"></span>ing one of the links around the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#shared-wrapper" id="shared-wrapper">shared wrap<span class="shy"></span>per</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Look at <a href="http://jsfiddle.net/csswizardry/rxsna/">such so<span class="shy"></span>lu<span class="shy"></span>tion</a> by Harry Roberts<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span>, but all those workarounds would<span class="shy"></span>n’t work in all cases, and would<span class="shy"></span>n’t work per<span class="shy"></span>fectly. We’d ei<span class="shy"></span>ther lose the na<span class="shy"></span>tiv<span class="shy"></span>ity of a link, try<span class="shy"></span>ing to em<span class="shy"></span>u<span class="shy"></span>late every<span class="shy"></span>thing from scratch, ei<span class="shy"></span>ther won’t be able to make a workaround work just like prop<span class="shy"></span>erly nested el<span class="shy"></span>e<span class="shy"></span>ments would.</p>
+<p>So, af<span class="shy"></span>ter try<span class="shy"></span>ing and weigh<span class="shy"></span>ing all the known workarounds in my head, I found out that I couldn&#39;t solve the cur<span class="shy"></span>rent task by any of the workarounds other than full JS em<span class="shy"></span>u<span class="shy"></span>la<span class="shy"></span>tion. But I stopped and de<span class="shy"></span>cided to ex<span class="shy"></span>per<span class="shy"></span>i<span class="shy"></span>ment a bit more.</p>
+<p><nobr>And —</nobr><span class="thinsp"> </span>found a proper so<span class="shy"></span>lu<span class="shy"></span>tion. <abbr>HTML</abbr>-only one, by the way, the one that gives you a way to nest any num<span class="shy"></span>ber of links one into an<span class="shy"></span>other.</p>
+<h2 class="Heading" id="the-solution"><a class="Anchor" aria-hidden="true" href="#the-solution"></a><span class="ss01 hang-m">T</span>he so<span class="shy"></span>lution</h2>
+<div class="Demo Demo_injected Figure" id="Demo_nested-links-simple">
+
+<style>
+
+.demo-simple:hover {
+    color: red !important;
+}
+
+.demo-simple .demo-simple:hover {
+    color: lime !important;
+}
+
+</style>
+
+<a class="demo-simple" href="#Foo">
+    Foo
+    <object type="lol/wut">
+        <a class="demo-simple" href="#Bar">
+            Bar
+        </a>
+    </object>
+    Baz
+</a>
+</div>
+<pre><code class="language-html">&lt;a href=&quot;#a&quot;&gt;
+    Foo
+    &lt;ob<span class="shy"></span>ject type=&quot;lol/​wut&quot;&gt;
+        &lt;a href=&quot;#b&quot;&gt;
+            Bar
+        &lt;/​a&gt;
+    &lt;/​ob<span class="shy"></span>ject&gt;
+    Baz
+&lt;/​a&gt;
+</code></pre>
+<p>What we do there is just plac<span class="shy"></span>ing an ob<span class="shy"></span>ject be<span class="shy"></span>tween those links. Yep, it works: all parsers of mod<span class="shy"></span>ern browsers sud<span class="shy"></span>denly see those links in<span class="shy"></span>de<span class="shy"></span>pen<span class="shy"></span>dently, and won’t break your markup any<span class="shy"></span>more. Hooray.</p>
+<h2 class="Heading" id="why-does-it-work"><a class="Anchor" aria-hidden="true" href="#why-does-it-work"></a><span class="ss01 hang-m">W</span>hy does it work</h2>
+<p>What are ob<span class="shy"></span>jects, in the<span class="shy"></span>ory? They are some ex<span class="shy"></span>ter<span class="shy"></span>nal en<span class="shy"></span>ti<span class="shy"></span>ties, with the type set by the <code>type</code> at<span class="shy"></span>tribute and the con<span class="shy"></span>tent or a link to it placed into the <code>data</code> at<span class="shy"></span>tribute. And the con<span class="shy"></span>tent be<span class="shy"></span>tween the open<span class="shy"></span>ing and clos<span class="shy"></span>ing <code>ob<span class="shy"></span>ject</code> tags is, <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#update" id="update">in fact</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Ac<span class="shy"></span>tu<span class="shy"></span>ally, see the <a href="#update-from-2015-03-05">Up<span class="shy"></span>date</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span>, a fall<span class="shy"></span>back, and it would be shown only when browser would<span class="shy"></span>n’t be ca<span class="shy"></span>pa<span class="shy"></span>ble of dis<span class="shy"></span>play<span class="shy"></span>ing the ob<span class="shy"></span>ject de<span class="shy"></span>fined in the at<span class="shy"></span>trib<span class="shy"></span>utes. Like, for ex<span class="shy"></span>am<span class="shy"></span>ple, if you won’t have an in<span class="shy"></span>stalled plugin.</p>
+<p>And if you’d write some gib<span class="shy"></span>ber<span class="shy"></span>ish <abbr>MIME</abbr>-type into the <code>type</code> at<span class="shy"></span>tribute, a browser would<span class="shy"></span>n’t un<span class="shy"></span>der<span class="shy"></span>stand it and would go straight to dis<span class="shy"></span>play<span class="shy"></span>ing the fall<span class="shy"></span>back. And, in fact, it would do the same even if you’d omit those “re<span class="shy"></span>quired” at<span class="shy"></span>trib<span class="shy"></span>utes at all.</p>
+<p>This way, af<span class="shy"></span>ter wrap<span class="shy"></span>ping any <abbr>HTML</abbr> with such at<span class="shy"></span>tribut<span class="shy"></span>e<span class="shy"></span>less <code>&lt;ob<span class="shy"></span>ject&gt;</code> we would get just a wrap<span class="shy"></span>per el<span class="shy"></span>e<span class="shy"></span>ment for this con<span class="shy"></span>tent. But a wrap<span class="shy"></span>per with an un<span class="shy"></span>usual trait: any con<span class="shy"></span>tent in<span class="shy"></span>side of it would be treated by browser’s parser with<span class="shy"></span>out look<span class="shy"></span>ing at the ob<span class="shy"></span>jec<span class="shy"></span>t’s con<span class="shy"></span>text. So, us<span class="shy"></span>ing this trait we can, fi<span class="shy"></span>nally, nest one link into an<span class="shy"></span>other, sep<span class="shy"></span>a<span class="shy"></span>rat<span class="shy"></span>ing them for a parser.</p>
+<p>I sup<span class="shy"></span>pose that this be<span class="shy"></span>hav<span class="shy"></span>ior was in<span class="shy"></span>tro<span class="shy"></span>duced to browsers be<span class="shy"></span>cause those ob<span class="shy"></span>ject fall<span class="shy"></span>backs were mostly used for show<span class="shy"></span>ing links like “You don’t have our mar<span class="shy"></span>velous plu<span class="shy"></span>gin in<span class="shy"></span>stalled, down<span class="shy"></span>load it now!” (like, for flash ob<span class="shy"></span>jects). And a lot of de<span class="shy"></span>vel<span class="shy"></span>op<span class="shy"></span>ers could use such ob<span class="shy"></span>jects as any other con<span class="shy"></span>tent or im<span class="shy"></span><nobr>ages —</nobr><span class="thinsp"> </span>nest<span class="shy"></span>ing into all the other tags they had in <abbr>HTML</abbr>: links, head<span class="shy"></span>ers, para<span class="shy"></span>graphs, wher<span class="shy"></span>ever. So, browsers needed this fall<span class="shy"></span>back to dis<span class="shy"></span>play prop<span class="shy"></span>erly in those con<span class="shy"></span>di<span class="shy"></span>tions, and they in<span class="shy"></span>tro<span class="shy"></span>duced this be<span class="shy"></span>hav<span class="shy"></span>ior, so the “web<span class="shy"></span>mas<span class="shy"></span>ters” would be safe from break<span class="shy"></span>ing their sites when in<span class="shy"></span>sert<span class="shy"></span>ing some copy-and-pasted code for such ex<span class="shy"></span>ter<span class="shy"></span>nal ob<span class="shy"></span>jects into their pages.</p>
+<h2 class="Heading" id="browser-support"><a class="Anchor" aria-hidden="true" href="#browser-support"></a><span class="ss01 hang-m">B</span>rowser support</h2>
+<p>Not all of the browsers had this be<span class="shy"></span>hav<span class="shy"></span>ior from the start.</p>
+<ul>
+<li><p>In<span class="shy"></span>ter<span class="shy"></span>net Ex<span class="shy"></span>plorer be<span class="shy"></span>gan to be<span class="shy"></span>have like this only from the 9th version.</p>
+</li>
+<li><p>Fire<span class="shy"></span><nobr>fox —</nobr><span class="thinsp"> </span>from the 4th.</p>
+</li>
+<li><p><nobr>Opera —</nobr><span class="thinsp"> </span>at least from 9th (maybe even ear<span class="shy"></span><nobr>lier —</nobr><span class="thinsp"> </span>I did<span class="shy"></span>n’t dig deeper than that).</p>
+</li>
+<li><p>We<span class="shy"></span><nobr>bkits —</nobr><span class="thinsp"> </span>all that I checked: Sa<span class="shy"></span>fari at least from 5.1, <nobr>Chrome —</nobr><span class="thinsp"> </span>from 14, etc.</p>
+</li>
+</ul>
+<p>Ob<span class="shy"></span>vi<span class="shy"></span>ously, the only browsers we’d need to sup<span class="shy"></span>port with such con<span class="shy"></span>di<span class="shy"></span>tions are old IE, all other browsers al<span class="shy"></span>ready be<span class="shy"></span>have cor<span class="shy"></span>rectly in all of the widely sup<span class="shy"></span>ported ver<span class="shy"></span>sions.</p>
+<h3 class="Heading" id="ie-fallback"><a class="Anchor" aria-hidden="true" href="#ie-fallback"></a><span class="ss01 hang-m">I</span>E fallback</h3>
+<p>I don’t know of any easy so<span class="shy"></span>lu<span class="shy"></span>tion for this prob<span class="shy"></span>lem in old IE. At the very least you could try to fix it some<span class="shy"></span>how by “re<span class="shy"></span>mov<span class="shy"></span>ing” the nested links us<span class="shy"></span>ing con<span class="shy"></span>di<span class="shy"></span>tional com<span class="shy"></span>ments:</p>
+<pre><code class="language-html">&lt;a href=&quot;…&quot;&gt;
+    con<span class="shy"></span>tent of the main link…
+    &lt;ob<span class="shy"></span>ject&gt;
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;a href=&quot;…&quot;&gt;&lt;!--&lt;![en<span class="shy"></span>dif]--&gt;
+            con<span class="shy"></span>tent of the nested link…
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;/​a&gt;&lt;!--&lt;![en<span class="shy"></span>dif]--&gt;
+    &lt;/​ob<span class="shy"></span>ject&gt;
+&lt;/​a&gt;
+</code></pre>
+<p>You’d lose some func<span class="shy"></span>tion<span class="shy"></span>al<span class="shy"></span>ity there, but it could be ok for the most cases. <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#try-expressions" id="try-expressions">If not</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Cu<span class="shy"></span>ri<span class="shy"></span>ous ones could think about if it is pos<span class="shy"></span>si<span class="shy"></span>ble to make a fall<span class="shy"></span>back us<span class="shy"></span>ing ex<span class="shy"></span>pres<span class="shy"></span>sions<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span>, you could then in<span class="shy"></span>sert those links later, sep<span class="shy"></span>a<span class="shy"></span>rately, us<span class="shy"></span>ing the same con<span class="shy"></span>di<span class="shy"></span>tional com<span class="shy"></span>ments, or use other workarounds for this problem.</p>
+<h2 class="Heading" id="is-it-valid-"><a class="Anchor" aria-hidden="true" href="#is-it-valid-"></a><span class="ss01 hang-m">I</span>s it valid?</h2>
+<p>Nope, not even close. It is not valid be<span class="shy"></span>cause we don’t have any of the re<span class="shy"></span>quired at<span class="shy"></span>trib<span class="shy"></span>utes on an ob<span class="shy"></span>ject. We could set some dummy, but <a class="Link" href="http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type">valid mime-type</a>, like <code>type=&quot;lol/​wut&quot;</code>, and the ob<span class="shy"></span>ject it<span class="shy"></span>self would then pass the val<span class="shy"></span>i<span class="shy"></span>da<span class="shy"></span>tion, but as soon as we nest the link in<span class="shy"></span>side of it, the val<span class="shy"></span>ida<span class="shy"></span>tor would throw us an error.</p>
+<p>Ob<span class="shy"></span>vi<span class="shy"></span>ously, a val<span class="shy"></span>ida<span class="shy"></span>tor is a tool not show<span class="shy"></span>ing any<span class="shy"></span>thing but the for<span class="shy"></span>mal spec<span class="shy"></span>i<span class="shy"></span>fi<span class="shy"></span>ca<span class="shy"></span>tions com<span class="shy"></span>pli<span class="shy"></span>ance. In our case, the us<span class="shy"></span>age of links in<span class="shy"></span>side ob<span class="shy"></span>jects is en<span class="shy"></span>tirely rea<span class="shy"></span>son<span class="shy"></span>able and won’t break any<span class="shy"></span>thing for any<span class="shy"></span>one if we’d make things in a proper way.</p>
+<p>More than that, I do not see any rea<span class="shy"></span>sons at all why specs should<span class="shy"></span>n’t drop those re<span class="shy"></span>stric<span class="shy"></span>tions and al<span class="shy"></span>low us to nest the links. No rea<span class="shy"></span>sons. None. There are a lot of cases where this is a cru<span class="shy"></span>cial re<span class="shy"></span>quire<span class="shy"></span>ment, and right now all we have are workarounds and “hacks” like this one.</p>
+<h2 class="Heading" id="usage-examples"><a class="Anchor" aria-hidden="true" href="#usage-examples"></a><span class="ss01 hang-m">U</span>sage ex<span class="shy"></span>amples</h2>
+<p>At first, I wanted to de<span class="shy"></span>scribe all the pos<span class="shy"></span>si<span class="shy"></span>ble use cases for the nested links, with live ex<span class="shy"></span>am<span class="shy"></span>ples and what<span class="shy"></span>not, but then I re<span class="shy"></span>mem<span class="shy"></span>bered that such ex<span class="shy"></span>am<span class="shy"></span>ples won’t con<span class="shy"></span>vince any<span class="shy"></span>one who is<span class="shy"></span>n’t al<span class="shy"></span>ready con<span class="shy"></span>vinced. Any<span class="shy"></span>one who ever stum<span class="shy"></span>bled upon this prob<span class="shy"></span>lem would have every<span class="shy"></span>thing they need from the so<span class="shy"></span>lu<span class="shy"></span>tion above, and oth<span class="shy"></span>ers would al<span class="shy"></span>ways be neg<span class="shy"></span>a<span class="shy"></span>tive about things like that, <em>be<span class="shy"></span>cause specs</em>. Also: it is very tir<span class="shy"></span>ing to mark up all those ex<span class="shy"></span>am<span class="shy"></span>ples, so I’ll just put them into a list:</p>
+<ul>
+<li><p>Ex<span class="shy"></span>cerpts from the ar<span class="shy"></span>ti<span class="shy"></span>cles, when the snip<span class="shy"></span>pet of first few sen<span class="shy"></span>tences could con<span class="shy"></span>tain links which you would<span class="shy"></span>n’t want to strip from the markup.</p>
+</li>
+<li><p>Side<span class="shy"></span>notes, foot<span class="shy"></span>notes, and nested terms are all too can be in<span class="shy"></span>side links, why not.</p>
+</li>
+<li><p>Any com<span class="shy"></span>plex UI with a lot of nested en<span class="shy"></span>ti<span class="shy"></span>ties, which could hap<span class="shy"></span>pen to be de<span class="shy"></span>scribed as links. Those could be tweets in any of the Twit<span class="shy"></span>ter’s in<span class="shy"></span>ter<span class="shy"></span>face, lead<span class="shy"></span>ing to the tweet’s page, but at the same time con<span class="shy"></span>tain<span class="shy"></span>ing other <nobr>links —</nobr><span class="thinsp"> </span>to users, hash<span class="shy"></span>tags, and ex<span class="shy"></span>ter<span class="shy"></span>nal pages. Those could be mail in<span class="shy"></span>ter<span class="shy"></span>faces, where the snip<span class="shy"></span>pet of a mes<span class="shy"></span>sage in an in<span class="shy"></span>box that should be a link to a mes<span class="shy"></span>sage it<span class="shy"></span>self could con<span class="shy"></span>tain other <nobr>links —</nobr><span class="thinsp"> </span>at<span class="shy"></span>tach<span class="shy"></span>ments, link to threads, la<span class="shy"></span>bels, etc.</p>
+</li>
+</ul>
+<h2 class="Heading" id="-"><a class="Anchor" aria-hidden="true" href="#-"></a><em> </em> *</h2>
+<p>The one thing I’d like to say in the end is that that trick with an ob<span class="shy"></span>ject could be ap<span class="shy"></span>plied to any con<span class="shy"></span>tent that you’d like to use some<span class="shy"></span>where where the specs for<span class="shy"></span>bid you to.</p>
+<p>As an ex<span class="shy"></span>am<span class="shy"></span>ple, there are a bunch of new tags in the lat<span class="shy"></span>est specs that you al<span class="shy"></span>ready should know, like <code>de<span class="shy"></span>tails</code> and <code>fig<span class="shy"></span>ure</code>. Guess what: by specs you can use them only in flow-level con<span class="shy"></span>texts: you can’t have pic<span class="shy"></span>tures with cap<span class="shy"></span>tions il<span class="shy"></span>lus<span class="shy"></span>trat<span class="shy"></span>ing some word in<span class="shy"></span>side a para<span class="shy"></span>graph, you can’t have a de<span class="shy"></span>scrip<span class="shy"></span>tion or foot<span class="shy"></span>notes for some words in<span class="shy"></span>side a para<span class="shy"></span>graph or a head<span class="shy"></span>ing (and what other than <code>de<span class="shy"></span>tails</code> tag would fit for this?), you can’t have a lot of cases that some<span class="shy"></span>one do<span class="shy"></span>ing specs could<span class="shy"></span>n’t think of.</p>
+<p>The <code>&lt;ob<span class="shy"></span>ject&gt;</code> trick solves all those prob<span class="shy"></span>lems. The ques<span class="shy"></span>tion is only if such us<span class="shy"></span>age would be fea<span class="shy"></span>si<span class="shy"></span>ble for you. And I’d say that a lot of re<span class="shy"></span>stric<span class="shy"></span>tions on specs are use<span class="shy"></span>less and abil<span class="shy"></span>ity to work around them, with valid ar<span class="shy"></span>gu<span class="shy"></span>ments, is priceless.</p>
+<h2 class="Heading" id="update-from-2015-03-05"><a class="Anchor" aria-hidden="true" href="#update-from-2015-03-05"></a><span class="ss01 hang-m">U</span>pdate from <nobr>2015-03</nobr>-05</h2>
+<p><a class="Link" href="https://github.com/VovanR">Vladimir Rod<span class="shy"></span>kin</a> found out that Fire<span class="shy"></span>fox’ Flash<span class="shy"></span>block plu<span class="shy"></span>gin re<span class="shy"></span>moves “bro<span class="shy"></span>ken ob<span class="shy"></span>jects”, and it treats at<span class="shy"></span>tribut<span class="shy"></span>e<span class="shy"></span>less <code>&lt;ob<span class="shy"></span>ject&gt;</code> as such. Adding un<span class="shy"></span>known mime-type like <code>type=&quot;lol/​wut&quot;</code> fixes this prob<span class="shy"></span>lem and Fx starts to show the ob<span class="shy"></span>ject cor<span class="shy"></span>rectly.</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2015-02-10">February 10, 2015</time>, in <a href="../" class="Link">Experiments</a>.
+          </p>
+          <p class="Metadata ThanksTo">Thanks to <a class="Link" href="http://taerin.deviantart.com/">Fev</a> for the illustration.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CNested%20Links%E2%80%9D" class="Link">write me about this</a>, or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2015-02-10-(fun)-nested-links/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/en/blog/flex-baseline/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Battle for Baseline</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

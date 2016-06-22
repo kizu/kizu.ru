@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+BODY {
+	background:#FFF;
+	color:#000;
+	}
+DD {
+	margin:.3em 10px;
+	}
+DL P {
+	margin:0 0 1em;
+	}
+DL P SPAN {
+	background:#DDD;
+	}
+.ex2 SUP, .ex2 SUB {
+	vertical-align:baseline;
+	position:relative;
+	font-size:.7em;
+	line-height:1;
+	}
+	.ex2 SUP {
+		bottom:1.4ex;
+		}
+	.ex2 SUB {
+		top:.5ex;
+		}
+
+</style>
+<p>Цель следующих примеров — показать куда именно и в каких случаях позиционируются эти теги. </p>
+<dl>
+	<dt>«Изначальные» теги в различных блоках:</dt>
+	<dd style="font-size:1em;"><p><span>первая строчка, смотрим на интервалы<br /><em>1em.</em> Верхний индекс<sup>здесь</sup>, а нижний — вот<sub>тут</sub>.<br />Вторая строчка, смотрим на интервалы<br />Третья строчка, смотрим на интервалы</span></p></dd>
+	<dd style="font-size:3em;"><p><span>первая строчка, смотрим на интервалы<br /><em>3em.</em> Верхний индекс<sup>здесь</sup>, а нижний — вот<sub>тут</sub>.<br />Вторая строчка, смотрим на интервалы<br />Третья строчка, смотрим на интервалы</span></p></dd>
+</dl>
+<dl class="ex2">
+	<dt>«Исправленные» суп и саб:</dt>
+	<dd style="font-size:1em;"><p><span>первая строчка, смотрим на интервалы<br /><em>1em.</em> Верхний индекс<sup>здесь</sup>, а нижний — вот<sub>тут</sub>.<br />Вторая строчка, смотрим на интервалы<br />Третья строчка, смотрим на интервалы</span></p></dd>
+	<dd style="font-size:3em;"><p><span>первая строчка, смотрим на интервалы<br /><em>3em.</em> Верхний индекс<sup>здесь</sup>, а нижний — вот<sub>тут</sub>.<br />Вторая строчка, смотрим на интервалы<br />Третья строчка, смотрим на интервалы</span></p></dd>
+</dl>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

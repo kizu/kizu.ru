@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style type="text/css">
+DL A {
+	border:1px solid lime;
+	text-decoration:none;
+	color:#000;
+	font-size:2em;
+	}
+.bg-a A:hover {
+	background:lime;
+	}
+.bg-span A:hover SPAN {
+	background:lime;
+	}
+
+A .inner {
+	background:#AAA;
+	}
+A:hover .inner {
+	background:lime;
+	}
+	</style>
+<!--[if IE]>
+	<style type="text/css">
+.hasLayout {
+	zoom:1;
+	}
+.fixed A {
+	background:url(about:blank);
+	zoom:1;
+	}
+.fixed A .hasLayout {
+	position:relative;
+	z-index:-1;
+	background:url(about:blank);
+	}
+	</style>
+<![endif]-->
+<dl>
+	<dt>Пример 1</dt>
+	<dd class="bg-a"><a href="#"><span><img src="i/black-px.gif" width="16" height="16" alt="lol" /> Простая ссылка — ок</span></a></dd>
+	<dt>Пример 2</dt>
+	<dd class="bg-a"><a href="#"><span class="hasLayout"><img src="i/black-px.gif" width="16" height="16" alt="lol" /> Ссылка с haslayout — правый клик, курсор и клик по картинке не ок в ие</span></a></dd>
+	<dt>Пример 3</dt>
+	<dd class="fixed bg-span"><a href="#"><span class="hasLayout"><img src="i/black-px.gif" width="16" height="16" alt="lol" /> Ссылка с haslayout —  ок</span></a></dd>
+	<dt>Пример 4</dt>
+	<dd><a href="#">Ссылка и <span class="inner">внутренний элемент</span> — наведение не ок в ие</a></dd>
+	<dt>Пример 5</dt>
+	<dd class="fixed"><a href="#">Ссылка и <span class="inner">внутренний элемент</span> — ок</a></dd>
+</dl>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+html {
+    background: #FFF;
+    }
+
+.scrollbox {
+    position: relative;
+    z-index: 1;
+
+    overflow: auto;
+
+    width: 200px;
+    max-height: 200px;
+    margin: 50px auto;
+
+    background: #FFF no-repeat;
+    background-image:
+        -webkit-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        -webkit-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image:
+        -moz-radial-gradient(50% 0, farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        -moz-radial-gradient(50% 100%,farthest-side, rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image:
+        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-position: 0 0, 0 100%;
+    background-size: 100% 14px;
+    }
+
+.scrollbox:before,
+.scrollbox:after {
+    content: "";
+    position: relative;
+    z-index: -1;
+
+    display: block;
+
+    height: 30px;
+    margin: 0 0 -30px;
+    background: -webkit-linear-gradient(top,#FFF,#FFF 30%,rgba(255,255,255,0));
+    background:    -moz-linear-gradient(top,#FFF,#FFF 30%,rgba(255,255,255,0));
+    background:   linear-gradient(to bottom,#FFF,#FFF 30%,rgba(255,255,255,0));
+    }
+.scrollbox:after {
+    margin: -30px 0 0;
+    background: -webkit-linear-gradient(top,rgba(255,255,255,0),#FFF 70%,#FFF);
+    background:    -moz-linear-gradient(top,rgba(255,255,255,0),#FFF 70%,#FFF);
+    background:   linear-gradient(to bottom,rgba(255,255,255,0),#FFF 70%,#FFF);
+    }
+
+</style>
+
+<div class="scrollbox">
+    <ul>
+        <li>Not enough content to scroll</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+
+
+<div class="scrollbox">
+    <ul>
+        <li>Ah! Scroll below!</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>The end!</li>
+        <li>No shadow there.</li>
+    </ul>
+</div>
+
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>kizu.ru</title>
+  <link href="http://kizu.ru/en/feed.xml" rel="self"/>
+  <link href="http://kizu.ru/en/"/>
+  <updated>2015-02-10T00:00:00+03:00</updated>
+  <id>http://kizu.ru/en/</id>
+  <author>
+    <name>Roman Komarov</name>
+    <email>kizmarh@ya.ru</email>
+  </author>
+  <entry>
+    <title>Nested Links</title>
+    <link href="http://kizu.ru/en/fun/nested-links/"/>
+    <updated>2015-02-10T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/nested-links</id>
+    <content type="html">&lt;h1 id=&quot;nested-links&quot;&gt;Nested Link&lt;span class=&quot;ss01&quot;&gt;s&lt;/span&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/fun/nested-links/nested-links.jpg&quot; width=&quot;640&quot; height=&quot;480&quot; alt=&quot;Cats playing nested links&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
+&lt;p&gt;&lt;abbr&gt;HTML&lt;/abbr&gt; specification has a lot of different restrictions. And I have my doubts about the feasibility of many of those. One example which I stumble upon rather &lt;nobr&gt;often —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;nested links.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/html5/text-level-semantics.html#the-a-element&quot;&gt;Spec&lt;/a&gt; straightly forbids such nesting:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;strong&gt;a&lt;/strong&gt; element&lt;/p&gt;
+&lt;p&gt;[…]&lt;/p&gt;
+&lt;p&gt;Content model: transparent, but there must be no &lt;a href=&quot;http://www.w3.org/TR/html5/dom.html#interactive-content-0&quot;&gt;interactive&lt;/a&gt; content descendant.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And if you’d do this, browser’s parser won’t understand you and, as soon as it’d see the opening tag for the nested link, it would close the first one right there:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;a href=&amp;quot;#Foo&amp;quot;&amp;gt;
+    Foo
+    &amp;lt;a href=&amp;quot;#Bar&amp;quot;&amp;gt;
+        Bar
+    &amp;lt;/a&amp;gt;
+    Baz
+&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the eyes of the browser would be something like &lt;nobr&gt;that&amp;#8202;—&lt;/nobr&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;a href=&amp;quot;#Foo&amp;quot;&amp;gt;
+    Foo
+    &amp;lt;/a&amp;gt;&amp;lt;a href=&amp;quot;#Bar&amp;quot;&amp;gt;
+        Bar
+    &amp;lt;/a&amp;gt;
+    Baz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And a live example:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/nested-links/#Demo_nested-links-broken&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;However, there are cases when you’d want to nest one link inside another despite the restrictions.&lt;/p&gt;
+&lt;p&gt;So, once again, while working on one task I stumbled upon such case. I happen to see and use different workarounds for it before, like an emulation of the nested links with JS (for example, with banal &lt;code&gt;onclick&lt;/code&gt;), or positioning one of the links around the &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#shared-wrapper&quot; id=&quot;shared-wrapper&quot;&gt;shared wrapper&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Look at &lt;a href=&quot;http://jsfiddle.net/csswizardry/rxsna/&quot;&gt;such solution&lt;/a&gt; by Harry Roberts&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, but all those workarounds wouldn’t work in all cases, and wouldn’t work perfectly. We’d either lose the nativity of a link, trying to emulate everything from scratch, either won’t be able to make a workaround work just like properly nested elements would.&lt;/p&gt;
+&lt;p&gt;So, after trying and weighing all the known workarounds in my head, I found out that I couldn&amp;#39;t solve the current task by any of the workarounds other than full JS emulation. But I stopped and decided to experiment a bit more.&lt;/p&gt;
+&lt;p&gt;&lt;nobr&gt;And —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;found a proper solution. &lt;abbr&gt;HTML&lt;/abbr&gt;-only one, by the way, the one that gives you a way to nest any number of links one into another.&lt;/p&gt;
+&lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/nested-links/#Demo_nested-links-simple&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;a href=&amp;quot;#a&amp;quot;&amp;gt;
+    Foo
+    &amp;lt;object type=&amp;quot;lol/wut&amp;quot;&amp;gt;
+        &amp;lt;a href=&amp;quot;#b&amp;quot;&amp;gt;
+            Bar
+        &amp;lt;/a&amp;gt;
+    &amp;lt;/object&amp;gt;
+    Baz
+&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What we do there is just placing an object between those links. Yep, it works: all parsers of modern browsers suddenly see those links independently, and won’t break your markup anymore. Hooray.&lt;/p&gt;
+&lt;h2 id=&quot;why-does-it-work&quot;&gt;Why does it work&lt;/h2&gt;
+&lt;p&gt;What are objects, in theory? They are some external entities, with the type set by the &lt;code&gt;type&lt;/code&gt; attribute and the content or a link to it placed into the &lt;code&gt;data&lt;/code&gt; attribute. And the content between the opening and closing &lt;code&gt;object&lt;/code&gt; tags is, &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#update&quot; id=&quot;update&quot;&gt;in fact&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Actually, see the &lt;a href=&quot;#update-from-2015-03-05&quot;&gt;Update&lt;/a&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, a fallback, and it would be shown only when browser wouldn’t be capable of displaying the object defined in the attributes. Like, for example, if you won’t have an installed plugin.&lt;/p&gt;
+&lt;p&gt;And if you’d write some gibberish &lt;abbr&gt;MIME&lt;/abbr&gt;-type into the &lt;code&gt;type&lt;/code&gt; attribute, a browser wouldn’t understand it and would go straight to displaying the fallback. And, in fact, it would do the same even if you’d omit those “required” attributes at all.&lt;/p&gt;
+&lt;p&gt;This way, after wrapping any &lt;abbr&gt;HTML&lt;/abbr&gt; with such attributeless &lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt; we would get just a wrapper element for this content. But a wrapper with an unusual trait: any content inside of it would be treated by browser’s parser without looking at the object’s context. So, using this trait we can, finally, nest one link into another, separating them for a parser.&lt;/p&gt;
+&lt;p&gt;I suppose that this behavior was introduced to browsers because those object fallbacks were mostly used for showing links like “You don’t have our marvelous plugin installed, download it now!” (like, for flash objects). And a lot of developers could use such objects as any other content or &lt;nobr&gt;images —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;nesting into all the other tags they had in &lt;abbr&gt;HTML&lt;/abbr&gt;: links, headers, paragraphs, wherever. So, browsers needed this fallback to display properly in those conditions, and they introduced this behavior, so the “webmasters” would be safe from breaking their sites when inserting some copy-and-pasted code for such external objects into their pages.&lt;/p&gt;
+&lt;h2 id=&quot;browser-support&quot;&gt;Browser support&lt;/h2&gt;
+&lt;p&gt;Not all of the browsers had this behavior from the start.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Internet Explorer began to behave like this only from the 9th version.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;nobr&gt;Firefox —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;from the 4th.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;nobr&gt;Opera —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;at least from 9th (maybe even &lt;nobr&gt;earlier —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I didn’t dig deeper than that).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;nobr&gt;Webkits —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;all that I checked: Safari at least from 5.1, &lt;nobr&gt;Chrome —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;from 14, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Obviously, the only browsers we’d need to support with such conditions are old IE, all other browsers already behave correctly in all of the widely supported versions.&lt;/p&gt;
+&lt;h3 id=&quot;ie-fallback&quot;&gt;IE fallback&lt;/h3&gt;
+&lt;p&gt;I don’t know of any easy solution for this problem in old IE. At the very least you could try to fix it somehow by “removing” the nested links using conditional comments:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;a href=&amp;quot;…&amp;quot;&amp;gt;
+    content of the main link…
+    &amp;lt;object&amp;gt;
+        &amp;lt;!--[if gte IE 9]&amp;gt;&amp;lt;!--&amp;gt;&amp;lt;a href=&amp;quot;…&amp;quot;&amp;gt;&amp;lt;!--&amp;lt;![endif]--&amp;gt;
+            content of the nested link…
+        &amp;lt;!--[if gte IE 9]&amp;gt;&amp;lt;!--&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;!--&amp;lt;![endif]--&amp;gt;
+    &amp;lt;/object&amp;gt;
+&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’d lose some functionality there, but it could be ok for the most cases. &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#try-expressions&quot; id=&quot;try-expressions&quot;&gt;If not&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Curious ones could think about if it is possible to make a fallback using expressions&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.&lt;/p&gt;
+&lt;h2 id=&quot;is-it-valid-&quot;&gt;Is it valid?&lt;/h2&gt;
+&lt;p&gt;Nope, not even close. It is not valid because we don’t have any of the required attributes on an object. We could set some dummy, but &lt;a href=&quot;http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type&quot;&gt;valid mime-type&lt;/a&gt;, like &lt;code&gt;type=&amp;quot;lol/wut&amp;quot;&lt;/code&gt;, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.&lt;/p&gt;
+&lt;p&gt;Obviously, a validator is a tool not showing anything but the formal specifications compliance. In our case, the usage of links inside objects is entirely reasonable and won’t break anything for anyone if we’d make things in a proper way.&lt;/p&gt;
+&lt;p&gt;More than that, I do not see any reasons at all why specs shouldn’t drop those restrictions and allow us to nest the links. No reasons. None. There are a lot of cases where this is a crucial requirement, and right now all we have are workarounds and “hacks” like this one.&lt;/p&gt;
+&lt;h2 id=&quot;usage-examples&quot;&gt;Usage examples&lt;/h2&gt;
+&lt;p&gt;At first, I wanted to describe all the possible use cases for the nested links, with live examples and whatnot, but then I remembered that such examples won’t convince anyone who isn’t already convinced. Anyone who ever stumbled upon this problem would have everything they need from the solution above, and others would always be negative about things like that, &lt;em&gt;because specs&lt;/em&gt;. Also: it is very tiring to mark up all those examples, so I’ll just put them into a list:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Excerpts from the articles, when the snippet of first few sentences could contain links which you wouldn’t want to strip from the markup.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sidenotes, footnotes, and nested terms are all too can be inside links, why not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Any complex UI with a lot of nested entities, which could happen to be described as links. Those could be tweets in any of the Twitter’s interface, leading to the tweet’s page, but at the same time containing other &lt;nobr&gt;links —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;to users, hashtags, and external pages. Those could be mail interfaces, where the snippet of a message in an inbox that should be a link to a message itself could contain other &lt;nobr&gt;links —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;attachments, link to threads, labels, etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;-&quot;&gt;&lt;em&gt; &lt;/em&gt; *&lt;/h2&gt;
+&lt;p&gt;The one thing I’d like to say in the end is that that trick with an object could be applied to any content that you’d like to use somewhere where the specs forbid you to.&lt;/p&gt;
+&lt;p&gt;As an example, there are a bunch of new tags in the latest specs that you already should know, like &lt;code&gt;details&lt;/code&gt; and &lt;code&gt;figure&lt;/code&gt;. Guess what: by specs you can use them only in flow-level contexts: you can’t have pictures with captions illustrating some word inside a paragraph, you can’t have a description or footnotes for some words inside a paragraph or a heading (and what other than &lt;code&gt;details&lt;/code&gt; tag would fit for this?), you can’t have a lot of cases that someone doing specs couldn’t think of.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt; trick solves all those problems. The question is only if such usage would be feasible for you. And I’d say that a lot of restrictions on specs are useless and ability to work around them, with valid arguments, is priceless.&lt;/p&gt;
+&lt;h2 id=&quot;update-from-2015-03-05&quot;&gt;Update from &lt;nobr&gt;2015-03&lt;/nobr&gt;-05&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/VovanR&quot;&gt;Vladimir Rodkin&lt;/a&gt; found out that Firefox’ Flashblock plugin removes “broken objects”, and it treats attributeless &lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt; as such. Adding unknown mime-type like &lt;code&gt;type=&amp;quot;lol/wut&amp;quot;&lt;/code&gt; fixes this problem and Fx starts to show the object correctly.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Battle for Baseline</title>
+    <link href="http://kizu.ru/en/blog/flex-baseline/"/>
+    <updated>2014-02-10T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/flex-baseline</id>
+    <content type="html">&lt;h1 id=&quot;battle-for-baseline&quot;&gt;Battle for Baseline&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/flex-baseline.jpg&quot; width=&quot;756&quot; height=&quot;478&quot; alt=&quot;Kitties&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The best solution for inline blocks were, well, inline-blocks. I used to like them because you could solve a lot of tasks with them. But they&amp;#39;re not ideal. They&amp;#39;re not capable of doing baseline vertical aligning &lt;em&gt;right&lt;/em&gt;. And the problems come straight from the &lt;a href=&quot;http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align&quot;&gt;specs&lt;/a&gt;, just read the last two paragraphs to see the problems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;“The baseline of an &lt;code&gt;inline-block&lt;/code&gt; is the baseline of its &lt;strong&gt;last&lt;/strong&gt; line box in the normal flow.”&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;“If [&lt;code&gt;inline-block&lt;/code&gt;&amp;#39;s] &lt;code&gt;overflow&lt;/code&gt; property has a computed value other than &lt;code&gt;visible&lt;/code&gt;, [its] baseline is the bottom margin edge.”&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Those rules make only one lined, simple inline-blocks usable with &lt;code&gt;vertical-align: baseline&lt;/code&gt;, in all other complex cases, we would get not what we would need.&lt;/p&gt;
+&lt;p&gt;Here is an example: all three blocks have &lt;code&gt;display: inline-block&lt;/code&gt;, the first one is simple oneliner, but with bigger padding, second one is multiline, but has smaller font-size and the third one has &lt;code&gt;overflow: auto&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline1.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline1&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;You &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#safari&quot; id=&quot;safari&quot;&gt;can see&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Btw, in the latest Safari the block with &lt;code&gt;overflow&lt;/code&gt; don&amp;#39;t behave according to the specs&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; where each block has its baseline in this example.&lt;/p&gt;
+&lt;h2 id=&quot;inline-table&quot;&gt;inline-table&lt;/h2&gt;
+&lt;p&gt;Actually, there was one place in &lt;abbr&gt;CSS&lt;/abbr&gt;, where the baseline aligning worked &lt;em&gt;properly&lt;/em&gt;: &lt;code&gt;display: inline-table&lt;/code&gt;. If we&amp;#39;d use it instead of inline-blocks in our example, we&amp;#39;d get almost what we tried to achieve:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline2.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline2&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;You can see an obvious flaw: the &lt;code&gt;overflow: auto&lt;/code&gt; is not working. And you shouldn&amp;#39;t forget that you&amp;#39;ll need to have &lt;code&gt;table-layout: fixed&lt;/code&gt;. So, &lt;code&gt;inline-table&lt;/code&gt; is nice as long as we don&amp;#39;t need &lt;code&gt;overflow&lt;/code&gt; other than &lt;code&gt;visible&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;trying-flex&quot;&gt;Trying to go flex&lt;/h2&gt;
+&lt;p&gt;So, can we do a block both with the proper baseline and with some &lt;code&gt;overflow&lt;/code&gt;? It seems we can, using &lt;nobr&gt;flexboxes —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;display: inline-flex&lt;/code&gt;. In &lt;a href=&quot;http://www.w3.org/TR/css3-flexbox/#flex-baselines&quot;&gt;theory&lt;/a&gt;, they have a correct baseline position in all complex cases, but what would we get in practice?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline3.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline3&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;d look at this example in any browser other than Firefox, you&amp;#39;ll see nicely aligned blocks (yep, even in IE10 and Opera 12).&lt;/p&gt;
+&lt;p&gt;But in Fx the block with &lt;code&gt;overflow: auto&lt;/code&gt;, suddenly, behaves just like the inline-&lt;nobr&gt;blocks —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it loses the baseline. So sad, this way we&amp;#39;ll need to wait for this &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=969874&quot;&gt;newly reported bug&lt;/a&gt; to be fixed.&lt;/p&gt;
+&lt;h2 id=&quot;another-way&quot;&gt;Is there another way?&lt;/h2&gt;
+&lt;p&gt;It is nice we could align &lt;code&gt;inline-flex&lt;/code&gt; blocks with the baselines of other blocks, if only there wasn&amp;#39;t this Fx bug… But what if we&amp;#39;d go and try to align not different &lt;code&gt;inline-flex&lt;/code&gt; blocks, but their children?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline4.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline4&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Oh, it works. But… While multiple &lt;code&gt;inline-flex&lt;/code&gt; blocks could wrap on overflow, for elements inside flexbox we would need to use &lt;code&gt;flex-wrap&lt;/code&gt; to wrap them. And guess what? Firefox didn&amp;#39;t support this property until 28.0.&lt;/p&gt;
+&lt;h2 id=&quot;combined&quot;&gt;All together&lt;/h2&gt;
+&lt;p&gt;But hey! If &lt;code&gt;inline-flex&lt;/code&gt; is properly aligned alongside other blocks and the nested block with &lt;code&gt;overflow: auto&lt;/code&gt; also has a proper baseline, then what if we&amp;#39;d combine those two? We would add another wrapper inside each element, then move all the paddings and overflow to them:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline5.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline5&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;In most browsers you won&amp;#39;t see any changes, but when we&amp;#39;ll look at Fx, we would see that the blocks now won&amp;#39;t have baseline at their bottom margin edge. But they won&amp;#39;t have it at the proper place &lt;nobr&gt;either —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;they&amp;#39;re shifted from the baseline of other blocks a little. Let&amp;#39;s measure &lt;nobr&gt;it —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;10 pixels. Hey, it is our padding! By removing paddings from each side we found that the problem is at the top &lt;nobr&gt;padding —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when we remove it everything works great. So, if the bug is in the padding (&lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=969880&quot;&gt;and I reported it too&lt;/a&gt;), how could we work around it? Let&amp;#39;s remove it and replace with a pseudo-element:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline6.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline6&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Perfect!&lt;/p&gt;
+&lt;h2 id=&quot;finishing-strokes&quot;&gt;Finishing strokes&lt;/h2&gt;
+&lt;p&gt;Well, not perfect. There are two small issues that can appear in IE 10 and Opera 12.&lt;/p&gt;
+&lt;p&gt;In IE flexbox with the set width wouldn&amp;#39;t have wrapped text inside of it. That&amp;#39;s a rather strange bug, but we could work around it by adding &lt;code&gt;width: 100%&lt;/code&gt; or &lt;code&gt;-ms-flex-negative: 1&lt;/code&gt; to the inner element, the latter is better.&lt;/p&gt;
+&lt;p&gt;Opera has a similar &lt;nobr&gt;bug —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the element inside a flexbox would have the width set to content. The only fix I found is adding &lt;code&gt;flex-direction: column&lt;/code&gt; to flexbox. As there would be only one element inside our wrapper, it won&amp;#39;t affect anything else.&lt;/p&gt;
+&lt;p&gt;There, &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#without-fallbacks&quot; id=&quot;without-fallbacks&quot;&gt;now it&amp;#39;s perfect&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;No fallbacks for older browsers though, but this slightly falls out of this post&amp;#39;s scope&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, there is the last example with different variants of blocks and with the wrapping blocks:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flex-baseline/examples/flex-baseline7.png&quot; alt=&quot;Screenshot&quot; title=&quot;Screenshot&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;small&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flex-baseline/#Demo_flex-baseline7&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;The resulting code for this example would be:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.flex {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+
+    /* Fixing Opera issue */
+    flex-direction: column;
+
+    vertical-align: baseline;
+    }
+
+.flex-content {
+    padding: 0 10px 10px;
+    border: 1px solid lime;
+
+    /* Fixing IE issue */
+    -ms-flex-negative: 1;
+    }
+
+/* Fixing Fx issue */
+.flex-content:before {
+    content: &amp;quot;&amp;quot;;
+    display: block;
+    padding-top: 10px;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;resume&quot;&gt;Overall&lt;/h2&gt;
+&lt;p&gt;Ah, Firefox! Without its bugs (and IE&amp;#39;s one) we could use only one element per block. Also, if you&amp;#39;ll need just multiline inline blocks, and you&amp;#39;re not afraid of tables, you could use &lt;code&gt;display: inline-table&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;But, overall, we won. We can now use baseline vertical aligning for blocks of any complexity, hooray! But if you&amp;#39;d want to write even better code in the future, I&amp;#39;d recommend you to go and vote for the &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=969874&quot;&gt;corresponding&lt;/a&gt; &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=969880&quot;&gt;bugs&lt;/a&gt; in Bugzilla.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>New Stylus Features</title>
+    <link href="http://kizu.ru/en/issues/new-stylus-features/"/>
+    <updated>2013-12-05T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/issues/new-stylus-features</id>
+    <content type="html">&lt;h1 id=&quot;new-stylus-features&quot;&gt;New Stylus Features&lt;/h1&gt;
+&lt;p&gt;Not so long ago I &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#maintaining&quot; id=&quot;maintaining&quot;&gt;became a maintainer&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;I&amp;#39;ll write someday later how this happened and what exactly I do there, but it worth to mention that I&amp;#39;m &lt;em&gt;a maintainer&lt;/em&gt;, but the main &lt;em&gt;developer&lt;/em&gt; now is my colleague &lt;a href=&quot;gh:panya&quot;&gt;Mikhail Korepanov&lt;/a&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; for &lt;a href=&quot;https://github.com/LearnBoost/stylus&quot;&gt;Stylus&lt;/a&gt; &lt;abbr&gt;CSS&lt;/abbr&gt; preprocessor. At the end of the last week, we released a new &lt;nobr&gt;version —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;a href=&quot;https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30&quot;&gt;0.41.0&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article, I&amp;#39;ll explain one &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#example-sidenote&quot; id=&quot;example-sidenote&quot;&gt;new tech&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can go straight to &lt;a href=&quot;#example&quot;&gt;its &lt;nobr&gt;step-by&lt;/nobr&gt;-step explanation&lt;/a&gt;, or to the &lt;a href=&quot;#result&quot;&gt;resulting code&lt;/a&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; that is now possible in the new Stylus, but I&amp;#39;ll describe the new features for a start.&lt;/p&gt;
+&lt;h2 id=&quot;block-mixins&quot;&gt;Block mixins&lt;/h2&gt;
+&lt;p&gt;Finally! The thing that was missing from Stylus for so &lt;nobr&gt;long —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the ability to pass blocks of Stylus code into mixins and then use those blocks inside the mixins&amp;#39; bodies.&lt;/p&gt;
+&lt;p&gt;The syntax for passing the block is rather simple: we call a mixin using a &lt;code&gt;+&lt;/code&gt; prefix, then we pass the block either in the curly braces, or using a new indent level (as you could do with a lot of things in Stylus):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;+foo()
+  // The block we want to pass
+  width: 10px
+  height: 10px
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After we passed the block to the mixin, this block becomes available inside of it as a named &lt;nobr&gt;argument —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;block&lt;/code&gt;. You can then use it anywhere inside the mixin using &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#block-call&quot; id=&quot;block-call&quot;&gt;an interpolation&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;There is a possibility we would add a way of using it without interpolation in the future though&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;foo()
+  width: 20px
+  .foo
+    {block}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or we could pass this as a variable to the next mixin, or use it in any other way.&lt;/p&gt;
+&lt;p&gt;Anyway, if you&amp;#39;ve called a mixin above like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;.bar
+  +foo()
+    padding: 0
+    .baz
+      height: 20px
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You would get this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.bar {
+  width: 20px;
+}
+.bar .foo {
+  padding: 0;
+}
+.bar .foo .baz {
+  height: 20px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With block mixins, we have a way of wrapping blocks with mixins and then wrapping them with anything. This feature is often used for handling media queries, and my example that you&amp;#39;ll see later in this article is also from the &lt;abbr&gt;RWD&lt;/abbr&gt; area.&lt;/p&gt;
+&lt;h2 id=&quot;hashes&quot;&gt;Hashes&lt;/h2&gt;
+&lt;p&gt;As I already mentioned, in the latest releases of Stylus we added (and polished to a usable state) hashes as a data type. Hashes are objects with key-value pairs, and they look rather simple:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;foo = {
+  bar: 10px,
+  raz: #fff,
+  baz: {
+    blah: blah
+    &amp;#39;10%&amp;#39;: yeah
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#codestyle&quot; id=&quot;codestyle&quot;&gt;are not&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;And as with all other optional syntax features of Stylus, you should use a consistent code style in your stylesheets. Otherwise your code would be messy as hell&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Then, after you defined a hash, you could add new properties to it or redefine old ones using dots or square brackets:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;foo.bar = 20px
+foo[&amp;#39;whatever&amp;#39;] = &amp;#39;hello&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The differences are simple: while you could use only idents with the dot syntax, with square brackets you could pass any string containing any symbols, or use a variable instead. So, the brackets are more flexible, while the dot is not.&lt;/p&gt;
+&lt;p&gt;You can get the values from the hash in the same &lt;nobr&gt;way —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;either by using a dot or using the square brackets.&lt;/p&gt;
+&lt;p&gt;I won&amp;#39;t describe &lt;a href=&quot;http://learnboost.github.io/stylus/docs/hashes.html&quot;&gt;all the features&lt;/a&gt; of the hashes, I&amp;#39;ll just mention that you can use the &lt;nobr&gt;built-in&lt;/nobr&gt; &lt;code&gt;length()&lt;/code&gt; function with them, you can iterate through them, use them in conditions (&lt;code&gt;if baz in foo&lt;/code&gt;), and there are also some &lt;nobr&gt;built-in&lt;/nobr&gt; functions to work with hashes (&lt;code&gt;keys()&lt;/code&gt;, &lt;code&gt;values()&lt;/code&gt;, &lt;code&gt;merge()&lt;/code&gt;). And you can interpolate hashes into &lt;abbr&gt;CSS&lt;/abbr&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;selector&quot;&gt;&lt;code&gt;selector()&lt;/code&gt; function&lt;/h2&gt;
+&lt;p&gt;There is now one small but important feature in &lt;nobr&gt;Stylus —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;selector()&lt;/code&gt;. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn&amp;#39;t &lt;strong&gt;get&lt;/strong&gt; the compiled selector, they only existed in the compiled &lt;abbr&gt;CSS&lt;/abbr&gt;.&lt;/p&gt;
+&lt;p&gt;But now, using &lt;code&gt;selector()&lt;/code&gt; function that returns the currently compiled selector, you could do a lot of useful things, like check the selector for something using the &lt;code&gt;match()&lt;/code&gt; function, or use it for something else. It is already very useful, and it would become even more so in future releases.&lt;/p&gt;
+&lt;p&gt;As an example, you can take this small chunk of code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;if match(&amp;#39;:(before|after)&amp;#39;, selector())
+  content: &amp;#39;&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we check if the selector has any pseudo-elements in it and if &lt;nobr&gt;so —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we apply the &lt;code&gt;content&lt;/code&gt;. This could be useful if we have some mixin, containing styles that could be applied both to a normal element and to a pseudo one.&lt;/p&gt;
+&lt;h2 id=&quot;example&quot;&gt;Example with cached media queries&lt;/h2&gt;
+&lt;p&gt;As a usage example of the new Stylus features, I&amp;#39;ll give you a solution for one of those small, responsive web design problems: the code you need to write for different viewport breakpoints. The problem is that the syntax of media queries could be rather long, so you could either use bubbling media queries which would result in not ideal &lt;abbr&gt;CSS&lt;/abbr&gt;, or, in the race for bytes, you&amp;#39;ll need to write all the overrides in one place, and that won&amp;#39;t be very comfortable in a lot of situations.&lt;/p&gt;
+&lt;p&gt;However, in the new Stylus, with block mixins, hashes and the &lt;code&gt;selector()&lt;/code&gt; function, you could work around this problem (and solve some others on your way to it).&lt;/p&gt;
+&lt;p&gt;&lt;nobr&gt;Briefly —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we can create a mixin that could be used instead of media queries and would cache the given blocks, combining them by conditions, so you could then output all of them using the second function.&lt;/p&gt;
+&lt;p&gt;The only downside of this method is the grouping &lt;nobr&gt;itself —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the selectors would be in a different order, so the specificity of the selectors could change.&lt;/p&gt;
+&lt;p&gt;For the start we need an object where we would store the cached blocks:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;$media_cache = {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we would need a mixin which we could use instead of media queries; its basic form would be this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;media($condition)
+  unless $media_cache[$condition]
+    $media_cache[$condition] = ()
+  push($media_cache[$condition], block)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This mixin&amp;#39;s logic is rather simple: if we don&amp;#39;t have a list of the blocks for a given condition, we initialize it then we pass the block to this list.&lt;/p&gt;
+&lt;p&gt;It won&amp;#39;t be enough for us actually: this mixin could be used only this way:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;+media(&amp;#39;(max-width:640px)&amp;#39;)
+  .foo
+    display: block;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could only pass full blocks to it, but couldn&amp;#39;t use the bubbling:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;.foo
+  +media(&amp;#39;(max-width:640px)&amp;#39;)
+    display: block;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code of our &lt;code&gt;media&lt;/code&gt; mixin doesn&amp;#39;t know anything about the context, the selector where we called &lt;nobr&gt;it —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;yet. Here the new &lt;code&gt;selector()&lt;/code&gt; function and an extra helper mixin are required, and with them &lt;code&gt;media&lt;/code&gt; mixin would look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
+
+  +helper($condition)
+    {selector()}
+      {block}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To save the context we move the initial code of this mixin inside a helper mixin, then call it passing the &lt;code&gt;block&lt;/code&gt; inside the interpolated&lt;code&gt;selector()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So, as we now wrap the code with a mixin, it won&amp;#39;t build automatically. We would need to call a function that would take a cache and put all it contains where we call it (and it would be logical to call it at the end of our stylesheet):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;apply_media_cache()
+  for $media, $blocks in $media_cache
+    @media $media
+      for $block in $blocks
+        {$block}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is rather easy: we iterate through the cache, taking the &lt;nobr&gt;condition —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;$media&lt;/code&gt;, and the list of all the blocks that were called with &lt;nobr&gt;it —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;$blocks&lt;/code&gt;, then we create the media query with that condition and inside of it iterate through all the blocks, yielding all of them one by one.&lt;/p&gt;
+&lt;p&gt;So, if we would then call this function at the end of the document:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;apply_media_cache()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We would get what we want.&lt;/p&gt;
+&lt;p&gt;However, there are a few things to improve in this function: we do not want always to write the parentheses, and, actually, we won&amp;#39;t want to write all those &lt;code&gt;only screen and&lt;/code&gt;. Also, we would want to use some keywords instead of the literal conditions, like &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#keywords&quot; id=&quot;keywords&quot;&gt;&lt;code&gt;palm&lt;/code&gt;, &lt;code&gt;portable&lt;/code&gt;, &lt;code&gt;desk&lt;/code&gt;&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;I&amp;#39;ve taken the names from the great &lt;a href=&quot;http://inuitcss.com/&quot;&gt;inuit.css&lt;/a&gt; framework by &lt;a href=&quot;@csswizardry&quot;&gt;Harry Roberts&lt;/a&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; and so on. With those improvements and all the previous steps the resulting code would be this:&lt;/p&gt;
+&lt;h3 id=&quot;result&quot;&gt;Resulting code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;// Define the cache and the aliases
+$media_cache = {}
+$media_aliases = {
+  palm:       &amp;#39;(max-width: 480px)&amp;#39;
+  lap:        &amp;#39;(min-width: 481px) and (max-width: 1023px)&amp;#39;
+  lap-and-up: &amp;#39;(min-width: 481px)&amp;#39;
+  portable:   &amp;#39;(max-width: 1023px)&amp;#39;
+  desk:       &amp;#39;(min-width: 1024px)&amp;#39;
+  desk-wide:  &amp;#39;(min-width: 1200px)&amp;#39;
+}
+
+// Mixin for caching the blocks with the given conditions
+media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
+
+  +helper($condition)
+    {selector() + &amp;#39;&amp;#39;}
+      {block}
+
+// Function we would use to call all the cached styles
+apply_media_cache()
+  for $media, $blocks in $media_cache
+    $media = unquote($media_aliases[$media] || $media)
+    $media = &amp;#39;(%s)&amp;#39; % $media unless match(&amp;#39;\(&amp;#39;, $media)
+    $media = &amp;#39;only screen and %s&amp;#39; % $media
+    @media $media
+      for $block in $blocks
+        {$block}
+
+// Here would be our main styles, using the `media` mixin
+// …
+
+// Here we call all the cached styles
+apply_media_cache()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we could write our stylesheets like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;.foo
+  width: 10px
+
+  +media(&amp;#39;lap&amp;#39;)
+    width: 20px
+
+  +media(&amp;#39;desk&amp;#39;)
+    width: 30px
+
+  +media(&amp;#39;min-width: 200px&amp;#39;)
+    width: 60px
+
+.bar
+  height: 10px
+
+  +media(&amp;#39;lap&amp;#39;)
+    height: 20px
+
+  +media(&amp;#39;desk&amp;#39;)
+    height: 30px
+
+  +media(&amp;#39;min-width: 200px&amp;#39;)
+    height: 50px
+
+  +media(&amp;#39;(min-width: 500px) and (max-width: 700px)&amp;#39;)
+    height: 50px
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And get this result afterwards:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.foo {
+  width: 10px;
+}
+.bar {
+  height: 10px;
+}
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+  .foo {
+    width: 20px;
+  }
+  .bar {
+    height: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .foo {
+    width: 30px;
+  }
+  .bar {
+    height: 30px;
+  }
+}
+@media only screen and (min-width: 200px) {
+  .foo {
+    width: 60px;
+  }
+  .bar {
+    height: 50px;
+  }
+}
+@media only screen and (min-width: 500px) and (max-width: 700px) {
+  .bar {
+    height: 50px;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the resulting code, we can see that we added the hash with aliases, we can also call the mixin with conditions lacking parentheses.&lt;/p&gt;
+&lt;p&gt;By using this code we can now use media queries bubbling anywhere we want and don&amp;#39;t even need to think about the extra &lt;nobr&gt;bytes —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;everything would be nicely grouped inside non-doubling media queries. All thanks to the new Stylus features.&lt;/p&gt;
+&lt;p&gt;Of course, this code is not ideal, and there could be a lot of ways to improve it, but my goal was to demonstrate the new features and how they work, after all.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Updated Jekyll</title>
+    <link href="http://kizu.ru/en/blog/updated-jekyll/"/>
+    <updated>2013-06-05T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/updated-jekyll</id>
+    <content type="html">&lt;h1 id=&quot;updated-jekyll&quot;&gt;Updated Jekyll&lt;/h1&gt;
+&lt;p&gt;Not that long ago Jekyll become that &lt;nobr&gt;big —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;version “1.0” &lt;a href=&quot;https://github.com/blog/1502-jekyll-turns-1-0&quot;&gt;was released&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are a lot of stuff in &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/History.markdown#100—2013-05-06&quot;&gt;the changelog&lt;/a&gt;: there are new features, there are a lot of fixes. You can read what&amp;#39;s the most important &lt;a href=&quot;http://jekyllrb.com/docs/upgrading/&quot;&gt;in this article&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I moved my site to this version. Well, not actually &lt;em&gt;moved&lt;/em&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;everything worked anyway, but there were some stuff in a new version that I could use to make things in a better way. So, I&amp;#39;ll write a bit on what I personally liked in this new version.&lt;/p&gt;
+&lt;h2 id=&quot;page-path&quot;&gt;&lt;code&gt;page.path&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;It&amp;#39;s one of those things I wanted the Jekyll to &lt;nobr&gt;have —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I even &lt;a href=&quot;https://github.com/mojombo/jekyll/issues/633#issuecomment-11678912&quot;&gt;pinged developers a bit&lt;/a&gt; in a corresponding issue at GitHub.&lt;/p&gt;
+&lt;p&gt;Old version of Jekyll had one flaw: there were no ways to retrieve the path of the source files for pages or blog posts. Why is this important? The blog or a site that&amp;#39;s hosted at GitHub would profit a lot from giving a way for its users to edit the content. To make it really easy it would be handy to provide a link that would go either straight to the GitHub&amp;#39;s edit file page, or at any other service that provides such possibility, like prose.io (which I use). This link would need to have the url to the source encoded in it; without proper method to do it there were only the dirtiest hacks available to implement this behavior.&lt;/p&gt;
+&lt;p&gt;And now it became really &lt;nobr&gt;simple —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the data of the posts and pages now contains the &lt;code&gt;path&lt;/code&gt; variable, which contains the path to the source of the page. Hooray!&lt;/p&gt;
+&lt;h2 id=&quot;absolute-permalinks&quot;&gt;Absolute permalinks&lt;/h2&gt;
+&lt;p&gt;Permalinks set in &lt;abbr&gt;YAML&lt;/abbr&gt; front matter were relative before. Even more, you couldn&amp;#39;t set them to point at the upper levels, like using &lt;code&gt;../&lt;/code&gt; (or I couldn&amp;#39;t find how to make it work). But in a new Jekyll you could use absolute permalinks. Actually, right now, in 1.0, you need to enable them in the config using &lt;code&gt;relative_permalinks:false&lt;/code&gt;, but with 1.1 this would be the default behavior. So, if you&amp;#39;re using relative permalinks now and don&amp;#39;t want them to become absolute at one moment, you&amp;#39;ll need to either change them to absolute ones, or just set the &lt;code&gt;relative_permalinks:true&lt;/code&gt;, so nothing would go wrong when 1.1 would be there.&lt;/p&gt;
+&lt;p&gt;Absolute permalinks made a lot of things easier for &lt;nobr&gt;me —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I could move all index pages for categories etc. to a single folder, for example.&lt;/p&gt;
+&lt;h2 id=&quot;changed-syntax-in-cli&quot;&gt;Changed syntax in &lt;abbr&gt;CLI&lt;/abbr&gt;&lt;/h2&gt;
+&lt;p&gt;New Jekyll comes with changed syntax in &lt;abbr&gt;CLI&lt;/abbr&gt;, and one of the most interesting features is an ability to use additional configs.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;d like to run Jekyll with both the default config &lt;code&gt;_config.yml&lt;/code&gt; and an extra one, like &lt;code&gt;_config-dev.yml&lt;/code&gt;, you could run Jekyll this way:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jekyll serve --config _config.yml,_config-dev.yml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using this you could easily set up the dev environment, where you could change the absolute urls to be localhost, turn on the display of the drafts and do anything extra that won&amp;#39;t show up in the production.&lt;/p&gt;
+&lt;h2 id=&quot;drafts&quot;&gt;Drafts&lt;/h2&gt;
+&lt;p&gt;In new Jekyll you could create proper drafts. If you&amp;#39;d create a &lt;code&gt;_drafts&lt;/code&gt; folder, its content won&amp;#39;t render by default, but if you&amp;#39;d run your local copy with &lt;code&gt;--drafts&lt;/code&gt; key in &lt;abbr&gt;CLI&lt;/abbr&gt;, the content of the drafts would be rendered like if it had been placed in the &lt;code&gt;_posts&lt;/code&gt; directory. One useful thing here is that you won&amp;#39;t need to set the date in the posts&amp;#39; filename, and when you&amp;#39;d need to publish the draft you&amp;#39;ll just need move the post from the &lt;code&gt;_drafts&lt;/code&gt; to the &lt;code&gt;_posts&lt;/code&gt; and add the date to its filename.&lt;/p&gt;
+&lt;p&gt;While I&amp;#39;m not using such drafts right now, it&amp;#39;s looking like a nice feature, so I&amp;#39;ll think if it could be used for my site.&lt;/p&gt;
+&lt;h2 id=&quot;other-stuff&quot;&gt;Other stuff&lt;/h2&gt;
+&lt;p&gt;There are a lot of other things mentioned in &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/History.markdown#minor-enhancements-3&quot;&gt;the changelog&lt;/a&gt;, but all that matters for me I mentioned in this post.&lt;/p&gt;
+&lt;p&gt;Overall, I&amp;#39;m happy to use Jekyll 1.0 now and recommend it to &lt;nobr&gt;anyone —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it become a bit easier to use with all the new stuff.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Application shortcuts</title>
+    <link href="http://kizu.ru/en/blog/application-shortcuts/"/>
+    <updated>2013-06-03T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/application-shortcuts</id>
+    <content type="html">&lt;h1 id=&quot;application-shortcuts&quot;&gt;Application shortcuts&lt;/h1&gt;
+&lt;p&gt;Here is one workflow thing I use all the time and I want to &lt;nobr&gt;share —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;using keyboard shortcuts to switch between applications.&lt;/p&gt;
+&lt;p&gt;I’m talking not about those system &lt;nobr&gt;shortcuts —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;cmd+tab&lt;/code&gt;/&lt;code&gt;alt+tab&lt;/code&gt;. They are &lt;nobr&gt;awful —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;because they are modal. You can’t tell at any given time what would be the result of using such shortcut: those shortcuts switch focus between the recent used apps, so you need to remember which applications you used and in which order. Which could be rather frustrating when you use more than two applications.&lt;/p&gt;
+&lt;p&gt;The solution is rather easy (my colleague Vitaly Harisov shown me it at december 2009): you just need to set a shortcut to any often-used application.&lt;/p&gt;
+&lt;p&gt;In 2009 I used Spaces in Mac OS for &lt;nobr&gt;this —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you could make a lot of spaces, each with just one app, and then set up the shortcut for each of those spaces. We used shortcuts like &lt;code&gt;option+A&lt;/code&gt;, &lt;code&gt;option+S&lt;/code&gt;, &lt;code&gt;option+D&lt;/code&gt; etc.&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;those keys are always under your fingers, and the symbols you’d get by those native shortcuts are not that useful anyway, so we could live without them.&lt;/p&gt;
+&lt;p&gt;Vitaly offered me this layout: in the centre raw of letters there were shortcuts for browsers, so you could switch between often to check your markup (something had changed there since 2009, but the main idea is clear):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;option+A&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;Opera, that was our main browser, so letter &lt;strong&gt;A&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;option+S&lt;/code&gt; —&lt;strong&gt;S&lt;/strong&gt;afari;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;option+D&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;IE, &lt;code&gt;D&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&amp;#39;cause it was &lt;strong&gt;D&lt;/strong&gt;umb;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;option+F&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;strong&gt;F&lt;/strong&gt;irefox.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other apps were somewhere near:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;option+Q&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;Terminal, &lt;code&gt;Q&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;rather close to other shortcuts;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;option+W&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;Finder, for the same reason;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;option+E&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;The main code &lt;strong&gt;E&lt;/strong&gt;ditor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also added shortcuts using &lt;code&gt;shift&lt;/code&gt;, so &lt;code&gt;option+shift+E&lt;/code&gt; went for the secondary code editor, &lt;code&gt;option+shift+A&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;for the Opera Next etc.&lt;/p&gt;
+&lt;p&gt;Right now I have shortcuts for messenger, mail, image editor, iA Writer and a lot of other stuff I use.&lt;/p&gt;
+&lt;p&gt;With one Mac OS version Spaces become worse to use with shortcuts and at the same time I bought great &lt;a href=&quot;http://www.alfredapp.com&quot;&gt;Alfred Powerpack&lt;/a&gt;, which had a very handy way to set any apps or files to keyboard shortcuts. With Alfred the setup of such shortcuts become so much easier, I got the sync for those settings across my two MacBooks using Dropbox, and the switch between apps become even faster than with Spaces (even after disabling the space switching animation). As I know, there are a bunch of similar apps for Mac like &lt;a href=&quot;http://qsapp.com/&quot;&gt;QuickSilver&lt;/a&gt; or &lt;a href=&quot;http://www.boastr.de&quot;&gt;BetterTouchTool&lt;/a&gt;, that can do the same trick. I think there should be apps for other OS like this, so if there &lt;nobr&gt;are —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;write me and I’ll add them here.&lt;/p&gt;
+&lt;p&gt;Anyway, you really should try &lt;nobr&gt;them —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;your workflow would be so much faster and seamless with them:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;When you’ll need to switch to any app, you&amp;#39;ll just press its keys. You don’t need to remember which app you used before, if it is already launched or not (Alfred would launch it for you if it’s not) and about a lot of other needless hassles.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It’s way much faster and easier than using other ways of &lt;nobr&gt;switching —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;like using your mouse or touchpad, or calling apps using Spotlight, Quicksilver or Alfred prompts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And if you’d use the same shortcuts in teams, it would be really easy to come and show anything on your colleagues’ &lt;nobr&gt;machines —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you’ll know what to press to get the kind of app you need, even if your friends uses vim instead of your lovely ST, or another browser, or anything else. And they could have Dock hidden in a place you’d never guess (or another monitor). But with the agreement on the common shortcuts for apps you could just work with their environment as with yours.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>“Blog”</title>
+    <link href="http://kizu.ru/en/blog/hello-blog/"/>
+    <updated>2013-05-07T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/hello-blog</id>
+    <content type="html">&lt;h1 id=&quot;-blog-&quot;&gt;“Blog”&lt;/h1&gt;
+&lt;p&gt;Hello! As I wrote in a &lt;a href=&quot;/en/issues/restart/&quot;&gt;post on the relaunch of my site&lt;/a&gt;, the main goal for the new version was to ease the process of adding new entries. However, beyond the technical side I completely forgot about &lt;em&gt;what exactly&lt;/em&gt; I wanted to write in that easy and simple way.&lt;/p&gt;
+&lt;p&gt;Until today everything I published on my site could be divided to two categories: &lt;a href=&quot;/issues/&quot;&gt;“issues”&lt;/a&gt; and &lt;a href=&quot;/fun/&quot;&gt;“experiments”&lt;/a&gt;. In “issues” I tried to publish mostly objective things with all the proper arguments and thoughts went through a lot of thinking. Maybe those things could be called “articles”, but I don’t like this word. In “experiments”went all those things like prototypes for different interesting things, made mostly just for fun, not as production solutions, almost without any descriptions whatsoever. While &lt;em&gt;now&lt;/em&gt; I see a bit of sense in describing things (like I did with my experiment on &lt;a href=&quot;:rotated-text&quot;&gt;rotated text&lt;/a&gt;), I still don’t like the style of &lt;nobr&gt;step-by&lt;/nobr&gt;-step tutorials that describe every letter here and there. So, those things I publish as “experiments” couldn’t go into “issues”.&lt;/p&gt;
+&lt;p&gt;So, why did I made it easy to write posts for my site? It’s because I wanted to write &lt;em&gt;more often&lt;/em&gt;. Not to publish articles or experiments (not that often for those), but to maintain a &lt;em&gt;blog&lt;/em&gt;. Not to post objective, complicated things, not for some crazy experiments with hardcore code, but to have a platform where I could share something simple, something casual maybe. Simple ideas, thoughts, critics for stuff that’s going on in the today’s frontend world.&lt;/p&gt;
+&lt;p&gt;When it was hard to publish a new post on a site I didn’t thought of it as a blog, but then I came to it and remade my site from scratch, but in a process I, again, forgot why I did all those things to Jekyll and &lt;nobr&gt;myself —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;forgot that I wanted it there for the short and simple posts. So, after the relaunch of a site there were not that much of new posts, but at the same time there were a lot of drafts and sketches for them. I forgot that you could post things not polished to the shining, but short, rough and unfinished posts (and I’ll complete all those drafts and publish them someday, but I won’t haste myself and would do it properly, without a hard schedule).&lt;/p&gt;
+&lt;p&gt;And now I remembered about all those thing, and here it &lt;nobr&gt;is —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;nobr&gt;blog —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;a new category on my site. Well, “category” is a strong word here, it’s just a way to cheat on myself and make me to write those &lt;nobr&gt;not-so&lt;/nobr&gt;-long things. The fact is all those posts would still go to &lt;a href=&quot;http://feeds.feedburner.com/kizuruen&quot; title=&quot;Atom actually, but is there a better term for it?&quot;&gt;&lt;abbr&gt;RSS&lt;/abbr&gt;&lt;/a&gt;, I still would share them on twitter, so nothing new there for you, except all those posts I’ll write actually.&lt;/p&gt;
+&lt;p&gt;So, hooray, here it is, a blog. I’ll try to post here some stupid things often :)&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Rotated text</title>
+    <link href="http://kizu.ru/en/fun/rotated-text/"/>
+    <updated>2013-04-30T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/rotated-text</id>
+    <content type="html">&lt;h1 id=&quot;rotated-text&quot;&gt;Rotated text&lt;/h1&gt;
+&lt;p&gt;Once I already shared this solution on twitter, but this time I’m going to write a bit more on it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The task&lt;/strong&gt; is to get the text rotated by 90 degrees.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The problem&lt;/strong&gt;: it’s widely known that when you use &lt;code&gt;transform&lt;/code&gt;, the block behaves similar to the &lt;code&gt;position:relative&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;its place in the flow is not changed after the transformation, so the change is only visual.&lt;/p&gt;
+&lt;p&gt;However, rather often you’ll &lt;em&gt;need&lt;/em&gt; to rotate the block in a way the flow would change either. Like if we’d want to put some rotated blocks in a row, or if we’d want to have vertical headers in &lt;nobr&gt;tables —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;in those cases we would need the height of the block to be its width after the rotate and vice versa.&lt;/p&gt;
+&lt;p&gt;I managed to make this work with one &lt;nobr&gt;assumption —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we would need to know the height of the rotated element. In such case the solution would be rather simple:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;We would need to have an extra element. &lt;abbr&gt;HTML&lt;/abbr&gt; for each block would be like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt; &amp;lt;span class=&amp;quot;rotated-text&amp;quot;&amp;gt;
+     &amp;lt;span class=&amp;quot;rotated-text__inner&amp;quot;&amp;gt;
+         Rotated foo
+     &amp;lt;/span&amp;gt;
+ &amp;lt;/span&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Wrapper would get those styles:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt; .rotated-text {
+     display: inline-block;
+     overflow: hidden;
+
+     width: 1.5em;
+     line-height: 1.5;
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt; Here we make our element to be inline-block (that’s not critical, the block display would work too, but inline-block is often handier), then we remove all the extra things using overflow (we would need this later) and set the width to the current elements’ &lt;nobr&gt;height —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the mentioned assumption (and &lt;code&gt;line-height&lt;/code&gt; is placed here as an example of what defines the blocks’ height).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then we make the inner element to be inline-block too, so its width would be collapsed to its content. After this we make it have &lt;code&gt;white-space:nowrap&lt;/code&gt;, so nothing would wrap (because of the fixed width in the previous step), and then we actually rotate the block from the left top corner using &lt;code&gt;transform-origin&lt;/code&gt; (for readability the transform properties are given without proper prefixes):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt; .rotated-text__inner {
+     display: inline-block;
+     white-space: nowrap;
+
+     transform: translate(0,100%) rotate(-90deg);
+     transform-origin: 0 0;
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And now the key part of my solution: we need to make this inner element to be &lt;em&gt;square&lt;/em&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;this would make the resulting element to have the height of its width, and the width would be equal to the assumed height on the wrapper. So, to make an element squarish we use this trick:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt; .rotated-text__inner:after {
+     content: &amp;quot;&amp;quot;;
+     float: left;
+     margin-top: 100%;
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt; Not that hard, but not a lot of people remember that top and bottom paddings and margins set in percents are using the width of the parent element, not its height. This behavior is not widely used, but here is a case where it’s useful at last.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So, in the end we got a square element, whose width is hidden by the overflow on wrapper and this element could be used in any context, so it would be affected by &lt;code&gt;text-align&lt;/code&gt; or &lt;code&gt;vertical-align&lt;/code&gt;. It is rather “fair” rotated block.&lt;/p&gt;
+&lt;p&gt;And just some basic examples of usage:&lt;/p&gt;
+&lt;h2 id=&quot;table-headers&quot;&gt;Table headers&lt;/h2&gt;
+&lt;p&gt;An obvious &lt;nobr&gt;example —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;compact table headers what don’t take that much of horizontal space:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/rotated-text/#Demo_rotated-text&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;-bookshelf-&quot;&gt;“Bookshelf”&lt;/h2&gt;
+&lt;p&gt;As all the rotated blocks have fair place in a flow, you could arrange them in a row so they won’t overlap each other and the height of the whole row would be equal to the “highest” of them:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/rotated-text/#Demo_rotated-text_books&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So, that’s it.&lt;/p&gt;
+&lt;p&gt;Once again: we need to know the initial height of the rotated block, so if we’d need to rotate multiline blocks, we’d need to change their resulting width accordingly.&lt;/p&gt;
+&lt;p&gt;Also, this method could work in &lt;nobr&gt;IE —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;by adding matrix filter and converting a pseudo-element to an actual &lt;nobr&gt;one —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;but I’m lazy enough to do this. But if you’d like, you could make it by yourself and even submit a Pull Requests to &lt;a href=&quot;https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text.html&quot;&gt;those&lt;/a&gt; &lt;a href=&quot;https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text_books.html&quot;&gt;examples&lt;/a&gt; :)&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Markdowning YAML for Jekyll</title>
+    <link href="http://kizu.ru/en/issues/markdowning-yaml/"/>
+    <updated>2013-04-21T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/issues/markdowning-yaml</id>
+    <content type="html">&lt;h1 id=&quot;markdowning-yaml-for-jekyll&quot;&gt;Markdowning &lt;abbr&gt;YAML&lt;/abbr&gt; for Jekyll&lt;/h1&gt;
+&lt;p&gt;While I’m struggling to write a lengthy article, here is a small one, on a little Jekyll trick I use.&lt;/p&gt;
+&lt;p&gt;In Jekyll you need to use &lt;abbr&gt;YAML&lt;/abbr&gt; front matter to add any metadata to the post or page. Actually, Jekyll “sees” only those files that have the &lt;abbr&gt;YAML&lt;/abbr&gt; front matter, so it is a somewhat important thing.&lt;/p&gt;
+&lt;p&gt;Most of the time this front matter would look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;---
+layout: docs
+title: Resources
+prev_section: sites
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It could seem to be ok. However, as I use Jekyll right on GitHub, my perfectionism tells me that the source of all my posts in markdown should look perfect when looked at GitHub. And it would render all the markdown documents instead of showing their content. So, the &lt;abbr&gt;YAML&lt;/abbr&gt; front matter in that case would look like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png&quot; alt=&quot;Bad code&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Not that readable, huh? And the last line suddenly became a &lt;nobr&gt;header —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I don’t think it’s what we could want there.&lt;/p&gt;
+&lt;p&gt;However, it can be fixed with ease: you just need to add some extra lines &lt;nobr&gt;in-between&lt;/nobr&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;---
+
+layout: docs
+
+title: Resources
+
+prev_section: sites
+
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And this would look so much better at GitHub:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png&quot; alt=&quot;Good code&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Instead of a useless header we would get &lt;abbr&gt;YAML&lt;/abbr&gt; nicely separated from content, and every line would become a paragraph there.&lt;/p&gt;
+&lt;p&gt;As most of posts won’t have a lot of metadata, those extra lines won’t bloat the code. And, in my opinion, this code style is also more readable when you’re working with actual code, so I don’t see any reasons why you shouldn’t use it all the time for &lt;abbr&gt;YAML&lt;/abbr&gt; front matters.&lt;/p&gt;
+&lt;p&gt;The only thing I don’t like there is that &lt;abbr&gt;YAML&lt;/abbr&gt; is so strict. You can’t add indents in the front of data, or use lists with hyphens &lt;nobr&gt;here —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;those could be rendered even nicer. Also, if someone would see any other possibility to enhance the readability of the &lt;abbr&gt;YAML&lt;/abbr&gt; front &lt;nobr&gt;matters —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;tell me via twitter or by issues on GitHub.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Jekyll</title>
+    <link href="http://kizu.ru/en/issues/going-jekyll/"/>
+    <updated>2013-01-30T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/issues/going-jekyll</id>
+    <content type="html">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+&lt;p&gt;In a &lt;a href=&quot;/en/issues/restart/&quot;&gt;post on site relaunch&lt;/a&gt; I told I’ll write a lot of articles on Jekyll. That’s the first post in the series, an introduction.&lt;/p&gt;
+&lt;p&gt;I won’t write on how to install &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;, how the files are structured there, and so &lt;nobr&gt;on —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there are already a lot of articles on that (look for some at the &lt;a href=&quot;#links&quot;&gt;“links”&lt;/a&gt;). To describe Jekyll briefly, it’s a blog-aware static site generator. An awesome one.&lt;/p&gt;
+&lt;h2 id=&quot;github-pages&quot;&gt;GitHub Pages&lt;/h2&gt;
+&lt;p&gt;I need to tell one thing from the start: this and all other future articles would be in the context of &lt;a href=&quot;http://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt;. While GitHub allows you to host any static sites on it, there is also a way to host sites wrote with Jekyll. So, the Jekyll is the only way to actually generate something right at GitHub without use of any other services or any front-end solutions.&lt;/p&gt;
+&lt;p&gt;With Jekyll you can just create a file in markdown, add a &lt;abbr&gt;YAML&lt;/abbr&gt; front matter to &lt;nobr&gt;it —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and start writing. After pushing this file to the repo on GitHub, the whole site would be regenerated and you’ll see the corresponding post both as a page on your site and in all the listings on other pages as well. And you could push your changes from any place: you could even use just GitHub’s site for this or any web app using GitHub’s &lt;abbr&gt;API&lt;/abbr&gt;.&lt;/p&gt;
+&lt;p&gt;And another thing I need to mention right from the start: a lot of things I’ll describe in the next articles could be made &lt;em&gt;so mush&lt;/em&gt; easier using plugins. But I won’t go an easy &lt;nobr&gt;way —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I’d like to make everything in a way more people could use it: even in places where the plugins are &lt;nobr&gt;disabled —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;as on GitHub Pages.&lt;/p&gt;
+&lt;h2 id=&quot;-hello-world-&quot;&gt;“Hello world”&lt;/h2&gt;
+&lt;p&gt;Minimal document you’ll need to generate a site on Jekyll should contain the &lt;a href=&quot;http://en.wikipedia.org/wiki/YAML&quot;&gt;&lt;abbr&gt;YAML&lt;/abbr&gt;&lt;/a&gt; front matter with at least one &lt;nobr&gt;field —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;layout&lt;/code&gt; (you could actually make one without it, with empty &lt;abbr&gt;YAML&lt;/abbr&gt; front matter, but in that case your page won’t have any layout at all). So, the minimal &lt;code&gt;hello-world.md&lt;/code&gt; for Jekyll would look like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+layout: default
+---
+
+Hello world!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In real world you’d like to add at least a title or some other data, but for the most trivial cases that’s the minimal code to start from.&lt;/p&gt;
+&lt;h2 id=&quot;dates&quot;&gt;Dates&lt;/h2&gt;
+&lt;p&gt;One of the features I like in Jekyll is its format for posts. You need to name the files as &lt;code&gt;YYYY-MM-DD-title&lt;/code&gt; and I think that’s awesome. It makes you to maintain a better file hierarchy that would be sorted by date automatically, and also you won’t need to write the date in the post &lt;nobr&gt;itself —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;Jekyll would use the date from the filename. Yes, in some cases you’ll want to use the &lt;code&gt;published&lt;/code&gt; field in &lt;abbr&gt;YAML&lt;/abbr&gt; to override the date from the filename, but it’s up to you. In most cases you won’t need it.&lt;/p&gt;
+&lt;h2 id=&quot;prose-io&quot;&gt;Prose.io&lt;/h2&gt;
+&lt;p&gt;And if you don’t like to fill up &lt;abbr&gt;YAML&lt;/abbr&gt; by yourself, and you don’t want to use any scripts for it (like it’s done in Jekyll Bootstrap), you could use a service like &lt;a href=&quot;http://prose.io&quot;&gt;Prose.io&lt;/a&gt;. This awesome service allows you to &lt;a href=&quot;http://prose.io/help/handbook.html#metadata_defaults&quot;&gt;describe all the metadata defaults&lt;/a&gt; in a config, so when you create a new post using Prose, all the metadata would be filled for you (actually, in most basic cases you’d need to at least look at the metadata, but that’s another story I’ll tell someday later).&lt;/p&gt;
+&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
+&lt;p&gt;There is a lot of useful info in the internets on Jekyll, I’ll try to sum all the useful links in this post for you (and for myself). There are links that would help you to start with Jekyll, and the links that are useful all the time you’re tinkering with the logic behind Jekyll’s templates.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll’s official site&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://prose.io/help/handbook.html&quot;&gt;configuring Prose.io for Jekyll&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are also a lot of helpful pages on Jekyll in the &lt;a href=&quot;http://jekyllbootstrap.com&quot;&gt;Jekyll Bootstrap&lt;/a&gt; project. I found those ones to be the most useful:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllbootstrap.com/lessons/jekyll-introduction.html&quot;&gt;Introduction to Jekyll&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllbootstrap.com/api/template-data-api.html&quot;&gt;template data &lt;abbr&gt;API&lt;/abbr&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Jekyll uses &lt;a href=&quot;http://www.liquidmarkup.org&quot;&gt;Liquid&lt;/a&gt; for templating. GitHub recently &lt;a href=&quot;https://github.com/blog/1366-github-pages-updated-to-jekyll-0-12-0&quot;&gt;updated Jekyll&lt;/a&gt;, so now you could use almost all the tags from the docs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/shopify/liquid/wiki/liquid-for-designers&quot;&gt;list of all the default liquid tags&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mojombo/jekyll/wiki/liquid-extensions&quot;&gt;extra liquid tags available in Jekyll&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before this update you couldn’t use the powerful &lt;code&gt;split&lt;/code&gt; &lt;nobr&gt;tag —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;almost the only way to make a lot of different things with Jekyll (guess &lt;nobr&gt;what —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there would be some article on me hacking with that tag).&lt;/p&gt;
+&lt;p&gt;For writing posts I recommend to use markdown. While there are other ways, like plain &lt;abbr&gt;HTML&lt;/abbr&gt; or Textile, for most cases the markdown would fit the best.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For a markdown engine I’d recommend to use &lt;a href=&quot;http://kramdown.rubyforge.org&quot;&gt;kramdown&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it’s the best option so far, I’d write why in one of the next articles.&lt;/li&gt;
+&lt;li&gt;For configuring the site or any specific post you’ll need to use &lt;a href=&quot;http://en.wikipedia.org/wiki/YAML&quot;&gt;&lt;abbr&gt;YAML&lt;/abbr&gt;&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so if you’re not familiar with its &lt;nobr&gt;syntax —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;go and read about it, it’s nice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Overall, I’m very happy I’ve chosen the Jekyll for my new site. There are a lot of issues with Liquid templates, but the overall result has been worth it.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Correct Cursor on Active Elements</title>
+    <link href="http://kizu.ru/en/issues/cursor-pointer/"/>
+    <updated>2013-01-22T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/issues/cursor-pointer</id>
+    <content type="html">&lt;h1 id=&quot;correct-cursor-on-active-elements&quot;&gt;Correct Cursor on Active Elements&lt;/h1&gt;
+&lt;p&gt;Every active element must have a set &lt;code&gt;cursor&lt;/code&gt; on hover. And it should be &lt;code&gt;cursor:pointer&lt;/code&gt; in most cases.&lt;/p&gt;
+&lt;p&gt;By active elements I mean links, buttons, selects, labels with checkboxes and radio buttons, and other similar elements.&lt;/p&gt;
+&lt;p&gt;Those elements should be treated as “active” when clicking on such element results in any action. Thereby a menu item for the current page, checked radio button or disabled buttons or links are not active elements, so they shouldn’t have any change on hover.&lt;/p&gt;
+&lt;p&gt;At first I thought it’s obvious, but then I found out there are a lot of developers who think otherwise. And I didn’t find any proper arguments against &lt;code&gt;cursor:pointer&lt;/code&gt; for active elements after reading all their points of view.&lt;/p&gt;
+&lt;p&gt;In this article I’ll tell you my arguments at first, and then I’ll discuss all the arguments against my point of view, describing why those arguments hadn’t incline me from it.&lt;/p&gt;
+&lt;h2 id=&quot;benefits-of-using-cursor-pointer&quot;&gt;Benefits of using &lt;code&gt;cursor:pointer&lt;/code&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;visual-feedback&quot;&gt;Visual Feedback&lt;/h3&gt;
+&lt;p&gt;For me the main profit from changed cursor is the visual feedback. Ideally every custom element should change its state on hover. However, in real life such state could be absent or wouldn’t differ much from the original state, or would happen with a transition. So there would be no feedback, or it would be not obvious.&lt;/p&gt;
+&lt;p&gt;But you surely would see when the cursor &lt;nobr&gt;changes —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;this happens instantly and stable. The click that could follow the mouseover would be &lt;em&gt;intuitive&lt;/em&gt;, otherwise the brain would need to match the position of the cursor with the element or spot the element’s change and then find out if it’s a hover state over this element’s active area or something else.&lt;/p&gt;
+&lt;p&gt;Changing of the cursor is the most natural, noticeable and obvious feedback you could easily add to any element. Of course, it’s not the best variant, but it’s cheap and easy. If you could add a distinct visual state on hover, then it would be even better.&lt;/p&gt;
+&lt;h3 id=&quot;delimitation-of-the-active-area&quot;&gt;Delimitation of the active area&lt;/h3&gt;
+&lt;p&gt;There are a lot of cases when you should hint to the users that they could click already. You could often want to increase the clickable area of different elements, like for small icons or for menu items placed near the window edges. In those cases adding a cursor on hover would help users to find out when they could click on an element.&lt;/p&gt;
+&lt;p&gt;In some cases, when there are adjacent elements, the cursor wouldn’t be enough to tell which element is &lt;nobr&gt;hovered —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;in those cases you should change the visual state of those elements.&lt;/p&gt;
+&lt;p&gt;Anyway, if you’d hint users when to use any specific active element, users would know it and it would be easier for them to use the UI next &lt;nobr&gt;time —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;they’d need to aim with less precision, because they’d know that active area of an element could be bigger than it can be seen. And when they’d move the cursor they could click right at the moment the cursor would change. Otherwise, if an element don’t change its cursor on hover, the users would need to aim carefully to hit the area of a small element like icon or checkbox.&lt;/p&gt;
+&lt;p&gt;And I could argue if someone would say the active area of an element should be as big as its visual representation, but I’ll keep my arguments on this topic for another article.&lt;/p&gt;
+&lt;h2 id=&quot;arguments-against-changing-the-cursor&quot;&gt;Arguments against changing the cursor&lt;/h2&gt;
+&lt;p&gt;I really did try, but hadn’t find any proper arguments against changing the cursor over the active elements. Most of those arguments can be described as “Don’t break users’ habits!”&lt;/p&gt;
+&lt;p&gt;But you can’t treat the presence of habits as an argument. This means there was one of the possible solutions and it was either the only one there, either it was the best at the moment. The habit should be treated in its context, and in context of &lt;em&gt;what&lt;/em&gt; would happen if we’d brake it. Would it be destructive in some way, or it would be just a matter of minor users’ discomfort?&lt;/p&gt;
+&lt;p&gt;Another fact is that not all of the habits are good. If we’d always stay with the users’ desires, the progress would stop. Often users become used to the things that only hinder them. A clear example of such bad habit are labels for checkboxes and radio buttons. Lazy developers didn’t bind them together for years, so users often don’t know what the labels could be actually clicked, so they spend their time and efforts trying to hit those little areas of those little controls even if the labels are clickable too. It’s a great example why you should not only bind the inputs with labels, but also tell users about it with all possible ways.&lt;/p&gt;
+&lt;p&gt;We could divide the “habits arguments” into different categories. I’d try to answer the most frequently used arguments against the changing of the cursor on hover.&lt;/p&gt;
+&lt;h3 id=&quot;-the-cursor-doesn-t-change-in-users-os-&quot;&gt;“The cursor doesn’t change in users’ OS”&lt;/h3&gt;
+&lt;p&gt;In OS the most used cursor is just an arrow. It doesn’t change over most of the system controls like buttons. However, the question is “Is this really good?” Is it familiar? Yes. But is it usable and could it be better? I often see how some desktop app is not usable because I need to guess where to &lt;nobr&gt;click —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there are no signs of active areas.&lt;/p&gt;
+&lt;p&gt;When we are talking about desktop we should also talk about games too. Unlike apps, games often have custom cursors that are changed over different UI elements. In comparison with modern games most of the web apps feel like the old games with pixel-&lt;nobr&gt;hunting —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you have to guess where to click and where to hover in order to do something. However, recently the web apps tend to use more cursors for different actions like &lt;nobr&gt;drag-n&lt;/nobr&gt;-drop or resize. But why then use the default cursor for buttons? &lt;code&gt;cursor:pointer&lt;/code&gt; would fit great there. And when we’d look at the checkboxes and radio buttons, then there should be not only a distinct visual hover state like changed background, but you shouldn’t forget to set the &lt;code&gt;cursor:default&lt;/code&gt; for &lt;nobr&gt;them —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;that’s the cursor the desktop apps mostly use to &lt;em&gt;select&lt;/em&gt; something. But if selecting the checkbox or radio button results in a UI change like expanding the accordion’s section, then the best cursor would be a pointer &lt;nobr&gt;one —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;telling something would happen after you’d click.&lt;/p&gt;
+&lt;p&gt;Web apps are not the same as desktop apps, there are a lot of new patterns and UI elements there, so it’s time to think again and decide which habits to forget.&lt;/p&gt;
+&lt;h3 id=&quot;-i-see-a-pointer-cursor-and-think-it-s-a-link-&quot;&gt;“I see a pointer cursor and think it’s a link!”&lt;/h3&gt;
+&lt;p&gt;Ah, that’s another often used argument. When there were no web apps, there were only linked textual documents. The apps mostly didn’t have such links, so in browsers, to tell users what the &lt;abbr&gt;HTML&lt;/abbr&gt; &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; is, there appeared underline, blue color and a pointer cursor. And as all the buttons and inputs were system controls, they inherited the default behavior with the default cursor.&lt;/p&gt;
+&lt;p&gt;Years passed and sites become more complex and &lt;nobr&gt;UI-rich&lt;/nobr&gt;, designers created new controls and they often were just the links disguised as buttons and other elements. And in most cases nobody removed the links’ cursors. So if you’d look at the modern sites, most custom buttons would be actually links and would have &lt;code&gt;cursor:pointer&lt;/code&gt; there.&lt;/p&gt;
+&lt;p&gt;In fact, you should forget the “pointer is for links” thing a long ago.&lt;/p&gt;
+&lt;h3 id=&quot;-but-you-could-open-links-in-new-windows-get-the-contextual-menus-for-them-&quot;&gt;“But you could open links in new windows, get the contextual menus for them…”&lt;/h3&gt;
+&lt;p&gt;Well, &lt;nobr&gt;yeah —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;links are not buttons, and buttons are not links. But that doesn’t mean the behavior of hover for links and buttons should differ.&lt;/p&gt;
+&lt;p&gt;Nobody would expect an ability to open something in a new tab from the button. In each case both the links and the buttons would have their context where users could either await the link’s behavior, either they would just use the control they have. And it really doesn’t matter which cursor the users would &lt;nobr&gt;see —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;if users would see a cursor in a links’ context, they would treat it as a link. But if users won’t expect a link, the button underneath would be ok. If users would like to attach a file, they won’t need the link’s behavior. If users would like to send a form, they would just do it, even if there’d be a &lt;code&gt;cursor:pointer&lt;/code&gt; on it, the users won’t go away and won’t try to open it in a new &lt;nobr&gt;window —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;they already know how to use search forms. The only place when the users would be &lt;nobr&gt;confused —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;if you’d do it reverse: make a button look like a &lt;nobr&gt;link —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;be blue and underlined.&lt;/p&gt;
+&lt;p&gt;Further &lt;nobr&gt;more —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there are already a lot of links that don’t look like ones and other elements that are disguised as links. Different dropdown handles, filters, cuts, closing icons, “cancel” &lt;nobr&gt;links —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;a lot of sites have a lot of elements using different tags in &lt;abbr&gt;HTML&lt;/abbr&gt; for them and having this &lt;code&gt;cursor:pointer&lt;/code&gt;. Why would then simple buttons or selects have default cursor instead of the one all other controls have?&lt;/p&gt;
+&lt;p&gt;There is a great example from one company’s service:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/issues/cursor-pointer/cursor-pointer.png&quot; alt=&quot;Active areas example&quot;&gt;&lt;/p&gt;
+&lt;p&gt;You could try to guess which marked elements are links, which are not; which have &lt;code&gt;cursor:pointer&lt;/code&gt;, which don’t. What would happen when you’ll hover or click any of those elements? You can think for a while, and I’ll give you an answer later.&lt;/p&gt;
+&lt;p&gt;If you’d say straightforwardly “only everything that have &lt;code&gt;href&lt;/code&gt; must have a cursor” then a lot of confusing things could appear. For example, if there would be one element visually, but with different tags underneath (like &lt;a href=&quot;http://twitter.github.com/bootstrap/base-css.html#buttons&quot;&gt;bootstrap’s buttons&lt;/a&gt; are), then it would be strange and confusing if there’d be a difference between the button made of &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you’d make the &lt;code&gt;default&lt;/code&gt; one, then it would become really confusing, ’cause there could be a disabled state for this button and you would need to spot the change of the button’s background in order to know could it be pressed or no. And then if you’d remove the &lt;code&gt;cursor:pointer&lt;/code&gt; from an actual link it won’t be any better, so the only proper way is to have &lt;code&gt;cursor:pointer&lt;/code&gt; in both cases.&lt;/p&gt;
+&lt;p&gt;We could find a lot of examples with buttons, links and their states would conflict with each other and the overall UX. Making the &lt;code&gt;cursor:pointer&lt;/code&gt; to mark only actionable elements makes sense and won’t create any conflicts other than slight discomfort for some persons.&lt;/p&gt;
+&lt;p&gt;And let’s get back to one strange service:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/issues/cursor-pointer/cursor-pointer.png&quot; alt=&quot;Active areas example&quot;&gt;&lt;/p&gt;
+&lt;p&gt;So, what’s there?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;It’s the post’s permalink. Ok, it’s an actual link, there is an underline and a pointer on hover.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Hey, it’s not a link, it’s just a text, not clickable at all.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;That’s pseudo-link, there is no actual link, but there is a hover state as the one on permalink: underline and pointer. Clicking here calls a dropdown to appear.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Another control that behaves like link (changes color on hover and gets &lt;code&gt;cursor:pointer&lt;/code&gt;), but there is no actual link. Again, dropdown on click.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This icon is not a link and clicking on it does nothing, while the other parts of the &lt;nobr&gt;snippet —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;header and &lt;nobr&gt;picture —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;are links.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;There are two links: userpic and username. They’re not connected and have their own hovers: pointer and an underline for username.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It’s a pseudo-link, no &lt;code&gt;href&lt;/code&gt; seen. And the underline on hover and pointer.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Oh, a button! A custom button. But what’t that? No pointer on hover! And even &lt;nobr&gt;more —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;hover brings the dropdown, I feel like on a minefield there.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;So, the button was treated as a “system” element, but what’s with checkbox? It and its label have &lt;code&gt;cursor:pointer&lt;/code&gt;. Wow.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So, what could I say? There is no even slight consistency and a lot of other UI mistakes. But hey, there is no &lt;code&gt;cursor:pointer&lt;/code&gt; on a button! I wonder which excuses the developer have for this.&lt;/p&gt;
+&lt;p&gt;&lt;abbr&gt;BTW&lt;/abbr&gt; it’s very interesting to look at different services in the search for consistency, almost no one is perfect, so you could often find things to think about and to criticise on.&lt;/p&gt;
+&lt;h3 id=&quot;-but-the-specs-say-&quot;&gt;“But the specs say…”&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/SelenIT2&quot;&gt;SelenIT&lt;/a&gt; brings &lt;a href=&quot;http://habrahabr.ru/qa/19097/&quot;&gt;another argument&lt;/a&gt; (in Russian): both the &lt;a href=&quot;http://www.w3.org/TR/CSS21/ui.html#propdef-cursor&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt;2.1&lt;/a&gt; spec and the &lt;a href=&quot;http://www.w3.org/TR/css3-ui/#links-and-status-cursors&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt;3 Basic UI&lt;/a&gt; clearly state that “the cursor is a pointer that indicates a link”. He also gives a link to a &lt;a href=&quot;http://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html&quot;&gt;Gérard Talbot’s message&lt;/a&gt;, where he declines a change to one of the &lt;abbr&gt;CSS&lt;/abbr&gt;2.1 tests. However, it couldn’t be an argument for this &lt;nobr&gt;issue —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the context of this message is a &lt;strong&gt;test for spec&lt;/strong&gt;, and if spec says something, then the test should cover only this.&lt;/p&gt;
+&lt;p&gt;In specs it is only said the pointer is supposed to be used for links, but it don’t imply you &lt;em&gt;can’t&lt;/em&gt; use it for anything other than link. It states the default use of such cursor, nothing more. Moreover, I think this part in specs should be changed to something like “The cursor is a pointer that indicates an element that can be clicked” to reflect modern state of the &lt;nobr&gt;web —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;’cause the current statement is come at least from the &lt;a href=&quot;http://www.w3.org/TR/WD-CSS2-971104/ui.html#propdef-cursor&quot;&gt;year 1997&lt;/a&gt; and a lot of things did happen since then.&lt;/p&gt;
+&lt;h3 id=&quot;-flickering-&quot;&gt;“Flickering”&lt;/h3&gt;
+&lt;p&gt;Here is another, different from habit ones, argument. If there would be a lot of actionable elements, they say, the cursor would blink a lot when you’d move it here and there.&lt;/p&gt;
+&lt;p&gt;But that’s not a proper argument, it’s a pointer for one of another problems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Active elements could be placed not that close one to another. In that case it would be harder for users to hit those elements and there would be symptomatic flickering when you’d move the cursor from one such element to another. Ideally, those elements should have continuous active areas. And to delimit different elements in that case you should use the visual hover like changing background and not the cursorless gaps.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Another &lt;nobr&gt;problem —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;cluttered interface. If you’d have whole page covered in active elements, &lt;nobr&gt;then —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;nobr&gt;yeah —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the cursor would change a lot (however, it already changes a lot when you hover over text or other static elements). When you have a lot of active areas, it could be that you need to simplify something there.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;recap&quot;&gt;Recap&lt;/h2&gt;
+&lt;p&gt;In ideal situation every active element should have a distinct visual hover state. But even with such state it won’t hurt to add a &lt;code&gt;cursor:pointer&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it would only add clarity and would remove possible UI conflicts. And if you can’t find how to make a visual state on hover, adding pointer would be enough for most cases (however, if you’re working with a designer, it would be better to ask them to give you a correct visual hover state).&lt;/p&gt;
+&lt;p&gt;And there are just no other arguments against cursor over active elements than user habits. And there would be more happy users than those who moan.&lt;/p&gt;
+&lt;p&gt;However, if you have any other arguments I didn’t &lt;nobr&gt;cover —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I would like to hear them. If you know of any A/&lt;nobr&gt;B-testing&lt;/nobr&gt; with different &lt;nobr&gt;cursors —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it would be very cool to look at the results of those.&lt;/p&gt;
+&lt;p&gt;Anyway, I hope &lt;em&gt;now&lt;/em&gt; this topic is obvious and you would go and add the &lt;code&gt;cursor:pointer&lt;/code&gt; to anywhere on you page where it is needed.&lt;/p&gt;
+&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://css-tricks.com/snippets/css/give-clickable-elements-a-pointer-cursor/&quot;&gt;Chris Coyer’s snippet on adding pointer cursor&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; Except for the snippet itself, in the comments there are all the same arguments on habits and points of view without arguments at all.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.usabilitypost.com/2009/10/26/mouse-cursor-affordance/&quot;&gt;Dmitry Fadeyev’s article on cursor’s affordance&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; In this article Dmitry comes with this statement: “If the cursor type is wrong, specify it using the &lt;abbr&gt;CSS&lt;/abbr&gt; &lt;code&gt;cursor&lt;/code&gt; property” and gives as an example custom buttons and input placeholders.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://pepelsbey.net/pres/push-it/&quot;&gt;Vadim Makeev’s slides&lt;/a&gt; (in Russian)&lt;/p&gt;
+&lt;p&gt; Nice slides on using the right elements for right purposes and all those things, however Vadim says you shouldn’t make a pointer cursor for buttons and I disagree there. Hope he’ll make up his mind after this article.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Restarting kizu.ru</title>
+    <link href="http://kizu.ru/en/issues/restart/"/>
+    <updated>2013-01-17T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/issues/restart</id>
+    <content type="html">&lt;h1 id=&quot;restarting-kizu-ru&quot;&gt;Restarting kizu.ru&lt;/h1&gt;
+&lt;p&gt;Hi there! That was a long way and I think I’m somewhere near the &lt;nobr&gt;end —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I’m relaunching my site. I can’t remember how many versions of it were there when it was entirely in Russian, but that would be the second version of my site in English.&lt;/p&gt;
+&lt;p&gt;Oh, did I say I’m near the end? I lied. You know what is the main feature of this version? It’s rough. It’s terribly, awfully draft, it&amp;#39;s broken and smelling. Don’t look at the &lt;nobr&gt;source —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you won’t find there anything better than ugly, barely working code. Really, I’m not joking. Why is it so? I decided to fight my perfectionism. I tended to polish, refine and then polish again my site before; I tried to show only the bestestest code I wrote. But now, this &lt;nobr&gt;version —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it is so far from anything I would like before. And that’s awesome.&lt;/p&gt;
+&lt;h2 id=&quot;the-goal&quot;&gt;The Goal&lt;/h2&gt;
+&lt;p&gt;So, why did I rewrote the whole site from scratch? Why do I think that it’s superior to the previous variants even in it’s deeply rough form?&lt;/p&gt;
+&lt;p&gt;That’s easy. I set the goal for myself: make a site that &lt;strong&gt;would be easy to update&lt;/strong&gt;. That’s &lt;nobr&gt;it —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;all other versions with all engines I tried for them weren’t handy for me. I had a lot of things to do for updating and filling the site or changing any parts of it. And I wanted to just write, write a lot. I have a lot of ideas for posts and things to publish at my site, but I’m lazy. Any previous version was like a wall for me, the wall I couldn’t make myself to jump over.&lt;/p&gt;
+&lt;p&gt;However, after a lot of prototypes, different engines and rewriting the whole thing several times, I came up with the solution that would fit me and would make updating my site a pleasure. And here it is. All the basic features that I wanted are complete, so I can&amp;#39;t wait anymore and launch it. But why is it pleasure to update the site now?&lt;/p&gt;
+&lt;h2 id=&quot;github-amp-jekyll&quot;&gt;GitHub &amp;amp; Jekyll&lt;/h2&gt;
+&lt;p&gt;I could praise and praise &lt;nobr&gt;GitHub —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;all the work those people do is worth a bunch of articles. But I’ll mention just one thing now.&lt;/p&gt;
+&lt;p&gt;GitHub gives you a way to host static &lt;nobr&gt;sites —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;a href=&quot;http://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt;. You could take your repo, throw some static files in it and after a few simple actions you could look at your own static site either at GitHub, or at your own domain if you’d set it up.&lt;/p&gt;
+&lt;p&gt;But there is more: other than just hosting plain dull static files, GitHub allows you to autogenerate them for &lt;nobr&gt;you —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;using &lt;a href=&quot;https://github.com/mojombo/jekyll#readme&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You could easily make a basic blog using &lt;nobr&gt;Jekyll —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it has everything you’d need for it: categories, tags, permalinks, generating feeds, etc. And as it’s a &lt;em&gt;generator&lt;/em&gt;, every page is generated just once, on your push to the repo, so it makes it nice for performance and server &lt;nobr&gt;load —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;users would get just plain htmls. A lot of people chosen the GitHub as a hosting for their blogs.&lt;/p&gt;
+&lt;p&gt;I’ve chosen too. I’ve always had a lot of demands for a static &lt;nobr&gt;generators —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I write in two languages, have a lot of experiments embedded in posts and a lot of other stuff. Jekyll uses &lt;a href=&quot;http://liquidmarkup.org&quot;&gt;Liquid&lt;/a&gt; templating engine. It’s rather simple, but with some guts you could do complex things with it. I’ve dig it a bit and made a lot of small improvements for my &lt;nobr&gt;blog —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there would be at least several articles on that. And maybe someday I’ll refine and rewrite all those things to a state of a standalone project that could be used as a boilerplate for a simple nice and powerful blog with all interesting features included. So, wait for &lt;nobr&gt;updates —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;there would be some.&lt;/p&gt;
+&lt;h2 id=&quot;prose-io&quot;&gt;Prose.io&lt;/h2&gt;
+&lt;p&gt;Ok, so I’m using GitHub, so I can just push the changes to it and they’ll go live. But GitHub have a nice &lt;nobr&gt;&lt;abbr&gt;API&lt;/abbr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so there are some web apps that already use it and do a great job with it. One of them is &lt;a href=&quot;http://prose.io&quot;&gt;prose.io&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and it works really well, I think I’ll write an article or two on it someday. I really liked it.&lt;/p&gt;
+&lt;h2 id=&quot;-write-an-article-&quot;&gt;“Write an article”&lt;/h2&gt;
+&lt;p&gt;How much times did I say “I’ll write an article on that” already? The point is I came with that New Year’s Resolution: to write at least one article a week after launching the new site. But everything tells me there would be more articles: I have a lot of drafts and ideas to tell and write on.&lt;/p&gt;
+&lt;p&gt;So, just wait for it! I’ll try to mix articles on the making of the new version of site with those I have already ideas for or with just anything that would fly there in a front of my eyes.&lt;/p&gt;
+&lt;p&gt;I’m not sure about the format of the blog/site, because everything could easily change, but I’m sure it would be fun.&lt;/p&gt;
+&lt;h2 id=&quot;markup-amp-design&quot;&gt;Markup &amp;amp; Design&lt;/h2&gt;
+&lt;p&gt;As I already &lt;nobr&gt;mentioned —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;right now there is only basement for the site that gives me an easy way to write a new article, change any previous one or just play with anything. Everything else is unfinished.&lt;/p&gt;
+&lt;p&gt;Markup is in a state of an early prototype, there is almost nothing interesting here. Well, some nice touches are there hopefully, but they are covered with layers of trash. Bad selectors, no continuous code style (the styles are generated from Stylus actually), a lot of copy-and-pasting, extra code and other bad things. Don’t read my &lt;abbr&gt;CSS&lt;/abbr&gt;. All the things that &lt;em&gt;are&lt;/em&gt; nice I’ll mention in all the new shiny posts, so you could just subscribe to the &lt;abbr&gt;RSS&lt;/abbr&gt; or &lt;a href=&quot;https://twitter.com/kizmarh&quot;&gt;follow updates in my twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Design, on the other hand, is almost stable. Yeah, there would be changes and a lot of them, but the whole concept is there.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The Font. I spend a lot of attention to it. There is a lot of the Font: I’ve chosen a big one for body, big enough for me at least. If it seems too big for &lt;nobr&gt;you —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you could reduce it using your browser or just sit farther from the display. I think it’s better to please those who are not that good at looking at small letters than those with eagle eyes.&lt;/p&gt;
+&lt;p&gt; Also, the font is serif. The sad part is that my blog is both on English and on &lt;nobr&gt;Russian —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and there are very few good free fonts with cyrillic subset. And a little more paid ones. I’ve chosen to pay. The font is &lt;a href=&quot;http://www.letterhead.ru/Fonts/21cent.html&quot;&gt;“21 cent”&lt;/a&gt; by &lt;a href=&quot;http://www.letterhead.ru&quot;&gt;Letterhead Studio&lt;/a&gt;. Don’t know why, but I really like this font. I bought it from &lt;a href=&quot;http://www.myfonts.com/fonts/letterheadrussia/21-cent/&quot;&gt;myfonts.net&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it’s nice they have it ’cause almost all other paid font providers are somewhat &lt;nobr&gt;greedy —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I don’t think paying monthly fee for a font is nice.&lt;/p&gt;
+&lt;p&gt; The whole font story is really tough and long. You can guess if it would translate into an article someday.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Minimalism. I’ve already mentioned it at &lt;nobr&gt;twitter —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it’s very hard to make a minimalistic textual site and not fall into cloning great &lt;a href=&quot;http://informationarchitects.net&quot;&gt;iA’s site&lt;/a&gt;. Some of the iterations I did for my site were dangerously close to that one. Maybe that’s not that bad after all, but I’ve stopped and tried to find what to do to make my site somehow stand out of similar ones. Minimalistic text-only sites are a trend, so it would be nice if my site would be recognisable in some way. Of course, it’s not finished, but I hope the shape can be seen.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Visual features. I’ll certainly write more posts on that, so only briefly now: look at the gamma and colors. I tried to reduce number of plain black and gray colors (and plain white too), using a small tint to everything. Also look at the header and footer (on desktop)&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I know, it’s not a new effect, but I kinda liked it and wanted to use it there as it perfectly fits into theme. And look at the &lt;nobr&gt;links —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the colors, the visited ones and especially look at the small thingy that can be visible on the underline that appears on hover.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;open-source&quot;&gt;Open Source&lt;/h2&gt;
+&lt;p&gt;Despite the rough trashy code inside, the code of this site is on GitHub. Yeah, it’s needed for all this Jekyll magic to work, but there is also another thing: the power of open source. Anyone could go and fix all those awful mistakes I do while writing the posts in English (in a verrry bad English I guess, sorry!)&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;now it’s very easy. Every article on site have two links at the bottom: one for creating an issue on GitHub straight &lt;nobr&gt;away —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so you can point me to any errors or add something to the post, and if you’re that generous, there is a link to the article at prose.&lt;nobr&gt;io —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so you could go and fix it.&lt;/p&gt;
+&lt;p&gt;Those actions would be very fast as long as you have GitHub account, so I hope you would use it. Thank you in advance!&lt;/p&gt;
+&lt;p&gt;This whole idea on going open source for articles is great, so there would be a lot of articles on that coming.&lt;/p&gt;
+&lt;h2 id=&quot;that-s-it-or-tl-dr&quot;&gt;That’s it or tl;dr&lt;/h2&gt;
+&lt;p&gt;Ok, so you can see the first post from a list of all those I’ll &lt;nobr&gt;write —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;with a new site under them. It’s drafty, broken in a lot of ways and smells inside, but that would change someday. Everything would be better and better and I’ll try to cover all the changes I do either in articles, or just in twitter.&lt;/p&gt;
+&lt;p&gt;So, thank you for reading this lengthy post (or scrolling till the end at least). Follow the updates, send pull requests and stay tuned!&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>bemto</title>
+    <link href="http://kizu.ru/en/projects/bemto/"/>
+    <updated>2012-07-02T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/projects/bemto</id>
+    <content type="html">&lt;h1 id=&quot;bemto&quot;&gt;bemto&lt;/h1&gt;
+&lt;p&gt;Oh hi. I created this &lt;nobr&gt;thing —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;a href=&quot;https://github.com/kizu/bemto&quot;&gt;bemto&lt;/a&gt;
+—&amp;#8202;some mixins for &lt;a href=&quot;https://github.com/visionmedia/jade&quot;&gt;Jade&lt;/a&gt; that makes it easy and fun to write the code in &lt;a href=&quot;http://bem.github.com/bem-method/pages/beginning/beginning.en.html&quot;&gt;&lt;abbr&gt;BEM&lt;/abbr&gt;&lt;/a&gt; notation.&lt;/p&gt;
+&lt;p&gt;I really love writing code in bem style and really like Jade, so I though that adding some bem to Jade would be a great little thing that at least I would use a lot. And I hope that it would be helpful to someone else too.&lt;/p&gt;
+&lt;p&gt;If you hadn’t already read the &lt;a href=&quot;http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/&quot;&gt;articles on &lt;abbr&gt;BEM&lt;/abbr&gt;&lt;/a&gt; on SM, or Nicolas Gallaghar’s &lt;a href=&quot;http://nicolasgallagher.com/about-html-semantics-front-end-architecture/&quot;&gt;article on front-end architecture&lt;/a&gt;,&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;go for it! Those articles explain some great ways to write extendable and mainainable code.&lt;/p&gt;
+&lt;p&gt;And Jade is the template engine heavily influenced by Haml by &lt;a href=&quot;http://tjholowaychuk.com/&quot;&gt;TJ Holowaychuk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Long story short: read &lt;a href=&quot;https://github.com/kizu/bemto#readme&quot;&gt;the readme of the project&lt;/a&gt; for more details. Especially look at &lt;a href=&quot;https://github.com/kizu/bemto/blob/master/README.md#using-for-building-complex-mixins&quot;&gt;the extended use-case&lt;/a&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it shows how you can use bemto to create reusable and &lt;nobr&gt;easy-to&lt;/nobr&gt;-use blocks.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Legends and Headings</title>
+    <link href="http://kizu.ru/en/fun/legends-and-headings/"/>
+    <updated>2012-04-27T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/legends-and-headings</id>
+    <content type="html">&lt;h1 id=&quot;legends-and-headings&quot;&gt;Legends and Headings&lt;/h1&gt;
+&lt;p&gt;One day in the last december I tried to find out what we can do with the &lt;code&gt;legend&lt;/code&gt; element. I wanted to move it in the fieldset’s frame, and didn’t want to style it out ’cause the fieldsets with legend have this special behavior: the fieldset’s border gets the gap for the legend to fit in.&lt;/p&gt;
+&lt;p&gt;So, I made some tricks to emulate different behaviors: move the legend to the right, center or even make visually two legends in one fieldset.&lt;/p&gt;
+&lt;p&gt;The easiest part is the positioning of the legend to the right: use the &lt;code&gt;direction: rtl&lt;/code&gt; and the position of the legend would adjuct accordingly. And don’t forget to bring back the &lt;code&gt;ltr&lt;/code&gt; direction on the child elements.&lt;/p&gt;
+&lt;p&gt;For the centered and the double one I used a hack with extra elements and stretched legend. There could be pseudos instead of some extra elements, but there were some bugs with them there, so I just used the extras here. Of course it’s not that «fair», but you can style it so it would look like borders, so… Here is a dabblet with those fieldsets and legends:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/legends-and-headings/#Demo_legends&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And there is a simplier demo of the headings with rulers on the sides. The main point is to use only one element and to make the borders somewhat «fair», so if there would be a background, there would be visual gaps. Other similar methods I saw used the fake background on the centered item to cover the line under it.&lt;/p&gt;
+&lt;p&gt;It’s sad that you can’t do multiline variant using only one &lt;nobr&gt;element —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so in that case there is one extra span. In other cases there is only the header and the &lt;nobr&gt;pseudos —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and it must degrade gracefully. So here is it’s dabblet:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/legends-and-headings/#Demo_headings&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Scrolling shadows</title>
+    <link href="http://kizu.ru/en/fun/shadowscroll/"/>
+    <updated>2012-04-21T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/shadowscroll</id>
+    <content type="html">&lt;h1 id=&quot;scrolling-shadows&quot;&gt;Scrolling shadows&lt;/h1&gt;
+&lt;p&gt;Here’s an old idea, but recreated with pure &lt;abbr&gt;CSS&lt;/abbr&gt;.&lt;/p&gt;
+&lt;p&gt;Originally, I had an extra wrapper and two extra pseudo-elements on it. Later I decided to rewrite the code and to use just a single element (by using radial gradients).&lt;/p&gt;
+&lt;p&gt;While this method is simple, there are some limitations: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the background must be solid&lt;ul&gt;
+&lt;li&gt;however, if you&amp;#39;d try &lt;code&gt;background-attachment: fixed&lt;/code&gt;…)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;there are some positioning issues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But in most regards this method is rather bulletproof. &lt;/p&gt;
+&lt;p&gt;If you replace the &lt;abbr&gt;CSS&lt;/abbr&gt;-gradients with simple images, this method could work in IE. (It might need a few more small fixes; I didn&amp;#39;t check.)&lt;/p&gt;
+&lt;p&gt;Enjoy!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;https://twitter.com/leaverou&quot;&gt;Lea Verou&lt;/a&gt; updated this experiment using the &lt;code&gt;background-attachment: local&lt;/code&gt;. &lt;a href=&quot;http://lea.verou.me/2012/04/background-attachment-local/&quot;&gt;Read about it in her post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/shadowscroll/#Demo_shadowscroll&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Multi-directional hover</title>
+    <link href="http://kizu.ru/en/fun/multi-directional-hover/"/>
+    <updated>2012-03-19T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/multi-directional-hover</id>
+    <content type="html">&lt;h1 id=&quot;multi-directional-hover&quot;&gt;Multi-directional hover&lt;/h1&gt;
+&lt;p&gt;Try to hover this block from different directions&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/multi-directional-hover/#Demo_hovers&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>CSS3 convex polygons</title>
+    <link href="http://kizu.ru/en/fun/polygons/"/>
+    <updated>2011-09-18T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/polygons</id>
+    <content type="html">&lt;h1 id=&quot;css3-convex-polygons&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt;3 convex polygons&lt;/h1&gt;
+&lt;p&gt;Using, &lt;code&gt;overflow:hidden&lt;/code&gt; and &lt;code&gt;visibility:hidden&lt;/code&gt; for wrappers with &lt;code&gt;visibility:visible&lt;/code&gt; on a last shild, we could do almost any convex masks which would be clickable and hoverable on their areas.&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/polygons/#Demo_polygons&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Text-overflow emulation and gradient overflow</title>
+    <link href="http://kizu.ru/en/fun/overflower/"/>
+    <updated>2011-03-08T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/overflower</id>
+    <content type="html">&lt;h1 id=&quot;text-overflow-emulation-and-gradient-overflow&quot;&gt;Text-overflow emulation and gradient overflow&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;The «overflow» effect is visible only if there is something to hide (so, there wouldn’t be a case when there is an overlayed gradient that hides a part of text, that would be visible whole anyway).&lt;/li&gt;
+&lt;li&gt;Also, you can add a &lt;code&gt;title&lt;/code&gt; attribute to a block, that would appear only when something is hidden.&lt;/li&gt;
+&lt;li&gt;You can use this method starting from the IE7 (however, I hadn’t optimise it for this experiment, so barely only title would be visible)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Resize the browser’s window to see the switching of overflow effect.&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/overflower/#Demo_overflower&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Filtering elements without JS</title>
+    <link href="http://kizu.ru/en/fun/filters/"/>
+    <updated>2011-02-06T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/filters</id>
+    <content type="html">&lt;h1 id=&quot;filtering-elements-without-js&quot;&gt;Filtering elements without JS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Colors are just checkboxes.&lt;/li&gt;
+&lt;li&gt;&lt;nobr&gt;Shapes —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;radiobuttons with an upgrade: you can uncheck once it&amp;#39;s checked.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Just &lt;abbr&gt;CSS&lt;/abbr&gt;, no JS, enjoy!&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/filters/#Demo_filters&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Only modern browsers supported, can be emulated in IE via expressions, but I&amp;#39;m lazy enough not to do it here.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Popups and dropdowns only by CSS</title>
+    <link href="http://kizu.ru/en/fun/popups/"/>
+    <updated>2011-02-05T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/popups</id>
+    <content type="html">&lt;h1 id=&quot;popups-and-dropdowns-only-by-css&quot;&gt;Popups and dropdowns only by &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/h1&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/popups/#Demo_popups&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+
+    </content>
+  </entry>
+  <entry>
+    <title>Custom CSS3 controls</title>
+    <link href="http://kizu.ru/en/fun/controls/"/>
+    <updated>2011-02-03T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/controls</id>
+    <content type="html">&lt;h1 id=&quot;custom-css3-controls&quot;&gt;Custom &lt;abbr&gt;CSS&lt;/abbr&gt;3 controls&lt;/h1&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/fun/controls/#Demo_controls&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This experiment features the heavy-css-styled radio-buttons, made without any use of JS using the &lt;code&gt;:checked&lt;/code&gt; pseudo-class. And with somewhat graceful degradation for some old browsers.&lt;/p&gt;
+&lt;p&gt;Also, there is some strange non-semantic structure, in which I tried to overcome one old &lt;a href=&quot;http://css-tricks.com/8439-webkit-sibling-bug/&quot;&gt;webkit’s bug&lt;/a&gt;. Since there is a better solution for this problem (using the always-runnng animation), this experiment was useful to me ’cause, you know, it’s always fun to overcome a bug and create something that works as intended. In the further experiments I&amp;#39;d use the animation bug-fix.&lt;/p&gt;
+&lt;p&gt;I have a lot of other thoughts for custom inputs, so stay tuned!&lt;/p&gt;
+
+    </content>
+  </entry>
+</feed>

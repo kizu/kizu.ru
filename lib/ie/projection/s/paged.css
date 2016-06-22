@@ -1,0 +1,99 @@
+/*_*/
+
+HTML,
+BODY {
+	height:100%;
+}
+
+BODY {
+	background:#000;
+	}
+
+H1,
+H2,
+H3,
+H4,
+H5,
+H6 {
+	text-align:center;
+	}
+
+A:link,
+A:visited {
+	color:inherit;
+	text-decoration:inherit;
+	}
+.aslink,
+.aslink:link,
+.aslink:visited {
+	text-decoration:underline;
+	}
+
+.presentation {
+	max-width:100%;
+	height:100%;
+	margin:0 auto;
+	font-size:3em;
+	counter-reset:presentation_item;
+	background:#FFF;
+	}
+
+.slide:not(HEADER) {
+	display:table;
+	position:relative;
+	page-break-before:always;
+	width:100%;
+	height:100%;
+	padding:0 3em;
+	box-sizing:border-box;
+	background:#FFF;
+	}
+.slide:after {
+	content:counter(presentation_item);
+	counter-increment:presentation_item;
+	position:absolute;
+	right:2em;
+	bottom:1em;
+	font-size:.5em;
+	color:#555;
+	}
+FOOTER.slide:after,
+HEADER.slide:after {
+	visibility:hidden;
+	}
+FOOTER.slide {
+	font-size:2em;
+	}
+	FOOTER.slide .aslink {
+		font-family:Monaco,Consolas,"Lucida Console","Courier New",monospace;
+		}
+.slide EM {
+	font-size:.9em;
+	font-style:normal;
+	color:#AAA;
+	}
+
+.slide :last-child {
+	margin-bottom:0;
+	}
+
+.slide DT {
+	margin-top:2em;
+	}
+.slide DD {
+	padding:0 0 0 1em;
+	border-left:.2em solid #CCC;
+	}
+/* Title Page */
+HEADER.slide {
+	display:table;
+	width:100%;  
+	max-width:none;
+	height:100%;
+	padding:0;
+	}
+	HEADER.slide .slide-in {
+		display:table-cell;
+		text-align: center;
+		vertical-align: middle;
+		}

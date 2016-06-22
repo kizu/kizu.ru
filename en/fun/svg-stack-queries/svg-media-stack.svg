@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+	<style>
+
+.icon { display: none }
+
+@media (aspect-ratio: 1/2), (aspect-ratio: 2/1) { #download { display: inline; }}
+@media (aspect-ratio: 1/3), (aspect-ratio: 3/1) { #next { display: inline; }}
+@media (aspect-ratio: 1/5), (aspect-ratio: 5/1) { #print { display: inline; }}
+
+@media (orientation: landscape) { .icon { fill: blue; } }
+
+
+	</style>
+
+	<path class="icon" id="download" d="M2,6h3V1h6v5h3L8,12m7,1v2H1V13"></path>
+	<path class="icon" id="next" d="M5 1v14l9-7"></path>
+	<path class="icon" id="print" d="M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5"></path>
+</svg>
+

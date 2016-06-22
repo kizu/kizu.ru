@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+/* Different “legend” — wait for it — experiments! */
+.fieldset {
+    margin: 1em 0;
+    border: 2px groove #AAA;
+}
+
+.fieldset_special>.legend {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.legend__inner {
+    display: block;
+    overflow: hidden;
+
+    text-align: center;
+    white-space: nowrap;
+}
+
+.legend__content {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.legend__left,
+.legend__right {
+    display: inline-block;
+
+    vertical-align: middle;
+
+    border-top: 2px groove #AAA;
+    width: 999px;
+    margin: 0 0 0 -999px;
+}
+
+.legend__right {
+    margin: 0 -999px 0 0;
+}
+
+.legend__part1 {
+    float: left;
+    margin: 0 2px;
+}
+.legend__part2 {
+    float: right;
+    margin: 0 2px 0 8px;
+}
+.legend__hr {
+    position: relative;
+    left: 2px; /* Can't use negative margin without losing the desired behavior */
+
+    display: block;
+    overflow: hidden;
+
+    border-top: 2px groove #AAA;
+    margin: .5em 0 0 0;
+}
+
+
+/* Showing that gaps are transparent */
+/* Pattern got from http://lea.verou.me/css3patterns/#diagonal-checkerboard */
+
+BODY {
+    background-color: #EEE;
+    background-image: linear-gradient( 45deg, #DDD 25%,transparent 25%, transparent 75%, #DDD 75%, #DDD),
+                      linear-gradient(-45deg, #DDD 25%,transparent 25%, transparent 75%, #DDD 75%, #DDD);
+    background-size:60px 60px;
+    }
+
+.fieldset_righty {
+    direction: rtl;
+}
+
+.fieldset_righty > .legend,
+.fieldset_righty > .fieldset__content {
+    direction: ltr;
+}
+
+H2 {
+    text-align: center;
+}
+
+</style>
+
+<h2>Just a legend</h2>
+<fieldset class="fieldset">
+    <legend class="legend">Nothing special</legend>
+    <p>Just some styles to make this fieldset look like custom others.</p>
+</fieldset>
+
+<h2>Legend on the right</h2>
+<fieldset class="fieldset fieldset_righty">
+    <legend class="legend">Well, that's simple</legend>
+    <div class="fieldset__content">And just some content</div>
+</fieldset>
+
+<h2>Centered legend</h2>
+<fieldset class="fieldset fieldset_special">
+    <legend class="legend">
+        <span class="legend__inner">
+            <span class="legend__left"></span>
+            <span class="legend__content">Wait for it…</span>
+            <span class="legend__right"></span>
+        </span>
+    </legend>
+    And just some content
+</fieldset>
+
+<h2>Two legends</h2>
+<fieldset class="fieldset fieldset_special">
+    <legend class="legend">
+        <span class="legend__part1">I'm the left part</span>
+        <span class="legend__part2">And I'm the right one</span>
+        <span class="legend__hr"></span>
+    </legend>
+    <div class="fieldset__content">And just some content</div>
+</fieldset>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

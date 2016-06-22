@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Stylus, Yandex.Mail and conditional IE styles — kizu.ru/en</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи нет перевода, но для многих других — есть" href="/" class="Page-Language-Link">по-русски*</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="stylus-yandex-mail-and-conditional-ie-styles"><a class="Anchor" aria-hidden="true" href="#stylus-yandex-mail-and-conditional-ie-styles"></a><span class="ss01 hang-xs">S</span>ty<span class="shy"></span>lus, Yan<span class="shy"></span>dex.Mail and con<span class="shy"></span>di<span class="shy"></span>tional IE styles</h1>
+          </header>
+<p>Hi there. Here is a trans<span class="shy"></span>la<span class="shy"></span>tion of <a class="Link" href="http://habrahabr.ru/company/yandex/blog/169415/">the ar<span class="shy"></span>ti<span class="shy"></span>cle</a> I wrote in russ<span class="shy"></span>ian for Yan<span class="shy"></span>dex’ blog at Habra<span class="shy"></span>habr. There I wrote on how we ended up with us<span class="shy"></span>ing <a class="Link" href="http://learnboost.github.com/stylus">Sty<span class="shy"></span>lus</a> <abbr>CSS</abbr> pre<span class="shy"></span>proces<span class="shy"></span>sor in our <a class="Link" href="http://mail.yandex.com/">Mail ser<span class="shy"></span>vice</a> and why we did it.</p>
+<p>Along with that I&#39;ll fea<span class="shy"></span>ture my lit<span class="shy"></span>tle li<span class="shy"></span>brary/​method<span class="shy"></span>ol<span class="shy"></span>ogy on mess<span class="shy"></span>ing with IE styles us<span class="shy"></span>ing the magic of Sty<span class="shy"></span><nobr>lus —</nobr><span class="thinsp"> </span><a class="Link" href="https://github.com/kizu/if-ie.styl"><nobr>if-ie</nobr>.styl</a>.</p>
+<p>That&#39;s only the first ar<span class="shy"></span>ti<span class="shy"></span>cle in the se<span class="shy"></span>ries, I&#39;ll write more on how we use Sty<span class="shy"></span>lus someday.</p>
+<h2 class="Heading" id="how-we-ended-up-with-using-prepressors"><a class="Anchor" aria-hidden="true" href="#how-we-ended-up-with-using-prepressors"></a><span class="ss01 hang-m">H</span>ow we ended up with us<span class="shy"></span>ing pre<span class="shy"></span>pressors</h2>
+<p>While our Mail ser<span class="shy"></span>vice look like a sim<span class="shy"></span>ple web app, it ac<span class="shy"></span>tu<span class="shy"></span>ally con<span class="shy"></span>tains a lot of dif<span class="shy"></span>fer<span class="shy"></span>ent blocks, mod<span class="shy"></span>i<span class="shy"></span>fi<span class="shy"></span>ca<span class="shy"></span>tions of those blocks and dif<span class="shy"></span>fer<span class="shy"></span>ent con<span class="shy"></span>text where those blocks could appear.</p>
+<p>More<span class="shy"></span>over, there are more than thirty themes avail<span class="shy"></span>able for the app. There are themes with light and dark back<span class="shy"></span>grounds, there are ones that dif<span class="shy"></span>fer only with hues, and there are <nobr>other —</nobr><span class="thinsp"> </span>like the one with the graph<span class="shy"></span>i<span class="shy"></span>cal in<span class="shy"></span>ter<span class="shy"></span>face made of plas<span class="shy"></span>ticine (<a class="Link" href="https://www.youtube.com/watch?v=qrDU3ErUiHA&amp;hd=1">lit<span class="shy"></span>er<span class="shy"></span>ally</a>). Some themes have only one back<span class="shy"></span>ground im<span class="shy"></span>age, other could have a lot of dif<span class="shy"></span>fer<span class="shy"></span>ent vari<span class="shy"></span>a<span class="shy"></span>tions cho<span class="shy"></span>sen ei<span class="shy"></span>ther ran<span class="shy"></span>domly or ac<span class="shy"></span>cord<span class="shy"></span>ing to the cur<span class="shy"></span>rent weather or the time of the day.</p>
+<p>All this re<span class="shy"></span>sults in a lot of vari<span class="shy"></span>a<span class="shy"></span>tions of the vi<span class="shy"></span>sual in<span class="shy"></span>ter<span class="shy"></span>face and makes us to find un<span class="shy"></span>usual ways and tools that would fit our needs per<span class="shy"></span>fectly.</p>
+<p>When we started to de<span class="shy"></span>velop the new (early 2010) ver<span class="shy"></span>sion of the Yan<span class="shy"></span>dex.Mail, we had the tool that we know: Tem<span class="shy"></span>plate Toolkit 2, so we used it for gen<span class="shy"></span>er<span class="shy"></span>at<span class="shy"></span>ing this <abbr>CSS</abbr> for themes. There were sim<span class="shy"></span>ple vari<span class="shy"></span>ables and con<span class="shy"></span>di<span class="shy"></span>tions, so it went ok. But with the num<span class="shy"></span>ber and the com<span class="shy"></span>plex<span class="shy"></span>ity of themes grow<span class="shy"></span>ing the tt2 be<span class="shy"></span>come not that handy to use, so we started to look at the more spe<span class="shy"></span>cialised <nobr>tools —</nobr><span class="thinsp"> </span><abbr>CSS</abbr> Pre<span class="shy"></span>processors.</p>
+<h2 class="Heading" id="choosing-the-preprocessor"><a class="Anchor" aria-hidden="true" href="#choosing-the-preprocessor"></a><span class="ss02 hang-xs">C</span>hoos<span class="shy"></span>ing the pre<span class="shy"></span>processor</h2>
+<p>We looked at the best three avail<span class="shy"></span>able pre<span class="shy"></span>proces<span class="shy"></span>sors at the time: Sass, Less and Sty<span class="shy"></span>lus. The se<span class="shy"></span>lec<span class="shy"></span>tion process was rather easy: we taken some of our com<span class="shy"></span>plex blocks and tried to rewrite their <abbr>CSS</abbr> us<span class="shy"></span>ing each of the pre<span class="shy"></span>processors.</p>
+<p><a class="Link" href="http://lesscss.org/"><strong>Less</strong></a> looked rather sim<span class="shy"></span>ple and handy at first: it uses the fa<span class="shy"></span>mil<span class="shy"></span>iar <abbr>CSS</abbr> syn<span class="shy"></span>tax and it can be used in the browser which is use<span class="shy"></span>ful for de<span class="shy"></span>bug<span class="shy"></span>ging. How<span class="shy"></span>ever, when we tried to make more com<span class="shy"></span>plex things with it we found out that it&#39;s also sim<span class="shy"></span>ple in other <nobr>way —</nobr><span class="thinsp"> </span>what could you achieve with<span class="shy"></span>out ar<span class="shy"></span>rays, cy<span class="shy"></span>cles and proper con<span class="shy"></span>di<span class="shy"></span>tions? Not that much.</p>
+<p>Then we tried <a class="Link" href="http://sass-lang.com/"><strong>Sass</strong></a> and it was re<span class="shy"></span>ally nice. Pow<span class="shy"></span>er<span class="shy"></span>ful, of<span class="shy"></span>fer<span class="shy"></span>ing two syn<span class="shy"></span>taxes, com<span class="shy"></span>mu<span class="shy"></span>nity and a lot of ex<span class="shy"></span>ist<span class="shy"></span>ing code in<span class="shy"></span>clud<span class="shy"></span>ing li<span class="shy"></span>braries like <a class="Link" href="http://compass-style.org/">Com<span class="shy"></span>pass</a>. But we found out just one big draw<span class="shy"></span>back there: Sass have very lim<span class="shy"></span>ited par<span class="shy"></span>ent ref<span class="shy"></span>er<span class="shy"></span>ence fea<span class="shy"></span>ture (us<span class="shy"></span>ing <code>&amp;</code> sym<span class="shy"></span>bol in nested se<span class="shy"></span>lec<span class="shy"></span>tors to, well, ref<span class="shy"></span>er<span class="shy"></span>ence the par<span class="shy"></span>ent). The main prob<span class="shy"></span>lem is that you can&#39;t use it for pre<span class="shy"></span>fix<span class="shy"></span>ing with mul<span class="shy"></span>ti<span class="shy"></span>ple classes or el<span class="shy"></span>e<span class="shy"></span>ments and for con<span class="shy"></span>cate<span class="shy"></span>nat<span class="shy"></span>ing the classes with any post<span class="shy"></span>fixes. Here are a few ex<span class="shy"></span>am<span class="shy"></span>ples of what you <em>can&#39;t</em> do in Sass (and can in other pre<span class="shy"></span>proces<span class="shy"></span>sors):</p>
+<ul>
+<li><code>&amp;__bar</code></li>
+<li><code>.baz&amp;</code></li>
+<li><code>but<span class="shy"></span>ton&amp;</code></li>
+</ul>
+<p>…</p>
+<h2 class="Heading" id="if-ie-styl-library"><a class="Anchor" aria-hidden="true" href="#if-ie-styl-library"></a><a class="Link" href="https://github.com/kizu/if-ie.styl"><nobr>if-ie</nobr>.styl</a> li<span class="shy"></span>brary</h2>
+<h3 class="Heading" id="the-base-for-the-methodology"><a class="Anchor" aria-hidden="true" href="#the-base-for-the-methodology"></a><span class="ss01 hang-m">T</span>he base for the method<span class="shy"></span>ology</h3>
+<h3 class="Heading" id="extra-features-of-if-ie-styl"><a class="Anchor" aria-hidden="true" href="#extra-features-of-if-ie-styl"></a><span class="ss01 hang-m">E</span>xtra fea<span class="shy"></span>tures of <nobr>if-ie</nobr>.styl</h3>
+<h3 class="Heading" id="inline-block"><a class="Anchor" aria-hidden="true" href="#inline-block"></a><code>in<span class="shy"></span>line-block</code></h3>
+<h3 class="Heading" id="rgba-ie"><a class="Anchor" aria-hidden="true" href="#rgba-ie"></a><code>rgba-ie</code></h3>
+
+          <p class="Metadata Published">Published on 
+            <time>June 22</time>, in <a href="../" class="Link">Articles</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CStylus%2C%20Yandex.Mail%20and%20conditional%20IE%20styles%E2%80%9D" class="Link">write me about this</a>, or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/(issues)-stylus-at-yandex-mail/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

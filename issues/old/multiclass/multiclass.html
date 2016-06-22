@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+DD {
+	background:blue;
+	color:#FFF;
+	padding:.2em;
+	}
+
+
+.class1.class2 .ex1 {
+	background:green;
+	}
+.nonsence.class2 .ex1 {
+	background:red;
+	}
+.class1.class2 .ex2 {
+	background:green;
+	}
+.class2 .ex2 {
+	background:red;
+	}
+
+.class1 .class2 .ex3 {
+	background:green;
+	}
+.nonsence .class2 .ex3 {
+	background:red;
+	}
+.class1 .class2 .ex4 {
+	background:green;
+	}
+.class2 .ex4 {
+	background:red;
+	}
+
+	</style>
+</head>
+<div class="class1 class2">
+	<div class="class1 class2">
+		<dl>
+			<dt>Пример 1</dt>
+			<dd class="ex1">example1 (red in ie)</dd>
+			<dt>Пример 2</dt>
+			<dd class="ex2">example2 (red in ie)</dd>
+			<dt>Пример 3</dt>
+			<dd class="ex3">example3 (ok)</dd>
+			<dt>Пример 4</dt>
+			<dd class="ex4">example4 (ok)</dd>
+		</dl>
+	</div>
+</div>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

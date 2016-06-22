@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru" class="Page Page_post Page_ru without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Кастомные контролы без яваскрипта — kizu.ru</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/controls/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/fun/controls/">
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li class="Page-Language"><a data-short="en" href="/en/fun/controls/" class="Page-Language-Link">in English</a>
+            </li>
+            <li data-short="ru" class="Page-Language is-current">по-русски
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="кастомные-контролы-без-яваскрипта"><a class="Anchor" aria-hidden="true" href="#кастомные-контролы-без-яваскрипта"></a><span class="ss04 hang-m">К</span>ас<span class="shy"></span>том<span class="shy"></span>ные кон<span class="shy"></span>тро<span class="shy"></span>лы без явас<span class="shy"></span>крип<span class="shy"></span>та</h1>
+          </header>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_controls"><style>
+/*_*/
+
+.b-radio-label {
+    cursor: pointer;
+    }
+.b-radio-input:checked+.b-radio-wrap>.b-radio-label {
+    cursor: default;
+    }
+/* Slider
+--------------------------*/
+.b-radio_slider {
+    position: relative;
+
+    width: 401px;
+    padding-left: 0;
+    margin-left: 0;
+
+    overflow: hidden;
+
+    border: 1px solid #666688;
+
+    white-space: nowrap;
+    text-indent: 0;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    background: #a1dbff; /* old browsers */
+    background: -moz-linear-gradient(top, #a1dbff 0%, #cbebff 47%, #f0f9ff 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a1dbff), color-stop(47%,#cbebff), color-stop(100%,#f0f9ff)); /* webkit */
+
+    -webkit-border-radius: .5em;
+       -moz-border-radius: .5em;
+            border-radius: .5em;
+
+    -webkit-box-shadow: inset 0 4px 25px rgba(26,11,78,0.5);
+       -moz-box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+         -o-box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+            box-shadow: inset 0 4px 25px rgba(0,0,0,0.5);
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -o-user-select: none;
+            user-select: none;
+    }
+
+    .b-radio_slider .b-radio-input {
+        position: absolute;
+
+        margin: 8px 0 0 10px;
+
+        cursor: pointer;
+        }
+
+    .b-radio_slider .b-radio-input:not(x) {
+        position: absolute;
+        top: 0;
+        left: -99px;
+        }
+    .b-radio_slider .b-radio-label {
+        position: relative;
+        z-index: 9;
+
+        display: inline-block;
+
+        width: 100px;
+        padding: 0.5em 0;
+
+        text-align: center;
+
+        text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        }
+    .b-radio_slider .b-radio-underlay {
+        position: absolute;
+        left: -100px;
+
+        width: 100px;
+        height: 100%;
+
+        background: #4387fd; /* old browsers */
+        background: -moz-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* firefox */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0)); /* webkit */
+
+        -webkit-border-radius: .4em;
+           -moz-border-radius: .4em;
+                border-radius: .4em;
+
+        -webkit-transition: all .3s ease;
+           -moz-transition: all .3s ease;
+             -o-transition: all .3s ease;
+                transition: all .3s ease;
+
+        -webkit-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,34,0.5);
+           -moz-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+             -o-box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+                box-shadow: 0 0 1px rgba(0,0,20,0.5), inset 0 -3px 3px rgba(0,0,0,0.5);
+
+        }
+
+    .b-radio_slider .b-radio-input#Radio1-1:checked+.b-radio-wrap .b-radio-underlay { left:   0px;}
+    .b-radio_slider .b-radio-input#Radio1-2:checked+.b-radio-wrap .b-radio-underlay { left: 100px;}
+    .b-radio_slider .b-radio-input#Radio1-3:checked+.b-radio-wrap .b-radio-underlay { left: 200px;}
+    .b-radio_slider .b-radio-input#Radio1-4:checked+.b-radio-wrap .b-radio-underlay { left: 300px;}
+
+/* Dotty
+--------------------------*/
+.b-radio_dots {
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+
+    padding: 0.3em 1em;
+    margin-left: 0;
+    border: 1px solid #888;
+
+    -webkit-border-radius: 1em;
+       -moz-border-radius: 1em;
+            border-radius: 1em;
+
+    list-style: none;
+
+    background: rgb(225,235,255);
+    }
+
+    .b-radio_dots .b-radio-wrap {
+        display: block;
+        line-height: 2em;
+        }
+        .b-radio_dots .b-radio-label:after {
+            content: "";
+            position: absolute;
+            top: -0.5em;
+            left: -0.75em;
+            z-index: 9;
+
+            width: 1.5em;
+            height: 1.5em;
+            border: solid rgb(225,235,255);
+            border-width: 0.75em;
+
+            -webkit-border-radius: 1.5em;
+               -moz-border-radius: 1.5em;
+                    border-radius: 1.5em;
+
+            clip: rect(0.25em 2.25em 2.75em 0.75em);
+            }
+
+    .b-radio_dots .b-radio-input {
+        position: absolute;
+
+        margin: 0.6em 0 0 0.5em;
+        }
+    .b-radio_dots .b-radio-label {
+        position: relative;
+        display: block;
+        padding-left: 2.4em;
+        }
+
+    .b-radio_dots .b-radio-label:not(x):before {
+        content: "";
+        position: absolute;
+
+        width: 1.5em;
+        height: 1.5em;
+        left: 0;
+        top: 0.2em;
+
+        overflow: hidden;
+
+        background: rgb(235,245,255);
+
+        vertical-align: middle;
+
+        -webkit-border-radius: 0.75em;
+           -moz-border-radius: 0.75em;
+                border-radius: 0.75em;
+
+        -webkit-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+           -moz-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+             -o-box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+                box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+
+        }
+        .b-radio_dots .b-radio-underlay {
+            position: absolute;
+            top: -0.4em;
+            left: 1.4em;
+
+            width: 0.8em;
+            height: 0.8em;
+
+            -webkit-border-radius: 0.4em;
+               -moz-border-radius: 0.4em;
+                    border-radius: 0.4em;
+
+            -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+               -moz-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+                 -o-box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+                    box-shadow: 0px 1px 2px rgba(0,0,0,0.5), inset 0px -1px 3px rgba(0,0,0,0.8);
+
+            -webkit-transition: all .3s ease;
+               -moz-transition: all .3s ease;
+                 -o-transition: all .3s ease;
+                    transition: all .3s ease;
+            }
+            .b-radio_dots .b-radio-underlay:before {
+                content: "";
+                position: absolute;
+                top: 3px;
+                left: 5px;
+                width: 0.2em;
+                height: 0.2em;
+                -webkit-box-shadow: inset -3px 1px 2px rgba(255,255,255,0.7);
+                }
+
+
+    .b-radio_dots .b-radio-input#Radio2-1:checked+.b-radio-wrap .b-radio-underlay {
+        top: 0.9em;
+        background: rgba(230,170,60,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-2:checked+.b-radio-wrap .b-radio-underlay {
+        top: 2.9em;
+        background: rgba(80,121,240,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-3:checked+.b-radio-wrap .b-radio-underlay {
+        top: 4.9em;
+        background: rgba(240,75,65,0.9);
+        }
+    .b-radio_dots .b-radio-input#Radio2-4:checked+.b-radio-wrap .b-radio-underlay {
+        top: 6.9em;
+        background: rgba(60,220,54,0.9);
+        }
+</style>
+
+<h2 class="Heading">Slider on radiobutton</h2>
+<p class="b-radio b-radio_slider"
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-1" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-1">One</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-2" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-2">Two</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-3" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-3">Three</label
+   ><input class="b-radio-input" type="radio" name="some_radios1" id="Radio1-4" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio1-4">Four</label
+   ><b class="b-radio-underlay"></b>
+</span></span></span></span></p>
+
+<h2 class="Heading">Choosing the ball's color</h2>
+<p class="b-radio b-radio_dots"
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-1" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-1">Orange</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-2" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-2">Blue</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-3" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-3">Red</label
+   ><input class="b-radio-input" type="radio" name="some_radios2" id="Radio2-4" /><span class="b-radio-wrap"><label class="b-radio-label" for="Radio2-4">Green</label
+   ><b class="b-radio-underlay"></b>
+</span></span></span></span></p>
+</div>
+<p>Grace<span class="shy"></span>ful degra<span class="shy"></span>da<span class="shy"></span>tion все дела, хотя смот<span class="shy"></span>реть луч<span class="shy"></span>ше все<span class="shy"></span>го в веб<span class="shy"></span>ки<span class="shy"></span>тах под мак<nobr> —</nobr><span class="thinsp"> </span>там боль<span class="shy"></span>ше вкус<span class="shy"></span>няшек.</p>
+<p>А в веб<span class="shy"></span>ки<span class="shy"></span>тах под вин<span class="shy"></span>ду пока есть ду<span class="shy"></span>рац<span class="shy"></span>кий баг, <nobr>из-за</nobr> ко<span class="shy"></span>то<span class="shy"></span>ро<span class="shy"></span>го внут<span class="shy"></span>рен<span class="shy"></span>ние тени не об<span class="shy"></span>ре<span class="shy"></span>за<span class="shy"></span>ют<span class="shy"></span>ся по бор<span class="shy"></span><nobr>дер-ра</nobr><span class="shy"></span>ди<span class="shy"></span>у<span class="shy"></span>су, печаль.</p>
+
+          <p class="Metadata Published">Опубликовано 
+            <time datetime="2011-02-03">3 февраля 2011 г.</time> в <a href="../" class="Link">Экспериментах</a>.
+          </p>
+          <aside class="Feedback">
+            <p>Если вы заметили ошибку или хотите чем-то дополнить статью, вы всегда можете <a href="https://github.com/kizu/kizu.github.com/issues/new?title=%D0%9E%D1%82%D0%B7%D1%8B%D0%B2%20%D0%BD%D0%B0%20%C2%AB%D0%9A%D0%B0%D1%81%D1%82%D0%BE%D0%BC%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8B%20%D0%B1%D0%B5%D0%B7%20%D1%8F%D0%B2%D0%B0%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0%C2%BB" class="Link">написать мне об этом</a>, или <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2011-02-03-(fun)-controls/index.ru.md" class="Link">поправить статью прямо на Гитхабе</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/fun/rounded-inner-corners/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Скруглённые внутренние углы</span></a><a href="/fun/popups/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Попапы и дропдауны</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>

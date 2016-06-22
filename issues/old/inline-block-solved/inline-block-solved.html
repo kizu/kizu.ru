@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+.button, .icon {
+	display:-moz-inline-box;
+	display:inline-block;
+	overflow:hidden;
+	position:relative;
+	vertical-align:middle;
+	}
+.button {
+	height:20px;
+	background:url(i/inline-block-2.png) 0 0;
+	}
+.icon {
+	height:16px;
+	width:16px;
+	}
+A.button {
+	text-decoration:none;
+	cursor:pointer;
+	color:#000;
+	}
+.button .in, .icon I {
+	float:left;
+	display:inline;
+	position:relative;
+	overflow:hidden;
+	}
+.button .in {
+	height:20px;
+	background:url(i/inline-block-2.png) 100% 0;
+	margin-left:10px;
+	padding-right:10px;
+	line-height:16px;
+	}
+.icon I {
+	height:16px;
+	width:16px;
+	background:url(i/inline-block-1.gif) 100% 0;
+	text-indent:-9999em;
+	}
+
+.menu {
+	text-align:center;
+	width:80%;
+	margin:0 auto;
+	}
+	.menu .item {
+		display:inline;
+		}
+	.menu .item .button {
+		margin-bottom:2px;
+		}
+</style>
+<h2>«Кнопка» в тексте:</h2>
+<p>Кнопка с <a href="#" class="button"><span class="in">текстом</span></a> в середине строки и дурацкой иконкой в конце: <i class="icon"><i>Текст, удаленный при помощи <code>text-indent:-9999em;</code></i></i></p>
+<p>Кнопка с текстом <a href="#" class="button"><span class="in">в конце строки</span></a></p>
+<p><a href="#" class="button"><span class="in"><i class="icon"><i>И!11</i></i> Кнопка с иконкой</span></a> в начале строки</p>
+<h2>Центрированное меню из кнопок на несколько строк</h2>
+<ul class="menu">
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c очень длинным-длинным-длинным текстом!</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Надпись какая-то</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё чуточку</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ом!</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c очень длинным-длинным-длинным текстом!</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Надпись какая-то</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё чуточку</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ом!</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё кнопка c текстом</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка c очень длинным-длинным-длинным текстом!</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Кнопка</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Надпись какая-то</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ещё чуточку</span></a></li>
+	<li class="item"><a href="#" class="button"><span class="in">Ом!</span></a></li>
+</ul>
+<p>Длинный абзац, в котором то тут то там вставлена или какая-нибудь иконка, вроде этой — <a href="#" class="icon"><i>Иконка со ссылкой</i></a>, либо где-то в глубине предложения находится <span class="button"><span class="in">кнопка</span></span>, кстати можно заметить, что в этом примере на кнопке ссылки нет, а на икноке — есть. Длинный абзац, в котором то тут то там вставлена или какая-нибудь иконка, вроде этой — <a href="#" class="icon"><i>Иконка со ссылкой</i></a>, либо где-то в глубине предложения находится <span class="button"><span class="in">кнопка</span></span>, кстати можно заметить, что в этом примере на кнопке ссылки нет, а на икноке — есть. Длинный абзац, в котором то тут то там вставлена или какая-нибудь иконка, вроде этой — <a href="#" class="icon"><i>Иконка со ссылкой</i></a>, либо где-то в глубине предложения находится <span class="button"><span class="in">кнопка</span></span>, кстати можно заметить, что в этом примере на кнопке ссылки нет, а на икноке — есть. Длинный абзац, в котором то тут то там вставлена или какая-нибудь иконка, вроде этой — <a href="#" class="icon"><i>Иконка со ссылкой</i></a>, либо где-то в глубине предложения находится <span class="button"><span class="in">кнопка</span></span>, кстати можно заметить, что в этом примере на кнопке ссылки нет, а на икноке — есть. Длинный абзац, в котором то тут то там вставлена или какая-нибудь иконка, вроде этой — <a href="#" class="icon"><i>Иконка со ссылкой</i></a>, либо где-то в глубине предложения находится <span class="button"><span class="in">кнопка</span></span>, кстати можно заметить, что в этом примере на кнопке ссылки нет, а на икноке — есть. </p>
+<p>Тут, возможно, появятся другие примеры, демонстрирующие то да сё.</p>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>

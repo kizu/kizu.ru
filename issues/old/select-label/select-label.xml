@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl">
+	<binding id="select-label">
+		<implementation>
+			<constructor><![CDATA[
+				this.style.mozBinding = '';
+				this.innerHTML = this.label;
+			]]></constructor>
+		</implementation>
+	</binding>
+</bindings>

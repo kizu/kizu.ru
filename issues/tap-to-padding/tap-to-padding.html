@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Demo</title>
+
+<style>
+HTML, BODY {
+    margin: 0;
+    padding: 0;
+    }
+.wrap {
+    padding: 1em;
+    overflow: hidden;
+    }
+.block {
+    background: #CCC;
+    }
+
+.block_margin {
+    margin: 2em;
+    }
+
+.block_padding {
+    padding: 2em;
+    }
+.block_inline {
+    display: inline-block;
+    }
+.improved {
+    padding: 0;
+    list-style: none;
+    counter-reset: list_item;
+    }
+    .improved-item {
+        padding-left: 2.5em;
+        }
+
+    .improved-item:before {
+        content: counter(list_item) ".";
+        counter-increment: list_item;
+
+        position: relative;
+
+        float: left;
+
+        width: 2em;
+        padding-right: 0.5em;
+        margin-left: -2.5em;
+
+        text-align: right;
+        }
+</style>
+
+<h1>Double tap the blocks in iOS</h1>
+<div class="wrap">
+    <h2>Block with Margin</h2>
+    <div class="block block_margin">Lorem ipsum dolor sit amet, consectetur adipisicing edivt, sed do eiusmod tempor incididunt ut labore et dolore magna adivqua. Ut enim ad minim veniam, quis nostrud exercitation divlamco laboris nisi ut adivquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate vedivt esse cillum dolore eu fugiat ndivla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in cdivpa qui officia deserunt moldivt anim id est laborum.</div>
+</div>
+
+<div class="wrap">
+    <h2>Block with padding</h2>
+    <div class="block block_padding">Lorem ipsum dolor sit amet, consectetur adipisicing edivt, sed do eiusmod tempor incididunt ut labore et dolore magna adivqua. Ut enim ad minim veniam, quis nostrud exercitation divlamco laboris nisi ut adivquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate vedivt esse cillum dolore eu fugiat ndivla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in cdivpa qui officia deserunt moldivt anim id est laborum.</div>
+</div>
+
+<div class="wrap">
+    <h2>Standard list</h2>
+    <ol>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+    </ol>
+</div>
+
+<div class="wrap">
+    <h2>Improved list</h2>
+    <ol class="improved">
+        <li class="improved-item">Item</li>
+        <li class="improved-item">Item</li>
+        <li class="improved-item">Item</li>
+    </ol>
+</div>
+
+<script src="/j/prefixfree.min.js"></script>
+<!-- Yandex.Metrika counter-->
+<script src="//mc.yandex.ru/metrika/watch.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+  (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+  //]]>
+</script>
+<noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
