@@ -217,7 +217,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
     footer.Page-Footer
       .LiquidLayout
         .LiquidLayout-Content
-          nav.PrevNext
+          nav.PrevNext(role="navigation")
             if document.prev
               a.Link.Link_wrapper.Link_prev(href='/' + document.prev.url)
                 span.Link-Inner
@@ -226,7 +226,7 @@ html.Page(class=page_class, lang=lang ? lang : false)
               a.Link.Link_wrapper.Link_next(href='/' + document.next.url)
                 span.Link-Inner
                   = document.next.title
-          p.Page-Copy
+          p.Page-Copy(role="contentinfo")
             +optionalTag('a', document.type != 'index').Link.Link_wrapper(href="/" + document.lang_prefix)
               = "© 2016 "
               +optionalTag('span', document.type != 'index').Link-Inner

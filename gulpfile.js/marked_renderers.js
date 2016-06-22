@@ -201,13 +201,13 @@ module.exports = {
                 args.attributes.id = id;
                 args.attributes.href = '#' + id;
 
-                args.after  +=     '<span class="Sidenote">';
+                args.after  +=     '<span class="Sidenote" role="note">';
                 args.after  +=         '<span class="Sidenote-Misc"> (</span>';
                 args.after  +=         marked(args.original.title, options).replace(/^\s*<p(?: class="")?>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1');
                 args.after  +=         '<span class="Sidenote-Misc">)</span>';
                 args.after  +=     '</span>';
 
-                args.after  +=     '<a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a>';
+                args.after  +=     '<a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a>';
                 args.after  += '</span>';
 
                 args.attributes.title = null;

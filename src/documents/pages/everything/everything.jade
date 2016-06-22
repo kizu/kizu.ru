@@ -3,9 +3,9 @@ if posts
     .Filter
       //- Todo: list all categories automatically
       - for (var i = 0; i < site.categories.length; i++)
-        a.Filter-Target(id=site.categories[i])
+        a.Filter-Target(id=site.categories[i], aria-hidden="true", role="presentation")
 
-      ul.Filter-Nav
+      ul.Filter-Nav(aria-hidden="true", role="presentation")
         li.Filter-Nav-Item.Filter-Nav-Item_everything
           a.Filter-Nav-Link(href="#everything")= loc({ru: 'Всё', en: 'Everything'})
 
