@@ -18,7 +18,7 @@
   "defaultCategory": "blog",
   "production_url": "http://kizu.ru/",
   "root_url": "/",
-  "srcRoot": "https://github.com/kizu/new-site/blob/gulp-version",
+  "srcRoot": "https://github.com/kizu/kizu.github.com/blob/source",
   "watchPort": 4000,
   "debug": false
 }
