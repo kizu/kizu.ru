@@ -109,7 +109,14 @@ html.Page(class=page_class, lang=lang ? lang : false)
 
     link(
       rel="stylesheet",
-      href= "/s/style.css")
+      href="/s/style.css")
+
+    link(
+      rel="preload",
+      href="/s/extras2.css",
+      as="style",
+      onload="this.rel='stylesheet'"
+      )
 
   body.Page-Body
     if site.debug
