@@ -10,6 +10,18 @@
 // 7. Enforce font-smoothing
 // 8. Default cursor as default
 
+
+// Temp fix for strange ie10+/edge bugs with text-shadow o_O
+@css {
+  @media screen {
+    @media (min-width: 0px) {
+      .Page {
+        text-shadow: 0 1px #FFF;
+      }
+    }
+  }
+}
+
 .Page
   padding: 0 // [1]
   margin: 0  // [1]
@@ -27,7 +39,6 @@
 
   // [3]
   font-size: $size.base
-  text-shadow: 0 1px $color.white
   color: $color.text
   background: $color.body
 
