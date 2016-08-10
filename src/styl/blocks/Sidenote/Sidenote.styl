@@ -15,7 +15,7 @@
       // cursor: help // Looks not ok, should we use it?
 
       padding-left: 0.2em
-      padding-right: 0.3em
+      padding-right: 0.1em
       margin-left: -0.2em
       margin-right: -0.3em
       border-radius: 3px
@@ -34,12 +34,14 @@
         text-shadow: none
 
       ^[0]-Wrapper:hover > &:not(:hover),
-      &:hover + ^[0]
+      &:hover + ^[0],
+      &:focus + ^[0]
         background: rgba($color.highlight, 0.3)
         text-shadow: none
 
       ^[0]-Wrapper:hover > &:target:not(:hover),
       &:target:hover + ^[0]
+      &:target:focus + ^[0]
         background: linear-gradient(rgba($color.highlight, 0.3), rgba($color.highlight, 0.3)) !important
 
 
@@ -183,6 +185,11 @@
         text-align: right
 
         color: rgba($color.text, 0.6)
+
+        transition: opacity 0.2s 0.2s linear
+
+        ^[0]-Wrapper:not(:hover) ^[0]-Context:not(:target):not(:focus) + &
+          opacity: 0
 
         .with-lonely-sidenote &
           content: "* "
