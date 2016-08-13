@@ -7,21 +7,24 @@
 
   padding-top: 1.5*$size.base
 
+  @media (max-width: 820px)
+    padding-top: $size.base
+    line-height: $size.base
+
   & .Link_prev
-    padding-left: 0.5*$size.base
-    padding-left: 2.5vw
-    margin-left: -0.5*$size.base
-    margin-left: -2.5vw
+    padding-left: 1.5*$size.base
+    margin-left: -1.5*$size.base
 
     &:before
       content: "← "
 
   & .Link_next
-    padding-right: 0.5*$size.base
-    padding-right: 2.5vw
-    margin-right: -0.5*$size.base
-    margin-right: -2.5vw
+    padding-right: 1.5*$size.base
+    margin-right: -1.5*$size.base
     margin-left: auto
+
+    @media (max-width: 820px)
+      margin-left: 0
 
     &:after
       content: " →"

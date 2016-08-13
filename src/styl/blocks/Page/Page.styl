@@ -55,9 +55,9 @@
     overflow: hidden
 
     height: $size.header
+
     // TODO: move those paddings to mixin?
-    padding: 0 0.5*$size.base
-    padding: 0 2.5vw
+    padding: 0 1.5*$size.base
 
     white-space: nowrap
 
@@ -68,11 +68,14 @@
       z-index: 99
       height: $size.header + 1.5*$size.base
 
+    @media (max-width: 820px)
+      ^[0]_index &
+        height: 6*$size.base
+
   &-Languages
     position: absolute
     top: 2*$size.base
-    right: 0.5*$size.base
-    right: 2.5vw
+    right: 1.5*$size.base
 
     padding: 0 1.5*$size.base
     margin: 0
@@ -84,8 +87,15 @@
 
     color: rgba($color.dark, 0.25)
 
+    @media (max-width: 820px)
+      right: $size.base
+      visibility: hidden
+
     ^[0]_index &
       top: 3.5*$size.base
+
+      @media (max-width: 820px)
+        top: 2*$size.base
 
     ^[0]:not(.without-sidebar) &
       left: 100%
@@ -95,7 +105,7 @@
 
       @media (max-width: 820px)
         left: auto
-        right: 0
+        right: -0.5*$size.base
 
   &-Language
     padding-left: 1.5*$size.base
@@ -106,6 +116,7 @@
       width: 1.5*$size.base
 
     @media (max-width: 820px)
+      visibility: visible
       overflow: hidden
 
       width: 0
@@ -152,8 +163,7 @@
 
     overflow: hidden
 
-    padding: $size.base 0.5*$size.base 0
-    padding: $size.base 2.5vw 0
+    padding: $size.base 1.5*$size.base 0
 
     background: $color.body
 
@@ -167,6 +177,10 @@
                   0 0 0 1px rgba($color.dark, 0.05),
                   0 0 40px -5px rgba($color.dark, 0.3)
 
+      @media (max-width: 820px)
+        padding-top: 0
+        padding-bottom: 1*$size.base
+
 
   // ## Page-Title: Page's title
   &-Title
@@ -176,12 +190,15 @@
 
     text-indent: -0.09em
 
-    ^[0]_index &
-      padding-top: 3*$size.base
-
     @media (max-width: 820px)
       padding-top: 2*$size.base
       font-size: 2.5*$size.base
+
+    ^[0]_index &
+      padding-top: 3*$size.base
+
+      @media (max-width: 820px)
+        padding-top: 2*$size.base
 
     &-Link
       &:not(:hover):not(:focus)
@@ -196,8 +213,7 @@
     overflow: hidden
 
     height: $size.footer
-    padding: 0 0.5*$size.base
-    padding: 0 2.5vw
+    padding: 0 1.5*$size.base
 
     & .Link
       white-space: nowrap
@@ -223,6 +239,10 @@
 
     font-size: $size.base
     color: $color.misc
+
+    @media (max-width: 820px)
+      padding-top: 0.25*$size.base
+      line-height: 1.25*$size.base
 
     & > .Link_wrapper:last-child
       margin-left: auto
