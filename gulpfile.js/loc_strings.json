@@ -59,6 +59,10 @@
         "ru": "Черновик от",
         "en": "Draft from"
     },
+    "its_a_draft": {
+        "ru": "Написано как черновик, ещё не опубликовано.",
+        "en": "Wrote as a draft, not published yet."
+    },
     "thanks_to": {
         "ru": "Спасибо",
         "en": "Thanks to"

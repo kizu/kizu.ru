@@ -176,22 +176,25 @@ html.Page(class=page_class, lang=lang ? lang : false)
             != document.content
 
             p.Metadata.Published
-              - var published = loc('published')
-              = published
-              = " "
-              time(datetime=document.date)= published_format(document.date)
-              if document.categories
-                = loc('_after_date') + " " + loc('in')
-                - for (var i = 0; i < document.categories.length; i++)
-                  if i > 0
-                    = ","
-                  = " "
-                  a.Link(href='../')
-                    = loc(document.categories[i] + '_in')
-                = "."
-              else
-                if published.indexOf('.') === -1
+              if !document.isDraft
+                - var published = loc('published')
+                = published
+                = " "
+                time(datetime=document.date)= published_format(document.date)
+                if document.categories
+                  = loc('_after_date') + " " + loc('in')
+                  - for (var i = 0; i < document.categories.length; i++)
+                    if i > 0
+                      = ","
+                    = " "
+                    a.Link(href='../')
+                      = loc(document.categories[i] + '_in')
                   = "."
+                else
+                  if published.indexOf('.') === -1
+                    = "."
+              else
+                = loc('its_a_draft')
 
             if document.metadata.thanks_to
               p.Metadata.ThanksTo
