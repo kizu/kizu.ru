@@ -15,7 +15,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp build"
+    "build": "gulp build",
+    "deploy": "(cd out && git checkout -- . && git clean -df && git checkout master && git pull --rebase origin master) && gulp build && (cd out && git add . && git commit -m 'Build up' && git push origin master)"
   },
   "devDependencies": {
     "each-done": "~1.0.0",
