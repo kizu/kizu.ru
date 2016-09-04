@@ -7,7 +7,7 @@
 
   padding-top: 1.5*$size.base
 
-  @media (max-width: 820px)
+  +at-lowest()
     padding-top: $size.base
     line-height: $size.base
 
@@ -23,7 +23,7 @@
     margin-right: -1.5*$size.base
     margin-left: auto
 
-    @media (max-width: 820px)
+    +at-lowest()
       margin-left: 0
 
     &:after

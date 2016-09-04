@@ -1,7 +1,7 @@
 // # LiquidLayout
 
 .LiquidLayout
-  @media (min-width: 820px)
+  +at-not-lowest()
     margin: 0 auto
 
     .Page.without-sidebar &
@@ -17,5 +17,5 @@
 
       max-width: $size.content
 
-      @media (min-width: 820px)
+      +at-not-lowest()
         margin: 0 $size.sidebar 0 auto

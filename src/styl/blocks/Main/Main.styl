@@ -15,10 +15,10 @@
     margin-right: auto
 
   & p
-    text-align: justify
+    text-align: left
 
-    @media (max-width: 820px)
-      text-align: left
+    +at-biggest()
+      text-align: justify
 
   // Better table
   & > table

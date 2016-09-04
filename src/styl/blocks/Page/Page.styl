@@ -69,7 +69,7 @@
       z-index: 99
       height: $size.header + 1.5*$size.base
 
-    @media (max-width: 820px)
+    +at-lowest()
       ^[0]_index &
         height: 6*$size.base
 
@@ -88,14 +88,14 @@
 
     color: rgba($color.dark, 0.25)
 
-    @media (max-width: 820px)
+    +at-lowest()
       right: $size.base
       visibility: hidden
 
     ^[0]_index &
       top: 3.5*$size.base
 
-      @media (max-width: 820px)
+      +at-lowest()
         top: 2*$size.base
 
     ^[0]:not(.without-sidebar) &
@@ -104,7 +104,7 @@
 
       width: $size.sidebar - 4*$size.base
 
-      @media (max-width: 820px)
+      +at-lowest()
         left: auto
         right: -0.5*$size.base
 
@@ -116,7 +116,7 @@
       margin-left: -1.5*$size.base
       width: 1.5*$size.base
 
-    @media (max-width: 820px)
+    +at-lowest()
       visibility: visible
       overflow: hidden
 
@@ -178,7 +178,7 @@
                   0 0 0 1px rgba($color.dark, 0.05),
                   0 0 40px -5px rgba($color.dark, 0.3)
 
-      @media (max-width: 820px)
+      +at-lowest()
         padding-top: 0
         padding-bottom: 1*$size.base
 
@@ -191,14 +191,14 @@
 
     text-indent: -0.09em
 
-    @media (max-width: 820px)
+    +at-lowest()
       padding-top: 2*$size.base
       font-size: 2.5*$size.base
 
     ^[0]_index &
       padding-top: 3*$size.base
 
-      @media (max-width: 820px)
+      +at-lowest()
         padding-top: 2*$size.base
 
     &-Link
@@ -219,7 +219,7 @@
     & .Link
       white-space: nowrap
 
-      @media (max-width: 820px)
+      +at-lowest()
         white-space: normal
 
     & p
@@ -243,7 +243,7 @@
     font-size: $size.base
     color: $color.misc
 
-    @media (max-width: 820px)
+    +at-lowest()
       padding-top: 0.25*$size.base
       line-height: 1.25*$size.base
 

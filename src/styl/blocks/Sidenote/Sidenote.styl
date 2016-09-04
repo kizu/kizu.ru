@@ -10,7 +10,7 @@
     text-shadow: none !important
     text-decoration: none !important
 
-    @media (min-width: 820px)
+    +at-not-lowest()
       cursor: inherit
       // cursor: help // Looks not ok, should we use it?
 
@@ -20,7 +20,7 @@
       margin-right: -0.3em
       border-radius: 3px
 
-    @media (min-width: 820px)
+    +at-not-lowest()
       &,
       & + ^[0]
         transition: background 0.2s 0.2s linear,
@@ -71,7 +71,7 @@
 
         padding: 0 1px
 
-    @media (max-width: 819px)
+    +at-lowest()
       cursor: pointer
 
       &:target
@@ -109,11 +109,11 @@
     display: inline
     counter-increment: sidenote
 
-    @media (max-width: 819px)
+    +at-lowest()
       -webkit-animation: bugfix infinite 1s
 
   &-Close
-    @media (max-width: 819px)
+    +at-lowest()
       display: none
 
       position: absolute
@@ -131,7 +131,7 @@
 
   // ## Sidenote itself
   &
-    @media (max-width: 819px)
+    +at-lowest()
       visibility: hidden
 
       z-index: 2
@@ -147,7 +147,7 @@
                   0 0 0 2000px rgba($color.dark, 0.5)
       border-radius: 0.5*$size.base
 
-    @media (min-width: 820px)
+    +at-not-lowest()
       position: relative
       float: right
       clear: right
