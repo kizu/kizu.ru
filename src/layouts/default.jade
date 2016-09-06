@@ -92,7 +92,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
     //- The title!
     - pageTitle = document.title || "Whatever, no title"
     - pageTitle = pageTitle.replace(/<(?:.|\n)*?>/gm, '');
-    title= pageTitle + " — kizu.ru" + (lang == "en" ? "/en" : '')
+    //- title= pageTitle + " — kizu.ru" + (lang == "en" ? "/en" : '')
+    title= pageTitle
 
     //- The link to RSS/Atom
     link(
