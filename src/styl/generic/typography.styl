@@ -3,6 +3,7 @@ ul,
 ol,
 dl,
 blockquote,
+figure,
 hr,
 code,
 pre,
@@ -141,6 +142,14 @@ blockquote
     &:first-child
       margin-top: 0
 
+figure
+  display: block
+  text-align: left
+
+  background: $color.white
+
+  +at-biggest()
+    padding-left: $size.indent
 
 .Heading:not(h1) + *
   margin-top: 0 !important

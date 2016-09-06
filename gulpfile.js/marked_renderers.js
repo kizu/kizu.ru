@@ -74,7 +74,22 @@ module.exports = {
     'image': [
         function(args) { return handleTitleAttributes(args); },
         function(args) { return handleAttributes(args); },
-        function(args, options) { return handleImageAttributes(args, options); }
+        function(args, options) { return handleImageAttributes(args, options); },
+        function(args, options) {
+            // Creating sidenotes for `title`s starting with `*`
+            if (args.original.title && args.original.title[0] == '*') {
+                args.before += '<figure class="Sidenote-Wrapper">';
+                args.before +=     '<figcaption class="Sidenote">';
+                args.before +=         marked(args.original.title.replace(/^\*/, ''), options).replace(/^\s*<p(?: class="")?>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1').replace('&amp;lt;', '&lt;').replace('&amp;gt;', '&gt;');
+                args.before +=     '</figcaption>';
+
+                args.attributes.class = 'Sidenote-Context';
+                args.attributes.title = "";
+
+                args.after  += '</figure>';
+            }
+            return args;
+        }
     ],
 
     'paragraph': [
@@ -203,7 +218,7 @@ module.exports = {
 
                 args.after  +=     '<span class="Sidenote" role="note">';
                 args.after  +=         '<span class="Sidenote-Misc"> (</span>';
-                args.after  +=         marked(args.original.title, options).replace(/^\s*<p(?: class="")?>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1');
+                args.after  +=         marked(args.original.title, options).replace(/^\s*<p(?: class="")?>\s*([\s\S]*\S)\s*<\/p>\s*$/, '$1').replace('&amp;lt;', '&lt;').replace('&amp;gt;', '&gt;');
                 args.after  +=         '<span class="Sidenote-Misc">)</span>';
                 args.after  +=     '</span>';
 

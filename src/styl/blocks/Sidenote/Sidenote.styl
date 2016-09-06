@@ -33,19 +33,19 @@
         animation-fill-mode: forwards
         text-shadow: none
 
-      ^[0]-Wrapper:hover > &:not(:hover),
-      &:hover + ^[0],
-      &:focus + ^[0]
+      ^[0]-Wrapper:hover > &:not(img):not(:hover),
+      &:not(img):hover + ^[0],
+      &:not(img):focus + ^[0]
         background: rgba($color.highlight, 0.3)
         text-shadow: none
 
-      ^[0]-Wrapper:hover > &:target:not(:hover),
-      &:target:hover + ^[0]
-      &:target:focus + ^[0]
+      ^[0]-Wrapper:hover > &:not(img):target:not(:hover),
+      &:not(img):target:hover + ^[0]
+      &:not(img):target:focus + ^[0]
         background: linear-gradient(rgba($color.highlight, 0.3), rgba($color.highlight, 0.3)) !important
 
 
-    &::after
+    &:not(img)::after
       // FIXME: Magic numbers
       content: counter(sidenote)
       position: relative
@@ -70,7 +70,8 @@
         padding: 0 1px
 
     +at-lowest()
-      cursor: pointer
+      &:not(img)
+        cursor: pointer
 
       &:target
         outline: none
@@ -87,7 +88,7 @@
         overflow: hidden
         text-overflow: ellipsis
 
-        &::before
+        &:not(figcaption)::before
           content: ''
 
           position: absolute
@@ -103,7 +104,7 @@
   &-Misc
     display: none
 
-  &-Wrapper
+  &-Wrapper:not(figure)
     display: inline
     counter-increment: sidenote
 
@@ -130,20 +131,29 @@
   // ## Sidenote itself
   &
     +at-lowest()
-      visibility: hidden
+      figcaption&
+        padding: 0 $size.indent $size.base
 
-      z-index: 2
-      position: absolute
-      left: 0.6*$size.base
-      right: 0.6*$size.base
+        font-family: $font.small
+        font-size: $size.smalltext
+        line-height: 1.25*$size.base
+        font-feature-settings: "lnum", "onum" 0
 
-      padding: 1*$size.base
-      margin-top: 1.8*$size.base
+      &:not(figcaption)
+        visibility: hidden
 
-      background: $color.body
-      box-shadow: 0 10px 10px -8px rgba($color.dark, 0.5),
-                  0 0 0 2000px rgba($color.dark, 0.5)
-      border-radius: 0.5*$size.base
+        z-index: 2
+        position: absolute
+        left: 0.6*$size.base
+        right: 0.6*$size.base
+
+        padding: 1*$size.base
+        margin-top: 1.8*$size.base
+
+        background: $color.body
+        box-shadow: 0 10px 10px -8px rgba($color.dark, 0.5),
+                    0 0 0 2000px rgba($color.dark, 0.5)
+        border-radius: 0.5*$size.base
 
     +at-not-lowest()
       position: relative
@@ -173,7 +183,7 @@
       & a:focus
         text-shadow: -1px 0 $color.body, 1px 0 $color.body
 
-      &::before
+      &:not(figcaption)::before
         content: counter(sidenote) ". "
         position: absolute
         left: 0.5*$size.base
