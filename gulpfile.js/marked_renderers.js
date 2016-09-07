@@ -93,7 +93,16 @@ module.exports = {
     ],
 
     'paragraph': [
-        function(args) { return handleAttributes(args); }
+        function(args) { return handleAttributes(args); },
+        function(args) {
+            // If there is a block-level tag nested into a paragraph, don't render the paragraph
+            // TODO: Make this a common basic thing in marked_overloaded,
+            //       with optional replacement to a `div` when there are classes/attrs given.
+            if (args.original.text.match(/^<figure /)) {
+                args.tagName = null;
+            }
+            return args;
+        }
     ],
 
     'code': [
