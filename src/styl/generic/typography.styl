@@ -144,12 +144,50 @@ blockquote
 
 figure
   display: block
+
+  padding: $size.base
+
   text-align: left
 
-  background: $color.white
+  background: rgba($color.text, 0.05)
+
+  &:after
+    content: ""
+
+    display: table
+    clear: both
+
+  & > img
+    vertical-align: top
+
+  +at-not-lowest()
+    box-shadow: ($size.sidebar + $size.base) 0 0 rgba($color.text, 0.05)
+
+  +at-lowest()
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    width: auto !important
+    max-width: none !important
+    padding: $size.base 1.5*$size.base
+    margin-left: -1.5*$size.base !important
+    margin-right: -1.5*$size.base !important
+
+    text-align: center
 
   +at-biggest()
     padding-left: $size.indent
+    padding-right: 0
+
+figcaption
+  order: 1
+
+  text-align: left
+
+  +at-lowest()
+    max-width: 35em
+    padding-top: $size.base
 
 .Heading:not(h1) + *
   margin-top: 0 !important
