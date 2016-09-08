@@ -10,17 +10,18 @@
     text-shadow: none !important
     text-decoration: none !important
 
-    @media (min-width: 820px)
-      cursor: inherit
-      // cursor: help // Looks not ok, should we use it?
+    +at-not-lowest()
+      &:not(img)
+        cursor: inherit
+        // cursor: help // Looks not ok, should we use it?
 
-      padding-left: 0.2em
-      padding-right: 0.1em
-      margin-left: -0.2em
-      margin-right: -0.3em
-      border-radius: 3px
+        padding-left: 0.2em
+        padding-right: 0.1em
+        margin-left: -0.15em
+        margin-right: -0.25em
+        border-radius: 3px
 
-    @media (min-width: 820px)
+    +at-not-lowest()
       &,
       & + ^[0]
         transition: background 0.2s 0.2s linear,
@@ -33,27 +34,25 @@
         animation-fill-mode: forwards
         text-shadow: none
 
-      ^[0]-Wrapper:hover > &:not(:hover),
-      &:hover + ^[0],
-      &:focus + ^[0]
+      ^[0]-Wrapper:hover > &:not(img):not(:hover),
+      &:not(img):hover + ^[0],
+      &:not(img):focus + ^[0]
         background: rgba($color.highlight, 0.3)
         text-shadow: none
 
-      ^[0]-Wrapper:hover > &:target:not(:hover),
-      &:target:hover + ^[0]
-      &:target:focus + ^[0]
+      ^[0]-Wrapper:hover > &:not(img):target:not(:hover),
+      &:not(img):target:hover + ^[0]
+      &:not(img):target:focus + ^[0]
         background: linear-gradient(rgba($color.highlight, 0.3), rgba($color.highlight, 0.3)) !important
 
 
-    &::after
+    &:not(img)::after
       // FIXME: Magic numbers
       content: counter(sidenote)
       position: relative
       top: -0.555*$size.base
 
       cursor: pointer
-
-      display: inline-block
 
       padding: 0 0.16em
       // margin: 0 -0.7em 0 0 // was disabled by error
@@ -71,8 +70,9 @@
 
         padding: 0 1px
 
-    @media (max-width: 819px)
-      cursor: pointer
+    +at-lowest()
+      &:not(img)
+        cursor: pointer
 
       &:target
         outline: none
@@ -89,7 +89,7 @@
         overflow: hidden
         text-overflow: ellipsis
 
-        &::before
+        &:not(figcaption)::before
           content: ''
 
           position: absolute
@@ -105,15 +105,15 @@
   &-Misc
     display: none
 
-  &-Wrapper
+  &-Wrapper:not(figure)
     display: inline
     counter-increment: sidenote
 
-    @media (max-width: 819px)
+    +at-lowest()
       -webkit-animation: bugfix infinite 1s
 
   &-Close
-    @media (max-width: 819px)
+    +at-lowest()
       display: none
 
       position: absolute
@@ -131,23 +131,30 @@
 
   // ## Sidenote itself
   &
-    @media (max-width: 819px)
-      visibility: hidden
+    +at-lowest()
+      figcaption&
+        font-family: $font.small
+        font-size: $size.smalltext
+        line-height: 1.25*$size.base
+        font-feature-settings: "lnum", "onum" 0
 
-      z-index: 2
-      position: absolute
-      left: 0.6*$size.base
-      right: 0.6*$size.base
+      &:not(figcaption)
+        visibility: hidden
 
-      padding: 1*$size.base
-      margin-top: 1.8*$size.base
+        z-index: 2
+        position: absolute
+        left: 0.6*$size.base
+        right: 0.6*$size.base
 
-      background: $color.body
-      box-shadow: 0 10px 10px -8px rgba($color.dark, 0.5),
-                  0 0 0 2000px rgba($color.dark, 0.5)
-      border-radius: 0.5*$size.base
+        padding: 1*$size.base
+        margin-top: 1.8*$size.base
 
-    @media (min-width: 820px)
+        background: $color.body
+        box-shadow: 0 10px 10px -8px rgba($color.dark, 0.5),
+                    0 0 0 2000px rgba($color.dark, 0.5)
+        border-radius: 0.5*$size.base
+
+    +at-not-lowest()
       position: relative
       float: right
       clear: right
@@ -175,7 +182,7 @@
       & a:focus
         text-shadow: -1px 0 $color.body, 1px 0 $color.body
 
-      &::before
+      &:not(figcaption)::before
         content: counter(sidenote) ". "
         position: absolute
         left: 0.5*$size.base

@@ -10,9 +10,10 @@
     page_class += ' Page_' + lang
   }
   var hasSidenotes = document.content.match(/"Sidenote"/g);
+  var simpleSidenotes = document.content.match(/<span class="Sidenote" role="note">/g);
   var hasSidepicture = document.content.match(/"Sidepicture"/g);
-  if (hasSidenotes) {
-    if (hasSidenotes.length === 1) {
+  if (simpleSidenotes) {
+    if (simpleSidenotes.length === 1) {
       page_class += ' with-lonely-sidenote'
     }
   } else if (!hasSidepicture) {
@@ -92,7 +93,8 @@ html.Page(class=page_class, lang=lang ? lang : false)
     //- The title!
     - pageTitle = document.title || "Whatever, no title"
     - pageTitle = pageTitle.replace(/<(?:.|\n)*?>/gm, '');
-    title= pageTitle + " — kizu.ru" + (lang == "en" ? "/en" : '')
+    //- title= pageTitle + " — kizu.ru" + (lang == "en" ? "/en" : '')
+    title= pageTitle
 
     //- The link to RSS/Atom
     link(

@@ -302,7 +302,7 @@ var storeDocument = function(stream, file) {
 };
 
 var postprocessContent = function(content, options) {
-    return content.replace(/href=":([a-z]+)"/i, function(m, slug) {
+    return content.replace(/href=":([a-z\-]+)"/i, function(m, slug) {
         var foundDoc = allDocuments[options.document.lang].documentsBySlug[slug];
         if (foundDoc) {
             return 'href="/' + foundDoc.url + '"';
