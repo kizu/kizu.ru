@@ -3,12 +3,41 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/feed.xml" rel="self"/>
   <link href="http://kizu.ru/"/>
-  <updated>2016-08-13T00:00:00+03:00</updated>
+  <updated>2016-09-08T00:00:00+03:00</updated>
   <id>http://kizu.ru</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Оформление строчных блоков кода</title>
+    <link href="http://kizu.ru/blog/styling-inline-code/"/>
+    <updated>2016-09-08T00:00:00+03:00</updated>
+    <id>http://kizu.ru/blog/styling-inline-code</id>
+    <content type="html">&lt;h1 id=&quot;оформление-строчных-блоков-кода&quot;&gt;Оформление строчных блоков кода&lt;/h1&gt;
+&lt;p&gt;Когда я работал над &lt;a href=&quot;/blog/the-new-version-of-this-site/&quot;&gt;новой версией моего сайта&lt;/a&gt;, я пытался побольше думать о том, как всё будет выглядеть и читаться с точки зрения типографики. Одной из вещей, с которыми у меня всегда были проблемы&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;как оформлять строчные блоки кода. Чаще всего, на их месте мы видим маленькие разноцветные прямоугольники. И чем больше ими набиваешь текст, тем хуже становится его читабельность.&lt;/p&gt;
+&lt;figure class=&quot;Sidenote-Wrapper&quot;&gt;&lt;figcaption class=&quot;Sidenote&quot;&gt;Пример взят из &lt;a href=&quot;https://en.wikipedia.org/wiki/Cascading_Style_Sheets#Selector&quot;&gt;статьи в Википедии о &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;. Поглядите на все эти разноцветные прямоугольники. Кроме того, заметьте, что в тексте есть несколько мест, которые можно было бы разметить строчными блоками кода. Возможно, это не было сделано как раз &lt;nobr&gt;из-за&lt;/nobr&gt; того, что текст стал бы ещё сильнее захламлён.&lt;/figcaption&gt;&lt;img class=&quot;Sidenote-Context&quot; src=&quot;http://kizu.ru/blog/styling-inline-code/example.png&quot; title=&quot;&quot; alt=&quot;Скриншот из Википедии&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;Что, если это слишком часто используемое оформление строчных блоков кода&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;излишне?&lt;/p&gt;
+&lt;p&gt;Практически всё, что мы видим, приходит от полноценных многострочных блоков кода. Но точно ли нам нужны все эти стили в строчном контексте?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Нужен ли нам моноширинный шрифт?&lt;/strong&gt; Неа. Моноширинность полезна тогда, когда у нас есть несколько строк, внутри которых нам нужно выравнивать символы друг относительно друга определённым образом. Но вот внутри обычного текста? Нам это не нужно. Уходи, моноширинный шрифт.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Нужны ли нам &lt;nobr&gt;какие-то&lt;/nobr&gt; бордеры или цвет фона?&lt;/strong&gt; Вряд ли. На больших блоках кода они выглядят нормально, но в строчном контексте подобное оформление очень сильно выпячивает наши строчные блоки, делая их слишком &lt;strong&gt;жирными&lt;/strong&gt;. А это, в свою очередь, ухудшает читаемость текста, так как глаз начинает спотыкаться, обращать внимание на эти яркие пятна ещё до того, как мы дочитаем до нужно места.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Нужна ли нам подсветка синтаксиса?&lt;/strong&gt; Сомневаюсь. Она полезна тогда, когда у нас есть много кода, и нам нужно отделить одни конструкции в нём от других. А вот в строчном контексте, когда в блоках кода оказываются лишь одно-два слова, подсветка становится излишней и ничего нам не даёт кроме ненужного привлечения внимания.&lt;/p&gt;
+&lt;h2 id=&quot;мо-решение&quot;&gt;Моё решение&lt;/h2&gt;
+&lt;p&gt;Итак, если все эти стили лишние, а то и вредные для нашего текста, что нам использовать вместо них? После обдумывания всех этих моментов, я решил вспомнить о том, как же оформляют похожие сущности в обычных книгах. И, оказывается, что когда доходит дело до ненавязчивого выделения небольших фрагментов текста, решение очевидно. &lt;em&gt;Курсив&lt;/em&gt;. И если он подходит для большинства обычных текстов, то почему бы не использовать курсив и для оформления строчных блоков кода?&lt;/p&gt;
+&lt;figure class=&quot;Sidenote-Wrapper&quot;&gt;&lt;figcaption class=&quot;Sidenote&quot;&gt;Моя версия примера выше, теперь хоть читается как текст. Нижние строчные блоки кода, с полными &lt;abbr&gt;CSS&lt;/abbr&gt;-правилами, в принципе, в &lt;nobr&gt;чём-то&lt;/nobr&gt; выигрывали от подсветки, так что, возможно, стоит в таких местах её возвращать, но уж точно не такую яркую, какой она была до этого.&lt;/figcaption&gt;&lt;img class=&quot;Sidenote-Context&quot; src=&quot;http://kizu.ru/blog/styling-inline-code/solution.png&quot; title=&quot;&quot; alt=&quot;Исправленный скриншот из Википедии&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;Собственно, можно посмотреть на строчный блок кода &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#semantics&quot; id=&quot;semantics&quot;&gt;прямо в этом тексте&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Прямо тут я использовал &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;, так как этот текст может оказаться, например, в &lt;abbr&gt;RSS&lt;/abbr&gt;-читалке, то есть там, где вы, скорее всего, не увидите стилей, специфичных для моего блога.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;: &lt;em&gt;font-style: italic&lt;/em&gt;. На мой взгляд, выглядит вполне неплохо&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;ненавязчиво, но явно отделено от основного текста.&lt;/p&gt;
+&lt;p&gt;Курсив достаточно отделяет код от остального текста, в большинстве случаев можно вообще больше ничего не добавлять. Самый простой способ сделать такие блоки кода курсивными следующий:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;:not(pre) &amp;gt; code {
+    font: inherit;
+    font-style: italic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Этим мы сделаем наши стандартные моноширинные блоки кода стандартным курсовом. Обратите внимание на &lt;code&gt;:not(pre)&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;если размечать полноценные блоки кода с помощью &lt;code&gt;&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;&lt;/code&gt;, этот селектор к ним не применится. Конечно, если мы используем &lt;nobr&gt;какую-то&lt;/nobr&gt; подсветку синтаксиса, нам надо будет её отключить для строчных блоков кода (или переопределить её стили). В некоторых случаях, когда вы используете отдельный шрифт для курсивного начертания, а в нашем веб-шрифте его нет, нам надо будет не забыть указать отдельны веб-шрифт и для наших блоков кода, иначе мы получим псевдо-курсив.&lt;/p&gt;
+&lt;h2 id=&quot;да-это-вс-субъективно&quot;&gt;Да, это всё субъективно&lt;/h2&gt;
+&lt;p&gt;Курсив для строчных блоков текста, конечно, может быть непривычен. Я и не говорю, что это единственный правильный вариант. Можно сказать, что это дело стиля&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;как вы будете оформлять строчные блоки кода. Иногда вы можете и захотеть, чтобы они выпячивались и привлекали внимание. Но, если вам захочется добавить читаемости вашим испещрённым строчными блоками кода текстам,&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;курсив вам в этом поможет.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Новая версия этого сайта</title>
     <link href="http://kizu.ru/blog/the-new-version-of-this-site/"/>
@@ -629,7 +658,7 @@ apply_media_cache()
     <updated>2013-05-17T00:00:00+03:00</updated>
     <id>http://kizu.ru/blog/cursor-text</id>
     <content type="html">&lt;h1 id=&quot;текстовый-курсор&quot;&gt;Текстовый курсор&lt;/h1&gt;
-&lt;p&gt;Я уже &lt;a href=&quot;:cursor-pointer&quot;&gt;писал&lt;/a&gt; о том, что на все активные элементы нужно вешать &lt;code&gt;cursor:pointer&lt;/code&gt;. Если кратко, то смена курсора должна означать, что с элементом под ним можно &lt;nobr&gt;что-то&lt;/nobr&gt; сделать, а не то, что элемент под курсором несёт &lt;nobr&gt;какую-то&lt;/nobr&gt; семантику (скажем, является &lt;em&gt;ссылкой&lt;/em&gt;, а не &lt;em&gt;кнопкой&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Я уже &lt;a href=&quot;/issues/cursor-pointer/&quot;&gt;писал&lt;/a&gt; о том, что на все активные элементы нужно вешать &lt;code&gt;cursor:pointer&lt;/code&gt;. Если кратко, то смена курсора должна означать, что с элементом под ним можно &lt;nobr&gt;что-то&lt;/nobr&gt; сделать, а не то, что элемент под курсором несёт &lt;nobr&gt;какую-то&lt;/nobr&gt; семантику (скажем, является &lt;em&gt;ссылкой&lt;/em&gt;, а не &lt;em&gt;кнопкой&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;Основная причина для этого&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;единообразие. Пользователи должны знать, что если курсор&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;рука, значит, можно на этот элемент нажать, чтобы &lt;nobr&gt;что-то&lt;/nobr&gt; произошло. А уж о том &lt;em&gt;что именно&lt;/em&gt; произойдёт должен уже говорить сам элемент.&lt;/p&gt;
 &lt;p&gt;И тут я натыкаюсь на такую вещь, как &lt;code&gt;cursor:text&lt;/code&gt;. И вижу отсутствие единообразия.&lt;/p&gt;
 &lt;p&gt;Дело в том, что этот курсор появляется как над обычным текстом, так и над текстовыми инпутами и текстариями.&lt;/p&gt;

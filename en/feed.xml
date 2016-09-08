@@ -3,12 +3,43 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2016-08-13T00:00:00+03:00</updated>
+  <updated>2016-09-08T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Styling inline code</title>
+    <link href="http://kizu.ru/en/blog/styling-inline-code/"/>
+    <updated>2016-09-08T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/styling-inline-code</id>
+    <content type="html">&lt;h1 id=&quot;styling-inline-code&quot;&gt;Styling inline code&lt;/h1&gt;
+&lt;p&gt;When I was working on &lt;a href=&quot;/en/blog/the-new-version-of-this-site/&quot;&gt;my site&amp;#39;s new version&lt;/a&gt;, I tried to think more about how everything should look and read typography-wise. And one of the things I always had problems with was how to style inline code blocks. Most of the time we can see small colorful rectangles in place of them. And the more you put those things inside your text, the worse the reading experience becomes.&lt;/p&gt;
+&lt;figure class=&quot;Sidenote-Wrapper&quot;&gt;&lt;figcaption class=&quot;Sidenote&quot;&gt;This example is taken from a &lt;a href=&quot;https://en.wikipedia.org/wiki/Cascading_Style_Sheets#Selector&quot;&gt;Wikipedia article on &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;. Look at all those colorful rectangles. Also, note how some of the things that could be inline code blocks are not marked as such as they surely would introduce even more visual clutter.&lt;/figcaption&gt;&lt;img class=&quot;Sidenote-Context&quot; src=&quot;http://kizu.ru/en/blog/styling-inline-code/example.png&quot; title=&quot;&quot; alt=&quot;Screenshot from Wikipedia&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;What if that overused inline code blocks&amp;#39; style is just redundant?&lt;/p&gt;
+&lt;p&gt;Almost everything we see there is coming from how the proper multiline code blocks are often presented. But do we really need all those styles in an &lt;em&gt;inline context&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do we need monospace font?&lt;/strong&gt; Nope. Monospace is useful when we have multiple lines and need to align symbols in a nice way. But inside a regular text? We don&amp;#39;t need it. Go away, monospace font.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do we need borders and any background color?&lt;/strong&gt; Unlikely. When we have a big single code block they&amp;#39;re ok, but those styles become too bright and eye-catching in an inline context. They make your inline code blocks too &lt;strong&gt;bold&lt;/strong&gt;, and it would worsen the text&amp;#39;s readability, as the eye would pay attention to those bright spots before you&amp;#39;ll read the whole text.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do we need syntax highlighting?&lt;/strong&gt; I doubt it. It is useful when we have a lot of code and need to separate some things from the other, but when we have only one or two words inside out code blocks, the highlighting is just unnecessary and won&amp;#39;t do anything except for getting more of our attention to it.&lt;/p&gt;
+&lt;h2 id=&quot;my-solution&quot;&gt;My Solution&lt;/h2&gt;
+&lt;p&gt;So, if all those styles are redundant, or even harmful for our text, what should we use instead? After some thoughts about all those issues, I started to look into how people are styling similar entities in regular books. When it comes to the non-obtrusive way of emphasizing some parts of the text the solution is obvious. &lt;em&gt;Italic&lt;/em&gt;. And if it is useful for the regular texts, why couldn&amp;#39;t we use it for our inline code blocks?&lt;/p&gt;
+&lt;figure class=&quot;Sidenote-Wrapper&quot;&gt;&lt;figcaption class=&quot;Sidenote&quot;&gt;My version of the above example now reads better as a text. The bottom inline code blocks, the ones with the whole &lt;abbr&gt;CSS&lt;/abbr&gt; rules, were actually a bit better with the highlighting, so it would be possible to reintroduce it there, but not as brightly as it was before.&lt;/figcaption&gt;&lt;img class=&quot;Sidenote-Context&quot; src=&quot;http://kizu.ru/en/blog/styling-inline-code/solution.png&quot; title=&quot;&quot; alt=&quot;Fixed screenshot from Wikipedia&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;Actually, you can look at an inline code block &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#semantics&quot; id=&quot;semantics&quot;&gt;right there&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Here I used just an &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;, as this post could be seen on &lt;abbr&gt;RSS&lt;/abbr&gt;-readers and in other places where you wouldn&amp;#39;t have the proper code blocks&amp;#39; style like I used for my blog.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;: &lt;em&gt;font-style: italic&lt;/em&gt;. I think that it look rather &lt;nobr&gt;nice —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;unobtrusive, but separate from the regular text.&lt;/p&gt;
+&lt;p&gt;Italic separates the code from the other text just fine, in most cases, you won&amp;#39;t need anything else there. The easiest way to make your inline code blocks italic is something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;:not(pre) &amp;gt; code {
+    font: inherit;
+    font-style: italic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This would make your inline code blocks to look like a regular italic text. Note the &lt;code&gt;:not(pre)&lt;/code&gt;&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;if you&amp;#39;ll mark your big code blocks using &lt;code&gt;&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;&lt;/code&gt;, this selector won&amp;#39;t match them. Of course, if you&amp;#39;re using some kind of syntax highlighter, you&amp;#39;ll need to disable it (or override its styles) for inline code blocks. In some cases, when you&amp;#39;re using a different web font for the italic, you&amp;#39;ll need to specify this too to not make a faux italic instead, of course.&lt;/p&gt;
+&lt;p&gt;There can be some cons for this solution. For example, if you&amp;#39;d want to have some &lt;em&gt;regular emphasis&lt;/em&gt; you&amp;#39;ll have the same style for both it and inline code blocks. But in most cases reader would know the difference from the context and it won&amp;#39;t matter much.&lt;/p&gt;
+&lt;h2 id=&quot;yes-it-39-s-all-subjective&quot;&gt;Yes, It&amp;#39;s All Subjective&lt;/h2&gt;
+&lt;p&gt;Italic for inline code blocks can be, of course, unusual. But I&amp;#39;m not saying that that&amp;#39;s the only possible solution.
+Overall, it is a matter of &lt;nobr&gt;style —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;how you would present your inline code blocks. Sometimes you&amp;#39;d want them to pop and bring reader&amp;#39;s attention. But if you&amp;#39;d want to have your texts with a lot of inline code blocks to be more &lt;nobr&gt;readable —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;italic could help you.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>The New Version of This Site</title>
     <link href="http://kizu.ru/en/blog/the-new-version-of-this-site/"/>
