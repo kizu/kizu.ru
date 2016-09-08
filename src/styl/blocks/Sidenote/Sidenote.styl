@@ -11,14 +11,15 @@
     text-decoration: none !important
 
     +at-not-lowest()
-      cursor: inherit
-      // cursor: help // Looks not ok, should we use it?
+      &:not(img)
+        cursor: inherit
+        // cursor: help // Looks not ok, should we use it?
 
-      padding-left: 0.2em
-      padding-right: 0.1em
-      margin-left: -0.2em
-      margin-right: -0.3em
-      border-radius: 3px
+        padding-left: 0.2em
+        padding-right: 0.1em
+        margin-left: -0.15em
+        margin-right: -0.25em
+        border-radius: 3px
 
     +at-not-lowest()
       &,

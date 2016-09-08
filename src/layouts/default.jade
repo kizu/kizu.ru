@@ -10,9 +10,10 @@
     page_class += ' Page_' + lang
   }
   var hasSidenotes = document.content.match(/"Sidenote"/g);
+  var simpleSidenotes = document.content.match(/<span class="Sidenote" role="note">/g);
   var hasSidepicture = document.content.match(/"Sidepicture"/g);
-  if (hasSidenotes) {
-    if (hasSidenotes.length === 1) {
+  if (simpleSidenotes) {
+    if (simpleSidenotes.length === 1) {
       page_class += ' with-lonely-sidenote'
     }
   } else if (!hasSidepicture) {

@@ -145,7 +145,7 @@ blockquote
 figure
   display: block
 
-  padding: $size.base
+  padding: 1.5*$size.base
 
   text-align: left
 
@@ -161,6 +161,7 @@ figure
     vertical-align: top
 
   +at-not-lowest()
+    border-radius: 3px
     box-shadow: ($size.sidebar + $size.base) 0 0 rgba($color.text, 0.05)
 
   +at-lowest()
