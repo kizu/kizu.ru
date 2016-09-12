@@ -228,15 +228,13 @@ figcaption
   &:after
     content: "\AD"
 
-    @supports (-webkit-appearance: none)
-      &
-        content: "\AD\2062"
+  &:not(*:root):after
+    content: "\AD\2062"
 
 .thinsp
-  @supports (-webkit-appearance: none)
-    &:after
-      content: ""
-      display: inline-block
+  &:not(*:root):after
+    content: ""
+    display: inline-block
 
 .Anchor
   display: inline-block
