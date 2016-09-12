@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en with-lonely-sidenote">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Conditions For CSS Variables</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи нет перевода, но для многих других — есть" href="/" class="Page-Language-Link">по-русски*</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="conditions-for-css-variables"><a class="Anchor" aria-hidden="true" href="#conditions-for-css-variables"></a><span class="ss02 hang-xs">C</span>on<span class="shy"></span>di<span class="shy"></span>tions For <abbr>CSS</abbr> Vari<span class="shy"></span>ables</h1>
+          </header>
+<p>I&#39;ll start from this: <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#not-those" id="not-those">there are no</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a mod<span class="shy"></span>ule named “<a href="https://www.w3.org/TR/css3-conditional/"><abbr>CSS</abbr> Con<span class="shy"></span>di<span class="shy"></span>tional Rules</a>”, but don&#39;t ex<span class="shy"></span>pect it to cover the <abbr>CSS</abbr> vari<span class="shy"></span><nobr>ables —</nobr><span class="thinsp"> </span>it cov<span class="shy"></span>ers some <nobr>at-rules</nobr> stuff. There is even a <a href="https://tabatkins.github.io/specs/css-when-else/">pro<span class="shy"></span>posal</a> for <code>@when</code>/<code>@else</code> <nobr>at-rules</nobr>, which, again, do not any<span class="shy"></span>thing in com<span class="shy"></span>mon with vari<span class="shy"></span>ables.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span> con<span class="shy"></span>di<span class="shy"></span>tions in specs to use with <a class="Link" href="https://www.w3.org/TR/css-variables-1/"><abbr>CSS</abbr> vari<span class="shy"></span>ables</a>. This is a re<span class="shy"></span>ally big flow in <abbr>CSS</abbr> vari<span class="shy"></span>ables, as while they al<span class="shy"></span>ready pro<span class="shy"></span>vide a lot of things that were not pos<span class="shy"></span>si<span class="shy"></span>ble in any other way be<span class="shy"></span>fore, the ab<span class="shy"></span>sence of con<span class="shy"></span>di<span class="shy"></span>tions is re<span class="shy"></span>ally frus<span class="shy"></span>trat<span class="shy"></span>ing. I don&#39;t know why there are no con<span class="shy"></span>di<span class="shy"></span>tions.</p>
+<p>But what if we&#39;d need the con<span class="shy"></span>di<span class="shy"></span>tional state<span class="shy"></span>ments for our <abbr>CSS</abbr> vari<span class="shy"></span>ables <em>now</em>? Well, as with a lot of other <abbr>CSS</abbr> stuff, we can hack our way around in same cases.</p>
+<h2 class="Heading" id="the-problem-39-s-definition"><a class="Anchor" aria-hidden="true" href="#the-problem-39-s-definition"></a><span class="ss01 hang-m">T</span>he Prob<span class="shy"></span>lem&#39;s De<span class="shy"></span>f<span class="shy"></span>i<span class="shy"></span>n<span class="shy"></span>ition</h2>
+<p>So, what we need is a way to use a sin<span class="shy"></span>gle <abbr>CSS</abbr> vari<span class="shy"></span>able for set<span class="shy"></span>ting dif<span class="shy"></span>fer<span class="shy"></span>ent <abbr>CSS</abbr> prop<span class="shy"></span>er<span class="shy"></span>ties to <em>dif<span class="shy"></span>fer<span class="shy"></span>ent</em> val<span class="shy"></span>ues, but not based di<span class="shy"></span>rectly on this vari<span class="shy"></span>able. <nobr>So —</nobr><span class="thinsp"> </span>we need con<span class="shy"></span>di<span class="shy"></span>tions.</p>
+<h2 class="Heading" id="using-calculations-for-binary-conditions"><a class="Anchor" aria-hidden="true" href="#using-calculations-for-binary-conditions"></a><span class="ss01 hang-m">U</span>sing Cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions for Bi<span class="shy"></span>nary Con<span class="shy"></span>ditions</h2>
+<p>Long story short, I&#39;ll just pre<span class="shy"></span>sent the so<span class="shy"></span>lu<span class="shy"></span>tion to you right now and ex<span class="shy"></span>plain it later:</p>
+<pre><code class="language-css">:root {
+    --is-big: 0;
+}
+
+.is-big {
+    --is-big: 1;
+}
+
+.block {
+    padding: calc(
+        25px * var(--is-big) + 
+        10px * (1 - var(--is-big))
+    );
+    bor<span class="shy"></span>der-width: calc(
+        3px * var(--is-big) + 
+        1px * (1 - var(--is-big))
+    );
+}
+</code></pre>
+<p>In this ex<span class="shy"></span>am<span class="shy"></span>ple we can have all our el<span class="shy"></span>e<span class="shy"></span>ments with <code>.block</code> to have paddings at <code>10px</code> and bor<span class="shy"></span>der widths at <code>1px</code> un<span class="shy"></span>less the <code>--is-big</code> vari<span class="shy"></span>able on those el<span class="shy"></span>e<span class="shy"></span>ments won&#39;t be <code>1</code>, in which case they would be<span class="shy"></span>come <code>25px</code> and <code>3px</code> re<span class="shy"></span>spec<span class="shy"></span>tively.</p>
+<p>The mech<span class="shy"></span>a<span class="shy"></span>nism be<span class="shy"></span>yond this is rather sim<span class="shy"></span>ple: we use both our pos<span class="shy"></span>si<span class="shy"></span>ble val<span class="shy"></span>ues in a sin<span class="shy"></span>gle cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tion, where we nul<span class="shy"></span>lify one and keep an<span class="shy"></span>other value based on the vari<span class="shy"></span>able&#39;s value which can be ei<span class="shy"></span>ther <code>1</code> or <code>0</code>.</p>
+
+          <p class="Metadata Published">Wrote as a draft, not published yet.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CConditions%20For%20CSS%20Variables%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/conditions-for-css-variables/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>
