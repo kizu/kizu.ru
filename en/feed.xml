@@ -3,12 +3,236 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2016-09-08T00:00:00+03:00</updated>
+  <updated>2016-10-21T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Conditions for CSS Variables</title>
+    <link href="http://kizu.ru/en/fun/conditions-for-css-variables/"/>
+    <updated>2016-10-21T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/conditions-for-css-variables</id>
+    <content type="html">&lt;h1 id=&quot;conditions-for-css-variables&quot;&gt;Conditions for &lt;abbr&gt;CSS&lt;/abbr&gt; Variables&lt;/h1&gt;
+&lt;p&gt;I&amp;#39;ll start from this: &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#not-those&quot; id=&quot;not-those&quot;&gt;there are no&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;There is a module named “&lt;a href=&quot;https://www.w3.org/TR/css3-conditional/&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Conditional Rules&lt;/a&gt;”, but don&amp;#39;t expect it to cover the &lt;abbr&gt;CSS&lt;/abbr&gt; &lt;nobr&gt;variables —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it covers some &lt;nobr&gt;at-rules&lt;/nobr&gt; stuff. There is even a &lt;a href=&quot;https://tabatkins.github.io/specs/css-when-else/&quot;&gt;proposal&lt;/a&gt; for &lt;code&gt;@when&lt;/code&gt;/&lt;code&gt;@else&lt;/code&gt; &lt;nobr&gt;at-rules&lt;/nobr&gt;, which, again, do not anything in common with variables.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; conditions in specs to use with &lt;a href=&quot;https://www.w3.org/TR/css-variables-1/&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; variables&lt;/a&gt;. I think that this is a really big flow in specs, as while variables already provide a lot of things that were not possible in any other way before, the absence of conditions is really frustrating, as there could be a lot of uses for them.&lt;/p&gt;
+&lt;p&gt;But what if we&amp;#39;d need those imaginary conditional statements for our &lt;abbr&gt;CSS&lt;/abbr&gt; variables &lt;em&gt;now&lt;/em&gt;? Well, as with a lot of other &lt;abbr&gt;CSS&lt;/abbr&gt; stuff, we can hack our way around for same cases.&lt;/p&gt;
+&lt;h2 id=&quot;the-problem-39-s-definition&quot;&gt;The Problem&amp;#39;s Definition&lt;/h2&gt;
+&lt;p&gt;So, what we need is a way to use a single &lt;abbr&gt;CSS&lt;/abbr&gt; variable for setting different &lt;abbr&gt;CSS&lt;/abbr&gt; properties to &lt;em&gt;different&lt;/em&gt; values, but not based directly on this variable (that &lt;nobr&gt;is —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;those values shouldn&amp;#39;t be &lt;em&gt;calculated&lt;/em&gt; from our variable). We need &lt;strong&gt;conditions&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;using-calculations-for-binary-conditions&quot;&gt;Using Calculations for Binary Conditions&lt;/h2&gt;
+&lt;p&gt;Long story short, I&amp;#39;ll just present the solution to you right now and would explain it later:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:root {
+    --is-big: 0;
+}
+
+.is-big {
+    --is-big: 1;
+}
+
+.block {
+    padding: calc(
+        25px * var(--is-big) +
+        10px * (1 - var(--is-big))
+    );
+    border-width: calc(
+        3px * var(--is-big) +
+        1px * (1 - var(--is-big))
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example, we&amp;#39;re making all our elements with &lt;code&gt;.block&lt;/code&gt; to have paddings equal to &lt;code&gt;10px&lt;/code&gt; and border widths to &lt;code&gt;1px&lt;/code&gt; unless the &lt;code&gt;--is-big&lt;/code&gt; variable on those elements won&amp;#39;t be &lt;code&gt;1&lt;/code&gt;, in which case they would become &lt;code&gt;25px&lt;/code&gt; and &lt;code&gt;3px&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;p&gt;The mechanism beyond this is rather simple: we use both our possible values in a single calculation using &lt;code&gt;calc()&lt;/code&gt;, where we nullify one and keep another value based on the variable&amp;#39;s value which can be either &lt;code&gt;1&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt;. In other words, we&amp;#39;ll have &lt;code&gt;25px * 1 + 10px * 0&lt;/code&gt; in one case and &lt;code&gt;25px * 0 + 10px * 1&lt;/code&gt; in another.&lt;/p&gt;
+&lt;h2 id=&quot;more-complex-conditions&quot;&gt;More complex conditions&lt;/h2&gt;
+&lt;p&gt;We can use this method to choose not only from 2 possible values but for choosing from 3 or more values. However, for each new added possible value the calculation becomes more complex. For choosing between 3 possible values it would already look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.block {
+    padding: calc(
+        100px * (1 - var(--foo)) * (2 - var(--foo)) * 0.5 +
+         20px * var(--foo) * (2 - var(--foo)) +
+          3px * var(--foo) * (1 - var(--foo)) * -0.5
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This could accept &lt;code&gt;0&lt;/code&gt;, &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;2&lt;/code&gt; values for &lt;code&gt;--foo&lt;/code&gt; variable and calculate the padding to &lt;code&gt;100px&lt;/code&gt;, &lt;code&gt;20px&lt;/code&gt; or &lt;code&gt;3px&lt;/code&gt; correspondingly.&lt;/p&gt;
+&lt;p&gt;The principle is the same: we just need to multiply each possible value to an expression that would be equal to &lt;code&gt;1&lt;/code&gt; when the condition for this value is the one we need and to &lt;code&gt;0&lt;/code&gt; in other cases. And this expression can be composed rather easily: we just need to nullify each other possible value of our conditional variable. After doing this we&amp;#39;d need to add our triggering value there to see if we&amp;#39;d need to adjust the result so it would be equal to 1. And that&amp;#39;s it.&lt;/p&gt;
+&lt;h3 id=&quot;a-possible-trap-in-the-specs&quot;&gt;A Possible Trap in the Specs&lt;/h3&gt;
+&lt;p&gt;With the increasing complexity of such calculations, there is a chance at one point they would stop from working. Why? There is this note in &lt;a href=&quot;https://drafts.csswg.org/css-values-3/#calc-syntax&quot;&gt;specs&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;UAs must support calc() expressions of at least 20 terms, where each &lt;abbr&gt;NUMBER&lt;/abbr&gt;, &lt;abbr&gt;DIMENSION&lt;/abbr&gt;, or &lt;abbr&gt;PERCENTAGE&lt;/abbr&gt; is a term. If a calc() expression contains more than the supported number of terms, it must be treated as if it were invalid.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Of course, I tested this a bit and couldn&amp;#39;t found such limitations in the browsers I tested, but there is still a chance either you would write some really complex code that would meet the possible existing limit, or some of the browsers could introduce this limit in the future, so be careful when using really complex calculations.&lt;/p&gt;
+&lt;h2 id=&quot;conditions-for-colors&quot;&gt;Conditions for Colors&lt;/h2&gt;
+&lt;p&gt;As you can see, those calculations could be used only for things that you can &lt;em&gt;calculate&lt;/em&gt;, so there is no chance we could use it for switching the values of &lt;code&gt;display&lt;/code&gt; property or any other non-numeric ones. But what about colors? Actually, we can calculate the individual components of the colors. Sadly, right now it would work only in Webkits and Blinks, as &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=984021&quot; title=&quot;Bugzilla ticket&quot;&gt;Firefox don&amp;#39;t yet support&lt;/a&gt; &lt;code&gt;calc()&lt;/code&gt; inside &lt;code&gt;rgba()&lt;/code&gt; and other color functions.&lt;/p&gt;
+&lt;p&gt;But when the support would be there (or if you&amp;#39;d like to experiment on this in browsers with an existing support), we could do things like that:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:root {
+    --is-red: 0;
+}
+
+.block {
+    background: rgba(
+        calc(
+            255*var(--is-red) +
+            0*(1 - var(--is-red))
+            ),
+        calc(
+            0*var(--is-red) +
+            255*(1 - var(--is-red))
+            ),
+        0, 1);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we&amp;#39;d have lime color by default and red if the &lt;code&gt;--is-red&lt;/code&gt; would be set to &lt;code&gt;1&lt;/code&gt; (note that when the component could be zero we could just omit it at all, making out code more compact, here I kept those for clarity of an algorithm).&lt;/p&gt;
+&lt;p&gt;As you could do those calculations with any components, it is possible to create those conditions for any colors (and maybe even for gradients? You should try it!).&lt;/p&gt;
+&lt;h3 id=&quot;another-trap-in-the-specs&quot;&gt;Another Trap in the Specs&lt;/h3&gt;
+&lt;p&gt;When I was testing how the conditions work for colors, I found out a really, &lt;em&gt;really&lt;/em&gt; weird limitation in Specs. It is called &lt;a href=&quot;https://twitter.com/kizmarh/status/788504161864261632&quot;&gt;“Type Checking”&lt;/a&gt;. I now officially hate it. What this means is that if the property accepts only &lt;code&gt;&amp;lt;integer&amp;gt;&lt;/code&gt; as a value, if you&amp;#39;d have any divisions or non-integers inside the &lt;code&gt;calc()&lt;/code&gt; for it, even if the result would be integer, the “resolved type” wouldn&amp;#39;t be &lt;code&gt;&amp;lt;integer&amp;gt;&lt;/code&gt;, it would be &lt;code&gt;&amp;lt;number&amp;gt;&lt;/code&gt;, and that means that those properties won&amp;#39;t accept such values. And when we&amp;#39;d have calculations involving more than two possible values, we&amp;#39;d need to have a non-integer modifiers. And that would make our calculation invalid for using with colors or other integer-only properties (like &lt;code&gt;z-index&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;That is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;calc(255 * (1 - var(--bar)) * (var(--bar) - 2) * -0.5)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Would be invalid when inside of the &lt;code&gt;rgba()&lt;/code&gt;. Initially I thought that this behaviour is a bug, especially knowing how the color functions can actually accept the values that go beyond the possible ranges (you can do &lt;code&gt;rgba(9001, +9001, -9001, 42)&lt;/code&gt; and get a valid yellow color), but this typing thing seems to be too hard for browsers to handle.&lt;/p&gt;
+&lt;h4 id=&quot;solutions-&quot;&gt;Solutions?&lt;/h4&gt;
+&lt;p&gt;There is one far from perfect solution. As in our case we know both the desired value and the problematic modifier, we can pre-calculate them and then round it up. Yep, that means that the resulting value could be not exactly the same, as we would lose some precision in some cases. But it is better than nothing, right?&lt;/p&gt;
+&lt;p&gt;But there is another solution that would work for &lt;nobr&gt;colors —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we can use &lt;code&gt;hsla&lt;/code&gt; instead of &lt;code&gt;rgba&lt;/code&gt;, as it accepts not integers, but numbers and percentages, so there won&amp;#39;t be a conflict in type resolving. But for other properties like &lt;code&gt;z-index&lt;/code&gt; that solution won&amp;#39;t work. But even with this method there still could be some losses in precision if you&amp;#39;re going to convert &lt;code&gt;rgb&lt;/code&gt; to &lt;code&gt;hsl&lt;/code&gt;. But those should be less than in previous solution.&lt;/p&gt;
+&lt;h2 id=&quot;preprocessing&quot;&gt;Preprocessing&lt;/h2&gt;
+&lt;p&gt;When the conditions are binary it is still possible to write them by hand. But when we&amp;#39;re starting to use more complex conditions, or when we&amp;#39;re getting to the colors, we&amp;#39;d better have tools that could make it easier to write. Luckily, we have preprocessors for this purpose.&lt;/p&gt;
+&lt;p&gt;Here is how I managed to quickly do it in &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#pen&quot; id=&quot;pen&quot;&gt;Stylus&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can look at &lt;a href=&quot;http://codepen.io/kizu/pen/zKmyvG&quot;&gt;CodePen with this code&lt;/a&gt; in action.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;conditional($var, $values...)
+  $result = &amp;#39;&amp;#39;
+
+  // If there is only an array passed, use its contents
+  if length($values) == 1
+    $values = $values[0]
+
+  // Validating the values and check if we need to do anything at all
+  $type = null
+  $equal = true
+
+  for $value, $i in $values
+    if $i &amp;gt; 0 and $value != $values[0]
+      $equal = false
+
+    $value_type = typeof($value)
+    $type = $type || $value_type
+    if !($type == &amp;#39;unit&amp;#39; or $type == &amp;#39;rgba&amp;#39;)
+      error(&amp;#39;Conditional function can accept only numbers or colors&amp;#39;)
+
+    if $type != $value_type
+      error(&amp;#39;Conditional function can accept only same type values&amp;#39;)
+
+  // If all the values are equal, just return one of them
+  if $equal
+    return $values[0]
+
+  // Handling numbers
+  if $type == &amp;#39;unit&amp;#39;
+    $result = &amp;#39;calc(&amp;#39;
+    $i_count = 0
+    for $value, $i in $values
+      $multiplier = &amp;#39;&amp;#39;
+      $modifier = 1
+      $j_count = 0
+      for $j in 0..(length($values) - 1)
+        if $j != $i
+          $j_count = $j_count + 1
+          // We could use just the general multiplier,
+          // but for 0 and 1 we can simplify it a bit.
+          if $j == 0
+            $modifier = $modifier * $i
+            $multiplier = $multiplier + $var
+          else if $j == 1
+            $modifier = $modifier * ($j - $i)
+            $multiplier = $multiplier + &amp;#39;(1 - &amp;#39; + $var + &amp;#39;)&amp;#39;
+          else
+            $modifier = $modifier * ($i - $j)
+            $multiplier = $multiplier + &amp;#39;(&amp;#39; + $var + &amp;#39; - &amp;#39; + $j + &amp;#39;)&amp;#39;
+
+          if $j_count &amp;lt; length($values) - 1
+            $multiplier = $multiplier + &amp;#39; * &amp;#39;
+
+      // If value is zero, just don&amp;#39;t add it there lol
+      if $value != 0
+        if $modifier != 1
+          $multiplier = $multiplier + &amp;#39; * &amp;#39; + (1 / $modifier)
+        $result = $result + ($i_count &amp;gt; 0 ? &amp;#39; + &amp;#39; : &amp;#39;&amp;#39;) + $value + &amp;#39; * &amp;#39; + $multiplier
+        $i_count = $i_count + 1
+
+    $result = $result + &amp;#39;)&amp;#39;
+
+  // Handling colors
+  if $type == &amp;#39;rgba&amp;#39;
+    $hues = ()
+    $saturations = ()
+    $lightnesses = ()
+    $alphas = ()
+
+    for $value in $values
+      push($hues, unit(hue($value), &amp;#39;&amp;#39;))
+      push($saturations, saturation($value))
+      push($lightnesses, lightness($value))
+      push($alphas, alpha($value))
+
+    $result = &amp;#39;hsla(&amp;#39; + conditional($var, $hues) + &amp;#39;, &amp;#39; + conditional($var, $saturations) + &amp;#39;, &amp;#39; + conditional($var, $lightnesses) + &amp;#39;, &amp;#39; + conditional($var, $alphas) +  &amp;#39;)&amp;#39;
+
+  return unquote($result)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Yep, there is a lot of code, but this mixin can generate conditionals both for numbers and colors, and not only for two possible conditions but for many more.&lt;/p&gt;
+&lt;p&gt;The usage is really easy:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;border-width: conditional(var(--foo), 10px, 20px)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first argument is our variable, the second one is the value that should be applied when the variable would be equal to &lt;code&gt;0&lt;/code&gt;, the &lt;nobr&gt;third —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when it would be equal to &lt;code&gt;1&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;p&gt;This above call would generate proper conditional:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;border-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And here is a more complex example for the color conditionals:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-styl&quot;&gt;color: conditional(var(--bar), red, lime, rebeccapurple, orange)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Would generate something that you surely wouldn&amp;#39;t want to write by hand:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that there is no detection of &lt;code&gt;&amp;lt;integer&amp;gt;&lt;/code&gt;-accepting properties, so that won&amp;#39;t work for &lt;code&gt;z-index&lt;/code&gt; and such, but it already converts colors to &lt;code&gt;hsla()&lt;/code&gt; to make them manageble (though even this could be enhanced so this convertation would happen only when it would be needed). Another thing I didn&amp;#39;t implement in this mixin (yet?) is the ability to use &lt;abbr&gt;CSS&lt;/abbr&gt; variables for the values. This would be possible for non-integer numbers as those values would be inserted as is in the conditional calculations. Maybe, when I&amp;#39;ll find time, I&amp;#39;ll fix the mixin to accept not only numbers or colors but also variables. For the time being it is still possible to do using the algorithm explained in this article.&lt;/p&gt;
+&lt;h2 id=&quot;fallbacks&quot;&gt;Fallbacks&lt;/h2&gt;
+&lt;p&gt;Of course, if you&amp;#39;re planning to actually use this, you&amp;#39;ll need to have a way to set fallbacks. They&amp;#39;re easy for browsers that just don&amp;#39;t support variables: you just declare the fallback value before the conditional declaration:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.block {
+    padding: 100px; /* fallback */
+    padding: calc(
+        100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
+         20px * (var(--foo) * (2 - var(--foo))) +
+          3px * (var(--foo) * (1 - var(--foo)) / -2)
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But when it comes to colors we have a problem: when there is a support for variables, in fact (and that&amp;#39;s another really weird place in specs), &lt;em&gt;just any&lt;/em&gt; declaration containing variables would be considered valid. And this means that it is not possible in &lt;abbr&gt;CSS&lt;/abbr&gt; to make a fallback for something containing variables:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;background: blue;
+background: I 💩 CSS VAR(--I)ABLES;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Is valid &lt;abbr&gt;CSS&lt;/abbr&gt; and per specs, the background would get an &lt;code&gt;initial&lt;/code&gt; value, not the one provided in a fallback (even though it is obvious that the other parts of the value are incorrect).&lt;/p&gt;
+&lt;p&gt;So, what we need in order to provide a fallback in those &lt;nobr&gt;cases —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;add &lt;code&gt;@support&lt;/code&gt; wrapper that would test the support for everything &lt;strong&gt;except&lt;/strong&gt; for the variables.&lt;/p&gt;
+&lt;p&gt;In our case, we need to wrap our conditional colors for Firefox in something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.block {
+    color: #f00;
+}
+@supports (color: rgb(0, calc(0), 0)) {
+    .block {
+        color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we&amp;#39;re testing a support for calculations inside color functions and applying the conditional color only in that case.&lt;/p&gt;
+&lt;p&gt;It is also possible to create such fallbacks automatically, but I won&amp;#39;t recommend you to use preprocessors for them as the complexity of creating such stuff is much more than the capabilities preprocessors provide.&lt;/p&gt;
+&lt;h2 id=&quot;use-cases&quot;&gt;Use cases&lt;/h2&gt;
+&lt;p&gt;I really don&amp;#39;t like to provide use cases for the things the need for which is obvious. So I&amp;#39;ll be brief. And I&amp;#39;ll state not only the conditions for variables, but also the general conditions, like for the result of &lt;code&gt;calc()&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The conditions for &lt;abbr&gt;CSS&lt;/abbr&gt; variables would be perfect for themifying blocks. This way you could have a number of numbered themes and then apply them to blocks (and nested ones!) using just one &lt;abbr&gt;CSS&lt;/abbr&gt; variable like &lt;code&gt;--block-variant: 1&lt;/code&gt;. This is not something that is possible through any other means other than variables and when you&amp;#39;d want to have different values for different props in different themes, without the conditionals you&amp;#39;d need to have many different variables and apply all of them in every case.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Typography. If it was possible to use the &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;gt;=&lt;/code&gt; in conditions for variables, it would be possible to have a number of “rules” for different font sizes, so you could set different line heights, font weights and other properties based on the given font-size. This is possible now, but now when you need to have some “stops” for those valuea and not just the values derived from &lt;code&gt;em&lt;/code&gt;s.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Responsive design. Well, if there were the conditions for calculations, then it would be almost the same as those elusive “element queries”&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you could check the &lt;code&gt;vw&lt;/code&gt; or the parent&amp;#39;s widths in percents and decide what to apply in different cases.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There can be other use cases, tell me if you&amp;#39;d find one! I&amp;#39;m sure I had more of them myself, but I don&amp;#39;t have that good of a memory to remember all the things I ever wanted to do with &lt;abbr&gt;CSS&lt;/abbr&gt;. Because its all the things.&lt;/p&gt;
+&lt;h2 id=&quot;future&quot;&gt;Future&lt;/h2&gt;
+&lt;p&gt;I would really like to see conditions described in &lt;abbr&gt;CSS&lt;/abbr&gt; specs, so we would not rely on calc hacks and could use proper conditions for non-calculatable values too. It is also impossible right now to have conditions other than strict equality, so no “when the variable is more than X” and other stuff like that. I don&amp;#39;t see any reasons why we can&amp;#39;t have proper conditions in &lt;abbr&gt;CSS&lt;/abbr&gt;, so if you know a fellow spec developer, hint them about this issue. My only hope is that they won&amp;#39;t tell us to “just use JS” or find out excuses of why that wouldn&amp;#39;t ever be possible. Here, it is already possible now using the hacks, there can&amp;#39;t be any excuses.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Styling inline code</title>
     <link href="http://kizu.ru/en/blog/styling-inline-code/"/>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Conditions for CSS Variables</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/conditions-for-css-variables/">
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/fun/conditions-for-css-variables/">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" href="/fun/conditions-for-css-variables/" class="Page-Language-Link">по-русски</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="conditions-for-css-variables"><a class="Anchor" aria-hidden="true" href="#conditions-for-css-variables"></a><span class="ss02 hang-xs">C</span>on<span class="shy"></span>di<span class="shy"></span>tions for <abbr>CSS</abbr> Vari<span class="shy"></span>ables</h1>
+          </header>
+<p>I&#39;ll start from this: <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#not-those" id="not-those">there are no</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a mod<span class="shy"></span>ule named “<a href="https://www.w3.org/TR/css3-conditional/"><abbr>CSS</abbr> Con<span class="shy"></span>di<span class="shy"></span>tional Rules</a>”, but don&#39;t ex<span class="shy"></span>pect it to cover the <abbr>CSS</abbr> vari<span class="shy"></span><nobr>ables —</nobr><span class="thinsp"> </span>it cov<span class="shy"></span>ers some <nobr>at-rules</nobr> stuff. There is even a <a href="https://tabatkins.github.io/specs/css-when-else/">pro<span class="shy"></span>posal</a> for <code>@when</code>/<code>@else</code> <nobr>at-rules</nobr>, which, again, do not any<span class="shy"></span>thing in com<span class="shy"></span>mon with vari<span class="shy"></span>ables.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span> con<span class="shy"></span>di<span class="shy"></span>tions in specs to use with <a class="Link" href="https://www.w3.org/TR/css-variables-1/"><abbr>CSS</abbr> vari<span class="shy"></span>ables</a>. I think that this is a re<span class="shy"></span>ally big flow in specs, as while vari<span class="shy"></span>ables al<span class="shy"></span>ready pro<span class="shy"></span>vide a lot of things that were not pos<span class="shy"></span>si<span class="shy"></span>ble in any other way be<span class="shy"></span>fore, the ab<span class="shy"></span>sence of con<span class="shy"></span>di<span class="shy"></span>tions is re<span class="shy"></span>ally frus<span class="shy"></span>trat<span class="shy"></span>ing, as there could be a lot of uses for them.</p>
+<p>But what if we&#39;d need those imag<span class="shy"></span>i<span class="shy"></span>nary con<span class="shy"></span>di<span class="shy"></span>tional state<span class="shy"></span>ments for our <abbr>CSS</abbr> vari<span class="shy"></span>ables <em>now</em>? Well, as with a lot of other <abbr>CSS</abbr> stuff, we can hack our way around for same cases.</p>
+<h2 class="Heading" id="the-problem-39-s-definition"><a class="Anchor" aria-hidden="true" href="#the-problem-39-s-definition"></a><span class="ss01 hang-m">T</span>he Prob<span class="shy"></span>lem&#39;s De<span class="shy"></span>f<span class="shy"></span>i<span class="shy"></span>n<span class="shy"></span>ition</h2>
+<p>So, what we need is a way to use a sin<span class="shy"></span>gle <abbr>CSS</abbr> vari<span class="shy"></span>able for set<span class="shy"></span>ting dif<span class="shy"></span>fer<span class="shy"></span>ent <abbr>CSS</abbr> prop<span class="shy"></span>er<span class="shy"></span>ties to <em>dif<span class="shy"></span>fer<span class="shy"></span>ent</em> val<span class="shy"></span>ues, but not based di<span class="shy"></span>rectly on this vari<span class="shy"></span>able (that <nobr>is —</nobr><span class="thinsp"> </span>those val<span class="shy"></span>ues shouldn&#39;t be <em>cal<span class="shy"></span>cu<span class="shy"></span>lated</em> from our vari<span class="shy"></span>able). We need <strong>con<span class="shy"></span>di<span class="shy"></span>tions</strong>.</p>
+<h2 class="Heading" id="using-calculations-for-binary-conditions"><a class="Anchor" aria-hidden="true" href="#using-calculations-for-binary-conditions"></a><span class="ss01 hang-m">U</span>sing Cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions for Bi<span class="shy"></span>nary Con<span class="shy"></span>ditions</h2>
+<p>Long story short, I&#39;ll just pre<span class="shy"></span>sent the so<span class="shy"></span>lu<span class="shy"></span>tion to you right now and would ex<span class="shy"></span>plain it later:</p>
+<pre><code class="language-css">:root {
+    --is-big: 0;
+}
+
+.is-big {
+    --is-big: 1;
+}
+
+.block {
+    padding: calc(
+        25px * var(--is-big) +
+        10px * (1 - var(--is-big))
+    );
+    bor<span class="shy"></span>der-width: calc(
+        3px * var(--is-big) +
+        1px * (1 - var(--is-big))
+    );
+}
+</code></pre>
+<p>In this ex<span class="shy"></span>am<span class="shy"></span>ple, we&#39;re mak<span class="shy"></span>ing all our el<span class="shy"></span>e<span class="shy"></span>ments with <code>.block</code> to have paddings equal to <code>10px</code> and bor<span class="shy"></span>der widths to <code>1px</code> un<span class="shy"></span>less the <code>--is-big</code> vari<span class="shy"></span>able on those el<span class="shy"></span>e<span class="shy"></span>ments won&#39;t be <code>1</code>, in which case they would be<span class="shy"></span>come <code>25px</code> and <code>3px</code> re<span class="shy"></span>spec<span class="shy"></span>tively.</p>
+<p>The mech<span class="shy"></span>a<span class="shy"></span>nism be<span class="shy"></span>yond this is rather sim<span class="shy"></span>ple: we use both our pos<span class="shy"></span>si<span class="shy"></span>ble val<span class="shy"></span>ues in a sin<span class="shy"></span>gle cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tion us<span class="shy"></span>ing <code>calc()</code>, where we nul<span class="shy"></span>lify one and keep an<span class="shy"></span>other value based on the vari<span class="shy"></span>able&#39;s value which can be ei<span class="shy"></span>ther <code>1</code> or <code>0</code>. In other words, we&#39;ll have <code>25px * 1 + 10px * 0</code> in one case and <code>25px * 0 + 10px * 1</code> in an<span class="shy"></span>other.</p>
+<h2 class="Heading" id="more-complex-conditions"><a class="Anchor" aria-hidden="true" href="#more-complex-conditions"></a><span class="ss01 hang-m">M</span>ore com<span class="shy"></span>plex con<span class="shy"></span>ditions</h2>
+<p>We can use this method to choose not only from 2 pos<span class="shy"></span>si<span class="shy"></span>ble val<span class="shy"></span>ues but for choos<span class="shy"></span>ing from 3 or more val<span class="shy"></span>ues. How<span class="shy"></span>ever, for each new added pos<span class="shy"></span>si<span class="shy"></span>ble value the cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tion be<span class="shy"></span>comes more com<span class="shy"></span>plex. For choos<span class="shy"></span>ing be<span class="shy"></span>tween 3 pos<span class="shy"></span>si<span class="shy"></span>ble val<span class="shy"></span>ues it would al<span class="shy"></span>ready look like this:</p>
+<pre><code class="language-css">.block {
+    padding: calc(
+        100px * (1 - var(--foo)) * (2 - var(--foo)) * 0.5 +
+         20px * var(--foo) * (2 - var(--foo)) +
+          3px * var(--foo) * (1 - var(--foo)) * -0.5
+    );
+}
+</code></pre>
+<p>This could ac<span class="shy"></span>cept <code>0</code>, <code>1</code> and <code>2</code> val<span class="shy"></span>ues for <code>--foo</code> vari<span class="shy"></span>able and cal<span class="shy"></span>cu<span class="shy"></span>late the padding to <code>100px</code>, <code>20px</code> or <code>3px</code> cor<span class="shy"></span>re<span class="shy"></span>spond<span class="shy"></span>ingly.</p>
+<p>The prin<span class="shy"></span>ci<span class="shy"></span>ple is the same: we just need to mul<span class="shy"></span>ti<span class="shy"></span>ply each pos<span class="shy"></span>si<span class="shy"></span>ble value to an ex<span class="shy"></span>pres<span class="shy"></span>sion that would be equal to <code>1</code> when the con<span class="shy"></span>di<span class="shy"></span>tion for this value is the one we need and to <code>0</code> in other cases. And this ex<span class="shy"></span>pres<span class="shy"></span>sion can be com<span class="shy"></span>posed rather eas<span class="shy"></span>ily: we just need to nul<span class="shy"></span>lify each other pos<span class="shy"></span>si<span class="shy"></span>ble value of our con<span class="shy"></span>di<span class="shy"></span>tional vari<span class="shy"></span>able. Af<span class="shy"></span>ter do<span class="shy"></span>ing this we&#39;d need to add our trig<span class="shy"></span>ger<span class="shy"></span>ing value there to see if we&#39;d need to ad<span class="shy"></span>just the re<span class="shy"></span>sult so it would be equal to 1. And that&#39;s it.</p>
+<h3 class="Heading" id="a-possible-trap-in-the-specs"><a class="Anchor" aria-hidden="true" href="#a-possible-trap-in-the-specs"></a><span class="ss01 hang-xs">A</span> Pos<span class="shy"></span>si<span class="shy"></span>ble Trap in the Specs</h3>
+<p>With the in<span class="shy"></span>creas<span class="shy"></span>ing com<span class="shy"></span>plex<span class="shy"></span>ity of such cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions, there is a chance at one point they would stop from work<span class="shy"></span>ing. Why? There is this note in <a class="Link" href="https://drafts.csswg.org/css-values-3/#calc-syntax">specs</a>:</p>
+<blockquote>
+<p>UAs must sup<span class="shy"></span>port calc() ex<span class="shy"></span>pres<span class="shy"></span>sions of at least 20 terms, where each <abbr>NUM</abbr><span class="shy"></span><abbr>BER</abbr>, DI<span class="shy"></span><abbr>MEN</abbr><span class="shy"></span><abbr>SION</abbr>, or <abbr>PER</abbr><span class="shy"></span><abbr>CENT</abbr><span class="shy"></span><abbr>AGE</abbr> is a term. If a calc() ex<span class="shy"></span>pres<span class="shy"></span>sion con<span class="shy"></span>tains more than the sup<span class="shy"></span>ported num<span class="shy"></span>ber of terms, it must be treated as if it were in<span class="shy"></span>valid.</p>
+</blockquote>
+<p>Of course, I tested this a bit and couldn&#39;t found such lim<span class="shy"></span>i<span class="shy"></span>ta<span class="shy"></span>tions in the browsers I tested, but there is still a chance ei<span class="shy"></span>ther you would write some re<span class="shy"></span>ally com<span class="shy"></span>plex code that would meet the pos<span class="shy"></span>si<span class="shy"></span>ble ex<span class="shy"></span>ist<span class="shy"></span>ing limit, or some of the browsers could in<span class="shy"></span>tro<span class="shy"></span>duce this limit in the fu<span class="shy"></span>ture, so be care<span class="shy"></span>ful when us<span class="shy"></span>ing re<span class="shy"></span>ally com<span class="shy"></span>plex cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions.</p>
+<h2 class="Heading" id="conditions-for-colors"><a class="Anchor" aria-hidden="true" href="#conditions-for-colors"></a><span class="ss02 hang-xs">C</span>on<span class="shy"></span>di<span class="shy"></span>tions for Colors</h2>
+<p>As you can see, those cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions could be used only for things that you can <em>cal<span class="shy"></span>cu<span class="shy"></span>late</em>, so there is no chance we could use it for switch<span class="shy"></span>ing the val<span class="shy"></span>ues of <code>dis<span class="shy"></span>play</code> prop<span class="shy"></span>erty or any other <nobr>non-nu</nobr><span class="shy"></span>meric ones. But what about col<span class="shy"></span>ors? Ac<span class="shy"></span>tu<span class="shy"></span>ally, we can cal<span class="shy"></span>cu<span class="shy"></span>late the in<span class="shy"></span>di<span class="shy"></span>vid<span class="shy"></span>ual com<span class="shy"></span>po<span class="shy"></span>nents of the col<span class="shy"></span>ors. Sadly, right now it would work only in We<span class="shy"></span>bkits and Blinks, as <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=984021" title="Bugzilla ticket">Fire<span class="shy"></span>fox don&#39;t yet sup<span class="shy"></span>port</a> <code>calc()</code> in<span class="shy"></span>side <code>rgba()</code> and other color func<span class="shy"></span>tions.</p>
+<p>But when the sup<span class="shy"></span>port would be there (or if you&#39;d like to ex<span class="shy"></span>per<span class="shy"></span>i<span class="shy"></span>ment on this in browsers with an ex<span class="shy"></span>ist<span class="shy"></span>ing sup<span class="shy"></span>port), we could do things like that:</p>
+<pre><code class="language-css">:root {
+    --is-red: 0;
+}
+
+.block {
+    back<span class="shy"></span>ground: rgba(
+        calc(
+            255*var(--is-red) +
+            0*(1 - var(--is-red))
+            ),
+        calc(
+            0*var(--is-red) +
+            255*(1 - var(--is-red))
+            ),
+        0, 1);
+}
+</code></pre>
+<p>Here we&#39;d have lime color by de<span class="shy"></span>fault and red if the <code>--is-red</code> would be set to <code>1</code> (note that when the com<span class="shy"></span>po<span class="shy"></span>nent could be zero we could just omit it at all, mak<span class="shy"></span>ing out code more com<span class="shy"></span>pact, here I kept those for clar<span class="shy"></span>ity of an al<span class="shy"></span>go<span class="shy"></span>rithm).</p>
+<p>As you could do those cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions with any com<span class="shy"></span>po<span class="shy"></span>nents, it is pos<span class="shy"></span>si<span class="shy"></span>ble to cre<span class="shy"></span>ate those con<span class="shy"></span>di<span class="shy"></span>tions for any col<span class="shy"></span>ors (and maybe even for gra<span class="shy"></span>di<span class="shy"></span>ents? You should try it!).</p>
+<h3 class="Heading" id="another-trap-in-the-specs"><a class="Anchor" aria-hidden="true" href="#another-trap-in-the-specs"></a><span class="ss01 hang-xs">A</span>nother Trap in the Specs</h3>
+<p>When I was test<span class="shy"></span>ing how the con<span class="shy"></span>di<span class="shy"></span>tions work for col<span class="shy"></span>ors, I found out a re<span class="shy"></span>ally, <em>re<span class="shy"></span>ally</em> weird lim<span class="shy"></span>i<span class="shy"></span>ta<span class="shy"></span>tion in Specs. It is called <a class="Link Link_wrapper" href="https://twitter.com/kizmarh/status/788504161864261632">“<span class="Link-Inner">Type Check<span class="shy"></span>ing</span>”</a>. I now of<span class="shy"></span>fi<span class="shy"></span>cially hate it. What this means is that if the prop<span class="shy"></span>erty ac<span class="shy"></span>cepts only <code>&lt;in<span class="shy"></span>te<span class="shy"></span>ger&gt;</code> as a value, if you&#39;d have any di<span class="shy"></span>vi<span class="shy"></span>sions or <nobr>non-in</nobr><span class="shy"></span>te<span class="shy"></span>gers in<span class="shy"></span>side the <code>calc()</code> for it, even if the re<span class="shy"></span>sult would be in<span class="shy"></span>te<span class="shy"></span>ger, the “re<span class="shy"></span>solved type” wouldn&#39;t be <code>&lt;in<span class="shy"></span>te<span class="shy"></span>ger&gt;</code>, it would be <code>&lt;num<span class="shy"></span>ber&gt;</code>, and that means that those prop<span class="shy"></span>er<span class="shy"></span>ties won&#39;t ac<span class="shy"></span>cept such val<span class="shy"></span>ues. And when we&#39;d have cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions in<span class="shy"></span>volv<span class="shy"></span>ing more than two pos<span class="shy"></span>si<span class="shy"></span>ble val<span class="shy"></span>ues, we&#39;d need to have a <nobr>non-in</nobr><span class="shy"></span>te<span class="shy"></span>ger mod<span class="shy"></span>i<span class="shy"></span>fiers. And that would make our cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tion in<span class="shy"></span>valid for us<span class="shy"></span>ing with col<span class="shy"></span>ors or other in<span class="shy"></span>te<span class="shy"></span>ger-only prop<span class="shy"></span>er<span class="shy"></span>ties (like <code>z-in<span class="shy"></span>dex</code>).</p>
+<p>That is:</p>
+<pre><code class="language-css">calc(255 * (1 - var(--bar)) * (var(--bar) - 2) * -0.5)
+</code></pre>
+<p>Would be in<span class="shy"></span>valid when in<span class="shy"></span>side of the <code>rgba()</code>. Ini<span class="shy"></span>tially I thought that this be<span class="shy"></span>hav<span class="shy"></span>iour is a bug, es<span class="shy"></span>pe<span class="shy"></span>cially know<span class="shy"></span>ing how the color func<span class="shy"></span>tions can ac<span class="shy"></span>tu<span class="shy"></span>ally ac<span class="shy"></span>cept the val<span class="shy"></span>ues that go be<span class="shy"></span>yond the pos<span class="shy"></span>si<span class="shy"></span>ble ranges (you can do <code>rgba(9001, +9001, -9001, 42)</code> and get a valid yel<span class="shy"></span>low color), but this typ<span class="shy"></span>ing thing seems to be too hard for browsers to handle.</p>
+<h4 class="Heading" id="solutions-"><a class="Anchor" aria-hidden="true" href="#solutions-"></a><span class="ss01 hang-xs">S</span>olu<span class="shy"></span>tions?</h4>
+<p>There is one far from per<span class="shy"></span>fect so<span class="shy"></span>lu<span class="shy"></span>tion. As in our case we know both the de<span class="shy"></span>sired value and the prob<span class="shy"></span>lem<span class="shy"></span>atic mod<span class="shy"></span>i<span class="shy"></span>fier, we can pre-cal<span class="shy"></span>cu<span class="shy"></span>late them and then round it up. Yep, that means that the re<span class="shy"></span>sult<span class="shy"></span>ing value could be not ex<span class="shy"></span>actly the same, as we would lose some pre<span class="shy"></span>ci<span class="shy"></span>sion in some cases. But it is bet<span class="shy"></span>ter than noth<span class="shy"></span>ing, right?</p>
+<p>But there is an<span class="shy"></span>other so<span class="shy"></span>lu<span class="shy"></span>tion that would work for col<span class="shy"></span><nobr>ors —</nobr><span class="thinsp"> </span>we can use <code>hsla</code> in<span class="shy"></span>stead of <code>rgba</code>, as it ac<span class="shy"></span>cepts not in<span class="shy"></span>te<span class="shy"></span>gers, but num<span class="shy"></span>bers and per<span class="shy"></span>cent<span class="shy"></span>ages, so there won&#39;t be a con<span class="shy"></span>flict in type re<span class="shy"></span>solv<span class="shy"></span>ing. But for other prop<span class="shy"></span>er<span class="shy"></span>ties like <code>z-in<span class="shy"></span>dex</code> that so<span class="shy"></span>lu<span class="shy"></span>tion won&#39;t work. But even with this method there still could be some losses in pre<span class="shy"></span>ci<span class="shy"></span>sion if you&#39;re go<span class="shy"></span>ing to con<span class="shy"></span>vert <code>rgb</code> to <code>hsl</code>. But those should be less than in pre<span class="shy"></span>vi<span class="shy"></span>ous so<span class="shy"></span>lution.</p>
+<h2 class="Heading" id="preprocessing"><a class="Anchor" aria-hidden="true" href="#preprocessing"></a><span class="ss01 hang-m">P</span>re<span class="shy"></span>pro<span class="shy"></span>cessing</h2>
+<p>When the con<span class="shy"></span>di<span class="shy"></span>tions are bi<span class="shy"></span>nary it is still pos<span class="shy"></span>si<span class="shy"></span>ble to write them by hand. But when we&#39;re start<span class="shy"></span>ing to use more com<span class="shy"></span>plex con<span class="shy"></span>di<span class="shy"></span>tions, or when we&#39;re get<span class="shy"></span>ting to the col<span class="shy"></span>ors, we&#39;d bet<span class="shy"></span>ter have tools that could make it eas<span class="shy"></span>ier to write. Luck<span class="shy"></span>ily, we have pre<span class="shy"></span>proces<span class="shy"></span>sors for this purpose.</p>
+<p>Here is how I man<span class="shy"></span>aged to quickly do it in <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#pen" id="pen">Sty<span class="shy"></span>lus</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can look at <a href="http://codepen.io/kizu/pen/zKmyvG">Code<span class="shy"></span>Pen with this code</a> in ac<span class="shy"></span>tion.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a></span>:</p>
+<pre><code class="language-styl">con<span class="shy"></span>di<span class="shy"></span>tional($var, $val<span class="shy"></span>ues...)
+  $re<span class="shy"></span>sult = &#39;&#39;
+
+  // If there is only an ar<span class="shy"></span>ray passed, use its con<span class="shy"></span>tents
+  if length($val<span class="shy"></span>ues) == 1
+    $val<span class="shy"></span>ues = $val<span class="shy"></span>ues[0]
+
+  // Val<span class="shy"></span>i<span class="shy"></span>dat<span class="shy"></span>ing the val<span class="shy"></span>ues and check if we need to do any<span class="shy"></span>thing at all
+  $type = null
+  $equal = true
+
+  for $value, $i in $val<span class="shy"></span>ues
+    if $i &gt; 0 and $value != $val<span class="shy"></span>ues[0]
+      $equal = false
+
+    $val<span class="shy"></span>ue_<span class="shy"></span>type = typeof($value)
+    $type = $type || $val<span class="shy"></span>ue_<span class="shy"></span>type
+    if !($type == &#39;unit&#39; or $type == &#39;rgba&#39;)
+      er<span class="shy"></span>ror(&#39;Con<span class="shy"></span>di<span class="shy"></span>tional func<span class="shy"></span>tion can ac<span class="shy"></span>cept only num<span class="shy"></span>bers or col<span class="shy"></span>ors&#39;)
+
+    if $type != $val<span class="shy"></span>ue_<span class="shy"></span>type
+      er<span class="shy"></span>ror(&#39;Con<span class="shy"></span>di<span class="shy"></span>tional func<span class="shy"></span>tion can ac<span class="shy"></span>cept only same type val<span class="shy"></span>ues&#39;)
+
+  // If all the val<span class="shy"></span>ues are equal, just re<span class="shy"></span>turn one of them
+  if $equal
+    re<span class="shy"></span>turn $val<span class="shy"></span>ues[0]
+
+  // Han<span class="shy"></span>dling num<span class="shy"></span>bers
+  if $type == &#39;unit&#39;
+    $re<span class="shy"></span>sult = &#39;calc(&#39;
+    $i_<span class="shy"></span>count = 0
+    for $value, $i in $val<span class="shy"></span>ues
+      $mul<span class="shy"></span>ti<span class="shy"></span>plier = &#39;&#39;
+      $mod<span class="shy"></span>i<span class="shy"></span>fier = 1
+      $j_<span class="shy"></span>count = 0
+      for $j in 0..(length($val<span class="shy"></span>ues) - 1)
+        if $j != $i
+          $j_<span class="shy"></span>count = $j_<span class="shy"></span>count + 1
+          // We could use just the gen<span class="shy"></span>eral mul<span class="shy"></span>ti<span class="shy"></span>plier,
+          // but for 0 and 1 we can sim<span class="shy"></span>plify it a bit.
+          if $j == 0
+            $mod<span class="shy"></span>i<span class="shy"></span>fier = $mod<span class="shy"></span>i<span class="shy"></span>fier * $i
+            $mul<span class="shy"></span>ti<span class="shy"></span>plier = $mul<span class="shy"></span>ti<span class="shy"></span>plier + $var
+          else if $j == 1
+            $mod<span class="shy"></span>i<span class="shy"></span>fier = $mod<span class="shy"></span>i<span class="shy"></span>fier * ($j - $i)
+            $mul<span class="shy"></span>ti<span class="shy"></span>plier = $mul<span class="shy"></span>ti<span class="shy"></span>plier + &#39;(1 - &#39; + $var + &#39;)&#39;
+          else
+            $mod<span class="shy"></span>i<span class="shy"></span>fier = $mod<span class="shy"></span>i<span class="shy"></span>fier * ($i - $j)
+            $mul<span class="shy"></span>ti<span class="shy"></span>plier = $mul<span class="shy"></span>ti<span class="shy"></span>plier + &#39;(&#39; + $var + &#39; - &#39; + $j + &#39;)&#39;
+
+          if $j_<span class="shy"></span>count &lt; length($val<span class="shy"></span>ues) - 1
+            $mul<span class="shy"></span>ti<span class="shy"></span>plier = $mul<span class="shy"></span>ti<span class="shy"></span>plier + &#39; * &#39;
+
+      // If value is zero, just don&#39;t add it there lol
+      if $value != 0
+        if $mod<span class="shy"></span>i<span class="shy"></span>fier != 1
+          $mul<span class="shy"></span>ti<span class="shy"></span>plier = $mul<span class="shy"></span>ti<span class="shy"></span>plier + &#39; * &#39; + (1 / $mod<span class="shy"></span>i<span class="shy"></span>fier)
+        $re<span class="shy"></span>sult = $re<span class="shy"></span>sult + ($i_<span class="shy"></span>count &gt; 0 ? &#39; + &#39; : &#39;&#39;) + $value + &#39; * &#39; + $mul<span class="shy"></span>ti<span class="shy"></span>plier
+        $i_<span class="shy"></span>count = $i_<span class="shy"></span>count + 1
+
+    $re<span class="shy"></span>sult = $re<span class="shy"></span>sult + &#39;)&#39;
+
+  // Han<span class="shy"></span>dling col<span class="shy"></span>ors
+  if $type == &#39;rgba&#39;
+    $hues = ()
+    $sat<span class="shy"></span>u<span class="shy"></span>ra<span class="shy"></span>tions = ()
+    $light<span class="shy"></span>nesses = ()
+    $al<span class="shy"></span>phas = ()
+
+    for $value in $val<span class="shy"></span>ues
+      push($hues, unit(hue($value), &#39;&#39;))
+      push($sat<span class="shy"></span>u<span class="shy"></span>ra<span class="shy"></span>tions, sat<span class="shy"></span>u<span class="shy"></span>ra<span class="shy"></span>tion($value))
+      push($light<span class="shy"></span>nesses, light<span class="shy"></span>ness($value))
+      push($al<span class="shy"></span>phas, al<span class="shy"></span>pha($value))
+
+    $re<span class="shy"></span>sult = &#39;hsla(&#39; + con<span class="shy"></span>di<span class="shy"></span>tional($var, $hues) + &#39;, &#39; + con<span class="shy"></span>di<span class="shy"></span>tional($var, $sat<span class="shy"></span>u<span class="shy"></span>ra<span class="shy"></span>tions) + &#39;, &#39; + con<span class="shy"></span>di<span class="shy"></span>tional($var, $light<span class="shy"></span>nesses) + &#39;, &#39; + con<span class="shy"></span>di<span class="shy"></span>tional($var, $al<span class="shy"></span>phas) +  &#39;)&#39;
+
+  re<span class="shy"></span>turn un<span class="shy"></span>quote($re<span class="shy"></span>sult)
+</code></pre>
+<p>Yep, there is a lot of code, but this mixin can gen<span class="shy"></span>er<span class="shy"></span>ate con<span class="shy"></span>di<span class="shy"></span>tion<span class="shy"></span>als both for num<span class="shy"></span>bers and col<span class="shy"></span>ors, and not only for two pos<span class="shy"></span>si<span class="shy"></span>ble con<span class="shy"></span>di<span class="shy"></span>tions but for many more.</p>
+<p>The us<span class="shy"></span>age is re<span class="shy"></span>ally easy:</p>
+<pre><code class="language-styl">bor<span class="shy"></span>der-width: con<span class="shy"></span>di<span class="shy"></span>tional(var(--foo), 10px, 20px)
+</code></pre>
+<p>The first ar<span class="shy"></span>gu<span class="shy"></span>ment is our vari<span class="shy"></span>able, the sec<span class="shy"></span>ond one is the value that should be ap<span class="shy"></span>plied when the vari<span class="shy"></span>able would be equal to <code>0</code>, the <nobr>third —</nobr><span class="thinsp"> </span>when it would be equal to <code>1</code>, etc.</p>
+<p>This above call would gen<span class="shy"></span>er<span class="shy"></span>ate proper con<span class="shy"></span>di<span class="shy"></span>tional:</p>
+<pre><code class="language-css">bor<span class="shy"></span>der-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
+</code></pre>
+<p>And here is a more com<span class="shy"></span>plex ex<span class="shy"></span>am<span class="shy"></span>ple for the color con<span class="shy"></span>di<span class="shy"></span>tionals:</p>
+<pre><code class="language-styl">color: con<span class="shy"></span>di<span class="shy"></span>tional(var(--bar), red, lime, re<span class="shy"></span>bec<span class="shy"></span>ca<span class="shy"></span>pur<span class="shy"></span>ple, or<span class="shy"></span>ange)
+</code></pre>
+<p>Would gen<span class="shy"></span>er<span class="shy"></span>ate some<span class="shy"></span>thing that you surely wouldn&#39;t want to write by hand:</p>
+<pre><code class="language-css">color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
+</code></pre>
+<p>Note that there is no de<span class="shy"></span>tec<span class="shy"></span>tion of <code>&lt;in<span class="shy"></span>te<span class="shy"></span>ger&gt;</code>-ac<span class="shy"></span>cept<span class="shy"></span>ing prop<span class="shy"></span>er<span class="shy"></span>ties, so that won&#39;t work for <code>z-in<span class="shy"></span>dex</code> and such, but it al<span class="shy"></span>ready con<span class="shy"></span>verts col<span class="shy"></span>ors to <code>hsla()</code> to make them man<span class="shy"></span>age<span class="shy"></span>ble (though even this could be en<span class="shy"></span>hanced so this con<span class="shy"></span>ver<span class="shy"></span>ta<span class="shy"></span>tion would hap<span class="shy"></span>pen only when it would be needed). An<span class="shy"></span>other thing I didn&#39;t im<span class="shy"></span>ple<span class="shy"></span>ment in this mixin (yet?) is the abil<span class="shy"></span>ity to use <abbr>CSS</abbr> vari<span class="shy"></span>ables for the val<span class="shy"></span>ues. This would be pos<span class="shy"></span>si<span class="shy"></span>ble for <nobr>non-in</nobr><span class="shy"></span>te<span class="shy"></span>ger num<span class="shy"></span>bers as those val<span class="shy"></span>ues would be in<span class="shy"></span>serted as is in the con<span class="shy"></span>di<span class="shy"></span>tional cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions. Maybe, when I&#39;ll find time, I&#39;ll fix the mixin to ac<span class="shy"></span>cept not only num<span class="shy"></span>bers or col<span class="shy"></span>ors but also vari<span class="shy"></span>ables. For the time be<span class="shy"></span>ing it is still pos<span class="shy"></span>si<span class="shy"></span>ble to do us<span class="shy"></span>ing the al<span class="shy"></span>go<span class="shy"></span>rithm ex<span class="shy"></span>plained in this ar<span class="shy"></span>ticle.</p>
+<h2 class="Heading" id="fallbacks"><a class="Anchor" aria-hidden="true" href="#fallbacks"></a><span class="ss01 hang-m">F</span>allbacks</h2>
+<p>Of course, if you&#39;re plan<span class="shy"></span>ning to ac<span class="shy"></span>tu<span class="shy"></span>ally use this, you&#39;ll need to have a way to set fall<span class="shy"></span>backs. They&#39;re easy for browsers that just don&#39;t sup<span class="shy"></span>port vari<span class="shy"></span>ables: you just de<span class="shy"></span>clare the fall<span class="shy"></span>back value be<span class="shy"></span>fore the con<span class="shy"></span>di<span class="shy"></span>tional de<span class="shy"></span>c<span class="shy"></span>la<span class="shy"></span>ration:</p>
+<pre><code class="language-css">.block {
+    padding: 100px; /* fall<span class="shy"></span>back */
+    padding: calc(
+        100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
+         20px * (var(--foo) * (2 - var(--foo))) +
+          3px * (var(--foo) * (1 - var(--foo)) / -2)
+    );
+}
+</code></pre>
+<p>But when it comes to col<span class="shy"></span>ors we have a prob<span class="shy"></span>lem: when there is a sup<span class="shy"></span>port for vari<span class="shy"></span>ables, in fact (and that&#39;s an<span class="shy"></span>other re<span class="shy"></span>ally weird place in specs), <em>just any</em> de<span class="shy"></span>c<span class="shy"></span>la<span class="shy"></span>ra<span class="shy"></span>tion con<span class="shy"></span>tain<span class="shy"></span>ing vari<span class="shy"></span>ables would be con<span class="shy"></span>sid<span class="shy"></span>ered valid. And this means that it is not pos<span class="shy"></span>si<span class="shy"></span>ble in <abbr>CSS</abbr> to make a fall<span class="shy"></span>back for some<span class="shy"></span>thing con<span class="shy"></span>tain<span class="shy"></span>ing vari<span class="shy"></span>ables:</p>
+<pre><code class="language-css">back<span class="shy"></span>ground: blue;
+back<span class="shy"></span>ground: I 💩 CSS VAR(--I)ABLES;
+</code></pre>
+<p>Is valid <abbr>CSS</abbr> and per specs, the back<span class="shy"></span>ground would get an <code>ini<span class="shy"></span>tial</code> value, not the one pro<span class="shy"></span>vided in a fall<span class="shy"></span>back (even though it is ob<span class="shy"></span>vi<span class="shy"></span>ous that the other parts of the value are in<span class="shy"></span>cor<span class="shy"></span>rect).</p>
+<p>So, what we need in or<span class="shy"></span>der to pro<span class="shy"></span>vide a fall<span class="shy"></span>back in those <nobr>cases —</nobr><span class="thinsp"> </span>add <code>@sup<span class="shy"></span>port</code> wrap<span class="shy"></span>per that would test the sup<span class="shy"></span>port for every<span class="shy"></span>thing <strong>ex<span class="shy"></span>cept</strong> for the vari<span class="shy"></span>ables.</p>
+<p>In our case, we need to wrap our con<span class="shy"></span>di<span class="shy"></span>tional col<span class="shy"></span>ors for Fire<span class="shy"></span>fox in some<span class="shy"></span>thing like this:</p>
+<pre><code class="language-css">.block {
+    color: #f00;
+}
+@sup<span class="shy"></span>ports (color: rgb(0, calc(0), 0)) {
+    .block {
+        color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
+  }
+}
+</code></pre>
+<p>Here we&#39;re test<span class="shy"></span>ing a sup<span class="shy"></span>port for cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions in<span class="shy"></span>side color func<span class="shy"></span>tions and ap<span class="shy"></span>ply<span class="shy"></span>ing the con<span class="shy"></span>di<span class="shy"></span>tional color only in that case.</p>
+<p>It is also pos<span class="shy"></span>si<span class="shy"></span>ble to cre<span class="shy"></span>ate such fall<span class="shy"></span>backs au<span class="shy"></span>to<span class="shy"></span>mat<span class="shy"></span>i<span class="shy"></span>cally, but I won&#39;t rec<span class="shy"></span>om<span class="shy"></span>mend you to use pre<span class="shy"></span>proces<span class="shy"></span>sors for them as the com<span class="shy"></span>plex<span class="shy"></span>ity of cre<span class="shy"></span>at<span class="shy"></span>ing such stuff is much more than the ca<span class="shy"></span>pa<span class="shy"></span>bil<span class="shy"></span>i<span class="shy"></span>ties pre<span class="shy"></span>proces<span class="shy"></span>sors provide.</p>
+<h2 class="Heading" id="use-cases"><a class="Anchor" aria-hidden="true" href="#use-cases"></a><span class="ss01 hang-m">U</span>se cases</h2>
+<p>I re<span class="shy"></span>ally don&#39;t like to pro<span class="shy"></span>vide use cases for the things the need for which is ob<span class="shy"></span>vi<span class="shy"></span>ous. So I&#39;ll be brief. And I&#39;ll state not only the con<span class="shy"></span>di<span class="shy"></span>tions for vari<span class="shy"></span>ables, but also the gen<span class="shy"></span>eral con<span class="shy"></span>di<span class="shy"></span>tions, like for the re<span class="shy"></span>sult of <code>calc()</code>.</p>
+<ul>
+<li><p>The con<span class="shy"></span>di<span class="shy"></span>tions for <abbr>CSS</abbr> vari<span class="shy"></span>ables would be per<span class="shy"></span>fect for themi<span class="shy"></span>fy<span class="shy"></span>ing blocks. This way you could have a num<span class="shy"></span>ber of num<span class="shy"></span>bered themes and then ap<span class="shy"></span>ply them to blocks (and nested ones!) us<span class="shy"></span>ing just one <abbr>CSS</abbr> vari<span class="shy"></span>able like <code>--block-vari<span class="shy"></span>ant: 1</code>. This is not some<span class="shy"></span>thing that is pos<span class="shy"></span>si<span class="shy"></span>ble through any other means other than vari<span class="shy"></span>ables and when you&#39;d want to have dif<span class="shy"></span>fer<span class="shy"></span>ent val<span class="shy"></span>ues for dif<span class="shy"></span>fer<span class="shy"></span>ent props in dif<span class="shy"></span>fer<span class="shy"></span>ent themes, with<span class="shy"></span>out the con<span class="shy"></span>di<span class="shy"></span>tion<span class="shy"></span>als you&#39;d need to have many dif<span class="shy"></span>fer<span class="shy"></span>ent vari<span class="shy"></span>ables and ap<span class="shy"></span>ply all of them in every case.</p>
+</li>
+<li><p>Ty<span class="shy"></span>pog<span class="shy"></span>ra<span class="shy"></span>phy. If it was pos<span class="shy"></span>si<span class="shy"></span>ble to use the <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code> in con<span class="shy"></span>di<span class="shy"></span>tions for vari<span class="shy"></span>ables, it would be pos<span class="shy"></span>si<span class="shy"></span>ble to have a num<span class="shy"></span>ber of “rules” for dif<span class="shy"></span>fer<span class="shy"></span>ent font sizes, so you could set dif<span class="shy"></span>fer<span class="shy"></span>ent line heights, font weights and other prop<span class="shy"></span>er<span class="shy"></span>ties based on the given font-size. This is pos<span class="shy"></span>si<span class="shy"></span>ble now, but now when you need to have some “stops” for those val<span class="shy"></span>uea and not just the val<span class="shy"></span>ues de<span class="shy"></span>rived from <code>em</code>s.</p>
+</li>
+<li><p>Re<span class="shy"></span>spon<span class="shy"></span>sive de<span class="shy"></span>sign. Well, if there were the con<span class="shy"></span>di<span class="shy"></span>tions for cal<span class="shy"></span>cu<span class="shy"></span>la<span class="shy"></span>tions, then it would be al<span class="shy"></span>most the same as those elu<span class="shy"></span>sive “el<span class="shy"></span>e<span class="shy"></span>ment queries”<nobr> —</nobr><span class="thinsp"> </span>you could check the <code>vw</code> or the par<span class="shy"></span>ent&#39;s widths in per<span class="shy"></span>cents and de<span class="shy"></span>cide what to ap<span class="shy"></span>ply in dif<span class="shy"></span>fer<span class="shy"></span>ent cases.</p>
+</li>
+</ul>
+<p>There can be other use cases, tell me if you&#39;d find one! I&#39;m sure I had more of them my<span class="shy"></span>self, but I don&#39;t have that good of a mem<span class="shy"></span>ory to re<span class="shy"></span>mem<span class="shy"></span>ber all the things I ever wanted to do with <abbr>CSS</abbr>. Be<span class="shy"></span>cause its all the things.</p>
+<h2 class="Heading" id="future"><a class="Anchor" aria-hidden="true" href="#future"></a><span class="ss01 hang-m">F</span>uture</h2>
+<p>I would re<span class="shy"></span>ally like to see con<span class="shy"></span>di<span class="shy"></span>tions de<span class="shy"></span>scribed in <abbr>CSS</abbr> specs, so we would not rely on calc hacks and could use proper con<span class="shy"></span>di<span class="shy"></span>tions for non-cal<span class="shy"></span>cu<span class="shy"></span>lat<span class="shy"></span>able val<span class="shy"></span>ues too. It is also im<span class="shy"></span>pos<span class="shy"></span>si<span class="shy"></span>ble right now to have con<span class="shy"></span>di<span class="shy"></span>tions other than strict equal<span class="shy"></span>ity, so no “when the vari<span class="shy"></span>able is more than X” and other stuff like that. I don&#39;t see any rea<span class="shy"></span>sons why we can&#39;t have proper con<span class="shy"></span>di<span class="shy"></span>tions in <abbr>CSS</abbr>, so if you know a fel<span class="shy"></span>low spec de<span class="shy"></span>vel<span class="shy"></span>oper, hint them about this is<span class="shy"></span>sue. My only hope is that they won&#39;t tell us to “just use JS” or find out ex<span class="shy"></span>cuses of why that wouldn&#39;t ever be pos<span class="shy"></span>si<span class="shy"></span>ble. Here, it is al<span class="shy"></span>ready pos<span class="shy"></span>si<span class="shy"></span>ble now us<span class="shy"></span>ing the hacks, there can&#39;t be any ex<span class="shy"></span>cuses.</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2016-10-21">October 21</time>, in <a href="../" class="Link">Experiments</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CConditions%20for%20CSS%20Variables%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2016-10-21-(fun)-conditions-for-css-variables/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext"><a href="/en/blog/styling-inline-code/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Styling inline code</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>
