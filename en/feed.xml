@@ -42,7 +42,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In this example, we&amp;#39;re making all our elements with &lt;code&gt;.block&lt;/code&gt; to have paddings equal to &lt;code&gt;10px&lt;/code&gt; and border widths to &lt;code&gt;1px&lt;/code&gt; unless the &lt;code&gt;--is-big&lt;/code&gt; variable on those elements won&amp;#39;t be &lt;code&gt;1&lt;/code&gt;, in which case they would become &lt;code&gt;25px&lt;/code&gt; and &lt;code&gt;3px&lt;/code&gt; respectively.&lt;/p&gt;
 &lt;p&gt;The mechanism beyond this is rather simple: we use both our possible values in a single calculation using &lt;code&gt;calc()&lt;/code&gt;, where we nullify one and keep another value based on the variable&amp;#39;s value which can be either &lt;code&gt;1&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt;. In other words, we&amp;#39;ll have &lt;code&gt;25px * 1 + 10px * 0&lt;/code&gt; in one case and &lt;code&gt;25px * 0 + 10px * 1&lt;/code&gt; in another.&lt;/p&gt;
-&lt;h2 id=&quot;more-complex-conditions&quot;&gt;More complex conditions&lt;/h2&gt;
+&lt;h2 id=&quot;more-complex-conditions&quot;&gt;More Complex Conditions&lt;/h2&gt;
 &lt;p&gt;We can use this method to choose not only from 2 possible values but for choosing from 3 or more values. However, for each new added possible value the calculation becomes more complex. For choosing between 3 possible values it would already look like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.block {
     padding: calc(
@@ -217,7 +217,7 @@ background: I 💩 CSS VAR(--I)ABLES;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here we&amp;#39;re testing a support for calculations inside color functions and applying the conditional color only in that case.&lt;/p&gt;
 &lt;p&gt;It is also possible to create such fallbacks automatically, but I won&amp;#39;t recommend you to use preprocessors for them as the complexity of creating such stuff is much more than the capabilities preprocessors provide.&lt;/p&gt;
-&lt;h2 id=&quot;use-cases&quot;&gt;Use cases&lt;/h2&gt;
+&lt;h2 id=&quot;use-cases&quot;&gt;Use Cases&lt;/h2&gt;
 &lt;p&gt;I really don&amp;#39;t like to provide use cases for the things the need for which is obvious. So I&amp;#39;ll be brief. And I&amp;#39;ll state not only the conditions for variables, but also the general conditions, like for the result of &lt;code&gt;calc()&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;The conditions for &lt;abbr&gt;CSS&lt;/abbr&gt; variables would be perfect for themifying blocks. This way you could have a number of numbered themes and then apply them to blocks (and nested ones!) using just one &lt;abbr&gt;CSS&lt;/abbr&gt; variable like &lt;code&gt;--block-variant: 1&lt;/code&gt;. This is not something that is possible through any other means other than variables and when you&amp;#39;d want to have different values for different props in different themes, without the conditionals you&amp;#39;d need to have many different variables and apply all of them in every case.&lt;/p&gt;
