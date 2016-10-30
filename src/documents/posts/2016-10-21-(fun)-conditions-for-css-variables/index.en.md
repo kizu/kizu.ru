@@ -40,7 +40,7 @@ In this example, we're making all our elements with `.block` to have paddings eq
 The mechanism beyond this is rather simple: we use both our possible values in a single calculation using `calc()`, where we nullify one and keep another value based on the variable's value which can be either `1` or `0`. In other words, we'll have `25px * 1 + 10px * 0` in one case and `25px * 0 + 10px * 1` in another.
 
 
-## More complex conditions
+## More Complex Conditions
 
 We can use this method to choose not only from 2 possible values but for choosing from 3 or more values. However, for each new added possible value the calculation becomes more complex. For choosing between 3 possible values it would already look like this:
 
@@ -272,7 +272,7 @@ Here we're testing a support for calculations inside color functions and applyin
 It is also possible to create such fallbacks automatically, but I won't recommend you to use preprocessors for them as the complexity of creating such stuff is much more than the capabilities preprocessors provide.
 
 
-## Use cases
+## Use Cases
 
 I really don't like to provide use cases for the things the need for which is obvious. So I'll be brief. And I'll state not only the conditions for variables, but also the general conditions, like for the result of `calc()`.
 
