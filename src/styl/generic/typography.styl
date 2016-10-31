@@ -193,6 +193,27 @@ figcaption
 .Heading:not(h1) + *
   margin-top: 0 !important
 
+dl
+  display: flex
+  flex-wrap: wrap
+  text-align: left
+
+  font-size: $size.smalltext
+  line-height: 1.5*$size.base
+
+  & > dt
+    width: 7.5em
+    margin-right: 0.4em
+
+    &:after
+      content: ": "
+
+  & > dd
+    flex-grow: 1
+    flex-basis: calc(100% - 8em)
+
+    margin-left: 0
+
 
 // Classes for hanging blocks
 .hang-xs
@@ -221,6 +242,8 @@ figcaption
 .ss08 { -webkit-font-feature-settings: "ss08"; font-feature-settings: "ss08" }
 .ss09 { -webkit-font-feature-settings: "ss09"; font-feature-settings: "ss09" }
 .ss10 { -webkit-font-feature-settings: "ss10"; font-feature-settings: "ss10" }
+
+.lnum { -webkit-font-feature-settings: "lnum", "onum" 0; font-feature-settings: "lnum", "onum" 0 }
 
 .shy
   font-family: '21Cent-Regular_hyphen', Georgia, serif
