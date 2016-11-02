@@ -59,19 +59,19 @@ $z-index = {
 }
 
 at-biggest()
-  @media (min-width: 1096px)
+  @media screen and (min-width: 1096px), print
     {block}
 
 at-not-biggest()
-  @media (max-width: 1095px)
+  @media screen and (max-width: 1095px)
     {block}
 
 at-lowest()
-  @media (max-width: 819px)
+  @media screen and (max-width: 819px)
     {block}
 
 at-not-lowest()
-  @media (min-width: 820px)
+  @media screen and (min-width: 820px), print
     {block}
 
 
