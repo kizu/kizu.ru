@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <title>Custom Specificity</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header role="banner" class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи нет перевода, но для многих других — есть" href="/" class="Page-Language-Link">по-русски*</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="custom-specificity"><a class="Anchor" aria-hidden="true" href="#custom-specificity"></a><span class="ss02 hang-xs">C</span>us<span class="shy"></span>tom Speci<span class="shy"></span>ficity</h1>
+          </header>
+<p>In <a class="Link" href="/en/fun/conditions-for-css-variables/">pre<span class="shy"></span>vi<span class="shy"></span>ous ar<span class="shy"></span>ti<span class="shy"></span>cle about con<span class="shy"></span>di<span class="shy"></span>tions for <abbr>CSS</abbr> vari<span class="shy"></span>ables</a> I talked about things that could be used rather soon, even if the sup<span class="shy"></span>port is not there yet. In this ar<span class="shy"></span>ti<span class="shy"></span>cle I&#39;ll go even fur<span class="shy"></span><nobr>ther —</nobr><span class="thinsp"> </span>I&#39;ll be talk<span class="shy"></span>ing about one thing from the <a class="Link" href="https://drafts.csswg.org/selectors-4/"><abbr>CSS</abbr> Se<span class="shy"></span>lec<span class="shy"></span>tors Level 4</a>, which is even less adopted yet, but we still can ex<span class="shy"></span>per<span class="shy"></span>i<span class="shy"></span>ment on things that&#39;re al<span class="shy"></span>ready there in some browsers.</p>
+<p>The part of this spec I&#39;ll be look<span class="shy"></span>ing at to<span class="shy"></span>day is the new, en<span class="shy"></span>hanced <code>:not()</code>. It would be re<span class="shy"></span>ally cool.</p>
+<h2 class="Heading" id="the-all-new-negation-pseudoclass"><a class="Anchor" aria-hidden="true" href="#the-all-new-negation-pseudoclass"></a><span class="ss01 hang-m">T</span>he All-New Nega<span class="shy"></span>tion Pseudoclass</h2>
+<p>In Se<span class="shy"></span>lec<span class="shy"></span>tors Level 3 <code>:not()</code> could have only a sin<span class="shy"></span>gle sim<span class="shy"></span>ple se<span class="shy"></span>lec<span class="shy"></span>tor in<span class="shy"></span>side of it. The lev<span class="shy"></span><nobr>eled-up</nobr> ver<span class="shy"></span>sion al<span class="shy"></span>lows for so much more!</p>
+<p>The <a class="Link" href="https://drafts.csswg.org/selectors-4/#negation">spec<span class="shy"></span>i<span class="shy"></span>fi<span class="shy"></span>ca<span class="shy"></span>tion for the <code>:not()</code></a> doesn&#39;t say much about its new fea<span class="shy"></span>tures, al<span class="shy"></span>most all it says is that in<span class="shy"></span>stead of a sim<span class="shy"></span>ple se<span class="shy"></span>lec<span class="shy"></span>tor you can put a <strong>se<span class="shy"></span>lec<span class="shy"></span>tor list</strong> in<span class="shy"></span>side. But that alone means a lot.</p>
+<h3 class="Heading" id="selector-lists"><a class="Anchor" aria-hidden="true" href="#selector-lists"></a><span class="ss01 hang-xs">S</span>elec<span class="shy"></span>tor Lists</h3>
+<p>So, now we can use comma-sep<span class="shy"></span>a<span class="shy"></span>rated se<span class="shy"></span>lec<span class="shy"></span>tor lists in<span class="shy"></span>side <code>:not()</code>. When we have a se<span class="shy"></span>lec<span class="shy"></span>tor list as a se<span class="shy"></span>lec<span class="shy"></span>tor, or in<span class="shy"></span>side a new <code>:matches()</code> pseudo<span class="shy"></span>class, the com<span class="shy"></span>mas are ac<span class="shy"></span>tu<span class="shy"></span>ally an equiv<span class="shy"></span>a<span class="shy"></span>lent of logic <strong>or</strong>, but when in<span class="shy"></span>side the <code>:not()</code> they ac<span class="shy"></span>tu<span class="shy"></span>ally be<span class="shy"></span>come <strong>and</strong></p>
+
+          <p class="Metadata Published">Wrote as a draft, not published yet.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CCustom%20Specificity%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/custom-specificity/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav role="navigation" class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+  </body>
+</html>
