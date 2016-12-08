@@ -51,6 +51,7 @@ Front-End Web Developer, responsible for most of the CSS&HTML for the Yandex.Mai
 - Developed the CSS&HTML codebase for other Yandex projects: Calendar, Web Messenger, Share Pop-Up and others.
 - Coded a lot of secondary pages for Yandex.Mail: landings, promos, e-mails etc.
 - Consulted the team on CSS, solving a lot of complex issues.
+- Managed a few Front-End Developer interviews.
 
 
 ### [Monographic](http://monographic.ru)    _March 2009 – July 2012_ {:.Heading_table}
@@ -85,7 +86,7 @@ HTML&CSS Developer at X-Project design studio.
 
 ### [Vane Design Studio](http://vane.ru)    _Feburary 2006 – March 2008_ {:.Heading_table}
 
-Contractor Front-End Web Developer helped the design studio with HTML&CSS for several projects.
+Contractor Front-End Web Developer, helped the design studio with HTML&CSS for several projects.
 
 - Developed studio's designs in HTML&CSS for several web-sites.
 - Implemented web-fonts using SIFR on a few of studio's projects.
@@ -97,7 +98,7 @@ Contractor Front-End Web Developer helped the design studio with HTML&CSS for se
 
 I gave [around 20 talks](http://kizu.ru/talks/), mostly in Russian, but also managed to give two talks in English at Fronteers Jam Sessions:
 
-- [“Don’t look into the source”](https://vimeo.com/album/2588576/video/77929464), 10m talk at Fronteers Jam Session, October 9, 2013.
+- [“Don’t look into the source”](https://vimeo.com/77929464), 10m talk at Fronteers Jam Session, October 9, 2013.
 - [“Use CSS transitions for pseudo-elements right now”](http://fronteers.nl/congres/2012/jam-session/use-css-transitions-for-pseudo-elements-right-now-roman-komarov), 10m talk at Fronteers Jam Session, October 3, 2012.
 
 
