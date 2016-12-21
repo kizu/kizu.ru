@@ -3,12 +3,126 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2016-10-21T00:00:00+03:00</updated>
+  <updated>2016-12-21T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Controlling the Specificity</title>
+    <link href="http://kizu.ru/en/fun/controlling-the-specificity/"/>
+    <updated>2016-12-21T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/fun/controlling-the-specificity</id>
+    <content type="html">&lt;h1 id=&quot;controlling-the-specificity&quot;&gt;Controlling the Specificity&lt;/h1&gt;
+&lt;p&gt;In &lt;a href=&quot;/en/fun/conditions-for-css-variables/&quot;&gt;the previous article about conditions for &lt;abbr&gt;CSS&lt;/abbr&gt; variables&lt;/a&gt; I talked about things that could be used rather soon, even if the support for them is not there yet. In this article I&amp;#39;ll go even &lt;nobr&gt;further —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;I&amp;#39;ll be talking about one thing from the &lt;a href=&quot;https://drafts.csswg.org/selectors-4/&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; Selectors Level 4&lt;/a&gt;, which is even less adopted.&lt;/p&gt;
+&lt;p&gt;The part of this spec I&amp;#39;ll be looking at today is the new, enhanced &lt;code&gt;:not()&lt;/code&gt;. Important disclaimer: the feature I would talk about have almost to no support at the moment, and even if it did, I wouldn&amp;#39;t recommend to use it as something other than experiment. You&amp;#39;ll see why. And after discussing what becomes possible with this new &lt;code&gt;:not()&lt;/code&gt; I&amp;#39;ll describe one more usable similar thing and then propose a few things that I think should be there in &lt;abbr&gt;CSS&lt;/abbr&gt; instead.&lt;/p&gt;
+&lt;h2 id=&quot;the-all-new-negation-pseudoclass&quot;&gt;The All-New Negation Pseudoclass&lt;/h2&gt;
+&lt;p&gt;In Selectors Level 3 &lt;code&gt;:not()&lt;/code&gt; could have only a single simple selector inside of it. The &lt;nobr&gt;leveled-up&lt;/nobr&gt; version allows for so much more!&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://drafts.csswg.org/selectors-4/#negation&quot;&gt;specification for the &lt;code&gt;:not()&lt;/code&gt;&lt;/a&gt; doesn&amp;#39;t say much about its new features. Almost all it says is that instead of a simple selector you can put a &lt;strong&gt;selector list&lt;/strong&gt; inside. But that alone means a lot.&lt;/p&gt;
+&lt;h3 id=&quot;selector-lists&quot;&gt;Selector Lists&lt;/h3&gt;
+&lt;p&gt;So, now we can use comma-separated selector lists inside any &lt;code&gt;:not()&lt;/code&gt;. The commas in usual comma-separated selector lists are an equivalent of logical &lt;strong&gt;or&lt;/strong&gt;, but when used inside the &lt;code&gt;:not()&lt;/code&gt; they actually become &lt;strong&gt;and&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Loot at this &lt;nobr&gt;example —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;such selector would target all buttons that are not hovered and not focused &lt;em&gt;at the same time&lt;/em&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;button:not(:hover, :focus)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And it is basically an equivalent of&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;button:not(:hover):not(:focus)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The difference there is how the specificity works for selector lists inside &lt;code&gt;:not()&lt;/code&gt;, here is &lt;a href=&quot;https://drafts.csswg.org/selectors-4/#specificity-rules&quot;&gt;what Spec says&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The specificity of a &lt;code&gt;:not()&lt;/code&gt; pseudo-class is replaced by the specificity of the most specific complex selector in its selector list argument.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That means that the specificity of &lt;code&gt;:not(:hover, :focus)&lt;/code&gt; is the same as the specificity of a single class, so it is really different than if you&amp;#39;d just use multiple &lt;code&gt;:not()&lt;/code&gt;s. You can fit any number of selectors inside a selector list inside &lt;code&gt;:not()&lt;/code&gt;, and you still would get the specificity of only the highest one. And if the specificity would be the same for each selector in a list, you&amp;#39;ll get only this specificity.&lt;/p&gt;
+&lt;p&gt;This is a first crucial feature for our case.&lt;/p&gt;
+&lt;h3 id=&quot;complex-selectors&quot;&gt;Complex Selectors&lt;/h3&gt;
+&lt;p&gt;The second crucial feature is that those selector lists can now contain complex selectors. Before, you could put only a simple selector inside &lt;code&gt;:not()&lt;/code&gt;, but now there won&amp;#39;t be such limit, so you could do stuff like &lt;code&gt;:not(a.foo:nth-child(2n+1):hover)&lt;/code&gt; and it would just work.&lt;/p&gt;
+&lt;p&gt;Another interesting thing in &lt;code&gt;:not()&lt;/code&gt; now accepting complex selectors, is that it can also accept selectors with combinators like &lt;code&gt;:not(.foo + .bar)&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;negation-of-negation&quot;&gt;Negation of Negation&lt;/h3&gt;
+&lt;p&gt;Of course, since the &lt;code&gt;:not()&lt;/code&gt; selector is itself a complex one, you can now use it inside other &lt;code&gt;:not()&lt;/code&gt;s.&lt;/p&gt;
+&lt;p&gt;And, yeah, we&amp;#39;re at the point where the magic would happen. What does double negation mean in logic? It returns the value to its original binary state.&lt;/p&gt;
+&lt;p&gt;If we&amp;#39;d have something like that:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(:not(:hover))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That would work just the same as a &lt;code&gt;:hover&lt;/code&gt; pseudoclass. That&amp;#39;s rather simple. But what would happen if we&amp;#39;d have a selector list there?&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(:not(:hover), :not(:focus))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As the selector lists inside &lt;code&gt;:not()&lt;/code&gt; work as a logical &lt;strong&gt;and&lt;/strong&gt;, and given that each of the selectors would be returned to its original meaning, the result would be almost the same as &lt;code&gt;:hover:focus&lt;/code&gt;. The difference would be that the specificity of the double negated selector wouldn&amp;#39;t be the same as of the usual complex one. Each of the nested &lt;code&gt;:not()&lt;/code&gt; would have a specificity of a single pseudoclass, and due to how selector lists work inside &lt;code&gt;:not()&lt;/code&gt;, the specificity of the whole construction would be equal, again, to a specificity of a single pseudoclass.&lt;/p&gt;
+&lt;h2 id=&quot;reducing-the-specificity&quot;&gt;Reducing the Specificity&lt;/h2&gt;
+&lt;p&gt;I think you can already guess what all of this means. That&amp;#39;s &lt;nobr&gt;right —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;using the new &lt;code&gt;:not()&lt;/code&gt; we can now write selectors with a specificity of a single class. And, actually, we can write &lt;em&gt;almost any selector&lt;/em&gt; this way.&lt;/p&gt;
+&lt;p&gt;So, if we&amp;#39;d like to have a multiclass selector with some states, like &lt;code&gt;.foo.bar.baz:link:hover&lt;/code&gt; and for it to have a specificity of a single class, so it could be easier overridden later on, we could rewrite this selector this way:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(:not(.foo), :not(.bar), :not(.baz), :not(:link), :not(:hover))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;what-about-combinators-&quot;&gt;What About Combinators?&lt;/h3&gt;
+&lt;p&gt;But what if we&amp;#39;d like to have more complex selectors with combinators, like this one?&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.foo:hover &amp;gt; .bar .baz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;They&amp;#39;re possible too, but with a slightly more complex code. What would help us is a universal selector. Here is how the selector above could look like if we&amp;#39;d want it to have a specificity of a single class:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(:not(:not(:not(:not(:not(.foo), :not(:hover)) &amp;gt; *), :not(.bar)) *), :not(.baz))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That looks awful, right? But that works!&lt;/p&gt;
+&lt;p&gt;Of course, it would become a bit readable if we&amp;#39;d use some indentations and stuff:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(
+    :not(
+        :not(
+            :not(
+                :not(
+                    :not(.foo),
+                    :not(:hover)
+                ) &amp;gt; *
+            ),
+            :not(.bar)
+        ) *
+    ),
+    :not(.baz)
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Still ugly, but manageable (and now, if you&amp;#39;d imagine all of the &lt;code&gt;:not()&lt;/code&gt; and universal selectors would disappear, you could read it almost as our original selector).&lt;/p&gt;
+&lt;p&gt;But why it works? Due to how the selector matching mechanism works, the selectors with combinators would match from right to left, so the rightmost selector would be always the one that matches the element we&amp;#39;re testing the &lt;code&gt;:not()&lt;/code&gt; on, so we could safely use just a universal selector instead of it if we need to just check the parents. And the universal selector brings no specificity with it.&lt;/p&gt;
+&lt;p&gt;The algorithm beyond rewriting the selector this way is rather simple: we go from right to left, replacing recursively all the parts with the double negations, so for when we have nested combinators, we would have more nested &lt;code&gt;:not()&lt;/code&gt;s. And this way we would always be guaranteed to have the same specificity on each step.&lt;/p&gt;
+&lt;h2 id=&quot;complete-control&quot;&gt;Complete Control&lt;/h2&gt;
+&lt;p&gt;It worth mentioning that we can already increase the specificity of any given class just by &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#foofoofoo&quot; id=&quot;foofoofoo&quot;&gt;multiplying it&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can read about this method in Harry Roberts&amp;#39; &lt;a href=&quot;http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity&quot;&gt;article on specificity hacks&lt;/a&gt; (and, as Harry, I first saw this method in &lt;a href=&quot;https://speakerdeck.com/mathiasbynens/3-dot-14-things-i-didnt-know-about-css-at-css-day-2014&quot;&gt;Mathias Bynens&amp;#39; talk&lt;/a&gt;).&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, so &lt;code&gt;.foo.foo.foo&lt;/code&gt; matches just the same as &lt;code&gt;.foo&lt;/code&gt;, but with a specificity of three classes. And as we can now both reduce and increase the specificity of almost any given selectors, that means we can, finally, &lt;strong&gt;control&lt;/strong&gt; the specificity of our selectors, regardless of their complexity. Of course, with the exception that we can&amp;#39;t reduce the specificity to be less than the one of the biggest single selector&amp;#39;s one, so we can&amp;#39;t make a selector that contains a class to be as specific as an element selector or a universal one.&lt;/p&gt;
+&lt;h2 id=&quot;preprocessors-&quot;&gt;Preprocessors?&lt;/h2&gt;
+&lt;p&gt;Yes, it is possible to programmatically convert almost any selector to the same selector with any custom specificity from one class to any given number. But I intentionally won&amp;#39;t implement it now. As I mentioned at the &lt;nobr&gt;start —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the browser support for the new &lt;code&gt;:not()&lt;/code&gt; is not yet there, and even if it would be there, the generated code we&amp;#39;d get for such selectors would be awful. If you&amp;#39;d like a small challenge, you can go and implement it just for fun using any preprocessor or postprocessor you like, but I don&amp;#39;t recommend on using it anywhere close to production.&lt;/p&gt;
+&lt;h2 id=&quot;possible-usage&quot;&gt;Possible Usage&lt;/h2&gt;
+&lt;p&gt;One of the easiest targets for controlling the specificity are any resets or normalizing &lt;nobr&gt;styles —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;right now they often contain things like attribute selectors and pseudoclasses like &lt;code&gt;:nth-child&lt;/code&gt;, and given that those selectors would also have the element selectors, they would always be higher than a single class in specificity, which would make it harder to override it in the code for your blocks.&lt;/p&gt;
+&lt;p&gt;For example, you can look at &lt;a href=&quot;https://github.com/necolas/normalize.css/blob/1da0911/normalize.css#L125&quot;&gt;one part&lt;/a&gt; of Nicolas Gallagher&amp;#39;s normalize.css:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here if you&amp;#39;d like to have a component that uses &lt;code&gt;&amp;lt;abbr&amp;gt;&lt;/code&gt; and you&amp;#39;d want a border or text-decoration other than underlined, you couldn&amp;#39;t use a single class for this component in your &lt;abbr&gt;CSS&lt;/abbr&gt; alongside using normalize.&lt;nobr&gt;css —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you&amp;#39;d need to override the specificity of two classes instead.&lt;/p&gt;
+&lt;p&gt;But if we could reduce the specificity of each selector in our resets and normalizes to the &lt;nobr&gt;smallest —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;of a single element or a single &lt;nobr&gt;class —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;those tools would become even more powerful and flexible.&lt;/p&gt;
+&lt;p&gt;Another area where the control over specificity is a must have are any complex &lt;abbr&gt;CSS&lt;/abbr&gt; methodologies. The easiest example would be Harry Roberts&amp;#39; &lt;a href=&quot;http://itcss.io&quot;&gt;it&lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt; &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#itcss&quot; id=&quot;itcss&quot;&gt;which&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;There is not much written on it anywhere, if you&amp;#39;d like to read more on it, you can try &lt;a href=&quot;https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/&quot;&gt;this article&lt;/a&gt; by Lubos Kmetko.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; role=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; have layers of selectors united by similar area of responsibility. If we could split those layers so they wouldn&amp;#39;t merge in their specificity, we would obtain the ultimate power over &lt;abbr&gt;CSS&lt;/abbr&gt; (ok, I exaggerated it a bit there).&lt;/p&gt;
+&lt;p&gt;Our general styles for typography would be always higher in specificity than the resets; our generic objects would always override the typography styles of any complexity; our components would always be guaranteed to override the styles of generic objects; and any utilities would always override anything else, and all without using &lt;code&gt;!important&lt;/code&gt;. And we could even handle things inside each layer by creating sub-layers, to allow modifiers for components to override their base styles even if those base styles are somewhat complex.&lt;/p&gt;
+&lt;h3 id=&quot;try-it-today&quot;&gt;Try It Today&lt;/h3&gt;
+&lt;p&gt;Talking about all of &lt;nobr&gt;this —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we can already kinda implement our styles this way using nothing but the increasing of specificity available already.&lt;/p&gt;
+&lt;p&gt;The algorithm would be simple: for each layer we need to calculate the maximum specificity, then add a number of redundant matching class selectors to each selector in a way they would split all the things into groups.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s say we have an abstract object&amp;#39;s selector: &lt;code&gt;.button:hover&lt;/code&gt;, then a component &lt;code&gt;.MyBlock-Submit&lt;/code&gt;, and, finally, a utility &lt;code&gt;.is-hidden&lt;/code&gt;. We can leave alone the first layer for the object, it would be the most bottom one. Then we calculate that it have two class-level selectors, so we add that number (plus one, to guarantee the override of any possible generic selector there) to each selector of the second layer of components. Then we calculate the specificity of the component layer (here we have just one class initially, in reality, it would be often much larger, plus the three classes from the previous layer, plus one for reliability) and add the corresponding number of redundant class selectors to anything in utility group.&lt;/p&gt;
+&lt;p&gt;The easiest (and the one method with the most support) way to add the desired specificity is possible if you have control over the &lt;abbr&gt;HTML&lt;/abbr&gt; of a page: just add a class containing a single underscore to &lt;code&gt;html&lt;/code&gt; &lt;nobr&gt;element —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;&amp;lt;html class=&amp;quot;_&amp;quot;&amp;gt;&lt;/code&gt;, and then use the chains of &lt;code&gt;._._&lt;/code&gt; before your selectors. It would look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.button:hover {}
+._._._ .MyBlock-Submit {}
+._._._._._ .is-hidden {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The only issue that can happen is that one of the selectors you&amp;#39;re prefixing would have a part that targets a root selector. In case of &lt;code&gt;:root&lt;/code&gt; or &lt;code&gt;html&lt;/code&gt; ones we could rather easily properly attach this part to the actual selector, for more ambiguous selectors we&amp;#39;d need to duplicate it like &lt;code&gt;._._._._.is-hidden, ._._._._ .is-hidden&lt;/code&gt;, though, if you know that you&amp;#39;re doing, you probably wouldn&amp;#39;t want to use any other classes on root.&lt;/p&gt;
+&lt;p&gt;And here we have all of the layers separated in a way their order doesn&amp;#39;t matter at all and you could make any layer as complex as you like without the fear of the need to override it later. And yes, you&amp;#39;d still have all the usual &lt;abbr&gt;CSS&lt;/abbr&gt; specificity rules inside of layers if you&amp;#39;d want to use them for more granular control of things.&lt;/p&gt;
+&lt;h2 id=&quot;proposal-for-native-tools&quot;&gt;Proposal For Native Tools&lt;/h2&gt;
+&lt;p&gt;In this article, I have shown that it would be already possible to set the specificity of any selector to any given number from one class to eternity. This could be used for more fine-grained control over your libraries&amp;#39; code and components, and in my practice, I had numerous occasions where it would be tremendously helpful.&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s why I propose to add the necessary tools to native &lt;nobr&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;to allow developers to control the specificity. Otherwise, it is possible developers in need would rely on hacks and awful code in the future.&lt;/p&gt;
+&lt;p&gt;What exactly I propose? Certainly &lt;strong&gt;not&lt;/strong&gt; something like a pseudoclass for modifying the specificity of a given selector. That would have too complex syntax (how would you pass the specificity to it?) and you&amp;#39;ll need to use this just anywhere when solving your usual &lt;abbr&gt;CSS&lt;/abbr&gt; problems. That&amp;#39;s bad.&lt;/p&gt;
+&lt;p&gt;What I&amp;#39;d like to see is some kind of a more general way of controlling the specificity not for specific selectors or rules, but for groups of rules. I think of some kind of an @-rule for it, so you could group any number of rules in a “layer”, then somehow determine the relationships of those layers between themselves, and voilà&lt;nobr&gt; —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;you&amp;#39;d have a way to control the &lt;em&gt;cascade&lt;/em&gt; itself, the thing that always was out of touch when you were developing your stylesheets.&lt;/p&gt;
+&lt;p&gt;And the best &lt;nobr&gt;part —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;specificity is a part of &lt;abbr&gt;CSS&lt;/abbr&gt; that is applied only for selectors, it doesn&amp;#39;t depend on &lt;abbr&gt;DOM&lt;/abbr&gt;, on any inheritance there etc. So there shouldn&amp;#39;t be a lot of troubles implementing something that changes the specificity itself (or creates groups of it like it is already there with the different parts of the cascade).&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; is fun, and as this article shows, would be really powerful with the tools new Specs would provide. There would be incredible things possible through hacks. There are already hacks like &lt;code&gt;.foo.foo.foo&lt;/code&gt; for modifying the specificity, and those tools can allow us to write and reuse the code that is more effective and maintainable than ever.&lt;/p&gt;
+&lt;p&gt;But I&amp;#39;d like to see those things possible not through hacks, but using the native &lt;abbr&gt;CSS&lt;/abbr&gt;. I think this is entirely possible to implement in browsers.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Conditions for CSS Variables</title>
     <link href="http://kizu.ru/en/fun/conditions-for-css-variables/"/>
