@@ -147,9 +147,9 @@ html.Page(class=page_class, lang=lang ? lang : false)
                 else
                   a.Page-Language-Link(
                     data-short="ru",
-                    title=loc('no_translation', 'ru'),
-                    href="/")
-                    = loc('in_lang', 'ru') + '*'
+                    title= "Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке"
+                    href="/blog/just-en/")
+                    = loc('in_lang', 'ru') + '?'
             else
               li.Page-Language
                 if document.translations && document.translations.en
