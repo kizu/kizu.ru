@@ -22,7 +22,7 @@
 &lt;p&gt;The &lt;a href=&quot;https://drafts.csswg.org/selectors-4/#negation&quot;&gt;specification for the &lt;code&gt;:not()&lt;/code&gt;&lt;/a&gt; doesn&amp;#39;t say much about its new features. Almost all it says is that instead of a simple selector you can put a &lt;strong&gt;selector list&lt;/strong&gt; inside. But that alone means a lot.&lt;/p&gt;
 &lt;h3 id=&quot;selector-lists&quot;&gt;Selector Lists&lt;/h3&gt;
 &lt;p&gt;So, now we can use comma-separated selector lists inside any &lt;code&gt;:not()&lt;/code&gt;. The commas in usual comma-separated selector lists are an equivalent of logical &lt;strong&gt;or&lt;/strong&gt;, but when used inside the &lt;code&gt;:not()&lt;/code&gt; they actually become &lt;strong&gt;and&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Loot at this &lt;nobr&gt;example —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;such selector would target all buttons that are not hovered and not focused &lt;em&gt;at the same time&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Look at this &lt;nobr&gt;example —&lt;/nobr&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;such selector would target all buttons that are not hovered and not focused &lt;em&gt;at the same time&lt;/em&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;button:not(:hover, :focus)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And it is basically an equivalent of&lt;/p&gt;
