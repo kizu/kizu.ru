@@ -231,7 +231,7 @@ module.exports = {
                 args.after  +=         '<span class="Sidenote-Misc">)</span>';
                 args.after  +=     '</span>';
 
-                args.after  +=     '<a class="Sidenote-Close" href="#x" aria-hidden="true" role="presentation" tabindex="-1"></a>';
+                args.after  +=     '<a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a>';
                 args.after  += '</span>';
 
                 args.attributes.title = null;

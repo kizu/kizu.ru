@@ -39,8 +39,9 @@ module.exports = function(text, lang, options) {
     // TODO: Make other abbreviations too, like JS, W3C etc.
 
     // Replace improper spaces from richtypo with proper
-    result = result.replace(/&#8202;—<\/nobr>&#8202;/g, ' —</nobr><span class="thinsp"> </span>')
-    result = result.replace(/( |&#8202;| | )—( |&#8202;| | )/g, '<nobr> —</nobr><span class="thinsp"> </span>')
+    result = result.replace(/<nobr>([^<]+)<\/nobr>/g, '<span class="nobr">$1</span>')
+    result = result.replace(/&#8202;—<\/span>&#8202;/g, ' —</span><span class="thinsp"> </span>')
+    result = result.replace(/( |&#8202;| | )—( |&#8202;| | )/g, '<span class="nobr"> —</span><span class="thinsp"> </span>')
 
     if (!options.simpleContent) {
         // Replace soft hyphens with special spans

@@ -3,7 +3,7 @@ if posts
     .Filter
       //- Todo: list all categories automatically
       - for (var i = 0; i < site.categories.length; i++)
-        a.Filter-Target(id=site.categories[i], aria-hidden="true", role="presentation")
+        a.Filter-Target(id=site.categories[i], aria-hidden="true")
 
       ul.Filter-Nav(aria-hidden="true", role="presentation")
         li.Filter-Nav-Item.Filter-Nav-Item_everything
