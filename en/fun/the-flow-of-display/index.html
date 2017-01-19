@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>The flow of display</title>
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
     <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/the-flow-of-display/">
@@ -12,7 +12,7 @@
     <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
   </head>
   <body class="Page-Body">
-    <header role="banner" class="Page-Header">
+    <header class="Page-Header">
       <div class="LiquidLayout">
         <div class="LiquidLayout-Content">
           <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
@@ -39,7 +39,7 @@
 <p>You can add any styles (ex<span class="shy"></span>cept for <code>float</code> and <code>dis<span class="shy"></span>play</code>, ob<span class="shy"></span>vi<span class="shy"></span>ously) for those el<span class="shy"></span>e<span class="shy"></span>ments, and any <abbr>HTML</abbr> con<span class="shy"></span>text or in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ments, but, again, the same for both.</p>
 <p>I&#39;d rec<span class="shy"></span>om<span class="shy"></span>mend you to think more about this and find out a so<span class="shy"></span>lu<span class="shy"></span>tion by your<span class="shy"></span>self. There would be an an<span class="shy"></span>swer later in this post, but I think it is a nice prob<span class="shy"></span>lem to think on.</p>
 <h2 class="Heading" id="closer-to-the-answer"><a class="Anchor" aria-hidden="true" href="#closer-to-the-answer"></a><span class="ss02 hang-xs">C</span>loser to the answer</h2>
-<p>The nice thing is that the ef<span class="shy"></span>fect that is hap<span class="shy"></span>pen<span class="shy"></span>ing there can be use<span class="shy"></span>ful. That&#39;s where I stum<span class="shy"></span>bled upon it in the first <nobr>place —</nobr><span class="thinsp"> </span>in a so<span class="shy"></span>lu<span class="shy"></span>tion for one com<span class="shy"></span>plex prob<span class="shy"></span>lem (which my col<span class="shy"></span>legues found out, not me!)</p>
+<p>The nice thing is that the ef<span class="shy"></span>fect that is hap<span class="shy"></span>pen<span class="shy"></span>ing there can be use<span class="shy"></span>ful. That&#39;s where I stum<span class="shy"></span>bled upon it in the first <nobr>place&#8202;—</nobr>&#8202;in a so<span class="shy"></span>lu<span class="shy"></span>tion for one com<span class="shy"></span>plex prob<span class="shy"></span>lem (which my col<span class="shy"></span>legues found out, not me!)</p>
 <p>The goal is to have an el<span class="shy"></span>e<span class="shy"></span>ment in the end of the list that would go right af<span class="shy"></span>ter the last item, while the num<span class="shy"></span>ber of items should adapt to the avail<span class="shy"></span>able width. The only draw<span class="shy"></span>back of the above so<span class="shy"></span>lu<span class="shy"></span>tion is that it need the last el<span class="shy"></span>e<span class="shy"></span>ment to have fixed width, but it&#39;s not the point of the demo.</p>
 <p>Here is a demo that uses the ef<span class="shy"></span>fect, de<span class="shy"></span>scribed in this ar<span class="shy"></span>gi<span class="shy"></span>cle, try to re<span class="shy"></span>size your browser and then guess what and why hap<span class="shy"></span>pens inside:</p>
 <div class="Demo Demo_injected Figure" id="Demo_the-flow-of-display1">
@@ -265,7 +265,7 @@
     <footer class="Page-Footer">
       <div class="LiquidLayout">
         <div class="LiquidLayout-Content">
-          <nav role="navigation" class="PrevNext">
+          <nav class="PrevNext">
           </nav>
           <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
           </p>
@@ -281,6 +281,6 @@
       (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
       //]]>
     </script>
-    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
   </body>
 </html>

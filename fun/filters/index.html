@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Фильтры элементов без яваскрипта</title>
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu">
     <link rel="alternate" hreflang="en" href="http://kizu.ru/en/fun/filters/">
@@ -12,7 +12,7 @@
     <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
   </head>
   <body class="Page-Body">
-    <header role="banner" class="Page-Header">
+    <header class="Page-Header">
       <div class="LiquidLayout">
         <div class="LiquidLayout-Content">
           <h1 class="Page-Title"><a href="/" class="Page-Title-Link">Роман Комаров</a>
@@ -32,12 +32,12 @@
           <header><h1 class="Heading" id="фильтры-элементов-без-яваскрипта"><a class="Anchor" aria-hidden="true" href="#фильтры-элементов-без-яваскрипта"></a><span class="ss01 hang-xs">Ф</span>иль<span class="shy"></span>тры эле<span class="shy"></span>мен<span class="shy"></span>тов без явас<span class="shy"></span>крип<span class="shy"></span>та</h1>
           </header>
 <ul>
-<li>Цве<span class="shy"></span>та<nobr> —</nobr><span class="thinsp"> </span>про<span class="shy"></span>сто чек<span class="shy"></span>бок<span class="shy"></span>сы.</li>
-<li>фор<span class="shy"></span>мы<nobr> —</nobr><span class="thinsp"> </span>ра<span class="shy"></span>дио<span class="shy"></span>ба<span class="shy"></span>то<span class="shy"></span>ны с до<span class="shy"></span>пол<span class="shy"></span>ни<span class="shy"></span>тель<span class="shy"></span>ным свой<span class="shy"></span>ством: их мож<span class="shy"></span>но «ан<span class="shy"></span>че<span class="shy"></span>кать».</li>
+<li>Цве<span class="shy"></span>та<span class="nobr"> —</span><span class="thinsp"> </span>про<span class="shy"></span>сто чек<span class="shy"></span>бок<span class="shy"></span>сы.</li>
+<li>фор<span class="shy"></span>мы<span class="nobr"> —</span><span class="thinsp"> </span>ра<span class="shy"></span>дио<span class="shy"></span>ба<span class="shy"></span>то<span class="shy"></span>ны с до<span class="shy"></span>пол<span class="shy"></span>ни<span class="shy"></span>тель<span class="shy"></span>ным свой<span class="shy"></span>ством: их мож<span class="shy"></span>но «ан<span class="shy"></span>че<span class="shy"></span>кать».</li>
 </ul>
 <p>Толь<span class="shy"></span>ко <abbr>CSS</abbr>, ни<span class="shy"></span>ка<span class="shy"></span>ко<span class="shy"></span>го JS.</p>
 <div class="Demo Figure" id="Demo_filters"><iframe class="Demo-Frame" style="height: 12em" width="100%" src="filters.html"></iframe></div>
-<p>Опять же<nobr> —</nobr><span class="thinsp"> </span>толь<span class="shy"></span>ко со<span class="shy"></span>вре<span class="shy"></span>мен<span class="shy"></span>ные бра<span class="shy"></span>у<span class="shy"></span>зе<span class="shy"></span>ры, в IE мож<span class="shy"></span>но было бы эму<span class="shy"></span>ли<span class="shy"></span>ро<span class="shy"></span>вать экс<span class="shy"></span>преш<span class="shy"></span>на<span class="shy"></span>ми, но лень.</p>
+<p>Опять же<span class="nobr"> —</span><span class="thinsp"> </span>толь<span class="shy"></span>ко со<span class="shy"></span>вре<span class="shy"></span>мен<span class="shy"></span>ные бра<span class="shy"></span>у<span class="shy"></span>зе<span class="shy"></span>ры, в IE мож<span class="shy"></span>но было бы эму<span class="shy"></span>ли<span class="shy"></span>ро<span class="shy"></span>вать экс<span class="shy"></span>преш<span class="shy"></span>на<span class="shy"></span>ми, но лень.</p>
 
           <p class="Metadata Published">Опубликовано 
             <time datetime="2011-02-06">6 февраля 2011 г.</time> в <a href="../" class="Link">Экспериментах</a>.
@@ -52,7 +52,7 @@
     <footer class="Page-Footer">
       <div class="LiquidLayout">
         <div class="LiquidLayout-Content">
-          <nav role="navigation" class="PrevNext"><a href="/fun/popups/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Попапы и дропдауны</span></a><a href="/fun/overflower/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Эмуляция text-overflow</span></a>
+          <nav class="PrevNext"><a href="/fun/popups/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Попапы и дропдауны</span></a><a href="/fun/overflower/" class="Link Link_wrapper Link_next"><span class="Link-Inner">Эмуляция text-overflow</span></a>
           </nav>
           <p role="contentinfo" class="Page-Copy"><a href="/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Роман Комаров</span>. </a><a href="https://twitter.com/ki_zu" class="Link Link_wrapper"><span class="Link-Inner">Читайте меня в твиттере</span>!</a>
           </p>
@@ -68,6 +68,6 @@
       (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
       //]]>
     </script>
-    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;"></noscript>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
   </body>
 </html>
