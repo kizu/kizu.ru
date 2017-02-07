@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sticky Position Nuances</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="sticky-position-nuances"><a class="Anchor" aria-hidden="true" href="#sticky-position-nuances"></a><span class="ss01 hang-xs">S</span>ticky Po­si­tion Nu­ances</h1>
+          </header>
+<h2 class="Heading" id="what-already-works"><a class="Anchor" aria-hidden="true" href="#what-already-works"></a><span class="ss01 hang-m">W</span>hat al­ready works</h2>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_use-cases"><style>
+
+body {
+    display: flex;
+}
+
+.container {
+    flex-grow: 1;
+    border: 1px solid;
+}
+
+.header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    height: 100px;
+    border: 1px solid;
+    margin-top: 100px;
+
+    background: lime;
+}
+.content {
+    height: 200vh;
+    background: #EEE;
+}
+
+body::after {
+    content: "Your browser don't support `position: sticky`";
+
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    color: #FFF;
+}
+@supports (position: sticky) or (position: -webkit-sticky) { body::after { display: none } }
+
+</style>
+
+<div class="container">
+    <div class="header"></div>
+    <div class="content"></div>
+</div>
+
+<div class="container" style="height: 150px">
+    <div class="header"></div>
+</div></div>
+<ul>
+<li>All di­rec­tions</li>
+<li>What if height &gt; view­port</li>
+</ul>
+<h2 class="Heading" id="use-cases"><a class="Anchor" aria-hidden="true" href="#use-cases"></a><span class="ss01 hang-m">U</span>se cases</h2>
+<p>надо сначала придумать и нарисовать юз-кейсы, потом их реализовывать, чисто кодом думать не особо получается, так как нет картинки в голове, а имеющиеся картинки я могу рендерить очень быстро и эффективно</p>
+<ul>
+<li>только топ<span class="nobr"> —</span><span class="thinsp"> </span>тупо стики хедеры/​аватарки</li>
+<li>только боттом<span class="nobr"> —</span><span class="thinsp"> </span>тулбар снизу</li>
+<li><p>только слева<span class="nobr"> —</span><span class="thinsp"> </span>какой-нибудь таймлайн с подсказкой</p>
+</li>
+<li><p>со всех сторон<span class="nobr"> —</span><span class="thinsp"> </span>тултип? только хвостик не получится сделать. Или получится, если делать кругляшами? хммммммммм</p>
+</li>
+<li><p>и сверху и снизу</p>
+<ul>
+<li>высота меньше вьюпорта<span class="nobr"> —</span><span class="thinsp"> </span>бессмысленно? ну как если бы как только топ? Или в зависимости от положения? Хммм</li>
+<li>высота больше вьюпорта<span class="nobr"> —</span><span class="thinsp"> </span>магия со скроллом<span class="nobr"> —</span><span class="thinsp"> </span>сайдбар</li>
+</ul>
+</li>
+</ul>
+<h2 class="Heading" id="current-bugs"><a class="Anchor" aria-hidden="true" href="#current-bugs"></a><span class="ss02 hang-xs">C</span>ur­rent bugs</h2>
+<p>Sa­fari hmm если есть контент, который увеличивает виртуальную высоту внутренности блока? типа задана высота + есть контент, вылезающий?</p>
+<h2 class="Heading" id="top-amp-bottom"><a class="Anchor" aria-hidden="true" href="#top-amp-bottom"></a><span class="ss01 hang-m">T</span>op &amp; Bottom</h2>
+<h3 class="Heading" id="if-the-height-is-lt-viewport"><a class="Anchor" aria-hidden="true" href="#if-the-height-is-lt-viewport"></a><span class="ss01 hang-m">I</span>f the height is &lt; viewport</h3>
+<h3 class="Heading" id="if-the-height-is-gt-viewport"><a class="Anchor" aria-hidden="true" href="#if-the-height-is-gt-viewport"></a><span class="ss01 hang-m">I</span>f the height is &gt; viewport</h3>
+<h2 class="Heading" id="psuedos-of-the-sticky-state"><a class="Anchor" aria-hidden="true" href="#psuedos-of-the-sticky-state"></a><span class="ss01 hang-m">P</span>sue­dos of the Sticky State</h2>
+
+          <p class="Metadata Published">Wrote as a draft, not published yet.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CSticky%20Position%20Nuances%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/sticky-position-nuances/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2016 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>

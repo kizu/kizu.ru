@@ -29,18 +29,18 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="battle-for-baseline"><a class="Anchor" aria-hidden="true" href="#battle-for-baseline"></a><span class="ss01 hang-m">B</span>at<span class="shy"></span>tle for Base<span class="shy"></span>line</h1>
+          <header><h1 class="Heading" id="battle-for-baseline"><a class="Anchor" aria-hidden="true" href="#battle-for-baseline"></a><span class="ss01 hang-m">B</span>at­tle for Base­line</h1>
           </header>
 <p><img src="flex-baseline.jpg" width="756" height="478" alt="Kitties"></p>
-<p>The best so<span class="shy"></span>lu<span class="shy"></span>tion for in<span class="shy"></span>line blocks were, well, in<span class="shy"></span>line-blocks. I used to like them be<span class="shy"></span>cause you could solve a lot of tasks with them. But they&#39;re not ideal. They&#39;re not ca<span class="shy"></span>pa<span class="shy"></span>ble of do<span class="shy"></span>ing base<span class="shy"></span>line ver<span class="shy"></span>ti<span class="shy"></span>cal align<span class="shy"></span>ing <em>right</em>. And the prob<span class="shy"></span>lems come straight from the <a class="Link" href="http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align">specs</a>, just read the last two para<span class="shy"></span>graphs to see the problems:</p>
+<p>The best so­lu­tion for in­line blocks were, well, in­line-blocks. I used to like them be­cause you could solve a lot of tasks with them. But they&#39;re not ideal. They&#39;re not ca­pa­ble of do­ing base­line ver­ti­cal align­ing <em>right</em>. And the prob­lems come straight from the <a class="Link" href="http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align">specs</a>, just read the last two para­graphs to see the problems:</p>
 <ol>
-<li><p>“The base<span class="shy"></span>line of an <code>in<span class="shy"></span>line-block</code> is the base<span class="shy"></span>line of its <strong>last</strong> line box in the nor<span class="shy"></span>mal flow.”</p>
+<li><p>“The base­line of an <code>in­line-block</code> is the base­line of its <strong>last</strong> line box in the nor­mal flow.”</p>
 </li>
-<li><p>“If [<code>in<span class="shy"></span>line-block</code>&#39;s] <code>over<span class="shy"></span>flow</code> prop<span class="shy"></span>erty has a com<span class="shy"></span>puted value other than <code>vis<span class="shy"></span>i<span class="shy"></span>ble</code>, [its] base<span class="shy"></span>line is the bot<span class="shy"></span>tom mar<span class="shy"></span>gin edge.”</p>
+<li><p>“If [<code>in­line-block</code>&#39;s] <code>over­flow</code> prop­erty has a com­puted value other than <code>vis­i­ble</code>, [its] base­line is the bot­tom mar­gin edge.”</p>
 </li>
 </ol>
-<p>Those rules make only one lined, sim<span class="shy"></span>ple in<span class="shy"></span>line-blocks us<span class="shy"></span>able with <code>ver<span class="shy"></span>ti<span class="shy"></span>cal-align: base<span class="shy"></span>line</code>, in all other com<span class="shy"></span>plex cases, we would get not what we would need.</p>
-<p>Here is an ex<span class="shy"></span>am<span class="shy"></span>ple: all three blocks have <code>dis<span class="shy"></span>play: in<span class="shy"></span>line-block</code>, the first one is sim<span class="shy"></span>ple one<span class="shy"></span>liner, but with big<span class="shy"></span>ger padding, sec<span class="shy"></span>ond one is mul<span class="shy"></span>ti<span class="shy"></span>line, but has smaller font-size and the third one has <code>over<span class="shy"></span>flow: auto</code>.</p>
+<p>Those rules make only one lined, sim­ple in­line-blocks us­able with <code>ver­ti­cal-align: base­line</code>, in all other com­plex cases, we would get not what we would need.</p>
+<p>Here is an ex­am­ple: all three blocks have <code>dis­play: in­line-block</code>, the first one is sim­ple one­liner, but with big­ger padding, sec­ond one is mul­ti­line, but has smaller font-size and the third one has <code>over­flow: auto</code>.</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline1_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline1"><label class="Demo-Toggler" for="Demo_flex-baseline1_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline1.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -95,9 +95,9 @@
     </div>
 </div>
 </div></div>
-<p>You <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#safari" id="safari">can see</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Btw, in the lat<span class="shy"></span>est Sa<span class="shy"></span>fari the block with <code>over<span class="shy"></span>flow</code> don&#39;t be<span class="shy"></span>have ac<span class="shy"></span>cord<span class="shy"></span>ing to the specs<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> where each block has its base<span class="shy"></span>line in this ex<span class="shy"></span>ample.</p>
-<h2 class="Heading" id="inline-table"><a class="Anchor" aria-hidden="true" href="#inline-table"></a>in<span class="shy"></span>line-table</h2>
-<p>Ac<span class="shy"></span>tu<span class="shy"></span>ally, there was one place in <abbr>CSS</abbr>, where the base<span class="shy"></span>line align<span class="shy"></span>ing worked <em>prop<span class="shy"></span>erly</em>: <code>dis<span class="shy"></span>play: in<span class="shy"></span>line-table</code>. If we&#39;d use it in<span class="shy"></span>stead of in<span class="shy"></span>line-blocks in our ex<span class="shy"></span>am<span class="shy"></span>ple, we&#39;d get al<span class="shy"></span>most what we tried to achieve:</p>
+<p>You <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#safari" id="safari">can see</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Btw, in the lat­est Sa­fari the block with <code>over­flow</code> don&#39;t be­have ac­cord­ing to the specs<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> where each block has its base­line in this ex­ample.</p>
+<h2 class="Heading" id="inline-table"><a class="Anchor" aria-hidden="true" href="#inline-table"></a>in­line-table</h2>
+<p>Ac­tu­ally, there was one place in <abbr>CSS</abbr>, where the base­line align­ing worked <em>prop­erly</em>: <code>dis­play: in­line-table</code>. If we&#39;d use it in­stead of in­line-blocks in our ex­am­ple, we&#39;d get al­most what we tried to achieve:</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline2_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline2"><label class="Demo-Toggler" for="Demo_flex-baseline2_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline2.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -128,9 +128,9 @@
     </div>
 </div>
 </div></div>
-<p>You can see an ob<span class="shy"></span>vi<span class="shy"></span>ous flaw: the <code>over<span class="shy"></span>flow: auto</code> is not work<span class="shy"></span>ing. And you shouldn&#39;t for<span class="shy"></span>get that you&#39;ll need to have <code>table-lay<span class="shy"></span>out: fixed</code>. So, <code>in<span class="shy"></span>line-table</code> is nice as long as we don&#39;t need <code>over<span class="shy"></span>flow</code> other than <code>vis<span class="shy"></span>i<span class="shy"></span>ble</code>.</p>
-<h2 class="Heading" id="trying-flex"><a class="Anchor" aria-hidden="true" href="#trying-flex"></a><span class="ss01 hang-m">T</span>ry<span class="shy"></span>ing to go flex</h2>
-<p>So, can we do a block both with the proper base<span class="shy"></span>line and with some <code>over<span class="shy"></span>flow</code>? It seems we can, us<span class="shy"></span>ing <span class="nobr">flexboxes —</span><span class="thinsp"> </span><code>dis<span class="shy"></span>play: in<span class="shy"></span>line-flex</code>. In <a class="Link" href="http://www.w3.org/TR/css3-flexbox/#flex-baselines">the<span class="shy"></span>ory</a>, they have a cor<span class="shy"></span>rect base<span class="shy"></span>line po<span class="shy"></span>si<span class="shy"></span>tion in all com<span class="shy"></span>plex cases, but what would we get in practice?</p>
+<p>You can see an ob­vi­ous flaw: the <code>over­flow: auto</code> is not work­ing. And you shouldn&#39;t for­get that you&#39;ll need to have <code>table-lay­out: fixed</code>. So, <code>in­line-table</code> is nice as long as we don&#39;t need <code>over­flow</code> other than <code>vis­i­ble</code>.</p>
+<h2 class="Heading" id="trying-flex"><a class="Anchor" aria-hidden="true" href="#trying-flex"></a><span class="ss01 hang-m">T</span>ry­ing to go flex</h2>
+<p>So, can we do a block both with the proper base­line and with some <code>over­flow</code>? It seems we can, us­ing <span class="nobr">flexboxes —</span><span class="thinsp"> </span><code>dis­play: in­line-flex</code>. In <a class="Link" href="http://www.w3.org/TR/css3-flexbox/#flex-baselines">the­ory</a>, they have a cor­rect base­line po­si­tion in all com­plex cases, but what would we get in practice?</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline3_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline3"><label class="Demo-Toggler" for="Demo_flex-baseline3_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline3.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -162,10 +162,10 @@
     </div>
 </div>
 </div></div>
-<p>If you&#39;d look at this ex<span class="shy"></span>am<span class="shy"></span>ple in any browser other than Fire<span class="shy"></span>fox, you&#39;ll see nicely aligned blocks (yep, even in IE10 and Opera 12).</p>
-<p>But in Fx the block with <code>over<span class="shy"></span>flow: auto</code>, sud<span class="shy"></span>denly, be<span class="shy"></span>haves just like the in<span class="shy"></span>line-<span class="nobr">blocks —</span><span class="thinsp"> </span>it loses the base<span class="shy"></span>line. So sad, this way we&#39;ll need to wait for this <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969874">newly re<span class="shy"></span>ported bug</a> to be fixed.</p>
-<h2 class="Heading" id="another-way"><a class="Anchor" aria-hidden="true" href="#another-way"></a><span class="ss01 hang-m">I</span>s there an<span class="shy"></span>other way?</h2>
-<p>It is nice we could align <code>in<span class="shy"></span>line-flex</code> blocks with the base<span class="shy"></span>lines of other blocks, if only there wasn&#39;t this Fx bug… But what if we&#39;d go and try to align not dif<span class="shy"></span>fer<span class="shy"></span>ent <code>in<span class="shy"></span>line-flex</code> blocks, but their children?</p>
+<p>If you&#39;d look at this ex­am­ple in any browser other than Fire­fox, you&#39;ll see nicely aligned blocks (yep, even in IE10 and Opera 12).</p>
+<p>But in Fx the block with <code>over­flow: auto</code>, sud­denly, be­haves just like the in­line-<span class="nobr">blocks —</span><span class="thinsp"> </span>it loses the base­line. So sad, this way we&#39;ll need to wait for this <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969874">newly re­ported bug</a> to be fixed.</p>
+<h2 class="Heading" id="another-way"><a class="Anchor" aria-hidden="true" href="#another-way"></a><span class="ss01 hang-m">I</span>s there an­other way?</h2>
+<p>It is nice we could align <code>in­line-flex</code> blocks with the base­lines of other blocks, if only there wasn&#39;t this Fx bug… But what if we&#39;d go and try to align not dif­fer­ent <code>in­line-flex</code> blocks, but their children?</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline4_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline4"><label class="Demo-Toggler" for="Demo_flex-baseline4_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline4.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -204,9 +204,9 @@
     </div>
 </div>
 </div></div>
-<p>Oh, it works. But… While mul<span class="shy"></span>ti<span class="shy"></span>ple <code>in<span class="shy"></span>line-flex</code> blocks could wrap on over<span class="shy"></span>flow, for el<span class="shy"></span>e<span class="shy"></span>ments in<span class="shy"></span>side flexbox we would need to use <code>flex-wrap</code> to wrap them. And guess what? Fire<span class="shy"></span>fox didn&#39;t sup<span class="shy"></span>port this prop<span class="shy"></span>erty un<span class="shy"></span>til 28.0.</p>
-<h2 class="Heading" id="combined"><a class="Anchor" aria-hidden="true" href="#combined"></a><span class="ss01 hang-xs">A</span>ll to<span class="shy"></span>gether</h2>
-<p>But hey! If <code>in<span class="shy"></span>line-flex</code> is prop<span class="shy"></span>erly aligned along<span class="shy"></span>side other blocks and the nested block with <code>over<span class="shy"></span>flow: auto</code> also has a proper base<span class="shy"></span>line, then what if we&#39;d com<span class="shy"></span>bine those two? We would add an<span class="shy"></span>other wrap<span class="shy"></span>per in<span class="shy"></span>side each el<span class="shy"></span>e<span class="shy"></span>ment, then move all the paddings and over<span class="shy"></span>flow to them:</p>
+<p>Oh, it works. But… While mul­ti­ple <code>in­line-flex</code> blocks could wrap on over­flow, for el­e­ments in­side flexbox we would need to use <code>flex-wrap</code> to wrap them. And guess what? Fire­fox didn&#39;t sup­port this prop­erty un­til 28.0.</p>
+<h2 class="Heading" id="combined"><a class="Anchor" aria-hidden="true" href="#combined"></a><span class="ss01 hang-xs">A</span>ll to­gether</h2>
+<p>But hey! If <code>in­line-flex</code> is prop­erly aligned along­side other blocks and the nested block with <code>over­flow: auto</code> also has a proper base­line, then what if we&#39;d com­bine those two? We would add an­other wrap­per in­side each el­e­ment, then move all the paddings and over­flow to them:</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline5_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline5"><label class="Demo-Toggler" for="Demo_flex-baseline5_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline5.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -248,7 +248,7 @@
     </div>
 </div>
 </div></div>
-<p>In most browsers you won&#39;t see any changes, but when we&#39;ll look at Fx, we would see that the blocks now won&#39;t have base<span class="shy"></span>line at their bot<span class="shy"></span>tom mar<span class="shy"></span>gin edge. But they won&#39;t have it at the proper place ei<span class="shy"></span><span class="nobr">ther —</span><span class="thinsp"> </span>they&#39;re shifted from the base<span class="shy"></span>line of other blocks a lit<span class="shy"></span>tle. Let&#39;s mea<span class="shy"></span>sure <span class="nobr">it —</span><span class="thinsp"> </span>10 pix<span class="shy"></span>els. Hey, it is our padding! By re<span class="shy"></span>mov<span class="shy"></span>ing paddings from each side we found that the prob<span class="shy"></span>lem is at the top <span class="nobr">padding —</span><span class="thinsp"> </span>when we re<span class="shy"></span>move it every<span class="shy"></span>thing works great. So, if the bug is in the padding (<a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969880">and I re<span class="shy"></span>ported it too</a>), how could we work around it? Let&#39;s re<span class="shy"></span>move it and re<span class="shy"></span>place with a <span class="nobr">pseudo-el</span><span class="shy"></span>ement:</p>
+<p>In most browsers you won&#39;t see any changes, but when we&#39;ll look at Fx, we would see that the blocks now won&#39;t have base­line at their bot­tom mar­gin edge. But they won&#39;t have it at the proper place ei­<span class="nobr">ther —</span><span class="thinsp"> </span>they&#39;re shifted from the base­line of other blocks a lit­tle. Let&#39;s mea­sure <span class="nobr">it —</span><span class="thinsp"> </span>10 pix­els. Hey, it is our padding! By re­mov­ing paddings from each side we found that the prob­lem is at the top <span class="nobr">padding —</span><span class="thinsp"> </span>when we re­move it every­thing works great. So, if the bug is in the padding (<a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969880">and I re­ported it too</a>), how could we work around it? Let&#39;s re­move it and re­place with a <span class="nobr">pseudo-el</span>­ement:</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline6_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline6"><label class="Demo-Toggler" for="Demo_flex-baseline6_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline6.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -301,11 +301,11 @@
 </div>
 </div></div>
 <p>Perfect!</p>
-<h2 class="Heading" id="finishing-strokes"><a class="Anchor" aria-hidden="true" href="#finishing-strokes"></a><span class="ss01 hang-m">F</span>in<span class="shy"></span>ish<span class="shy"></span>ing strokes</h2>
-<p>Well, not per<span class="shy"></span>fect. There are two small is<span class="shy"></span>sues that can ap<span class="shy"></span>pear in IE 10 and Opera 12.</p>
-<p>In IE flexbox with the set width wouldn&#39;t have wrapped text in<span class="shy"></span>side of it. That&#39;s a rather strange bug, but we could work around it by adding <code>width: 100%</code> or <code>-ms-flex-neg<span class="shy"></span>a<span class="shy"></span>tive: 1</code> to the in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ment, the lat<span class="shy"></span>ter is better.</p>
-<p>Opera has a sim<span class="shy"></span>i<span class="shy"></span>lar <span class="nobr">bug —</span><span class="thinsp"> </span>the el<span class="shy"></span>e<span class="shy"></span>ment in<span class="shy"></span>side a flexbox would have the width set to con<span class="shy"></span>tent. The only fix I found is adding <code>flex-di<span class="shy"></span>rec<span class="shy"></span>tion: col<span class="shy"></span>umn</code> to flexbox. As there would be only one el<span class="shy"></span>e<span class="shy"></span>ment in<span class="shy"></span>side our wrap<span class="shy"></span>per, it won&#39;t af<span class="shy"></span>fect any<span class="shy"></span>thing else.</p>
-<p>There, <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#without-fallbacks" id="without-fallbacks">now it&#39;s per<span class="shy"></span>fect</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>No fall<span class="shy"></span>backs for older browsers though, but this slightly falls out of this post&#39;s scope<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>, there is the last ex<span class="shy"></span>am<span class="shy"></span>ple with dif<span class="shy"></span>fer<span class="shy"></span>ent vari<span class="shy"></span>ants of blocks and with the wrap<span class="shy"></span>ping blocks:</p>
+<h2 class="Heading" id="finishing-strokes"><a class="Anchor" aria-hidden="true" href="#finishing-strokes"></a><span class="ss01 hang-m">F</span>in­ish­ing strokes</h2>
+<p>Well, not per­fect. There are two small is­sues that can ap­pear in IE 10 and Opera 12.</p>
+<p>In IE flexbox with the set width wouldn&#39;t have wrapped text in­side of it. That&#39;s a rather strange bug, but we could work around it by adding <code>width: 100%</code> or <code>-ms-flex-neg­a­tive: 1</code> to the in­ner el­e­ment, the lat­ter is better.</p>
+<p>Opera has a sim­i­lar <span class="nobr">bug —</span><span class="thinsp"> </span>the el­e­ment in­side a flexbox would have the width set to con­tent. The only fix I found is adding <code>flex-di­rec­tion: col­umn</code> to flexbox. As there would be only one el­e­ment in­side our wrap­per, it won&#39;t af­fect any­thing else.</p>
+<p>There, <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#without-fallbacks" id="without-fallbacks">now it&#39;s per­fect</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>No fall­backs for older browsers though, but this slightly falls out of this post&#39;s scope<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>, there is the last ex­am­ple with dif­fer­ent vari­ants of blocks and with the wrap­ping blocks:</p>
 <input type="checkbox" class="Demo-Toggle" id="Demo_flex-baseline7_toggle" checked="checked" /><div class="Demo Demo_injected Demo_seamless with-screenshot" id="Demo_flex-baseline7"><label class="Demo-Toggler" for="Demo_flex-baseline7_toggle"><a class="Demo-Toggler-Item Demo-Toggler-Checked">Screenshot</a><span class="Demo-Misc"> and </span><a class="Demo-Toggler-Item Demo-Toggler-Unchecked">Live demo</a></label><img class="Demo-Screenshot" src="examples/flex-baseline7.png" alt="Screenshot" title="Screenshot" /><div class="Demo-Content" title="Live demo">
 
 <style>
@@ -379,36 +379,36 @@
     </div>
 </div>
 </div></div>
-<p>The re<span class="shy"></span>sult<span class="shy"></span>ing code for this ex<span class="shy"></span>am<span class="shy"></span>ple would be:</p>
+<p>The re­sult­ing code for this ex­am­ple would be:</p>
 <pre><code class="language-css">.flex {
-    dis<span class="shy"></span>play: -ms-in<span class="shy"></span>line-flexbox;
-    dis<span class="shy"></span>play: -we<span class="shy"></span>bkit-in<span class="shy"></span>line-flex;
-    dis<span class="shy"></span>play: in<span class="shy"></span>line-flex;
+    dis­play: -ms-in­line-flexbox;
+    dis­play: -we­bkit-in­line-flex;
+    dis­play: in­line-flex;
 
-    /* Fix<span class="shy"></span>ing Opera is<span class="shy"></span>sue */
-    flex-di<span class="shy"></span>rec<span class="shy"></span>tion: col<span class="shy"></span>umn;
+    /* Fix­ing Opera is­sue */
+    flex-di­rec­tion: col­umn;
 
-    ver<span class="shy"></span>ti<span class="shy"></span>cal-align: base<span class="shy"></span>line;
+    ver­ti­cal-align: base­line;
     }
 
-.flex-con<span class="shy"></span>tent {
+.flex-con­tent {
     padding: 0 10px 10px;
-    bor<span class="shy"></span>der: 1px solid lime;
+    bor­der: 1px solid lime;
 
-    /* Fix<span class="shy"></span>ing IE is<span class="shy"></span>sue */
-    -ms-flex-neg<span class="shy"></span>a<span class="shy"></span>tive: 1;
+    /* Fix­ing IE is­sue */
+    -ms-flex-neg­a­tive: 1;
     }
 
-/* Fix<span class="shy"></span>ing Fx is<span class="shy"></span>sue */
-.flex-con<span class="shy"></span>tent:be<span class="shy"></span>fore {
-    con<span class="shy"></span>tent: &quot;&quot;;
-    dis<span class="shy"></span>play: block;
+/* Fix­ing Fx is­sue */
+.flex-con­tent:be­fore {
+    con­tent: &quot;&quot;;
+    dis­play: block;
     padding-top: 10px;
     }
 </code></pre>
-<h2 class="Heading" id="resume"><a class="Anchor" aria-hidden="true" href="#resume"></a><span class="ss01 hang-xs">O</span>ve<span class="shy"></span>rall</h2>
-<p>Ah, Fire<span class="shy"></span>fox! With<span class="shy"></span>out its bugs (and IE&#39;s one) we could use only one el<span class="shy"></span>e<span class="shy"></span>ment per block. Also, if you&#39;ll need just mul<span class="shy"></span>ti<span class="shy"></span>line in<span class="shy"></span>line blocks, and you&#39;re not afraid of ta<span class="shy"></span>bles, you could use <code>dis<span class="shy"></span>play: in<span class="shy"></span>line-table</code>.</p>
-<p>But, over<span class="shy"></span>all, we won. We can now use base<span class="shy"></span>line ver<span class="shy"></span>ti<span class="shy"></span>cal align<span class="shy"></span>ing for blocks of any com<span class="shy"></span>plex<span class="shy"></span>ity, hooray! But if you&#39;d want to write even bet<span class="shy"></span>ter code in the fu<span class="shy"></span>ture, I&#39;d rec<span class="shy"></span>om<span class="shy"></span>mend you to go and vote for the <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969874">cor<span class="shy"></span>re<span class="shy"></span>spond<span class="shy"></span>ing</a> <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969880">bugs</a> in Bugzilla.</p>
+<h2 class="Heading" id="resume"><a class="Anchor" aria-hidden="true" href="#resume"></a><span class="ss01 hang-xs">O</span>ve­rall</h2>
+<p>Ah, Fire­fox! With­out its bugs (and IE&#39;s one) we could use only one el­e­ment per block. Also, if you&#39;ll need just mul­ti­line in­line blocks, and you&#39;re not afraid of ta­bles, you could use <code>dis­play: in­line-table</code>.</p>
+<p>But, over­all, we won. We can now use base­line ver­ti­cal align­ing for blocks of any com­plex­ity, hooray! But if you&#39;d want to write even bet­ter code in the fu­ture, I&#39;d rec­om­mend you to go and vote for the <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969874">cor­re­spond­ing</a> <a class="Link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=969880">bugs</a> in Bugzilla.</p>
 
           <p class="Metadata Published">Published on 
             <time datetime="2014-02-10">February 10, 2014</time>, in <a href="../" class="Link">the Blog</a>.

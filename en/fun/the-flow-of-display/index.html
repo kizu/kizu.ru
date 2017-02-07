@@ -29,19 +29,19 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="the-flow-of-display"><a class="Anchor" aria-hidden="true" href="#the-flow-of-display"></a><span class="ss01 hang-m">T</span>he flow of dis<span class="shy"></span>play</h1>
+          <header><h1 class="Heading" id="the-flow-of-display"><a class="Anchor" aria-hidden="true" href="#the-flow-of-display"></a><span class="ss01 hang-m">T</span>he flow of dis­play</h1>
           </header>
 <p><img src="the-flow-of-display.jpg" width="756" height="382" alt="How is this puzzle solved?"></p>
-<p>There are a lot of sub<span class="shy"></span>tle nu<span class="shy"></span>ances in <abbr>CSS</abbr>. Some<span class="shy"></span>times you look at the code and won<span class="shy"></span>der “why is it work<span class="shy"></span>ing at all?!”, and as more ex<span class="shy"></span>pe<span class="shy"></span>ri<span class="shy"></span>enced you be<span class="shy"></span>come, the less of<span class="shy"></span>ten it happens.</p>
-<p>A few days ago my col<span class="shy"></span>legues found a so<span class="shy"></span>lu<span class="shy"></span>tion for one prob<span class="shy"></span>lem, but they couldn&#39;t tell <em>why</em> is it work<span class="shy"></span>ing, and showed me the code. I couldn&#39;t tell it from the start too, but af<span class="shy"></span>ter a few min<span class="shy"></span>utes with it, I found the an<span class="shy"></span>swer, and it was some<span class="shy"></span>thing I al<span class="shy"></span>ready knew, but in a new context.</p>
-<p>So, I have a small quiz for you, with an an<span class="shy"></span>swer later in the ar<span class="shy"></span>ti<span class="shy"></span>cle: you have two el<span class="shy"></span>e<span class="shy"></span>ments with the same <abbr>HTML</abbr> con<span class="shy"></span>text and the same <abbr>CSS</abbr>, ap<span class="shy"></span>plied to them. Both of them have some ex<span class="shy"></span>act styles with <code>float:left</code> in their <abbr>CSS</abbr>. And the only thing that is dif<span class="shy"></span>fer<span class="shy"></span>ent be<span class="shy"></span>tween them is that one of those blocks have <code>dis<span class="shy"></span>play:in<span class="shy"></span>line-block</code> and the other one have <code>dis<span class="shy"></span>play:block</code>.</p>
-<p>Can you find out a case when the value of <code>dis<span class="shy"></span>play</code> on a block with <code>float:left</code> in <abbr>CSS</abbr> would matter?</p>
-<p>You can add any styles (ex<span class="shy"></span>cept for <code>float</code> and <code>dis<span class="shy"></span>play</code>, ob<span class="shy"></span>vi<span class="shy"></span>ously) for those el<span class="shy"></span>e<span class="shy"></span>ments, and any <abbr>HTML</abbr> con<span class="shy"></span>text or in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ments, but, again, the same for both.</p>
-<p>I&#39;d rec<span class="shy"></span>om<span class="shy"></span>mend you to think more about this and find out a so<span class="shy"></span>lu<span class="shy"></span>tion by your<span class="shy"></span>self. There would be an an<span class="shy"></span>swer later in this post, but I think it is a nice prob<span class="shy"></span>lem to think on.</p>
+<p>There are a lot of sub­tle nu­ances in <abbr>CSS</abbr>. Some­times you look at the code and won­der “why is it work­ing at all?!”, and as more ex­pe­ri­enced you be­come, the less of­ten it happens.</p>
+<p>A few days ago my col­legues found a so­lu­tion for one prob­lem, but they couldn&#39;t tell <em>why</em> is it work­ing, and showed me the code. I couldn&#39;t tell it from the start too, but af­ter a few min­utes with it, I found the an­swer, and it was some­thing I al­ready knew, but in a new context.</p>
+<p>So, I have a small quiz for you, with an an­swer later in the ar­ti­cle: you have two el­e­ments with the same <abbr>HTML</abbr> con­text and the same <abbr>CSS</abbr>, ap­plied to them. Both of them have some ex­act styles with <code>float:left</code> in their <abbr>CSS</abbr>. And the only thing that is dif­fer­ent be­tween them is that one of those blocks have <code>dis­play:in­line-block</code> and the other one have <code>dis­play:block</code>.</p>
+<p>Can you find out a case when the value of <code>dis­play</code> on a block with <code>float:left</code> in <abbr>CSS</abbr> would matter?</p>
+<p>You can add any styles (ex­cept for <code>float</code> and <code>dis­play</code>, ob­vi­ously) for those el­e­ments, and any <abbr>HTML</abbr> con­text or in­ner el­e­ments, but, again, the same for both.</p>
+<p>I&#39;d rec­om­mend you to think more about this and find out a so­lu­tion by your­self. There would be an an­swer later in this post, but I think it is a nice prob­lem to think on.</p>
 <h2 class="Heading" id="closer-to-the-answer"><a class="Anchor" aria-hidden="true" href="#closer-to-the-answer"></a><span class="ss02 hang-xs">C</span>loser to the answer</h2>
-<p>The nice thing is that the ef<span class="shy"></span>fect that is hap<span class="shy"></span>pen<span class="shy"></span>ing there can be use<span class="shy"></span>ful. That&#39;s where I stum<span class="shy"></span>bled upon it in the first <span class="nobr">place —</span><span class="thinsp"> </span>in a so<span class="shy"></span>lu<span class="shy"></span>tion for one com<span class="shy"></span>plex prob<span class="shy"></span>lem (which my col<span class="shy"></span>legues found out, not me!)</p>
-<p>The goal is to have an el<span class="shy"></span>e<span class="shy"></span>ment in the end of the list that would go right af<span class="shy"></span>ter the last item, while the num<span class="shy"></span>ber of items should adapt to the avail<span class="shy"></span>able width. The only draw<span class="shy"></span>back of the above so<span class="shy"></span>lu<span class="shy"></span>tion is that it need the last el<span class="shy"></span>e<span class="shy"></span>ment to have fixed width, but it&#39;s not the point of the demo.</p>
-<p>Here is a demo that uses the ef<span class="shy"></span>fect, de<span class="shy"></span>scribed in this ar<span class="shy"></span>gi<span class="shy"></span>cle, try to re<span class="shy"></span>size your browser and then guess what and why hap<span class="shy"></span>pens inside:</p>
+<p>The nice thing is that the ef­fect that is hap­pen­ing there can be use­ful. That&#39;s where I stum­bled upon it in the first <span class="nobr">place —</span><span class="thinsp"> </span>in a so­lu­tion for one com­plex prob­lem (which my col­legues found out, not me!)</p>
+<p>The goal is to have an el­e­ment in the end of the list that would go right af­ter the last item, while the num­ber of items should adapt to the avail­able width. The only draw­back of the above so­lu­tion is that it need the last el­e­ment to have fixed width, but it&#39;s not the point of the demo.</p>
+<p>Here is a demo that uses the ef­fect, de­scribed in this ar­gi­cle, try to re­size your browser and then guess what and why hap­pens inside:</p>
 <div class="Demo Demo_injected Figure" id="Demo_the-flow-of-display1">
 
 <style>
@@ -89,18 +89,18 @@
     <li class="just-some-item">…last</li>
 </ul>
 </div>
-<p>Now I&#39;ll give you a hint: what could dis<span class="shy"></span>able the ef<span class="shy"></span>fect of the <code>float</code>, but still would have <code>dis<span class="shy"></span>play</code> to have an ef<span class="shy"></span>fect on an el<span class="shy"></span>e<span class="shy"></span>ment? There is one prop<span class="shy"></span>erty you can add that would make all the dif<span class="shy"></span>ference.</p>
+<p>Now I&#39;ll give you a hint: what could dis­able the ef­fect of the <code>float</code>, but still would have <code>dis­play</code> to have an ef­fect on an el­e­ment? There is one prop­erty you can add that would make all the dif­ference.</p>
 <p>It is…</p>
 <p>…wait for it…</p>
-<p><code>po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute</code>!</p>
+<p><code>po­si­tion: ab­solute</code>!</p>
 <h2 class="Heading" id="the-flow"><a class="Anchor" aria-hidden="true" href="#the-flow"></a><span class="ss01 hang-m">T</span>he flow</h2>
-<p>That&#39;s right, when we add <code>po<span class="shy"></span>si<span class="shy"></span>tion:ab<span class="shy"></span>solute</code> for those el<span class="shy"></span>e<span class="shy"></span>ments, we&#39;re dis<span class="shy"></span>abling the be<span class="shy"></span>hav<span class="shy"></span>iour of the <code>float</code>. And a lot of de<span class="shy"></span>vel<span class="shy"></span>op<span class="shy"></span>ers would think that <code>po<span class="shy"></span>si<span class="shy"></span>tion:ab<span class="shy"></span>solute</code> would dis<span class="shy"></span>card the ef<span class="shy"></span>fect of the <code>dis<span class="shy"></span>play</code> as well… But it won&#39;t! At least, not com<span class="shy"></span>pletely.</p>
-<p>There is one in<span class="shy"></span>ter<span class="shy"></span>est<span class="shy"></span>ing place in the <abbr>CSS</abbr> specs that comes into play:</p>
+<p>That&#39;s right, when we add <code>po­si­tion:ab­solute</code> for those el­e­ments, we&#39;re dis­abling the be­hav­iour of the <code>float</code>. And a lot of de­vel­op­ers would think that <code>po­si­tion:ab­solute</code> would dis­card the ef­fect of the <code>dis­play</code> as well… But it won&#39;t! At least, not com­pletely.</p>
+<p>There is one in­ter­est­ing place in the <abbr>CSS</abbr> specs that comes into play:</p>
 <blockquote>
-<p>wha<span class="shy"></span>ha<span class="shy"></span>ha<span class="shy"></span>hahaha</p>
+<p>wha­ha­ha­hahaha</p>
 </blockquote>
-<p>This means that if our block with <code>po<span class="shy"></span>si<span class="shy"></span>tion:ab<span class="shy"></span>solute</code> don&#39;t have the <code>top</code>, <code>right</code>, <code>bot<span class="shy"></span>tom</code> or <code>left</code> set, it would be placed in the flow as if it wouldn&#39;t have <code>po<span class="shy"></span>si<span class="shy"></span>tion:ab<span class="shy"></span>solute</code> and would be af<span class="shy"></span>fected by its <code>dis<span class="shy"></span>play</code>! And as the <code>float</code> is dis<span class="shy"></span>carded, the <code>dis<span class="shy"></span>play</code> mat<span class="shy"></span>ters, and when it mat<span class="shy"></span>ters is when our el<span class="shy"></span>e<span class="shy"></span>ments have some<span class="shy"></span>thing be<span class="shy"></span>fore them.</p>
-<p>Look at this sim<span class="shy"></span>ple ex<span class="shy"></span>ample:</p>
+<p>This means that if our block with <code>po­si­tion:ab­solute</code> don&#39;t have the <code>top</code>, <code>right</code>, <code>bot­tom</code> or <code>left</code> set, it would be placed in the flow as if it wouldn&#39;t have <code>po­si­tion:ab­solute</code> and would be af­fected by its <code>dis­play</code>! And as the <code>float</code> is dis­carded, the <code>dis­play</code> mat­ters, and when it mat­ters is when our el­e­ments have some­thing be­fore them.</p>
+<p>Look at this sim­ple ex­ample:</p>
 <div class="Demo Demo_injected Demo_seamless" id="Demo_the-flow-of-display2">
 
 <style>
@@ -127,7 +127,7 @@
   <span class="b">B</span>
 </p>
 </div>
-<p>The <code>html</code> for those blocks is the same, with the only dif<span class="shy"></span>fer<span class="shy"></span>ence of the used classes:</p>
+<p>The <code>html</code> for those blocks is the same, with the only dif­fer­ence of the used classes:</p>
 <pre><code class="undefinedHTML">&lt;p&gt;
   Hello
   &lt;span class=&quot;a&quot;&gt;A&lt;/​span&gt;
@@ -140,21 +140,21 @@
 <p>And the <abbr>CSS</abbr> for them:</p>
 <pre><code class="undefinedCSS">.a {
     float: left;
-    dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+    dis­play: in­line-block;
     }
 .b {
     float: left;
-    dis<span class="shy"></span>play: block;
+    dis­play: block;
     }
 .a,
 .b {
-    po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute;
+    po­si­tion: ab­solute;
     }
 </code></pre>
-<p>Yep, the <code>float</code> won&#39;t do any<span class="shy"></span>thing there, and the dif<span class="shy"></span>fer<span class="shy"></span>ence in the flow are there be<span class="shy"></span>cause of the dif<span class="shy"></span>fer<span class="shy"></span>ences in <code>dis<span class="shy"></span>play</code>.</p>
-<p>Won<span class="shy"></span>der<span class="shy"></span>ful! Think a bit about all this. Of course, the <code>float</code> is not needed there, but it was a nice dis<span class="shy"></span>guise for the ef<span class="shy"></span>fect, as it is dis<span class="shy"></span>carded on ab<span class="shy"></span>solute po<span class="shy"></span>si<span class="shy"></span>tion<span class="shy"></span>ing, but the <code>dis<span class="shy"></span>play</code> is not.</p>
+<p>Yep, the <code>float</code> won&#39;t do any­thing there, and the dif­fer­ence in the flow are there be­cause of the dif­fer­ences in <code>dis­play</code>.</p>
+<p>Won­der­ful! Think a bit about all this. Of course, the <code>float</code> is not needed there, but it was a nice dis­guise for the ef­fect, as it is dis­carded on ab­solute po­si­tion­ing, but the <code>dis­play</code> is not.</p>
 <h2 class="Heading" id="the-use-case"><a class="Anchor" aria-hidden="true" href="#the-use-case"></a><span class="ss01 hang-m">T</span>he use case</h2>
-<p>Now I&#39;ll try to ex<span class="shy"></span>plain the case I shown above, I&#39;ll show you it once again (re<span class="shy"></span>size your browser, blah blah):</p>
+<p>Now I&#39;ll try to ex­plain the case I shown above, I&#39;ll show you it once again (re­size your browser, blah blah):</p>
 <div class="Demo Demo_injected Figure" id="Demo_the-flow-of-display1">
 
 <style>
@@ -202,8 +202,8 @@
     <li class="just-some-item">…last</li>
 </ul>
 </div>
-<p>What hap<span class="shy"></span>pens here (and what needed to be achieved) is that the last item from the list should be al<span class="shy"></span>ways on the first line, go<span class="shy"></span>ing af<span class="shy"></span>ter all the other items which are wrapped if they don&#39;t have enought place for them.</p>
-<p>That was not an easy task, and I&#39;m a bit ashamed that I didn&#39;t solve it by my<span class="shy"></span>self, but hey, at least I know how (and why) we can do it now!</p>
+<p>What hap­pens here (and what needed to be achieved) is that the last item from the list should be al­ways on the first line, go­ing af­ter all the other items which are wrapped if they don&#39;t have enought place for them.</p>
+<p>That was not an easy task, and I&#39;m a bit ashamed that I didn&#39;t solve it by my­self, but hey, at least I know how (and why) we can do it now!</p>
 <p>The <abbr>HTML</abbr> for those items is this:</p>
 <pre><code class="undefinedHTML">&lt;ul class=&quot;just-some-items&quot;&gt;
     &lt;li class=&quot;just-some-item&quot;&gt;One&lt;/​li&gt;
@@ -222,34 +222,34 @@
 </code></pre>
 <p>The <abbr>CSS</abbr> is this:</p>
 <pre><code class="undefinedCSS">.just-some-items {
-    over<span class="shy"></span>flow: hid<span class="shy"></span>den;
+    over­flow: hid­den;
 
     height: 2em;
     padding-right: 2.4em;
-    mar<span class="shy"></span>gin: 0;
+    mar­gin: 0;
     }
 .just-some-item {
     float: left;
 
-    mar<span class="shy"></span>gin-right: 0.5em;
+    mar­gin-right: 0.5em;
 
     line-height: 2em;
     }
 .just-some-item:last-child {
-    po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute;
+    po­si­tion: ab­solute;
 
-    dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+    dis­play: in­line-block;
 
     width: 2.4em;
     }
 </code></pre>
-<p>And even know<span class="shy"></span>ing all the above stuff, the “Aha!” mo<span class="shy"></span>ment was de<span class="shy"></span>layed a bit for me. What hap<span class="shy"></span>pens there is the fol<span class="shy"></span>lowing:</p>
+<p>And even know­ing all the above stuff, the “Aha!” mo­ment was de­layed a bit for me. What hap­pens there is the fol­lowing:</p>
 <ol>
 <li>All the blocks are floated.</li>
-<li>The last item have <code>po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute</code>.</li>
-<li>When we add the <code>dis<span class="shy"></span>play:in<span class="shy"></span>line-block</code> (or, ac<span class="shy"></span>tu<span class="shy"></span>ally, <code>dis<span class="shy"></span>play:in<span class="shy"></span>line</code>, or <code>dis<span class="shy"></span>play:in<span class="shy"></span>line-flex</code>), the ef<span class="shy"></span>fect that was ex<span class="shy"></span>plained above hap<span class="shy"></span>pens. The last block is placed in the nor<span class="shy"></span>mal flow, while all the other el<span class="shy"></span>e<span class="shy"></span>ments are floated, this makes this el<span class="shy"></span>e<span class="shy"></span>ment to be on the first line.</li>
+<li>The last item have <code>po­si­tion: ab­solute</code>.</li>
+<li>When we add the <code>dis­play:in­line-block</code> (or, ac­tu­ally, <code>dis­play:in­line</code>, or <code>dis­play:in­line-flex</code>), the ef­fect that was ex­plained above hap­pens. The last block is placed in the nor­mal flow, while all the other el­e­ments are floated, this makes this el­e­ment to be on the first line.</li>
 </ol>
-<p>Ac<span class="shy"></span>tu<span class="shy"></span>ally, we don&#39;t even need the <code>po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute</code> there, we could have a nor<span class="shy"></span>mal <code>in<span class="shy"></span>line-block</code> here with the zero width and with<span class="shy"></span>out the float, but as we want it to have an ac<span class="shy"></span>tual width and paddings and what<span class="shy"></span>ever, the <code>po<span class="shy"></span>si<span class="shy"></span>tion:ab<span class="shy"></span>solute</code> is re<span class="shy"></span>ally handy there.</p>
+<p>Ac­tu­ally, we don&#39;t even need the <code>po­si­tion: ab­solute</code> there, we could have a nor­mal <code>in­line-block</code> here with the zero width and with­out the float, but as we want it to have an ac­tual width and paddings and what­ever, the <code>po­si­tion:ab­solute</code> is re­ally handy there.</p>
 
           <p class="Metadata Published">Wrote as a draft, not published yet.
           </p>

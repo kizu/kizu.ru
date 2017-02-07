@@ -29,25 +29,25 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="new-stylus-features"><a class="Anchor" aria-hidden="true" href="#new-stylus-features"></a><span class="ss01 hang-m">N</span>ew Sty<span class="shy"></span>lus Fea<span class="shy"></span>tures</h1>
+          <header><h1 class="Heading" id="new-stylus-features"><a class="Anchor" aria-hidden="true" href="#new-stylus-features"></a><span class="ss01 hang-m">N</span>ew Sty­lus Fea­tures</h1>
           </header>
-<p>Not so long ago I <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#maintaining" id="maintaining">be<span class="shy"></span>came a main<span class="shy"></span>tainer</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I&#39;ll write some<span class="shy"></span>day later how this hap<span class="shy"></span>pened and what ex<span class="shy"></span>actly I do there, but it worth to men<span class="shy"></span>tion that I&#39;m <em>a main<span class="shy"></span>tainer</em>, but the main <em>de<span class="shy"></span>vel<span class="shy"></span>oper</em> now is my col<span class="shy"></span>league <a href="gh:panya">Mikhail Ko<span class="shy"></span>repanov</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> for <a class="Link" href="https://github.com/LearnBoost/stylus">Sty<span class="shy"></span>lus</a> <abbr>CSS</abbr> pre<span class="shy"></span>proces<span class="shy"></span>sor. At the end of the last week, we re<span class="shy"></span>leased a new ver<span class="shy"></span><span class="nobr">sion —</span><span class="thinsp"> </span><a class="Link" href="https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30">0.41.0</a><span class="nobr"> —</span><span class="thinsp"> </span>where we added some new fea<span class="shy"></span>tures. And in the two ear<span class="shy"></span>lier re<span class="shy"></span>leases we added sup<span class="shy"></span>port for the hashes and pol<span class="shy"></span>ished it, so af<span class="shy"></span>ter all this work it is now pos<span class="shy"></span>si<span class="shy"></span>ble to do a lot of in<span class="shy"></span>ter<span class="shy"></span>est<span class="shy"></span>ing new things. In this ar<span class="shy"></span>ti<span class="shy"></span>cle, I&#39;ll ex<span class="shy"></span>plain one <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#example-sidenote" id="example-sidenote">new tech</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can go straight to <a href="#example">its <span class="nobr">step-by</span>-step ex<span class="shy"></span>pla<span class="shy"></span>na<span class="shy"></span>tion</a>, or to the <a href="#result">re<span class="shy"></span>sult<span class="shy"></span>ing code</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> that is now pos<span class="shy"></span>si<span class="shy"></span>ble in the new Sty<span class="shy"></span>lus, but I&#39;ll de<span class="shy"></span>scribe the new fea<span class="shy"></span>tures for a start.</p>
+<p>Not so long ago I <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#maintaining" id="maintaining">be­came a main­tainer</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I&#39;ll write some­day later how this hap­pened and what ex­actly I do there, but it worth to men­tion that I&#39;m <em>a main­tainer</em>, but the main <em>de­vel­oper</em> now is my col­league <a href="gh:panya">Mikhail Ko­repanov</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> for <a class="Link" href="https://github.com/LearnBoost/stylus">Sty­lus</a> <abbr>CSS</abbr> pre­proces­sor. At the end of the last week, we re­leased a new ver­<span class="nobr">sion —</span><span class="thinsp"> </span><a class="Link" href="https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30">0.41.0</a><span class="nobr"> —</span><span class="thinsp"> </span>where we added some new fea­tures. And in the two ear­lier re­leases we added sup­port for the hashes and pol­ished it, so af­ter all this work it is now pos­si­ble to do a lot of in­ter­est­ing new things. In this ar­ti­cle, I&#39;ll ex­plain one <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#example-sidenote" id="example-sidenote">new tech</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can go straight to <a href="#example">its <span class="nobr">step-by</span>-step ex­pla­na­tion</a>, or to the <a href="#result">re­sult­ing code</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> that is now pos­si­ble in the new Sty­lus, but I&#39;ll de­scribe the new fea­tures for a start.</p>
 <h2 class="Heading" id="block-mixins"><a class="Anchor" aria-hidden="true" href="#block-mixins"></a><span class="ss01 hang-m">B</span>lock mixins</h2>
-<p>Fi<span class="shy"></span>nally! The thing that was miss<span class="shy"></span>ing from Sty<span class="shy"></span>lus for so <span class="nobr">long —</span><span class="thinsp"> </span>the abil<span class="shy"></span>ity to pass blocks of Sty<span class="shy"></span>lus code into mix<span class="shy"></span>ins and then use those blocks in<span class="shy"></span>side the mix<span class="shy"></span>ins&#39; bodies.</p>
-<p>The syn<span class="shy"></span>tax for pass<span class="shy"></span>ing the block is rather sim<span class="shy"></span>ple: we call a mixin us<span class="shy"></span>ing a <code>+</code> pre<span class="shy"></span>fix, then we pass the block ei<span class="shy"></span>ther in the curly braces, or us<span class="shy"></span>ing a new in<span class="shy"></span>dent level (as you could do with a lot of things in Sty<span class="shy"></span>lus):</p>
+<p>Fi­nally! The thing that was miss­ing from Sty­lus for so <span class="nobr">long —</span><span class="thinsp"> </span>the abil­ity to pass blocks of Sty­lus code into mix­ins and then use those blocks in­side the mix­ins&#39; bodies.</p>
+<p>The syn­tax for pass­ing the block is rather sim­ple: we call a mixin us­ing a <code>+</code> pre­fix, then we pass the block ei­ther in the curly braces, or us­ing a new in­dent level (as you could do with a lot of things in Sty­lus):</p>
 <pre><code class="language-styl">+foo()
   // The block we want to pass
   width: 10px
   height: 10px
 </code></pre>
-<p>Af<span class="shy"></span>ter we passed the block to the mixin, this block be<span class="shy"></span>comes avail<span class="shy"></span>able in<span class="shy"></span>side of it as a named ar<span class="shy"></span>gu<span class="shy"></span><span class="nobr">ment —</span><span class="thinsp"> </span><code>block</code>. You can then use it any<span class="shy"></span>where in<span class="shy"></span>side the mixin us<span class="shy"></span>ing <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#block-call" id="block-call">an in<span class="shy"></span>ter<span class="shy"></span>po<span class="shy"></span>la<span class="shy"></span>tion</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a pos<span class="shy"></span>si<span class="shy"></span>bil<span class="shy"></span>ity we would add a way of us<span class="shy"></span>ing it with<span class="shy"></span>out in<span class="shy"></span>ter<span class="shy"></span>po<span class="shy"></span>la<span class="shy"></span>tion in the fu<span class="shy"></span>ture though<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>:</p>
+<p>Af­ter we passed the block to the mixin, this block be­comes avail­able in­side of it as a named ar­gu­<span class="nobr">ment —</span><span class="thinsp"> </span><code>block</code>. You can then use it any­where in­side the mixin us­ing <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#block-call" id="block-call">an in­ter­po­la­tion</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a pos­si­bil­ity we would add a way of us­ing it with­out in­ter­po­la­tion in the fu­ture though<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>:</p>
 <pre><code class="language-styl">foo()
   width: 20px
   .foo
     {block}
 </code></pre>
-<p>Or we could pass this as a vari<span class="shy"></span>able to the next mixin, or use it in any other way.</p>
-<p>Any<span class="shy"></span>way, if you&#39;ve called a mixin above like this:</p>
+<p>Or we could pass this as a vari­able to the next mixin, or use it in any other way.</p>
+<p>Any­way, if you&#39;ve called a mixin above like this:</p>
 <pre><code class="language-styl">.bar
   +foo()
     padding: 0
@@ -65,9 +65,9 @@
   height: 20px;
 }
 </code></pre>
-<p>With block mix<span class="shy"></span>ins, we have a way of wrap<span class="shy"></span>ping blocks with mix<span class="shy"></span>ins and then wrap<span class="shy"></span>ping them with any<span class="shy"></span>thing. This fea<span class="shy"></span>ture is of<span class="shy"></span>ten used for han<span class="shy"></span>dling me<span class="shy"></span>dia queries, and my ex<span class="shy"></span>am<span class="shy"></span>ple that you&#39;ll see later in this ar<span class="shy"></span>ti<span class="shy"></span>cle is also from the <abbr>RWD</abbr> area.</p>
+<p>With block mix­ins, we have a way of wrap­ping blocks with mix­ins and then wrap­ping them with any­thing. This fea­ture is of­ten used for han­dling me­dia queries, and my ex­am­ple that you&#39;ll see later in this ar­ti­cle is also from the <abbr>RWD</abbr> area.</p>
 <h2 class="Heading" id="hashes"><a class="Anchor" aria-hidden="true" href="#hashes"></a><span class="ss01 hang-m">H</span>ashes</h2>
-<p>As I al<span class="shy"></span>ready men<span class="shy"></span>tioned, in the lat<span class="shy"></span>est re<span class="shy"></span>leases of Sty<span class="shy"></span>lus we added (and pol<span class="shy"></span>ished to a us<span class="shy"></span>able state) hashes as a data type. Hashes are ob<span class="shy"></span>jects with key-value pairs, and they look rather simple:</p>
+<p>As I al­ready men­tioned, in the lat­est re­leases of Sty­lus we added (and pol­ished to a us­able state) hashes as a data type. Hashes are ob­jects with key-value pairs, and they look rather simple:</p>
 <pre><code class="language-javascript">foo = {
   bar: 10px,
   raz: #fff,
@@ -77,76 +77,76 @@
   }
 }
 </code></pre>
-<p>As you can see from this ex<span class="shy"></span>am<span class="shy"></span>ple, the syn<span class="shy"></span>tax is sim<span class="shy"></span>i<span class="shy"></span>lar to the ob<span class="shy"></span>jects in JavaScript: the key could be ei<span class="shy"></span>ther an in<span class="shy"></span>dent or a string, and any<span class="shy"></span>thing could go into value, even nested hashes. An im<span class="shy"></span>por<span class="shy"></span>tant part: while you can use or<span class="shy"></span>di<span class="shy"></span>nary blocks with or with<span class="shy"></span>out curly braces in Sty<span class="shy"></span>lus, they are manda<span class="shy"></span>tory for hashes, while the trail<span class="shy"></span>ing com<span class="shy"></span>mas <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#codestyle" id="codestyle">are not</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>And as with all other op<span class="shy"></span>tional syn<span class="shy"></span>tax fea<span class="shy"></span>tures of Sty<span class="shy"></span>lus, you should use a con<span class="shy"></span>sis<span class="shy"></span>tent code style in your stylesheets. Oth<span class="shy"></span>er<span class="shy"></span>wise your code would be messy as hell<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
-<p>Then, af<span class="shy"></span>ter you de<span class="shy"></span>fined a hash, you could add new prop<span class="shy"></span>er<span class="shy"></span>ties to it or re<span class="shy"></span>de<span class="shy"></span>fine old ones us<span class="shy"></span>ing dots or square brackets:</p>
+<p>As you can see from this ex­am­ple, the syn­tax is sim­i­lar to the ob­jects in JavaScript: the key could be ei­ther an in­dent or a string, and any­thing could go into value, even nested hashes. An im­por­tant part: while you can use or­di­nary blocks with or with­out curly braces in Sty­lus, they are manda­tory for hashes, while the trail­ing com­mas <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#codestyle" id="codestyle">are not</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>And as with all other op­tional syn­tax fea­tures of Sty­lus, you should use a con­sis­tent code style in your stylesheets. Oth­er­wise your code would be messy as hell<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
+<p>Then, af­ter you de­fined a hash, you could add new prop­er­ties to it or re­de­fine old ones us­ing dots or square brackets:</p>
 <pre><code class="language-styl">foo.bar = 20px
-foo[&#39;what<span class="shy"></span>ever&#39;] = &#39;hello&#39;
+foo[&#39;what­ever&#39;] = &#39;hello&#39;
 </code></pre>
-<p>The dif<span class="shy"></span>fer<span class="shy"></span>ences are sim<span class="shy"></span>ple: while you could use only idents with the dot syn<span class="shy"></span>tax, with square brack<span class="shy"></span>ets you could pass any string con<span class="shy"></span>tain<span class="shy"></span>ing any sym<span class="shy"></span>bols, or use a vari<span class="shy"></span>able in<span class="shy"></span>stead. So, the brack<span class="shy"></span>ets are more flex<span class="shy"></span>i<span class="shy"></span>ble, while the dot is not.</p>
-<p>You can get the val<span class="shy"></span>ues from the hash in the same <span class="nobr">way —</span><span class="thinsp"> </span>ei<span class="shy"></span>ther by us<span class="shy"></span>ing a dot or us<span class="shy"></span>ing the square brackets.</p>
-<p>I won&#39;t de<span class="shy"></span>scribe <a class="Link" href="http://learnboost.github.io/stylus/docs/hashes.html">all the fea<span class="shy"></span>tures</a> of the hashes, I&#39;ll just men<span class="shy"></span>tion that you can use the <span class="nobr">built-in</span> <code>length()</code> func<span class="shy"></span>tion with them, you can it<span class="shy"></span>er<span class="shy"></span>ate through them, use them in con<span class="shy"></span>di<span class="shy"></span>tions (<code>if baz in foo</code>), and there are also some <span class="nobr">built-in</span> func<span class="shy"></span>tions to work with hashes (<code>keys()</code>, <code>val<span class="shy"></span>ues()</code>, <code>merge()</code>). And you can in<span class="shy"></span>ter<span class="shy"></span>po<span class="shy"></span>late hashes into <abbr>CSS</abbr>.</p>
-<h2 class="Heading" id="selector"><a class="Anchor" aria-hidden="true" href="#selector"></a><code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code> function</h2>
-<p>There is now one small but im<span class="shy"></span>por<span class="shy"></span>tant fea<span class="shy"></span>ture in Sty<span class="shy"></span><span class="nobr">lus —</span><span class="thinsp"> </span><code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code>. While you can con<span class="shy"></span>struct com<span class="shy"></span>plex se<span class="shy"></span>lec<span class="shy"></span>tors in Sty<span class="shy"></span>lus by us<span class="shy"></span>ing nested blocks, in<span class="shy"></span>ter<span class="shy"></span>po<span class="shy"></span>la<span class="shy"></span>tions, mix<span class="shy"></span>ins and other things, you couldn&#39;t <strong>get</strong> the com<span class="shy"></span>piled se<span class="shy"></span>lec<span class="shy"></span>tor, they only ex<span class="shy"></span>isted in the com<span class="shy"></span>piled <abbr>CSS</abbr>.</p>
-<p>But now, us<span class="shy"></span>ing <code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code> func<span class="shy"></span>tion that re<span class="shy"></span>turns the cur<span class="shy"></span>rently com<span class="shy"></span>piled se<span class="shy"></span>lec<span class="shy"></span>tor, you could do a lot of use<span class="shy"></span>ful things, like check the se<span class="shy"></span>lec<span class="shy"></span>tor for some<span class="shy"></span>thing us<span class="shy"></span>ing the <code>match()</code> func<span class="shy"></span>tion, or use it for some<span class="shy"></span>thing else. It is al<span class="shy"></span>ready very use<span class="shy"></span>ful, and it would be<span class="shy"></span>come even more so in fu<span class="shy"></span>ture re<span class="shy"></span>leases.</p>
-<p>As an ex<span class="shy"></span>am<span class="shy"></span>ple, you can take this small chunk of code:</p>
-<pre><code class="language-styl">if match(&#39;:(be<span class="shy"></span>fore|af<span class="shy"></span>ter)&#39;, se<span class="shy"></span>lec<span class="shy"></span>tor())
-  con<span class="shy"></span>tent: &#39;&#39;
+<p>The dif­fer­ences are sim­ple: while you could use only idents with the dot syn­tax, with square brack­ets you could pass any string con­tain­ing any sym­bols, or use a vari­able in­stead. So, the brack­ets are more flex­i­ble, while the dot is not.</p>
+<p>You can get the val­ues from the hash in the same <span class="nobr">way —</span><span class="thinsp"> </span>ei­ther by us­ing a dot or us­ing the square brackets.</p>
+<p>I won&#39;t de­scribe <a class="Link" href="http://learnboost.github.io/stylus/docs/hashes.html">all the fea­tures</a> of the hashes, I&#39;ll just men­tion that you can use the <span class="nobr">built-in</span> <code>length()</code> func­tion with them, you can it­er­ate through them, use them in con­di­tions (<code>if baz in foo</code>), and there are also some <span class="nobr">built-in</span> func­tions to work with hashes (<code>keys()</code>, <code>val­ues()</code>, <code>merge()</code>). And you can in­ter­po­late hashes into <abbr>CSS</abbr>.</p>
+<h2 class="Heading" id="selector"><a class="Anchor" aria-hidden="true" href="#selector"></a><code>se­lec­tor()</code> function</h2>
+<p>There is now one small but im­por­tant fea­ture in Sty­<span class="nobr">lus —</span><span class="thinsp"> </span><code>se­lec­tor()</code>. While you can con­struct com­plex se­lec­tors in Sty­lus by us­ing nested blocks, in­ter­po­la­tions, mix­ins and other things, you couldn&#39;t <strong>get</strong> the com­piled se­lec­tor, they only ex­isted in the com­piled <abbr>CSS</abbr>.</p>
+<p>But now, us­ing <code>se­lec­tor()</code> func­tion that re­turns the cur­rently com­piled se­lec­tor, you could do a lot of use­ful things, like check the se­lec­tor for some­thing us­ing the <code>match()</code> func­tion, or use it for some­thing else. It is al­ready very use­ful, and it would be­come even more so in fu­ture re­leases.</p>
+<p>As an ex­am­ple, you can take this small chunk of code:</p>
+<pre><code class="language-styl">if match(&#39;:(be­fore|af­ter)&#39;, se­lec­tor())
+  con­tent: &#39;&#39;
 </code></pre>
-<p>Here we check if the se<span class="shy"></span>lec<span class="shy"></span>tor has any <span class="nobr">pseudo-el</span><span class="shy"></span>e<span class="shy"></span>ments in it and if <span class="nobr">so —</span><span class="thinsp"> </span>we ap<span class="shy"></span>ply the <code>con<span class="shy"></span>tent</code>. This could be use<span class="shy"></span>ful if we have some mixin, con<span class="shy"></span>tain<span class="shy"></span>ing styles that could be ap<span class="shy"></span>plied both to a nor<span class="shy"></span>mal el<span class="shy"></span>e<span class="shy"></span>ment and to a pseudo one.</p>
-<h2 class="Heading" id="example"><a class="Anchor" aria-hidden="true" href="#example"></a><span class="ss01 hang-m">E</span>xam<span class="shy"></span>ple with cached me<span class="shy"></span>dia queries</h2>
-<p>As a us<span class="shy"></span>age ex<span class="shy"></span>am<span class="shy"></span>ple of the new Sty<span class="shy"></span>lus fea<span class="shy"></span>tures, I&#39;ll give you a so<span class="shy"></span>lu<span class="shy"></span>tion for one of those small, re<span class="shy"></span>spon<span class="shy"></span>sive web de<span class="shy"></span>sign prob<span class="shy"></span>lems: the code you need to write for dif<span class="shy"></span>fer<span class="shy"></span>ent view<span class="shy"></span>port break<span class="shy"></span>points. The prob<span class="shy"></span>lem is that the syn<span class="shy"></span>tax of me<span class="shy"></span>dia queries could be rather long, so you could ei<span class="shy"></span>ther use bub<span class="shy"></span>bling me<span class="shy"></span>dia queries which would re<span class="shy"></span>sult in not ideal <abbr>CSS</abbr>, or, in the race for bytes, you&#39;ll need to write all the over<span class="shy"></span>rides in one place, and that won&#39;t be very com<span class="shy"></span>fort<span class="shy"></span>able in a lot of sit<span class="shy"></span>u<span class="shy"></span>a<span class="shy"></span>tions.</p>
-<p>How<span class="shy"></span>ever, in the new Sty<span class="shy"></span>lus, with block mix<span class="shy"></span>ins, hashes and the <code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code> func<span class="shy"></span>tion, you could work around this prob<span class="shy"></span>lem (and solve some oth<span class="shy"></span>ers on your way to it).</p>
-<p><span class="nobr">Briefly —</span><span class="thinsp"> </span>we can cre<span class="shy"></span>ate a mixin that could be used in<span class="shy"></span>stead of me<span class="shy"></span>dia queries and would cache the given blocks, com<span class="shy"></span>bin<span class="shy"></span>ing them by con<span class="shy"></span>di<span class="shy"></span>tions, so you could then out<span class="shy"></span>put all of them us<span class="shy"></span>ing the sec<span class="shy"></span>ond function.</p>
-<p>The only down<span class="shy"></span>side of this method is the group<span class="shy"></span>ing it<span class="shy"></span><span class="nobr">self —</span><span class="thinsp"> </span>the se<span class="shy"></span>lec<span class="shy"></span>tors would be in a dif<span class="shy"></span>fer<span class="shy"></span>ent or<span class="shy"></span>der, so the speci<span class="shy"></span>ficity of the se<span class="shy"></span>lec<span class="shy"></span>tors could change.</p>
-<p>For the start we need an ob<span class="shy"></span>ject where we would store the cached blocks:</p>
-<pre><code class="language-styl">$me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache = {}
+<p>Here we check if the se­lec­tor has any <span class="nobr">pseudo-el</span>­e­ments in it and if <span class="nobr">so —</span><span class="thinsp"> </span>we ap­ply the <code>con­tent</code>. This could be use­ful if we have some mixin, con­tain­ing styles that could be ap­plied both to a nor­mal el­e­ment and to a pseudo one.</p>
+<h2 class="Heading" id="example"><a class="Anchor" aria-hidden="true" href="#example"></a><span class="ss01 hang-m">E</span>xam­ple with cached me­dia queries</h2>
+<p>As a us­age ex­am­ple of the new Sty­lus fea­tures, I&#39;ll give you a so­lu­tion for one of those small, re­spon­sive web de­sign prob­lems: the code you need to write for dif­fer­ent view­port break­points. The prob­lem is that the syn­tax of me­dia queries could be rather long, so you could ei­ther use bub­bling me­dia queries which would re­sult in not ideal <abbr>CSS</abbr>, or, in the race for bytes, you&#39;ll need to write all the over­rides in one place, and that won&#39;t be very com­fort­able in a lot of sit­u­a­tions.</p>
+<p>How­ever, in the new Sty­lus, with block mix­ins, hashes and the <code>se­lec­tor()</code> func­tion, you could work around this prob­lem (and solve some oth­ers on your way to it).</p>
+<p><span class="nobr">Briefly —</span><span class="thinsp"> </span>we can cre­ate a mixin that could be used in­stead of me­dia queries and would cache the given blocks, com­bin­ing them by con­di­tions, so you could then out­put all of them us­ing the sec­ond function.</p>
+<p>The only down­side of this method is the group­ing it­<span class="nobr">self —</span><span class="thinsp"> </span>the se­lec­tors would be in a dif­fer­ent or­der, so the speci­ficity of the se­lec­tors could change.</p>
+<p>For the start we need an ob­ject where we would store the cached blocks:</p>
+<pre><code class="language-styl">$me­di­a_­cache = {}
 </code></pre>
-<p>Then we would need a mixin which we could use in<span class="shy"></span>stead of me<span class="shy"></span>dia queries; its ba<span class="shy"></span>sic form would be this:</p>
-<pre><code class="language-styl">me<span class="shy"></span>dia($con<span class="shy"></span>di<span class="shy"></span>tion)
-  un<span class="shy"></span>less $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion]
-    $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion] = ()
-  push($me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion], block)
+<p>Then we would need a mixin which we could use in­stead of me­dia queries; its ba­sic form would be this:</p>
+<pre><code class="language-styl">me­dia($con­di­tion)
+  un­less $me­di­a_­cache[$con­di­tion]
+    $me­di­a_­cache[$con­di­tion] = ()
+  push($me­di­a_­cache[$con­di­tion], block)
 </code></pre>
-<p>This mixin&#39;s logic is rather sim<span class="shy"></span>ple: if we don&#39;t have a list of the blocks for a given con<span class="shy"></span>di<span class="shy"></span>tion, we ini<span class="shy"></span>tial<span class="shy"></span>ize it then we pass the block to this list.</p>
-<p>It won&#39;t be enough for us ac<span class="shy"></span>tu<span class="shy"></span>ally: this mixin could be used only this way:</p>
-<pre><code class="language-styl">+me<span class="shy"></span>dia(&#39;(max-width:640px)&#39;)
+<p>This mixin&#39;s logic is rather sim­ple: if we don&#39;t have a list of the blocks for a given con­di­tion, we ini­tial­ize it then we pass the block to this list.</p>
+<p>It won&#39;t be enough for us ac­tu­ally: this mixin could be used only this way:</p>
+<pre><code class="language-styl">+me­dia(&#39;(max-width:640px)&#39;)
   .foo
-    dis<span class="shy"></span>play: block;
+    dis­play: block;
 </code></pre>
-<p>We could only pass full blocks to it, but couldn&#39;t use the bub<span class="shy"></span>bling:</p>
+<p>We could only pass full blocks to it, but couldn&#39;t use the bub­bling:</p>
 <pre><code class="language-styl">.foo
-  +me<span class="shy"></span>dia(&#39;(max-width:640px)&#39;)
-    dis<span class="shy"></span>play: block;
+  +me­dia(&#39;(max-width:640px)&#39;)
+    dis­play: block;
 </code></pre>
-<p>The code of our <code>me<span class="shy"></span>dia</code> mixin doesn&#39;t know any<span class="shy"></span>thing about the con<span class="shy"></span>text, the se<span class="shy"></span>lec<span class="shy"></span>tor where we called <span class="nobr">it —</span><span class="thinsp"> </span>yet. Here the new <code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code> func<span class="shy"></span>tion and an ex<span class="shy"></span>tra helper mixin are re<span class="shy"></span>quired, and with them <code>me<span class="shy"></span>dia</code> mixin would look like this:</p>
-<pre><code class="language-styl">me<span class="shy"></span>dia($con<span class="shy"></span>di<span class="shy"></span>tion)
-  helper($con<span class="shy"></span>di<span class="shy"></span>tion)
-    un<span class="shy"></span>less $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion]
-      $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion] = ()
-    push($me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion], block)
+<p>The code of our <code>me­dia</code> mixin doesn&#39;t know any­thing about the con­text, the se­lec­tor where we called <span class="nobr">it —</span><span class="thinsp"> </span>yet. Here the new <code>se­lec­tor()</code> func­tion and an ex­tra helper mixin are re­quired, and with them <code>me­dia</code> mixin would look like this:</p>
+<pre><code class="language-styl">me­dia($con­di­tion)
+  helper($con­di­tion)
+    un­less $me­di­a_­cache[$con­di­tion]
+      $me­di­a_­cache[$con­di­tion] = ()
+    push($me­di­a_­cache[$con­di­tion], block)
 
-  +helper($con<span class="shy"></span>di<span class="shy"></span>tion)
-    {se<span class="shy"></span>lec<span class="shy"></span>tor()}
+  +helper($con­di­tion)
+    {se­lec­tor()}
       {block}
 </code></pre>
-<p>To save the con<span class="shy"></span>text we move the ini<span class="shy"></span>tial code of this mixin in<span class="shy"></span>side a helper mixin, then call it pass<span class="shy"></span>ing the <code>block</code> in<span class="shy"></span>side the in<span class="shy"></span>ter<span class="shy"></span>po<span class="shy"></span>lated<code>se<span class="shy"></span>lec<span class="shy"></span>tor()</code>.</p>
-<p>So, as we now wrap the code with a mixin, it won&#39;t build au<span class="shy"></span>to<span class="shy"></span>mat<span class="shy"></span>i<span class="shy"></span>cally. We would need to call a func<span class="shy"></span>tion that would take a cache and put all it con<span class="shy"></span>tains where we call it (and it would be log<span class="shy"></span>i<span class="shy"></span>cal to call it at the end of our stylesheet):</p>
-<pre><code class="language-styl">ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache()
-  for $me<span class="shy"></span>dia, $blocks in $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache
-    @me<span class="shy"></span>dia $me<span class="shy"></span>dia
+<p>To save the con­text we move the ini­tial code of this mixin in­side a helper mixin, then call it pass­ing the <code>block</code> in­side the in­ter­po­lated<code>se­lec­tor()</code>.</p>
+<p>So, as we now wrap the code with a mixin, it won&#39;t build au­to­mat­i­cally. We would need to call a func­tion that would take a cache and put all it con­tains where we call it (and it would be log­i­cal to call it at the end of our stylesheet):</p>
+<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
+  for $me­dia, $blocks in $me­di­a_­cache
+    @me­dia $me­dia
       for $block in $blocks
         {$block}
 </code></pre>
-<p>It is rather easy: we it<span class="shy"></span>er<span class="shy"></span>ate through the cache, tak<span class="shy"></span>ing the con<span class="shy"></span>di<span class="shy"></span><span class="nobr">tion —</span><span class="thinsp"> </span><code>$me<span class="shy"></span>dia</code>, and the list of all the blocks that were called with <span class="nobr">it —</span><span class="thinsp"> </span><code>$blocks</code>, then we cre<span class="shy"></span>ate the me<span class="shy"></span>dia query with that con<span class="shy"></span>di<span class="shy"></span>tion and in<span class="shy"></span>side of it it<span class="shy"></span>er<span class="shy"></span>ate through all the blocks, yield<span class="shy"></span>ing all of them one by one.</p>
-<p>So, if we would then call this func<span class="shy"></span>tion at the end of the doc<span class="shy"></span>ument:</p>
-<pre><code class="language-styl">ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache()
+<p>It is rather easy: we it­er­ate through the cache, tak­ing the con­di­<span class="nobr">tion —</span><span class="thinsp"> </span><code>$me­dia</code>, and the list of all the blocks that were called with <span class="nobr">it —</span><span class="thinsp"> </span><code>$blocks</code>, then we cre­ate the me­dia query with that con­di­tion and in­side of it it­er­ate through all the blocks, yield­ing all of them one by one.</p>
+<p>So, if we would then call this func­tion at the end of the doc­ument:</p>
+<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
 </code></pre>
 <p>We would get what we want.</p>
-<p>How<span class="shy"></span>ever, there are a few things to im<span class="shy"></span>prove in this func<span class="shy"></span>tion: we do not want al<span class="shy"></span>ways to write the paren<span class="shy"></span>the<span class="shy"></span>ses, and, ac<span class="shy"></span>tu<span class="shy"></span>ally, we won&#39;t want to write all those <code>only screen and</code>. Also, we would want to use some key<span class="shy"></span>words in<span class="shy"></span>stead of the lit<span class="shy"></span>eral con<span class="shy"></span>di<span class="shy"></span>tions, like <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#keywords" id="keywords"><code>palm</code>, <code>portable</code>, <code>desk</code></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I&#39;ve taken the names from the great <a href="http://inuitcss.com/">inuit.css</a> frame<span class="shy"></span>work by <a href="@csswizardry">Harry Roberts</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> and so on. With those im<span class="shy"></span>prove<span class="shy"></span>ments and all the pre<span class="shy"></span>vi<span class="shy"></span>ous steps the re<span class="shy"></span>sult<span class="shy"></span>ing code would be this:</p>
-<h3 class="Heading" id="result"><a class="Anchor" aria-hidden="true" href="#result"></a><span class="ss01 hang-m">R</span>esult<span class="shy"></span>ing code</h3>
-<pre><code class="language-styl">// De<span class="shy"></span>fine the cache and the aliases
-$me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache = {}
-$me<span class="shy"></span>di<span class="shy"></span>a_aliases = {
+<p>How­ever, there are a few things to im­prove in this func­tion: we do not want al­ways to write the paren­the­ses, and, ac­tu­ally, we won&#39;t want to write all those <code>only screen and</code>. Also, we would want to use some key­words in­stead of the lit­eral con­di­tions, like <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#keywords" id="keywords"><code>palm</code>, <code>portable</code>, <code>desk</code></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I&#39;ve taken the names from the great <a href="http://inuitcss.com/">inuit.css</a> frame­work by <a href="@csswizardry">Harry Roberts</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> and so on. With those im­prove­ments and all the pre­vi­ous steps the re­sult­ing code would be this:</p>
+<h3 class="Heading" id="result"><a class="Anchor" aria-hidden="true" href="#result"></a><span class="ss01 hang-m">R</span>esult­ing code</h3>
+<pre><code class="language-styl">// De­fine the cache and the aliases
+$me­di­a_­cache = {}
+$me­di­a_aliases = {
   palm:       &#39;(max-width: 480px)&#39;
   lap:        &#39;(min-width: 481px) and (max-width: 1023px)&#39;
   lap-and-up: &#39;(min-width: 481px)&#39;
@@ -155,69 +155,69 @@ $me<span class="shy"></span>di<span class="shy"></span>a_aliases = {
   desk-wide:  &#39;(min-width: 1200px)&#39;
 }
 
-// Mixin for caching the blocks with the given con<span class="shy"></span>di<span class="shy"></span>tions
-me<span class="shy"></span>dia($con<span class="shy"></span>di<span class="shy"></span>tion)
-  helper($con<span class="shy"></span>di<span class="shy"></span>tion)
-    un<span class="shy"></span>less $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion]
-      $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion] = ()
-    push($me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache[$con<span class="shy"></span>di<span class="shy"></span>tion], block)
+// Mixin for caching the blocks with the given con­di­tions
+me­dia($con­di­tion)
+  helper($con­di­tion)
+    un­less $me­di­a_­cache[$con­di­tion]
+      $me­di­a_­cache[$con­di­tion] = ()
+    push($me­di­a_­cache[$con­di­tion], block)
 
-  +helper($con<span class="shy"></span>di<span class="shy"></span>tion)
-    {se<span class="shy"></span>lec<span class="shy"></span>tor() + &#39;&#39;}
+  +helper($con­di­tion)
+    {se­lec­tor() + &#39;&#39;}
       {block}
 
-// Func<span class="shy"></span>tion we would use to call all the cached styles
-ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache()
-  for $me<span class="shy"></span>dia, $blocks in $me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache
-    $me<span class="shy"></span>dia = un<span class="shy"></span>quote($me<span class="shy"></span>di<span class="shy"></span>a_aliases[$me<span class="shy"></span>dia] || $me<span class="shy"></span>dia)
-    $me<span class="shy"></span>dia = &#39;(%s)&#39; % $me<span class="shy"></span>dia un<span class="shy"></span>less match(&#39;\(&#39;, $me<span class="shy"></span>dia)
-    $me<span class="shy"></span>dia = &#39;only screen and %s&#39; % $me<span class="shy"></span>dia
-    @me<span class="shy"></span>dia $me<span class="shy"></span>dia
+// Func­tion we would use to call all the cached styles
+ap­ply_­me­di­a_­cache()
+  for $me­dia, $blocks in $me­di­a_­cache
+    $me­dia = un­quote($me­di­a_aliases[$me­dia] || $me­dia)
+    $me­dia = &#39;(%s)&#39; % $me­dia un­less match(&#39;\(&#39;, $me­dia)
+    $me­dia = &#39;only screen and %s&#39; % $me­dia
+    @me­dia $me­dia
       for $block in $blocks
         {$block}
 
-// Here would be our main styles, us<span class="shy"></span>ing the `me<span class="shy"></span>dia` mixin
+// Here would be our main styles, us­ing the `me­dia` mixin
 // …
 
 // Here we call all the cached styles
-ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></span>di<span class="shy"></span>a_<span class="shy"></span>cache()
+ap­ply_­me­di­a_­cache()
 </code></pre>
 <p>Then we could write our stylesheets like this:</p>
 <pre><code class="language-styl">.foo
   width: 10px
 
-  +me<span class="shy"></span>dia(&#39;lap&#39;)
+  +me­dia(&#39;lap&#39;)
     width: 20px
 
-  +me<span class="shy"></span>dia(&#39;desk&#39;)
+  +me­dia(&#39;desk&#39;)
     width: 30px
 
-  +me<span class="shy"></span>dia(&#39;min-width: 200px&#39;)
+  +me­dia(&#39;min-width: 200px&#39;)
     width: 60px
 
 .bar
   height: 10px
 
-  +me<span class="shy"></span>dia(&#39;lap&#39;)
+  +me­dia(&#39;lap&#39;)
     height: 20px
 
-  +me<span class="shy"></span>dia(&#39;desk&#39;)
+  +me­dia(&#39;desk&#39;)
     height: 30px
 
-  +me<span class="shy"></span>dia(&#39;min-width: 200px&#39;)
+  +me­dia(&#39;min-width: 200px&#39;)
     height: 50px
 
-  +me<span class="shy"></span>dia(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
+  +me­dia(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
     height: 50px
 </code></pre>
-<p>And get this re<span class="shy"></span>sult af<span class="shy"></span>ter<span class="shy"></span>wards:</p>
+<p>And get this re­sult af­ter­wards:</p>
 <pre><code class="language-css">.foo {
   width: 10px;
 }
 .bar {
   height: 10px;
 }
-@me<span class="shy"></span>dia only screen and (min-width: 481px) and (max-width: 1023px) {
+@me­dia only screen and (min-width: 481px) and (max-width: 1023px) {
   .foo {
     width: 20px;
   }
@@ -225,7 +225,7 @@ ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></sp
     height: 20px;
   }
 }
-@me<span class="shy"></span>dia only screen and (min-width: 1024px) {
+@me­dia only screen and (min-width: 1024px) {
   .foo {
     width: 30px;
   }
@@ -233,7 +233,7 @@ ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></sp
     height: 30px;
   }
 }
-@me<span class="shy"></span>dia only screen and (min-width: 200px) {
+@me­dia only screen and (min-width: 200px) {
   .foo {
     width: 60px;
   }
@@ -241,15 +241,15 @@ ap<span class="shy"></span>ply_<span class="shy"></span>me<span class="shy"></sp
     height: 50px;
   }
 }
-@me<span class="shy"></span>dia only screen and (min-width: 500px) and (max-width: 700px) {
+@me­dia only screen and (min-width: 500px) and (max-width: 700px) {
   .bar {
     height: 50px;
   }
 }
 </code></pre>
-<p>In the re<span class="shy"></span>sult<span class="shy"></span>ing code, we can see that we added the hash with aliases, we can also call the mixin with con<span class="shy"></span>di<span class="shy"></span>tions lack<span class="shy"></span>ing paren<span class="shy"></span>theses.</p>
-<p>By us<span class="shy"></span>ing this code we can now use me<span class="shy"></span>dia queries bub<span class="shy"></span>bling any<span class="shy"></span>where we want and don&#39;t even need to think about the ex<span class="shy"></span>tra <span class="nobr">bytes —</span><span class="thinsp"> </span>every<span class="shy"></span>thing would be nicely grouped in<span class="shy"></span>side non-dou<span class="shy"></span>bling me<span class="shy"></span>dia queries. All thanks to the new Sty<span class="shy"></span>lus fea<span class="shy"></span>tures.</p>
-<p>Of course, this code is not ideal, and there could be a lot of ways to im<span class="shy"></span>prove it, but my goal was to demon<span class="shy"></span>strate the new fea<span class="shy"></span>tures and how they work, af<span class="shy"></span>ter all.</p>
+<p>In the re­sult­ing code, we can see that we added the hash with aliases, we can also call the mixin with con­di­tions lack­ing paren­theses.</p>
+<p>By us­ing this code we can now use me­dia queries bub­bling any­where we want and don&#39;t even need to think about the ex­tra <span class="nobr">bytes —</span><span class="thinsp"> </span>every­thing would be nicely grouped in­side non-dou­bling me­dia queries. All thanks to the new Sty­lus fea­tures.</p>
+<p>Of course, this code is not ideal, and there could be a lot of ways to im­prove it, but my goal was to demon­strate the new fea­tures and how they work, af­ter all.</p>
 
           <p class="Metadata Published">Published on 
             <time datetime="2013-12-05">December 5, 2013</time>, in <a href="../" class="Link">Articles</a>.

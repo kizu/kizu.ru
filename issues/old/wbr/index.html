@@ -27,24 +27,24 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="wbr-и-его-эмуляция"><a class="Anchor" aria-hidden="true" href="#wbr-и-его-эмуляция"></a><span class="ss01 hang-m">W</span>BR и его эму<span class="shy"></span>ля<span class="shy"></span>ция</h1>
+          <header><h1 class="Heading" id="wbr-и-его-эмуляция"><a class="Anchor" aria-hidden="true" href="#wbr-и-его-эмуляция"></a><span class="ss01 hang-m">W</span>BR и его эму­ля­ция</h1>
           </header>
-<p>Неко<span class="shy"></span>то<span class="shy"></span>рые, на<span class="shy"></span>вер<span class="shy"></span>ное, зна<span class="shy"></span>ют про тег <code>WBR</code>, ко<span class="shy"></span><span class="nobr">гда-то</span> дав<span class="shy"></span>но ис<span class="shy"></span>поль<span class="shy"></span>зо<span class="shy"></span>вав<span class="shy"></span>ший<span class="shy"></span>ся для того, что<span class="shy"></span>бы пе<span class="shy"></span>ре<span class="shy"></span>но<span class="shy"></span>сить слиш<span class="shy"></span>ком длин<span class="shy"></span>ные сло<span class="shy"></span>ва, если воз<span class="shy"></span>ни<span class="shy"></span>ка<span class="shy"></span>ет та<span class="shy"></span>кая необ<span class="shy"></span>хо<span class="shy"></span>ди<span class="shy"></span>мость. Ос<span class="shy"></span>нов<span class="shy"></span>ные про<span class="shy"></span>бле<span class="shy"></span>мы это<span class="shy"></span>го тега две:</p>
+<p>Неко­то­рые, на­вер­ное, зна­ют про тег <code>WBR</code>, ко­<span class="nobr">гда-то</span> дав­но ис­поль­зо­вав­ший­ся для того, что­бы пе­ре­но­сить слиш­ком длин­ные сло­ва, если воз­ни­ка­ет та­кая необ­хо­ди­мость. Ос­нов­ные про­бле­мы это­го тега две:</p>
 <ul>
-<li>он не ра<span class="shy"></span>бо<span class="shy"></span>та<span class="shy"></span>ет в Опе<span class="shy"></span>ре</li>
-<li>он не ва<span class="shy"></span>лид<span class="shy"></span>ный</li>
+<li>он не ра­бо­та­ет в Опе­ре</li>
+<li>он не ва­лид­ный</li>
 </ul>
-<p>К сча<span class="shy"></span>стью, эму<span class="shy"></span>ли<span class="shy"></span>ро<span class="shy"></span>вать его до<span class="shy"></span>ста<span class="shy"></span>точ<span class="shy"></span>но лег<span class="shy"></span>ко. Кро<span class="shy"></span>ме того, при по<span class="shy"></span>мо<span class="shy"></span>щи этой эму<span class="shy"></span>ля<span class="shy"></span>ции мож<span class="shy"></span>но по<span class="shy"></span>чи<span class="shy"></span>нить по<span class="shy"></span>ве<span class="shy"></span>де<span class="shy"></span>ние тега в Опере.</p>
-<p>Вот при<span class="shy"></span>мер<span class="shy"></span>ное ре<span class="shy"></span>шение:</p>
+<p>К сча­стью, эму­ли­ро­вать его до­ста­точ­но лег­ко. Кро­ме того, при по­мо­щи этой эму­ля­ции мож­но по­чи­нить по­ве­де­ние тега в Опере.</p>
+<p>Вот при­мер­ное ре­шение:</p>
 <pre><code class="language-html">lalala&lt;i class=&quot;wbr&quot;&gt;&lt;/​​i&gt;lalala
 </code></pre>
 <p>и</p>
 <pre><code class="language-css">WBR,
 .wbr {
-    dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+    dis­play: in­line-block;
     }
 </code></pre>
-<p>Един<span class="shy"></span>ствен<span class="shy"></span>ный мо<span class="shy"></span>мент, ко<span class="shy"></span>то<span class="shy"></span>рый оста<span class="shy"></span>ёт<span class="shy"></span>ся за рам<span class="shy"></span>ка<span class="shy"></span>ми эму<span class="shy"></span>ля<span class="shy"></span>ции: в IE <code>WBR</code> мо<span class="shy"></span>жет со<span class="shy"></span>зда<span class="shy"></span>вать раз<span class="shy"></span>рыв стро<span class="shy"></span>ки при <code>white-space:nowrap</code>.</p>
+<p>Един­ствен­ный мо­мент, ко­то­рый оста­ёт­ся за рам­ка­ми эму­ля­ции: в IE <code>WBR</code> мо­жет со­зда­вать раз­рыв стро­ки при <code>white-space:nowrap</code>.</p>
 
           <p class="Metadata Published">Опубликовано 
             <time datetime="2009-05-19">19 мая 2009 г.</time> в <a href="../" class="Link">Заметках</a>, <a href="../" class="Link">Старом</a>.

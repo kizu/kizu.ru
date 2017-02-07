@@ -31,55 +31,55 @@
         <div class="Main LiquidLayout-Content">
           <header><h1 class="Heading" id="rotated-text"><a class="Anchor" aria-hidden="true" href="#rotated-text"></a><span class="ss01 hang-m">R</span>otated text</h1>
           </header>
-<p>Once I al<span class="shy"></span>ready shared this so<span class="shy"></span>lu<span class="shy"></span>tion on twit<span class="shy"></span>ter, but this time I’m go<span class="shy"></span>ing to write a bit more on it.</p>
-<p><strong>The task</strong> is to get the text ro<span class="shy"></span>tated by 90 de<span class="shy"></span>grees.</p>
-<p><strong>The prob<span class="shy"></span>lem</strong>: it’s widely known that when you use <code>trans<span class="shy"></span>form</code>, the block be<span class="shy"></span>haves sim<span class="shy"></span>i<span class="shy"></span>lar to the <code>po<span class="shy"></span>si<span class="shy"></span>tion:rel<span class="shy"></span>a<span class="shy"></span>tive</code><span class="nobr"> —</span><span class="thinsp"> </span>its place in the flow is not changed af<span class="shy"></span>ter the trans<span class="shy"></span>for<span class="shy"></span>ma<span class="shy"></span>tion, so the change is only visual.</p>
-<p>How<span class="shy"></span>ever, rather of<span class="shy"></span>ten you’ll <em>need</em> to ro<span class="shy"></span>tate the block in a way the flow would change ei<span class="shy"></span>ther. Like if we’d want to put some ro<span class="shy"></span>tated blocks in a row, or if we’d want to have ver<span class="shy"></span>ti<span class="shy"></span>cal head<span class="shy"></span>ers in ta<span class="shy"></span><span class="nobr">bles —</span><span class="thinsp"> </span>in those cases we would need the height of the block to be its width af<span class="shy"></span>ter the ro<span class="shy"></span>tate and vice versa.</p>
-<p>I man<span class="shy"></span>aged to make this work with one as<span class="shy"></span>sump<span class="shy"></span><span class="nobr">tion —</span><span class="thinsp"> </span>we would need to know the height of the ro<span class="shy"></span>tated el<span class="shy"></span>e<span class="shy"></span>ment. In such case the so<span class="shy"></span>lu<span class="shy"></span>tion would be rather simple:</p>
+<p>Once I al­ready shared this so­lu­tion on twit­ter, but this time I’m go­ing to write a bit more on it.</p>
+<p><strong>The task</strong> is to get the text ro­tated by 90 de­grees.</p>
+<p><strong>The prob­lem</strong>: it’s widely known that when you use <code>trans­form</code>, the block be­haves sim­i­lar to the <code>po­si­tion:rel­a­tive</code><span class="nobr"> —</span><span class="thinsp"> </span>its place in the flow is not changed af­ter the trans­for­ma­tion, so the change is only visual.</p>
+<p>How­ever, rather of­ten you’ll <em>need</em> to ro­tate the block in a way the flow would change ei­ther. Like if we’d want to put some ro­tated blocks in a row, or if we’d want to have ver­ti­cal head­ers in ta­<span class="nobr">bles —</span><span class="thinsp"> </span>in those cases we would need the height of the block to be its width af­ter the ro­tate and vice versa.</p>
+<p>I man­aged to make this work with one as­sump­<span class="nobr">tion —</span><span class="thinsp"> </span>we would need to know the height of the ro­tated el­e­ment. In such case the so­lu­tion would be rather simple:</p>
 <ol>
-<li><p>We would need to have an ex<span class="shy"></span>tra el<span class="shy"></span>e<span class="shy"></span>ment. <abbr>HTML</abbr> for each block would be like this:</p>
-<pre><code class="language-html"> &lt;span class=&quot;ro<span class="shy"></span>tated-text&quot;&gt;
-     &lt;span class=&quot;ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner&quot;&gt;
-         Ro<span class="shy"></span>tated foo
+<li><p>We would need to have an ex­tra el­e­ment. <abbr>HTML</abbr> for each block would be like this:</p>
+<pre><code class="language-html"> &lt;span class=&quot;ro­tated-text&quot;&gt;
+     &lt;span class=&quot;ro­tated-tex­t__in­ner&quot;&gt;
+         Ro­tated foo
      &lt;/​span&gt;
  &lt;/​span&gt;
 </code></pre>
 </li>
-<li><p>Wrap<span class="shy"></span>per would get those styles:</p>
-<pre><code class="language-css"> .ro<span class="shy"></span>tated-text {
-     dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
-     over<span class="shy"></span>flow: hid<span class="shy"></span>den;
+<li><p>Wrap­per would get those styles:</p>
+<pre><code class="language-css"> .ro­tated-text {
+     dis­play: in­line-block;
+     over­flow: hid­den;
 
      width: 1.5em;
      line-height: 1.5;
  }
 </code></pre>
-<p> Here we make our el<span class="shy"></span>e<span class="shy"></span>ment to be in<span class="shy"></span>line-block (that’s not crit<span class="shy"></span>i<span class="shy"></span>cal, the block dis<span class="shy"></span>play would work too, but in<span class="shy"></span>line-block is of<span class="shy"></span>ten hand<span class="shy"></span>ier), then we re<span class="shy"></span>move all the ex<span class="shy"></span>tra things us<span class="shy"></span>ing over<span class="shy"></span>flow (we would need this later) and set the width to the cur<span class="shy"></span>rent el<span class="shy"></span>e<span class="shy"></span>ments’ <span class="nobr">height —</span><span class="thinsp"> </span>the men<span class="shy"></span>tioned as<span class="shy"></span>sump<span class="shy"></span>tion (and <code>line-height</code> is placed here as an ex<span class="shy"></span>am<span class="shy"></span>ple of what de<span class="shy"></span>fines the blocks’ height).</p>
+<p> Here we make our el­e­ment to be in­line-block (that’s not crit­i­cal, the block dis­play would work too, but in­line-block is of­ten hand­ier), then we re­move all the ex­tra things us­ing over­flow (we would need this later) and set the width to the cur­rent el­e­ments’ <span class="nobr">height —</span><span class="thinsp"> </span>the men­tioned as­sump­tion (and <code>line-height</code> is placed here as an ex­am­ple of what de­fines the blocks’ height).</p>
 </li>
-<li><p>Then we make the in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ment to be in<span class="shy"></span>line-block too, so its width would be col<span class="shy"></span>lapsed to its con<span class="shy"></span>tent. Af<span class="shy"></span>ter this we make it have <code>white-space:nowrap</code>, so noth<span class="shy"></span>ing would wrap (be<span class="shy"></span>cause of the fixed width in the pre<span class="shy"></span>vi<span class="shy"></span>ous step), and then we ac<span class="shy"></span>tu<span class="shy"></span>ally ro<span class="shy"></span>tate the block from the left top cor<span class="shy"></span>ner us<span class="shy"></span>ing <code>trans<span class="shy"></span>form-ori<span class="shy"></span>gin</code> (for read<span class="shy"></span>abil<span class="shy"></span>ity the trans<span class="shy"></span>form prop<span class="shy"></span>er<span class="shy"></span>ties are given with<span class="shy"></span>out proper pre<span class="shy"></span>fixes):</p>
-<pre><code class="language-css"> .ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner {
-     dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
+<li><p>Then we make the in­ner el­e­ment to be in­line-block too, so its width would be col­lapsed to its con­tent. Af­ter this we make it have <code>white-space:nowrap</code>, so noth­ing would wrap (be­cause of the fixed width in the pre­vi­ous step), and then we ac­tu­ally ro­tate the block from the left top cor­ner us­ing <code>trans­form-ori­gin</code> (for read­abil­ity the trans­form prop­er­ties are given with­out proper pre­fixes):</p>
+<pre><code class="language-css"> .ro­tated-tex­t__in­ner {
+     dis­play: in­line-block;
      white-space: nowrap;
 
-     trans<span class="shy"></span>form: trans<span class="shy"></span>late(0,100%) ro<span class="shy"></span>tate(-90deg);
-     trans<span class="shy"></span>form-ori<span class="shy"></span>gin: 0 0;
+     trans­form: trans­late(0,100%) ro­tate(-90deg);
+     trans­form-ori­gin: 0 0;
  }
 </code></pre>
 </li>
-<li><p>And now the key part of my so<span class="shy"></span>lu<span class="shy"></span>tion: we need to make this in<span class="shy"></span>ner el<span class="shy"></span>e<span class="shy"></span>ment to be <em>square</em><span class="nobr"> —</span><span class="thinsp"> </span>this would make the re<span class="shy"></span>sult<span class="shy"></span>ing el<span class="shy"></span>e<span class="shy"></span>ment to have the height of its width, and the width would be equal to the as<span class="shy"></span>sumed height on the wrap<span class="shy"></span>per. So, to make an el<span class="shy"></span>e<span class="shy"></span>ment squar<span class="shy"></span>ish we use this trick:</p>
-<pre><code class="language-css"> .ro<span class="shy"></span>tated-tex<span class="shy"></span>t__in<span class="shy"></span>ner:af<span class="shy"></span>ter {
-     con<span class="shy"></span>tent: &quot;&quot;;
+<li><p>And now the key part of my so­lu­tion: we need to make this in­ner el­e­ment to be <em>square</em><span class="nobr"> —</span><span class="thinsp"> </span>this would make the re­sult­ing el­e­ment to have the height of its width, and the width would be equal to the as­sumed height on the wrap­per. So, to make an el­e­ment squar­ish we use this trick:</p>
+<pre><code class="language-css"> .ro­tated-tex­t__in­ner:af­ter {
+     con­tent: &quot;&quot;;
      float: left;
-     mar<span class="shy"></span>gin-top: 100%;
+     mar­gin-top: 100%;
  }
 </code></pre>
-<p> Not that hard, but not a lot of peo<span class="shy"></span>ple re<span class="shy"></span>mem<span class="shy"></span>ber that top and bot<span class="shy"></span>tom paddings and mar<span class="shy"></span>gins set in per<span class="shy"></span>cents are us<span class="shy"></span>ing the width of the par<span class="shy"></span>ent el<span class="shy"></span>e<span class="shy"></span>ment, not its height. This be<span class="shy"></span>hav<span class="shy"></span>ior is not widely used, but here is a case where it’s use<span class="shy"></span>ful at last.</p>
+<p> Not that hard, but not a lot of peo­ple re­mem­ber that top and bot­tom paddings and mar­gins set in per­cents are us­ing the width of the par­ent el­e­ment, not its height. This be­hav­ior is not widely used, but here is a case where it’s use­ful at last.</p>
 </li>
 </ol>
-<p>So, in the end we got a square el<span class="shy"></span>e<span class="shy"></span>ment, whose width is hid<span class="shy"></span>den by the over<span class="shy"></span>flow on wrap<span class="shy"></span>per and this el<span class="shy"></span>e<span class="shy"></span>ment could be used in any con<span class="shy"></span>text, so it would be af<span class="shy"></span>fected by <code>text-align</code> or <code>ver<span class="shy"></span>ti<span class="shy"></span>cal-align</code>. It is rather “fair” ro<span class="shy"></span>tated block.</p>
-<p>And just some ba<span class="shy"></span>sic ex<span class="shy"></span>am<span class="shy"></span>ples of usage:</p>
+<p>So, in the end we got a square el­e­ment, whose width is hid­den by the over­flow on wrap­per and this el­e­ment could be used in any con­text, so it would be af­fected by <code>text-align</code> or <code>ver­ti­cal-align</code>. It is rather “fair” ro­tated block.</p>
+<p>And just some ba­sic ex­am­ples of usage:</p>
 <h2 class="Heading" id="table-headers"><a class="Anchor" aria-hidden="true" href="#table-headers"></a><span class="ss01 hang-m">T</span>able headers</h2>
-<p>An ob<span class="shy"></span>vi<span class="shy"></span>ous ex<span class="shy"></span>am<span class="shy"></span><span class="nobr">ple —</span><span class="thinsp"> </span>com<span class="shy"></span>pact table head<span class="shy"></span>ers what don’t take that much of hor<span class="shy"></span>i<span class="shy"></span>zon<span class="shy"></span>tal space:</p>
+<p>An ob­vi­ous ex­am­<span class="nobr">ple —</span><span class="thinsp"> </span>com­pact table head­ers what don’t take that much of hor­i­zon­tal space:</p>
 <div class="Demo Demo_injected Demo_seamless" id="Demo_rotated-text"><style>
 
 .rotated-text {
@@ -196,8 +196,8 @@
     </tr>
 </table>
 </div>
-<h2 class="Heading" id="-bookshelf-"><a class="Anchor" aria-hidden="true" href="#-bookshelf-"></a><span class="hang-m">“</span>Book<span class="shy"></span>shelf”</h2>
-<p>As all the ro<span class="shy"></span>tated blocks have fair place in a flow, you could arrange them in a row so they won’t over<span class="shy"></span>lap each other and the height of the whole row would be equal to the “high<span class="shy"></span>est” of them:</p>
+<h2 class="Heading" id="-bookshelf-"><a class="Anchor" aria-hidden="true" href="#-bookshelf-"></a><span class="hang-m">“</span>Book­shelf”</h2>
+<p>As all the ro­tated blocks have fair place in a flow, you could arrange them in a row so they won’t over­lap each other and the height of the whole row would be equal to the “high­est” of them:</p>
 <div class="Demo Demo_injected Demo_seamless" id="Demo_rotated-text_books"><style>
 
 .rotated-text {
@@ -279,8 +279,8 @@
 </ul>
 </div>
 <p>So, that’s it.</p>
-<p>Once again: we need to know the ini<span class="shy"></span>tial height of the ro<span class="shy"></span>tated block, so if we’d need to ro<span class="shy"></span>tate mul<span class="shy"></span>ti<span class="shy"></span>line blocks, we’d need to change their re<span class="shy"></span>sult<span class="shy"></span>ing width ac<span class="shy"></span>cord<span class="shy"></span>ingly.</p>
-<p>Also, this method could work in <span class="nobr">IE —</span><span class="thinsp"> </span>by adding ma<span class="shy"></span>trix fil<span class="shy"></span>ter and con<span class="shy"></span>vert<span class="shy"></span>ing a <span class="nobr">pseudo-el</span><span class="shy"></span>e<span class="shy"></span>ment to an ac<span class="shy"></span>tual <span class="nobr">one —</span><span class="thinsp"> </span>but I’m lazy enough to do this. But if you’d like, you could make it by your<span class="shy"></span>self and even sub<span class="shy"></span>mit a Pull Re<span class="shy"></span>quests to <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text.html">those</a> <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text_books.html">ex<span class="shy"></span>am<span class="shy"></span>ples</a> :)</p>
+<p>Once again: we need to know the ini­tial height of the ro­tated block, so if we’d need to ro­tate mul­ti­line blocks, we’d need to change their re­sult­ing width ac­cord­ingly.</p>
+<p>Also, this method could work in <span class="nobr">IE —</span><span class="thinsp"> </span>by adding ma­trix fil­ter and con­vert­ing a <span class="nobr">pseudo-el</span>­e­ment to an ac­tual <span class="nobr">one —</span><span class="thinsp"> </span>but I’m lazy enough to do this. But if you’d like, you could make it by your­self and even sub­mit a Pull Re­quests to <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text.html">those</a> <a class="Link" href="https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text_books.html">ex­am­ples</a> :)</p>
 
           <p class="Metadata Published">Published on 
             <time datetime="2013-04-30">April 30, 2013</time>, in <a href="../" class="Link">Experiments</a>.

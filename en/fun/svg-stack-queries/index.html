@@ -27,63 +27,63 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="svg-stacks-with-media-queries"><a class="Anchor" aria-hidden="true" href="#svg-stacks-with-media-queries"></a><span class="ss01 hang-xs">S</span>VG Stacks with Me<span class="shy"></span>dia Queries</h1>
+          <header><h1 class="Heading" id="svg-stacks-with-media-queries"><a class="Anchor" aria-hidden="true" href="#svg-stacks-with-media-queries"></a><span class="ss01 hang-xs">S</span>VG Stacks with Me­dia Queries</h1>
           </header>
-<p>I love <abbr>SVG</abbr> and what I don&#39;t like is how browsers don&#39;t tend to im<span class="shy"></span>prove in the sup<span class="shy"></span>port for them. And while some time ago it could be called “a chicken and egg prob<span class="shy"></span>lem”<span class="nobr"> —</span><span class="thinsp"> </span>there were no sup<span class="shy"></span>port be<span class="shy"></span>cause of lack of us<span class="shy"></span>age and de<span class="shy"></span>vel<span class="shy"></span>oper in<span class="shy"></span>ter<span class="shy"></span>est, as well as de<span class="shy"></span>vel<span class="shy"></span>op<span class="shy"></span>ers didn&#39;t look at <abbr>SVG</abbr> be<span class="shy"></span>cause there were a lot of bugs and in<span class="shy"></span>con<span class="shy"></span>sis<span class="shy"></span>tency every<span class="shy"></span>where.</p>
-<p>But in the last year or two I saw a lot of ar<span class="shy"></span>ti<span class="shy"></span>cles on <abbr>SVG</abbr> and a lot of peo<span class="shy"></span>ple use it more and <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#articles" id="articles">more</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>For ex<span class="shy"></span>am<span class="shy"></span>ple a few days ago my col<span class="shy"></span>league from Yan<span class="shy"></span>dex, Alexey Ten, wrote <a href="http://lynn.ru/examples/svg/en.html">an ar<span class="shy"></span>ti<span class="shy"></span>cle</a> on sim<span class="shy"></span>ple but pow<span class="shy"></span>er<span class="shy"></span>ful tech<span class="shy"></span>nique for grace<span class="shy"></span>ful degra<span class="shy"></span>da<span class="shy"></span>tion with <abbr>SVG</abbr><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>. I&#39;d say it&#39;s what “Retina” did, but whatever.</p>
-<p>Any<span class="shy"></span>way, I&#39;d like to talk about one of those hard-needed fea<span class="shy"></span>tures that won&#39;t ship there any<span class="shy"></span>time soon: <abbr>SVG</abbr> Stacks. You can be fa<span class="shy"></span>mil<span class="shy"></span>iar with this idea from <a class="Link" href="http://simurai.com/post/20251013889/svg-stacks">this great ar<span class="shy"></span>ti<span class="shy"></span>cle of Simu<span class="shy"></span>rai</a><span class="nobr"> —</span><span class="thinsp"> </span>the point is to have dif<span class="shy"></span>fer<span class="shy"></span>ent <abbr>SVG</abbr> im<span class="shy"></span>ages in<span class="shy"></span>side one file and to show only the one we need us<span class="shy"></span>ing <code>:tar<span class="shy"></span>get</code> in <abbr>CSS</abbr> em<span class="shy"></span>bed<span class="shy"></span>ded in <abbr>SVG</abbr> and urls like <code>url(stack.svg#foo)</code>.</p>
-<p>But we can&#39;t use it be<span class="shy"></span>cause of <a class="Link" href="https://code.google.com/p/chromium/issues/detail?id=128055#c6">ephemeral se<span class="shy"></span>cu<span class="shy"></span>rity rea<span class="shy"></span>sons</a>. Well, whatever.</p>
-<p>I&#39;d like to show you how we can achieve some<span class="shy"></span>thing sim<span class="shy"></span>i<span class="shy"></span>lar today.</p>
-<p>It is a hack, it is an ex<span class="shy"></span>per<span class="shy"></span>i<span class="shy"></span>ment, it have its flaws and it was not tested in pro<span class="shy"></span>duc<span class="shy"></span>tion. But hey!</p>
+<p>I love <abbr>SVG</abbr> and what I don&#39;t like is how browsers don&#39;t tend to im­prove in the sup­port for them. And while some time ago it could be called “a chicken and egg prob­lem”<span class="nobr"> —</span><span class="thinsp"> </span>there were no sup­port be­cause of lack of us­age and de­vel­oper in­ter­est, as well as de­vel­op­ers didn&#39;t look at <abbr>SVG</abbr> be­cause there were a lot of bugs and in­con­sis­tency every­where.</p>
+<p>But in the last year or two I saw a lot of ar­ti­cles on <abbr>SVG</abbr> and a lot of peo­ple use it more and <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#articles" id="articles">more</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>For ex­am­ple a few days ago my col­league from Yan­dex, Alexey Ten, wrote <a href="http://lynn.ru/examples/svg/en.html">an ar­ti­cle</a> on sim­ple but pow­er­ful tech­nique for grace­ful degra­da­tion with <abbr>SVG</abbr><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>. I&#39;d say it&#39;s what “Retina” did, but whatever.</p>
+<p>Any­way, I&#39;d like to talk about one of those hard-needed fea­tures that won&#39;t ship there any­time soon: <abbr>SVG</abbr> Stacks. You can be fa­mil­iar with this idea from <a class="Link" href="http://simurai.com/post/20251013889/svg-stacks">this great ar­ti­cle of Simu­rai</a><span class="nobr"> —</span><span class="thinsp"> </span>the point is to have dif­fer­ent <abbr>SVG</abbr> im­ages in­side one file and to show only the one we need us­ing <code>:tar­get</code> in <abbr>CSS</abbr> em­bed­ded in <abbr>SVG</abbr> and urls like <code>url(stack.svg#foo)</code>.</p>
+<p>But we can&#39;t use it be­cause of <a class="Link" href="https://code.google.com/p/chromium/issues/detail?id=128055#c6">ephemeral se­cu­rity rea­sons</a>. Well, whatever.</p>
+<p>I&#39;d like to show you how we can achieve some­thing sim­i­lar today.</p>
+<p>It is a hack, it is an ex­per­i­ment, it have its flaws and it was not tested in pro­duc­tion. But hey!</p>
 <div class="Demo Figure" id="Demo_svg-stack-queries"><iframe class="Demo-Frame" style="height: 1.5em" width="100%" src="svg-stack-queries.html"></iframe></div>
-<p>Well, the code wouldn&#39;t be that el<span class="shy"></span>e<span class="shy"></span>gant as with orig<span class="shy"></span>i<span class="shy"></span>nal <abbr>SVG</abbr> Stacks idea, but what I did is a Proof of Concept.</p>
+<p>Well, the code wouldn&#39;t be that el­e­gant as with orig­i­nal <abbr>SVG</abbr> Stacks idea, but what I did is a Proof of Concept.</p>
 <p>The <abbr>HTML</abbr> for those icons is this:</p>
-<pre><code class="language-html">&lt;span class=&quot;icon-wrap<span class="shy"></span>per&quot;&gt;
-    &lt;img class=&quot;icon icon_<span class="shy"></span>down<span class="shy"></span>load&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
+<pre><code class="language-html">&lt;span class=&quot;icon-wrap­per&quot;&gt;
+    &lt;img class=&quot;icon icon_­down­load&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
 &lt;/​span&gt;
-&lt;span class=&quot;icon-wrap<span class="shy"></span>per&quot;&gt;
+&lt;span class=&quot;icon-wrap­per&quot;&gt;
     &lt;img class=&quot;icon icon_next&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
 &lt;/​span&gt;
-&lt;span class=&quot;icon-wrap<span class="shy"></span>per&quot;&gt;
+&lt;span class=&quot;icon-wrap­per&quot;&gt;
     &lt;img class=&quot;icon icon_print&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
 &lt;/​span&gt;
 </code></pre>
-<p>The <abbr>SVG</abbr> it<span class="shy"></span>self would look like this:</p>
+<p>The <abbr>SVG</abbr> it­self would look like this:</p>
 <pre><code class="language-markup">&lt;svg xmlns=&quot;http://​www.w3.org/​2000/​svg&quot;&gt;
     &lt;style&gt;
 
-.icon { dis<span class="shy"></span>play: none }
+.icon { dis­play: none }
 
-@me<span class="shy"></span>dia (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 1/​2), (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 2/​1) { #down<span class="shy"></span>load { dis<span class="shy"></span>play: in<span class="shy"></span>line; }}
-@me<span class="shy"></span>dia (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 1/​3), (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 3/​1) { #next { dis<span class="shy"></span>play: in<span class="shy"></span>line; }}
-@me<span class="shy"></span>dia (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 1/​5), (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 5/​1) { #print { dis<span class="shy"></span>play: in<span class="shy"></span>line; }}
+@me­dia (as­pect-ra­tio: 1/​2), (as­pect-ra­tio: 2/​1) { #down­load { dis­play: in­line; }}
+@me­dia (as­pect-ra­tio: 1/​3), (as­pect-ra­tio: 3/​1) { #next { dis­play: in­line; }}
+@me­dia (as­pect-ra­tio: 1/​5), (as­pect-ra­tio: 5/​1) { #print { dis­play: in­line; }}
 
-@me<span class="shy"></span>dia (ori<span class="shy"></span>en<span class="shy"></span>ta<span class="shy"></span>tion: land<span class="shy"></span>scape) { .icon { fill: blue; } }
+@me­dia (ori­en­ta­tion: land­scape) { .icon { fill: blue; } }
 
 
     &lt;/​style&gt;
 
-    &lt;path class=&quot;icon&quot; id=&quot;down<span class="shy"></span>load&quot; d=&quot;M2,6h3V1h6v5h3L8,12m7,1v2H1V13&quot;&gt;&lt;/​path&gt;
+    &lt;path class=&quot;icon&quot; id=&quot;down­load&quot; d=&quot;M2,6h3V1h6v5h3L8,12m7,1v2H1V13&quot;&gt;&lt;/​path&gt;
     &lt;path class=&quot;icon&quot; id=&quot;next&quot; d=&quot;M5 1v14l9-7&quot;&gt;&lt;/​path&gt;
     &lt;path class=&quot;icon&quot; id=&quot;print&quot; d=&quot;M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5&quot;&gt;&lt;/​path&gt;
 &lt;/​svg&gt;
 </code></pre>
-<p>And the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#webkit-bug" id="webkit-bug"><em>ba<span class="shy"></span>sic</em></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a bug in We<span class="shy"></span>bkit pre<span class="shy"></span>vent<span class="shy"></span>ing the icons to be shown on page load. You could fix it with some<span class="shy"></span>thing that would cause a re<span class="shy"></span>flow, like an an<span class="shy"></span>i<span class="shy"></span>ma<span class="shy"></span>tion, you can see how I ap<span class="shy"></span>plied it in the …<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> <abbr>CSS</abbr> would look this way:</p>
-<pre><code class="language-css">.icon-wrap<span class="shy"></span>per {
-    dis<span class="shy"></span>play: in<span class="shy"></span>line-block;
-    ver<span class="shy"></span>ti<span class="shy"></span>cal-align: top;
-    over<span class="shy"></span>flow: hid<span class="shy"></span>den;
+<p>And the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#webkit-bug" id="webkit-bug"><em>ba­sic</em></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a bug in We­bkit pre­vent­ing the icons to be shown on page load. You could fix it with some­thing that would cause a re­flow, like an an­i­ma­tion, you can see how I ap­plied it in the …<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> <abbr>CSS</abbr> would look this way:</p>
+<pre><code class="language-css">.icon-wrap­per {
+    dis­play: in­line-block;
+    ver­ti­cal-align: top;
+    over­flow: hid­den;
 
     width: 16px;
     height: 16px;
 }
 
 .icon {
-    ver<span class="shy"></span>ti<span class="shy"></span>cal-align: top;
+    ver­ti­cal-align: top;
 }
 
-.icon_<span class="shy"></span>down<span class="shy"></span>load       { width: 120px; height: 240px; }
-.icon_<span class="shy"></span>down<span class="shy"></span>load:hover { width: 240px; height: 120px; }
+.icon_­down­load       { width: 120px; height: 240px; }
+.icon_­down­load:hover { width: 240px; height: 120px; }
 
 .icon_next           { width: 120px; height: 360px; }
 .icon_next:hover     { width: 360px; height: 120px; }
@@ -91,30 +91,30 @@
 .icon_print          { width: 120px; height: 600px; }
 .icon_print:hover    { width: 600px; height: 120px; }
 </code></pre>
-<p>I guess you al<span class="shy"></span>ready got the idea? While we can&#39;t use <code>:tar<span class="shy"></span>get</code>, you could al<span class="shy"></span>ready know that we can use <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#clowncar" id="clowncar">me<span class="shy"></span>dia queries in <abbr>SVG</abbr></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>See, for ex<span class="shy"></span>am<span class="shy"></span>ple <a href="http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/">Clown Car Tech<span class="shy"></span>nique</a> by Es<span class="shy"></span>telle<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
-<p>So, we hide all the icons in<span class="shy"></span>side an <abbr>SVG</abbr> and then show<span class="shy"></span>ing them when the spe<span class="shy"></span>cific me<span class="shy"></span>dia queries are trig<span class="shy"></span>gered.</p>
-<p>Some notes on some things in code you&#39;re al<span class="shy"></span>ready won<span class="shy"></span>der<span class="shy"></span>ing on:</p>
+<p>I guess you al­ready got the idea? While we can&#39;t use <code>:tar­get</code>, you could al­ready know that we can use <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#clowncar" id="clowncar">me­dia queries in <abbr>SVG</abbr></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>See, for ex­am­ple <a href="http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/">Clown Car Tech­nique</a> by Es­telle<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
+<p>So, we hide all the icons in­side an <abbr>SVG</abbr> and then show­ing them when the spe­cific me­dia queries are trig­gered.</p>
+<p>Some notes on some things in code you&#39;re al­ready won­der­ing on:</p>
 <ol>
-<li><p>We should use <code>&lt;img/&​gt;</code> (or any sim<span class="shy"></span>i<span class="shy"></span>lar method) in<span class="shy"></span>stead of <abbr>SVG</abbr> in <abbr>CSS</abbr> back<span class="shy"></span>grounds, &#39;cause there are a lot of <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#svg-in-css" id="svg-in-css">is<span class="shy"></span>sues</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>…<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> with back<span class="shy"></span>grounds in dif<span class="shy"></span>fer<span class="shy"></span>ent browsers. And that&#39;s sad, &#39;cause we could use only one el<span class="shy"></span>e<span class="shy"></span>ment in <abbr>HTML</abbr> for those icons then, us<span class="shy"></span>ing <code>back<span class="shy"></span>ground-im<span class="shy"></span>age</code> or <span class="nobr">pseudo-el</span><span class="shy"></span>e<span class="shy"></span>ments.</p>
+<li><p>We should use <code>&lt;img/&​gt;</code> (or any sim­i­lar method) in­stead of <abbr>SVG</abbr> in <abbr>CSS</abbr> back­grounds, &#39;cause there are a lot of <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#svg-in-css" id="svg-in-css">is­sues</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>…<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> with back­grounds in dif­fer­ent browsers. And that&#39;s sad, &#39;cause we could use only one el­e­ment in <abbr>HTML</abbr> for those icons then, us­ing <code>back­ground-im­age</code> or <span class="nobr">pseudo-el</span>­e­ments.</p>
 </li>
-<li><p>I&#39;ve used a wrap<span class="shy"></span>per to show only the ac<span class="shy"></span>tual part of the <abbr>SVG</abbr>, hid<span class="shy"></span>ing the ex<span class="shy"></span>tra can<span class="shy"></span>vas that is needed only for me<span class="shy"></span>dia queries. How<span class="shy"></span>ever, if you&#39;re ok with ab<span class="shy"></span>solute po<span class="shy"></span>si<span class="shy"></span>tion<span class="shy"></span>ing, you could use it along with <code>clip</code> to hide the extras:</p>
-<pre><code class="language-css"> .icon_ab<span class="shy"></span>solute {
-     po<span class="shy"></span>si<span class="shy"></span>tion: ab<span class="shy"></span>solute;
+<li><p>I&#39;ve used a wrap­per to show only the ac­tual part of the <abbr>SVG</abbr>, hid­ing the ex­tra can­vas that is needed only for me­dia queries. How­ever, if you&#39;re ok with ab­solute po­si­tion­ing, you could use it along with <code>clip</code> to hide the extras:</p>
+<pre><code class="language-css"> .icon_ab­solute {
+     po­si­tion: ab­solute;
      clip: rect(0, 16px, 16px, 0);
  }
 </code></pre>
 </li>
-<li><p>An im<span class="shy"></span>por<span class="shy"></span>tant part: your <code>&lt;svg&gt;</code> tag should be with<span class="shy"></span>out <code>width</code>, <code>height</code> or <code>view<span class="shy"></span>Box</code> at<span class="shy"></span>trib<span class="shy"></span>utes. This would make icons to not re<span class="shy"></span>size when the con<span class="shy"></span>tainer re<span class="shy"></span>sizes, so we could ac<span class="shy"></span>tu<span class="shy"></span>ally change the size of <code>&lt;img/&​gt;</code> con<span class="shy"></span>tain<span class="shy"></span>ing the <abbr>SVG</abbr> with<span class="shy"></span>out re<span class="shy"></span>siz<span class="shy"></span>ing the icons.</p>
+<li><p>An im­por­tant part: your <code>&lt;svg&gt;</code> tag should be with­out <code>width</code>, <code>height</code> or <code>view­Box</code> at­trib­utes. This would make icons to not re­size when the con­tainer re­sizes, so we could ac­tu­ally change the size of <code>&lt;img/&​gt;</code> con­tain­ing the <abbr>SVG</abbr> with­out re­siz­ing the icons.</p>
 </li>
-<li><p>While you could use MQ with <code>min-width</code> and <code>max-width</code>, I ended up with us<span class="shy"></span>ing <code>as<span class="shy"></span>pect-ra<span class="shy"></span>tio</code>. Why? Be<span class="shy"></span>cause if we&#39;d re<span class="shy"></span>size the page, the size of icons would change, and the width/​height based MQ would broke (at least in we<span class="shy"></span>bkits).</p>
+<li><p>While you could use MQ with <code>min-width</code> and <code>max-width</code>, I ended up with us­ing <code>as­pect-ra­tio</code>. Why? Be­cause if we&#39;d re­size the page, the size of icons would change, and the width/​height based MQ would broke (at least in we­bkits).</p>
 </li>
-<li><p>And I used a bit big num<span class="shy"></span>bers like <code>120px</code> etc. to keep the as<span class="shy"></span>pect ra<span class="shy"></span>tios <span class="nobr">strict —</span><span class="thinsp"> </span>if we&#39;d use small ones like <code>16px</code> etc, then on page re<span class="shy"></span>size they would be changed un<span class="shy"></span>evenly, so the <code>as<span class="shy"></span>pect-ra<span class="shy"></span>tio</code> would be bro<span class="shy"></span>ken. Hav<span class="shy"></span>ing a big num<span class="shy"></span>ber makes most of the zoom lev<span class="shy"></span>els pre<span class="shy"></span>serve proper as<span class="shy"></span>pect ratio.</p>
+<li><p>And I used a bit big num­bers like <code>120px</code> etc. to keep the as­pect ra­tios <span class="nobr">strict —</span><span class="thinsp"> </span>if we&#39;d use small ones like <code>16px</code> etc, then on page re­size they would be changed un­evenly, so the <code>as­pect-ra­tio</code> would be bro­ken. Hav­ing a big num­ber makes most of the zoom lev­els pre­serve proper as­pect ratio.</p>
 </li>
-<li><p>If you&#39;d want to use only icons, with<span class="shy"></span>out the hover state, the code would be even sim<span class="shy"></span>pler, but I shown this there &#39;cause it&#39;s just an<span class="shy"></span>other nice use case for <abbr>SVG</abbr> Stacks, and also to show how you can do it us<span class="shy"></span>ing MQ: you show an icon on both ori<span class="shy"></span>en<span class="shy"></span>ta<span class="shy"></span><span class="nobr">tions —</span><span class="thinsp"> </span><code>(as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 1/​2), (as<span class="shy"></span>pect-ra<span class="shy"></span>tio: 2/​1)</code> and then you can use one of them to make a hover state, and you could use the same one for every icon us<span class="shy"></span>ing <code>ori<span class="shy"></span>en<span class="shy"></span>ta<span class="shy"></span>tion</code> query.</p>
+<li><p>If you&#39;d want to use only icons, with­out the hover state, the code would be even sim­pler, but I shown this there &#39;cause it&#39;s just an­other nice use case for <abbr>SVG</abbr> Stacks, and also to show how you can do it us­ing MQ: you show an icon on both ori­en­ta­<span class="nobr">tions —</span><span class="thinsp"> </span><code>(as­pect-ra­tio: 1/​2), (as­pect-ra­tio: 2/​1)</code> and then you can use one of them to make a hover state, and you could use the same one for every icon us­ing <code>ori­en­ta­tion</code> query.</p>
 </li>
 </ol>
-<p>So, that&#39;s it! While all this works, there are still a lot of is<span class="shy"></span>sues in dif<span class="shy"></span>fer<span class="shy"></span>ent browsers, most of them are in we<span class="shy"></span>bkits. For ex<span class="shy"></span>am<span class="shy"></span>ple, those icons won&#39;t re<span class="shy"></span>size in a vec<span class="shy"></span>tor way on iOS (what would be the best way to fix it? Make icons big<span class="shy"></span>ger from the start and them zoom them down us<span class="shy"></span>ing trans<span class="shy"></span>forms?), they need the an<span class="shy"></span>i<span class="shy"></span>ma<span class="shy"></span>tion both on the page load and on hover (there are <em>strange</em> bugs for this) and who knows what else could go wrong?</p>
-<p>But I still love this small ex<span class="shy"></span>per<span class="shy"></span>i<span class="shy"></span>ment, &#39;cause it makes the idea to work and I can&#39;t wait for the bright fu<span class="shy"></span>ture when we could just use proper <abbr>SVG</abbr> Stacks with<span class="shy"></span>out all those hacks.</p>
+<p>So, that&#39;s it! While all this works, there are still a lot of is­sues in dif­fer­ent browsers, most of them are in we­bkits. For ex­am­ple, those icons won&#39;t re­size in a vec­tor way on iOS (what would be the best way to fix it? Make icons big­ger from the start and them zoom them down us­ing trans­forms?), they need the an­i­ma­tion both on the page load and on hover (there are <em>strange</em> bugs for this) and who knows what else could go wrong?</p>
+<p>But I still love this small ex­per­i­ment, &#39;cause it makes the idea to work and I can&#39;t wait for the bright fu­ture when we could just use proper <abbr>SVG</abbr> Stacks with­out all those hacks.</p>
 
           <p class="Metadata Published">Wrote as a draft, not published yet.
           </p>

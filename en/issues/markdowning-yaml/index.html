@@ -29,36 +29,36 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="markdowning-yaml-for-jekyll"><a class="Anchor" aria-hidden="true" href="#markdowning-yaml-for-jekyll"></a><span class="ss01 hang-m">M</span>ark<span class="shy"></span>down<span class="shy"></span>ing <abbr>YAML</abbr> for Jekyll</h1>
+          <header><h1 class="Heading" id="markdowning-yaml-for-jekyll"><a class="Anchor" aria-hidden="true" href="#markdowning-yaml-for-jekyll"></a><span class="ss01 hang-m">M</span>ark­down­ing <abbr>YAML</abbr> for Jekyll</h1>
           </header>
-<p>While I’m strug<span class="shy"></span>gling to write a lengthy ar<span class="shy"></span>ti<span class="shy"></span>cle, here is a small one, on a lit<span class="shy"></span>tle Jekyll trick I use.</p>
-<p>In Jekyll you need to use <abbr>YAML</abbr> front mat<span class="shy"></span>ter to add any meta<span class="shy"></span>data to the post or page. Ac<span class="shy"></span>tu<span class="shy"></span>ally, Jekyll “sees” only those files that have the <abbr>YAML</abbr> front mat<span class="shy"></span>ter, so it is a some<span class="shy"></span>what im<span class="shy"></span>por<span class="shy"></span>tant thing.</p>
-<p>Most of the time this front mat<span class="shy"></span>ter would look like this:</p>
+<p>While I’m strug­gling to write a lengthy ar­ti­cle, here is a small one, on a lit­tle Jekyll trick I use.</p>
+<p>In Jekyll you need to use <abbr>YAML</abbr> front mat­ter to add any meta­data to the post or page. Ac­tu­ally, Jekyll “sees” only those files that have the <abbr>YAML</abbr> front mat­ter, so it is a some­what im­por­tant thing.</p>
+<p>Most of the time this front mat­ter would look like this:</p>
 <pre><code class="language-yaml">---
-lay<span class="shy"></span>out: docs
-ti<span class="shy"></span>tle: Re<span class="shy"></span>sources
-pre<span class="shy"></span>v_<span class="shy"></span>sec<span class="shy"></span>tion: sites
+lay­out: docs
+ti­tle: Re­sources
+pre­v_­sec­tion: sites
 ---
 </code></pre>
-<p>It could seem to be ok. How<span class="shy"></span>ever, as I use Jekyll right on GitHub, my per<span class="shy"></span>fec<span class="shy"></span>tion<span class="shy"></span>ism tells me that the source of all my posts in mark<span class="shy"></span>down should look per<span class="shy"></span>fect when looked at GitHub. And it would ren<span class="shy"></span>der all the mark<span class="shy"></span>down doc<span class="shy"></span>u<span class="shy"></span>ments in<span class="shy"></span>stead of show<span class="shy"></span>ing their con<span class="shy"></span>tent. So, the <abbr>YAML</abbr> front mat<span class="shy"></span>ter in that case would look like this:</p>
+<p>It could seem to be ok. How­ever, as I use Jekyll right on GitHub, my per­fec­tion­ism tells me that the source of all my posts in mark­down should look per­fect when looked at GitHub. And it would ren­der all the mark­down doc­u­ments in­stead of show­ing their con­tent. So, the <abbr>YAML</abbr> front mat­ter in that case would look like this:</p>
 <p><img src="http://img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png" alt="Bad code"></p>
-<p>Not that read<span class="shy"></span>able, huh? And the last line sud<span class="shy"></span>denly be<span class="shy"></span>came a <span class="nobr">header —</span><span class="thinsp"> </span>I don’t think it’s what we could want there.</p>
-<p>How<span class="shy"></span>ever, it can be fixed with ease: you just need to add some ex<span class="shy"></span>tra lines <span class="nobr">in-be</span><span class="shy"></span>tween:</p>
+<p>Not that read­able, huh? And the last line sud­denly be­came a <span class="nobr">header —</span><span class="thinsp"> </span>I don’t think it’s what we could want there.</p>
+<p>How­ever, it can be fixed with ease: you just need to add some ex­tra lines <span class="nobr">in-be</span>­tween:</p>
 <pre><code class="language-yaml">---
 
-lay<span class="shy"></span>out: docs
+lay­out: docs
 
-ti<span class="shy"></span>tle: Re<span class="shy"></span>sources
+ti­tle: Re­sources
 
-pre<span class="shy"></span>v_<span class="shy"></span>sec<span class="shy"></span>tion: sites
+pre­v_­sec­tion: sites
 
 ---
 </code></pre>
-<p>And this would look so much bet<span class="shy"></span>ter at GitHub:</p>
+<p>And this would look so much bet­ter at GitHub:</p>
 <p><img src="http://img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png" alt="Good code"></p>
-<p>In<span class="shy"></span>stead of a use<span class="shy"></span>less header we would get <abbr>YAML</abbr> nicely sep<span class="shy"></span>a<span class="shy"></span>rated from con<span class="shy"></span>tent, and every line would be<span class="shy"></span>come a para<span class="shy"></span>graph there.</p>
-<p>As most of posts won’t have a lot of meta<span class="shy"></span>data, those ex<span class="shy"></span>tra lines won’t bloat the code. And, in my opin<span class="shy"></span>ion, this code style is also more read<span class="shy"></span>able when you’re work<span class="shy"></span>ing with ac<span class="shy"></span>tual code, so I don’t see any rea<span class="shy"></span>sons why you should<span class="shy"></span>n’t use it all the time for <abbr>YAML</abbr> front matters.</p>
-<p>The only thing I don’t like there is that <abbr>YAML</abbr> is so strict. You can’t add in<span class="shy"></span>dents in the front of data, or use lists with hy<span class="shy"></span>phens <span class="nobr">here —</span><span class="thinsp"> </span>those could be ren<span class="shy"></span>dered even nicer. Also, if some<span class="shy"></span>one would see any other pos<span class="shy"></span>si<span class="shy"></span>bil<span class="shy"></span>ity to en<span class="shy"></span>hance the read<span class="shy"></span>abil<span class="shy"></span>ity of the <abbr>YAML</abbr> front mat<span class="shy"></span><span class="nobr">ters —</span><span class="thinsp"> </span>tell me via twit<span class="shy"></span>ter or by is<span class="shy"></span>sues on GitHub.</p>
+<p>In­stead of a use­less header we would get <abbr>YAML</abbr> nicely sep­a­rated from con­tent, and every line would be­come a para­graph there.</p>
+<p>As most of posts won’t have a lot of meta­data, those ex­tra lines won’t bloat the code. And, in my opin­ion, this code style is also more read­able when you’re work­ing with ac­tual code, so I don’t see any rea­sons why you should­n’t use it all the time for <abbr>YAML</abbr> front matters.</p>
+<p>The only thing I don’t like there is that <abbr>YAML</abbr> is so strict. You can’t add in­dents in the front of data, or use lists with hy­phens <span class="nobr">here —</span><span class="thinsp"> </span>those could be ren­dered even nicer. Also, if some­one would see any other pos­si­bil­ity to en­hance the read­abil­ity of the <abbr>YAML</abbr> front mat­<span class="nobr">ters —</span><span class="thinsp"> </span>tell me via twit­ter or by is­sues on GitHub.</p>
 
           <p class="Metadata Published">Published on 
             <time datetime="2013-04-21">April 21, 2013</time>, in <a href="../" class="Link">Articles</a>.
