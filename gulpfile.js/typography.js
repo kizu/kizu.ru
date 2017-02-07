@@ -43,9 +43,10 @@ module.exports = function(text, lang, options) {
     result = result.replace(/&#8202;—<\/span>&#8202;/g, ' —</span><span class="thinsp"> </span>')
     result = result.replace(/( |&#8202;| | )—( |&#8202;| | )/g, '<span class="nobr"> —</span><span class="thinsp"> </span>')
 
-    if (!options.simpleContent) {
-        // Replace soft hyphens with special spans
-        result = result.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
-    }
+    // TODO: find out is there a way to enable it without causing problems to screenreaders
+    // if (!options.simpleContent) {
+    //     // Replace soft hyphens with special spans
+    //     result = result.replace(new RegExp('\u00AD', 'g'), '<span class="shy"></span>')
+    // }
     return result;
 };

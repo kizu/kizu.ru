@@ -5,6 +5,13 @@
 I am a **Front-End Web Developer** with 10 years of professional experience, researching and implementing highly performant, scalable and maintainable CSS practices for large websites and web-applications, as well as standards-compliant, semantic and accessible HTML, and JavaScript for complex UI behaviors.
 
 
+## Objective
+
+I'm looking for a place where I could apply my CSS skills. I can solve any possible CSS issue: from vertical centering to project's architecture, but the more complex problems you can provide, the happier I would be dealing with them. One day I dream to work on CSS itself by contributing to specifications, so there is that.
+
+I'm currently located in Russia, and I'm looking for opportunities to relocate to somewhere else (Canada, Europe, USA, New Zealand and so on).
+
+
 ## Contact
 
 <dl class="lnum">

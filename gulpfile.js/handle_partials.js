@@ -1,7 +1,7 @@
 module.exports = function(content, options) {
-    return content.replace(/<p>\[par(?:<span class="shy"><\/span>)?tial:(.+)\]<\/p>/g, function(string, name){
+    return content.replace(/<p>\[par(?:<span class="shy"><\/span>|\u00AD)?tial:(.+)\]<\/p>/g, function(string, name){
         var result = '';
-        name = name.replace(/<[^>]+>/g, '');
+        name = name.replace(/<[^>]+>|\u00AD/g, '');
         var partial = options.document.resources[name];
         if (!partial) {
             console.warn('No partial found for', name);
