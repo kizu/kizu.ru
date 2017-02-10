@@ -35,7 +35,7 @@ I'm currently located in Russia, and I'm looking for opportunities to relocate t
     </dd>
     <dt>GitHub profile</dt>
     <dd>
-        <a class="Link" href="gh:kizu">https://github.com/kizu</a>
+        <a class="Link" href="https://github.com/kizu">https://github.com/kizu</a>
     </dd>
     <dt>Skype</dt>
     <dd>
