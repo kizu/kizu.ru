@@ -10,24 +10,33 @@ var hyphers = {
 module.exports = function(text, lang, options) {
     var result = text;
     options = options || {};
-    
+
     if (!options.simpleContent) {
         // Hyphenate HTML
+        var stopChanges = false;
         result = posthtml()
             .use( function(tree) {
                 tree.walk(function(node) {
                     textNode = node;
                     if (typeof(textNode) == 'string') {
-                        textNode = hyphers[lang].hyphenateText(textNode);
-                        if (lang !== 'en') {
-                            textNode = hyphers['en'].hyphenateText(textNode);
+                        if (!stopChanges) {
+                            textNode = hyphers[lang].hyphenateText(textNode);
+                            if (lang !== 'en') {
+                                textNode = hyphers['en'].hyphenateText(textNode);
+                            }
+                        }
+                    } else if (node.tag) {
+                        if (node.tag == 'pre') {
+                            stopChanges = true;
+                        } else if (node.tag != 'code') {
+                            stopChanges = false;
                         }
                     }
-                    return textNode
+                    return textNode;
                     });
-                return tree
+                return tree;
             })
-            .process(result, { sync: true }).html
+            .process(result, { sync: true }).html;
         // Removing the last soft hyphen when the result is short
         result = result.replace(new RegExp('\u00AD([a-zа-я]{1,4}[\.\,\:\?\!\…]?\s*</(?:p|h2|h3|h4)>)', 'gi'),'$1')
     }

@@ -5,7 +5,6 @@ var express = require('express');
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var gutil = require('gulp-util');
-var gulpif = require('gulp-if');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
 var foreach = require('gulp-foreach');
@@ -15,7 +14,7 @@ var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var jade = require(process.cwd() + '/node_modules/gulp-jade/node_modules/jade');
+var jade = require(process.cwd() + '/node_modules/jade');
 var gulpJade = require('gulp-jade');
 var stylus = require('stylus');
 var posthtml = require('posthtml');
@@ -326,7 +325,7 @@ var getJadeData = function(document) {
             console.warn('No loc string found for ' + locString);
         }
     };
-    
+
     return {
         'posts': allDocuments[document.lang].posts,
         'document': document,
