@@ -381,28 +381,28 @@
 </div></div>
 <p>Код по­лу­ча­ет­ся таким:</p>
 <pre><code class="language-css">.flex {
-    dis­play: -ms-in­line-flexbox;
-    dis­play: -we­bkit-in­line-flex;
-    dis­play: in­line-flex;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
 
-    /* Fix­ing Opera is­sue */
-    flex-di­rec­tion: col­umn;
+    /* Fixing Opera issue */
+    flex-direction: column;
 
-    ver­ti­cal-align: base­line;
+    vertical-align: baseline;
     }
 
-.flex-con­tent {
+.flex-content {
     padding: 0 10px 10px;
-    bor­der: 1px solid lime;
+    border: 1px solid lime;
 
-    /* Fix­ing IE is­sue */
-    -ms-flex-neg­a­tive: 1;
+    /* Fixing IE issue */
+    -ms-flex-negative: 1;
     }
 
-/* Fix­ing Fx is­sue */
-.flex-con­tent:be­fore {
-    con­tent: &quot;&quot;;
-    dis­play: block;
+/* Fixing Fx issue */
+.flex-content:before {
+    content: &quot;&quot;;
+    display: block;
     padding-top: 10px;
     }
 </code></pre>

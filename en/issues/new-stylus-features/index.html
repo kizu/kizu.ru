@@ -80,7 +80,7 @@
 <p>As you can see from this ex­am­ple, the syn­tax is sim­i­lar to the ob­jects in JavaScript: the key could be ei­ther an in­dent or a string, and any­thing could go into value, even nested hashes. An im­por­tant part: while you can use or­di­nary blocks with or with­out curly braces in Sty­lus, they are manda­tory for hashes, while the trail­ing com­mas <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#codestyle" id="codestyle">are not</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>And as with all other op­tional syn­tax fea­tures of Sty­lus, you should use a con­sis­tent code style in your stylesheets. Oth­er­wise your code would be messy as hell<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
 <p>Then, af­ter you de­fined a hash, you could add new prop­er­ties to it or re­de­fine old ones us­ing dots or square brackets:</p>
 <pre><code class="language-styl">foo.bar = 20px
-foo[&#39;what­ever&#39;] = &#39;hello&#39;
+foo[&#39;whatever&#39;] = &#39;hello&#39;
 </code></pre>
 <p>The dif­fer­ences are sim­ple: while you could use only idents with the dot syn­tax, with square brack­ets you could pass any string con­tain­ing any sym­bols, or use a vari­able in­stead. So, the brack­ets are more flex­i­ble, while the dot is not.</p>
 <p>You can get the val­ues from the hash in the same <span class="nobr">way —</span><span class="thinsp"> </span>ei­ther by us­ing a dot or us­ing the square brackets.</p>
@@ -89,8 +89,8 @@ foo[&#39;what­ever&#39;] = &#39;hello&#39;
 <p>There is now one small but im­por­tant fea­ture in Sty­<span class="nobr">lus —</span><span class="thinsp"> </span><code>se­lec­tor()</code>. While you can con­struct com­plex se­lec­tors in Sty­lus by us­ing nested blocks, in­ter­po­la­tions, mix­ins and other things, you couldn&#39;t <strong>get</strong> the com­piled se­lec­tor, they only ex­isted in the com­piled <abbr>CSS</abbr>.</p>
 <p>But now, us­ing <code>se­lec­tor()</code> func­tion that re­turns the cur­rently com­piled se­lec­tor, you could do a lot of use­ful things, like check the se­lec­tor for some­thing us­ing the <code>match()</code> func­tion, or use it for some­thing else. It is al­ready very use­ful, and it would be­come even more so in fu­ture re­leases.</p>
 <p>As an ex­am­ple, you can take this small chunk of code:</p>
-<pre><code class="language-styl">if match(&#39;:(be­fore|af­ter)&#39;, se­lec­tor())
-  con­tent: &#39;&#39;
+<pre><code class="language-styl">if match(&#39;:(before|after)&#39;, selector())
+  content: &#39;&#39;
 </code></pre>
 <p>Here we check if the se­lec­tor has any <span class="nobr">pseudo-el</span>­e­ments in it and if <span class="nobr">so —</span><span class="thinsp"> </span>we ap­ply the <code>con­tent</code>. This could be use­ful if we have some mixin, con­tain­ing styles that could be ap­plied both to a nor­mal el­e­ment and to a pseudo one.</p>
 <h2 class="Heading" id="example"><a class="Anchor" aria-hidden="true" href="#example"></a><span class="ss01 hang-m">E</span>xam­ple with cached me­dia queries</h2>
@@ -99,54 +99,54 @@ foo[&#39;what­ever&#39;] = &#39;hello&#39;
 <p><span class="nobr">Briefly —</span><span class="thinsp"> </span>we can cre­ate a mixin that could be used in­stead of me­dia queries and would cache the given blocks, com­bin­ing them by con­di­tions, so you could then out­put all of them us­ing the sec­ond function.</p>
 <p>The only down­side of this method is the group­ing it­<span class="nobr">self —</span><span class="thinsp"> </span>the se­lec­tors would be in a dif­fer­ent or­der, so the speci­ficity of the se­lec­tors could change.</p>
 <p>For the start we need an ob­ject where we would store the cached blocks:</p>
-<pre><code class="language-styl">$me­di­a_­cache = {}
+<pre><code class="language-styl">$media_cache = {}
 </code></pre>
 <p>Then we would need a mixin which we could use in­stead of me­dia queries; its ba­sic form would be this:</p>
-<pre><code class="language-styl">me­dia($con­di­tion)
-  un­less $me­di­a_­cache[$con­di­tion]
-    $me­di­a_­cache[$con­di­tion] = ()
-  push($me­di­a_­cache[$con­di­tion], block)
+<pre><code class="language-styl">media($condition)
+  unless $media_cache[$condition]
+    $media_cache[$condition] = ()
+  push($media_cache[$condition], block)
 </code></pre>
 <p>This mixin&#39;s logic is rather sim­ple: if we don&#39;t have a list of the blocks for a given con­di­tion, we ini­tial­ize it then we pass the block to this list.</p>
 <p>It won&#39;t be enough for us ac­tu­ally: this mixin could be used only this way:</p>
-<pre><code class="language-styl">+me­dia(&#39;(max-width:640px)&#39;)
+<pre><code class="language-styl">+media(&#39;(max-width:640px)&#39;)
   .foo
-    dis­play: block;
+    display: block;
 </code></pre>
 <p>We could only pass full blocks to it, but couldn&#39;t use the bub­bling:</p>
 <pre><code class="language-styl">.foo
-  +me­dia(&#39;(max-width:640px)&#39;)
-    dis­play: block;
+  +media(&#39;(max-width:640px)&#39;)
+    display: block;
 </code></pre>
 <p>The code of our <code>me­dia</code> mixin doesn&#39;t know any­thing about the con­text, the se­lec­tor where we called <span class="nobr">it —</span><span class="thinsp"> </span>yet. Here the new <code>se­lec­tor()</code> func­tion and an ex­tra helper mixin are re­quired, and with them <code>me­dia</code> mixin would look like this:</p>
-<pre><code class="language-styl">me­dia($con­di­tion)
-  helper($con­di­tion)
-    un­less $me­di­a_­cache[$con­di­tion]
-      $me­di­a_­cache[$con­di­tion] = ()
-    push($me­di­a_­cache[$con­di­tion], block)
+<pre><code class="language-styl">media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
 
-  +helper($con­di­tion)
-    {se­lec­tor()}
+  +helper($condition)
+    {selector()}
       {block}
 </code></pre>
 <p>To save the con­text we move the ini­tial code of this mixin in­side a helper mixin, then call it pass­ing the <code>block</code> in­side the in­ter­po­lated<code>se­lec­tor()</code>.</p>
 <p>So, as we now wrap the code with a mixin, it won&#39;t build au­to­mat­i­cally. We would need to call a func­tion that would take a cache and put all it con­tains where we call it (and it would be log­i­cal to call it at the end of our stylesheet):</p>
-<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
-  for $me­dia, $blocks in $me­di­a_­cache
-    @me­dia $me­dia
+<pre><code class="language-styl">apply_media_cache()
+  for $media, $blocks in $media_cache
+    @media $media
       for $block in $blocks
         {$block}
 </code></pre>
 <p>It is rather easy: we it­er­ate through the cache, tak­ing the con­di­<span class="nobr">tion —</span><span class="thinsp"> </span><code>$me­dia</code>, and the list of all the blocks that were called with <span class="nobr">it —</span><span class="thinsp"> </span><code>$blocks</code>, then we cre­ate the me­dia query with that con­di­tion and in­side of it it­er­ate through all the blocks, yield­ing all of them one by one.</p>
 <p>So, if we would then call this func­tion at the end of the doc­ument:</p>
-<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
+<pre><code class="language-styl">apply_media_cache()
 </code></pre>
 <p>We would get what we want.</p>
 <p>How­ever, there are a few things to im­prove in this func­tion: we do not want al­ways to write the paren­the­ses, and, ac­tu­ally, we won&#39;t want to write all those <code>only screen and</code>. Also, we would want to use some key­words in­stead of the lit­eral con­di­tions, like <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#keywords" id="keywords"><code>palm</code>, <code>portable</code>, <code>desk</code></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I&#39;ve taken the names from the great <a href="http://inuitcss.com/">inuit.css</a> frame­work by <a href="@csswizardry">Harry Roberts</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> and so on. With those im­prove­ments and all the pre­vi­ous steps the re­sult­ing code would be this:</p>
 <h3 class="Heading" id="result"><a class="Anchor" aria-hidden="true" href="#result"></a><span class="ss01 hang-m">R</span>esult­ing code</h3>
-<pre><code class="language-styl">// De­fine the cache and the aliases
-$me­di­a_­cache = {}
-$me­di­a_aliases = {
+<pre><code class="language-styl">// Define the cache and the aliases
+$media_cache = {}
+$media_aliases = {
   palm:       &#39;(max-width: 480px)&#39;
   lap:        &#39;(min-width: 481px) and (max-width: 1023px)&#39;
   lap-and-up: &#39;(min-width: 481px)&#39;
@@ -155,59 +155,59 @@ $me­di­a_aliases = {
   desk-wide:  &#39;(min-width: 1200px)&#39;
 }
 
-// Mixin for caching the blocks with the given con­di­tions
-me­dia($con­di­tion)
-  helper($con­di­tion)
-    un­less $me­di­a_­cache[$con­di­tion]
-      $me­di­a_­cache[$con­di­tion] = ()
-    push($me­di­a_­cache[$con­di­tion], block)
+// Mixin for caching the blocks with the given conditions
+media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
 
-  +helper($con­di­tion)
-    {se­lec­tor() + &#39;&#39;}
+  +helper($condition)
+    {selector() + &#39;&#39;}
       {block}
 
-// Func­tion we would use to call all the cached styles
-ap­ply_­me­di­a_­cache()
-  for $me­dia, $blocks in $me­di­a_­cache
-    $me­dia = un­quote($me­di­a_aliases[$me­dia] || $me­dia)
-    $me­dia = &#39;(%s)&#39; % $me­dia un­less match(&#39;\(&#39;, $me­dia)
-    $me­dia = &#39;only screen and %s&#39; % $me­dia
-    @me­dia $me­dia
+// Function we would use to call all the cached styles
+apply_media_cache()
+  for $media, $blocks in $media_cache
+    $media = unquote($media_aliases[$media] || $media)
+    $media = &#39;(%s)&#39; % $media unless match(&#39;\(&#39;, $media)
+    $media = &#39;only screen and %s&#39; % $media
+    @media $media
       for $block in $blocks
         {$block}
 
-// Here would be our main styles, us­ing the `me­dia` mixin
+// Here would be our main styles, using the `media` mixin
 // …
 
 // Here we call all the cached styles
-ap­ply_­me­di­a_­cache()
+apply_media_cache()
 </code></pre>
 <p>Then we could write our stylesheets like this:</p>
 <pre><code class="language-styl">.foo
   width: 10px
 
-  +me­dia(&#39;lap&#39;)
+  +media(&#39;lap&#39;)
     width: 20px
 
-  +me­dia(&#39;desk&#39;)
+  +media(&#39;desk&#39;)
     width: 30px
 
-  +me­dia(&#39;min-width: 200px&#39;)
+  +media(&#39;min-width: 200px&#39;)
     width: 60px
 
 .bar
   height: 10px
 
-  +me­dia(&#39;lap&#39;)
+  +media(&#39;lap&#39;)
     height: 20px
 
-  +me­dia(&#39;desk&#39;)
+  +media(&#39;desk&#39;)
     height: 30px
 
-  +me­dia(&#39;min-width: 200px&#39;)
+  +media(&#39;min-width: 200px&#39;)
     height: 50px
 
-  +me­dia(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
+  +media(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
     height: 50px
 </code></pre>
 <p>And get this re­sult af­ter­wards:</p>
@@ -217,7 +217,7 @@ ap­ply_­me­di­a_­cache()
 .bar {
   height: 10px;
 }
-@me­dia only screen and (min-width: 481px) and (max-width: 1023px) {
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
   .foo {
     width: 20px;
   }
@@ -225,7 +225,7 @@ ap­ply_­me­di­a_­cache()
     height: 20px;
   }
 }
-@me­dia only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   .foo {
     width: 30px;
   }
@@ -233,7 +233,7 @@ ap­ply_­me­di­a_­cache()
     height: 30px;
   }
 }
-@me­dia only screen and (min-width: 200px) {
+@media only screen and (min-width: 200px) {
   .foo {
     width: 60px;
   }
@@ -241,7 +241,7 @@ ap­ply_­me­di­a_­cache()
     height: 50px;
   }
 }
-@me­dia only screen and (min-width: 500px) and (max-width: 700px) {
+@media only screen and (min-width: 500px) and (max-width: 700px) {
   .bar {
     height: 50px;
   }

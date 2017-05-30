@@ -35,9 +35,9 @@
 <p>In Jekyll you need to use <abbr>YAML</abbr> front mat­ter to add any meta­data to the post or page. Ac­tu­ally, Jekyll “sees” only those files that have the <abbr>YAML</abbr> front mat­ter, so it is a some­what im­por­tant thing.</p>
 <p>Most of the time this front mat­ter would look like this:</p>
 <pre><code class="language-yaml">---
-lay­out: docs
-ti­tle: Re­sources
-pre­v_­sec­tion: sites
+layout: docs
+title: Resources
+prev_section: sites
 ---
 </code></pre>
 <p>It could seem to be ok. How­ever, as I use Jekyll right on GitHub, my per­fec­tion­ism tells me that the source of all my posts in mark­down should look per­fect when looked at GitHub. And it would ren­der all the mark­down doc­u­ments in­stead of show­ing their con­tent. So, the <abbr>YAML</abbr> front mat­ter in that case would look like this:</p>
@@ -46,11 +46,11 @@ pre­v_­sec­tion: sites
 <p>How­ever, it can be fixed with ease: you just need to add some ex­tra lines <span class="nobr">in-be</span>­tween:</p>
 <pre><code class="language-yaml">---
 
-lay­out: docs
+layout: docs
 
-ti­tle: Re­sources
+title: Resources
 
-pre­v_­sec­tion: sites
+prev_section: sites
 
 ---
 </code></pre>

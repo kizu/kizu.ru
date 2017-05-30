@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Label-to-Input States</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="label-to-input-states"><a class="Anchor" aria-hidden="true" href="#label-to-input-states"></a><span class="ss01 hang-m">L</span><span class="nobr">abel-to</span>-In­put States</h1>
+          </header>
+<p>When fid­dling with in­puts &amp; la­bels for them, I re­mem­bered one thing that amused me <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#for-a-long-time" id="for-a-long-time">for a long time</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Fun fact: when I started the re­search for this ar­ti­cle, I found <a href="https://stackoverflow.com/questions/9098581/why-is-hover-for-input-triggered-on-corresponding-label-in-css">this ques­tion</a> at Stack­Over­flow, with a re­ally de­tailed an­swer by Bolt­Clock. The fun part is that I was the one who asked this ques­tion at this far Feb­ru­ary of the year 2012, and now to­tally for­got about it. Also, the “Even more” part of this ques­tion is still ac­tual for We­bkits/​Blinks.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>. Look at this <abbr>HTML</abbr>:</p>
+<pre><code class="language-html">&lt;label&gt;
+    Here is an input: 
+    &lt;input type=&quot;text&quot; /&gt;
+&lt;/label&gt;
+</code></pre>
+<p>The fact that amuses me is that when you de­clare a state for an in­put in <abbr>CSS</abbr>, like with <code>:hover</code> or <code>:ac­tive</code> pseudo classes, and then you have a la­bel for that in­put, then trig­ger­ing those states over the la­bel would ac­tu­ally trig­ger the same states on the input.</p>
+<p>Here is an ex­cerpt from the <a class="Link" href="https://drafts.csswg.org/selectors-4/#the-hover-pseudo">lat­est Se­lec­tors Level 4 spec</a>:</p>
+<blockquote>
+<p>Doc­u­ment lan­guages may de­fine ad­di­tional ways in which an el­e­ment can match :hover. For ex­am­ple, [<abbr>HTML</abbr>5] de­fines a la­beled con­trol el­e­ment as match­ing :hover when its la­bel is hovered.</p>
+</blockquote>
+<p>Here is a sim­ple ex­am­ple of this be­haviour:</p>
+<div class="Demo Demo_injected Figure" id="Demo_1">
+
+<style>
+
+input.example:hover {
+  background: lime;
+}
+
+label.example-label {
+    border-bottom: 1px dotted;
+}
+
+label.example-label:hover {
+    border-color: transparent;
+}
+
+</style>
+
+<p>
+    Hover <label class="example-label" for="Example1">this label</label> or the input itself
+    <input class="example" id="Example1" type="text" />
+</​p>
+</div>
+<p>If you&#39;re us­ing any mod­ern browser, you could see the in­put to be high­lighted both when you hover the in­put it­self and the la­bel as­so­ci­ated with it.</p>
+<p>The <abbr>CSS</abbr> for this ex­am­ple is trivial:</p>
+<pre><code class="language-css">input.example:hover {
+  background: lime;
+}
+</code></pre>
+<h2 class="Heading" id="but-what-about-ancestors-"><a class="Anchor" aria-hidden="true" href="#but-what-about-ancestors-"></a><span class="ss01 hang-m">B</span>ut What About An­cestors?</h2>
+<p>If you&#39;d look at that place about the hover in <a class="Link" href="https://drafts.csswg.org/selectors-4/#the-hover-pseudo">the spec</a>, you&#39;d see the fol­low­ing sen­tence above:</p>
+<blockquote>
+<p>An el­e­ment also matches :hover if one of its de­scen­dants in the flat tree (in­clud­ing <span class="nobr">non-el</span>­e­ment nodes, such as text nodes) matches the above con­di­tions.</p>
+</blockquote>
+<p>Which is a thing you could pos­si­bly al­ready know: when you hover over a de­scen­dant, then this state is also trig­gered <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#all-of-them" id="all-of-them">on all the an­ces­tors</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Even if the el­e­ment is out of the an­ces­tor&#39;s bounds, like be­ing po­si­tioned or moved out­side us­ing some other method, and even if the an­ces­tor would have <code>pointer-events: none</code> or <code>dis­play: con­tents</code>, it still would be marked as the one hav­ing the same state as the de­scen­dant.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>, which can be used in a lot of use­ful ways.</p>
+<p>But what if we have those con­nected la­bel and in­put, and the la­bel would be placed not in one of the in­put&#39;s an­ces­tor&#39;s flat tree?</p>
+<p>Like this:</p>
+<pre><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;
+        Here is
+        &lt;label class=&quot;example-label&quot; for=&quot;Example2&quot;&gt;a label&lt;/label&gt;
+        for the input inside another list item. Hover it!
+    &lt;/li&gt;
+    &lt;li&gt;
+        And here is the input for the above label:
+        &lt;input class=&quot;example&quot; id=&quot;Example2&quot; type=&quot;text&quot; /&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>And if we&#39;d add the same <abbr>CSS</abbr> as for the ex­am­ple above, we&#39;d get the same result:</p>
+<div class="Demo Demo_injected Figure" id="Demo_2">
+
+<ul>
+    <li>
+        Here is
+        <label class="example-label" for="Example2">a label</label>
+        for the input inside another list item. Hover it!
+    </li>
+    <li>
+        And here is the input for the above label:
+        <input class="example" id="Example2" type="text" />
+    </li>
+</ul>
+</div>
+<p>For now the re­sult is the same. But there is one big dif­fer­ence. Let&#39;s add some styles like this:</p>
+<pre><code class="language-css">ul.example3 &gt; li:hover {
+    box-shadow: 0 0 0 3px blue;
+}
+</code></pre>
+<p>Now look at the fol­low­ing ex­am­ple and try to hover over the in­put it­self and the as­so­ci­ated label:</p>
+<div class="Demo Demo_injected Figure" id="Demo_3">
+
+<style>
+
+ul.example3 li:hover {
+    box-shadow: 0 0 0 3px blue;
+}
+
+</style>
+
+<ul class="example3">
+    <li>
+        Here is
+        <label class="example-label" for="Example3">a label</label>
+        for the input inside another list item. Hover it!
+    </li>
+    <li>
+        And here is the input for the above label:
+        <input class="example" id="Example3" type="text" />
+    </li>
+</ul>
+</div>
+<p>You should see there that, as prob­a­bly ex­pected, only the ac­tual list item that is hov­ered would ob­tain the above styles. Giv­ing the in­put the <code>:hover</code> state us­ing the la­bel trick won&#39;t trig­ger the <code>:hover</code> over its par­ent. All like was writ­ten in the specs.</p>
+<p>And what this also means is that as we have this be­hav­iour, the fol­low­ing se­lec­tor that could look like non­sense at the first glance would ac­tu­ally mean some­thing:</p>
+<pre><code class="language-css">:not(:hover) &gt; input#Example4:hover {
+  background: blue;
+}
+</code></pre>
+<p>If we&#39;d take our first ex­am­ple and would just wrap an in­put into a sim­ple span:</p>
+<pre><code class="language-html">&lt;span&gt;&lt;input class=&quot;example&quot; id=&quot;Example4&quot; type=&quot;text&quot; /&gt;&lt;/span&gt;
+</code></pre>
+<p>This new se­lec­tor would ac­tu­ally tar­get <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#not-only" id="not-only">only</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Ac­tu­ally, there is at least one other way to trig­ger <span class="nobr">it —</span><span class="thinsp"> </span>by us­ing the de­vel­oper tools and check­ing the <code>:hover</code> state only for the in­put there. And if you&#39;d find out other cases where this would <span class="nobr">work —</span><span class="thinsp"> </span>please, re­port them to me!<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> the hover state of this in­put that is caused by hov­er­ing over label.</p>
+<p>And that means that we can now ac­tu­ally style both hover states in dif­fer­ent ways!</p>
+<p>Here is that ex­am­ple working:</p>
+<div class="Demo Demo_injected Figure" id="Demo_4">
+
+<style>
+
+:not(:hover) > input#Example4:hover {
+  background: blue;
+}
+
+</style>
+
+<p>
+    <span><input class="example" id="Example4" type="text" /></span>
+    Hover <label class="example-label" for="Example4">this label</label> or the input itself
+</​p>
+</div>
+<h2 class="Heading" id="selecting-siblings"><a class="Anchor" aria-hidden="true" href="#selecting-siblings"></a><span class="ss01 hang-xs">S</span>elect­ing Siblings</h2>
+<p>As with a lot of other places in <abbr>CSS</abbr>, you could re­search a lot of things sur­round­ing this be­hav­iour. For ex­am­ple, not only the <code>:hover</code> state can be del­e­gated this way, but also at least the <code>:ac­tive</code> one.</p>
+<p>But I&#39;d like to men­tion one nu­ance that could be rather use­ful, but which is pre­vented by IE/​Edge not sup­port­ing it.</p>
+<p>As we saw, the par­ent is, per spec, won&#39;t get the hover state of such del­e­gated <code>:hover</code>. But what if we&#39;d want to use this <code>:hover</code> as a pre­req­ui­site to some­thing else? What if we would add a com­bi­na­tor af­ter it and then would try to se­lect some sib­lings that will come af­ter the input?</p>
+<p>Like this:</p>
+<div class="Demo Demo_injected Figure" id="Demo_5">
+
+<style>
+
+.example5 input.example:hover ~ a {
+  background: blue;
+}
+
+</style>
+
+<ul class="example5">
+    <li>
+        Here is
+        <label class="example-label" for="Example5">a label</label>
+        for the input inside another list item. Hover it!
+    </li>
+    <li>
+        And here is the input for the above label:
+        <input class="example" id="Example5" type="text" />, now with <a class="Link" href="#nope">a link</a> after it.
+    </li>
+</ul>
+</div>
+<p>In Fire­fox and browsers based on We­bkit/​Blink you could see the link that goes af­ter the in­put to be high­lighted even when you hover the la­bel in­side an­other list item! In Edge, sadly, noth­ing hap­pens there.</p>
+<p>And, as in the browsers that sup­port it, this be­hav­iour would work even if the in­put is dis­abled, we then could hide it us­ing the of­ten used tech­nique (us­ing <code>clip</code> etc.), and then use la­bels at one part of the page to high­light stuff at any other part of the page with­out any JS. What fun could we get out of it?</p>
+<h2 class="Heading" id="breaking-the-specs-in-the-end"><a class="Anchor" aria-hidden="true" href="#breaking-the-specs-in-the-end"></a><span class="ss01 hang-m">B</span>reak­ing the Specs in the End</h2>
+<p>The most <input disabled="" aria-hidden="true" class="lol-example" id="Example6-5" type="radio"><span class="example-target">fun</span> thing what I found when do­ing quick ex­per­i­ments <input disabled="" aria-hidden="true" class="lol-example" id="Example6-6" type="radio"><span class="example-target">is</span> this:</p>
+<div class="Demo Demo_injected Figure" id="Demo_6">
+
+<style>
+
+.lol-example {
+  position: absolute;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+}
+
+:hover + .example-target {
+  background: yellow;
+  box-shadow: 0 0 0 2px blue;
+}
+
+</style>
+
+<ul class="example6">
+    <li>
+        Here is some list item with some words like
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-1" type="text" /><span class="example-target">Woosh</span>
+        and
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-2" type="text" /><span class="example-target">Wheee</span>
+    </li>
+    <li>
+        And another <input disabled aria-hidden="true" class="lol-example" id="Example6-3" type="text" /><span class="example-target">list item</span>!
+    </li>
+    <li>
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-4" type="text" /><span class="example-target">And another!</span>
+    </li>
+</ul>
+
+<p>
+    Hey, look, there is a
+    <label for="Example6-1"><label for="Example6-2"><label for="Example6-3"><label for="Example6-4"><label for="Example6-5"><label for="Example6-6"><label class="example-label" for="Example6-7">superlabel!</label></label></label></label></label></label></label>
+    Hover it!
+</p>
+
+</div>
+<p>Sadly, there I used the <input disabled="" aria-hidden="true" class="lol-example" id="Example6-7" type="radio"><span class="example-target">for­bid­den in specs</span> nest­ing of la­bels in­side other la­bels (which we could ac­tu­ally over­come in terms of <em>va­lid­ity</em> us­ing ei­ther the method for <a class="Link" href="/en/fun/nested-links/">nest­ing links</a> or by <abbr>DOM</abbr> ma­nip­u­la­tion), which sur­pris­ingly works as we&#39;d ex­pect: you hover one (vi­su­ally) item, and then you get vi­sual feed­back from any num­ber of places all over the page.</p>
+<p>Imag­ine if this would be the thing we could use with­out hacks and with­out re­ly­ing on the la­<span class="nobr">bel-to</span>-in­put state del­e­gation.</p>
+<p>And here we have it <em>im­ple­mented</em> in some way, so its en­tirely pos­si­ble to do in browsers and we&#39;d only need the specs to sup­port it? What do you think, do we need a way to del­e­gate states from one el­e­ment to an­other in na­tive <abbr>CSS</abbr>? If you think that we need, tell your fel­low spec writ­ers and/​or browser ven­dors, or even come up with a draft of what it could look like in a spec by yourself!</p>
+<p>There is a <em>chance</em>, that such stuff would be pos­si­ble with ex­ten­sive us­age of <code>:has()</code> (<a class="Link" href="https://drafts.csswg.org/selectors-4/#relational">at the same spec</a>) if it would be ever im­ple­mented, but yeah, only if it would be ever im­ple­mented.</p>
+
+          <p class="Metadata Published">Wrote as a draft, not published yet.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CLabel-to-Input%20States%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/label-to-input/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2017 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>

@@ -55,13 +55,13 @@
 <p>Про­пи­сан­ные выше «се­лек­то­ры» я уже ча­стич­но при­ме­няю, сде­лав про­стень­кий и гряз­ный мак­рос для текст­мей­та,<span class="nobr"> —</span><span class="thinsp"> </span>сна­ча­ла транс­фор­ми­рую се­лек­тор, по­том вы­зы­ваю <span class="nobr">зен-ко</span>­динг. <span class="nobr">По-хо</span>­ро­ше­му, надо бы это встро­ить в <span class="nobr">зен-ко</span>­динг как пре­про­цес­сор, и я, воз­мож­но, ко­<span class="nobr">гда-ни</span>­будь по­про­бую <span class="nobr">что-то</span> та­кое со­орудить.</p>
 <p>Од­на­ко, се­лек­то­ра­ми дело не огра­ни­чи­ва­ет­ся. Всё то же са­мое мож­но сде­лать и для <abbr>HAML</abbr> (и, по идее, для лю­бо­го шаб­ло­ни­за­то­ра, сам я по­про­бую <span class="nobr">что-то</span> сде­лать имен­но для <abbr>HAML</abbr> т.к. его лег­ко пар­сить, а я не про­грам­мист :)), в та­ком слу­чае запись</p>
 <pre><code class="language-css">.b-bl1
-  .b-bl2_­foo
+  .b-bl2_foo
     .__el
     .____el_bar
 </code></pre>
 <p>Бу­дет ин­тер­пре­ти­ро­вать­ся как</p>
 <pre><code class="language-css">.b-bl1
-  .b-bl2.b-bl2_­foo
+  .b-bl2.b-bl2_foo
     .b-bl2__el
     .b-bl1__el.b-bl1__el_bar
 </code></pre>
@@ -69,7 +69,7 @@
 <pre><code class="language-css">.b-block {
     …
     ._foo {…}
-    .__el­e­ment {
+    .__element {
         …
         ._bar {…}
         }
@@ -78,19 +78,19 @@
 <p>бу­дет рас­кры­вать­ся сас­сом сна­ча­ла в</p>
 <pre><code class="language-css">.b-block {…}
 .b-block ._foo {…}
-.b-block .__el­e­ment {…}
-.b-block .__el­e­ment ._bar {…}
+.b-block .__element {…}
+.b-block .__element ._bar {…}
 </code></pre>
 <p>что по­том про­стей­шей ре­гу­ляр­кой пре­об­ра­зу­ет­ся уже в то, что нам нужно:</p>
 <pre><code class="language-css">.b-block {…}
-.b-block­_­foo {…}
-.b-block­__el­e­ment {…}
-.b-block­__el­e­men­t_bar {…}
+.b-block_foo {…}
+.b-block__element {…}
+.b-block__element_bar {…}
 </code></pre>
 <p>Ву­аля.</p>
 <p>Кон­цеп­ция про­стая, ре­а­ли­за­ция не долж­на быть очень уж слож­ной, од­на­ко, сам я, если <span class="nobr">что-то</span> и ре­а­ли­зую, то это бу­дет, ско­рее все­го, ре­а­ли­зо­ва­но крайне пло­хо. По­то­му, если вдруг <span class="nobr">кто-то</span> за­го­рит­ся иде­ей и сде­ла­ет <span class="nobr">что-то</span> из того, что я опи­сал (до­пол­не­ние к <span class="nobr">зен-ко</span>­дин­гу, пре­про­цес­сор для <abbr>HAML</abbr> и пост­про­цес­сор для <abbr>SASS</abbr>), или же ре­а­ли­зу­ет эту кон­цеп­цию для <span class="nobr">чего-то</span> ещё (<abbr>LESS</abbr>, лю­бой дру­гой шаб­ло­ни­за­тор, что угод­но),<span class="nobr"> —</span><span class="thinsp"> </span>я буду толь­ко за.</p>
 <p>И ещё: это пока толь­ко на­ча­ло. В вёрст­ке и, в част­но­сти, в <abbr>БЭМ</abbr> я вижу мно­го чего, что мож­но раз­ви­вать и улуч­шать, мно­го моих идей хо­ро­шо ло­жат­ся ря­дом с кон­цеп­ци­ей be­mto. Так что, на­по­сле­док, мо­же­те по­ду­мать во что, по моим мыс­лям, мо­жет пре­вра­тить­ся сле­ду­ющее:</p>
-<pre><code class="language-css">.b-block­_­foo._bar&gt;.__b-link_lol&gt;.__el­e­ment._
+<pre><code class="language-css">.b-block_foo._bar&gt;.__b-link_lol&gt;.__element._
 </code></pre>
 <h2 class="Heading" id="добавлено-"><a class="Anchor" aria-hidden="true" href="#добавлено-"></a><span class="ss01 hang-xs">Д</span>обав­лено:</h2>
 <ol>

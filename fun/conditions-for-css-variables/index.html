@@ -51,7 +51,7 @@
         25px * var(--is-big) +
         10px * (1 - var(--is-big))
     );
-    bor­der-width: calc(
+    border-width: calc(
         3px * var(--is-big) +
         1px * (1 - var(--is-big))
     );
@@ -85,7 +85,7 @@
 }
 
 .block {
-    back­ground: rgba(
+    background: rgba(
         calc(
             255*var(--is-red) +
             0*(1 - var(--is-red))
@@ -111,95 +111,95 @@
 <h2 class="Heading" id="препроцессинг"><a class="Anchor" aria-hidden="true" href="#препроцессинг"></a><span class="ss01 hang-m">П</span>ре­про­цессинг</h2>
 <p>То­гда как для би­нар­ных усло­вий вполне ре­аль­но пи­сать вы­чис­ле­ния вруч­ную, для бо­лее слож­ных слу­ча­ев, или в слу­чае тех же цве­тов, нам бы при­го­ди­лись ин­стру­мен­ты, ко­то­рые бы поз­во­ли­ли де­лать это всё ав­то­ма­ти­че­ски. К сча­стью, у нас есть для это­го пре­про­цес­соры.</p>
 <p>Вот как я ре­а­ли­зо­вал это быст­рень­ко на <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#pen" id="pen">Стай­лу­се</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Мож­но по­смот­реть на этот же код <a href="http://codepen.io/kizu/pen/zKmyvG">на Code­Pen</a> in ac­tion.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>:</p>
-<pre><code class="language-styl">con­di­tional($var, $val­ues...)
-  $re­sult = &#39;&#39;
+<pre><code class="language-styl">conditional($var, $values...)
+  $result = &#39;&#39;
 
-  // If there is only an ar­ray passed, use its con­tents
-  if length($val­ues) == 1
-    $val­ues = $val­ues[0]
+  // If there is only an array passed, use its contents
+  if length($values) == 1
+    $values = $values[0]
 
-  // Val­i­dat­ing the val­ues and check if we need to do any­thing at all
+  // Validating the values and check if we need to do anything at all
   $type = null
   $equal = true
 
-  for $value, $i in $val­ues
-    if $i &gt; 0 and $value != $val­ues[0]
+  for $value, $i in $values
+    if $i &gt; 0 and $value != $values[0]
       $equal = false
 
-    $val­ue_­type = typeof($value)
-    $type = $type || $val­ue_­type
+    $value_type = typeof($value)
+    $type = $type || $value_type
     if !($type == &#39;unit&#39; or $type == &#39;rgba&#39;)
-      er­ror(&#39;Con­di­tional func­tion can ac­cept only num­bers or col­ors&#39;)
+      error(&#39;Conditional function can accept only numbers or colors&#39;)
 
-    if $type != $val­ue_­type
-      er­ror(&#39;Con­di­tional func­tion can ac­cept only same type val­ues&#39;)
+    if $type != $value_type
+      error(&#39;Conditional function can accept only same type values&#39;)
 
-  // If all the val­ues are equal, just re­turn one of them
+  // If all the values are equal, just return one of them
   if $equal
-    re­turn $val­ues[0]
+    return $values[0]
 
-  // Han­dling num­bers
+  // Handling numbers
   if $type == &#39;unit&#39;
-    $re­sult = &#39;calc(&#39;
-    $i_­count = 0
-    for $value, $i in $val­ues
-      $mul­ti­plier = &#39;&#39;
-      $mod­i­fier = 1
-      $j_­count = 0
-      for $j in 0..(length($val­ues) - 1)
+    $result = &#39;calc(&#39;
+    $i_count = 0
+    for $value, $i in $values
+      $multiplier = &#39;&#39;
+      $modifier = 1
+      $j_count = 0
+      for $j in 0..(length($values) - 1)
         if $j != $i
-          $j_­count = $j_­count + 1
-          // We could use just the gen­eral mul­ti­plier,
-          // but for 0 and 1 we can sim­plify it a bit.
+          $j_count = $j_count + 1
+          // We could use just the general multiplier,
+          // but for 0 and 1 we can simplify it a bit.
           if $j == 0
-            $mod­i­fier = $mod­i­fier * $i
-            $mul­ti­plier = $mul­ti­plier + $var
+            $modifier = $modifier * $i
+            $multiplier = $multiplier + $var
           else if $j == 1
-            $mod­i­fier = $mod­i­fier * ($j - $i)
-            $mul­ti­plier = $mul­ti­plier + &#39;(1 - &#39; + $var + &#39;)&#39;
+            $modifier = $modifier * ($j - $i)
+            $multiplier = $multiplier + &#39;(1 - &#39; + $var + &#39;)&#39;
           else
-            $mod­i­fier = $mod­i­fier * ($i - $j)
-            $mul­ti­plier = $mul­ti­plier + &#39;(&#39; + $var + &#39; - &#39; + $j + &#39;)&#39;
+            $modifier = $modifier * ($i - $j)
+            $multiplier = $multiplier + &#39;(&#39; + $var + &#39; - &#39; + $j + &#39;)&#39;
 
-          if $j_­count &lt; length($val­ues) - 1
-            $mul­ti­plier = $mul­ti­plier + &#39; * &#39;
+          if $j_count &lt; length($values) - 1
+            $multiplier = $multiplier + &#39; * &#39;
 
       // If value is zero, just don&#39;t add it there lol
       if $value != 0
-        if $mod­i­fier != 1
-          $mul­ti­plier = $mul­ti­plier + &#39; * &#39; + (1 / $mod­i­fier)
-        $re­sult = $re­sult + ($i_­count &gt; 0 ? &#39; + &#39; : &#39;&#39;) + $value + &#39; * &#39; + $mul­ti­plier
-        $i_­count = $i_­count + 1
+        if $modifier != 1
+          $multiplier = $multiplier + &#39; * &#39; + (1 / $modifier)
+        $result = $result + ($i_count &gt; 0 ? &#39; + &#39; : &#39;&#39;) + $value + &#39; * &#39; + $multiplier
+        $i_count = $i_count + 1
 
-    $re­sult = $re­sult + &#39;)&#39;
+    $result = $result + &#39;)&#39;
 
-  // Han­dling col­ors
+  // Handling colors
   if $type == &#39;rgba&#39;
     $hues = ()
-    $sat­u­ra­tions = ()
-    $light­nesses = ()
-    $al­phas = ()
+    $saturations = ()
+    $lightnesses = ()
+    $alphas = ()
 
-    for $value in $val­ues
+    for $value in $values
       push($hues, unit(hue($value), &#39;&#39;))
-      push($sat­u­ra­tions, sat­u­ra­tion($value))
-      push($light­nesses, light­ness($value))
-      push($al­phas, al­pha($value))
+      push($saturations, saturation($value))
+      push($lightnesses, lightness($value))
+      push($alphas, alpha($value))
 
-    $re­sult = &#39;hsla(&#39; + con­di­tional($var, $hues) + &#39;, &#39; + con­di­tional($var, $sat­u­ra­tions) + &#39;, &#39; + con­di­tional($var, $light­nesses) + &#39;, &#39; + con­di­tional($var, $al­phas) +  &#39;)&#39;
+    $result = &#39;hsla(&#39; + conditional($var, $hues) + &#39;, &#39; + conditional($var, $saturations) + &#39;, &#39; + conditional($var, $lightnesses) + &#39;, &#39; + conditional($var, $alphas) +  &#39;)&#39;
 
-  re­turn un­quote($re­sult)
+  return unquote($result)
 </code></pre>
 <p>Да, кода до­воль­но мно­го, но этот мик­син спо­со­бен ге­не­ри­ро­вать усло­вия как для чи­сел, так и для цве­тов, и не толь­ко для би­нар­ных усло­вий, но и для лю­бо­го чис­ла воз­мож­ных зна­че­ний в них.</p>
 <p>Ис­поль­зо­ва­ние мик­си­на очень простое:</p>
-<pre><code class="language-styl">bor­der-width: con­di­tional(var(--foo), 10px, 20px)
+<pre><code class="language-styl">border-width: conditional(var(--foo), 10px, 20px)
 </code></pre>
 <p>Пер­вый ар­гу­мент<span class="nobr"> —</span><span class="thinsp"> </span>наша пе­ре­мен­ная, вто­рым ар­гу­мен­том бу­дет то зна­че­ние, ко­то­рое долж­но при­ме­нять­ся ко­гда пе­ре­мен­ная бу­дет рав­на <code>0</code>, тре­тий ар­гу­мент<span class="nobr"> —</span><span class="thinsp"> </span><code>1</code>, и т.д.</p>
 <p>Вы­зов мик­си­на выше сге­не­рит вот та­кое услов­ное вы­ра­жение:</p>
-<pre><code class="language-css">bor­der-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
+<pre><code class="language-css">border-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
 </code></pre>
 <p>А вот бо­лее слож­ный при­мер с цве­тами:</p>
-<pre><code class="language-styl">color: con­di­tional(var(--bar), red, lime, re­bec­ca­pur­ple, or­ange)
+<pre><code class="language-styl">color: conditional(var(--bar), red, lime, rebeccapurple, orange)
 </code></pre>
 <p>Он сге­не­рит то, что вы точ­но не за­хо­ти­те пи­сать вручную:</p>
 <pre><code class="language-css">color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
@@ -208,7 +208,7 @@
 <h2 class="Heading" id="фолбеки"><a class="Anchor" aria-hidden="true" href="#фолбеки"></a><span class="ss01 hang-xs">Ф</span>ол­беки</h2>
 <p>Ко­неч­но, если вы дей­стви­тель­но со­би­ра­е­тесь всё это дело ис­поль­зо­вать, вам по­на­до­бит­ся воз­мож­ность ис­поль­зо­вать фол­бе­ки. Для бра­у­зе­ров, не под­дер­жи­ва­ю­щих пе­ре­мен­ные, это про­сто<span class="nobr"> —</span><span class="thinsp"> </span>мож­но опре­де­лять де­кла­ра­цию с фол­бе­ком за­ранее:</p>
 <pre><code class="language-css">.block {
-    padding: 100px; /* fall­back */
+    padding: 100px; /* fallback */
     padding: calc(
         100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
          20px * (var(--foo) * (2 - var(--foo))) +
@@ -217,8 +217,8 @@
 }
 </code></pre>
 <p>Но вот ко­гда дело до­хо­дит до цве­тов, то по­яв­ля­ет­ся про­бле­ма: как толь­ко по­яв­ля­ют­ся пе­ре­мен­ные, то по фак­ту (и это оче­ред­ное очень стран­ное ме­сто в спе­ци­фи­ка­ци­ях), <em>тупо лю­бая</em> де­кла­ра­ция, в ко­то­рой есть <abbr>CSS</abbr>-пе­ре­мен­ные, ока­зы­ва­ет­ся ва­лид­ной. А это зна­чит, что не по­лу­чит­ся ис­поль­зо­вать фол­бек для чего-либо, где есть <abbr>CSS</abbr>-пе­ре­менные:</p>
-<pre><code class="language-css">back­ground: blue;
-back­ground: I 💩 CSS VAR(--I)ABLES;
+<pre><code class="language-css">background: blue;
+background: I 💩 CSS VAR(--I)ABLES;
 </code></pre>
 <p>Вот это вот<span class="nobr"> —</span><span class="thinsp"> </span>ва­лид­но со­глас­но спе­ци­фи­ка­ци­ям, фон бу­дет при­ни­мать своё <code>ini­tial</code> зна­че­ние, а фол­бек при­ме­нять­ся не бу­дет (даже если ну со­вер­шен­но оче­вид­но, что осталь­ные ча­сти зна­че­ния ну уж точ­но некор­рект­ны).</p>
 <p>Так что, для того, что­бы предо­став­лять фол­бе­ки в по­доб­ных слу­ча­ях, нам надо бу­дет вос­поль­зо­вать­ся обёрт­кой с <code>@sup­ports</code>, в ко­то­рой мы бу­дем про­ве­рять под­держ­ку все­го <strong>кро­ме</strong> пе­ре­менных.</p>
@@ -226,7 +226,7 @@ back­ground: I 💩 CSS VAR(--I)ABLES;
 <pre><code class="language-css">.block {
     color: #f00;
 }
-@sup­ports (color: rgb(0, calc(0), 0)) {
+@supports (color: rgb(0, calc(0), 0)) {
     .block {
         color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
   }

@@ -45,16 +45,16 @@
     Foo
     &lt;a href=&quot;#Bar&quot;&gt;
         Bar
-    &lt;/​​a&gt;
+    &lt;/a&gt;
     Baz
-&lt;/​​a&gt;
+&lt;/a&gt;
 </code></pre>
 <p>в гла­зах бра­у­зе­ра ста­нет <span class="nobr">чем-то</span> та­ким —</p>
 <pre><code class="language-html">&lt;a href=&quot;#Foo&quot;&gt;
     Foo
-    &lt;/​​a&gt;&lt;a href=&quot;#Bar&quot;&gt;
+    &lt;/a&gt;&lt;a href=&quot;#Bar&quot;&gt;
         Bar
-    &lt;/​​a&gt;
+    &lt;/a&gt;
     Baz
 </code></pre>
 <p>Жи­вой пример:</p>
@@ -90,13 +90,13 @@
 </div>
 <pre><code class="language-html">&lt;a href=&quot;#a&quot;&gt;
     Foo
-    &lt;ob­ject type=&quot;lol/​​wut&quot;&gt;
+    &lt;object type=&quot;lol/wut&quot;&gt;
         &lt;a href=&quot;#b&quot;&gt;
             Bar
-        &lt;/​​a&gt;
-    &lt;/​​ob­ject&gt;
+        &lt;/a&gt;
+    &lt;/object&gt;
     Baz
-&lt;/​​a&gt;
+&lt;/a&gt;
 </code></pre>
 <p>Всё, что мы, в ито­ге, де­ла­ем<span class="nobr"> —</span><span class="thinsp"> </span>про­кла­ды­ва­ем меж­ду внут­рен­ней и внеш­ней ссыл­кой объ­ект. Вне­зап­но, это ра­бо­та­ет: все пар­се­ры со­вре­мен­ных бра­у­зе­ров пе­ре­ста­ют взры­вать раз­мет­ку и на­чи­на­ют вос­при­ни­мать вло­жен­ность те­гов так, как нам это­го хо­чет­ся. Ура.</p>
 <h2 class="Heading" id="почему-это-работает"><a class="Anchor" aria-hidden="true" href="#почему-это-работает"></a><span class="ss01 hang-m">П</span>оче­му это ра­бо­тает</h2>
@@ -120,13 +120,13 @@
 <h3 class="Heading" id="фолбек-для-ie"><a class="Anchor" aria-hidden="true" href="#фолбек-для-ie"></a><span class="ss01 hang-xs">Ф</span>ол­бек для IE</h3>
 <p>К со­жа­ле­нию, я не знаю про­сто­го спо­со­ба обой­ти эту про­бле­му в ста­рых IE. Как ми­ни­мум, мож­но по­про­бо­вать по­пра­вить си­ту­а­цию так, что­бы ни­че­го не взры­ва­лось<span class="nobr"> —</span><span class="thinsp"> </span>на­при­мер, обер­нуть теги внут­рен­ней ссыл­ки в услов­ные ком­мен­тарии:</p>
 <pre><code class="language-html">&lt;a href=&quot;…&quot;&gt;
-    текст ос­нов­ной ссыл­ки…
-    &lt;ob­ject&gt;
-        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;a href=&quot;…&quot;&gt;&lt;!--&lt;![en­dif]--&gt;
-            con­tent of the nested link…
-        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;/​​a&gt;&lt;!--&lt;![en­dif]--&gt;
-    &lt;/​​ob­ject&gt;
-&lt;/​​a&gt;
+    текст основной ссылки…
+    &lt;object&gt;
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;a href=&quot;…&quot;&gt;&lt;!--&lt;![endif]--&gt;
+            content of the nested link…
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;/a&gt;&lt;!--&lt;![endif]--&gt;
+    &lt;/object&gt;
+&lt;/a&gt;
 </code></pre>
 <p>Если по­доб­ная по­те­ря функ­ци­о­наль­но­сти вас устро­ит<span class="nobr"> —</span><span class="thinsp"> </span>от­лич­но, <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#try-expressions" id="try-expressions">ина­че</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Са­мые лю­бо­пыт­ные мо­гут по­про­бо­вать по­ду­мать: мож­но ли со­ору­дить ка­<span class="nobr">кой-ни</span>­будь фол­бек, ис­поль­зуя экс­преш­ны?<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> же при­дёт­ся ис­поль­зо­вать в услов­ных ком­мен­та­ри­ях иные фол­бе­ки для этой про­блемы.</p>
 <h2 class="Heading" id="это-валидно-"><a class="Anchor" aria-hidden="true" href="#это-валидно-"></a><span class="ss02 hang-xs">Э</span>то ва­лидно?</h2>

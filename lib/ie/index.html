@@ -43,34 +43,34 @@
 <h2 class="Heading" id="Png"><a class="Anchor" aria-hidden="true" href="#Png"></a><span class="ss01 hang-m">И</span>справ­ле­ние по­лу­про­зрач­ных png</h2>
 <p>Тупо фильтр</p>
 <pre><code class="undefinedCSS">* HTML .png-crop {
-    back­ground-im­age:none;
+    background-image:none;
     zoom:1;
-    fil­ter:progid:DX­Im­age­Trans­form.Mi­crosoft.Al­phaIm­age­Loader(src=&quot;ololo.png&quot;, siz­ing­Method=&quot;crop&quot;);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&quot;ololo.png&quot;, sizingMethod=&quot;crop&quot;);
     }
 </code></pre>
 <p>Ис­прав­ле­ние png с ме­то­дом crop (лёг­ким дви­же­ни­ем руки ме­ня­ет­ся на «scale»)</p>
 <pre><code class="undefinedCSS">* HTML .png-crop {
-    fil­ter:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.zoom = 1;
-            t.run­timeStyle.fil­ter = &#39;progid:DX­Im­age­Trans­form.Mi­crosoft.Al­phaIm­age­Loader(src=&#39;+t.cur­rentStyle.back­groundIm­age.split(&#39;\&quot;&#39;)[1]+&#39;, siz­ing­Method=crop)&#39;;
-            t.run­timeStyle.back­groundIm­age = &#39;none&#39;;
+    filter:expression(
+        function(t){
+            t.runtimeStyle.zoom = 1;
+            t.runtimeStyle.filter = &#39;progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&#39;+t.currentStyle.backgroundImage.split(&#39;\&quot;&#39;)[1]+&#39;, sizingMethod=crop)&#39;;
+            t.runtimeStyle.backgroundImage = &#39;none&#39;;
         }(this)
     );
     }
 </code></pre>
 <p>Ис­прав­ле­ние png для <code>&lt;img /&gt;</code>, не ну­жен про­зрач­ный гиф. <sup><a class="Link" href="png.html">при­мер</a></sup>.</p>
 <pre><code class="undefinedCSS">* HTML IMG {
-    _vis­i­bil­ity:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.vis­i­bil­ity = &#39;hid­den&#39;;
-            var png = doc­u­ment.cre­ateEle­ment(&#39;png&#39;);
-            png.style.css­Text = &#39;zoom:1;fil­ter:progid:DX­Im­age­Trans­form.Mi­crosoft.Al­phaIm­age­Loader(src=&#39; + t.src + &#39;,siz­ing­Method=scale);&#39;;
-            png.ap­pend­Child(t.re­pla­ceN­ode(png));
-            if (png.par­entN­ode.getAt­tribute(&#39;href&#39;)) {
-                var pngclick = doc­u­ment.cre­ateEle­ment(&#39;pngclick&#39;);
-                pngclick.style.css­Text = &#39;po­si­tion:ab­solute;over­flow:hid­den;width:ex­pres­sion(run­timeStyle.width = par­entN­ode.off­setWidth);height:ex­pres­sion(run­timeStyle.height = par­entN­ode.off­setHeight);&#39;;
-                t.par­entN­ode.in­sert­Be­fore(pngclick,t);
+    _visibility:expression(
+        function(t){
+            t.runtimeStyle.visibility = &#39;hidden&#39;;
+            var png = document.createElement(&#39;png&#39;);
+            png.style.cssText = &#39;zoom:1;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&#39; + t.src + &#39;,sizingMethod=scale);&#39;;
+            png.appendChild(t.replaceNode(png));
+            if (png.parentNode.getAttribute(&#39;href&#39;)) {
+                var pngclick = document.createElement(&#39;pngclick&#39;);
+                pngclick.style.cssText = &#39;position:absolute;overflow:hidden;width:expression(runtimeStyle.width = parentNode.offsetWidth);height:expression(runtimeStyle.height = parentNode.offsetHeight);&#39;;
+                t.parentNode.insertBefore(pngclick,t);
             }
         }(this)
     );
@@ -80,14 +80,14 @@
 <p>Толь­ко max-width, бе­рёт­ся из эле­мен­та, толь­ко пик­се­ли (воз­мож­но, сто­ит до­ба­вить про­вер­ку на из­ме­не­ние ши­ри­ны са­мо­го эле­мен­та). <sup><a class="Link" href="minmax.html">при­мер</a></sup>.</p>
 <pre><code class="undefinedCSS">.maxwidth {
     zoom:1;
-    maxwidth:ex­pres­sion(
-        func­tion(t){
-            var w = t.par­entN­ode.scroll­Width;
+    maxwidth:expression(
+        function(t){
+            var w = t.parentNode.scrollWidth;
             if (w != t.w) {
                 t.w = w;
-                var max = par­seInt(t.cur­rentStyle[&#39;max-width&#39;], 10);
+                var max = parseInt(t.currentStyle[&#39;max-width&#39;], 10);
                 t.style.width = &#39;auto&#39;;
-                if (t.scroll­Width &gt; max) {
+                if (t.scrollWidth &gt; max) {
                     t.style.width = max;
                 }
             }
@@ -98,12 +98,12 @@
 <p>min-width для <abbr>BODY</abbr>, бе­рёт­ся из свой­ства, толь­ко пик­се­ли (stan­dards-mode only (пока)) (+надо до­ба­вить ке­ши­ру­е­мость зна­че­ния<span class="nobr"> —</span><span class="thinsp"> </span>что­бы пе­ре­за­пи­сы­вать его толь­ко если ме­ня­ет­ся).</p>
 <pre><code class="undefinedCSS">* HTML BODY
 {
-    zoom:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.zoom = 1;
-            var max = par­seInt(t.cur­rentStyle[&#39;min-width&#39;], 10);
-            var f = func­tion() {
-                var w = doc­u­ment.doc­u­mentEle­ment.clien­tWidth;
+    zoom:expression(
+        function(t){
+            t.runtimeStyle.zoom = 1;
+            var max = parseInt(t.currentStyle[&#39;min-width&#39;], 10);
+            var f = function() {
+                var w = document.documentElement.clientWidth;
                 if (w != t.w) {
                     t.w = w;
                     if (w &lt; max) {
@@ -114,21 +114,21 @@
                 }
             };
             f();
-            win­dow.at­tachEvent(&#39;on­re­size&#39;,f);
+            window.attachEvent(&#39;onresize&#39;,f);
         }(this)
     );
 }
 </code></pre>
 <p>Max-width/​​max-height, толь­ко пик­се­ли, од­но­ра­зовый.</p>
 <pre><code class="undefinedCSS">IMG {
-    zoom:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.zoom = 1;
-            var maxW = par­seInt(t.cur­rentStyle[&#39;max-width&#39;], 10);
-            var maxH = par­seInt(t.cur­rentStyle[&#39;max-height&#39;], 10);
-            if (t.scroll­Width &gt; maxW &amp;&amp; t.scroll­Width &gt;= t.scroll­Height) {
+    zoom:expression(
+        function(t){
+            t.runtimeStyle.zoom = 1;
+            var maxW = parseInt(t.currentStyle[&#39;max-width&#39;], 10);
+            var maxH = parseInt(t.currentStyle[&#39;max-height&#39;], 10);
+            if (t.scrollWidth &gt; maxW &amp;&amp; t.scrollWidth &gt;= t.scrollHeight) {
                 t.style.width = maxW;
-            } else if (t.scroll­Height &gt; maxH) {
+            } else if (t.scrollHeight &gt; maxH) {
                 t.style.height = maxH;
             }
         }(this)
@@ -138,24 +138,24 @@
 <h2 class="Heading" id="Positioning"><a class="Anchor" aria-hidden="true" href="#Positioning"></a><span class="ss01 hang-m">П</span>ози­ци­о­ни­ро­вание</h2>
 <p>Ре­а­ли­за­ция пра­виль­но­го аб­со­лют­но­го по­зи­ци­о­ни­ро­ва­ния (left+right/​​top+bot­tom), го­то­во для «px» и «%», надо те­сти­ро­вать и по­ста­вить про­вер­ку на вы­со­ту/​​ши­ри­ну (если мож­но). Мо­жет, до­ба­вить ис­прав­ле­ние для right/​​bot­tom при от­стут­ствии left/​​top?</p>
 <pre><code class="undefinedCSS">* HTML .tblr {
-    tblr:ex­pres­sion(
-        func­tion (t) {
-            func­tion to_px(in­put, dim) {
-                re­turn in­put.match(&#39;%&#39;) ? Math.floor(dim / 100 * par­seInt(in­put, 10)) : par­seInt(in­put, 10);
+    tblr:expression(
+        function (t) {
+            function to_px(input, dim) {
+                return input.match(&#39;%&#39;) ? Math.floor(dim / 100 * parseInt(input, 10)) : parseInt(input, 10);
             }
-            var h = t.par­entN­ode.off­setHeight || t.par­entN­ode.par­entN­ode.off­setHeight;
-            var w = t.par­entN­ode.off­setWidth || t.par­entN­ode.par­entN­ode.off­setWidth;
-            var top = to_px(t.cur­rentStyle.top, h);
-            var bot­tom = to_px(t.cur­rentStyle.bot­tom, h);
-            var left = to_px(t.cur­rentStyle.left, w);
-            var right = to_px(t.cur­rentStyle.right, w);
+            var h = t.parentNode.offsetHeight || t.parentNode.parentNode.offsetHeight;
+            var w = t.parentNode.offsetWidth || t.parentNode.parentNode.offsetWidth;
+            var top = to_px(t.currentStyle.top, h);
+            var bottom = to_px(t.currentStyle.bottom, h);
+            var left = to_px(t.currentStyle.left, w);
+            var right = to_px(t.currentStyle.right, w);
 
-            if (t.h != h || t.top != top || t.bot­tom != bot­tom || t.w != w || t.left != left || t.right != right) {
-                if (h &gt;= 0 &amp;&amp; top &gt;= 0 &amp;&amp; bot­tom &gt;= 0) {
+            if (t.h != h || t.top != top || t.bottom != bottom || t.w != w || t.left != left || t.right != right) {
+                if (h &gt;= 0 &amp;&amp; top &gt;= 0 &amp;&amp; bottom &gt;= 0) {
                     t.h = h;
                     t.top = top;
-                    t.bot­tom = bot­tom;
-                    t.style.height = h - (top + bot­tom) &gt; 0 ? h - (top + bot­tom) : 0;
+                    t.bottom = bottom;
+                    t.style.height = h - (top + bottom) &gt; 0 ? h - (top + bottom) : 0;
                 }
                 if (w &gt;= 0 &amp;&amp; left &gt;= 0 &amp;&amp; right &gt;= 0) {
                     t.w = w;
@@ -170,27 +170,27 @@
 </code></pre>
 <p>Фикс для уби­ра­ния тряс­ки в ие при фик­си­ро­ван­ном по­зи­ци­о­ни­ро­вании</p>
 <pre><code class="undefinedCSS">* HTML {
-    back­ground-im­age:url(about:blank);
-    back­ground-at­tach­ment:fixed;
+    background-image:url(about:blank);
+    background-attachment:fixed;
     }
 </code></pre>
 <p>Экс­прешн для ней­тра­ли­за­ции тряс­ки в ие при фик­си­ро­ван­ном по­зи­ци­о­ни­ро­вании</p>
 <pre><code class="undefinedCSS">* HTML {
-    _be­hav­ior:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.be­hav­ior = &#39;none&#39;;
+    _behavior:expression(
+        function(t){
+            t.runtimeStyle.behavior = &#39;none&#39;;
             var style;
-            if (t.cur­rentStyle.back­groundIm­age) {
-                style = t.run­timeStyle;
+            if (t.currentStyle.backgroundImage) {
+                style = t.runtimeStyle;
             } else {
-                var body = doc­u­ment.doc­u­mentEle­ment || doc­u­ment.body;
-                if (body.par­entN­ode.cur­rentStyle.back­groundIm­age) {
-                    style = body.par­entN­ode.run­timeStyle;
+                var body = document.documentElement || document.body;
+                if (body.parentNode.currentStyle.backgroundImage) {
+                    style = body.parentNode.runtimeStyle;
                 }
             }
             if (style) {
-                style.back­groundIm­age = &#39;url(about:blank)&#39;;
-                style.back­groun­dAt­tach­ment = &#39;fixed&#39;;
+                style.backgroundImage = &#39;url(about:blank)&#39;;
+                style.backgroundAttachment = &#39;fixed&#39;;
             }
         }(this)
     );
@@ -199,10 +199,10 @@
 <h2 class="Heading" id="Select"><a class="Anchor" aria-hidden="true" href="#Select"></a><span class="ss01 hang-m">П</span>ере­кры­тие се­лек­тов ай­фрей­мом <sup><a class="Link" href="select.html">при­мер</a></sup></h2>
 <p>Ис­прав­ле­ние эле­мен­тов над се­лек­та­ми, надо бы сде­лать ва­ри­ант с от­сле­жи­ва­ни­ем со­сто­я­ния ис­ход­но­го эле­мен­та (ке­ши­ру­е­мый экс­прешн на дис­плей?)</p>
 <pre><code class="undefinedCSS">.iframed {
-    zoom:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.zoom = 1;
-            t.in­ser­tAd­ja­cen­tHTML(&#39;be­fore­Be­gin&#39;,&#39;&lt;iframe src=&quot;about:blank&quot; style=&quot;po­si­tion:ab­solute;fil­ter:progid:DX­Im­age­Trans­form.Mi­crosoft.Al­pha(Opac­ity=0);opac­ity:0;padding:0;mar­gin:0;bor­der:0;ex­pres­sion:ex­pres­sion(func­tion(t){var L=t.nextSi­b­ling.off­setLeft;var T=t.nextSi­b­ling.off­set­Top;var W=t.nextSi­b­ling.off­setWidth;var H=t.nextSi­b­ling.off­setHeight;if(t.L!=L||t.T!=T||t.W!=W||t.H!=H){            t.run­timeStyle.left=t.L=L;t.run­timeStyle.top=t.T=T;t.run­timeStyle.width=t.W=W;t.run­timeStyle.height=t.H=H;}}(this));&quot;&gt;&lt;/​​iframe&gt;&#39;)
+    zoom:expression(
+        function(t){
+            t.runtimeStyle.zoom = 1;
+            t.insertAdjacentHTML(&#39;beforeBegin&#39;,&#39;&lt;iframe src=&quot;about:blank&quot; style=&quot;position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;padding:0;margin:0;border:0;expression:expression(function(t){var L=t.nextSibling.offsetLeft;var T=t.nextSibling.offsetTop;var W=t.nextSibling.offsetWidth;var H=t.nextSibling.offsetHeight;if(t.L!=L||t.T!=T||t.W!=W||t.H!=H){            t.runtimeStyle.left=t.L=L;t.runtimeStyle.top=t.T=T;t.runtimeStyle.width=t.W=W;t.runtimeStyle.height=t.H=H;}}(this));&quot;&gt;&lt;/iframe&gt;&#39;)
         }(this)
     );
     }
@@ -210,10 +210,10 @@
 <h2 class="Heading" id="Height"><a class="Anchor" aria-hidden="true" href="#Height"></a><span class="ss01 hang-m">Р</span>ас­тя­ги­ва­ние вы­соты</h2>
 <p>Вы­со­та: 100%</p>
 <pre><code class="undefinedCSS">.height100 {
-    po­si­tion:ab­solute;
-    stretch:ex­pres­sion(
-        func­tion(t){
-            var h = t.par­entN­ode.off­setHeight;
+    position:absolute;
+    stretch:expression(
+        function(t){
+            var h = t.parentNode.offsetHeight;
             if (t.h != h) {
                 t.style.height = t.h = h;
             }
@@ -223,30 +223,30 @@
 </code></pre>
 <h2 class="Heading" id="Opacity"><a class="Anchor" aria-hidden="true" href="#Opacity"></a><span class="ss01 hang-xs">O</span>pacity!</h2>
 <p>Увы, вось­мой ие дол­жен ра­бо­тать в ре­жи­ме седь­мого.</p>
-<pre><code class="undefinedCSS">.opac­ity {
-    fil­ter:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.fil­ter = &#39;progid:DX­Im­age­Trans­form.Mi­crosoft.Al­pha(opac­ity=&#39; + t.cur­rentStyle.opac­ity * 100 + &#39;)&#39;;
+<pre><code class="undefinedCSS">.opacity {
+    filter:expression(
+        function(t){
+            t.runtimeStyle.filter = &#39;progid:DXImageTransform.Microsoft.Alpha(opacity=&#39; + t.currentStyle.opacity * 100 + &#39;)&#39;;
         }(this)
     );
     }
 </code></pre>
 <p>А если надо без экс­преш­нов и в вось­мом, надо тупо вот так:</p>
-<pre><code class="undefinedCSS">.opac­ity {
-    -ms-fil­ter:&quot;progid:DX­Im­age­Trans­form.Mi­crosoft.Al­pha(Opac­ity=0)&quot;;
-    fil­ter:progid:DX­Im­age­Trans­form.Mi­crosoft.Al­pha(Opac­ity=0);
-    opac­ity:0;
+<pre><code class="undefinedCSS">.opacity {
+    -ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;
+    filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity:0;
     }
 </code></pre>
 <h2 class="Heading" id="Dpi"><a class="Anchor" aria-hidden="true" href="#Dpi"></a><span class="ss01 hang-m">Р</span>аз­мер шриф­та в за­ви­си­мо­сти от dpi</h2>
 <p>При­ме­ня­ем для <abbr>BODY</abbr>, пе­ре­опре­де­ляя стан­дарт­ную ве­ли­чи­ну (на са­мом деле, надо бы брать и пар­сить эту ве­ли­чи­ну, а не хард­ко­дить, <span class="nobr">по-хо</span>­ро­ше­<span class="nobr">му-то</span>)</p>
 <pre><code class="undefinedCSS">BODY {
-    font-size:ex­pres­sion(
-        func­tion(t){
-            if (screen.de­viceXDPI == screen.log­i­calXDPI) {
-                t.run­timeStyle.font­Size = 6000/​​screen.log­i­ca­lY­DPI + &#39;%&#39;;
+    font-size:expression(
+        function(t){
+            if (screen.deviceXDPI == screen.logicalXDPI) {
+                t.runtimeStyle.fontSize = 6000/screen.logicalYDPI + &#39;%&#39;;
             } else {
-                t.run­timeStyle.font­Size = &#39;62.5%&#39;;
+                t.runtimeStyle.fontSize = &#39;62.5%&#39;;
             }
         }(this)
     );
@@ -255,23 +255,23 @@
 <h2 class="Heading" id="Counter"><a class="Anchor" aria-hidden="true" href="#Counter"></a><span class="ss01 hang-m">Р</span>еа­ли­за­ция про­сто­го счёт­чи­ка <sup><a class="Link" href="counter.html">при­мер</a></sup></h2>
 <p>Всем бра­у­зе­рам от­да­ём:</p>
 <pre><code class="undefinedCSS">.list {
-    counter-re­set:list_item;
+    counter-reset:list_item;
     }
     .list-item {
-        dis­play:block;
+        display:block;
         }
-        .list-item:be­fore,
-        .list-item-be­fore {
-            con­tent:counter(list_item);
-            counter-in­cre­ment:list_item;
+        .list-item:before,
+        .list-item-before {
+            content:counter(list_item);
+            counter-increment:list_item;
             }
 </code></pre>
 <p>А толь­ко для ие:</p>
 <pre><code class="undefinedCSS">.list-item {
-    list-style-type:ex­pres­sion(
-        func­tion(t){
-            t.run­timeStyle.list­Style­Type = &#39;none&#39;;
-            t.in­ser­tAd­ja­cen­tHTML(&#39;af­ter­Be­gin&#39;,&#39;&lt;span class=&quot;list-item-be­fore&quot;&gt;&#39; + (++t.par­entN­ode.IEcounter || (t.par­entN­ode.IEcounter = 1)) + &#39;&lt;/​​span&gt;&#39;);
+    list-style-type:expression(
+        function(t){
+            t.runtimeStyle.listStyleType = &#39;none&#39;;
+            t.insertAdjacentHTML(&#39;afterBegin&#39;,&#39;&lt;span class=&quot;list-item-before&quot;&gt;&#39; + (++t.parentNode.IEcounter || (t.parentNode.IEcounter = 1)) + &#39;&lt;/span&gt;&#39;);
         }(this)
     );
     }
@@ -279,15 +279,15 @@
 <h2 class="Heading" id="Pseudoclass"><a class="Anchor" aria-hidden="true" href="#Pseudoclass"></a><span class="ss02 hang-xs">Э</span>му­ля­ции псев­до­клас­сов <sup><a class="Link" href="pseudoclass.html">при­мер</a></sup></h2>
 <p>Эму­ля­ция :hover</p>
 <pre><code class="undefinedCSS">* HTML .some-block {
-    _be­hav­ior: ex­pres­sion(
-        func­tion(t, hov­er­Class){
-            t.run­timeStyle.be­hav­ior = &#39;none&#39;;
-            hov­er­Class = hov­er­Class || t.class­Name ? t.class­Name.re­place(/([^\​​s]+)/​​g,&#39;$1_hover&#39;) : &#39;hover&#39;;
-            t.at­tachEvent(&#39;on­mouseover&#39;,func­tion() {
-                t.class­Name += (&#39; &#39; + hov­er­Class);
+    _behavior: expression(
+        function(t, hoverClass){
+            t.runtimeStyle.behavior = &#39;none&#39;;
+            hoverClass = hoverClass || t.className ? t.className.replace(/([^\s]+)/g,&#39;$1_hover&#39;) : &#39;hover&#39;;
+            t.attachEvent(&#39;onmouseover&#39;,function() {
+                t.className += (&#39; &#39; + hoverClass);
             });
-            t.at­tachEvent(&#39;on­mouse­out&#39;,func­tion() {
-                t.class­Name = t.class­Name.re­place(new Reg­Exp(&#39; &#39; + hov­er­Class,&#39;g&#39;), &#39;&#39;);
+            t.attachEvent(&#39;onmouseout&#39;,function() {
+                t.className = t.className.replace(new RegExp(&#39; &#39; + hoverClass,&#39;g&#39;), &#39;&#39;);
             });
         }(this)
     );
@@ -295,39 +295,39 @@
 </code></pre>
 <p>Эму­ля­ция :focus</p>
 <pre><code class="undefinedCSS">* HTML .type-text {
-    _be­hav­ior: ex­pres­sion(
-        func­tion(t, fo­cus­Class){
-            t.run­timeStyle.be­hav­ior = &#39;none&#39;;
-            fo­cus­Class = fo­cus­Class || t.class­Name ? t.class­Name.re­place(/([^\​​s]+)/​​g,&#39;$1_­fo­cus&#39;) : &#39;fo­cus&#39;;
-            t.at­tachEvent(&#39;on­fo­cus&#39;,func­tion() {
-                t.class­Name += (&#39; &#39; + fo­cus­Class);
+    _behavior: expression(
+        function(t, focusClass){
+            t.runtimeStyle.behavior = &#39;none&#39;;
+            focusClass = focusClass || t.className ? t.className.replace(/([^\s]+)/g,&#39;$1_focus&#39;) : &#39;focus&#39;;
+            t.attachEvent(&#39;onfocus&#39;,function() {
+                t.className += (&#39; &#39; + focusClass);
             });
-            t.at­tachEvent(&#39;on­blur&#39;,func­tion() {
-                t.class­Name = t.class­Name.re­place(new Reg­Exp(&#39; &#39; + fo­cus­Class,&#39;g&#39;), &#39;&#39;);
+            t.attachEvent(&#39;onblur&#39;,function() {
+                t.className = t.className.replace(new RegExp(&#39; &#39; + focusClass,&#39;g&#39;), &#39;&#39;);
             });
         }(this)
     );
     }
 </code></pre>
 <p>Эму­ля­ция :target</p>
-<pre><code class="undefinedCSS">#Some­Block {
-    be­hav­ior: ex­pres­sion(
-        func­tion(t, tar­get­Class){
+<pre><code class="undefinedCSS">#SomeBlock {
+    behavior: expression(
+        function(t, targetClass){
             if (t.id) {
-                var hash = win­dow.lo­ca­tion.hash;
-                if (!t.tar­get­Class) {
-                    t.tar­get­Class = tar­get­Class || t.class­Name ? t.class­Name.re­place(/([^\​​s]+)/​​g,&#39;$1_­tar­get&#39;) : &#39;tar­get&#39;;
+                var hash = window.location.hash;
+                if (!t.targetClass) {
+                    t.targetClass = targetClass || t.className ? t.className.replace(/([^\s]+)/g,&#39;$1_target&#39;) : &#39;target&#39;;
                 }
                 if (t.lastHash != hash) {
                     t.lastHash = hash;
                     if (&quot;#&quot;+t.id == hash) {
-                        t.class­Name += (&#39; &#39; + t.tar­get­Class);
+                        t.className += (&#39; &#39; + t.targetClass);
                     } else {
-                        t.class­Name = t.class­Name.re­place(new Reg­Exp(&#39; &#39; + t.tar­get­Class,&#39;g&#39;), &#39;&#39;);
+                        t.className = t.className.replace(new RegExp(&#39; &#39; + t.targetClass,&#39;g&#39;), &#39;&#39;);
                     }
                 }
             } else {
-                t.run­timeStyle.be­hav­ior = &#39;none&#39;;
+                t.runtimeStyle.behavior = &#39;none&#39;;
             }
         }(this)
     );

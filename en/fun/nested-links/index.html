@@ -45,16 +45,16 @@
     Foo
     &lt;a href=&quot;#Bar&quot;&gt;
         Bar
-    &lt;/​a&gt;
+    &lt;/a&gt;
     Baz
-&lt;/​a&gt;
+&lt;/a&gt;
 </code></pre>
 <p>in the eyes of the browser would be some­thing like <span class="nobr">that&#8202;—</span></p>
 <pre><code class="language-html">&lt;a href=&quot;#Foo&quot;&gt;
     Foo
-    &lt;/​a&gt;&lt;a href=&quot;#Bar&quot;&gt;
+    &lt;/a&gt;&lt;a href=&quot;#Bar&quot;&gt;
         Bar
-    &lt;/​a&gt;
+    &lt;/a&gt;
     Baz
 </code></pre>
 <p>And a live ex­ample:</p>
@@ -90,13 +90,13 @@
 </div>
 <pre><code class="language-html">&lt;a href=&quot;#a&quot;&gt;
     Foo
-    &lt;ob­ject type=&quot;lol/​wut&quot;&gt;
+    &lt;object type=&quot;lol/wut&quot;&gt;
         &lt;a href=&quot;#b&quot;&gt;
             Bar
-        &lt;/​a&gt;
-    &lt;/​ob­ject&gt;
+        &lt;/a&gt;
+    &lt;/object&gt;
     Baz
-&lt;/​a&gt;
+&lt;/a&gt;
 </code></pre>
 <p>What we do there is just plac­ing an ob­ject be­tween those links. Yep, it works: all parsers of mod­ern browsers sud­denly see those links in­de­pen­dently, and won’t break your markup any­more. Hooray.</p>
 <h2 class="Heading" id="why-does-it-work"><a class="Anchor" aria-hidden="true" href="#why-does-it-work"></a><span class="ss01 hang-m">W</span>hy does it work</h2>
@@ -120,13 +120,13 @@
 <h3 class="Heading" id="ie-fallback"><a class="Anchor" aria-hidden="true" href="#ie-fallback"></a><span class="ss01 hang-m">I</span>E fallback</h3>
 <p>I don’t know of any easy so­lu­tion for this prob­lem in old IE. At the very least you could try to fix it some­how by “re­mov­ing” the nested links us­ing con­di­tional com­ments:</p>
 <pre><code class="language-html">&lt;a href=&quot;…&quot;&gt;
-    con­tent of the main link…
-    &lt;ob­ject&gt;
-        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;a href=&quot;…&quot;&gt;&lt;!--&lt;![en­dif]--&gt;
-            con­tent of the nested link…
-        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;/​a&gt;&lt;!--&lt;![en­dif]--&gt;
-    &lt;/​ob­ject&gt;
-&lt;/​a&gt;
+    content of the main link…
+    &lt;object&gt;
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;a href=&quot;…&quot;&gt;&lt;!--&lt;![endif]--&gt;
+            content of the nested link…
+        &lt;!--[if gte IE 9]&gt;&lt;!--&gt;&lt;/a&gt;&lt;!--&lt;![endif]--&gt;
+    &lt;/object&gt;
+&lt;/a&gt;
 </code></pre>
 <p>You’d lose some func­tion­al­ity there, but it could be ok for the most cases. <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#try-expressions" id="try-expressions">If not</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Cu­ri­ous ones could think about if it is pos­si­ble to make a fall­back us­ing ex­pres­sions<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>, you could then in­sert those links later, sep­a­rately, us­ing the same con­di­tional com­ments, or use other workarounds for this problem.</p>
 <h2 class="Heading" id="is-it-valid-"><a class="Anchor" aria-hidden="true" href="#is-it-valid-"></a><span class="ss01 hang-m">I</span>s it valid?</h2>

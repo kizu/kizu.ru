@@ -37,7 +37,7 @@
 <p>На­ко­<span class="nobr">нец-то</span>! То, чего так дав­но не хва­та­ло в Стай­лу­се (и что уже дав­но есть в Sass)<span class="nobr"> —</span><span class="thinsp"> </span>воз­мож­ность пе­ре­да­вать в мик­син блок кода.</p>
 <p>Син­так­сис пе­ре­да­чи бло­ка до­воль­но про­стой: вы­зы­ва­ем мик­син, ис­поль­зуя пре­фикс «+», по­сле чего пе­ре­да­ём со­от­вет­ству­ю­щий блок либо в фи­гур­ных скоб­ках, либо че­рез блок с но­вым от­сту­пом (как всё обыч­но де­ла­ет­ся в Стай­лу­се):</p>
 <pre><code class="language-styl">+foo()
-  // Блок, ко­то­рый мы хо­тим пе­ре­дать
+  // Блок, который мы хотим передать
   width: 10px
   height: 10px
 </code></pre>
@@ -80,7 +80,7 @@
 <p>Как вид­но из при­ме­ра, син­так­сис по­хож на обыч­ные явас­крип­то­вые объ­ек­ты: клю­чом мо­жет быть или иден­ти­фи­ка­тор, или стро­ка, а зна­че­ни­ем мо­жет быть по­чти что угод­но, в том чис­ле и вло­жен­ный хеш. Из важ­но­го: в от­ли­чие от обыч­ных бло­ков Стай­лу­са, фи­гур­ные скоб­ки для хе­шей обя­за­тель­ны, но вот за­пя­тые<span class="nobr"> —</span><span class="thinsp"> </span><span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#codestyle" id="codestyle">нет</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Как и осталь­ные оп­ци­о­наль­ные фичи син­так­си­са, если не при­дер­жи­вать­ся ка­ко­<span class="nobr">го-то</span> кон­крет­но­го код-стай­ла, то код бу­дет нечи­та­бель­ным, так что ре­ши­те как вы бу­де­те пи­сать хеши и бло­ки, и при­дер­жи­вай­тесь это­го ре­ше­ния<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>.</p>
 <p>По­сле того, как вы объ­яви­ли хеш, мож­но в него до­ба­вить но­вые свой­ства или пе­ре­за­пи­сать ста­рые либо че­рез точ­ку, либо че­рез квад­рат­ные скобки:</p>
 <pre><code class="language-styl">foo.bar = 20px
-foo[&#39;what­ever&#39;] = &#39;hello&#39;
+foo[&#39;whatever&#39;] = &#39;hello&#39;
 </code></pre>
 <p>От­ли­чия до­воль­но про­стые: че­рез точ­ку мож­но пи­сать толь­ко иден­ти­фи­ка­то­ры, то­гда как в квад­рат­ных скоб­ках мож­но ис­поль­зо­вать лю­бые стро­ки, либо пе­ре­да­вать пе­ре­мен­ные. В об­щем, с квад­рат­ны­ми скоб­ка­ми по­лу­ча­ет­ся бо­лее гиб­ко, а че­рез точ­ку<span class="nobr"> —</span><span class="thinsp"> </span>ко­роче.</p>
 <p>По­лу­чать свой­ства мож­но ана­ло­гич­но<span class="nobr"> —</span><span class="thinsp"> </span>либо че­рез точ­ку, либо че­рез квад­рат­ные скобки.</p>
@@ -89,8 +89,8 @@ foo[&#39;what­ever&#39;] = &#39;hello&#39;
 <p>В но­вом Стай­лу­се по­яви­лась неболь­шая, но важ­ная фича<span class="nobr"> —</span><span class="thinsp"> </span>функ­ция <code>se­lec­tor()</code>. До неё в Стай­лу­се не было воз­мож­но­сти <strong>по­лу­чить</strong> те­ку­щий се­лек­тор: его мож­но было со­став­лять из вло­жен­ных бло­ков, ин­тер­по­ли­ро­вать в него, но узнать ка­кой же в ито­ге по­лу­ча­ет­ся се­лек­тор было нельзя.</p>
 <p>Те­перь же есть функ­ция <code>se­lec­tor()</code>, ко­то­рая воз­вра­ща­ет те­ку­щий ском­пи­ли­ро­ван­ный се­лек­тор. Его мож­но ис­поль­зо­вать либо для раз­лич­ных про­ве­рок, либо для ка­ких-либо иных це­лей. Уже сей­час эта функ­ция бу­дет очень по­лез­на в раз­ных си­ту­а­ци­ях, а в бу­ду­щих ре­ли­зах она ста­нет ещё мощнее.</p>
 <p>В ка­че­стве при­ме­ра я при­ве­ду вот та­кой неболь­шой ку­сок кода:</p>
-<pre><code class="language-styl">if match(&#39;:(be­fore|af­ter)&#39;, se­lec­tor())
-  con­tent: &#39;&#39;
+<pre><code class="language-styl">if match(&#39;:(before|after)&#39;, selector())
+  content: &#39;&#39;
 </code></pre>
 <p>Здесь мы про­ве­ря­ем есть ли в се­лек­то­ре ука­за­ние на псев­до­эле­мент, и если так<span class="nobr"> —</span><span class="thinsp"> </span>вы­во­дим <code>con­tent</code>. Это мо­жет при­го­дить­ся, если у вас есть мик­син, це­ли­ком от­ве­ча­ю­щий за ка­<span class="nobr">кое-то</span> по­ве­де­ние, и ко­то­рый мож­но при­ме­нить как к обыч­но­му эле­мен­ту, так и к псев­<span class="nobr">до-эле</span>­менту.</p>
 <h2 class="Heading" id="example"><a class="Anchor" aria-hidden="true" href="#example"></a><span class="ss01 hang-m">П</span>ри­мер с ке­ши­ру­е­мы­ми ме­ди­а­к­ве­рями</h2>
@@ -99,54 +99,54 @@ foo[&#39;what­ever&#39;] = &#39;hello&#39;
 <p>Если крат­ко опи­сать ре­ше­ние: мы со­зда­дим мик­син, за­ме­ня­ю­щий вы­зо­вы ме­ди­а­к­ве­рей и ке­ши­ру­ю­щий их, объ­еди­няя по усло­ви­ям, по­сле чего даём воз­мож­ность вы­ве­сти весь за­ке­ши­ро­ван­ный та­ким об­ра­зом код.</p>
 <p>Един­ствен­ным недо­стат­ком та­ко­го под­хо­да бу­дет то, что если несколь­ко усло­вий ме­ди­а­к­ве­рей бу­дут пе­ре­се­кать­ся, то, <span class="nobr">из-за</span> груп­пи­ров­ки всех пра­вил по объ­еди­нён­ным ме­ди­а­к­ве­рям, по­ря­док при­ме­не­ния этих пра­вил мо­жет по­ме­няться.</p>
 <p>Для на­ча­ла нам по­на­до­бит­ся объ­ект, в ко­то­рый мы бу­дем со­хра­нять вы­зван­ный в бу­ду­щем код:</p>
-<pre><code class="language-styl">$me­di­a_­cache = {}
+<pre><code class="language-styl">$media_cache = {}
 </code></pre>
 <p>По­сле это­го нам бу­дет ну­жен мик­син, ко­то­рый мы и бу­дем ис­поль­зо­вать вме­сто ме­ди­а­к­ве­рей, в пер­вом при­бли­же­нии он бу­дет вы­гля­деть <span class="nobr">как-то</span> так:</p>
-<pre><code class="language-styl">me­dia($con­di­tion)
-  un­less $me­di­a_­cache[$con­di­tion]
-    $me­di­a_­cache[$con­di­tion] = ()
-  push($me­di­a_­cache[$con­di­tion], block)
+<pre><code class="language-styl">media($condition)
+  unless $media_cache[$condition]
+    $media_cache[$condition] = ()
+  push($media_cache[$condition], block)
 </code></pre>
 <p>Мик­син до­воль­но про­стой: если у нас ещё нет в кеше спис­ка по пе­ре­дан­но­му в мик­син клю­чу, мы ини­ци­и­ру­ем этот спи­сок, по­сле чего пу­шим в него пе­ре­дан­ный в мик­син блок<span class="nobr"> —</span><span class="thinsp"> </span>это бу­дет наш кеш.</p>
 <p>На са­мом деле нам это­го не бу­дет до­ста­точ­но: та­кой мик­син мож­но бу­дет ис­поль­зо­вать толь­ко вот так:</p>
-<pre><code class="language-styl">+me­dia(&#39;(max-width:640px)&#39;)
+<pre><code class="language-styl">+media(&#39;(max-width:640px)&#39;)
   .foo
-    dis­play: block;
+    display: block;
 </code></pre>
 <p>Мы смо­жем про­ки­ды­вать внутрь толь­ко пол­но­цен­ные бло­ки, у нас не по­лу­чит­ся ис­поль­зо­вать всплытие:</p>
 <pre><code class="language-styl">.foo
-  +me­dia(&#39;(max-width:640px)&#39;)
-    dis­play: block;
+  +media(&#39;(max-width:640px)&#39;)
+    display: block;
 </code></pre>
 <p>Всё <span class="nobr">из-за</span> того, что мик­син пока ни­че­го не зна­ет о сво­ём кон­тек­сте<span class="nobr"> —</span><span class="thinsp"> </span>он зна­ет толь­ко о бло­ке, ко­то­рый в него пе­ре­да­ли. <span class="nobr">Тут-то</span> нам и по­мо­жет функ­ция <code>se­lec­tor()</code>, да ещё один мик­<span class="nobr">син-по</span>­мощ­ник<span class="nobr"> —</span><span class="thinsp"> </span>вме­сте с ними наш мик­син бу­дет вы­гля­деть так:</p>
-<pre><code class="language-styl">me­dia($con­di­tion)
-  helper($con­di­tion)
-    un­less $me­di­a_­cache[$con­di­tion]
-      $me­di­a_­cache[$con­di­tion] = ()
-    push($me­di­a_­cache[$con­di­tion], block)
+<pre><code class="language-styl">media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
 
-  +helper($con­di­tion)
-    {se­lec­tor()}
+  +helper($condition)
+    {selector()}
       {block}
 </code></pre>
 <p>Для того, что­бы со­хра­нять кон­текст, мы вы­но­сим из­на­чаль­ный код, по­ме­ща­ю­щий пе­ре­дан­ный блок в кеш, в мик­син <code>helper</code>, ко­то­рый тут же и вы­зы­ва­ем, об­рам­ляя пе­ре­дан­ный блок в те­ку­щий се­лектор.</p>
 <p>Так как те­перь при вы­зо­ве на­ше­го мик­си­на всё бу­дет по­ме­щать­ся в кеш, оно не бу­дет вы­во­дить­ся само по себе. Зна­чит, нам нуж­на функ­ция, ко­то­рая возь­мёт со­дер­жи­мое кеша и вы­плес­нет его там, где мы эту функ­цию при­ме­ним (ло­гич­но бу­дет вы­зы­вать её в кон­це фай­ла):</p>
-<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
-  for $me­dia, $blocks in $me­di­a_­cache
-    @me­dia $me­dia
+<pre><code class="language-styl">apply_media_cache()
+  for $media, $blocks in $media_cache
+    @media $media
       for $block in $blocks
         {$block}
 </code></pre>
 <p>Всё до­воль­но про­сто: сна­ча­ла ите­ри­ру­ем­ся по кешу, по­лу­чая по оче­ре­ди усло­вия (<code>$me­dia</code>) и спи­сок вы­зван­ных с та­ким усло­ви­ем бло­ков (<code>$blocks</code>), по­сле чего со­зда­ём со­от­вет­ству­ю­щую ме­ди­а­к­ве­ри, внут­ри ко­то­рой уже ите­ри­ру­ем­ся по всем бло­кам, вы­во­дя их один за другим.</p>
 <p>Те­перь, если мы в кон­це до­ку­мен­та вы­зо­вем эту функцию:</p>
-<pre><code class="language-styl">ap­ply_­me­di­a_­cache()
+<pre><code class="language-styl">apply_media_cache()
 </code></pre>
 <p>мы по­лу­чим то, ради чего всё за­те­вали.</p>
 <p>Од­на­ко, и эту функ­цию мож­но улуч­шить: ведь мы не хо­тим каж­дый раз пи­сать при вы­зо­ве ско­боч­ки, да и, на са­мом деле, хо­ро­шо бы все­гда иметь в усло­ви­ях <code>only screen and</code>. Кро­ме того, мы и во­все мо­жем за­хо­теть ис­поль­зо­вать вме­сто кон­крет­ных зна­че­ний клю­че­вые сло­ва, типа <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#keywords" id="keywords"><code>palm</code>, <code>portable</code>, <code>desk</code></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Для при­ме­ра я вы­брал гра­да­ции из фрейм­вор­ка <a href="@csswizardry">Гар­ри Ро­берт­са</a> <a href="http://inuitcss.com/">inuit.css</a><span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> и т.п. Вме­сте с до­пол­не­ни­я­ми и все­ми преды­ду­щи­ми ша­га­ми мы по­лу­ча­ем вот та­кой код:</p>
 <h3 class="Heading" id="result"><a class="Anchor" aria-hidden="true" href="#result"></a><span class="ss01 hang-m">И</span>то­го­вый код</h3>
-<pre><code class="language-styl">// Опре­де­ля­ем объ­ект кеша и объ­ект с али­а­са­ми
-$me­di­a_­cache = {}
-$me­di­a_aliases = {
+<pre><code class="language-styl">// Определяем объект кеша и объект с алиасами
+$media_cache = {}
+$media_aliases = {
   palm:       &#39;(max-width: 480px)&#39;
   lap:        &#39;(min-width: 481px) and (max-width: 1023px)&#39;
   lap-and-up: &#39;(min-width: 481px)&#39;
@@ -155,59 +155,59 @@ $me­di­a_aliases = {
   desk-wide:  &#39;(min-width: 1200px)&#39;
 }
 
-// Мик­син, ке­ши­ру­ю­щий ме­ди­а­к­ве­ри
-me­dia($con­di­tion)
-  helper($con­di­tion)
-    un­less $me­di­a_­cache[$con­di­tion]
-      $me­di­a_­cache[$con­di­tion] = ()
-    push($me­di­a_­cache[$con­di­tion], block)
+// Миксин, кеширующий медиаквери
+media($condition)
+  helper($condition)
+    unless $media_cache[$condition]
+      $media_cache[$condition] = ()
+    push($media_cache[$condition], block)
 
-  +helper($con­di­tion)
-    {se­lec­tor() + &#39;&#39;}
+  +helper($condition)
+    {selector() + &#39;&#39;}
       {block}
 
-// Функ­ция, вы­зы­ва­ю­щая за­ке­ши­ро­ван­ные ме­ди­а­к­ве­ри
-ap­ply_­me­di­a_­cache()
-  for $me­dia, $blocks in $me­di­a_­cache
-    $me­dia = un­quote($me­di­a_aliases[$me­dia] || $me­dia)
-    $me­dia = &#39;(%s)&#39; % $me­dia un­less match(&#39;\(&#39;, $me­dia)
-    $me­dia = &#39;only screen and %s&#39; % $me­dia
-    @me­dia $me­dia
+// Функция, вызывающая закешированные медиаквери
+apply_media_cache()
+  for $media, $blocks in $media_cache
+    $media = unquote($media_aliases[$media] || $media)
+    $media = &#39;(%s)&#39; % $media unless match(&#39;\(&#39;, $media)
+    $media = &#39;only screen and %s&#39; % $media
+    @media $media
       for $block in $blocks
         {$block}
 
-// Здесь бу­дет ос­нов­ной код с вы­зо­ва­ми мик­си­на
+// Здесь будет основной код с вызовами миксина
 // …
 
-// Вы­зы­ва­ем все за­ке­ши­ро­ван­ные ме­ди­а­к­ве­ри
-ap­ply_­me­di­a_­cache()
+// Вызываем все закешированные медиаквери
+apply_media_cache()
 </code></pre>
 <p>Те­перь мы мо­жем пи­сать код при­мер­но так:</p>
 <pre><code class="language-styl">.foo
   width: 10px
 
-  +me­dia(&#39;lap&#39;)
+  +media(&#39;lap&#39;)
     width: 20px
 
-  +me­dia(&#39;desk&#39;)
+  +media(&#39;desk&#39;)
     width: 30px
 
-  +me­dia(&#39;min-width: 200px&#39;)
+  +media(&#39;min-width: 200px&#39;)
     width: 60px
 
 .bar
   height: 10px
 
-  +me­dia(&#39;lap&#39;)
+  +media(&#39;lap&#39;)
     height: 20px
 
-  +me­dia(&#39;desk&#39;)
+  +media(&#39;desk&#39;)
     height: 30px
 
-  +me­dia(&#39;min-width: 200px&#39;)
+  +media(&#39;min-width: 200px&#39;)
     height: 50px
 
-  +me­dia(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
+  +media(&#39;(min-width: 500px) and (max-width: 700px)&#39;)
     height: 50px
 </code></pre>
 <p>И в ре­зуль­та­те по­лу­чим сле­ду­ющее:</p>
@@ -217,7 +217,7 @@ ap­ply_­me­di­a_­cache()
 .bar {
   height: 10px;
 }
-@me­dia only screen and (min-width: 481px) and (max-width: 1023px) {
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
   .foo {
     width: 20px;
   }
@@ -225,7 +225,7 @@ ap­ply_­me­di­a_­cache()
     height: 20px;
   }
 }
-@me­dia only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   .foo {
     width: 30px;
   }
@@ -233,7 +233,7 @@ ap­ply_­me­di­a_­cache()
     height: 30px;
   }
 }
-@me­dia only screen and (min-width: 200px) {
+@media only screen and (min-width: 200px) {
   .foo {
     width: 60px;
   }
@@ -241,7 +241,7 @@ ap­ply_­me­di­a_­cache()
     height: 50px;
   }
 }
-@me­dia only screen and (min-width: 500px) and (max-width: 700px) {
+@media only screen and (min-width: 500px) and (max-width: 700px) {
   .bar {
     height: 50px;
   }

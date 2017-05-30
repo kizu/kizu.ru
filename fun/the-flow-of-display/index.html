@@ -130,25 +130,25 @@
 <p><abbr>HTML</abbr> обо­их при­ме­ров оди­на­ков, за ис­клю­че­ни­ем классов:</p>
 <pre><code class="language-html">&lt;p&gt;
   Hello
-  &lt;span class=&quot;a&quot;&gt;A&lt;/​​span&gt;
-&lt;/​​p&gt;
+  &lt;span class=&quot;a&quot;&gt;A&lt;/span&gt;
+&lt;/p&gt;
 &lt;p&gt;
   Hello
-  &lt;span class=&quot;b&quot;&gt;B&lt;/​​span&gt;
-&lt;/​​p&gt;
+  &lt;span class=&quot;b&quot;&gt;B&lt;/span&gt;
+&lt;/p&gt;
 </code></pre>
 <p><abbr>CSS</abbr> для них такой:</p>
 <pre><code class="language-css">.a {
     float: left;
-    dis­play: in­line-block;
+    display: inline-block;
     }
 .b {
     float: left;
-    dis­play: block;
+    display: block;
     }
 .a,
 .b {
-    po­si­tion: ab­solute;
+    position: absolute;
     }
 </code></pre>
 <p>Да, <code>float</code> тут не ну­жен, в этом слу­чае он ни­че­го не де­ла­ет, но он и не бу­дет от­ме­нять по­ве­де­ние <code>dis­play</code>. И, то­гда как оба эле­мен­та пол­но­стью оди­на­ко­вы и име­ют <code>po­si­tion:ab­solute</code>, <span class="nobr">из-за</span> зна­че­ний <code>dis­play</code> ре­зуль­тат раз­ли­ча­ется.</p>
@@ -159,39 +159,39 @@
 <p>Не са­мая про­стая за­дач­ка, при­чём я сам её схо­ду не смог быст­ро ре­шить, но, по край­ней мере, те­перь я знаю как это сде­лать и по­че­му это мож­но сде­лать имен­но так.</p>
 <p><abbr>HTML</abbr> для это­го спис­ка: </p>
 <pre><code class="language-html">&lt;ul class=&quot;just-some-items&quot;&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;One&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Two&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Three&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Four&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Five&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Six&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Seven&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Eight&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Nine&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Ten&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Eleven&lt;/​​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;…last&lt;/​​li&gt;
-&lt;/​​ul&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;One&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Two&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Three&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Four&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Five&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Six&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Seven&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Eight&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Nine&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Ten&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Eleven&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;…last&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre>
 <p>А <abbr>CSS</abbr> та­ков (я остав­лю часть пре­зен­та­ци­он­ных сти­лей за рам­ка­ми):</p>
 <pre><code class="language-css">.just-some-items {
-    over­flow: hid­den;
+    overflow: hidden;
 
     height: 2em;
     padding-right: 2.4em;
-    mar­gin: 0;
+    margin: 0;
     }
 .just-some-item {
     float: left;
 
-    mar­gin-right: 0.5em;
+    margin-right: 0.5em;
 
     line-height: 2em;
     }
 .just-some-item:last-child {
-    po­si­tion: ab­solute;
+    position: absolute;
 
-    dis­play: in­line-block;
+    display: inline-block;
 
     width: 2.4em;
     }

@@ -50,7 +50,7 @@
         25px * var(--is-big) +
         10px * (1 - var(--is-big))
     );
-    bor­der-width: calc(
+    border-width: calc(
         3px * var(--is-big) +
         1px * (1 - var(--is-big))
     );
@@ -84,7 +84,7 @@
 }
 
 .block {
-    back­ground: rgba(
+    background: rgba(
         calc(
             255*var(--is-red) +
             0*(1 - var(--is-red))
@@ -110,95 +110,95 @@
 <h2 class="Heading" id="preprocessing"><a class="Anchor" aria-hidden="true" href="#preprocessing"></a><span class="ss01 hang-m">P</span>re­pro­cessing</h2>
 <p>When the con­di­tions are bi­nary it is still pos­si­ble to write them by hand. But when we&#39;re start­ing to use more com­plex con­di­tions, or when we&#39;re get­ting to the col­ors, we&#39;d bet­ter have tools that could make it eas­ier to write. Luck­ily, we have pre­proces­sors for this purpose.</p>
 <p>Here is how I man­aged to quickly do it in <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#pen" id="pen">Sty­lus</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can look at <a href="http://codepen.io/kizu/pen/zKmyvG">Code­Pen with this code</a> in ac­tion.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>:</p>
-<pre><code class="language-styl">con­di­tional($var, $val­ues...)
-  $re­sult = &#39;&#39;
+<pre><code class="language-styl">conditional($var, $values...)
+  $result = &#39;&#39;
 
-  // If there is only an ar­ray passed, use its con­tents
-  if length($val­ues) == 1
-    $val­ues = $val­ues[0]
+  // If there is only an array passed, use its contents
+  if length($values) == 1
+    $values = $values[0]
 
-  // Val­i­dat­ing the val­ues and check if we need to do any­thing at all
+  // Validating the values and check if we need to do anything at all
   $type = null
   $equal = true
 
-  for $value, $i in $val­ues
-    if $i &gt; 0 and $value != $val­ues[0]
+  for $value, $i in $values
+    if $i &gt; 0 and $value != $values[0]
       $equal = false
 
-    $val­ue_­type = typeof($value)
-    $type = $type || $val­ue_­type
+    $value_type = typeof($value)
+    $type = $type || $value_type
     if !($type == &#39;unit&#39; or $type == &#39;rgba&#39;)
-      er­ror(&#39;Con­di­tional func­tion can ac­cept only num­bers or col­ors&#39;)
+      error(&#39;Conditional function can accept only numbers or colors&#39;)
 
-    if $type != $val­ue_­type
-      er­ror(&#39;Con­di­tional func­tion can ac­cept only same type val­ues&#39;)
+    if $type != $value_type
+      error(&#39;Conditional function can accept only same type values&#39;)
 
-  // If all the val­ues are equal, just re­turn one of them
+  // If all the values are equal, just return one of them
   if $equal
-    re­turn $val­ues[0]
+    return $values[0]
 
-  // Han­dling num­bers
+  // Handling numbers
   if $type == &#39;unit&#39;
-    $re­sult = &#39;calc(&#39;
-    $i_­count = 0
-    for $value, $i in $val­ues
-      $mul­ti­plier = &#39;&#39;
-      $mod­i­fier = 1
-      $j_­count = 0
-      for $j in 0..(length($val­ues) - 1)
+    $result = &#39;calc(&#39;
+    $i_count = 0
+    for $value, $i in $values
+      $multiplier = &#39;&#39;
+      $modifier = 1
+      $j_count = 0
+      for $j in 0..(length($values) - 1)
         if $j != $i
-          $j_­count = $j_­count + 1
-          // We could use just the gen­eral mul­ti­plier,
-          // but for 0 and 1 we can sim­plify it a bit.
+          $j_count = $j_count + 1
+          // We could use just the general multiplier,
+          // but for 0 and 1 we can simplify it a bit.
           if $j == 0
-            $mod­i­fier = $mod­i­fier * $i
-            $mul­ti­plier = $mul­ti­plier + $var
+            $modifier = $modifier * $i
+            $multiplier = $multiplier + $var
           else if $j == 1
-            $mod­i­fier = $mod­i­fier * ($j - $i)
-            $mul­ti­plier = $mul­ti­plier + &#39;(1 - &#39; + $var + &#39;)&#39;
+            $modifier = $modifier * ($j - $i)
+            $multiplier = $multiplier + &#39;(1 - &#39; + $var + &#39;)&#39;
           else
-            $mod­i­fier = $mod­i­fier * ($i - $j)
-            $mul­ti­plier = $mul­ti­plier + &#39;(&#39; + $var + &#39; - &#39; + $j + &#39;)&#39;
+            $modifier = $modifier * ($i - $j)
+            $multiplier = $multiplier + &#39;(&#39; + $var + &#39; - &#39; + $j + &#39;)&#39;
 
-          if $j_­count &lt; length($val­ues) - 1
-            $mul­ti­plier = $mul­ti­plier + &#39; * &#39;
+          if $j_count &lt; length($values) - 1
+            $multiplier = $multiplier + &#39; * &#39;
 
       // If value is zero, just don&#39;t add it there lol
       if $value != 0
-        if $mod­i­fier != 1
-          $mul­ti­plier = $mul­ti­plier + &#39; * &#39; + (1 / $mod­i­fier)
-        $re­sult = $re­sult + ($i_­count &gt; 0 ? &#39; + &#39; : &#39;&#39;) + $value + &#39; * &#39; + $mul­ti­plier
-        $i_­count = $i_­count + 1
+        if $modifier != 1
+          $multiplier = $multiplier + &#39; * &#39; + (1 / $modifier)
+        $result = $result + ($i_count &gt; 0 ? &#39; + &#39; : &#39;&#39;) + $value + &#39; * &#39; + $multiplier
+        $i_count = $i_count + 1
 
-    $re­sult = $re­sult + &#39;)&#39;
+    $result = $result + &#39;)&#39;
 
-  // Han­dling col­ors
+  // Handling colors
   if $type == &#39;rgba&#39;
     $hues = ()
-    $sat­u­ra­tions = ()
-    $light­nesses = ()
-    $al­phas = ()
+    $saturations = ()
+    $lightnesses = ()
+    $alphas = ()
 
-    for $value in $val­ues
+    for $value in $values
       push($hues, unit(hue($value), &#39;&#39;))
-      push($sat­u­ra­tions, sat­u­ra­tion($value))
-      push($light­nesses, light­ness($value))
-      push($al­phas, al­pha($value))
+      push($saturations, saturation($value))
+      push($lightnesses, lightness($value))
+      push($alphas, alpha($value))
 
-    $re­sult = &#39;hsla(&#39; + con­di­tional($var, $hues) + &#39;, &#39; + con­di­tional($var, $sat­u­ra­tions) + &#39;, &#39; + con­di­tional($var, $light­nesses) + &#39;, &#39; + con­di­tional($var, $al­phas) +  &#39;)&#39;
+    $result = &#39;hsla(&#39; + conditional($var, $hues) + &#39;, &#39; + conditional($var, $saturations) + &#39;, &#39; + conditional($var, $lightnesses) + &#39;, &#39; + conditional($var, $alphas) +  &#39;)&#39;
 
-  re­turn un­quote($re­sult)
+  return unquote($result)
 </code></pre>
 <p>Yep, there is a lot of code, but this mixin can gen­er­ate con­di­tion­als both for num­bers and col­ors, and not only for two pos­si­ble con­di­tions but for many more.</p>
 <p>The us­age is re­ally easy:</p>
-<pre><code class="language-styl">bor­der-width: con­di­tional(var(--foo), 10px, 20px)
+<pre><code class="language-styl">border-width: conditional(var(--foo), 10px, 20px)
 </code></pre>
 <p>The first ar­gu­ment is our vari­able, the sec­ond one is the value that should be ap­plied when the vari­able would be equal to <code>0</code>, the <span class="nobr">third —</span><span class="thinsp"> </span>when it would be equal to <code>1</code>, etc.</p>
 <p>This above call would gen­er­ate proper con­di­tional:</p>
-<pre><code class="language-css">bor­der-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
+<pre><code class="language-css">border-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
 </code></pre>
 <p>And here is a more com­plex ex­am­ple for the color con­di­tionals:</p>
-<pre><code class="language-styl">color: con­di­tional(var(--bar), red, lime, re­bec­ca­pur­ple, or­ange)
+<pre><code class="language-styl">color: conditional(var(--bar), red, lime, rebeccapurple, orange)
 </code></pre>
 <p>Would gen­er­ate some­thing that you surely wouldn&#39;t want to write by hand:</p>
 <pre><code class="language-css">color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
@@ -207,7 +207,7 @@
 <h2 class="Heading" id="fallbacks"><a class="Anchor" aria-hidden="true" href="#fallbacks"></a><span class="ss01 hang-m">F</span>allbacks</h2>
 <p>Of course, if you&#39;re plan­ning to ac­tu­ally use this, you&#39;ll need to have a way to set fall­backs. They&#39;re easy for browsers that just don&#39;t sup­port vari­ables: you just de­clare the fall­back value be­fore the con­di­tional de­c­la­ration:</p>
 <pre><code class="language-css">.block {
-    padding: 100px; /* fall­back */
+    padding: 100px; /* fallback */
     padding: calc(
         100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
          20px * (var(--foo) * (2 - var(--foo))) +
@@ -216,8 +216,8 @@
 }
 </code></pre>
 <p>But when it comes to col­ors we have a prob­lem: when there is a sup­port for vari­ables, in fact (and that&#39;s an­other re­ally weird place in specs), <em>just any</em> de­c­la­ra­tion con­tain­ing vari­ables would be con­sid­ered valid. And this means that it is not pos­si­ble in <abbr>CSS</abbr> to make a fall­back for some­thing con­tain­ing vari­ables:</p>
-<pre><code class="language-css">back­ground: blue;
-back­ground: I 💩 CSS VAR(--I)ABLES;
+<pre><code class="language-css">background: blue;
+background: I 💩 CSS VAR(--I)ABLES;
 </code></pre>
 <p>Is valid <abbr>CSS</abbr> and per specs, the back­ground would get an <code>ini­tial</code> value, not the one pro­vided in a fall­back (even though it is ob­vi­ous that the other parts of the value are in­cor­rect).</p>
 <p>So, what we need in or­der to pro­vide a fall­back in those <span class="nobr">cases —</span><span class="thinsp"> </span>add <code>@sup­port</code> wrap­per that would test the sup­port for every­thing <strong>ex­cept</strong> for the vari­ables.</p>
@@ -225,7 +225,7 @@ back­ground: I 💩 CSS VAR(--I)ABLES;
 <pre><code class="language-css">.block {
     color: #f00;
 }
-@sup­ports (color: rgb(0, calc(0), 0)) {
+@supports (color: rgb(0, calc(0), 0)) {
     .block {
         color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
   }

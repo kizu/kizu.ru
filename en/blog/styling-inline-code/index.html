@@ -44,7 +44,7 @@
 <p>Ac­tu­ally, you can look at an in­line code block <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#semantics" id="semantics">right there</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Here I used just an <code>&lt;em&gt;</code>, as this post could be seen on <abbr>RSS</abbr>-read­ers and in other places where you wouldn&#39;t have the proper code blocks&#39; style like I used for my blog.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>: <em>font-style: italic</em>. I think that it look rather <span class="nobr">nice —</span><span class="thinsp"> </span>un­ob­tru­sive, but sep­a­rate from the reg­u­lar text.</p>
 <p>Italic sep­a­rates the code from the other text just fine, in most cases, you won&#39;t need any­thing else there. The eas­i­est way to make your in­line code blocks italic is some­thing like this:</p>
 <pre><code class="language-styl">:not(pre) &gt; code {
-    font: in­herit;
+    font: inherit;
     font-style: italic;
 }
 </code></pre>

@@ -38,17 +38,17 @@
 <p>У меня по­лу­чи­лось ре­шить эту за­да­чу с од­ним до­пу­ще­ни­ем: нуж­но знать вы­со­ту по­во­ра­чи­ва­е­мо­го эле­мен­та. В этом слу­чае ре­а­ли­за­ция ста­но­вит­ся очень простой:</p>
 <ol>
 <li><p>Нам по­на­до­бит­ся до­пол­ни­тель­ный эле­мент. <abbr>HTML</abbr> каж­до­го бло­ка бу­дет при­мер­но таким:</p>
-<pre><code class="language-html"> &lt;span class=&quot;ro­tated-text&quot;&gt;
-     &lt;span class=&quot;ro­tated-tex­t__in­ner&quot;&gt;
-         Ro­tated foo
-     &lt;/​​span&gt;
- &lt;/​​span&gt;
+<pre><code class="language-html"> &lt;span class=&quot;rotated-text&quot;&gt;
+     &lt;span class=&quot;rotated-text__inner&quot;&gt;
+         Rotated foo
+     &lt;/span&gt;
+ &lt;/span&gt;
 </code></pre>
 </li>
 <li><p>Врап­пе­ру мы за­да­ём вот та­кие сти­ли: </p>
-<pre><code class="language-css"> .ro­tated-text {
-     dis­play: in­line-block;
-     over­flow: hid­den;
+<pre><code class="language-css"> .rotated-text {
+     display: inline-block;
+     overflow: hidden;
 
      width: 1.5em;
      line-height: 1.5;
@@ -57,20 +57,20 @@
 <p> Здесь мы де­ла­ем эле­мент ин­лайн-блоч­ным (это не кри­тич­но, сра­бо­та­ло бы и блоч­ное отоб­ра­же­ние, но ин­лайн-блок чаще бы­ва­ет ну­жен), за­тем об­ре­за­ем все вы­сту­па­ю­щие ча­сти (при­го­дит­ся поз­же), да­лее за­да­ём ши­ри­ну, рав­ную те­ку­щей вы­со­те бло­ка,<span class="nobr"> —</span><span class="thinsp"> </span>то са­мое до­пу­ще­ние (<code>line-height</code> тут при­ве­дён в ка­че­стве при­ме­ра того, что сей­час опре­де­ля­ет вы­со­ту бло­ка, а так как все эле­мен­ты, ис­поль­зу­е­мые в при­ме­ре, од­но­строч­ные, то это и бу­дет его вы­со­той).</p>
 </li>
 <li><p>Внут­рен­ний эле­мент де­ла­ем ин­лайн-блоч­ным, что­бы его ши­ри­на схлоп­ну­лась по кон­тен­ту. По­сле чего за­да­ём <code>white-space:nowrap</code> для того, что­бы ни­че­го ни­ку­да не пе­ре­но­си­лось (ведь выше мы огра­ни­чи­ли ши­ри­ну), ну и по­во­ра­чи­ва­ем блок, счи­тая верх­ний ле­вый угол точ­кой от­счё­та (для чи­та­е­мо­сти свой­ства при­ве­де­ны без пре­фик­сов):</p>
-<pre><code class="language-css"> .ro­tated-tex­t__in­ner {
-     dis­play: in­line-block;
+<pre><code class="language-css"> .rotated-text__inner {
+     display: inline-block;
      white-space: nowrap;
 
-     trans­form: trans­late(0,100%) ro­tate(-90deg);
-     trans­form-ori­gin: 0 0;
+     transform: translate(0,100%) rotate(-90deg);
+     transform-origin: 0 0;
  }
 </code></pre>
 </li>
 <li><p>А те­перь са­мое глав­ное: нам нуж­но сде­лать этот внут­рен­ний эле­мент «квад­рат­ным»<span class="nobr"> —</span><span class="thinsp"> </span>это сде­ла­ет вы­со­ту ко­неч­но­го эле­мен­та рав­ной ши­рине, ну а ши­ри­на у нас об­ре­за­ет­ся врап­пе­ром. Для того, что­бы сде­лать наш эле­мент квад­рат­ным, я при­ме­няю вот та­кой вот трюк:</p>
-<pre><code class="language-css"> .ro­tated-tex­t__in­ner:af­ter {
-     con­tent: &quot;&quot;;
+<pre><code class="language-css"> .rotated-text__inner:after {
+     content: &quot;&quot;;
      float: left;
-     mar­gin-top: 100%;
+     margin-top: 100%;
  }
 </code></pre>
 <p> Вро­де всё до­воль­но про­сто, но немно­гие зна­ют о том, что вер­ти­каль­ные ма­джи­ны и пад­дин­ги, за­дан­ные в про­цен­тах, ис­чис­ля­ют­ся не от вы­со­ты бло­ка, а от его ши­ри­ны. Это по­ве­де­ние ред­ко ис­поль­зу­ет­ся на прак­ти­ке, но у нас как раз тот слу­чай, ко­гда оно при­го­дилось.</p>

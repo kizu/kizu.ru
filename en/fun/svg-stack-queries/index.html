@@ -38,52 +38,52 @@
 <div class="Demo Figure" id="Demo_svg-stack-queries"><iframe class="Demo-Frame" style="height: 1.5em" width="100%" src="svg-stack-queries.html"></iframe></div>
 <p>Well, the code wouldn&#39;t be that el­e­gant as with orig­i­nal <abbr>SVG</abbr> Stacks idea, but what I did is a Proof of Concept.</p>
 <p>The <abbr>HTML</abbr> for those icons is this:</p>
-<pre><code class="language-html">&lt;span class=&quot;icon-wrap­per&quot;&gt;
-    &lt;img class=&quot;icon icon_­down­load&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
-&lt;/​span&gt;
-&lt;span class=&quot;icon-wrap­per&quot;&gt;
+<pre><code class="language-html">&lt;span class=&quot;icon-wrapper&quot;&gt;
+    &lt;img class=&quot;icon icon_download&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
+&lt;/span&gt;
+&lt;span class=&quot;icon-wrapper&quot;&gt;
     &lt;img class=&quot;icon icon_next&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
-&lt;/​span&gt;
-&lt;span class=&quot;icon-wrap­per&quot;&gt;
+&lt;/span&gt;
+&lt;span class=&quot;icon-wrapper&quot;&gt;
     &lt;img class=&quot;icon icon_print&quot; src=&quot;test3.svg&quot; alt=&quot;&quot;&gt;
-&lt;/​span&gt;
+&lt;/span&gt;
 </code></pre>
 <p>The <abbr>SVG</abbr> it­self would look like this:</p>
-<pre><code class="language-markup">&lt;svg xmlns=&quot;http://​www.w3.org/​2000/​svg&quot;&gt;
+<pre><code class="language-markup">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
     &lt;style&gt;
 
-.icon { dis­play: none }
+.icon { display: none }
 
-@me­dia (as­pect-ra­tio: 1/​2), (as­pect-ra­tio: 2/​1) { #down­load { dis­play: in­line; }}
-@me­dia (as­pect-ra­tio: 1/​3), (as­pect-ra­tio: 3/​1) { #next { dis­play: in­line; }}
-@me­dia (as­pect-ra­tio: 1/​5), (as­pect-ra­tio: 5/​1) { #print { dis­play: in­line; }}
+@media (aspect-ratio: 1/2), (aspect-ratio: 2/1) { #download { display: inline; }}
+@media (aspect-ratio: 1/3), (aspect-ratio: 3/1) { #next { display: inline; }}
+@media (aspect-ratio: 1/5), (aspect-ratio: 5/1) { #print { display: inline; }}
 
-@me­dia (ori­en­ta­tion: land­scape) { .icon { fill: blue; } }
+@media (orientation: landscape) { .icon { fill: blue; } }
 
 
-    &lt;/​style&gt;
+    &lt;/style&gt;
 
-    &lt;path class=&quot;icon&quot; id=&quot;down­load&quot; d=&quot;M2,6h3V1h6v5h3L8,12m7,1v2H1V13&quot;&gt;&lt;/​path&gt;
-    &lt;path class=&quot;icon&quot; id=&quot;next&quot; d=&quot;M5 1v14l9-7&quot;&gt;&lt;/​path&gt;
-    &lt;path class=&quot;icon&quot; id=&quot;print&quot; d=&quot;M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5&quot;&gt;&lt;/​path&gt;
-&lt;/​svg&gt;
+    &lt;path class=&quot;icon&quot; id=&quot;download&quot; d=&quot;M2,6h3V1h6v5h3L8,12m7,1v2H1V13&quot;&gt;&lt;/path&gt;
+    &lt;path class=&quot;icon&quot; id=&quot;next&quot; d=&quot;M5 1v14l9-7&quot;&gt;&lt;/path&gt;
+    &lt;path class=&quot;icon&quot; id=&quot;print&quot; d=&quot;M4,2h8v2h1V1H3v3h1M0,5v6h3v1l3,3h7v-4h3V5m-3,2v1H12v6H6V12H4V8H3V7m2,1h6v1H5m0,1h6v1H5&quot;&gt;&lt;/path&gt;
+&lt;/svg&gt;
 </code></pre>
 <p>And the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#webkit-bug" id="webkit-bug"><em>ba­sic</em></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>There is a bug in We­bkit pre­vent­ing the icons to be shown on page load. You could fix it with some­thing that would cause a re­flow, like an an­i­ma­tion, you can see how I ap­plied it in the …<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> <abbr>CSS</abbr> would look this way:</p>
-<pre><code class="language-css">.icon-wrap­per {
-    dis­play: in­line-block;
-    ver­ti­cal-align: top;
-    over­flow: hid­den;
+<pre><code class="language-css">.icon-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
 
     width: 16px;
     height: 16px;
 }
 
 .icon {
-    ver­ti­cal-align: top;
+    vertical-align: top;
 }
 
-.icon_­down­load       { width: 120px; height: 240px; }
-.icon_­down­load:hover { width: 240px; height: 120px; }
+.icon_download       { width: 120px; height: 240px; }
+.icon_download:hover { width: 240px; height: 120px; }
 
 .icon_next           { width: 120px; height: 360px; }
 .icon_next:hover     { width: 360px; height: 120px; }
@@ -98,8 +98,8 @@
 <li><p>We should use <code>&lt;img/&​gt;</code> (or any sim­i­lar method) in­stead of <abbr>SVG</abbr> in <abbr>CSS</abbr> back­grounds, &#39;cause there are a lot of <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#svg-in-css" id="svg-in-css">is­sues</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>…<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> with back­grounds in dif­fer­ent browsers. And that&#39;s sad, &#39;cause we could use only one el­e­ment in <abbr>HTML</abbr> for those icons then, us­ing <code>back­ground-im­age</code> or <span class="nobr">pseudo-el</span>­e­ments.</p>
 </li>
 <li><p>I&#39;ve used a wrap­per to show only the ac­tual part of the <abbr>SVG</abbr>, hid­ing the ex­tra can­vas that is needed only for me­dia queries. How­ever, if you&#39;re ok with ab­solute po­si­tion­ing, you could use it along with <code>clip</code> to hide the extras:</p>
-<pre><code class="language-css"> .icon_ab­solute {
-     po­si­tion: ab­solute;
+<pre><code class="language-css"> .icon_absolute {
+     position: absolute;
      clip: rect(0, 16px, 16px, 0);
  }
 </code></pre>

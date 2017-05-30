@@ -36,12 +36,12 @@
 </ul>
 <p>К сча­стью, эму­ли­ро­вать его до­ста­точ­но лег­ко. Кро­ме того, при по­мо­щи этой эму­ля­ции мож­но по­чи­нить по­ве­де­ние тега в Опере.</p>
 <p>Вот при­мер­ное ре­шение:</p>
-<pre><code class="language-html">lalala&lt;i class=&quot;wbr&quot;&gt;&lt;/​​i&gt;lalala
+<pre><code class="language-html">lalala&lt;i class=&quot;wbr&quot;&gt;&lt;/i&gt;lalala
 </code></pre>
 <p>и</p>
 <pre><code class="language-css">WBR,
 .wbr {
-    dis­play: in­line-block;
+    display: inline-block;
     }
 </code></pre>
 <p>Един­ствен­ный мо­мент, ко­то­рый оста­ёт­ся за рам­ка­ми эму­ля­ции: в IE <code>WBR</code> мо­жет со­зда­вать раз­рыв стро­ки при <code>white-space:nowrap</code>.</p>

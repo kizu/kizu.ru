@@ -37,10 +37,10 @@
 <h3 class="Heading" id="selector-lists"><a class="Anchor" aria-hidden="true" href="#selector-lists"></a><span class="ss01 hang-xs">S</span>elec­tor Lists</h3>
 <p>So, now we can use comma-sep­a­rated se­lec­tor lists in­side any <code>:not()</code>. The com­mas in usual comma-sep­a­rated se­lec­tor lists are an equiv­a­lent of log­i­cal <strong>or</strong>, but when used in­side the <code>:not()</code> they ac­tu­ally be­come <strong>and</strong>.</p>
 <p>Look at this ex­am­<span class="nobr">ple —</span><span class="thinsp"> </span>such se­lec­tor would tar­get all but­tons that are not hov­ered and not fo­cused <em>at the same time</em>:</p>
-<pre><code class="language-css">but­ton:not(:hover, :fo­cus)
+<pre><code class="language-css">button:not(:hover, :focus)
 </code></pre>
 <p>And it is ba­si­cally an equiv­a­lent of</p>
-<pre><code class="language-css">but­ton:not(:hover):not(:fo­cus)
+<pre><code class="language-css">button:not(:hover):not(:focus)
 </code></pre>
 <p>The dif­fer­ence there is how the speci­ficity works for se­lec­tor lists in­side <code>:not()</code>, here is <a class="Link" href="https://drafts.csswg.org/selectors-4/#specificity-rules">what Spec says</a>:</p>
 <blockquote>
@@ -58,7 +58,7 @@
 <pre><code class="language-css">:not(:not(:hover))
 </code></pre>
 <p>That would work just the same as a <code>:hover</code> pseudo­class. That&#39;s rather sim­ple. But what would hap­pen if we&#39;d have a se­lec­tor list there?</p>
-<pre><code class="language-css">:not(:not(:hover), :not(:fo­cus))
+<pre><code class="language-css">:not(:not(:hover), :not(:focus))
 </code></pre>
 <p>As the se­lec­tor lists in­side <code>:not()</code> work as a log­i­cal <strong>and</strong>, and given that each of the se­lec­tors would be re­turned to its orig­i­nal mean­ing, the re­sult would be al­most the same as <code>:hover:fo­cus</code>. The dif­fer­ence would be that the speci­ficity of the dou­ble negated se­lec­tor wouldn&#39;t be the same as of the usual com­plex one. Each of the nested <code>:not()</code> would have a speci­ficity of a sin­gle pseudo­class, and due to how se­lec­tor lists work in­side <code>:not()</code>, the speci­ficity of the whole con­struc­tion would be equal, again, to a speci­ficity of a sin­gle pseudo­class.</p>
 <h2 class="Heading" id="reducing-the-specificity"><a class="Anchor" aria-hidden="true" href="#reducing-the-specificity"></a><span class="ss01 hang-m">R</span>educ­ing the Speci­ficity</h2>
@@ -101,13 +101,13 @@
 <p>One of the eas­i­est tar­gets for con­trol­ling the speci­ficity are any re­sets or nor­mal­iz­ing <span class="nobr">styles —</span><span class="thinsp"> </span>right now they of­ten con­tain things like at­tribute se­lec­tors and pseudo­classes like <code>:nth-child</code>, and given that those se­lec­tors would also have the el­e­ment se­lec­tors, they would al­ways be higher than a sin­gle class in speci­ficity, which would make it harder to over­ride it in the code for your blocks.</p>
 <p>For ex­am­ple, you can look at <a class="Link" href="https://github.com/necolas/normalize.css/blob/1da0911/normalize.css#L125">one part</a> of Nico­las Gal­lagher&#39;s nor­mal­ize.css:</p>
 <pre><code class="language-css">/**
- * 1. Re­move the bot­tom bor­der in Fire­fox 39-.
- * 2. Add the cor­rect text dec­o­ra­tion in Chrome, Edge, IE, Opera, and Sa­fari.
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
-abbr[ti­tle] {
-  bor­der-bot­tom: none; /* 1 */
-  text-dec­o­ra­tion: un­der­line; /* 2 */
-  text-dec­o­ra­tion: un­der­line dot­ted; /* 2 */
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 </code></pre>
 <p>Here if you&#39;d like to have a com­po­nent that uses <code>&lt;abbr&gt;</code> and you&#39;d want a bor­der or text-dec­o­ra­tion other than un­der­lined, you couldn&#39;t use a sin­gle class for this com­po­nent in your <abbr>CSS</abbr> along­side us­ing nor­mal­ize.<span class="nobr">css —</span><span class="thinsp"> </span>you&#39;d need to over­ride the speci­ficity of two classes in­stead.</p>
@@ -119,9 +119,9 @@ abbr[ti­tle] {
 <p>The al­go­rithm would be sim­ple: for each layer we need to cal­cu­late the max­i­mum speci­ficity, then add a num­ber of re­dun­dant match­ing class se­lec­tors to each se­lec­tor in a way they would split all the things into groups.</p>
 <p>Let&#39;s say we have an ab­stract ob­ject&#39;s se­lec­tor: <code>.but­ton:hover</code>, then a com­po­nent <code>.My­Block-Sub­mit</code>, and, fi­nally, a util­ity <code>.is-hid­den</code>. We can leave alone the first layer for the ob­ject, it would be the most bot­tom one. Then we cal­cu­late that it have two class-level se­lec­tors, so we add that num­ber (plus one, to guar­an­tee the over­ride of any pos­si­ble generic se­lec­tor there) to each se­lec­tor of the sec­ond layer of com­po­nents. Then we cal­cu­late the speci­ficity of the com­po­nent layer (here we have just one class ini­tially, in re­al­ity, it would be of­ten much larger, plus the three classes from the pre­vi­ous layer, plus one for re­li­a­bil­ity) and add the cor­re­spond­ing num­ber of re­dun­dant class se­lec­tors to any­thing in util­ity group.</p>
 <p>The eas­i­est (and the one method with the most sup­port) way to add the de­sired speci­ficity is pos­si­ble if you have con­trol over the <abbr>HTML</abbr> of a page: just add a class con­tain­ing a sin­gle un­der­score to <code>html</code> el­e­<span class="nobr">ment —</span><span class="thinsp"> </span><code>&lt;html class=&quot;_&quot;&gt;</code>, and then use the chains of <code>._._</code> be­fore your se­lec­tors. It would look like this:</p>
-<pre><code>.but­ton:hover {}
-._._._ .My­Block-Sub­mit {}
-._._._._._ .is-hid­den {}
+<pre><code>.button:hover {}
+._._._ .MyBlock-Submit {}
+._._._._._ .is-hidden {}
 </code></pre>
 <p>The only is­sue that can hap­pen is that one of the se­lec­tors you&#39;re pre­fix­ing would have a part that tar­gets a root se­lec­tor. In case of <code>:root</code> or <code>html</code> ones we could rather eas­ily prop­erly at­tach this part to the ac­tual se­lec­tor, for more am­bigu­ous se­lec­tors we&#39;d need to du­pli­cate it like <code>._._._._.is-hid­den, ._._._._ .is-hid­den</code>, though, if you know that you&#39;re do­ing, you prob­a­bly wouldn&#39;t want to use any other classes on root.</p>
 <p>And here we have all of the lay­ers sep­a­rated in a way their or­der doesn&#39;t mat­ter at all and you could make any layer as com­plex as you like with­out the fear of the need to over­ride it later. And yes, you&#39;d still have all the usual <abbr>CSS</abbr> speci­ficity rules in­side of lay­ers if you&#39;d want to use them for more gran­u­lar con­trol of things.</p>

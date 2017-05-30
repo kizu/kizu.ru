@@ -130,25 +130,25 @@
 <p>The <code>html</code> for those blocks is the same, with the only dif­fer­ence of the used classes:</p>
 <pre><code class="undefinedHTML">&lt;p&gt;
   Hello
-  &lt;span class=&quot;a&quot;&gt;A&lt;/​span&gt;
-&lt;/​p&gt;
+  &lt;span class=&quot;a&quot;&gt;A&lt;/span&gt;
+&lt;/p&gt;
 &lt;p&gt;
   Hello
-  &lt;span class=&quot;b&quot;&gt;B&lt;/​span&gt;
-&lt;/​p&gt;
+  &lt;span class=&quot;b&quot;&gt;B&lt;/span&gt;
+&lt;/p&gt;
 </code></pre>
 <p>And the <abbr>CSS</abbr> for them:</p>
 <pre><code class="undefinedCSS">.a {
     float: left;
-    dis­play: in­line-block;
+    display: inline-block;
     }
 .b {
     float: left;
-    dis­play: block;
+    display: block;
     }
 .a,
 .b {
-    po­si­tion: ab­solute;
+    position: absolute;
     }
 </code></pre>
 <p>Yep, the <code>float</code> won&#39;t do any­thing there, and the dif­fer­ence in the flow are there be­cause of the dif­fer­ences in <code>dis­play</code>.</p>
@@ -206,39 +206,39 @@
 <p>That was not an easy task, and I&#39;m a bit ashamed that I didn&#39;t solve it by my­self, but hey, at least I know how (and why) we can do it now!</p>
 <p>The <abbr>HTML</abbr> for those items is this:</p>
 <pre><code class="undefinedHTML">&lt;ul class=&quot;just-some-items&quot;&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;One&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Two&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Three&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Four&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Five&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Six&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Seven&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Eight&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Nine&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Ten&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;Eleven&lt;/​li&gt;
-    &lt;li class=&quot;just-some-item&quot;&gt;…last&lt;/​li&gt;
-&lt;/​ul&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;One&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Two&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Three&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Four&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Five&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Six&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Seven&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Eight&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Nine&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Ten&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;Eleven&lt;/li&gt;
+    &lt;li class=&quot;just-some-item&quot;&gt;…last&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre>
 <p>The <abbr>CSS</abbr> is this:</p>
 <pre><code class="undefinedCSS">.just-some-items {
-    over­flow: hid­den;
+    overflow: hidden;
 
     height: 2em;
     padding-right: 2.4em;
-    mar­gin: 0;
+    margin: 0;
     }
 .just-some-item {
     float: left;
 
-    mar­gin-right: 0.5em;
+    margin-right: 0.5em;
 
     line-height: 2em;
     }
 .just-some-item:last-child {
-    po­si­tion: ab­solute;
+    position: absolute;
 
-    dis­play: in­line-block;
+    display: inline-block;
 
     width: 2.4em;
     }
