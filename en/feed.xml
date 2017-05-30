@@ -3,12 +3,97 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2016-12-21T00:00:00+03:00</updated>
+  <updated>2017-05-31T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Label-to-Input States</title>
+    <link href="http://kizu.ru/en/blog/label-to-input/"/>
+    <updated>2017-05-31T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/label-to-input</id>
+    <content type="html">&lt;h1 id=&quot;label-to-input-states&quot;&gt;&lt;span class=&quot;nobr&quot;&gt;Label-to&lt;/span&gt;-Input States&lt;/h1&gt;
+&lt;p&gt;When fiddling with inputs &amp;amp; labels for them, I remembered one thing that amused me &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#for-a-long-time&quot; id=&quot;for-a-long-time&quot;&gt;for a long time&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Fun fact: when I started the research for this article, I found &lt;a href=&quot;https://stackoverflow.com/questions/9098581/why-is-hover-for-input-triggered-on-corresponding-label-in-css&quot;&gt;this question&lt;/a&gt; at StackOverflow, with a really detailed answer by BoltClock. The fun part is that I was the one who asked this question at this far February of the year 2012, and now totally forgot about it. Also, the “Even more” part of this question is still actual for Webkits/Blinks.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;. Look at this &lt;abbr&gt;HTML&lt;/abbr&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;label&amp;gt;
+    Here is an input: 
+    &amp;lt;input type=&amp;quot;text&amp;quot; /&amp;gt;
+&amp;lt;/label&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The fact that amuses me is that when you declare a state for an input in &lt;abbr&gt;CSS&lt;/abbr&gt;, like with &lt;code&gt;:hover&lt;/code&gt; or &lt;code&gt;:active&lt;/code&gt; pseudo classes, and then you have a label for that input, then triggering those states over the label would actually trigger the same states on the input.&lt;/p&gt;
+&lt;p&gt;Here is an excerpt from the &lt;a href=&quot;https://drafts.csswg.org/selectors-4/#the-hover-pseudo&quot;&gt;latest Selectors Level 4 spec&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Document languages may define additional ways in which an element can match :hover. For example, [&lt;abbr&gt;HTML&lt;/abbr&gt;5] defines a labeled control element as matching :hover when its label is hovered.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here is a simple example of this behaviour:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_1&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re using any modern browser, you could see the input to be highlighted both when you hover the input itself and the label associated with it.&lt;/p&gt;
+&lt;p&gt;The &lt;abbr&gt;CSS&lt;/abbr&gt; for this example is trivial:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;input.example:hover {
+  background: lime;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;but-what-about-ancestors-&quot;&gt;But What About Ancestors?&lt;/h2&gt;
+&lt;p&gt;If you&amp;#39;d look at that place about the hover in &lt;a href=&quot;https://drafts.csswg.org/selectors-4/#the-hover-pseudo&quot;&gt;the spec&lt;/a&gt;, you&amp;#39;d see the following sentence above:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;An element also matches :hover if one of its descendants in the flat tree (including non-element nodes, such as text nodes) matches the above conditions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Which is a thing you could possibly already know: when you hover over a descendant, then this state is also triggered &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#all-of-them&quot; id=&quot;all-of-them&quot;&gt;on all the ancestors&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Even if the element is out of the ancestor&amp;#39;s bounds, like being positioned or moved outside using some other method, and even if the ancestor would have &lt;code&gt;pointer-events: none&lt;/code&gt; or &lt;code&gt;display: contents&lt;/code&gt;, it still would be marked as the one having the same state as the descendant.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, which can be used in a lot of useful ways.&lt;/p&gt;
+&lt;p&gt;But what if we have those connected label and input, and the label would be placed not in one of the input&amp;#39;s ancestor&amp;#39;s flat tree?&lt;/p&gt;
+&lt;p&gt;Like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;ul&amp;gt;
+    &amp;lt;li&amp;gt;
+        Here is
+        &amp;lt;label class=&amp;quot;example-label&amp;quot; for=&amp;quot;Example2&amp;quot;&amp;gt;a label&amp;lt;/label&amp;gt;
+        for the input inside another list item. Hover it!
+    &amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;
+        And here is the input for the above label:
+        &amp;lt;input class=&amp;quot;example&amp;quot; id=&amp;quot;Example2&amp;quot; type=&amp;quot;text&amp;quot; /&amp;gt;
+    &amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And if we&amp;#39;d add the same &lt;abbr&gt;CSS&lt;/abbr&gt; as for the example above, we&amp;#39;d get the same result:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_2&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For now the result is the same. But there is one big difference. Let&amp;#39;s add some styles like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;ul.example3 &amp;gt; li:hover {
+    box-shadow: 0 0 0 3px blue;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now look at the following example and try to hover over the input itself and the associated label:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_3&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You should see there that, as probably expected, only the actual list item that is hovered would obtain the above styles. Giving the input the &lt;code&gt;:hover&lt;/code&gt; state using the label trick won&amp;#39;t trigger the &lt;code&gt;:hover&lt;/code&gt; over its parent. All like was written in the specs.&lt;/p&gt;
+&lt;p&gt;And what this also means is that as we have this behaviour, the following selector that could look like nonsense at the first glance would actually mean something:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:not(:hover) &amp;gt; input#Example4:hover {
+  background: blue;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we&amp;#39;d take our first example and would just wrap an input into a simple span:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;span&amp;gt;&amp;lt;input class=&amp;quot;example&amp;quot; id=&amp;quot;Example4&amp;quot; type=&amp;quot;text&amp;quot; /&amp;gt;&amp;lt;/span&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This new selector would actually target &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#not-only&quot; id=&quot;not-only&quot;&gt;only&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Actually, there is at least one other way to trigger &lt;span class=&quot;nobr&quot;&gt;it —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;by using the developer tools and checking the &lt;code&gt;:hover&lt;/code&gt; state only for the input there. And if you&amp;#39;d find out other cases where this would &lt;span class=&quot;nobr&quot;&gt;work —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;please, report them to me!&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; the hover state of this input that is caused by hovering over label.&lt;/p&gt;
+&lt;p&gt;And that means that we can now actually style both hover states in different ways!&lt;/p&gt;
+&lt;p&gt;Here is that example working:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_4&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;selecting-siblings&quot;&gt;Selecting Siblings&lt;/h2&gt;
+&lt;p&gt;As with a lot of other places in &lt;abbr&gt;CSS&lt;/abbr&gt;, you could research a lot of things surrounding this behaviour. For example, not only the &lt;code&gt;:hover&lt;/code&gt; state can be delegated this way, but also at least the &lt;code&gt;:active&lt;/code&gt; one.&lt;/p&gt;
+&lt;p&gt;But I&amp;#39;d like to mention one nuance that could be rather useful, but which is prevented by IE/Edge not supporting it.&lt;/p&gt;
+&lt;p&gt;As we saw, the parent is, per spec, won&amp;#39;t get the hover state of such delegated &lt;code&gt;:hover&lt;/code&gt;. But what if we&amp;#39;d want to use this &lt;code&gt;:hover&lt;/code&gt; as a prerequisite to something else? What if we would add a combinator after it and then would try to select some siblings that will come after the input?&lt;/p&gt;
+&lt;p&gt;Like this:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_5&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In Firefox and browsers based on Webkit/Blink you could see the link that goes after the input to be highlighted even when you hover the label inside another list item! In Edge, sadly, nothing happens there.&lt;/p&gt;
+&lt;p&gt;And, as in the browsers that support it, this behaviour would work even if the input is disabled, we then could hide it using the often used technique (using &lt;code&gt;clip&lt;/code&gt; etc.), and then use labels at one part of the page to highlight stuff at any other part of the page without any JS. What fun could we get out of it?&lt;/p&gt;
+&lt;h2 id=&quot;breaking-the-specs-in-the-end&quot;&gt;Breaking the Specs in the End&lt;/h2&gt;
+&lt;p&gt;The most &lt;input disabled aria-hidden=&quot;true&quot; class=&quot;lol-example&quot; id=&quot;Example6-5&quot; type=&quot;radio&quot; /&gt;&lt;span class=&quot;example-target&quot;&gt;fun&lt;/span&gt; thing what I found when doing quick experiments &lt;input disabled aria-hidden=&quot;true&quot; class=&quot;lol-example&quot; id=&quot;Example6-6&quot; type=&quot;radio&quot; /&gt;&lt;span class=&quot;example-target&quot;&gt;is&lt;/span&gt; this:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/label-to-input/#Demo_6&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Sadly, there I used the &lt;input disabled aria-hidden=&quot;true&quot; class=&quot;lol-example&quot; id=&quot;Example6-7&quot; type=&quot;radio&quot; /&gt;&lt;span class=&quot;example-target&quot;&gt;forbidden in specs&lt;/span&gt; nesting of labels inside other labels (which we could actually overcome in terms of &lt;em&gt;validity&lt;/em&gt; using either the method for &lt;a href=&quot;/en/fun/nested-links/&quot;&gt;nesting links&lt;/a&gt; or by &lt;abbr&gt;DOM&lt;/abbr&gt; manipulation), which surprisingly works as we&amp;#39;d expect: you hover one (visually) item, and then you get visual feedback from any number of places all over the page.&lt;/p&gt;
+&lt;p&gt;Imagine if this would be the thing we could use without hacks and without relying on the &lt;span class=&quot;nobr&quot;&gt;label-to&lt;/span&gt;-input state delegation.&lt;/p&gt;
+&lt;p&gt;And here we have it &lt;em&gt;implemented&lt;/em&gt; in some way, so its entirely possible to do in browsers and we&amp;#39;d only need the specs to support it? What do you think, do we need a way to delegate states from one element to another in native &lt;abbr&gt;CSS&lt;/abbr&gt;? If you think that we need, tell your fellow spec writers and/or browser vendors, or even come up with a draft of what it could look like in a spec by yourself!&lt;/p&gt;
+&lt;p&gt;There is a &lt;em&gt;chance&lt;/em&gt;, that such stuff would be possible with extensive usage of &lt;code&gt;:has()&lt;/code&gt; (&lt;a href=&quot;https://drafts.csswg.org/selectors-4/#relational&quot;&gt;at the same spec&lt;/a&gt;) if it would be ever implemented, but yeah, only if it would be ever implemented.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Controlling the Specificity</title>
     <link href="http://kizu.ru/en/fun/controlling-the-specificity/"/>
