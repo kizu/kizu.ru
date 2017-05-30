@@ -1,0 +1,41 @@
+---
+framed: true
+---
+
+<style>
+
+.lol-example {
+  position: absolute;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+}
+
+:hover + .example-target {
+  background: yellow;
+  box-shadow: 0 0 0 2px blue;
+}
+
+</style>
+
+<ul class="example6">
+    <li>
+        Here is some list item with some words like
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-1" type="text" /><span class="example-target">Woosh</span>
+        and
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-2" type="text" /><span class="example-target">Wheee</span>
+    </li>
+    <li>
+        And another <input disabled aria-hidden="true" class="lol-example" id="Example6-3" type="text" /><span class="example-target">list item</span>!
+    </li>
+    <li>
+        <input disabled aria-hidden="true" class="lol-example" id="Example6-4" type="text" /><span class="example-target">And another!</span>
+    </li>
+</ul>
+
+<p>
+    Hey, look, there is a
+    <label for="Example6-1"><label for="Example6-2"><label for="Example6-3"><label for="Example6-4"><label for="Example6-5"><label for="Example6-6"><label class="example-label" for="Example6-7">superlabel!</label></label></label></label></label></label></label>
+    Hover it!
+</p>
+
