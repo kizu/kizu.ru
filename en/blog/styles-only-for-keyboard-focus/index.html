@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Styles Only for Keyboard Focus</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="styles-only-for-keyboard-focus"><a class="Anchor" aria-hidden="true" href="#styles-only-for-keyboard-focus"></a><span class="ss01 hang-xs">S</span>tyles Only for Keyboard Focus</h1>
+          </header>
+<p>One of the things I couldn&#39;t man­age to find a so­lu­tion for was for a long time a prob­lem of fo­cus styles on el­e­ments. The prob­lem is: when you have an el­e­ment with some <code>:fo­cus</code> styles, they&#39;re ap­plied not only to the fo­cused state it­self but also af­ter you just click on an el­e­ment (and it be­haves dif­fer­ently for dif­fer­ent el­e­ments in dif­fer­ent browsers, of course).</p>
+<p>What this meant is that when­ever you wanted to have some cus­tom el­e­ment, you would need to com­pro­mise in how the fo­cus state would look like, be­cause if you&#39;d make it too bright or dis­tinct from the nor­mal state, users would see it when­ever they&#39;d click the el­e­ments with those styles. So you&#39;re ei­ther get­ting the too no­tice­able ef­fect when it is not needed or not enough no­tice­able ef­fect when it is needed. Ac­ces­si­bil­ity-wise, the lat­ter is, of course, bet­ter, but what if we could, in fact, dif­fer­en­tiate?</p>
+<p>In this post, I&#39;ll pre­sent to you <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#solution" id="solution">the so­lu­tion</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can jump straight to <a href="#final-solution">the fi­nal so­lu­tion</a>, but I rec­om­mend you to read the whole post any­way in or­der to bet­ter un­der­stand it.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> I had found. It is not per­fect, but I think this is enough for us to start mak­ing our el­e­ments both hav­ing a dis­tinct bright fo­cus state and be good look­ing when users would use a mouse, a track­pad etc.</p>
+<h2 class="Heading" id="current-state-of-the-problem"><a class="Anchor" aria-hidden="true" href="#current-state-of-the-problem"></a><span class="ss02 hang-xs">C</span>urrent State of the Problem</h2>
+<p>To un­der­stand the prob­lem bet­ter, we should look at how things be­have in dif­fer­ent browsers for the sim­plest test case.</p>
+<p>Try to hover, click and switch fo­cus over those con­trols:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_1"><style>
+
+/* Resetting & Normalizing Button's styles */
+.example-Button {
+  position: relative;
+
+  display: inline-block;
+  vertical-align: baseline;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+
+  white-space: nowrap;
+
+  font: inherit;
+  text-decoration: none;
+
+  color: inherit;
+  background: transparent;
+
+  cursor: pointer;
+  user-select: none;
+  -moz-appearance: none;
+}
+
+.example-Button::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+/* Visual styles to demonstrate states behaviour */
+
+.example-Button {
+  padding: 0.25em 0.75em;
+  border: 1px solid;
+  margin: 1em;
+
+  background: #808080;
+
+  border-radius: 9em;
+}
+
+ /* Removing site's styles */
+:not(#id).example-Button,
+:not(#id).example-Button:link,
+:not(#id).example-Button:visited,
+:not(#id).example-Button:hover,
+:not(#id).example-Button:focus {
+  color: #FFF !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  background: #808080;
+}
+
+:not(#id).example-Button:hover {
+  background: blue;
+}
+
+:not(#id).example-Button:active {
+  background: darkorange;
+}
+
+#Example1 .example-Button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 7px lime;
+}
+
+
+
+</style>
+
+<div id="Example1" class="example-Wrapper">
+    <button class="example-Button" type="button" tabindex="0">I'm a button!</button>
+    <a class="example-Button" href="#x" tabindex="0">I'm a link!</a>
+    <span class="example-Button" tabindex="0">I'm a span!</span>
+</div>
+</div>
+<p>Browsers be­have rather dif­fer­ently there:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Browser</th>
+<th>But­ton</th>
+<th>Link</th>
+<th>Span</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Chrome</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">IE11</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Fire­fox</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Sa­fari</td>
+<td><strong>No</strong></td>
+<td>Yes*</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the Sa­fari doesn&#39;t get key­board fo­cus for links by de­fault (you need to en­able it in its pref­er­ences for this), but still gets the state on click.</p>
+<p>We can al­ready see that for most el­e­ments in all browsers we would get that fo­cused state when we&#39;d click the but­ton, while for the <code>&lt;but­ton&gt;</code>s in Sa­fari and Fire­fox we for some rea­son won&#39;t.</p>
+<h2 class="Heading" id="possible-solution-in-the-specs-"><a class="Anchor" aria-hidden="true" href="#possible-solution-in-the-specs-"></a><span class="ss01 hang-m">P</span>ossible Solution in the Specs?</h2>
+<p>One thing we should al­ways do when we start ex­per­i­ment­ing is to see if there is al­ready a so­lu­tion in cur­rent or in­com­ing spec­i­fi­ca­tions.</p>
+<p><a class="Link" href="https://drafts.csswg.org/selectors-4/#the-focusring-pseudo">The lat­est draft of Se­lec­tors Level 4</a> pro­vides us with two new fo­<span class="nobr">cus-re</span>­lated pseudo-classes: <code>:fo­cus-within</code> and <code>:fo­cus-ring</code>.</p>
+<ul>
+<li><code>:fo­cus-within</code> is es­sen­tially a <code>:fo­cus</code> that works like <code>:hover</code><span class="nobr"> —</span><span class="thinsp"> </span>when­ever chil­dren of an el­e­ment would get <code>:fo­cus</code>, the el­e­ment would get <code>:fo­cus-within</code> (and the el­e­ment would get it when fo­cused it­self, of course). I can see how that would be a re­ally use­ful tool but for our case, it&#39;s rather use­less (un­less we&#39;d try to do some re­ally wild things).</li>
+<li><code>:fo­cus-ring</code> seems like a tool made specif­i­cally for our use-<span class="nobr">case —</span><span class="thinsp"> </span>it is kinda the old <code>:fo­cus</code>, but with this added: “[…] and the UA de­ter­mines via heuris­tics that the fo­cus should be spe­cially in­di­cated on the el­e­ment”.</li>
+</ul>
+<p>In the­ory, <code>:fo­cus-ring</code> should <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#although" id="although">help us</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Of course, we&#39;d need to im­ple­ment it us­ing pro­gres­sive en­hance­ment: de­clar­ing all the styles for <code>:fo­cus</code>, then re­move the styles on <code>:not(:fo­cus-ring)</code>, as oth­er­wise, we would lose in key­board ac­ces­si­bil­ity at older browsers.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>: we could use it for key­board fo­cus styles while leav­ing the nor­mal <code>:fo­cus</code> with­out any­thing ex­cess. But there are two prob­lems: no browser, as far as I know, sup­ports the prop­erty from the spec and only Fire­fox sup­ports its <code>:-moz-fo­cus­ring</code><span class="nobr"> —</span><span class="thinsp"> </span><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring">old pro­pri­etary pseudo-class</a>, which was a base for a new one. And this pseudo-class is al­ready a bit flawed:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_2"><style>
+
+#Example2 .example-Button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 7px lime;
+}
+
+#Example2 .example-Button:not(:focus-ring) {
+  box-shadow: none;
+}
+
+#Example2 .example-Button:not(:-moz-focusring) {
+  box-shadow: none;
+}
+
+</style>
+
+<div id="Example2" class="example-Wrapper">
+    <button class="example-Button" type="button" tabindex="0">I'm a button!</button>
+    <a class="example-Button" href="#x" tabindex="0">I'm a link!</a>
+    <span class="example-Button" tabindex="0">I'm a span!</span>
+</div>
+</div>
+<p>If you&#39;d look at this ex­am­ple in Fire­fox, it would work prop­erly un­less you&#39;d click on a styled span. That&#39;s un­for­tu­nate, as while for proper na­tive con­trols things are ok, I&#39;m sure there would be cases when peo­ple would like to have this kind of con­trol over in­ter­ac­tive parts of pages that should have the same be­hav­ior as the na­tive con­trols.</p>
+<p>And in other browsers, you shouldn&#39;t see any­thing there un­less some­one would al­ready im­ple­ment <code>:fo­cus-ring</code>. If that would hap­<span class="nobr">pen —</span><span class="thinsp"> </span>tell me and I&#39;ll up­date this post!</p>
+<h2 class="Heading" id="my-solution"><a class="Anchor" aria-hidden="true" href="#my-solution"></a><span class="ss01 hang-m">M</span>y Solution</h2>
+<p>I was play­ing with one of my fa­vorite <abbr>CSS</abbr> prop­er­<span class="nobr">ties —</span><span class="thinsp"> </span><code>vis­i­bil­ity</code><span class="nobr"> —</span><span class="thinsp"> </span>when I had my “bingo” mo­ment. Af­ter val­i­dat­ing my idea and see­ing it work I was re­ally sur­prised I didn&#39;t come to this so­lu­tion be­fore. Af­ter some test­ing, I found out that not every­thing is so smooth, but more on this later.</p>
+<h3 class="Heading" id="visibility"><a class="Anchor" aria-hidden="true" href="#visibility"></a><span class="ss01 hang-m">V</span>isibility</h3>
+<p>I think this prop­erty de­serves a sep­a­rate post just to show all the things you can do with it. But for now I&#39;ll briefly tell which its fea­tures would be re­ally use­ful for our case:</p>
+<ol>
+<li>When­ever you have an el­e­ment with <code>vis­i­bil­ity: hid­den</code>, you can use <code>vis­i­bil­ity: vis­i­ble</code> on its chil­dren to make them vis­i­ble.</li>
+<li>When­ever you hide an el­e­ment us­ing <code>vis­i­bil­ity: hid­den</code>, it not only be­comes vis­i­bly in­vis­i­ble (like with <code>opac­ity</code>), but it wouldn&#39;t also get key­board fo­cus and wouldn&#39;t be vis­i­ble to as­sis­tive tech­nolo­gies. You can guess that the part about the key­board fo­cus is what in­ter­ests us there.</li>
+</ol>
+<p>You could al­ready see where all of this leads us to: what if we&#39;ll add an­other el­e­ment in­side our in­ter­ac­tive el­e­ment, then use <code>vis­i­bil­ity: hid­den</code> on the el­e­ment it­self, but then re­turn its con­tents back with <code>vis­i­bil­ity: vis­i­ble</code>?</p>
+<p>The an­swer: the el­e­ment would be­come ac­ces­si­ble only us­ing point­ing-and-click­ing de­vices, as click­ing on the in­sides of a hid­den el­e­ment still trig­gers all the events on it. Of course, that&#39;s now ex­actly what we need, as we ac­tu­ally need the key­board fo­cus and don&#39;t want to lose in ac­ces­si­bil­ity in any way.</p>
+<h3 class="Heading" id="when-to-hide"><a class="Anchor" aria-hidden="true" href="#when-to-hide"></a><span class="ss01 hang-m">W</span>hen to Hide</h3>
+<p>But then I was won­der­ing: what if we would use this method of hid­ing-and-show­ing only when the pointer de­vice is used? The pseudo-classes <code>:hover</code> and <code>:ac­tive</code> come to mind.</p>
+<ul>
+<li>If we&#39;d use <code>:hover</code> there, every­thing would work al­most as we would in­tend, but there would be a small is­sue of when we&#39;d hover an el­e­ment, and then we&#39;d want to use key­board nav­i­ga­tion, we couldn&#39;t get a fo­cus on this el­e­ment.</li>
+<li>If we&#39;d use <code>:ac­tive</code>, then things would al­most work, but the prob­lem would be that when you call an ac­tion on an in­ter­ac­tive el­e­ment us­ing a key­board, then some browsers ac­tu­ally ap­ply <code>:ac­tive</code> state on this el­e­ment. The ac­tion would pass, but at the same time, we&#39;ll lose the fo­cused state on the el­e­ment.</li>
+</ul>
+<p>Af­ter play­ing a bit with dif­fer­ent com­bi­na­tions, the most log­i­cal way would be to use both states: <code>:hover:ac­tive</code>. Un­less we in­ter­act with an el­e­ment with some­thing that is ac­tu­ally point­ing it we won&#39;t trig­ger this state. With it, our so­lu­tion would look like this:</p>
+<pre><code class="language-css">.Button:active:hover {
+    visibility: hidden;
+}
+
+:active:hover &gt; .Button-Content {
+    visibility: visible;
+}
+</code></pre>
+<p>Of course, in that case, we&#39;d need to move all the vi­sual styling of the but­ton to the in­ner el­e­ment, and use the par­ent el­e­ment only for layout.</p>
+<p>And then when we&#39;d need to de­clare all the states like <code>:hover</code>, <code>:ac­tive</code> and <code>:fo­cus</code>, we&#39;d need to do them us­ing <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#itsok" id="itsok">se­lec­tors</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Note that we don&#39;t need to add the par­ent&#39;s el­e­ment class to the state when it is used like <span class="nobr">that —</span><span class="thinsp"> </span>there are no per­for­mance is­sues due to how the se­lec­tor match­ing works in browsers.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> like <code>:fo­cus &gt; .But­ton-Con­tent</code>.</p>
+<p>Here, look at this ex­am­ple (bet­ter not in Fire­fox for now):</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_3"><style>
+
+/* Resetting & Normalizing Button's styles */
+.example-ComplexButton {
+  position: relative;
+
+  display: inline-block;
+  vertical-align: baseline;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+
+  white-space: nowrap;
+
+  font: inherit;
+  text-decoration: none;
+
+  color: inherit;
+  background: transparent;
+
+  cursor: pointer;
+  user-select: none;
+  -moz-appearance: none;
+}
+
+.example-ComplexButton::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+ /* Removing site's styles */
+:not(#id).example-ComplexButton,
+:not(#id).example-ComplexButton:link,
+:not(#id).example-ComplexButton:visited,
+:not(#id).example-ComplexButton:hover,
+:not(#id).example-ComplexButton:focus {
+  color: #FFF !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  background: none;
+}
+
+
+/* Visual styles to demonstrate states behaviour */
+.example-ComplexButton {
+  margin: 1em;
+}
+
+.example-ComplexButton:focus {
+  outline: none;
+}
+
+.example-ComplexButton-Content {
+  display: inline-block;
+
+  padding: 0.25em 0.75em;
+  border: 1px solid;
+
+  background: #808080;
+
+  border-radius: 9em;
+}
+
+:hover > .example-ComplexButton-Content {
+  background: blue;
+}
+
+:active > .example-ComplexButton-Content {
+  background: darkorange;
+}
+
+:focus > .example-ComplexButton-Content {
+  box-shadow: 0 0 3px 7px lime;
+}
+
+/* Fixing the pointer focus */
+.example-ComplexButton:active:hover {
+  visibility: hidden;
+}
+
+:active:hover > .example-ComplexButton-Content {
+  visibility: visible;
+}
+
+</style>
+
+<div id="Example3" class="example-Wrapper">
+    <button class="example-ComplexButton" type="button" tabindex="0"><span class="example-ComplexButton-Content">I'm a button!</span></button>
+    <a class="example-ComplexButton" href="#x" tabindex="0"><span class="example-ComplexButton-Content">I'm a link!</span></a>
+    <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
+</div>
+</div>
+<p>We&#39;re al­most there! If you&#39;d look at this ex­am­ple in Chrome or Edge, every­thing would work per­fectly: when you click on those but­tons, they would work and won&#39;t be­come vis­i­bly fo­cused, but you would still be able to fo­cus them from the key­board and see the fo­cus ring.</p>
+<p>How­ever, there are a few is­sues in other browsers: Sa­fari and Fire­fox. In Sa­fari the first but­ton that is made us­ing <code>&lt;but­ton&gt;</code> would have sud­denly the fo­cus state clipped as if the par­ent but­ton had <code>over­flow: hid­den</code>. This is eas­ily fixed by adding <code>po­si­tion: rel­a­tive</code> on the in­ner el­ement.</p>
+<p>But in Fire­fox… Well, our <code>:hover:ac­tive</code> stuff just doesn&#39;t work. And even more to it, if we&#39;d ac­tu­ally lis­ten to the but­ton&#39;s events, then on <code>&lt;but­ton&gt;</code> we won&#39;t get a <code>click</code> when we click (and that should be a <em>click</em>, not a tap!). That only hap­pens when you change the <code>vis­i­bil­ity</code> of a <code>&lt;but­ton&gt;</code> on the <code>:ac­tive</code> state.</p>
+<h3 class="Heading" id="fixing-firefox"><a class="Anchor" aria-hidden="true" href="#fixing-firefox"></a><span class="ss01 hang-m">F</span>ixing Firefox</h3>
+<p>Af­ter spend­ing a lot of time on try­ing to find a fix for Fire­fox, the best fix I could find was this:</p>
+<ul>
+<li><p>The <code>&lt;but­ton&gt;</code> it­self ac­tu­ally worked as in­tended al­ways in Fire­fox, so we don&#39;t need to do any­thing for it.</p>
+<p> So, only for Fire­fox, we&#39;d need to re­store its vis­i­bil­ity for the ac­tive state: </p>
+<pre><code class="language-css">  button.Button:active:not(:-moz-focusring) {
+     visibility: inherit;
+  }
+</code></pre>
+<p> Two things to note there:</p>
+<ol>
+<li>We&#39;re restor­ing the <code>vis­i­bil­ity</code> us­ing <code>in­herit</code>, as in all cases when you need to <strong>re­store</strong> the <code>vis­i­bil­ity</code> it&#39;s bet­ter to use it in­stead of <code>vis­i­ble</code>. In our case, it doesn&#39;t mat­ter much, but it&#39;s just a good prac­tice to get used to.</li>
+<li>For ap­ply­ing styles just for Fire­fox I&#39;m us­ing the pseudo-class that only Fx un­der­<span class="nobr">stands —</span><span class="thinsp"> </span><code>:-moz-fo­cus­ring</code>, wrap­ping it with <code>:not()</code> as that&#39;s the case when we&#39;d want it to work.</li>
+</ol>
+</li>
+<li><p>For in­ter­ac­tive links, spans and other non-but­ton el­e­ments we&#39;d need to use our method on <code>:hover</code>, which is not ideal as I men­tioned be­fore, but what can we do? At least, we can add an ex­tra guard not to hide el­e­ments on hover when they&#39;re al­ready fo­cused. And we&#39;d also use the same <code>:not(:-moz-fo­cus­ring)</code> hack, and it even would make some sense there!</p>
+<pre><code class="language-css">  .Button:not(button):hover:not(:focus):not(:-moz-focusring) {
+      visibility: hidden;
+  }
+
+  :not(button):hover:not(:focus):not(:-moz-focusring) &gt; .Button-Content {
+      visibility: visible;
+  }
+</code></pre>
+<p> Note that we do this not for but­tons, as adding this stuff for them on hover would make them flicker, and we al­ready have na­tive but­tons in Fx to be­have like we want them to.</p>
+</li>
+</ul>
+<h3 class="Heading" id="final-solution"><a class="Anchor" aria-hidden="true" href="#final-solution"></a><span class="ss01 hang-m">F</span>inal Solution</h3>
+<p>With all those fixes, our ex­am­ple would look like this and should work the same in all mod­ern browsers:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_4"><style>
+
+/* Fixing the Safari bug for `<button>`s overflow */
+#Example4 .example-ComplexButton-Content {
+  position: relative;
+}
+
+/* Restoring the default behavior for `<button>` in Firefox */
+#Example4 button.example-ComplexButton:active:not(:-moz-focusring) {
+   visibility: inherit;
+}
+
+/* Using a slightly worse method for Fx on non-focused hover */
+#Example4 .example-ComplexButton:not(button):hover:not(:focus):not(:-moz-focusring) {
+  visibility: hidden;
+}
+
+#Example4 :not(button):hover:not(:focus):not(:-moz-focusring) > .example-ComplexButton-Content {
+  visibility: visible;
+}
+
+</style>
+
+<div id="Example4" class="example-Wrapper">
+    <button class="example-ComplexButton" type="button" tabindex="0"><span class="example-ComplexButton-Content">I'm a button!</span></button>
+    <a class="example-ComplexButton" href="#x" tabindex="0"><span class="example-ComplexButton-Content">I'm a link!</span></a>
+    <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
+</div>
+</div>
+<p><span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#brevity" id="brevity">Here is</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Here in the later <abbr>CSS</abbr> ex­am­ple I used more sim­pli­fied class­names and over­all changed things a bit for them to be more read­able, as well as not men­tion­ing all the re­set and vi­sual styles for our but­tons.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> an <abbr>HTML</abbr> which is used for this ex­ample:</p>
+<pre><code class="language-html">&lt;button class=&quot;Button&quot; type=&quot;button&quot; tabindex=&quot;0&quot;&gt;
+    &lt;span class=&quot;Button-Content&quot;&gt;
+        I&#39;m a button!
+    &lt;/span&gt;
+&lt;/button&gt;
+
+&lt;a class=&quot;Button&quot; href=&quot;#x&quot; tabindex=&quot;0&quot;&gt;
+    &lt;span class=&quot;Button-Content&quot;&gt;
+        I&#39;m a link!
+    &lt;/span&gt;
+&lt;/a&gt;
+
+&lt;span class=&quot;Button&quot; tabindex=&quot;0&quot;&gt;
+    &lt;span class=&quot;Button-Content&quot;&gt;
+        I&#39;m a span!
+    &lt;/span&gt;
+&lt;/span&gt;
+</code></pre>
+<p>And here is the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#codepen" id="codepen">fi­nal <abbr>CSS</abbr></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can see how it works with this lit­eral <abbr>CSS</abbr> on <a href="https://codepen.io/kizu/pen/dRZzyP?editors=1100">this Code­Pen pen</a>, with­out any ex­tra styling (ex­cept for <code>all: ini­tial</code> on but­tons).<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> for our method:</p>
+<pre><code class="language-css">/* Making the button not to get keyboard focus on click */
+.Button:active:hover {
+   visibility: hidden;
+}
+
+:active:hover &gt; .Button-Content {
+    visibility: visible;
+}
+
+/* Fixing the Safari bug for `&lt;button&gt;`s overflow */
+.Button-Content {
+    position: relative;
+}
+
+/* Restoring the default behavior for `&lt;button&gt;` in Fx */
+button.Button:active:not(:-moz-focusring) {
+   visibility: inherit;
+}
+
+/* Using a slightly worse method for Fx on non-focused hover */
+.Button:not(button):hover:not(:focus):not(:-moz-focusring) {
+    visibility: hidden;
+}
+
+:not(button):hover:not(:focus):not(:-moz-focusring) &gt; .Button-Content {
+    visibility: visible;
+}
+
+/* All the states on the inner element */
+:hover &gt; .Button-Content {
+    background: blue;
+}
+
+:active &gt; .Button-Content {
+    background: darkorange;
+}
+
+:focus &gt; .Button-Content {
+    box-shadow: 0 0 3px 7px lime;
+}
+
+/* Removing default outline only after we&#39;ve added our custom one */
+.Button:focus {
+    outline: none;
+}
+</code></pre>
+<h3 class="Heading" id="remaining-problems"><a class="Anchor" aria-hidden="true" href="#remaining-problems"></a><span class="ss01 hang-m">R</span>emaining Problems</h3>
+<ul>
+<li>In Fire­fox we couldn&#39;t get key­board fo­cus on a non-<code>&lt;but­ton&gt;</code> el­e­ment which is hov­ered (un­less it&#39;s al­ready fo­cused). That&#39;s a bum­mer, so if that&#39;s crit­i­cal for you, you could re­move the worse method that is there for Fx and/​or use only <code>&lt;but­ton&gt;</code>s.</li>
+<li>in IE11 things would work just if we didn&#39;t add our hacks, so we won&#39;t use any­thing.</li>
+<li>This needs an­other el­e­ment and won&#39;t work for <code>&lt;in­put type=&quot;but­ton&quot;&gt;</code> ob­vi­ously, but I don&#39;t rec­om­mend us­ing it for but­tons and there is lit­er­ally noth­ing bad in adding an ex­tra span when it helps us to fix a prob­lem.</li>
+</ul>
+<p>So, not a lot of prob­lems af­ter all. If you&#39;ll see any­thing in the fi­nal ex­am­ple in the browser you use, let me know!</p>
+<h2 class="Heading" id="final-words"><a class="Anchor" aria-hidden="true" href="#final-words"></a><span class="ss01 hang-m">F</span>inal Words</h2>
+<p>Now we can use a nice and no­tice­able key­board fo­cus state for our in­ter­ac­tive el­e­ments with­out com­pro­mis­ing in how it would look for oth­ers. That&#39;s the thing I tried to fix for years and I don&#39;t even re­mem­ber the num­ber of at­tempts I did to fix it. I&#39;m re­ally glad I fi­nally nailed it, and I hope browsers would start to sup­port the <code>:fo­cus-ring</code> pseudo-class, and that it would work not only for links and but­tons but for any el­e­ments that are in­ter­ac­tive (even if they were made so with <code>tabindex=&quot;0&quot; etc.</code>).</p>
+<p>Thank you for reading.</p>
+
+          <p class="Metadata Published">Wrote as a draft, not published yet.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CStyles%20Only%20for%20Keyboard%20Focus%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/styles-only-for-keyboard-focus/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext">
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2017 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>
