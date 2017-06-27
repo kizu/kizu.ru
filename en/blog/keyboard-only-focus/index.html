@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Styles Only for Keyboard Focus</title>
+    <title>Keyboard-Only Focus</title>
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
     <link rel="stylesheet" href="/s/style.css">
     <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
@@ -27,10 +27,10 @@
     <article role="main" class="Page-Content">
       <div class="LiquidLayout">
         <div class="Main LiquidLayout-Content">
-          <header><h1 class="Heading" id="styles-only-for-keyboard-focus"><a class="Anchor" aria-hidden="true" href="#styles-only-for-keyboard-focus"></a><span class="ss01 hang-xs">S</span>tyles Only for Keyboard Focus</h1>
+          <header><h1 class="Heading" id="keyboard-only-focus"><a class="Anchor" aria-hidden="true" href="#keyboard-only-focus"></a><span class="ss01 hang-m">K</span>eyboard-Only Focus</h1>
           </header>
-<p>One of the things I couldn&#39;t man­age to find a so­lu­tion for was for a long time a prob­lem of fo­cus styles on el­e­ments. The prob­lem is: when you have an el­e­ment with some <code>:fo­cus</code> styles, they&#39;re ap­plied not only to the fo­cused state it­self but also af­ter you just click on an el­e­ment (and it be­haves dif­fer­ently for dif­fer­ent el­e­ments in dif­fer­ent browsers, of course).</p>
-<p>What this meant is that when­ever you wanted to have some cus­tom el­e­ment, you would need to com­pro­mise in how the fo­cus state would look like, be­cause if you&#39;d make it too bright or dis­tinct from the nor­mal state, users would see it when­ever they&#39;d click the el­e­ments with those styles. So you&#39;re ei­ther get­ting the too no­tice­able ef­fect when it is not needed or not enough no­tice­able ef­fect when it is needed. Ac­ces­si­bil­ity-wise, the lat­ter is, of course, bet­ter, but what if we could, in fact, dif­fer­en­tiate?</p>
+<p>One of the things I couldn&#39;t man­age to find a so­lu­tion for a long time was a prob­lem of fo­cus styles on in­ter­ac­tive el­e­ments. The prob­lem was: when you have an el­e­ment with some <code>:fo­cus</code> styles, they&#39;re ap­plied not only to the fo­cused state it­self but also af­ter you just click on this el­e­ment (and it be­haves dif­fer­ently for dif­fer­ent el­e­ments in dif­fer­ent browsers, of course).</p>
+<p>What this meant is that when­ever you wanted to have some cus­tom el­e­ment, you would need to com­pro­mise in how the fo­cus state would look like, be­cause if you&#39;d make it too bright or dis­tinct from the nor­mal state, users would see it when­ever they&#39;d click the el­e­ments with those styles. So you&#39;re ei­ther get­ting the too no­tice­able ef­fect when it is not needed or not enough no­tice­able ef­fect when it is needed. Ac­ces­si­bil­ity-wise, the for­mer is, of course, bet­ter, but what if we could make those styles not to ap­ply when you click at all?</p>
 <p>In this post, I&#39;ll pre­sent to you <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#solution" id="solution">the so­lu­tion</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can jump straight to <a href="#final-solution">the fi­nal so­lu­tion</a>, but I rec­om­mend you to read the whole post any­way in or­der to bet­ter un­der­stand it.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> I had found. It is not per­fect, but I think this is enough for us to start mak­ing our el­e­ments both hav­ing a dis­tinct bright fo­cus state and be good look­ing when users would use a mouse, a track­pad etc.</p>
 <h2 class="Heading" id="current-state-of-the-problem"><a class="Anchor" aria-hidden="true" href="#current-state-of-the-problem"></a><span class="ss02 hang-xs">C</span>urrent State of the Problem</h2>
 <p>To un­der­stand the prob­lem bet­ter, we should look at how things be­have in dif­fer­ent browsers for the sim­plest test case.</p>
@@ -115,7 +115,7 @@
     <span class="example-Button" tabindex="0">I'm a span!</span>
 </div>
 </div>
-<p>Browsers be­have rather dif­fer­ently there:</p>
+<p><span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#safari" id="safari">Browsers</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Note that the Sa­fari doesn&#39;t get key­board fo­cus for links by de­fault (you need to en­able it in its pref­er­ences for this), but still gets the state on click.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> be­have a bit dif­fer­ently there:</p>
 <table>
 <thead>
 <tr>
@@ -133,7 +133,7 @@
 <td>Yes</td>
 </tr>
 <tr>
-<td style="text-align:left">IE11</td>
+<td style="text-align:left">Edge</td>
 <td>Yes</td>
 <td>Yes</td>
 <td>Yes</td>
@@ -152,16 +152,15 @@
 </tr>
 </tbody>
 </table>
-<p>Note that the Sa­fari doesn&#39;t get key­board fo­cus for links by de­fault (you need to en­able it in its pref­er­ences for this), but still gets the state on click.</p>
-<p>We can al­ready see that for most el­e­ments in all browsers we would get that fo­cused state when we&#39;d click the but­ton, while for the <code>&lt;but­ton&gt;</code>s in Sa­fari and Fire­fox we for some rea­son won&#39;t.</p>
+<p>We can al­ready see that for most el­e­ments in all browsers we would get that fo­cused state when we&#39;d click our cus­tom el­e­ment, while for the <code>&lt;but­ton&gt;</code>s in Sa­fari and Fire­fox we won&#39;t.</p>
 <h2 class="Heading" id="possible-solution-in-the-specs-"><a class="Anchor" aria-hidden="true" href="#possible-solution-in-the-specs-"></a><span class="ss01 hang-m">P</span>ossible Solution in the Specs?</h2>
 <p>One thing we should al­ways do when we start ex­per­i­ment­ing is to see if there is al­ready a so­lu­tion in cur­rent or in­com­ing spec­i­fi­ca­tions.</p>
-<p><a class="Link" href="https://drafts.csswg.org/selectors-4/#the-focusring-pseudo">The lat­est draft of Se­lec­tors Level 4</a> pro­vides us with two new fo­<span class="nobr">cus-re</span>­lated pseudo-classes: <code>:fo­cus-within</code> and <code>:fo­cus-ring</code>.</p>
+<p><a class="Link" href="https://drafts.csswg.org/selectors-4/#the-focusring-pseudo">The lat­est draft of Se­lec­tors Level 4</a> pro­vides us with two new fo­<span class="nobr">cus-re</span>­lated pseudo-classes: <code>fo­cus-within</code> and <code>fo­cus-ring</code>.</p>
 <ul>
-<li><code>:fo­cus-within</code> is es­sen­tially a <code>:fo­cus</code> that works like <code>:hover</code><span class="nobr"> —</span><span class="thinsp"> </span>when­ever chil­dren of an el­e­ment would get <code>:fo­cus</code>, the el­e­ment would get <code>:fo­cus-within</code> (and the el­e­ment would get it when fo­cused it­self, of course). I can see how that would be a re­ally use­ful tool but for our case, it&#39;s rather use­less (un­less we&#39;d try to do some re­ally wild things).</li>
-<li><code>:fo­cus-ring</code> seems like a tool made specif­i­cally for our use-<span class="nobr">case —</span><span class="thinsp"> </span>it is kinda the old <code>:fo­cus</code>, but with this added: “[…] and the UA de­ter­mines via heuris­tics that the fo­cus should be spe­cially in­di­cated on the el­e­ment”.</li>
+<li><code>:fo­cus-within</code> is es­sen­tially a <code>:fo­cus</code> that works like <code>:hover</code><span class="nobr"> —</span><span class="thinsp"> </span>when­ever chil­dren of an el­e­ment would get <code>:fo­cus</code>, the el­e­ment would get <code>:fo­cus-within</code> (and the el­e­ment would get it when fo­cused it­self, of course). I can see how that would be a re­ally use­ful tool in fu­ture, but for our case it&#39;s rather use­less (un­less we&#39;d try to do some re­ally wild things).</li>
+<li><code>:fo­cus-ring</code> seems like a tool made specif­i­cally for our use-<span class="nobr">case —</span><span class="thinsp"> </span>it is kinda the old <code>:fo­cus</code>, but with this added: <q>[…] and the UA de­ter­mines via heuris­tics that the fo­cus should be spe­cially in­di­cated on the el­e­ment</q>.</li>
 </ul>
-<p>In the­ory, <code>:fo­cus-ring</code> should <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#although" id="although">help us</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Of course, we&#39;d need to im­ple­ment it us­ing pro­gres­sive en­hance­ment: de­clar­ing all the styles for <code>:fo­cus</code>, then re­move the styles on <code>:not(:fo­cus-ring)</code>, as oth­er­wise, we would lose in key­board ac­ces­si­bil­ity at older browsers.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>: we could use it for key­board fo­cus styles while leav­ing the nor­mal <code>:fo­cus</code> with­out any­thing ex­cess. But there are two prob­lems: no browser, as far as I know, sup­ports the prop­erty from the spec and only Fire­fox sup­ports its <code>:-moz-fo­cus­ring</code><span class="nobr"> —</span><span class="thinsp"> </span><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring">old pro­pri­etary pseudo-class</a>, which was a base for a new one. And this pseudo-class is al­ready a bit flawed:</p>
+<p>In the­ory, <code>:fo­cus-ring</code> should <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#although" id="although">help us</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Of course, we&#39;d need to im­ple­ment it us­ing pro­gres­sive en­hance­ment: de­clar­ing all the styles for <code>:fo­cus</code>, then re­mov­ing the styles on <code>:not(:fo­cus-ring)</code>, as oth­er­wise, we would lose in key­board ac­ces­si­bil­ity at older browsers.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>: we could use it for key­board fo­cus styles while leav­ing the nor­mal <code>:fo­cus</code> with­out any­thing ex­cess. But there are two prob­lems: no browser, as far as I know, sup­ports the prop­erty from the spec and only Fire­fox sup­ports its <code>:-moz-fo­cus­ring</code><span class="nobr"> —</span><span class="thinsp"> </span><a class="Link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring">old pro­pri­etary pseudo-class</a>, which was a base for a new one. And this pseudo-class is al­ready a bit flawed:</p>
 <div class="Demo Demo_injected Demo_seamless" id="Demo_2"><style>
 
 #Example2 .example-Button:focus {
@@ -186,17 +185,17 @@
 </div>
 </div>
 <p>If you&#39;d look at this ex­am­ple in Fire­fox, it would work prop­erly un­less you&#39;d click on a styled span. That&#39;s un­for­tu­nate, as while for proper na­tive con­trols things are ok, I&#39;m sure there would be cases when peo­ple would like to have this kind of con­trol over in­ter­ac­tive parts of pages that should have the same be­hav­ior as the na­tive con­trols.</p>
-<p>And in other browsers, you shouldn&#39;t see any­thing there un­less some­one would al­ready im­ple­ment <code>:fo­cus-ring</code>. If that would hap­<span class="nobr">pen —</span><span class="thinsp"> </span>tell me and I&#39;ll up­date this post!</p>
+<p>And in other browsers, you shouldn&#39;t see any­thing there un­less some­one would al­ready im­ple­ment the <code>:fo­cus-ring</code>. If that would hap­<span class="nobr">pen —</span><span class="thinsp"> </span>tell me and I&#39;ll up­date this post!</p>
 <h2 class="Heading" id="my-solution"><a class="Anchor" aria-hidden="true" href="#my-solution"></a><span class="ss01 hang-m">M</span>y Solution</h2>
 <p>I was play­ing with one of my fa­vorite <abbr>CSS</abbr> prop­er­<span class="nobr">ties —</span><span class="thinsp"> </span><code>vis­i­bil­ity</code><span class="nobr"> —</span><span class="thinsp"> </span>when I had my “bingo” mo­ment. Af­ter val­i­dat­ing my idea and see­ing it work I was re­ally sur­prised I didn&#39;t come to this so­lu­tion be­fore. Af­ter some test­ing, I found out that not every­thing is so smooth, but more on this later.</p>
 <h3 class="Heading" id="visibility"><a class="Anchor" aria-hidden="true" href="#visibility"></a><span class="ss01 hang-m">V</span>isibility</h3>
-<p>I think this prop­erty de­serves a sep­a­rate post just to show all the things you can do with it. But for now I&#39;ll briefly tell which its fea­tures would be re­ally use­ful for our case:</p>
+<p>I think this prop­erty de­serves its own sep­a­rate ar­ti­cle just to show all the things you can do with it. But for now I&#39;ll briefly tell which its fea­tures would be re­ally use­ful for our case:</p>
 <ol>
 <li>When­ever you have an el­e­ment with <code>vis­i­bil­ity: hid­den</code>, you can use <code>vis­i­bil­ity: vis­i­ble</code> on its chil­dren to make them vis­i­ble.</li>
-<li>When­ever you hide an el­e­ment us­ing <code>vis­i­bil­ity: hid­den</code>, it not only be­comes vis­i­bly in­vis­i­ble (like with <code>opac­ity</code>), but it wouldn&#39;t also get key­board fo­cus and wouldn&#39;t be vis­i­ble to as­sis­tive tech­nolo­gies. You can guess that the part about the key­board fo­cus is what in­ter­ests us there.</li>
+<li>When­ever you hide an el­e­ment us­ing <code>vis­i­bil­ity: hid­den</code>, it would not only be­come vi­su­ally in­vis­i­ble (like with <code>opac­ity</code>), but it wouldn&#39;t also get key­board fo­cus and wouldn&#39;t be vis­i­ble to as­sis­tive tech­nolo­gies. You can guess that the part about the key­board fo­cus is what in­ter­ests us there.</li>
 </ol>
 <p>You could al­ready see where all of this leads us to: what if we&#39;ll add an­other el­e­ment in­side our in­ter­ac­tive el­e­ment, then use <code>vis­i­bil­ity: hid­den</code> on the el­e­ment it­self, but then re­turn its con­tents back with <code>vis­i­bil­ity: vis­i­ble</code>?</p>
-<p>The an­swer: the el­e­ment would be­come ac­ces­si­ble only us­ing point­ing-and-click­ing de­vices, as click­ing on the in­sides of a hid­den el­e­ment still trig­gers all the events on it. Of course, that&#39;s now ex­actly what we need, as we ac­tu­ally need the key­board fo­cus and don&#39;t want to lose in ac­ces­si­bil­ity in any way.</p>
+<p>The an­swer: the el­e­ment would be­come ac­ces­si­ble only us­ing point­ing-and-click­ing de­vices, as click­ing on the in­sides of a hid­den el­e­ment still trig­gers all the events on it. Of course, that&#39;s not ex­actly what we need, as we ac­tu­ally need the key­board fo­cus and don&#39;t want to lose in ac­ces­si­bil­ity in any way.</p>
 <h3 class="Heading" id="when-to-hide"><a class="Anchor" aria-hidden="true" href="#when-to-hide"></a><span class="ss01 hang-m">W</span>hen to Hide</h3>
 <p>But then I was won­der­ing: what if we would use this method of hid­ing-and-show­ing only when the pointer de­vice is used? The pseudo-classes <code>:hover</code> and <code>:ac­tive</code> come to mind.</p>
 <ul>
@@ -310,9 +309,9 @@
     <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
 </div>
 </div>
-<p>We&#39;re al­most there! If you&#39;d look at this ex­am­ple in Chrome or Edge, every­thing would work per­fectly: when you click on those but­tons, they would work and won&#39;t be­come vis­i­bly fo­cused, but you would still be able to fo­cus them from the key­board and see the fo­cus ring.</p>
-<p>How­ever, there are a few is­sues in other browsers: Sa­fari and Fire­fox. In Sa­fari the first but­ton that is made us­ing <code>&lt;but­ton&gt;</code> would have sud­denly the fo­cus state clipped as if the par­ent but­ton had <code>over­flow: hid­den</code>. This is eas­ily fixed by adding <code>po­si­tion: rel­a­tive</code> on the in­ner el­ement.</p>
-<p>But in Fire­fox… Well, our <code>:hover:ac­tive</code> stuff just doesn&#39;t work. And even more to it, if we&#39;d ac­tu­ally lis­ten to the but­ton&#39;s events, then on <code>&lt;but­ton&gt;</code> we won&#39;t get a <code>click</code> when we click (and that should be a <em>click</em>, not a tap!). That only hap­pens when you change the <code>vis­i­bil­ity</code> of a <code>&lt;but­ton&gt;</code> on the <code>:ac­tive</code> state.</p>
+<p>We&#39;re al­most there! If you&#39;d look at this ex­am­ple in Chrome or Edge, every­thing would work per­fectly: when you&#39;d click those but­tons, they would work and won&#39;t be­come vis­i­bly fo­cused, but you would still be able to fo­cus them from the key­board and see the fo­cus ring.</p>
+<p>How­ever, there are a few is­sues in other browsers: Sa­fari and Fire­fox. In Sa­fari the first but­ton (the one that is made us­ing <code>&lt;but­ton&gt;</code>) would sud­denly have the fo­cus state clipped as if the par­ent but­ton had <code>over­flow: hid­den</code> (while this is not the case). This is eas­ily fixed by adding <code>po­si­tion: rel­a­tive</code> on the in­ner el­e­ment which some­how fixes <a class="Link" href="https://bugs.webkit.org/show_bug.cgi?id=173872">this bug</a>.</p>
+<p>But in Fire­fox… Well, our <code>:hover:ac­tive</code> stuff just doesn&#39;t work. And even more to it, if we&#39;d ac­tu­ally lis­ten to the but­ton&#39;s events, then on <code>&lt;but­ton&gt;</code> <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#fxbug" id="fxbug">we won&#39;t get</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>I sus­pect that there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1375877">a re­lated bug in bugzilla</a> for this, but maybe there are oth­ers, feel free to find if some other bug fits bet­ter!<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> a <code>click</code> when we click (and that should be a <em>click</em>, not a tap!). That only hap­pens when you change the <code>vis­i­bil­ity</code> of a <code>&lt;but­ton&gt;</code> on the <code>:ac­tive</code> state.</p>
 <h3 class="Heading" id="fixing-firefox"><a class="Anchor" aria-hidden="true" href="#fixing-firefox"></a><span class="ss01 hang-m">F</span>ixing Firefox</h3>
 <p>Af­ter spend­ing a lot of time on try­ing to find a fix for Fire­fox, the best fix I could find was this:</p>
 <ul>
@@ -324,7 +323,7 @@
 </code></pre>
 <p> Two things to note there:</p>
 <ol>
-<li>We&#39;re restor­ing the <code>vis­i­bil­ity</code> us­ing <code>in­herit</code>, as in all cases when you need to <strong>re­store</strong> the <code>vis­i­bil­ity</code> it&#39;s bet­ter to use it in­stead of <code>vis­i­ble</code>. In our case, it doesn&#39;t mat­ter much, but it&#39;s just a good prac­tice to get used to.</li>
+<li>We&#39;re restor­ing the <code>vis­i­bil­ity</code> us­ing <code>in­herit</code>, as in all cases when you need to <strong>re­store</strong> the <code>vis­i­bil­ity</code> it&#39;s bet­ter to use <code>in­herit</code> in­stead of <code>vis­i­ble</code>, be­cause oth­er­wise in­side a <code>vis­i­bil­ity: hid­den</code> con­text we would sud­denly make our el­e­ment vis­i­ble. In our case, it doesn&#39;t mat­ter much, but it&#39;s just a good prac­tice to get used to.</li>
 <li>For ap­ply­ing styles just for Fire­fox I&#39;m us­ing the pseudo-class that only Fx un­der­<span class="nobr">stands —</span><span class="thinsp"> </span><code>:-moz-fo­cus­ring</code>, wrap­ping it with <code>:not()</code> as that&#39;s the case when we&#39;d want it to work.</li>
 </ol>
 </li>
@@ -371,7 +370,7 @@
     <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
 </div>
 </div>
-<p><span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#brevity" id="brevity">Here is</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Here in the later <abbr>CSS</abbr> ex­am­ple I used more sim­pli­fied class­names and over­all changed things a bit for them to be more read­able, as well as not men­tion­ing all the re­set and vi­sual styles for our but­tons.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> an <abbr>HTML</abbr> which is used for this ex­ample:</p>
+<p>Here is an <abbr>HTML</abbr> <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#similar" id="similar">sim­i­lar</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Here and in the later <abbr>CSS</abbr> ex­am­ple I used more sim­pli­fied class­names and over­all changed things a bit for them to be more read­able, as well as not men­tion­ing all the re­set and vi­sual styles for our but­tons.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> to the one used for this ex­ample:</p>
 <pre><code class="language-html">&lt;button class=&quot;Button&quot; type=&quot;button&quot; tabindex=&quot;0&quot;&gt;
     &lt;span class=&quot;Button-Content&quot;&gt;
         I&#39;m a button!
@@ -441,17 +440,17 @@ button.Button:active:not(:-moz-focusring) {
 <ul>
 <li>In Fire­fox we couldn&#39;t get key­board fo­cus on a non-<code>&lt;but­ton&gt;</code> el­e­ment which is hov­ered (un­less it&#39;s al­ready fo­cused). That&#39;s a bum­mer, so if that&#39;s crit­i­cal for you, you could re­move the worse method that is there for Fx and/​or use only <code>&lt;but­ton&gt;</code>s.</li>
 <li>in IE11 things would work just if we didn&#39;t add our hacks, so we won&#39;t use any­thing.</li>
-<li>This needs an­other el­e­ment and won&#39;t work for <code>&lt;in­put type=&quot;but­ton&quot;&gt;</code> ob­vi­ously, but I don&#39;t rec­om­mend us­ing it for but­tons and there is lit­er­ally noth­ing bad in adding an ex­tra span when it helps us to fix a prob­lem.</li>
+<li>This method needs an ex­tra el­e­ment and won&#39;t work for <code>&lt;in­put type=&quot;but­ton&quot;&gt;</code> ob­vi­ously (which I don&#39;t rec­om­mend us­ing it for but­tons any­way) and there is lit­er­ally noth­ing bad in adding an ex­tra span when it helps us to fix a prob­lem. Ex­tra divs and spans are not not se­man­tic.</li>
 </ul>
 <p>So, not a lot of prob­lems af­ter all. If you&#39;ll see any­thing in the fi­nal ex­am­ple in the browser you use, let me know!</p>
 <h2 class="Heading" id="final-words"><a class="Anchor" aria-hidden="true" href="#final-words"></a><span class="ss01 hang-m">F</span>inal Words</h2>
-<p>Now we can use a nice and no­tice­able key­board fo­cus state for our in­ter­ac­tive el­e­ments with­out com­pro­mis­ing in how it would look for oth­ers. That&#39;s the thing I tried to fix for years and I don&#39;t even re­mem­ber the num­ber of at­tempts I did to fix it. I&#39;m re­ally glad I fi­nally nailed it, and I hope browsers would start to sup­port the <code>:fo­cus-ring</code> pseudo-class, and that it would work not only for links and but­tons but for any el­e­ments that are in­ter­ac­tive (even if they were made so with <code>tabindex=&quot;0&quot; etc.</code>).</p>
+<p>Now we can use a nice and no­tice­able key­board fo­cus state for our in­ter­ac­tive el­e­ments with­out com­pro­mis­ing in how it would look for oth­ers. That&#39;s the thing I tried to fix for years and I don&#39;t even re­mem­ber the num­ber of at­tempts I did to fix it. I&#39;m re­ally glad I fi­nally nailed it, and I hope browsers would start sup­port­ing the <code>:fo­cus-ring</code> pseudo-class, and that it would work not only for links and but­tons but for any el­e­ments that are in­ter­ac­tive (even if they were made so with <code>tabindex=&quot;0&quot; etc.</code>).</p>
 <p>Thank you for reading.</p>
 
           <p class="Metadata Published">Wrote as a draft, not published yet.
           </p>
           <aside class="Feedback">
-            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CStyles%20Only%20for%20Keyboard%20Focus%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/styles-only-for-keyboard-focus/index.en.md" class="Link">edit this article on Github</a>.
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CKeyboard-Only%20Focus%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/drafts/keyboard-only-focus/index.en.md" class="Link">edit this article on Github</a>.
             </p>
           </aside>
         </div>
