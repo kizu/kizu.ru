@@ -15,17 +15,15 @@
     <updated>2017-06-27T00:00:00+03:00</updated>
     <id>http://kizu.ru/en/blog/keyboard-only-focus</id>
     <content type="html">&lt;h1 id=&quot;keyboard-only-focus&quot;&gt;Keyboard-Only Focus&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Warning!&lt;/strong&gt; For the moment it seems that there is a critical problem with this method in Fx for Windows. I&amp;#39;ve tested only on Mac OS, and in Windows button seem to behave so much worse in Firefox than on Windows. I&amp;#39;ll look into it and would update the post later. Sorry for the misinformation!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Ok! So I&amp;#39;ve found a proper solution that seems to be even more simple and to work everywhere, but I need to test it properly to ensure I didn&amp;#39;t miss anything again. After I&amp;#39;ll do it I&amp;#39;ll write about this new solution either in an update at this post, or as a new post (while updating this one mentioning all the issues). Stay tuned!&lt;/p&gt;
-&lt;hr&gt;
 &lt;p&gt;One of the things I couldn&amp;#39;t manage to find a solution for a long time was a problem of focus styles on interactive elements. The problem was: when you have an element with some &lt;code&gt;:focus&lt;/code&gt; styles, they&amp;#39;re applied not only to the focused state itself but also after you just click on this element (and it behaves differently for different elements in different browsers, of course).&lt;/p&gt;
 &lt;p&gt;What this meant is that whenever you wanted to have some custom element, you would need to compromise in how the focus state would look like, because if you&amp;#39;d make it too bright or distinct from the normal state, users would see it whenever they&amp;#39;d click the elements with those styles. So you&amp;#39;re either getting the too noticeable effect when it is not needed or not enough noticeable effect when it is needed. Accessibility-wise, the former is, of course, better, but what if we could make those styles not to apply when you click at all?&lt;/p&gt;
-&lt;p&gt;In this post, I&amp;#39;ll present to you &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#solution&quot; id=&quot;solution&quot;&gt;the solution&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can jump straight to &lt;a href=&quot;#final-solution&quot;&gt;the final solution&lt;/a&gt;, but I recommend you to read the whole post anyway in order to better understand it.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; I had found. It is not perfect, but I think this is enough for us to start making our elements both having a distinct bright focus state and be good looking when users would use a mouse, a trackpad etc.&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;#39;ll present to you &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#solution&quot; id=&quot;solution&quot;&gt;the solution&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can jump straight to &lt;a href=&quot;#proper-solution&quot;&gt;the final solution&lt;/a&gt;, but I recommend you to read the whole post anyway in order to better understand it.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; I had found. It is not perfect, but I think this is enough for us to start making our elements both having a distinct bright focus state and be good looking when users would use a mouse, a trackpad etc.&lt;/p&gt;
 &lt;h2 id=&quot;current-state-of-the-problem&quot;&gt;Current State of the Problem&lt;/h2&gt;
 &lt;p&gt;To understand the problem better, we should look at how things behave in different browsers for the simplest test case.&lt;/p&gt;
 &lt;p&gt;Try to hover, click and switch focus over those controls:&lt;/p&gt;
 &lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/keyboard-only-focus/#Demo_1&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#safari&quot; id=&quot;safari&quot;&gt;Browsers&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Note that the Safari doesn&amp;#39;t get keyboard focus for links by default (you need to enable it in its preferences for this), but still gets the state on click.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; behave a bit differently there:&lt;/p&gt;
+&lt;h3 id=&quot;which-browsers-get-the-focus-ring-after-click&quot;&gt;Which Browsers Get the Focus Ring After Click&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -49,7 +47,13 @@
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&quot;text-align:left&quot;&gt;Firefox&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Firefox Win&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Firefox Mac&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;No&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Yes&lt;/td&gt;
@@ -62,7 +66,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;We can already see that for most elements in all browsers we would get that focused state when we&amp;#39;d click our custom element, while for the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;s in Safari and Firefox we won&amp;#39;t.&lt;/p&gt;
+&lt;p&gt;We can already see that for most elements in all browsers we would get that focused state when we&amp;#39;d click our custom element, while for the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;s in Safari and Firefox for Mac we won&amp;#39;t.&lt;/p&gt;
 &lt;h2 id=&quot;possible-solution-in-the-specs-&quot;&gt;Possible Solution in the Specs?&lt;/h2&gt;
 &lt;p&gt;One thing we should always do when we start experimenting is to see if there is already a solution in current or incoming specifications.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://drafts.csswg.org/selectors-4/#the-focusring-pseudo&quot;&gt;The latest draft of Selectors Level 4&lt;/a&gt; provides us with two new focus-related pseudo-classes: &lt;code&gt;focus-within&lt;/code&gt; and &lt;code&gt;focus-ring&lt;/code&gt;.&lt;/p&gt;
@@ -72,10 +76,14 @@
 &lt;/ul&gt;
 &lt;p&gt;In theory, &lt;code&gt;:focus-ring&lt;/code&gt; should &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#although&quot; id=&quot;although&quot;&gt;help us&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Of course, we&amp;#39;d need to implement it using progressive enhancement: declaring all the styles for &lt;code&gt;:focus&lt;/code&gt;, then removing the styles on &lt;code&gt;:not(:focus-ring)&lt;/code&gt;, as otherwise, we would lose in keyboard accessibility at older browsers.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;: we could use it for keyboard focus styles while leaving the normal &lt;code&gt;:focus&lt;/code&gt; without anything excess. But there are two problems: no browser, as far as I know, supports the property from the spec and only Firefox supports its &lt;code&gt;:-moz-focusring&lt;/code&gt;&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring&quot;&gt;old proprietary pseudo-class&lt;/a&gt;, which was a base for a new one. And this pseudo-class is already a bit flawed:&lt;/p&gt;
 &lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/keyboard-only-focus/#Demo_2&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;d look at this example in Firefox, it would work properly unless you&amp;#39;d click on a styled span. That&amp;#39;s unfortunate, as while for proper native controls things are ok, I&amp;#39;m sure there would be cases when people would like to have this kind of control over interactive parts of pages that should have the same behavior as the native controls.&lt;/p&gt;
-&lt;p&gt;And in other browsers, you shouldn&amp;#39;t see anything there unless someone would already implement the &lt;code&gt;:focus-ring&lt;/code&gt;. If that would &lt;span class=&quot;nobr&quot;&gt;happen —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;tell me and I&amp;#39;ll update this post!&lt;/p&gt;
-&lt;h2 id=&quot;my-solution&quot;&gt;My Solution&lt;/h2&gt;
-&lt;p&gt;I was playing with one of my favorite &lt;abbr&gt;CSS&lt;/abbr&gt; &lt;span class=&quot;nobr&quot;&gt;properties —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;visibility&lt;/code&gt;&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when I had my “bingo” moment. After validating my idea and seeing it work I was really surprised I didn&amp;#39;t come to this solution before. After some testing, I found out that not everything is so smooth, but more on this later.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;d look at this example in Firefox, you could see two different issues:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;At Firefox for Mac it would work properly unless you&amp;#39;d click on a styled span, in which case you&amp;#39;ll see the focus-ring. That&amp;#39;s unfortunate, as while for proper native controls things are ok, I&amp;#39;m sure there would be cases when people would like to have this kind of control over interactive parts of pages that should have the same behavior as the native controls. But as things are work as intended at Windows, maybe that behavior at Mac is a bug? Probably we could see it fixed in future.&lt;/li&gt;
+&lt;li&gt;This issue is bigger and &lt;span class=&quot;nobr&quot;&gt;worse —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;as &lt;a href=&quot;https://twitter.com/patrick_h_lauke/status/879808288669433857&quot;&gt;Patrick has mentioned&lt;/a&gt;, there is a really weird heuristic which makes the &lt;code&gt;:-moz-focusring&lt;/code&gt; to apply all-the-time once you&amp;#39;ve used a keyboard navigation on page at least once. That makes this solution not stable enough. Especially, given that in some cases I managed to “break” Firefox making it to consider &lt;strong&gt;every&lt;/strong&gt; page to be in this keyboard-navigation &lt;span class=&quot;nobr&quot;&gt;always-on&lt;/span&gt; from the start and on refresh, which was fixed only after the browser restart.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In other browsers, you shouldn&amp;#39;t see anything there unless someone would already implement the &lt;code&gt;:focus-ring&lt;/code&gt;. If that would &lt;span class=&quot;nobr&quot;&gt;happen —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;tell me and I&amp;#39;ll update this post!&lt;/p&gt;
+&lt;h2 id=&quot;my-initial-solution&quot;&gt;My Initial Solution&lt;/h2&gt;
+&lt;p&gt;I was playing with one of my favorite &lt;abbr&gt;CSS&lt;/abbr&gt; &lt;span class=&quot;nobr&quot;&gt;properties —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;visibility&lt;/code&gt;&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when I had my “bingo” moment. After validating my idea and seeing it work I was really surprised I didn&amp;#39;t come to this solution before. After &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#nope&quot; id=&quot;nope&quot;&gt;some testing&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Apparently, I didn&amp;#39;t test enough :( As &lt;a href=&quot;https://twitter.com/iandevlin&quot;&gt;Ian&lt;/a&gt; &lt;a href=&quot;https://twitter.com/iandevlin/status/879796311566012416&quot;&gt;pointed out&lt;/a&gt; after I initially published this post, I didn&amp;#39;t test the solution enough at Firefox for Windows. That meant two things: at Windows the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; still had the focusring visible, and I didn&amp;#39;t know about the heuristic of the &lt;code&gt;:-moz-focusring&lt;/code&gt; that made the button with my solution completely unusable after user would use keyboard for at least once. I leave this solution to show what could be done if not for Firefox, and invite you to look at the &lt;a href=&quot;#proper-solution&quot;&gt;final proper solution&lt;/a&gt; below.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, I found out that not everything is so smooth, but more on this later.&lt;/p&gt;
 &lt;h3 id=&quot;visibility&quot;&gt;Visibility&lt;/h3&gt;
 &lt;p&gt;I think this property deserves its own separate article just to show all the things you can do with it. But for now I&amp;#39;ll briefly tell which its features would be really useful for our case:&lt;/p&gt;
 &lt;ol&gt;
@@ -107,6 +115,7 @@
 &lt;p&gt;However, there are a few issues in other browsers: Safari and Firefox. In Safari the first button (the one that is made using &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;) would suddenly have the focus state clipped as if the parent button had &lt;code&gt;overflow: hidden&lt;/code&gt; (while this is not the case). This is easily fixed by adding &lt;code&gt;position: relative&lt;/code&gt; on the inner element which somehow fixes &lt;a href=&quot;https://bugs.webkit.org/show_bug.cgi?id=173872&quot;&gt;this bug&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;But in Firefox… Well, our &lt;code&gt;:hover:active&lt;/code&gt; stuff just doesn&amp;#39;t work. And even more to it, if we&amp;#39;d actually listen to the button&amp;#39;s events, then on &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#fxbug&quot; id=&quot;fxbug&quot;&gt;we won&amp;#39;t get&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;I suspect that there is &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1375877&quot;&gt;a related bug in bugzilla&lt;/a&gt; for this, but maybe there are others, feel free to find if some other bug fits better!&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; a &lt;code&gt;click&lt;/code&gt; when we click (and that should be a &lt;em&gt;click&lt;/em&gt;, not a tap!). That only happens when you change the &lt;code&gt;visibility&lt;/code&gt; of a &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; on the &lt;code&gt;:active&lt;/code&gt; state.&lt;/p&gt;
 &lt;h3 id=&quot;fixing-firefox&quot;&gt;Fixing Firefox&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Update from 28 June 2017:&lt;/strong&gt; At the time of writing this part I didn&amp;#39;t test things in Firefox for Win. After testing it there I found out that this solution is completely unusable due to various problems in Firefox for Windows&amp;#39; implementation of buttons. &lt;strong&gt;Do not use this fix&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;After spending a lot of time on trying to find a fix for Firefox, the best fix I could find was this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;The &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; itself actually worked as intended always in Firefox, so we don&amp;#39;t need to do anything for it.&lt;/p&gt;
@@ -133,55 +142,45 @@
 &lt;p&gt; Note that we do this not for buttons, as adding this stuff for them on hover would make them flicker, and we already have native buttons in Fx to behave like we want them to.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;final-solution&quot;&gt;Final Solution&lt;/h3&gt;
+&lt;h3 id=&quot;final-initial-solution&quot;&gt;Final Initial Solution&lt;/h3&gt;
 &lt;p&gt;With all those fixes, our example would look like this and should work the same in all modern browsers:&lt;/p&gt;
 &lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/keyboard-only-focus/#Demo_4&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here is an &lt;abbr&gt;HTML&lt;/abbr&gt; &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#similar&quot; id=&quot;similar&quot;&gt;similar&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Here and in the later &lt;abbr&gt;CSS&lt;/abbr&gt; example I used more simplified classnames and overall changed things a bit for them to be more readable, as well as not mentioning all the reset and visual styles for our buttons.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; to the one used for this example:&lt;/p&gt;
+&lt;p&gt;But not that fast. In Firefox for Windows there are severe problems with buttons&amp;#39; implementation which lead to this solution being unusable. Thanks for &lt;a href=&quot;https://twitter.com/iandevlin&quot;&gt;Ian Devlin&lt;/a&gt; for pointing this out. In Firefox for Windows you still would see the focus ring over the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; there on click, and after you&amp;#39;d use keyboard navigation at least once, things would go completely &lt;span class=&quot;nobr&quot;&gt;wrong —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;Firefox would treat each &lt;code&gt;:focus&lt;/code&gt; as if it has &lt;code&gt;:-moz-focusring&lt;/code&gt;, which would be multiplied by another problem with buttons which would lead to &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; not to register clicks.&lt;/p&gt;
+&lt;p&gt;You can see how this initial solution worked on &lt;a href=&quot;https://codepen.io/kizu/pen/dRZzyP?editors=1100&quot;&gt;this CodePen pen&lt;/a&gt;, without any extra styling (except for &lt;code&gt;all: initial&lt;/code&gt; on buttons).&lt;/p&gt;
+&lt;h2 id=&quot;proper-solution&quot;&gt;Proper Solution&lt;/h2&gt;
+&lt;p&gt;After writing and publishing this article, and then finding out the actual solution just don&amp;#39;t work in Firefox for Windows (and not just not &lt;span class=&quot;nobr&quot;&gt;work —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;in some conditions it makes the buttons inaccessible), I&amp;#39;ve tried to find a proper solution. And, I think, I found it! Still not ideal at Firefox for Windows, but without those severe problems. I hope.&lt;/p&gt;
+&lt;p&gt;The solution came after watching &lt;a href=&quot;https://www.youtube.com/watch?v=Pe0Ce1WtnUM&quot;&gt;this video by Rob Dobson&lt;/a&gt; that &lt;a href=&quot;https://twitter.com/pepelsbey_&quot;&gt;Vadim Makeev&lt;/a&gt; had suggested to me and reading &lt;a href=&quot;https://www.sitepoint.com/when-do-elements-take-the-focus/&quot;&gt;this article about tabindex&lt;/a&gt; that was suggested by &lt;a href=&quot;https://twitter.com/patrick_h_lauke&quot;&gt;Patrick H. Lauke&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Look at it:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/keyboard-only-focus/#Demo_5&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If should work everywhere &lt;em&gt;except&lt;/em&gt; for one case: only in Firefox for Windows after you&amp;#39;ll use keyboard navigation at least once, you&amp;#39;ll see focus ring after clicking on the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element. Maybe it is possible to fix this case, but its &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#ihatefx&quot; id=&quot;ihatefx&quot;&gt;not critical&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Everything would work properly except for the visual focus ring even in this case, not like with the previous solution, and its the Firefox that should start with fixing its own problems with the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;, not us finding hacky workarounds for them.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The fun thing: this solution is even simpler than the previous one.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We&amp;#39;re just adding a &lt;code&gt;tabindex=&amp;quot;-1&amp;quot;&lt;/code&gt; to the inner element, which makes all browsers to set actual focus not on the interactive element itself, but on its insides. And when an element has focus inside of it, all the keyboard events would still work properly, so you could “click” this button from keyboard without any problems. This is possible due to how browsers handle that negative &lt;span class=&quot;nobr&quot;&gt;tabindex —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;they don&amp;#39;t put elements with it to the keyboard focus list, but make it possible to focus those elements by clicking on them or by setting focus programmatically.&lt;/li&gt;
+&lt;li&gt;The only place where this fix doesn&amp;#39;t work is Firefox for Windows. There, only for a &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element, you would still see the focus ring. I&amp;#39;ve fixed it using the &lt;code&gt;:-moz-focusring&lt;/code&gt; by removing the focus styles when we don&amp;#39;t need them. Of course, due to Firefox&amp;#39; strange heuristic, after you&amp;#39;ll use keyboard navigation at least once, you&amp;#39;ll then see this focusring on click, but that&amp;#39;s a minor drawback and everything would still work otherwise.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here is an &lt;abbr&gt;HTML&lt;/abbr&gt; &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#similar&quot; id=&quot;similar&quot;&gt;similar&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Here and in the later &lt;abbr&gt;CSS&lt;/abbr&gt; example I used more simplified classnames and overall changed things a bit for them to be more readable, as well as not mentioning all the reset and visual styles for our buttons.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; to the one used for this solution:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;button class=&amp;quot;Button&amp;quot; type=&amp;quot;button&amp;quot; tabindex=&amp;quot;0&amp;quot;&amp;gt;
-    &amp;lt;span class=&amp;quot;Button-Content&amp;quot;&amp;gt;
+    &amp;lt;span class=&amp;quot;Button-Content&amp;quot; tabindex=&amp;quot;-1&amp;quot;&amp;gt;
         I&amp;#39;m a button!
     &amp;lt;/span&amp;gt;
 &amp;lt;/button&amp;gt;
 
 &amp;lt;a class=&amp;quot;Button&amp;quot; href=&amp;quot;#x&amp;quot; tabindex=&amp;quot;0&amp;quot;&amp;gt;
-    &amp;lt;span class=&amp;quot;Button-Content&amp;quot;&amp;gt;
+    &amp;lt;span class=&amp;quot;Button-Content&amp;quot; tabindex=&amp;quot;-1&amp;quot;&amp;gt;
         I&amp;#39;m a link!
     &amp;lt;/span&amp;gt;
 &amp;lt;/a&amp;gt;
 
 &amp;lt;span class=&amp;quot;Button&amp;quot; tabindex=&amp;quot;0&amp;quot;&amp;gt;
-    &amp;lt;span class=&amp;quot;Button-Content&amp;quot;&amp;gt;
+    &amp;lt;span class=&amp;quot;Button-Content&amp;quot; tabindex=&amp;quot;-1&amp;quot;&amp;gt;
         I&amp;#39;m a span!
     &amp;lt;/span&amp;gt;
 &amp;lt;/span&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And here is the &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#codepen&quot; id=&quot;codepen&quot;&gt;final &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can see how it works with this literal &lt;abbr&gt;CSS&lt;/abbr&gt; on &lt;a href=&quot;https://codepen.io/kizu/pen/dRZzyP?editors=1100&quot;&gt;this CodePen pen&lt;/a&gt;, without any extra styling (except for &lt;code&gt;all: initial&lt;/code&gt; on buttons).&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; for our method:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;/* Making the button not to get keyboard focus on click */
-.Button:active:hover {
-   visibility: hidden;
-}
-
-:active:hover &amp;gt; .Button-Content {
-    visibility: visible;
-}
-
-/* Fixing the Safari bug for `&amp;lt;button&amp;gt;`s overflow */
+&lt;p&gt;And here is the &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#codepen&quot; id=&quot;codepen&quot;&gt;final &lt;abbr&gt;CSS&lt;/abbr&gt;&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can see how it works with this literal &lt;abbr&gt;CSS&lt;/abbr&gt; on &lt;a href=&quot;https://codepen.io/kizu/pen/OgzMeQ?editors=1100&quot;&gt;this CodePen pen&lt;/a&gt;, without any extra styling (except for &lt;code&gt;all: initial&lt;/code&gt; on buttons).&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; for our method:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;/* Fixing the Safari bug for `&amp;lt;button&amp;gt;`s overflow */
 .Button-Content {
     position: relative;
-}
-
-/* Restoring the default behavior for `&amp;lt;button&amp;gt;` in Fx */
-button.Button:active:not(:-moz-focusring) {
-   visibility: inherit;
-}
-
-/* Using a slightly worse method for Fx on non-focused hover */
-.Button:not(button):hover:not(:focus):not(:-moz-focusring) {
-    visibility: hidden;
-}
-
-:not(button):hover:not(:focus):not(:-moz-focusring) &amp;gt; .Button-Content {
-    visibility: visible;
 }
 
 /* All the states on the inner element */
@@ -197,20 +196,28 @@ button.Button:active:not(:-moz-focusring) {
     box-shadow: 0 0 3px 7px lime;
 }
 
+/* Removing the focus ring styles specifically for button in Firefox */
+button:not(:-moz-focusring):focus &amp;gt; .ComplexButton-Content {
+    box-shadow: none;
+}
+
 /* Removing default outline only after we&amp;#39;ve added our custom one */
-.Button:focus {
+.Button:focus,
+.Button-Content:focus {
     outline: none;
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that while the parent element is not hidden at any moment unlike at the previous solution with &lt;code&gt;visibility&lt;/code&gt;, it is still better to have all the styles for our element on the inner element due to various reasons.&lt;/p&gt;
+&lt;p&gt;As an added bonus, if we&amp;#39;d want, we can now choose how we&amp;#39;d want to have our element when focusing it programmatically: we can have a visual focus by focusing an outer element, or we can choose not to have focus by focusing the inner element. Even more to it: if we&amp;#39;d add another inner element with the &lt;code&gt;tabindex=&amp;quot;-1&amp;quot;&lt;/code&gt;, then we could style element differently now in three cases: on keyboard focus, on click focus and on programmatic focus.&lt;/p&gt;
 &lt;h3 id=&quot;remaining-problems&quot;&gt;Remaining Problems&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;In Firefox we couldn&amp;#39;t get keyboard focus on a non-&lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; element which is hovered (unless it&amp;#39;s already focused). That&amp;#39;s a bummer, so if that&amp;#39;s critical for you, you could remove the worse method that is there for Fx and/or use only &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;s.&lt;/li&gt;
+&lt;li&gt;In Firefox for Windows after using the keyboard navigation at least once we would see the focus ring over the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; elements. That&amp;#39;s unfortunate, but it doesn&amp;#39;t break the functionality and should be a rather rare and minor case.&lt;/li&gt;
 &lt;li&gt;in IE11 things would work just if we didn&amp;#39;t add our hacks, so we won&amp;#39;t use anything.&lt;/li&gt;
 &lt;li&gt;This method needs an extra element and won&amp;#39;t work for &lt;code&gt;&amp;lt;input type=&amp;quot;button&amp;quot;&amp;gt;&lt;/code&gt; obviously (which I don&amp;#39;t recommend using it for buttons anyway) and there is literally nothing bad in adding an extra span when it helps us to fix a problem. Extra divs and spans are not not semantic.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So, not a lot of problems after all. If you&amp;#39;ll see anything in the final example in the browser you use, let me know!&lt;/p&gt;
 &lt;h2 id=&quot;final-words&quot;&gt;Final Words&lt;/h2&gt;
-&lt;p&gt;Now we can use a nice and noticeable keyboard focus state for our interactive elements without compromising in how it would look for others. That&amp;#39;s the thing I tried to fix for years and I don&amp;#39;t even remember the number of attempts I did to fix it. I&amp;#39;m really glad I finally nailed it, and I hope browsers would start supporting the &lt;code&gt;:focus-ring&lt;/code&gt; pseudo-class, and that it would work not only for links and buttons but for any elements that are interactive (even if they were made so with &lt;code&gt;tabindex=&amp;quot;0&amp;quot; etc.&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Now we can use a nice and noticeable keyboard focus state for our interactive elements without compromising in how it would look for others. That&amp;#39;s the thing I tried to fix for years and I don&amp;#39;t even remember the number of attempts I did to fix it. I&amp;#39;m really glad I finally nailed it, and I hope browsers would start supporting the &lt;code&gt;:focus-ring&lt;/code&gt; pseudo-class, and that it wouldn&amp;#39;t have that annoying heuristic that it has now and would work for any elements that have a set &lt;code&gt;tabindex&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Thank you for reading.&lt;/p&gt;
 
     </content>
