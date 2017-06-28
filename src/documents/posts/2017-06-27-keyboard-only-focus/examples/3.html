@@ -1,0 +1,94 @@
+<style>
+
+/* Resetting & Normalizing Button's styles */
+.example-ComplexButton {
+  position: relative;
+
+  display: inline-block;
+  vertical-align: baseline;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+
+  white-space: nowrap;
+
+  font: inherit;
+  text-decoration: none;
+
+  color: inherit;
+  background: transparent;
+
+  cursor: pointer;
+  user-select: none;
+  -moz-appearance: none;
+}
+
+.example-ComplexButton::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+ /* Removing site's styles */
+:not(#id).example-ComplexButton,
+:not(#id).example-ComplexButton:link,
+:not(#id).example-ComplexButton:visited,
+:not(#id).example-ComplexButton:hover,
+:not(#id).example-ComplexButton:focus {
+  color: #FFF !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  background: none;
+}
+
+
+/* Visual styles to demonstrate states behaviour */
+.example-ComplexButton {
+  margin: 1em;
+}
+
+.example-ComplexButton:focus {
+  outline: none;
+}
+
+.example-ComplexButton-Content {
+  display: inline-block;
+
+  padding: 0.25em 0.75em;
+  border: 1px solid;
+
+  background: #808080;
+
+  border-radius: 9em;
+}
+
+:hover > .example-ComplexButton-Content {
+  background: blue;
+}
+
+:active > .example-ComplexButton-Content {
+  background: darkorange;
+}
+
+:focus > .example-ComplexButton-Content {
+  box-shadow: 0 0 3px 7px lime;
+}
+
+/* Fixing the pointer focus */
+#Example3 .example-ComplexButton:active:hover {
+  visibility: hidden;
+}
+
+#Example3 :active:hover > .example-ComplexButton-Content {
+  visibility: visible;
+}
+
+</style>
+
+<div id="Example3" class="example-Wrapper">
+    <button class="example-ComplexButton" type="button" tabindex="0"><span class="example-ComplexButton-Content">I'm a button!</span></button>
+    <a class="example-ComplexButton" href="#x" tabindex="0"><span class="example-ComplexButton-Content">I'm a link!</span></a>
+    <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
+</div>

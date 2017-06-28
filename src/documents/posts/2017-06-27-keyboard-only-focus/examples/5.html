@@ -1,0 +1,23 @@
+<style>
+
+/* Fixing the Safari bug for `<button>`s overflow */
+#Example5 .example-ComplexButton-Content {
+  position: relative;
+}
+
+#Example5 .example-ComplexButton-Content:focus {
+  outline: none;
+}
+
+#Example5 button:not(:-moz-focusring):focus > .example-ComplexButton-Content {
+  box-shadow: none;
+}
+
+
+</style>
+
+<div id="Example5" class="example-Wrapper">
+    <button class="example-ComplexButton" type="button" tabindex="0"><span class="example-ComplexButton-Content" tabindex="-1">I'm a button!</span></button>
+    <a class="example-ComplexButton" href="#x" tabindex="0"><span class="example-ComplexButton-Content" tabindex="-1">I'm a link!</span></a>
+    <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content" tabindex="-1">I'm a span!</span></span>
+</div>

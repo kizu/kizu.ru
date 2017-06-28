@@ -1,0 +1,37 @@
+<style>
+
+/* Fixing the pointer focus */
+#Example4 .example-ComplexButton:active:hover {
+  visibility: hidden;
+}
+
+#Example4 :active:hover > .example-ComplexButton-Content {
+  visibility: visible;
+}
+
+/* Fixing the Safari bug for `<button>`s overflow */
+#Example4 .example-ComplexButton-Content {
+  position: relative;
+}
+
+/* Restoring the default behavior for `<button>` in Firefox */
+#Example4 button.example-ComplexButton:active:not(:-moz-focusring) {
+   visibility: inherit;
+}
+
+/* Using a slightly worse method for Fx on non-focused hover */
+#Example4 .example-ComplexButton:not(button):hover:not(:focus):not(:-moz-focusring) {
+  visibility: hidden;
+}
+
+#Example4 :not(button):hover:not(:focus):not(:-moz-focusring) > .example-ComplexButton-Content {
+  visibility: visible;
+}
+
+</style>
+
+<div id="Example4" class="example-Wrapper">
+    <button class="example-ComplexButton" type="button" tabindex="0"><span class="example-ComplexButton-Content">I'm a button!</span></button>
+    <a class="example-ComplexButton" href="#x" tabindex="0"><span class="example-ComplexButton-Content">I'm a link!</span></a>
+    <span class="example-ComplexButton" tabindex="0"><span class="example-ComplexButton-Content">I'm a span!</span></span>
+</div>

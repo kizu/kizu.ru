@@ -1,0 +1,22 @@
+<style>
+
+#Example2 .example-Button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 7px lime;
+}
+
+#Example2 .example-Button:not(:focus-ring) {
+  box-shadow: none;
+}
+
+#Example2 .example-Button:not(:-moz-focusring) {
+  box-shadow: none;
+}
+
+</style>
+
+<div id="Example2" class="example-Wrapper">
+    <button class="example-Button" type="button" tabindex="0">I'm a button!</button>
+    <a class="example-Button" href="#x" tabindex="0">I'm a link!</a>
+    <span class="example-Button" tabindex="0">I'm a span!</span>
+</div>

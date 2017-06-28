@@ -26,9 +26,9 @@ module.exports = function(text, lang, options) {
                             }
                         }
                     } else if (node.tag) {
-                        if (node.tag == 'pre') {
+                        if (node.tag == 'pre' || node.tag.match(/^h[1-6]$/)) {
                             stopChanges = true;
-                        } else if (node.tag != 'code') {
+                        } else if (node.tag != 'code' && !(node.tag == 'a' && node.attrs.class == 'Anchor') && !(node.tag == 'span' && node.attrs.class.startsWith('ss'))) {
                             stopChanges = false;
                         }
                     }

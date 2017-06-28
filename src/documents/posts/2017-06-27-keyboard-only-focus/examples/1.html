@@ -1,0 +1,79 @@
+<style>
+
+/* Resetting & Normalizing Button's styles */
+.example-Button {
+  position: relative;
+
+  display: inline-block;
+  vertical-align: baseline;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+
+  white-space: nowrap;
+
+  font: inherit;
+  text-decoration: none;
+
+  color: inherit;
+  background: transparent;
+
+  cursor: pointer;
+  user-select: none;
+  -moz-appearance: none;
+}
+
+.example-Button::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+/* Visual styles to demonstrate states behaviour */
+
+.example-Button {
+  padding: 0.25em 0.75em;
+  border: 1px solid;
+  margin: 1em;
+
+  background: #808080;
+
+  border-radius: 9em;
+}
+
+ /* Removing site's styles */
+:not(#id).example-Button,
+:not(#id).example-Button:link,
+:not(#id).example-Button:visited,
+:not(#id).example-Button:hover,
+:not(#id).example-Button:focus {
+  color: #FFF !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  background: #808080;
+}
+
+:not(#id).example-Button:hover {
+  background: blue;
+}
+
+:not(#id).example-Button:active {
+  background: darkorange;
+}
+
+#Example1 .example-Button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 7px lime;
+}
+
+
+
+</style>
+
+<div id="Example1" class="example-Wrapper">
+    <button class="example-Button" type="button" tabindex="0">I'm a button!</button>
+    <a class="example-Button" href="#x" tabindex="0">I'm a link!</a>
+    <span class="example-Button" tabindex="0">I'm a span!</span>
+</div>
