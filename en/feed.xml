@@ -213,7 +213,7 @@ button:not(:-moz-focusring):focus &amp;gt; .ComplexButton-Content {
 &lt;ul&gt;
 &lt;li&gt;In Firefox for Windows after using the keyboard navigation at least once we would see the focus ring over the &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; elements. That&amp;#39;s unfortunate, but it doesn&amp;#39;t break the functionality and should be a rather rare and minor case.&lt;/li&gt;
 &lt;li&gt;in IE11 the solution would work for links and other elements, but you&amp;#39;ll always see the focus ring for &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;This method needs an extra element and won&amp;#39;t work for &lt;code&gt;&amp;lt;input type=&amp;quot;button&amp;quot;&amp;gt;&lt;/code&gt; obviously (which I don&amp;#39;t recommend using it for buttons anyway) and there is literally nothing bad in adding an extra span when it helps us to fix a problem. Extra divs and spans are not not semantic.&lt;/li&gt;
+&lt;li&gt;This method needs an extra element and won&amp;#39;t work for &lt;code&gt;&amp;lt;input type=&amp;quot;button&amp;quot;&amp;gt;&lt;/code&gt; obviously (which I don&amp;#39;t recommend using for buttons anyway) and there is literally nothing bad in adding an extra span when it helps us to fix a problem. Extra divs and spans are not not semantic.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So, not a lot of problems after all. If you&amp;#39;ll see anything in the final example in the browser you use, let me know!&lt;/p&gt;
 &lt;h2 id=&quot;final-words&quot;&gt;Final Words&lt;/h2&gt;
