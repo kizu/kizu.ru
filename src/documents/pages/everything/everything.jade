@@ -5,15 +5,6 @@ if posts
       - for (var i = 0; i < site.categories.length; i++)
         a.Filter-Target(id=site.categories[i], aria-hidden="true")
 
-      ul.Filter-Nav(aria-hidden="true", role="presentation")
-        li.Filter-Nav-Item.Filter-Nav-Item_everything
-          a.Filter-Nav-Link(href="#everything")= loc({ru: 'Всё', en: 'Everything'})
-
-        - for (var i = 0; i < site.categories.length; i++)
-          li.Filter-Nav-Item
-            a.Filter-Nav-Link(href="#" + site.categories[i])= loc(site.categories[i])
-
-
       ul.Filter-Content
         - for post in posts
           -
@@ -28,3 +19,13 @@ if posts
 
             = " — "
             time.published(datetime=post.date)= published_format(post.date)
+
+      p= loc('filter')
+
+      ul.Filter-Nav(aria-hidden="true", role="presentation")
+        li.Filter-Nav-Item.Filter-Nav-Item_everything
+          a.Filter-Nav-Link(href="#everything")= loc({ru: 'Всё', en: 'Everything'})
+
+        - for (var i = 0; i < site.categories.length; i++)
+          li.Filter-Nav-Item
+            a.Filter-Nav-Link(href="#" + site.categories[i])= loc(site.categories[i])

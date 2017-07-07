@@ -142,5 +142,9 @@
     "page_is_moved": {
         "ru": "Эта страница навсегда перемещена по новому адресу",
         "en": "This page is permanently moved to a new address"
+    },
+    "filter": {
+        "ru": "Вы можете отфильтровать этот список используя вот этот вот контрол (возможно, в будущем я добавлю больше вариантов фильтрации):",
+        "en": "You can filter this list using this control (maybe later I'll add more ways to filter it):"
     }
 }
