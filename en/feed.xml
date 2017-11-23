@@ -3,12 +3,43 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2017-06-27T00:00:00+03:00</updated>
+  <updated>2017-11-23T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Bemto-Components</title>
+    <link href="http://kizu.ru/en/blog/bemto-components/"/>
+    <updated>2017-11-23T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/bemto-components</id>
+    <content type="html">&lt;h1 id=&quot;bemto-components&quot;&gt;Bemto-Components&lt;/h1&gt;
+&lt;p&gt;Here is a thing I&amp;#39;m working on at my free time these days:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://kizu.ru/bemto-components/&quot;&gt;bemto-components&lt;/a&gt; (&lt;a href=&quot;https://github.com/kizu/bemto-components&quot;&gt;github repo&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;In the last 6 months, I was working mostly with &lt;abbr&gt;CSS&lt;/abbr&gt; for projects using React and I&amp;#39;ve tried a few ways of doing components and styles for them. For styling purposes I found out that &lt;a href=&quot;https://www.styled-components.com&quot;&gt;styled-components&lt;/a&gt; work the best for me: you write proper &lt;abbr&gt;CSS&lt;/abbr&gt; there (and not some kinds of JS object abominations), and everything works pretty nice.&lt;/p&gt;
+&lt;p&gt;However, what I missed is some stuff that I got used to while working with markup in &lt;a href=&quot;https://en.bem.info/&quot;&gt;&lt;abbr&gt;BEM&lt;/abbr&gt;&lt;/a&gt; way. With styled-components you can essentially get only really simple and small components. If you&amp;#39;d need complex internal structure, you&amp;#39;d need to do more work with plain React/&lt;abbr&gt;JSX&lt;/abbr&gt;, and if you&amp;#39;d need variations, then you were left just with either extending (which is cumbersome for when you need multiple modifications), or by using interpolations with props inside styled-components (which can become &lt;nobr&gt;&lt;abbr&gt;CSS&lt;/abbr&gt;-in&lt;/nobr&gt;-&lt;span class=&quot;nobr&quot;&gt;JS-in&lt;/span&gt;-&lt;nobr&gt;&lt;abbr&gt;CSS&lt;/abbr&gt;-in&lt;/nobr&gt;-JS rather easily which is unfortunate and not very readable).&lt;/p&gt;
+&lt;p&gt;After some experiments, I&amp;#39;ve come up with the project that I think would solve most of the problems I had with React+styled-components and would provide a lot of &lt;span class=&quot;nobr&quot;&gt;quality-of&lt;/span&gt;-life features I&amp;#39;ve missed from the &lt;abbr&gt;BEM&lt;/abbr&gt; and &lt;abbr&gt;HTML&lt;/abbr&gt; preprocessors days.&lt;/p&gt;
+&lt;h2 id=&quot;so-what-are-they-&quot;&gt;So What Are They?&lt;/h2&gt;
+&lt;p&gt;I won&amp;#39;t go to lengths there, as I&amp;#39;ve already written &lt;a href=&quot;http://kizu.ru/bemto-components/&quot;&gt;a lot of docs&lt;/a&gt;, so I&amp;#39;ll copy the beginning there:&lt;/p&gt;
+&lt;p&gt;Bemto-components are smart components for using &lt;abbr&gt;BEM&lt;/abbr&gt; methodology with React. Best used together with styled-components.&lt;/p&gt;
+&lt;p&gt;They provide:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://kizu.ru/bemto-components/#html-structure&quot;&gt;Reusable, configurable, easy to create &lt;abbr&gt;HTML&lt;/abbr&gt; elements.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://kizu.ru/bemto-components/#bem&quot;&gt;Elements and Modifiers from &lt;abbr&gt;BEM&lt;/abbr&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://kizu.ru/bemto-components/#styled-components&quot;&gt;Styled-components support from the box&lt;/a&gt;, totally optional.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Links above go to the corresponding sections of the docs, and there are too many features to mention in a blog post, so go there ↑, each example there is an interactive playground by the way.&lt;/p&gt;
+&lt;h2 id=&quot;bemto-button&quot;&gt;Bemto-button&lt;/h2&gt;
+&lt;p&gt;However, if you&amp;#39;d want to see a more real-life example, there is another project: &lt;a href=&quot;https://github.com/bemto/bemto-button&quot;&gt;bemto-button&lt;/a&gt;, it is a foundation for all the buttons I use in my markup for more than 4 years, now in a form of a React component.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://kizu.ru/bemto-components/#bemtobutton&quot;&gt;The docs for it&lt;/a&gt; are incorporated into the docs for bemto-components, and there is an interactive playground in all the examples as well.&lt;/p&gt;
+&lt;p&gt;This button component is the example of why I made bemto-components: it was really easy to create, and now it is really easy to use.&lt;/p&gt;
+&lt;h2 id=&quot;future&quot;&gt;Future&lt;/h2&gt;
+&lt;p&gt;All of this is just a start: not all the features of bemto-components are there in the docs (and those docs probably contain a lot of typos and overall bad-written, as I didn&amp;#39;t yet have time to review them), but I&amp;#39;m planning to add new features, write new docs, and create new components similar to bemto-button.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re using React and styled-components (or, for bemto-components, anything else, as they are pretty styling system agnostic at the moment), I hope you&amp;#39;ll try them and would tell me what do you think.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Keyboard-Only Focus</title>
     <link href="http://kizu.ru/en/blog/keyboard-only-focus/"/>

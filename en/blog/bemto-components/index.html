@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en without-sidebar">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bemto-Components</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="bemto-components"><a class="Anchor" aria-hidden="true" href="#bemto-components"></a><span class="ss01 hang-m">B</span>emto-Components</h1>
+          </header>
+<p>Here is a thing I&#39;m work­ing on at my free time these days:</p>
+<p><a class="Link" href="http://kizu.ru/bemto-components/">be­mto-com­po­nents</a> (<a class="Link" href="https://github.com/kizu/bemto-components">github repo</a>).</p>
+<p>In the last 6 months, I was work­ing mostly with <abbr>CSS</abbr> for pro­jects us­ing Re­act and I&#39;ve tried a few ways of do­ing com­po­nents and styles for them. For styling pur­poses I found out that <a class="Link" href="https://www.styled-components.com">styled-com­po­nents</a> work the best for me: you write proper <abbr>CSS</abbr> there (and not some kinds of JS ob­ject abom­i­na­tions), and every­thing works pretty nice.</p>
+<p>How­ever, what I missed is some stuff that I got used to while work­ing with markup in <a class="Link" href="https://en.bem.info/"><abbr>BEM</abbr></a> way. With styled-com­po­nents you can es­sen­tially get only re­ally sim­ple and small com­po­nents. If you&#39;d need com­plex in­ter­nal struc­ture, you&#39;d need to do more work with plain Re­act/​<abbr>JSX</abbr>, and if you&#39;d need vari­a­tions, then you were left just with ei­ther ex­tend­ing (which is cum­ber­some for when you need mul­ti­ple mod­i­fi­ca­tions), or by us­ing in­ter­po­la­tions with props in­side styled-com­po­nents (which can be­come <nobr><abbr>CSS</abbr>-in</nobr>-<span class="nobr">JS-in</span>-<nobr><abbr>CSS</abbr>-in</nobr>-JS rather eas­ily which is un­for­tu­nate and not very read­able).</p>
+<p>Af­ter some ex­per­i­ments, I&#39;ve come up with the pro­ject that I think would solve most of the prob­lems I had with Re­act+styled-com­po­nents and would pro­vide a lot of qual­<span class="nobr">ity-of</span>-life fea­tures I&#39;ve missed from the <abbr>BEM</abbr> and <abbr>HTML</abbr> pre­proces­sors days.</p>
+<h2 class="Heading" id="so-what-are-they-"><a class="Anchor" aria-hidden="true" href="#so-what-are-they-"></a><span class="ss01 hang-xs">S</span>o What Are They?</h2>
+<p>I won&#39;t go to lengths there, as I&#39;ve al­ready writ­ten <a class="Link" href="http://kizu.ru/bemto-components/">a lot of docs</a>, so I&#39;ll copy the be­gin­ning there:</p>
+<p>Be­mto-com­po­nents are smart com­po­nents for us­ing <abbr>BEM</abbr> method­ol­ogy with Re­act. Best used to­gether with styled-com­po­nents.</p>
+<p>They provide:</p>
+<ul>
+<li><a class="Link" href="http://kizu.ru/bemto-components/#html-structure">Reusable, con­fig­urable, easy to cre­ate <abbr>HTML</abbr> el­e­ments.</a></li>
+<li><a class="Link" href="http://kizu.ru/bemto-components/#bem">El­e­ments and Mod­i­fiers from <abbr>BEM</abbr>.</a></li>
+<li><a class="Link" href="http://kizu.ru/bemto-components/#styled-components">Styled-com­po­nents sup­port from the box</a>, to­tally op­tional.</li>
+</ul>
+<p>Links above go to the cor­re­spond­ing sec­tions of the docs, and there are too many fea­tures to men­tion in a blog post, so go there ↑, each ex­am­ple there is an in­ter­ac­tive play­ground by the way.</p>
+<h2 class="Heading" id="bemto-button"><a class="Anchor" aria-hidden="true" href="#bemto-button"></a><span class="ss01 hang-m">B</span>emto-button</h2>
+<p>How­ever, if you&#39;d want to see a more real-life ex­am­ple, there is an­other pro­ject: <a class="Link" href="https://github.com/bemto/bemto-button">be­mto-but­ton</a>, it is a foun­da­tion for all the but­tons I use in my markup for more than 4 years, now in a form of a Re­act com­ponent.</p>
+<p><a class="Link" href="http://kizu.ru/bemto-components/#bemtobutton">The docs for it</a> are in­cor­po­rated into the docs for be­mto-com­po­nents, and there is an in­ter­ac­tive play­ground in all the ex­am­ples as well.</p>
+<p>This but­ton com­po­nent is the ex­am­ple of why I made be­mto-com­po­nents: it was re­ally easy to cre­ate, and now it is re­ally easy to use.</p>
+<h2 class="Heading" id="future"><a class="Anchor" aria-hidden="true" href="#future"></a><span class="ss01 hang-m">F</span>uture</h2>
+<p>All of this is just a start: not all the fea­tures of be­mto-com­po­nents are there in the docs (and those docs prob­a­bly con­tain a lot of ty­pos and over­all bad-writ­ten, as I didn&#39;t yet have time to re­view them), but I&#39;m plan­ning to add new fea­tures, write new docs, and cre­ate new com­po­nents sim­i­lar to be­mto-button.</p>
+<p>If you&#39;re us­ing Re­act and styled-com­po­nents (or, for be­mto-com­po­nents, any­thing else, as they are pretty styling sys­tem ag­nos­tic at the mo­ment), I hope you&#39;ll try them and would tell me what do you think.</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2017-11-23">November 23</time>, in <a href="../" class="Link">the Blog</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CBemto-Components%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2017-11-23-bemto-components/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext"><a href="/en/blog/keyboard-only-focus/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Keyboard-Only Focus</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2017 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>
