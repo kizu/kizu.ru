@@ -3,12 +3,114 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2017-11-23T00:00:00+03:00</updated>
+  <updated>2017-11-28T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Flexible Overflow</title>
+    <link href="http://kizu.ru/en/blog/flexible-overflow/"/>
+    <updated>2017-11-28T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/flexible-overflow</id>
+    <content type="html">&lt;h1 id=&quot;flexible-overflow&quot;&gt;Flexible Overflow&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;http://kizu.ru/en/blog/flexible-overflow/sad-lions.gif&quot; alt=&quot;Sad Lions&quot;&gt;&lt;/p&gt;
+&lt;p&gt;A lot of people love responsive sites, and we used to make them with the help of Media Queries. Today, in the era of components, we can&amp;#39;t rely just on the width of our viewport anymore. Our components need to be independent and work in any conditions.&lt;/p&gt;
+&lt;p&gt;One of the solutions everyone is waiting for is &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/1031&quot;&gt;Container Queries&lt;/a&gt; (formerly known as Element Queries). But their future is not certain, and while there are &lt;a href=&quot;https://github.com/marcj/css-element-queries&quot;&gt;polyfills&lt;/a&gt; that allow us to use some of their possible features, the need to polyfill everything can be daunting.&lt;/p&gt;
+&lt;p&gt;But should we rely on JS or look at our news feeds in anticipation of Container Queries all the time? What if &lt;abbr&gt;CSS&lt;/abbr&gt; is already powerful enough to solve some of the potential Container Queries use cases right now? What if &lt;abbr&gt;CSS&lt;/abbr&gt; could even solve some of the responsive cases that even Container Queries probably &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#queryless&quot; id=&quot;queryless&quot;&gt;couldn&amp;#39;t solve&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Very often we don&amp;#39;t know the dimensions we could rely on, even on per-component basis, so &lt;em&gt;queries&lt;/em&gt; not always could help us, and we need to learn how to use more complex &lt;abbr&gt;CSS&lt;/abbr&gt; to achieve what we want.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;?&lt;/p&gt;
+&lt;p&gt;Today I&amp;#39;ll present you with one of those cases.&lt;/p&gt;
+&lt;h2 id=&quot;long-line-of-text-becomes-shorter&quot;&gt;Long Line of Text Becomes Shorter&lt;/h2&gt;
+&lt;p&gt;Whenever we have a very long string that won&amp;#39;t fit our available space, the most obvious solution is &lt;code&gt;text-overflow: ellipsis&lt;/code&gt;. But very often we don&amp;#39;t want to just truncate our long text strings: we could want to substitute it with some other text instead, remove some parts, or replace it with just an icon. That&amp;#39;s what you could see happening in the gif at the start of this article, and here is a much simpler live example (try to resize the wrapper or toggle the toggler to see how it would behave):&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/#Demo_1&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The code beyond this example is just some &lt;abbr&gt;HTML&lt;/abbr&gt; &amp;amp; &lt;abbr&gt;CSS&lt;/abbr&gt; which &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#fallback&quot; id=&quot;fallback&quot;&gt;uses&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;With fallback to just &lt;code&gt;text-overflow: ellipsis&lt;/code&gt; when there is no support for &lt;code&gt;flex-wrap&lt;/code&gt;.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; flexbox, and is made to be accessible to screen-readers which would read only the longest part, ignoring the shorter one. Ah, and also whenever you see the shorter line, the longer part would be also accessible as an &lt;abbr&gt;HTML&lt;/abbr&gt; title.&lt;/p&gt;
+&lt;h2 id=&quot;the-implementation&quot;&gt;The Implementation&lt;/h2&gt;
+&lt;p&gt;I&amp;#39;ll go straight to the code and would explain some parts of it later. Here is the &lt;abbr&gt;CSS&lt;/abbr&gt; I&amp;#39;ve written for the above example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.overflower {
+  display: inline-block;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 1.5em;
+  line-height: 1.5em;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.overflower-long {
+  display: inline;
+}
+
+.overflower-short {
+  display: none;
+}
+
+@supports (flex-wrap: wrap) {
+  .overflower {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  .overflower-short {
+    display: block;
+    overflow: hidden;
+
+    flex-grow: 1;
+    width: 0;
+
+    text-overflow: ellipsis;
+  }
+
+  .overflower-long {
+    flex-basis: 100%;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here is how the markup looks for it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;span class=&amp;quot;overflower&amp;quot;&amp;gt;
+  &amp;lt;span
+    class=&amp;quot;overflower-short&amp;quot;
+    aria-hidden=&amp;quot;true&amp;quot;
+    title=&amp;quot;Some long text that could become shorter&amp;quot;
+  &amp;gt;
+    Short text here is.
+  &amp;lt;/span&amp;gt;
+  &amp;lt;span class=&amp;quot;overflower-long&amp;quot;&amp;gt;
+    Some long text that could become shorter.
+  &amp;lt;/span&amp;gt;
+&amp;lt;/span&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The best part here is that you can nest this construction, thus gaining more than two possible length variations:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/#Demo_2&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And two more examples: header and a menu, as the more common use cases for something like this:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/#Demo_header&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/#Demo_menu&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;flex&quot;&gt;Flex&lt;/h3&gt;
+&lt;p&gt;So, how and why does this work? Let&amp;#39;s look at &lt;abbr&gt;CSS&lt;/abbr&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The first thing you can notice is that most of the styles are beyond the &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#ie11&quot; id=&quot;ie11&quot;&gt;&lt;code&gt;@supports&lt;/code&gt;&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;We miss IE11 here, and maybe with some hacks, we could make it work as well, but I don&amp;#39;t think it would worth the effort. You can try though if you want.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;: that is because everything works only when we can have &lt;code&gt;flex-wrap&lt;/code&gt;, so we would need to have some fallback in case there won&amp;#39;t be any (UC Browser for Android, hello).&lt;/li&gt;
+&lt;li&gt;The next thing is that we need to make the height of our block fixed (and &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#lh-unit&quot; id=&quot;lh-unit&quot;&gt;equal to line-height&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;That would be an ideal case for &lt;a href=&quot;https://drafts.csswg.org/css-values/#lh&quot;&gt;the lh unit&lt;/a&gt;, can we have it already, please?&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; for simplicity), so we could trim everything that would be wrapped later (rather a common trick I&amp;#39;d say).&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Now, the most interesting part: we need to make the shorter part to disappear when there is enough space for our long part, but then to appear when there won&amp;#39;t be. We do this by making the short part to take all the remaining space of the flex flow and then making the long part to take all 100%.&lt;/p&gt;
+&lt;p&gt; When there is enough space for the long part it would always take this space. But when its parent would become shorter than the contents of the long part, the magic part would happen: it would jump to the new line as there was another item before it, and that shorter item, that had basically 0 width before, would &lt;em&gt;grow&lt;/em&gt; to take all the suddenly vacant space.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the end, the &lt;abbr&gt;CSS&lt;/abbr&gt; for this effect is rather short. We just utilize multiple aspects of flexbox together: wrapping, growing and shrinking.&lt;/p&gt;
+&lt;h3 id=&quot;accessibility&quot;&gt;Accessibility&lt;/h3&gt;
+&lt;p&gt;While there are some minor caveats that are hard to overcome (when the shorter variant is shown, you could select &amp;amp; copy it alongside the longer &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#overflower-text&quot; id=&quot;overflower-text&quot;&gt;variant&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;It is possible to work around that by not having the shorter variants as &lt;abbr&gt;HTML&lt;/abbr&gt; content, but inserting it as pseudo-elements by using attributes, see the example with Header above.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;), most of the a11y stuff is fixable in &lt;abbr&gt;HTML&lt;/abbr&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For screen readers we need only the longest part, so we can hide everything else using &lt;code&gt;aria-hidden=&amp;#39;true&amp;#39;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We can enhance the experience for users who can use a pointer device and can see the &lt;code&gt;title&lt;/code&gt; attribute&amp;#39;s tooltip by adding it for the short part only. This way, when the text would be displayed at full, we won&amp;#39;t have this tooltip. And when at least something is hidden we&amp;#39;d get the tooltip on hover.&lt;/li&gt;
+&lt;li&gt;If we would use this method by nesting it, we&amp;#39;d need just one &lt;code&gt;aria-hidden&lt;/code&gt; and &lt;code&gt;title&lt;/code&gt;, both on the topmost short variant.&lt;/li&gt;
+&lt;li&gt;As the crucial part of this method is based on &lt;code&gt;flex-wrap&lt;/code&gt;, for those who don&amp;#39;t support it we make a fallback to just &lt;code&gt;text-overflow: ellipsis&lt;/code&gt;, so things won&amp;#39;t break in older browsers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;play-with-flex-css-amp-everything&quot;&gt;Play With Flex, &lt;abbr&gt;CSS&lt;/abbr&gt; &amp;amp; Everything&lt;/h2&gt;
+&lt;p&gt;This was just one of the possible effects you can achieve using powerful modern &lt;abbr&gt;CSS&lt;/abbr&gt;. And as flexbox is already really wide supported, and fallbacks for it are easy, nothing should stop you from using it. I&amp;#39;ll continue my experiments with flexbox, and later with grids, so stay tuned for more responsive, queryless solutions from me. Ah, and there is also some space for good old floats, they&amp;#39;re still cool and can sometimes achieve stuff that is really hard to do otherwise.&lt;/p&gt;
+&lt;p&gt;Things were interesting in &lt;abbr&gt;CSS&lt;/abbr&gt;, they are now, and they&amp;#39;ll always be.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Bemto-Components</title>
     <link href="http://kizu.ru/en/blog/bemto-components/"/>

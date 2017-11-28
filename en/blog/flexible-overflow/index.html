@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flexible Overflow</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="flexible-overflow"><a class="Anchor" aria-hidden="true" href="#flexible-overflow"></a><span class="ss01 hang-m">F</span>lexible Overflow</h1>
+          </header>
+<p><img src="sad-lions.gif" alt="Sad Lions"></p>
+<p>A lot of peo­ple love re­spon­sive sites, and we used to make them with the help of Me­dia Queries. To­day, in the era of com­po­nents, we can&#39;t rely just on the width of our view­port any­more. Our com­po­nents need to be in­de­pen­dent and work in any con­di­tions.</p>
+<p>One of the so­lu­tions every­one is wait­ing for is <a class="Link" href="https://github.com/w3c/csswg-drafts/issues/1031">Con­tainer Queries</a> (for­merly known as El­e­ment Queries). But their fu­ture is not cer­tain, and while there are <a class="Link" href="https://github.com/marcj/css-element-queries">poly­fills</a> that al­low us to use some of their pos­si­ble fea­tures, the need to poly­fill every­thing can be daunting.</p>
+<p>But should we rely on JS or look at our news feeds in an­tic­i­pa­tion of Con­tainer Queries all the time? What if <abbr>CSS</abbr> is al­ready pow­er­ful enough to solve some of the po­ten­tial Con­tainer Queries use cases right now? What if <abbr>CSS</abbr> could even solve some of the re­spon­sive cases that even Con­tainer Queries prob­a­bly <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#queryless" id="queryless">couldn&#39;t solve</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>Very of­ten we don&#39;t know the di­men­sions we could rely on, even on per-com­po­nent ba­sis, so <em>queries</em> not al­ways could help us, and we need to learn how to use more com­plex <abbr>CSS</abbr> to achieve what we want.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>?</p>
+<p>To­day I&#39;ll pre­sent you with one of those cases.</p>
+<h2 class="Heading" id="long-line-of-text-becomes-shorter"><a class="Anchor" aria-hidden="true" href="#long-line-of-text-becomes-shorter"></a><span class="ss01 hang-m">L</span>ong Line of Text Becomes Shorter</h2>
+<p>When­ever we have a very long string that won&#39;t fit our avail­able space, the most ob­vi­ous so­lu­tion is <code>text-over­flow: el­lip­sis</code>. But very of­ten we don&#39;t want to just trun­cate our long text strings: we could want to sub­sti­tute it with some other text in­stead, re­move some parts, or re­place it with just an icon. That&#39;s what you could see hap­pen­ing in the gif at the start of this ar­ti­cle, and here is a much sim­pler live ex­am­ple (try to re­size the wrap­per or tog­gle the tog­gler to see how it would be­have):</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_1"><style>
+    .example {
+      margin-bottom: 2em;
+    }
+
+    .example > input,
+    .example > label {
+      cursor: pointer;
+    }
+
+    .example > input {
+      vertical-align: middle;
+      margin: -0.2em 0 0;
+    }
+
+    .wrapper {
+      resize: horizontal;
+
+      overflow: hidden;
+
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.5em 1em;
+      border: 1px solid;
+
+      transition: width 1.5s;
+    }
+
+    .wrapper:active {
+      transition: none;
+    }
+
+    :checked + label + .wrapper {
+      width: 25% !important;
+    }
+
+    .overflower {
+      display: inline-block;
+      overflow: hidden;
+
+      box-sizing: border-box;
+      max-width: 100%;
+      height: 1.5em;
+      line-height: 1.5em;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .overflower-long {
+      display: inline;
+    }
+
+    .overflower-short {
+      display: none;
+    }
+
+    @supports (flex-wrap: wrap) {
+      .overflower {
+        display: inline-flex;
+        flex-wrap: wrap;
+      }
+
+      .overflower-short {
+        display: block;
+        overflow: hidden;
+
+        flex-grow: 1;
+        width: 0;
+
+        text-overflow: ellipsis;
+      }
+
+      .overflower-long {
+        flex-basis: 100%;
+      }
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthToggler" /><label for="WidthToggler">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <span class="overflower">
+      <span class="overflower-short" aria-hidden="true" title="Some long text that could become shorter">
+        Short text here is.
+      </span>
+      <span class="overflower-long">
+        Some long text that could become shorter.
+      </span>
+    </span>
+  </div>
+</div>
+</div>
+<p>The code be­yond this ex­am­ple is just some <abbr>HTML</abbr> &amp; <abbr>CSS</abbr> which <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#fallback" id="fallback">uses</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>With fall­back to just <code>text-over­flow: el­lip­sis</code> when there is no sup­port for <code>flex-wrap</code>.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> flexbox, and is made to be ac­ces­si­ble to screen-read­ers which would read only the longest part, ig­nor­ing the shorter one. Ah, and also when­ever you see the shorter line, the longer part would be also ac­ces­si­ble as an <abbr>HTML</abbr> title.</p>
+<h2 class="Heading" id="the-implementation"><a class="Anchor" aria-hidden="true" href="#the-implementation"></a><span class="ss01 hang-m">T</span>he Implementation</h2>
+<p>I&#39;ll go straight to the code and would ex­plain some parts of it later. Here is the <abbr>CSS</abbr> I&#39;ve writ­ten for the above ex­ample:</p>
+<pre><code class="language-css">.overflower {
+  display: inline-block;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 1.5em;
+  line-height: 1.5em;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.overflower-long {
+  display: inline;
+}
+
+.overflower-short {
+  display: none;
+}
+
+@supports (flex-wrap: wrap) {
+  .overflower {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  .overflower-short {
+    display: block;
+    overflow: hidden;
+
+    flex-grow: 1;
+    width: 0;
+
+    text-overflow: ellipsis;
+  }
+
+  .overflower-long {
+    flex-basis: 100%;
+  }
+}
+</code></pre>
+<p>Here is how the markup looks for it:</p>
+<pre><code class="language-html">&lt;span class=&quot;overflower&quot;&gt;
+  &lt;span
+    class=&quot;overflower-short&quot;
+    aria-hidden=&quot;true&quot;
+    title=&quot;Some long text that could become shorter&quot;
+  &gt;
+    Short text here is.
+  &lt;/span&gt;
+  &lt;span class=&quot;overflower-long&quot;&gt;
+    Some long text that could become shorter.
+  &lt;/span&gt;
+&lt;/span&gt;
+</code></pre>
+<p>The best part here is that you can nest this con­struc­tion, thus gain­ing more than two pos­si­ble length vari­a­tions:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_2"><div class="example">
+  <input type="checkbox" id="WidthToggler2" /><label for="WidthToggler2">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <span class="overflower">
+      <span class="overflower-short" aria-hidden="true" title="Very long text that would become shorter if you'd resize it.">
+        <span class="overflower">
+          <span class="overflower-short">
+            <span class="overflower">
+              <span class="overflower-short">
+                <span class="overflower">
+                  <span class="overflower-short">🙀</span>
+                  <span class="overflower-long">Tiny text!</span>
+                </span>
+              </span>
+              <span class="overflower-long">
+                Short text here is.
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            Some long text that could become shorter.
+          </span>
+        </span>
+      </span>
+      <span class="overflower-long">
+        Very long text that would become shorter if you'd resize it.
+      </span>
+    </span>
+  </div>
+</div>
+</div>
+<p>And two more ex­am­ples: header and a menu, as the more com­mon use cases for some­thing like this:</p>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_header"><style>
+    @supports (flex-wrap: wrap) {
+      [overflower-text]:after {
+        content: attr(overflower-text);
+      }
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthTogglerHeader" /><label for="WidthTogglerHeader">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <h2 class="Heading" style='margin: 0.1em 0 0;'><span class="overflower"><span class="overflower-short" aria-hidden="true" title="Really Long Line of Text Becomes so Much Shorter."><span class="overflower"><span class="overflower-short" overflower-text="Long → Short"></span><span class="overflower-long" overflower-text="Long Header Becomes Shorter"></span></span></span><span class="overflower-long">Really Long Header Becomes so Much Shorter.</span></span></h2>
+  </div>
+</div>
+</div>
+<div class="Demo Demo_injected Demo_seamless" id="Demo_menu"><style>
+    .menu {
+      display: flex;
+      margin: 0;
+      justify-content: space-around;
+    }
+
+    .menu-item {
+      flex-shrink: 1;
+      overflow: hidden;
+      min-width: 2em;
+      padding: 0 0.5em;
+      text-align: center;
+    }
+
+    .menu-item:before {
+      display: none;
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthTogglerMenu" /><label for="WidthTogglerMenu">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <ul class="menu">
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🐈 Walking cats 🐈">
+            <span class="overflower">
+              <span class="overflower-short">
+                🐈🐈🐈
+              </span>
+              <span class="overflower-long">
+                Walking cats
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🐈 Walking cats 🐈
+          </span>
+        </span>
+      </a></li>
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🙀 Surprised cats 🙀">
+            <span class="overflower">
+              <span class="overflower-short">
+                🙀🙀🙀
+              </span>
+              <span class="overflower-long">
+                Surprised cats
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🙀 Surprised cats 🙀
+          </span>
+        </span>
+      </a></li>
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🦁 Sad lions 🦁">
+            <span class="overflower">
+              <span class="overflower-short">
+                🦁🦁🦁
+              </span>
+              <span class="overflower-long">
+                Sad lions
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🦁 Sad lions 🦁
+          </span>
+        </span>
+      </a></li>
+    </ul>
+  </div>
+</div>
+</div>
+<h3 class="Heading" id="flex"><a class="Anchor" aria-hidden="true" href="#flex"></a><span class="ss01 hang-m">F</span>lex</h3>
+<p>So, how and why does this work? Let&#39;s look at <abbr>CSS</abbr>:</p>
+<ol>
+<li>The first thing you can no­tice is that most of the styles are be­yond the <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#ie11" id="ie11"><code>@sup­ports</code></a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>We miss IE11 here, and maybe with some hacks, we could make it work as well, but I don&#39;t think it would worth the ef­fort. You can try though if you want.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>: that is be­cause every­thing works only when we can have <code>flex-wrap</code>, so we would need to have some fall­back in case there won&#39;t be any (UC Browser for An­droid, hello).</li>
+<li>The next thing is that we need to make the height of our block fixed (and <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#lh-unit" id="lh-unit">equal to line-height</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>That would be an ideal case for <a href="https://drafts.csswg.org/css-values/#lh">the lh unit</a>, can we have it al­ready, please?<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> for sim­plic­ity), so we could trim every­thing that would be wrapped later (rather a com­mon trick I&#39;d say).</li>
+<li><p>Now, the most in­ter­est­ing part: we need to make the shorter part to dis­ap­pear when there is enough space for our long part, but then to ap­pear when there won&#39;t be. We do this by mak­ing the short part to take all the re­main­ing space of the flex flow and then mak­ing the long part to take all 100%.</p>
+<p> When there is enough space for the long part it would al­ways take this space. But when its par­ent would be­come shorter than the con­tents of the long part, the magic part would hap­pen: it would jump to the new line as there was an­other item be­fore it, and that shorter item, that had ba­si­cally 0 width be­fore, would <em>grow</em> to take all the sud­denly va­cant space.</p>
+</li>
+</ol>
+<p>In the end, the <abbr>CSS</abbr> for this ef­fect is rather short. We just uti­lize mul­ti­ple as­pects of flexbox to­gether: wrap­ping, grow­ing and shrinking.</p>
+<h3 class="Heading" id="accessibility"><a class="Anchor" aria-hidden="true" href="#accessibility"></a><span class="ss01 hang-xs">A</span>ccessibility</h3>
+<p>While there are some mi­nor caveats that are hard to over­come (when the shorter vari­ant is shown, you could se­lect &amp; copy it along­side the longer <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#overflower-text" id="overflower-text">vari­ant</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>It is pos­si­ble to work around that by not hav­ing the shorter vari­ants as <abbr>HTML</abbr> con­tent, but in­sert­ing it as <span class="nobr">pseudo-el</span>­e­ments by us­ing at­trib­utes, see the ex­am­ple with Header above.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span>), most of the a11y stuff is fix­able in <abbr>HTML</abbr>:</p>
+<ul>
+<li>For screen read­ers we need only the longest part, so we can hide every­thing else us­ing <code>aria-hid­den=&#39;true&#39;</code>.</li>
+<li>We can en­hance the ex­pe­ri­ence for users who can use a pointer de­vice and can see the <code>ti­tle</code> at­tribute&#39;s tooltip by adding it for the short part only. This way, when the text would be dis­played at full, we won&#39;t have this tooltip. And when at least some­thing is hid­den we&#39;d get the tooltip on hover.</li>
+<li>If we would use this method by nest­ing it, we&#39;d need just one <code>aria-hid­den</code> and <code>ti­tle</code>, both on the top­most short vari­ant.</li>
+<li>As the cru­cial part of this method is based on <code>flex-wrap</code>, for those who don&#39;t sup­port it we make a fall­back to just <code>text-over­flow: el­lip­sis</code>, so things won&#39;t break in older browsers.</li>
+</ul>
+<h2 class="Heading" id="play-with-flex-css-amp-everything"><a class="Anchor" aria-hidden="true" href="#play-with-flex-css-amp-everything"></a><span class="ss01 hang-m">P</span>lay With Flex, <abbr>CSS</abbr> &amp; Everything</h2>
+<p>This was just one of the pos­si­ble ef­fects you can achieve us­ing pow­er­ful mod­ern <abbr>CSS</abbr>. And as flexbox is al­ready re­ally wide sup­ported, and fall­backs for it are easy, noth­ing should stop you from us­ing it. I&#39;ll con­tinue my ex­per­i­ments with flexbox, and later with grids, so stay tuned for more re­spon­sive, query­less so­lu­tions from me. Ah, and there is also some space for good old floats, they&#39;re still cool and can some­times achieve stuff that is re­ally hard to do oth­erwise.</p>
+<p>Things were in­ter­est­ing in <abbr>CSS</abbr>, they are now, and they&#39;ll al­ways be.</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2017-11-28">November 28</time>, in <a href="../" class="Link">the Blog</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CFlexible%20Overflow%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2017-11-28-flexible-overflow/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext"><a href="/en/blog/bemto-components/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Bemto-Components</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2017 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>
