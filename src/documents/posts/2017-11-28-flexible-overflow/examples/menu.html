@@ -1,0 +1,80 @@
+<style>
+    .menu {
+      display: flex;
+      margin: 0;
+      justify-content: space-around;
+    }
+
+    .menu-item {
+      flex-shrink: 1;
+      overflow: hidden;
+      min-width: 2em;
+      padding: 0 0.5em;
+      text-align: center;
+    }
+
+    .menu-item:before {
+      display: none;
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthTogglerMenu" /><label for="WidthTogglerMenu">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <ul class="menu">
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🐈 Walking cats 🐈">
+            <span class="overflower">
+              <span class="overflower-short">
+                🐈🐈🐈
+              </span>
+              <span class="overflower-long">
+                Walking cats
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🐈 Walking cats 🐈
+          </span>
+        </span>
+      </a></li>
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🙀 Surprised cats 🙀">
+            <span class="overflower">
+              <span class="overflower-short">
+                🙀🙀🙀
+              </span>
+              <span class="overflower-long">
+                Surprised cats
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🙀 Surprised cats 🙀
+          </span>
+        </span>
+      </a></li>
+      <li class="menu-item"><a href="#">
+        <span class="overflower">
+          <span class="overflower-short" aria-hidden="true" title="🦁 Sad lions 🦁">
+            <span class="overflower">
+              <span class="overflower-short">
+                🦁🦁🦁
+              </span>
+              <span class="overflower-long">
+                Sad lions
+              </span>
+            </span>
+          </span>
+          <span class="overflower-long">
+            🦁 Sad lions 🦁
+          </span>
+        </span>
+      </a></li>
+    </ul>
+  </div>
+</div>

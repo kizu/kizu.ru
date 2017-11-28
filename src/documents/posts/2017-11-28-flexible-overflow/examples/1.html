@@ -1,0 +1,94 @@
+<style>
+    .example {
+      margin-bottom: 2em;
+    }
+
+    .example > input,
+    .example > label {
+      cursor: pointer;
+    }
+
+    .example > input {
+      vertical-align: middle;
+      margin: -0.2em 0 0;
+    }
+
+    .wrapper {
+      resize: horizontal;
+
+      overflow: hidden;
+
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.5em 1em;
+      border: 1px solid;
+
+      transition: width 1.5s;
+    }
+
+    .wrapper:active {
+      transition: none;
+    }
+
+    :checked + label + .wrapper {
+      width: 25% !important;
+    }
+
+    .overflower {
+      display: inline-block;
+      overflow: hidden;
+
+      box-sizing: border-box;
+      max-width: 100%;
+      height: 1.5em;
+      line-height: 1.5em;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .overflower-long {
+      display: inline;
+    }
+
+    .overflower-short {
+      display: none;
+    }
+
+    @supports (flex-wrap: wrap) {
+      .overflower {
+        display: inline-flex;
+        flex-wrap: wrap;
+      }
+
+      .overflower-short {
+        display: block;
+        overflow: hidden;
+
+        flex-grow: 1;
+        width: 0;
+
+        text-overflow: ellipsis;
+      }
+
+      .overflower-long {
+        flex-basis: 100%;
+      }
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthToggler" /><label for="WidthToggler">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <span class="overflower">
+      <span class="overflower-short" aria-hidden="true" title="Some long text that could become shorter">
+        Short text here is.
+      </span>
+      <span class="overflower-long">
+        Some long text that could become shorter.
+      </span>
+    </span>
+  </div>
+</div>

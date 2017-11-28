@@ -1,0 +1,16 @@
+<style>
+    @supports (flex-wrap: wrap) {
+      [overflower-text]:after {
+        content: attr(overflower-text);
+      }
+    }
+</style>
+
+<div class="example">
+  <input type="checkbox" id="WidthTogglerHeader" /><label for="WidthTogglerHeader">
+    Toggle the width of the block below
+  </label>
+  <div class="wrapper">
+    <h2 class="Heading" style='margin: 0.1em 0 0;'><span class="overflower"><span class="overflower-short" aria-hidden="true" title="Really Long Line of Text Becomes so Much Shorter."><span class="overflower"><span class="overflower-short" overflower-text="Long → Short"></span><span class="overflower-long" overflower-text="Long Header Becomes Shorter"></span></span></span><span class="overflower-long">Really Long Header Becomes so Much Shorter.</span></span></h2>
+  </div>
+</div>
