@@ -1,0 +1,112 @@
+<style>
+.logic-unit-a:checked {
+  counter-increment: logic-unit-a 10;
+}
+
+.logic-unit-b:checked {
+  counter-increment: logic-unit-b 10;
+}
+
+.overflower_and,
+.overflower_or,
+.overflower_not,
+.overflower_xor {
+  display: inline-flex;
+  width: 3em;
+}
+
+.overflower_or .overflower-long,
+.overflower_xor .overflower-long {
+  padding-left: calc(100% - 2.5ch);
+}
+
+.overflower_and .overflower-long,
+.overflower_not .overflower-long {
+  padding-left: calc(100% - 3.5ch);
+}
+
+.overflower_and .overflower-long:before,
+.overflower_or .overflower-long:before,
+.overflower_not .overflower-long:before,
+.overflower_xor .overflower-long:before {
+  content: counter(logic-unit-a) counter(logic-unit-b);
+}
+
+.overflower_not .overflower-long {
+  counter-increment: logic-unit-b 10;
+}
+.logic-unit-not-b:checked {
+  counter-increment: logic-unit-b -10;
+}
+
+.overflower_xor .overflower-long {
+  counter-increment: logic-unit-a 2 logic-unit-b 2;
+}
+.logic-unit-xor-a:checked {
+  counter-increment: logic-unit-a 8 logic-unit-b -1;
+}
+.logic-unit-xor-b:checked {
+  counter-increment: logic-unit-b 8 logic-unit-a -1;
+}
+
+</style>
+
+<div>
+  <input class="logic-unit-a" type="checkbox" id="LogicUnitA2"
+  /><label for="LogicUnitA2"> Click me</label>
+  <strong>AND/OR</strong>
+  <input class="logic-unit-b" type="checkbox" id="LogicUnitB2"
+  /><label for="LogicUnitB2"> click me!</label>
+  <span class="overflower overflower_or">
+    <span class="overflower-short">
+      🐈
+    </span>
+    <span class="overflower-long">
+    </span>
+  </span>
+</div>
+
+<div>
+  <input class="logic-unit-a" type="checkbox" id="LogicUnitA"
+  /><label for="LogicUnitA"> Click me</label>
+  <strong>AND</strong>
+  <input class="logic-unit-b" type="checkbox" id="LogicUnitB"
+  /><label for="LogicUnitB"> click me!</label>
+  <span class="overflower overflower_and">
+    <span class="overflower-short">
+      🦁🦁
+    </span>
+    <span class="overflower-long">
+    </span>
+  </span>
+</div>
+
+<div>
+  <input class="logic-unit-a" type="checkbox" id="LogicUnitA3"
+  /><label for="LogicUnitA3"> Click me</label>
+  <strong>AND DO NOT</strong>
+  <input class="logic-unit-not-b" type="checkbox" id="LogicUnitB3"
+  /><label for="LogicUnitB3"> click me!</label>
+  <span class="overflower overflower_not">
+    <span class="overflower-short">
+      😿
+    </span>
+    <span class="overflower-long">
+    </span>
+  </span>
+</div>
+
+<div>
+  <input class="logic-unit-xor-a" type="checkbox" id="LogicUnitA4"
+  /><label for="LogicUnitA4"> Click me</label>
+  <strong>XOR</strong>
+  <input class="logic-unit-xor-b" type="checkbox" id="LogicUnitB4"
+  /><label for="LogicUnitB4"> click me!</label>
+  <span class="overflower overflower_xor">
+    <span class="overflower-short">
+      🦁🙀
+    </span>
+    <span class="overflower-long">
+    </span>
+  </span>
+</div>

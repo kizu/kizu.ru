@@ -1,0 +1,978 @@
+<style>
+/* Win conditions */
+/* ⋯ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3))[id^=W]:checked  + :checked + :checked + :checked + :checked ~ footer,
+/* ⋰ */ .board > :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
+/* ⋮  */ .board > [id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
+/* ⋱ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer {
+  --endgame: grid;
+  --endmessage: 'White won!';
+}
+
+/* ⋯ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3)):checked + :checked + :checked + :checked +  [id^=B]:checked ~ footer,
+/* ⋰ */ .board > :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4)):checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
+/* ⋮  */ .board > :checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
+/* ⋱ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3)):checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer {
+  --endgame: grid;
+  --endmessage: 'Black won!';
+}
+
+/* Turn-passing counters magic omg */
+.board > input {
+  counter-increment: var(--stone) 10;
+}
+.board > input:checked {
+  counter-increment: White 10 Black -10 var(--stone) 100 var(--notstone) -10;
+}
+.board > input[id^=White]:checked {
+  counter-increment: White -10 Black 10 var(--stone) 100 var(--notstone) -10;
+}
+
+.board {
+  --stone-size: 36px;
+  --playfield-width: calc(var(--columns) * var(--stone-size));
+  --playfield-height: calc(var(--rows) * var(--stone-size));
+
+  counter-reset: White 0 Black 10;
+}
+
+@media (max-width: 504px) {
+  .board {
+    --stone-size: 30px;
+  }
+}
+
+/* Visually hiding inputs */
+.board > input {
+  position: fixed;
+  top: -99em;
+  left: -99em;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Stones! */
+.board > section > label {
+  visibility: hidden;
+
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  box-sizing: border-box;
+  height: var(--stone-size);
+  width: var(--stone-size);
+
+  cursor: pointer;
+
+  font-size: var(--stone-size);
+}
+.board > section > label > span,
+.board > section > label > span:before {
+  visibility: visible;
+  content: '';
+
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+
+  width: 0;
+  height: var(--stone-size);
+}
+.board > section > label:hover > span:before {
+  width: var(--stone-size);
+}
+.board > section > label > span:before {
+  border-radius: 50%;
+  box-shadow:
+    inset -0.3em -0.1em 0.8em 0em #000,
+    inset -.2em -0.3em 0.4em 0.25em #000,
+    inset 1em 0 #AAA;
+  background: rgba(0,0,0,0.5);
+  transform: scale(0.95)
+}
+.board > section > label[for^=White] > span:before {
+  box-shadow:
+    inset -1px -1px 1.9px #000,
+    inset 1em 0 #FFF;
+  background: rgba(0,0,0,0.3);
+  transform: scale(0.98)
+}
+.board > section > label:after,
+.board > section > label > span:after {
+  content: counter(Black) counter(var(--stone));
+
+  flex-basis: 100%;
+  font-size: 10px;
+  position: relative;
+  padding-left: calc(100% - 3.5ch);
+  box-sizing: border-box;
+}
+.board > section > label[for^=White]:after {
+  content: counter(White) counter(var(--stone));
+}
+.board > section > label > span:after {
+  visibility: hidden;
+  content: counter(var(--stone));
+
+  padding-left: calc(100% - 2.5ch);
+}
+
+/* Layout and other misc stuff */
+.board {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+
+  padding: 1em 0 0;
+  margin: auto;
+
+  text-shadow: none;
+}
+
+/* Label wrappers */
+.board > section {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  grid-template-columns: repeat(var(--columns), var(--stone-size));
+
+  width: var(--playfield-width);
+  height: var(--playfield-height);
+}
+
+/* Turn marker & reset */
+.board > header {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--stone-size) calc(0.5 * var(--stone-size));
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2;
+  grid-row: 2;
+}
+.board > header > button {
+  visibility: hidden;
+}
+.board > :checked ~ header > button {
+  visibility: inherit;
+}
+
+/* Turn marker logic */
+.board > header > p {
+  margin: 0;
+}
+.board > header > p > span {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: var(--stone-size);
+  height: var(--stone-size);
+  overflow: hidden;
+  vertical-align: middle;
+  font-size: var(--stone-size);
+}
+.board > header > p > span:before {
+  content: "";
+  position: relative;
+
+  flex-grow: 1;
+
+  width: 0;
+  height: 100%;
+
+  border-radius: 50%;
+  box-shadow:
+    inset -1px -1px 1.9px #000,
+    inset 1em 0 #FFF;
+  background: rgba(0,0,0,0.3);
+
+  transform: scale(0.98)
+}
+.board > header > p > span:after {
+  content: counter(White);
+
+  position: relative;
+  flex-basis: 100%;
+
+  box-sizing: border-box;
+  height: 100%;
+  padding-left: calc(100% - 1.5ch);
+
+  color: transparent;
+
+  border-radius: 50%;
+  box-shadow:
+    inset -0.3em -0.1em 0.8em 0em #000,
+    inset -.2em -0.3em 0.4em 0.25em #000,
+    inset 1em 0 #AAA;
+  background: rgba(0,0,0,0.5);
+
+  transform: scale(0.95)
+}
+
+/* The block with the win message */
+.board > footer {
+  grid-column: 2;
+  grid-row: 1;
+
+  z-index: 99;
+
+  display: var(--endgame, none);
+
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+
+  grid-gap: 1em;
+  margin: calc(-0.5 * var(--stone-size));
+
+  font: 40px/1.5 Hevetica Neue, Arial, sans-serif;
+  color: #000;
+
+  background: rgba(255,255,255,0.9);
+}
+.board > footer:before {
+  content: var(--endmessage);
+}
+
+/* New game after win button */
+.board > footer > button {
+  font-size: 1em;
+  border: 2px solid;
+  padding: 0.5em 1em;
+  border-radius: 9em;
+  background: #FFF;
+  cursor: pointer;
+}
+
+/* The board visuals */
+.board:before {
+  content: "";
+
+  grid-column: 2;
+  grid-row: 1;
+
+  width: calc(var(--playfield-width) + var(--stone-size));
+  height: calc(var(--playfield-height) + var(--stone-size));
+  margin: calc(-0.5 * var(--stone-size));
+
+  --dotsSizeX: calc(var(--stone-size) * (var(--columns) + 1) - var(--stone-size) * 8);
+  --dotsSizeY: calc(var(--stone-size) * (var(--rows) + 1) - var(--stone-size) * 8);
+  --dotsPositionX: calc(var(--stone-size) * (var(--columns) + 1) / 2);
+  --dotsPositionY: calc(var(--stone-size) * (var(--rows) + 1) / 2);
+  background:
+    radial-gradient(closest-side circle, #000 3px, transparent 4px)
+      var(--dotsPositionX) var(--dotsPositionY)/var(--dotsSizeX) var(--dotsSizeY),
+    radial-gradient(closest-side circle, #000 3px, transparent 4px)
+      50%,
+    linear-gradient(#DCB35C calc(var(--stone-size) - 2px), transparent 0)
+      0 0/100% calc(var(--stone-size) * var(--rows) + 2px),
+    linear-gradient(to right, #DCB35C calc(var(--stone-size) - 2px), transparent 0)
+      0 0/calc(var(--stone-size) * var(--columns) + 2px) 100%,
+    linear-gradient(#000 var(--stone-size), transparent 0)
+      0 0/100% calc(var(--stone-size) * var(--rows)),
+    linear-gradient(to right, #000 var(--stone-size), transparent 0)
+      0 0/calc(var(--stone-size) * var(--columns)) 100%,
+    linear-gradient(#000 2px, transparent 0)
+      -1px -1px/var(--stone-size) var(--stone-size),
+    linear-gradient(to right, #000 2px, transparent 0)
+      -1px -1px/var(--stone-size) var(--stone-size)
+    #DCB35C;
+}
+</style>
+
+<form class='board' style="--rows:13;--columns:13;">
+  <input id="Black1" type="radio" style="--stone:B1;--notstone:W1;"/>
+  <input id="Black2" type="radio" style="--stone:B2;--notstone:W2;"/>
+  <input id="Black3" type="radio" style="--stone:B3;--notstone:W3;"/>
+  <input id="Black4" type="radio" style="--stone:B4;--notstone:W4;"/>
+  <input id="Black5" type="radio" style="--stone:B5;--notstone:W5;"/>
+  <input id="Black6" type="radio" style="--stone:B6;--notstone:W6;"/>
+  <input id="Black7" type="radio" style="--stone:B7;--notstone:W7;"/>
+  <input id="Black8" type="radio" style="--stone:B8;--notstone:W8;"/>
+  <input id="Black9" type="radio" style="--stone:B9;--notstone:W9;"/>
+  <input id="Black10" type="radio" style="--stone:B10;--notstone:W10;"/>
+  <input id="Black11" type="radio" style="--stone:B11;--notstone:W11;"/>
+  <input id="Black12" type="radio" style="--stone:B12;--notstone:W12;"/>
+  <input id="Black13" type="radio" style="--stone:B13;--notstone:W13;"/>
+  <input id="Black14" type="radio" style="--stone:B14;--notstone:W14;"/>
+  <input id="Black15" type="radio" style="--stone:B15;--notstone:W15;"/>
+  <input id="Black16" type="radio" style="--stone:B16;--notstone:W16;"/>
+  <input id="Black17" type="radio" style="--stone:B17;--notstone:W17;"/>
+  <input id="Black18" type="radio" style="--stone:B18;--notstone:W18;"/>
+  <input id="Black19" type="radio" style="--stone:B19;--notstone:W19;"/>
+  <input id="Black20" type="radio" style="--stone:B20;--notstone:W20;"/>
+  <input id="Black21" type="radio" style="--stone:B21;--notstone:W21;"/>
+  <input id="Black22" type="radio" style="--stone:B22;--notstone:W22;"/>
+  <input id="Black23" type="radio" style="--stone:B23;--notstone:W23;"/>
+  <input id="Black24" type="radio" style="--stone:B24;--notstone:W24;"/>
+  <input id="Black25" type="radio" style="--stone:B25;--notstone:W25;"/>
+  <input id="Black26" type="radio" style="--stone:B26;--notstone:W26;"/>
+  <input id="Black27" type="radio" style="--stone:B27;--notstone:W27;"/>
+  <input id="Black28" type="radio" style="--stone:B28;--notstone:W28;"/>
+  <input id="Black29" type="radio" style="--stone:B29;--notstone:W29;"/>
+  <input id="Black30" type="radio" style="--stone:B30;--notstone:W30;"/>
+  <input id="Black31" type="radio" style="--stone:B31;--notstone:W31;"/>
+  <input id="Black32" type="radio" style="--stone:B32;--notstone:W32;"/>
+  <input id="Black33" type="radio" style="--stone:B33;--notstone:W33;"/>
+  <input id="Black34" type="radio" style="--stone:B34;--notstone:W34;"/>
+  <input id="Black35" type="radio" style="--stone:B35;--notstone:W35;"/>
+  <input id="Black36" type="radio" style="--stone:B36;--notstone:W36;"/>
+  <input id="Black37" type="radio" style="--stone:B37;--notstone:W37;"/>
+  <input id="Black38" type="radio" style="--stone:B38;--notstone:W38;"/>
+  <input id="Black39" type="radio" style="--stone:B39;--notstone:W39;"/>
+  <input id="Black40" type="radio" style="--stone:B40;--notstone:W40;"/>
+  <input id="Black41" type="radio" style="--stone:B41;--notstone:W41;"/>
+  <input id="Black42" type="radio" style="--stone:B42;--notstone:W42;"/>
+  <input id="Black43" type="radio" style="--stone:B43;--notstone:W43;"/>
+  <input id="Black44" type="radio" style="--stone:B44;--notstone:W44;"/>
+  <input id="Black45" type="radio" style="--stone:B45;--notstone:W45;"/>
+  <input id="Black46" type="radio" style="--stone:B46;--notstone:W46;"/>
+  <input id="Black47" type="radio" style="--stone:B47;--notstone:W47;"/>
+  <input id="Black48" type="radio" style="--stone:B48;--notstone:W48;"/>
+  <input id="Black49" type="radio" style="--stone:B49;--notstone:W49;"/>
+  <input id="Black50" type="radio" style="--stone:B50;--notstone:W50;"/>
+  <input id="Black51" type="radio" style="--stone:B51;--notstone:W51;"/>
+  <input id="Black52" type="radio" style="--stone:B52;--notstone:W52;"/>
+  <input id="Black53" type="radio" style="--stone:B53;--notstone:W53;"/>
+  <input id="Black54" type="radio" style="--stone:B54;--notstone:W54;"/>
+  <input id="Black55" type="radio" style="--stone:B55;--notstone:W55;"/>
+  <input id="Black56" type="radio" style="--stone:B56;--notstone:W56;"/>
+  <input id="Black57" type="radio" style="--stone:B57;--notstone:W57;"/>
+  <input id="Black58" type="radio" style="--stone:B58;--notstone:W58;"/>
+  <input id="Black59" type="radio" style="--stone:B59;--notstone:W59;"/>
+  <input id="Black60" type="radio" style="--stone:B60;--notstone:W60;"/>
+  <input id="Black61" type="radio" style="--stone:B61;--notstone:W61;"/>
+  <input id="Black62" type="radio" style="--stone:B62;--notstone:W62;"/>
+  <input id="Black63" type="radio" style="--stone:B63;--notstone:W63;"/>
+  <input id="Black64" type="radio" style="--stone:B64;--notstone:W64;"/>
+  <input id="Black65" type="radio" style="--stone:B65;--notstone:W65;"/>
+  <input id="Black66" type="radio" style="--stone:B66;--notstone:W66;"/>
+  <input id="Black67" type="radio" style="--stone:B67;--notstone:W67;"/>
+  <input id="Black68" type="radio" style="--stone:B68;--notstone:W68;"/>
+  <input id="Black69" type="radio" style="--stone:B69;--notstone:W69;"/>
+  <input id="Black70" type="radio" style="--stone:B70;--notstone:W70;"/>
+  <input id="Black71" type="radio" style="--stone:B71;--notstone:W71;"/>
+  <input id="Black72" type="radio" style="--stone:B72;--notstone:W72;"/>
+  <input id="Black73" type="radio" style="--stone:B73;--notstone:W73;"/>
+  <input id="Black74" type="radio" style="--stone:B74;--notstone:W74;"/>
+  <input id="Black75" type="radio" style="--stone:B75;--notstone:W75;"/>
+  <input id="Black76" type="radio" style="--stone:B76;--notstone:W76;"/>
+  <input id="Black77" type="radio" style="--stone:B77;--notstone:W77;"/>
+  <input id="Black78" type="radio" style="--stone:B78;--notstone:W78;"/>
+  <input id="Black79" type="radio" style="--stone:B79;--notstone:W79;"/>
+  <input id="Black80" type="radio" style="--stone:B80;--notstone:W80;"/>
+  <input id="Black81" type="radio" style="--stone:B81;--notstone:W81;"/>
+  <input id="Black82" type="radio" style="--stone:B82;--notstone:W82;"/>
+  <input id="Black83" type="radio" style="--stone:B83;--notstone:W83;"/>
+  <input id="Black84" type="radio" style="--stone:B84;--notstone:W84;"/>
+  <input id="Black85" type="radio" style="--stone:B85;--notstone:W85;"/>
+  <input id="Black86" type="radio" style="--stone:B86;--notstone:W86;"/>
+  <input id="Black87" type="radio" style="--stone:B87;--notstone:W87;"/>
+  <input id="Black88" type="radio" style="--stone:B88;--notstone:W88;"/>
+  <input id="Black89" type="radio" style="--stone:B89;--notstone:W89;"/>
+  <input id="Black90" type="radio" style="--stone:B90;--notstone:W90;"/>
+  <input id="Black91" type="radio" style="--stone:B91;--notstone:W91;"/>
+  <input id="Black92" type="radio" style="--stone:B92;--notstone:W92;"/>
+  <input id="Black93" type="radio" style="--stone:B93;--notstone:W93;"/>
+  <input id="Black94" type="radio" style="--stone:B94;--notstone:W94;"/>
+  <input id="Black95" type="radio" style="--stone:B95;--notstone:W95;"/>
+  <input id="Black96" type="radio" style="--stone:B96;--notstone:W96;"/>
+  <input id="Black97" type="radio" style="--stone:B97;--notstone:W97;"/>
+  <input id="Black98" type="radio" style="--stone:B98;--notstone:W98;"/>
+  <input id="Black99" type="radio" style="--stone:B99;--notstone:W99;"/>
+  <input id="Black100" type="radio" style="--stone:B100;--notstone:W100;"/>
+  <input id="Black101" type="radio" style="--stone:B101;--notstone:W101;"/>
+  <input id="Black102" type="radio" style="--stone:B102;--notstone:W102;"/>
+  <input id="Black103" type="radio" style="--stone:B103;--notstone:W103;"/>
+  <input id="Black104" type="radio" style="--stone:B104;--notstone:W104;"/>
+  <input id="Black105" type="radio" style="--stone:B105;--notstone:W105;"/>
+  <input id="Black106" type="radio" style="--stone:B106;--notstone:W106;"/>
+  <input id="Black107" type="radio" style="--stone:B107;--notstone:W107;"/>
+  <input id="Black108" type="radio" style="--stone:B108;--notstone:W108;"/>
+  <input id="Black109" type="radio" style="--stone:B109;--notstone:W109;"/>
+  <input id="Black110" type="radio" style="--stone:B110;--notstone:W110;"/>
+  <input id="Black111" type="radio" style="--stone:B111;--notstone:W111;"/>
+  <input id="Black112" type="radio" style="--stone:B112;--notstone:W112;"/>
+  <input id="Black113" type="radio" style="--stone:B113;--notstone:W113;"/>
+  <input id="Black114" type="radio" style="--stone:B114;--notstone:W114;"/>
+  <input id="Black115" type="radio" style="--stone:B115;--notstone:W115;"/>
+  <input id="Black116" type="radio" style="--stone:B116;--notstone:W116;"/>
+  <input id="Black117" type="radio" style="--stone:B117;--notstone:W117;"/>
+  <input id="Black118" type="radio" style="--stone:B118;--notstone:W118;"/>
+  <input id="Black119" type="radio" style="--stone:B119;--notstone:W119;"/>
+  <input id="Black120" type="radio" style="--stone:B120;--notstone:W120;"/>
+  <input id="Black121" type="radio" style="--stone:B121;--notstone:W121;"/>
+  <input id="Black122" type="radio" style="--stone:B122;--notstone:W122;"/>
+  <input id="Black123" type="radio" style="--stone:B123;--notstone:W123;"/>
+  <input id="Black124" type="radio" style="--stone:B124;--notstone:W124;"/>
+  <input id="Black125" type="radio" style="--stone:B125;--notstone:W125;"/>
+  <input id="Black126" type="radio" style="--stone:B126;--notstone:W126;"/>
+  <input id="Black127" type="radio" style="--stone:B127;--notstone:W127;"/>
+  <input id="Black128" type="radio" style="--stone:B128;--notstone:W128;"/>
+  <input id="Black129" type="radio" style="--stone:B129;--notstone:W129;"/>
+  <input id="Black130" type="radio" style="--stone:B130;--notstone:W130;"/>
+  <input id="Black131" type="radio" style="--stone:B131;--notstone:W131;"/>
+  <input id="Black132" type="radio" style="--stone:B132;--notstone:W132;"/>
+  <input id="Black133" type="radio" style="--stone:B133;--notstone:W133;"/>
+  <input id="Black134" type="radio" style="--stone:B134;--notstone:W134;"/>
+  <input id="Black135" type="radio" style="--stone:B135;--notstone:W135;"/>
+  <input id="Black136" type="radio" style="--stone:B136;--notstone:W136;"/>
+  <input id="Black137" type="radio" style="--stone:B137;--notstone:W137;"/>
+  <input id="Black138" type="radio" style="--stone:B138;--notstone:W138;"/>
+  <input id="Black139" type="radio" style="--stone:B139;--notstone:W139;"/>
+  <input id="Black140" type="radio" style="--stone:B140;--notstone:W140;"/>
+  <input id="Black141" type="radio" style="--stone:B141;--notstone:W141;"/>
+  <input id="Black142" type="radio" style="--stone:B142;--notstone:W142;"/>
+  <input id="Black143" type="radio" style="--stone:B143;--notstone:W143;"/>
+  <input id="Black144" type="radio" style="--stone:B144;--notstone:W144;"/>
+  <input id="Black145" type="radio" style="--stone:B145;--notstone:W145;"/>
+  <input id="Black146" type="radio" style="--stone:B146;--notstone:W146;"/>
+  <input id="Black147" type="radio" style="--stone:B147;--notstone:W147;"/>
+  <input id="Black148" type="radio" style="--stone:B148;--notstone:W148;"/>
+  <input id="Black149" type="radio" style="--stone:B149;--notstone:W149;"/>
+  <input id="Black150" type="radio" style="--stone:B150;--notstone:W150;"/>
+  <input id="Black151" type="radio" style="--stone:B151;--notstone:W151;"/>
+  <input id="Black152" type="radio" style="--stone:B152;--notstone:W152;"/>
+  <input id="Black153" type="radio" style="--stone:B153;--notstone:W153;"/>
+  <input id="Black154" type="radio" style="--stone:B154;--notstone:W154;"/>
+  <input id="Black155" type="radio" style="--stone:B155;--notstone:W155;"/>
+  <input id="Black156" type="radio" style="--stone:B156;--notstone:W156;"/>
+  <input id="Black157" type="radio" style="--stone:B157;--notstone:W157;"/>
+  <input id="Black158" type="radio" style="--stone:B158;--notstone:W158;"/>
+  <input id="Black159" type="radio" style="--stone:B159;--notstone:W159;"/>
+  <input id="Black160" type="radio" style="--stone:B160;--notstone:W160;"/>
+  <input id="Black161" type="radio" style="--stone:B161;--notstone:W161;"/>
+  <input id="Black162" type="radio" style="--stone:B162;--notstone:W162;"/>
+  <input id="Black163" type="radio" style="--stone:B163;--notstone:W163;"/>
+  <input id="Black164" type="radio" style="--stone:B164;--notstone:W164;"/>
+  <input id="Black165" type="radio" style="--stone:B165;--notstone:W165;"/>
+  <input id="Black166" type="radio" style="--stone:B166;--notstone:W166;"/>
+  <input id="Black167" type="radio" style="--stone:B167;--notstone:W167;"/>
+  <input id="Black168" type="radio" style="--stone:B168;--notstone:W168;"/>
+  <input id="Black169" type="radio" style="--stone:B169;--notstone:W169;"/>
+  <input id="White1" type="radio" style="--stone:W1;--notstone:B1;"/>
+  <input id="White2" type="radio" style="--stone:W2;--notstone:B2;"/>
+  <input id="White3" type="radio" style="--stone:W3;--notstone:B3;"/>
+  <input id="White4" type="radio" style="--stone:W4;--notstone:B4;"/>
+  <input id="White5" type="radio" style="--stone:W5;--notstone:B5;"/>
+  <input id="White6" type="radio" style="--stone:W6;--notstone:B6;"/>
+  <input id="White7" type="radio" style="--stone:W7;--notstone:B7;"/>
+  <input id="White8" type="radio" style="--stone:W8;--notstone:B8;"/>
+  <input id="White9" type="radio" style="--stone:W9;--notstone:B9;"/>
+  <input id="White10" type="radio" style="--stone:W10;--notstone:B10;"/>
+  <input id="White11" type="radio" style="--stone:W11;--notstone:B11;"/>
+  <input id="White12" type="radio" style="--stone:W12;--notstone:B12;"/>
+  <input id="White13" type="radio" style="--stone:W13;--notstone:B13;"/>
+  <input id="White14" type="radio" style="--stone:W14;--notstone:B14;"/>
+  <input id="White15" type="radio" style="--stone:W15;--notstone:B15;"/>
+  <input id="White16" type="radio" style="--stone:W16;--notstone:B16;"/>
+  <input id="White17" type="radio" style="--stone:W17;--notstone:B17;"/>
+  <input id="White18" type="radio" style="--stone:W18;--notstone:B18;"/>
+  <input id="White19" type="radio" style="--stone:W19;--notstone:B19;"/>
+  <input id="White20" type="radio" style="--stone:W20;--notstone:B20;"/>
+  <input id="White21" type="radio" style="--stone:W21;--notstone:B21;"/>
+  <input id="White22" type="radio" style="--stone:W22;--notstone:B22;"/>
+  <input id="White23" type="radio" style="--stone:W23;--notstone:B23;"/>
+  <input id="White24" type="radio" style="--stone:W24;--notstone:B24;"/>
+  <input id="White25" type="radio" style="--stone:W25;--notstone:B25;"/>
+  <input id="White26" type="radio" style="--stone:W26;--notstone:B26;"/>
+  <input id="White27" type="radio" style="--stone:W27;--notstone:B27;"/>
+  <input id="White28" type="radio" style="--stone:W28;--notstone:B28;"/>
+  <input id="White29" type="radio" style="--stone:W29;--notstone:B29;"/>
+  <input id="White30" type="radio" style="--stone:W30;--notstone:B30;"/>
+  <input id="White31" type="radio" style="--stone:W31;--notstone:B31;"/>
+  <input id="White32" type="radio" style="--stone:W32;--notstone:B32;"/>
+  <input id="White33" type="radio" style="--stone:W33;--notstone:B33;"/>
+  <input id="White34" type="radio" style="--stone:W34;--notstone:B34;"/>
+  <input id="White35" type="radio" style="--stone:W35;--notstone:B35;"/>
+  <input id="White36" type="radio" style="--stone:W36;--notstone:B36;"/>
+  <input id="White37" type="radio" style="--stone:W37;--notstone:B37;"/>
+  <input id="White38" type="radio" style="--stone:W38;--notstone:B38;"/>
+  <input id="White39" type="radio" style="--stone:W39;--notstone:B39;"/>
+  <input id="White40" type="radio" style="--stone:W40;--notstone:B40;"/>
+  <input id="White41" type="radio" style="--stone:W41;--notstone:B41;"/>
+  <input id="White42" type="radio" style="--stone:W42;--notstone:B42;"/>
+  <input id="White43" type="radio" style="--stone:W43;--notstone:B43;"/>
+  <input id="White44" type="radio" style="--stone:W44;--notstone:B44;"/>
+  <input id="White45" type="radio" style="--stone:W45;--notstone:B45;"/>
+  <input id="White46" type="radio" style="--stone:W46;--notstone:B46;"/>
+  <input id="White47" type="radio" style="--stone:W47;--notstone:B47;"/>
+  <input id="White48" type="radio" style="--stone:W48;--notstone:B48;"/>
+  <input id="White49" type="radio" style="--stone:W49;--notstone:B49;"/>
+  <input id="White50" type="radio" style="--stone:W50;--notstone:B50;"/>
+  <input id="White51" type="radio" style="--stone:W51;--notstone:B51;"/>
+  <input id="White52" type="radio" style="--stone:W52;--notstone:B52;"/>
+  <input id="White53" type="radio" style="--stone:W53;--notstone:B53;"/>
+  <input id="White54" type="radio" style="--stone:W54;--notstone:B54;"/>
+  <input id="White55" type="radio" style="--stone:W55;--notstone:B55;"/>
+  <input id="White56" type="radio" style="--stone:W56;--notstone:B56;"/>
+  <input id="White57" type="radio" style="--stone:W57;--notstone:B57;"/>
+  <input id="White58" type="radio" style="--stone:W58;--notstone:B58;"/>
+  <input id="White59" type="radio" style="--stone:W59;--notstone:B59;"/>
+  <input id="White60" type="radio" style="--stone:W60;--notstone:B60;"/>
+  <input id="White61" type="radio" style="--stone:W61;--notstone:B61;"/>
+  <input id="White62" type="radio" style="--stone:W62;--notstone:B62;"/>
+  <input id="White63" type="radio" style="--stone:W63;--notstone:B63;"/>
+  <input id="White64" type="radio" style="--stone:W64;--notstone:B64;"/>
+  <input id="White65" type="radio" style="--stone:W65;--notstone:B65;"/>
+  <input id="White66" type="radio" style="--stone:W66;--notstone:B66;"/>
+  <input id="White67" type="radio" style="--stone:W67;--notstone:B67;"/>
+  <input id="White68" type="radio" style="--stone:W68;--notstone:B68;"/>
+  <input id="White69" type="radio" style="--stone:W69;--notstone:B69;"/>
+  <input id="White70" type="radio" style="--stone:W70;--notstone:B70;"/>
+  <input id="White71" type="radio" style="--stone:W71;--notstone:B71;"/>
+  <input id="White72" type="radio" style="--stone:W72;--notstone:B72;"/>
+  <input id="White73" type="radio" style="--stone:W73;--notstone:B73;"/>
+  <input id="White74" type="radio" style="--stone:W74;--notstone:B74;"/>
+  <input id="White75" type="radio" style="--stone:W75;--notstone:B75;"/>
+  <input id="White76" type="radio" style="--stone:W76;--notstone:B76;"/>
+  <input id="White77" type="radio" style="--stone:W77;--notstone:B77;"/>
+  <input id="White78" type="radio" style="--stone:W78;--notstone:B78;"/>
+  <input id="White79" type="radio" style="--stone:W79;--notstone:B79;"/>
+  <input id="White80" type="radio" style="--stone:W80;--notstone:B80;"/>
+  <input id="White81" type="radio" style="--stone:W81;--notstone:B81;"/>
+  <input id="White82" type="radio" style="--stone:W82;--notstone:B82;"/>
+  <input id="White83" type="radio" style="--stone:W83;--notstone:B83;"/>
+  <input id="White84" type="radio" style="--stone:W84;--notstone:B84;"/>
+  <input id="White85" type="radio" style="--stone:W85;--notstone:B85;"/>
+  <input id="White86" type="radio" style="--stone:W86;--notstone:B86;"/>
+  <input id="White87" type="radio" style="--stone:W87;--notstone:B87;"/>
+  <input id="White88" type="radio" style="--stone:W88;--notstone:B88;"/>
+  <input id="White89" type="radio" style="--stone:W89;--notstone:B89;"/>
+  <input id="White90" type="radio" style="--stone:W90;--notstone:B90;"/>
+  <input id="White91" type="radio" style="--stone:W91;--notstone:B91;"/>
+  <input id="White92" type="radio" style="--stone:W92;--notstone:B92;"/>
+  <input id="White93" type="radio" style="--stone:W93;--notstone:B93;"/>
+  <input id="White94" type="radio" style="--stone:W94;--notstone:B94;"/>
+  <input id="White95" type="radio" style="--stone:W95;--notstone:B95;"/>
+  <input id="White96" type="radio" style="--stone:W96;--notstone:B96;"/>
+  <input id="White97" type="radio" style="--stone:W97;--notstone:B97;"/>
+  <input id="White98" type="radio" style="--stone:W98;--notstone:B98;"/>
+  <input id="White99" type="radio" style="--stone:W99;--notstone:B99;"/>
+  <input id="White100" type="radio" style="--stone:W100;--notstone:B100;"/>
+  <input id="White101" type="radio" style="--stone:W101;--notstone:B101;"/>
+  <input id="White102" type="radio" style="--stone:W102;--notstone:B102;"/>
+  <input id="White103" type="radio" style="--stone:W103;--notstone:B103;"/>
+  <input id="White104" type="radio" style="--stone:W104;--notstone:B104;"/>
+  <input id="White105" type="radio" style="--stone:W105;--notstone:B105;"/>
+  <input id="White106" type="radio" style="--stone:W106;--notstone:B106;"/>
+  <input id="White107" type="radio" style="--stone:W107;--notstone:B107;"/>
+  <input id="White108" type="radio" style="--stone:W108;--notstone:B108;"/>
+  <input id="White109" type="radio" style="--stone:W109;--notstone:B109;"/>
+  <input id="White110" type="radio" style="--stone:W110;--notstone:B110;"/>
+  <input id="White111" type="radio" style="--stone:W111;--notstone:B111;"/>
+  <input id="White112" type="radio" style="--stone:W112;--notstone:B112;"/>
+  <input id="White113" type="radio" style="--stone:W113;--notstone:B113;"/>
+  <input id="White114" type="radio" style="--stone:W114;--notstone:B114;"/>
+  <input id="White115" type="radio" style="--stone:W115;--notstone:B115;"/>
+  <input id="White116" type="radio" style="--stone:W116;--notstone:B116;"/>
+  <input id="White117" type="radio" style="--stone:W117;--notstone:B117;"/>
+  <input id="White118" type="radio" style="--stone:W118;--notstone:B118;"/>
+  <input id="White119" type="radio" style="--stone:W119;--notstone:B119;"/>
+  <input id="White120" type="radio" style="--stone:W120;--notstone:B120;"/>
+  <input id="White121" type="radio" style="--stone:W121;--notstone:B121;"/>
+  <input id="White122" type="radio" style="--stone:W122;--notstone:B122;"/>
+  <input id="White123" type="radio" style="--stone:W123;--notstone:B123;"/>
+  <input id="White124" type="radio" style="--stone:W124;--notstone:B124;"/>
+  <input id="White125" type="radio" style="--stone:W125;--notstone:B125;"/>
+  <input id="White126" type="radio" style="--stone:W126;--notstone:B126;"/>
+  <input id="White127" type="radio" style="--stone:W127;--notstone:B127;"/>
+  <input id="White128" type="radio" style="--stone:W128;--notstone:B128;"/>
+  <input id="White129" type="radio" style="--stone:W129;--notstone:B129;"/>
+  <input id="White130" type="radio" style="--stone:W130;--notstone:B130;"/>
+  <input id="White131" type="radio" style="--stone:W131;--notstone:B131;"/>
+  <input id="White132" type="radio" style="--stone:W132;--notstone:B132;"/>
+  <input id="White133" type="radio" style="--stone:W133;--notstone:B133;"/>
+  <input id="White134" type="radio" style="--stone:W134;--notstone:B134;"/>
+  <input id="White135" type="radio" style="--stone:W135;--notstone:B135;"/>
+  <input id="White136" type="radio" style="--stone:W136;--notstone:B136;"/>
+  <input id="White137" type="radio" style="--stone:W137;--notstone:B137;"/>
+  <input id="White138" type="radio" style="--stone:W138;--notstone:B138;"/>
+  <input id="White139" type="radio" style="--stone:W139;--notstone:B139;"/>
+  <input id="White140" type="radio" style="--stone:W140;--notstone:B140;"/>
+  <input id="White141" type="radio" style="--stone:W141;--notstone:B141;"/>
+  <input id="White142" type="radio" style="--stone:W142;--notstone:B142;"/>
+  <input id="White143" type="radio" style="--stone:W143;--notstone:B143;"/>
+  <input id="White144" type="radio" style="--stone:W144;--notstone:B144;"/>
+  <input id="White145" type="radio" style="--stone:W145;--notstone:B145;"/>
+  <input id="White146" type="radio" style="--stone:W146;--notstone:B146;"/>
+  <input id="White147" type="radio" style="--stone:W147;--notstone:B147;"/>
+  <input id="White148" type="radio" style="--stone:W148;--notstone:B148;"/>
+  <input id="White149" type="radio" style="--stone:W149;--notstone:B149;"/>
+  <input id="White150" type="radio" style="--stone:W150;--notstone:B150;"/>
+  <input id="White151" type="radio" style="--stone:W151;--notstone:B151;"/>
+  <input id="White152" type="radio" style="--stone:W152;--notstone:B152;"/>
+  <input id="White153" type="radio" style="--stone:W153;--notstone:B153;"/>
+  <input id="White154" type="radio" style="--stone:W154;--notstone:B154;"/>
+  <input id="White155" type="radio" style="--stone:W155;--notstone:B155;"/>
+  <input id="White156" type="radio" style="--stone:W156;--notstone:B156;"/>
+  <input id="White157" type="radio" style="--stone:W157;--notstone:B157;"/>
+  <input id="White158" type="radio" style="--stone:W158;--notstone:B158;"/>
+  <input id="White159" type="radio" style="--stone:W159;--notstone:B159;"/>
+  <input id="White160" type="radio" style="--stone:W160;--notstone:B160;"/>
+  <input id="White161" type="radio" style="--stone:W161;--notstone:B161;"/>
+  <input id="White162" type="radio" style="--stone:W162;--notstone:B162;"/>
+  <input id="White163" type="radio" style="--stone:W163;--notstone:B163;"/>
+  <input id="White164" type="radio" style="--stone:W164;--notstone:B164;"/>
+  <input id="White165" type="radio" style="--stone:W165;--notstone:B165;"/>
+  <input id="White166" type="radio" style="--stone:W166;--notstone:B166;"/>
+  <input id="White167" type="radio" style="--stone:W167;--notstone:B167;"/>
+  <input id="White168" type="radio" style="--stone:W168;--notstone:B168;"/>
+  <input id="White169" type="radio" style="--stone:W169;--notstone:B169;"/>
+  <header>
+    <p>Current turn: <span></span>
+    </p>
+    <button type="reset">Restart</button>
+  </header>
+  <section>
+    <label for="Black1" style="--stone:B1;"><span></span></label>
+    <label for="Black2" style="--stone:B2;"><span></span></label>
+    <label for="Black3" style="--stone:B3;"><span></span></label>
+    <label for="Black4" style="--stone:B4;"><span></span></label>
+    <label for="Black5" style="--stone:B5;"><span></span></label>
+    <label for="Black6" style="--stone:B6;"><span></span></label>
+    <label for="Black7" style="--stone:B7;"><span></span></label>
+    <label for="Black8" style="--stone:B8;"><span></span></label>
+    <label for="Black9" style="--stone:B9;"><span></span></label>
+    <label for="Black10" style="--stone:B10;"><span></span></label>
+    <label for="Black11" style="--stone:B11;"><span></span></label>
+    <label for="Black12" style="--stone:B12;"><span></span></label>
+    <label for="Black13" style="--stone:B13;"><span></span></label>
+    <label for="Black14" style="--stone:B14;"><span></span></label>
+    <label for="Black15" style="--stone:B15;"><span></span></label>
+    <label for="Black16" style="--stone:B16;"><span></span></label>
+    <label for="Black17" style="--stone:B17;"><span></span></label>
+    <label for="Black18" style="--stone:B18;"><span></span></label>
+    <label for="Black19" style="--stone:B19;"><span></span></label>
+    <label for="Black20" style="--stone:B20;"><span></span></label>
+    <label for="Black21" style="--stone:B21;"><span></span></label>
+    <label for="Black22" style="--stone:B22;"><span></span></label>
+    <label for="Black23" style="--stone:B23;"><span></span></label>
+    <label for="Black24" style="--stone:B24;"><span></span></label>
+    <label for="Black25" style="--stone:B25;"><span></span></label>
+    <label for="Black26" style="--stone:B26;"><span></span></label>
+    <label for="Black27" style="--stone:B27;"><span></span></label>
+    <label for="Black28" style="--stone:B28;"><span></span></label>
+    <label for="Black29" style="--stone:B29;"><span></span></label>
+    <label for="Black30" style="--stone:B30;"><span></span></label>
+    <label for="Black31" style="--stone:B31;"><span></span></label>
+    <label for="Black32" style="--stone:B32;"><span></span></label>
+    <label for="Black33" style="--stone:B33;"><span></span></label>
+    <label for="Black34" style="--stone:B34;"><span></span></label>
+    <label for="Black35" style="--stone:B35;"><span></span></label>
+    <label for="Black36" style="--stone:B36;"><span></span></label>
+    <label for="Black37" style="--stone:B37;"><span></span></label>
+    <label for="Black38" style="--stone:B38;"><span></span></label>
+    <label for="Black39" style="--stone:B39;"><span></span></label>
+    <label for="Black40" style="--stone:B40;"><span></span></label>
+    <label for="Black41" style="--stone:B41;"><span></span></label>
+    <label for="Black42" style="--stone:B42;"><span></span></label>
+    <label for="Black43" style="--stone:B43;"><span></span></label>
+    <label for="Black44" style="--stone:B44;"><span></span></label>
+    <label for="Black45" style="--stone:B45;"><span></span></label>
+    <label for="Black46" style="--stone:B46;"><span></span></label>
+    <label for="Black47" style="--stone:B47;"><span></span></label>
+    <label for="Black48" style="--stone:B48;"><span></span></label>
+    <label for="Black49" style="--stone:B49;"><span></span></label>
+    <label for="Black50" style="--stone:B50;"><span></span></label>
+    <label for="Black51" style="--stone:B51;"><span></span></label>
+    <label for="Black52" style="--stone:B52;"><span></span></label>
+    <label for="Black53" style="--stone:B53;"><span></span></label>
+    <label for="Black54" style="--stone:B54;"><span></span></label>
+    <label for="Black55" style="--stone:B55;"><span></span></label>
+    <label for="Black56" style="--stone:B56;"><span></span></label>
+    <label for="Black57" style="--stone:B57;"><span></span></label>
+    <label for="Black58" style="--stone:B58;"><span></span></label>
+    <label for="Black59" style="--stone:B59;"><span></span></label>
+    <label for="Black60" style="--stone:B60;"><span></span></label>
+    <label for="Black61" style="--stone:B61;"><span></span></label>
+    <label for="Black62" style="--stone:B62;"><span></span></label>
+    <label for="Black63" style="--stone:B63;"><span></span></label>
+    <label for="Black64" style="--stone:B64;"><span></span></label>
+    <label for="Black65" style="--stone:B65;"><span></span></label>
+    <label for="Black66" style="--stone:B66;"><span></span></label>
+    <label for="Black67" style="--stone:B67;"><span></span></label>
+    <label for="Black68" style="--stone:B68;"><span></span></label>
+    <label for="Black69" style="--stone:B69;"><span></span></label>
+    <label for="Black70" style="--stone:B70;"><span></span></label>
+    <label for="Black71" style="--stone:B71;"><span></span></label>
+    <label for="Black72" style="--stone:B72;"><span></span></label>
+    <label for="Black73" style="--stone:B73;"><span></span></label>
+    <label for="Black74" style="--stone:B74;"><span></span></label>
+    <label for="Black75" style="--stone:B75;"><span></span></label>
+    <label for="Black76" style="--stone:B76;"><span></span></label>
+    <label for="Black77" style="--stone:B77;"><span></span></label>
+    <label for="Black78" style="--stone:B78;"><span></span></label>
+    <label for="Black79" style="--stone:B79;"><span></span></label>
+    <label for="Black80" style="--stone:B80;"><span></span></label>
+    <label for="Black81" style="--stone:B81;"><span></span></label>
+    <label for="Black82" style="--stone:B82;"><span></span></label>
+    <label for="Black83" style="--stone:B83;"><span></span></label>
+    <label for="Black84" style="--stone:B84;"><span></span></label>
+    <label for="Black85" style="--stone:B85;"><span></span></label>
+    <label for="Black86" style="--stone:B86;"><span></span></label>
+    <label for="Black87" style="--stone:B87;"><span></span></label>
+    <label for="Black88" style="--stone:B88;"><span></span></label>
+    <label for="Black89" style="--stone:B89;"><span></span></label>
+    <label for="Black90" style="--stone:B90;"><span></span></label>
+    <label for="Black91" style="--stone:B91;"><span></span></label>
+    <label for="Black92" style="--stone:B92;"><span></span></label>
+    <label for="Black93" style="--stone:B93;"><span></span></label>
+    <label for="Black94" style="--stone:B94;"><span></span></label>
+    <label for="Black95" style="--stone:B95;"><span></span></label>
+    <label for="Black96" style="--stone:B96;"><span></span></label>
+    <label for="Black97" style="--stone:B97;"><span></span></label>
+    <label for="Black98" style="--stone:B98;"><span></span></label>
+    <label for="Black99" style="--stone:B99;"><span></span></label>
+    <label for="Black100" style="--stone:B100;"><span></span></label>
+    <label for="Black101" style="--stone:B101;"><span></span></label>
+    <label for="Black102" style="--stone:B102;"><span></span></label>
+    <label for="Black103" style="--stone:B103;"><span></span></label>
+    <label for="Black104" style="--stone:B104;"><span></span></label>
+    <label for="Black105" style="--stone:B105;"><span></span></label>
+    <label for="Black106" style="--stone:B106;"><span></span></label>
+    <label for="Black107" style="--stone:B107;"><span></span></label>
+    <label for="Black108" style="--stone:B108;"><span></span></label>
+    <label for="Black109" style="--stone:B109;"><span></span></label>
+    <label for="Black110" style="--stone:B110;"><span></span></label>
+    <label for="Black111" style="--stone:B111;"><span></span></label>
+    <label for="Black112" style="--stone:B112;"><span></span></label>
+    <label for="Black113" style="--stone:B113;"><span></span></label>
+    <label for="Black114" style="--stone:B114;"><span></span></label>
+    <label for="Black115" style="--stone:B115;"><span></span></label>
+    <label for="Black116" style="--stone:B116;"><span></span></label>
+    <label for="Black117" style="--stone:B117;"><span></span></label>
+    <label for="Black118" style="--stone:B118;"><span></span></label>
+    <label for="Black119" style="--stone:B119;"><span></span></label>
+    <label for="Black120" style="--stone:B120;"><span></span></label>
+    <label for="Black121" style="--stone:B121;"><span></span></label>
+    <label for="Black122" style="--stone:B122;"><span></span></label>
+    <label for="Black123" style="--stone:B123;"><span></span></label>
+    <label for="Black124" style="--stone:B124;"><span></span></label>
+    <label for="Black125" style="--stone:B125;"><span></span></label>
+    <label for="Black126" style="--stone:B126;"><span></span></label>
+    <label for="Black127" style="--stone:B127;"><span></span></label>
+    <label for="Black128" style="--stone:B128;"><span></span></label>
+    <label for="Black129" style="--stone:B129;"><span></span></label>
+    <label for="Black130" style="--stone:B130;"><span></span></label>
+    <label for="Black131" style="--stone:B131;"><span></span></label>
+    <label for="Black132" style="--stone:B132;"><span></span></label>
+    <label for="Black133" style="--stone:B133;"><span></span></label>
+    <label for="Black134" style="--stone:B134;"><span></span></label>
+    <label for="Black135" style="--stone:B135;"><span></span></label>
+    <label for="Black136" style="--stone:B136;"><span></span></label>
+    <label for="Black137" style="--stone:B137;"><span></span></label>
+    <label for="Black138" style="--stone:B138;"><span></span></label>
+    <label for="Black139" style="--stone:B139;"><span></span></label>
+    <label for="Black140" style="--stone:B140;"><span></span></label>
+    <label for="Black141" style="--stone:B141;"><span></span></label>
+    <label for="Black142" style="--stone:B142;"><span></span></label>
+    <label for="Black143" style="--stone:B143;"><span></span></label>
+    <label for="Black144" style="--stone:B144;"><span></span></label>
+    <label for="Black145" style="--stone:B145;"><span></span></label>
+    <label for="Black146" style="--stone:B146;"><span></span></label>
+    <label for="Black147" style="--stone:B147;"><span></span></label>
+    <label for="Black148" style="--stone:B148;"><span></span></label>
+    <label for="Black149" style="--stone:B149;"><span></span></label>
+    <label for="Black150" style="--stone:B150;"><span></span></label>
+    <label for="Black151" style="--stone:B151;"><span></span></label>
+    <label for="Black152" style="--stone:B152;"><span></span></label>
+    <label for="Black153" style="--stone:B153;"><span></span></label>
+    <label for="Black154" style="--stone:B154;"><span></span></label>
+    <label for="Black155" style="--stone:B155;"><span></span></label>
+    <label for="Black156" style="--stone:B156;"><span></span></label>
+    <label for="Black157" style="--stone:B157;"><span></span></label>
+    <label for="Black158" style="--stone:B158;"><span></span></label>
+    <label for="Black159" style="--stone:B159;"><span></span></label>
+    <label for="Black160" style="--stone:B160;"><span></span></label>
+    <label for="Black161" style="--stone:B161;"><span></span></label>
+    <label for="Black162" style="--stone:B162;"><span></span></label>
+    <label for="Black163" style="--stone:B163;"><span></span></label>
+    <label for="Black164" style="--stone:B164;"><span></span></label>
+    <label for="Black165" style="--stone:B165;"><span></span></label>
+    <label for="Black166" style="--stone:B166;"><span></span></label>
+    <label for="Black167" style="--stone:B167;"><span></span></label>
+    <label for="Black168" style="--stone:B168;"><span></span></label>
+    <label for="Black169" style="--stone:B169;"><span></span></label>
+  </section>
+  <section>
+    <label for="White1" style="--stone:W1;"><span></span></label>
+    <label for="White2" style="--stone:W2;"><span></span></label>
+    <label for="White3" style="--stone:W3;"><span></span></label>
+    <label for="White4" style="--stone:W4;"><span></span></label>
+    <label for="White5" style="--stone:W5;"><span></span></label>
+    <label for="White6" style="--stone:W6;"><span></span></label>
+    <label for="White7" style="--stone:W7;"><span></span></label>
+    <label for="White8" style="--stone:W8;"><span></span></label>
+    <label for="White9" style="--stone:W9;"><span></span></label>
+    <label for="White10" style="--stone:W10;"><span></span></label>
+    <label for="White11" style="--stone:W11;"><span></span></label>
+    <label for="White12" style="--stone:W12;"><span></span></label>
+    <label for="White13" style="--stone:W13;"><span></span></label>
+    <label for="White14" style="--stone:W14;"><span></span></label>
+    <label for="White15" style="--stone:W15;"><span></span></label>
+    <label for="White16" style="--stone:W16;"><span></span></label>
+    <label for="White17" style="--stone:W17;"><span></span></label>
+    <label for="White18" style="--stone:W18;"><span></span></label>
+    <label for="White19" style="--stone:W19;"><span></span></label>
+    <label for="White20" style="--stone:W20;"><span></span></label>
+    <label for="White21" style="--stone:W21;"><span></span></label>
+    <label for="White22" style="--stone:W22;"><span></span></label>
+    <label for="White23" style="--stone:W23;"><span></span></label>
+    <label for="White24" style="--stone:W24;"><span></span></label>
+    <label for="White25" style="--stone:W25;"><span></span></label>
+    <label for="White26" style="--stone:W26;"><span></span></label>
+    <label for="White27" style="--stone:W27;"><span></span></label>
+    <label for="White28" style="--stone:W28;"><span></span></label>
+    <label for="White29" style="--stone:W29;"><span></span></label>
+    <label for="White30" style="--stone:W30;"><span></span></label>
+    <label for="White31" style="--stone:W31;"><span></span></label>
+    <label for="White32" style="--stone:W32;"><span></span></label>
+    <label for="White33" style="--stone:W33;"><span></span></label>
+    <label for="White34" style="--stone:W34;"><span></span></label>
+    <label for="White35" style="--stone:W35;"><span></span></label>
+    <label for="White36" style="--stone:W36;"><span></span></label>
+    <label for="White37" style="--stone:W37;"><span></span></label>
+    <label for="White38" style="--stone:W38;"><span></span></label>
+    <label for="White39" style="--stone:W39;"><span></span></label>
+    <label for="White40" style="--stone:W40;"><span></span></label>
+    <label for="White41" style="--stone:W41;"><span></span></label>
+    <label for="White42" style="--stone:W42;"><span></span></label>
+    <label for="White43" style="--stone:W43;"><span></span></label>
+    <label for="White44" style="--stone:W44;"><span></span></label>
+    <label for="White45" style="--stone:W45;"><span></span></label>
+    <label for="White46" style="--stone:W46;"><span></span></label>
+    <label for="White47" style="--stone:W47;"><span></span></label>
+    <label for="White48" style="--stone:W48;"><span></span></label>
+    <label for="White49" style="--stone:W49;"><span></span></label>
+    <label for="White50" style="--stone:W50;"><span></span></label>
+    <label for="White51" style="--stone:W51;"><span></span></label>
+    <label for="White52" style="--stone:W52;"><span></span></label>
+    <label for="White53" style="--stone:W53;"><span></span></label>
+    <label for="White54" style="--stone:W54;"><span></span></label>
+    <label for="White55" style="--stone:W55;"><span></span></label>
+    <label for="White56" style="--stone:W56;"><span></span></label>
+    <label for="White57" style="--stone:W57;"><span></span></label>
+    <label for="White58" style="--stone:W58;"><span></span></label>
+    <label for="White59" style="--stone:W59;"><span></span></label>
+    <label for="White60" style="--stone:W60;"><span></span></label>
+    <label for="White61" style="--stone:W61;"><span></span></label>
+    <label for="White62" style="--stone:W62;"><span></span></label>
+    <label for="White63" style="--stone:W63;"><span></span></label>
+    <label for="White64" style="--stone:W64;"><span></span></label>
+    <label for="White65" style="--stone:W65;"><span></span></label>
+    <label for="White66" style="--stone:W66;"><span></span></label>
+    <label for="White67" style="--stone:W67;"><span></span></label>
+    <label for="White68" style="--stone:W68;"><span></span></label>
+    <label for="White69" style="--stone:W69;"><span></span></label>
+    <label for="White70" style="--stone:W70;"><span></span></label>
+    <label for="White71" style="--stone:W71;"><span></span></label>
+    <label for="White72" style="--stone:W72;"><span></span></label>
+    <label for="White73" style="--stone:W73;"><span></span></label>
+    <label for="White74" style="--stone:W74;"><span></span></label>
+    <label for="White75" style="--stone:W75;"><span></span></label>
+    <label for="White76" style="--stone:W76;"><span></span></label>
+    <label for="White77" style="--stone:W77;"><span></span></label>
+    <label for="White78" style="--stone:W78;"><span></span></label>
+    <label for="White79" style="--stone:W79;"><span></span></label>
+    <label for="White80" style="--stone:W80;"><span></span></label>
+    <label for="White81" style="--stone:W81;"><span></span></label>
+    <label for="White82" style="--stone:W82;"><span></span></label>
+    <label for="White83" style="--stone:W83;"><span></span></label>
+    <label for="White84" style="--stone:W84;"><span></span></label>
+    <label for="White85" style="--stone:W85;"><span></span></label>
+    <label for="White86" style="--stone:W86;"><span></span></label>
+    <label for="White87" style="--stone:W87;"><span></span></label>
+    <label for="White88" style="--stone:W88;"><span></span></label>
+    <label for="White89" style="--stone:W89;"><span></span></label>
+    <label for="White90" style="--stone:W90;"><span></span></label>
+    <label for="White91" style="--stone:W91;"><span></span></label>
+    <label for="White92" style="--stone:W92;"><span></span></label>
+    <label for="White93" style="--stone:W93;"><span></span></label>
+    <label for="White94" style="--stone:W94;"><span></span></label>
+    <label for="White95" style="--stone:W95;"><span></span></label>
+    <label for="White96" style="--stone:W96;"><span></span></label>
+    <label for="White97" style="--stone:W97;"><span></span></label>
+    <label for="White98" style="--stone:W98;"><span></span></label>
+    <label for="White99" style="--stone:W99;"><span></span></label>
+    <label for="White100" style="--stone:W100;"><span></span></label>
+    <label for="White101" style="--stone:W101;"><span></span></label>
+    <label for="White102" style="--stone:W102;"><span></span></label>
+    <label for="White103" style="--stone:W103;"><span></span></label>
+    <label for="White104" style="--stone:W104;"><span></span></label>
+    <label for="White105" style="--stone:W105;"><span></span></label>
+    <label for="White106" style="--stone:W106;"><span></span></label>
+    <label for="White107" style="--stone:W107;"><span></span></label>
+    <label for="White108" style="--stone:W108;"><span></span></label>
+    <label for="White109" style="--stone:W109;"><span></span></label>
+    <label for="White110" style="--stone:W110;"><span></span></label>
+    <label for="White111" style="--stone:W111;"><span></span></label>
+    <label for="White112" style="--stone:W112;"><span></span></label>
+    <label for="White113" style="--stone:W113;"><span></span></label>
+    <label for="White114" style="--stone:W114;"><span></span></label>
+    <label for="White115" style="--stone:W115;"><span></span></label>
+    <label for="White116" style="--stone:W116;"><span></span></label>
+    <label for="White117" style="--stone:W117;"><span></span></label>
+    <label for="White118" style="--stone:W118;"><span></span></label>
+    <label for="White119" style="--stone:W119;"><span></span></label>
+    <label for="White120" style="--stone:W120;"><span></span></label>
+    <label for="White121" style="--stone:W121;"><span></span></label>
+    <label for="White122" style="--stone:W122;"><span></span></label>
+    <label for="White123" style="--stone:W123;"><span></span></label>
+    <label for="White124" style="--stone:W124;"><span></span></label>
+    <label for="White125" style="--stone:W125;"><span></span></label>
+    <label for="White126" style="--stone:W126;"><span></span></label>
+    <label for="White127" style="--stone:W127;"><span></span></label>
+    <label for="White128" style="--stone:W128;"><span></span></label>
+    <label for="White129" style="--stone:W129;"><span></span></label>
+    <label for="White130" style="--stone:W130;"><span></span></label>
+    <label for="White131" style="--stone:W131;"><span></span></label>
+    <label for="White132" style="--stone:W132;"><span></span></label>
+    <label for="White133" style="--stone:W133;"><span></span></label>
+    <label for="White134" style="--stone:W134;"><span></span></label>
+    <label for="White135" style="--stone:W135;"><span></span></label>
+    <label for="White136" style="--stone:W136;"><span></span></label>
+    <label for="White137" style="--stone:W137;"><span></span></label>
+    <label for="White138" style="--stone:W138;"><span></span></label>
+    <label for="White139" style="--stone:W139;"><span></span></label>
+    <label for="White140" style="--stone:W140;"><span></span></label>
+    <label for="White141" style="--stone:W141;"><span></span></label>
+    <label for="White142" style="--stone:W142;"><span></span></label>
+    <label for="White143" style="--stone:W143;"><span></span></label>
+    <label for="White144" style="--stone:W144;"><span></span></label>
+    <label for="White145" style="--stone:W145;"><span></span></label>
+    <label for="White146" style="--stone:W146;"><span></span></label>
+    <label for="White147" style="--stone:W147;"><span></span></label>
+    <label for="White148" style="--stone:W148;"><span></span></label>
+    <label for="White149" style="--stone:W149;"><span></span></label>
+    <label for="White150" style="--stone:W150;"><span></span></label>
+    <label for="White151" style="--stone:W151;"><span></span></label>
+    <label for="White152" style="--stone:W152;"><span></span></label>
+    <label for="White153" style="--stone:W153;"><span></span></label>
+    <label for="White154" style="--stone:W154;"><span></span></label>
+    <label for="White155" style="--stone:W155;"><span></span></label>
+    <label for="White156" style="--stone:W156;"><span></span></label>
+    <label for="White157" style="--stone:W157;"><span></span></label>
+    <label for="White158" style="--stone:W158;"><span></span></label>
+    <label for="White159" style="--stone:W159;"><span></span></label>
+    <label for="White160" style="--stone:W160;"><span></span></label>
+    <label for="White161" style="--stone:W161;"><span></span></label>
+    <label for="White162" style="--stone:W162;"><span></span></label>
+    <label for="White163" style="--stone:W163;"><span></span></label>
+    <label for="White164" style="--stone:W164;"><span></span></label>
+    <label for="White165" style="--stone:W165;"><span></span></label>
+    <label for="White166" style="--stone:W166;"><span></span></label>
+    <label for="White167" style="--stone:W167;"><span></span></label>
+    <label for="White168" style="--stone:W168;"><span></span></label>
+    <label for="White169" style="--stone:W169;"><span></span></label>
+  </section>
+  <footer>
+    <button type="reset">Play again!</button>
+  </footer>
+</form>
