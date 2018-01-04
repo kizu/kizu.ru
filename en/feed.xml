@@ -3,12 +3,236 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2017-11-28T00:00:00+03:00</updated>
+  <updated>2018-01-04T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Counters and Stones</title>
+    <link href="http://kizu.ru/en/blog/counters-and-stones/"/>
+    <updated>2018-01-04T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/counters-and-stones</id>
+    <content type="html">&lt;h1 id=&quot;counters-and-stones&quot;&gt;Counters and Stones&lt;/h1&gt;
+&lt;p&gt;Today&amp;#39;s article is a bit special for me: I&amp;#39;ll explain a solution which I couldn&amp;#39;t find for more than four years. The problem is not very practical: it was one aspect of &lt;abbr&gt;CSS&lt;/abbr&gt;-only stuff that could be much easier handled by JS, but I really wanted to find a clean &lt;abbr&gt;HTML&lt;/abbr&gt;&amp;amp;&lt;abbr&gt;CSS&lt;/abbr&gt;-only solution for. And I have found it. And in this article, I&amp;#39;ll explain what was the problem and how the solution works.&lt;/p&gt;
+&lt;p&gt;But first, I need to say thanks to &lt;a href=&quot;https://twitter.com/Una&quot;&gt;Una&lt;/a&gt;. I was browsing internets and found out myself looking at on one of her &lt;span class=&quot;nobr&quot;&gt;articles —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;a href=&quot;https://una.im/css-games/&quot;&gt;“Pure &lt;abbr&gt;CSS&lt;/abbr&gt; Games with Counter-Increment”&lt;/a&gt;. While I had read this article a few times before (I really like &lt;abbr&gt;CSS&lt;/abbr&gt; experiments like that as you can guess!), this time something clicked. I remembered &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#fronteers&quot; id=&quot;fronteers&quot;&gt;one of my older unfinished experiments&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;I&amp;#39;ve mentioned this experiment in my old lightning talk &lt;a href=&quot;https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source&quot;&gt;“Don’t look into the source”&lt;/a&gt; at Fronteers 2013 Jam Session.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; which was a bit similar to one of the games Una created, and how both our examples didn&amp;#39;t solve one hard aspect. But looking at this article now, when I just wrote the article on &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/&quot;&gt;Flexible Overflow&lt;/a&gt;, I looked at the “Counter-Increment” part and the puzzle in my head completed.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ll explain the problem and the solution later, but now look at this, my now finished &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#renju&quot; id=&quot;renju&quot;&gt;experiment&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;This is a really basic implementation of &lt;a href=&quot;https://en.wikipedia.org/wiki/Gomoku&quot;&gt;Gomoku&lt;/a&gt;&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;a game where two players compete on who could purt five consecutive stones first. Only the very basic winning rules are implemented of course.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; from the past:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/counters-and-stones/#Demo_13x13&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Things you can notice:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You can place “stones” by clicking/tapping on the line intersections.&lt;/li&gt;
+&lt;li&gt;When you place each new stone, the turn passes to another player.&lt;/li&gt;
+&lt;li&gt;When a player places five stones in a row, they win.&lt;/li&gt;
+&lt;li&gt;Everything there is done using just &lt;abbr&gt;HTML&lt;/abbr&gt;&amp;amp;&lt;abbr&gt;CSS&lt;/abbr&gt;, no JS involved.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Until recently, it was known how to achieve most of those points in &lt;abbr&gt;CSS&lt;/abbr&gt;: you can see it in Una&amp;#39;s games, for example. Except for the second &lt;span class=&quot;nobr&quot;&gt;point —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;passing turns ended up to be the hardest thing. When I did my demo for Fronteers, I had to pass turns manually, by doing an extra click after putting a stone. Una handled this by allowing 5 seconds for each player&amp;#39;s turn, which is also far from ideal.&lt;/p&gt;
+&lt;p&gt;In this article, I&amp;#39;ll show you how this can be handled in a way you&amp;#39;d need to click only once to put a stone to pass a turn.&lt;/p&gt;
+&lt;p&gt;The basic idea is that we need to have some kind of a logic switch, which we would use to change the states of our elements: turn them on and off. While this can be achieved by using the &lt;code&gt;:checked&lt;/code&gt; state (and in a lot of cases it is still much better than what I&amp;#39;ll describe there), for our &lt;span class=&quot;nobr&quot;&gt;case —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when we&amp;#39;d need to change turns &lt;em&gt;at the same time&lt;/em&gt; when we place stones on a field it wasn&amp;#39;t enough. We&amp;#39;d need to have something that would &lt;em&gt;toggle&lt;/em&gt; the state with each consecutive click on &lt;em&gt;different&lt;/em&gt; items. Here is what I came up with.&lt;/p&gt;
+&lt;h2 id=&quot;logic-unit&quot;&gt;Logic Unit&lt;/h2&gt;
+&lt;p&gt;The main idea for our main building block is to use &lt;abbr&gt;CSS&lt;/abbr&gt; &lt;em&gt;counters&lt;/em&gt;. They have this unique property for &lt;abbr&gt;CSS&lt;/abbr&gt;: you can increment them, decrement, and their values would be available all the way down the context they were declared at.&lt;/p&gt;
+&lt;p&gt;But here is a problem: we can&amp;#39;t use them anywhere but the &lt;code&gt;content&lt;/code&gt; &lt;abbr&gt;CSS&lt;/abbr&gt; property. So, for a long time, I thought &lt;span class=&quot;nobr&quot;&gt;that —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;yeah &lt;span class=&quot;nobr&quot;&gt;cool —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we can have those counters, but we couldn&amp;#39;t use them for anything that deals with logic, only for visual stuff, like representing the number of things etc.&lt;/p&gt;
+&lt;p&gt;Until I looked at this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0
+42
+100
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Those are integers that &lt;abbr&gt;CSS&lt;/abbr&gt; counters are able to add to our &lt;abbr&gt;HTML&lt;/abbr&gt; by using &lt;code&gt;content&lt;/code&gt; property. Do you see it? Those numbers have different lengths. One symbol, two symbols, three symbols… That means that based on different values of a counter, it can actually affect the page&amp;#39;s layout, as the generated content from them would have different widths. And as I played a lot with stuff that depends on the elements&amp;#39; widths in &lt;a href=&quot;http://kizu.ru/en/blog/flexible-overflow/&quot;&gt;my previous article&lt;/a&gt;, when I noticed this I immediately thought of how that aspect of counters can be used!&lt;/p&gt;
+&lt;p&gt;If we would take our example that has a flexible overflow, then make it so it would have some fixed width, then we&amp;#39;d add the counter&amp;#39;s content inside its “jumping down” part… Look:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/counters-and-stones/#Demo_logic-unit-draft&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can see how when you click there, the checked input increments our counter by &lt;code&gt;100000&lt;/code&gt;, and you can see how the flexible overflow makes this counter to jump down (I removed &lt;code&gt;overflow:hidden&lt;/code&gt; from the container for you to see it) and our hidden content appears.&lt;/p&gt;
+&lt;p&gt;That is the basic idea: we use the counter to influence the display of an element, and when we use the input we didn&amp;#39;t use any combinators like &lt;code&gt;+&lt;/code&gt; or &lt;code&gt;~&lt;/code&gt; to achieve it!&lt;/p&gt;
+&lt;p&gt;Now, you can see that it&amp;#39;s kinda strange to increment by &lt;code&gt;100000&lt;/code&gt; just in order for a counter to fit into our box. That is really easy to solve in a way we&amp;#39;d need to change one order of counter to achieve the same:&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/counters-and-stones/#Demo_logic-unit-shorter&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can see how not only it works with just changing from 0 to 10, but it also works with any width.&lt;/p&gt;
+&lt;p&gt;I achieved this by reducing the inner width of the element containing the counter in a way it could fit only one digit:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;box-sizing: border-box;
+padding-left: calc(100% - 1.5ch);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;#39;m using the &lt;code&gt;1.5ch&lt;/code&gt; instead of &lt;code&gt;1ch&lt;/code&gt; there to ensure there won&amp;#39;t be any weird stuff happening on the edge values: 1 digit would always fit &lt;code&gt;1.5ch&lt;/code&gt;, and two digits would always overflow it.&lt;/p&gt;
+&lt;p&gt;You can remember what &lt;code&gt;ch&lt;/code&gt; stands for from &lt;a href=&quot;https://www.w3.org/TR/css-values-3/#ch&quot;&gt;the specs&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘ch unit’&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;equal to the used advance measure of the &amp;quot;0&amp;quot; (&lt;abbr&gt;ZERO&lt;/abbr&gt;, U+0030) glyph found in the font used to render it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And that&amp;#39;s exactly the unit we&amp;#39;d like to use there.&lt;/p&gt;
+&lt;h3 id=&quot;the-code&quot;&gt;The code&lt;/h3&gt;
+&lt;p&gt;Here is the source for this last example. &lt;abbr&gt;HTML&lt;/abbr&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;input class=&amp;quot;logic-unit&amp;quot; type=&amp;quot;checkbox&amp;quot; id=&amp;quot;LogicUnit&amp;quot;
+/&amp;gt;&amp;lt;label for=&amp;quot;LogicUnit&amp;quot;&amp;gt; Click me!&amp;lt;/label&amp;gt;
+&amp;lt;span class=&amp;quot;overflower&amp;quot;&amp;gt;
+  &amp;lt;span class=&amp;quot;overflower-short&amp;quot;&amp;gt;
+    🙀 🙀 🙀
+  &amp;lt;/span&amp;gt;
+  &amp;lt;span class=&amp;quot;overflower-long&amp;quot;&amp;gt;
+  &amp;lt;/span&amp;gt;
+&amp;lt;/span&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And &lt;abbr&gt;CSS&lt;/abbr&gt; (with some unneeded visual stuff omited):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.logic-unit:checked {
+  counter-increment: logic-unit 10;
+}
+
+.overflower {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.overflower-short {
+  overflow: hidden;
+  flex-grow: 1;
+  width: 0;
+}
+
+.overflower-long {
+  flex-basis: 100%;
+  box-sizing: border-box;
+  padding-left: calc(100% - 1.5ch);
+}
+
+.overflower-long:before {
+  content: counter(logic-unit);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;and-or-not-xor&quot;&gt;And, Or, Not, Xor&lt;/h3&gt;
+&lt;p&gt;The best thing with counters: we can use multiple counters at the same time. That means, we can try to implement some logic for multiple counters!&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/counters-and-stones/#Demo_logic-unit-and-or&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We achieve this by setting different starting values for our counters and by allowing a different amount of digits to fit it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For &lt;strong&gt;&lt;abbr&gt;AND&lt;/abbr&gt;/OR&lt;/strong&gt; we need to overflow only on 3 digits. Any new digit would be enough.&lt;/li&gt;
+&lt;li&gt;For &lt;strong&gt;&lt;abbr&gt;AND&lt;/abbr&gt;&lt;/strong&gt; we need to overflow only on 4 digits. We would need to have both counters set.&lt;/li&gt;
+&lt;li&gt;For &lt;strong&gt;&lt;abbr&gt;NOT&lt;/abbr&gt;&lt;/strong&gt; we need to invert the logic and start from the longer number, decreasing it later.&lt;/li&gt;
+&lt;li&gt;Finally, &lt;strong&gt;&lt;abbr&gt;XOR&lt;/abbr&gt;&lt;/strong&gt; is achieved by playing with the numbers a bit so any counter would add a digit, but addition of another one would reduce it back.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of this can be achieved for any number of counters, and the best part is that we don&amp;#39;t need to know how those counters would be set.&lt;/p&gt;
+&lt;h2 id=&quot;board-game&quot;&gt;Board Game&lt;/h2&gt;
+&lt;p&gt;All of this allows us to do a lot of interesting stuff. In our game these basic logic units are used for:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Passing a turn from one player to another.&lt;/li&gt;
+&lt;li&gt;Setting a “checked” state for each stone&amp;#39;s label.&lt;/li&gt;
+&lt;li&gt;Disabling a stone of another color from being placed in the already &lt;span class=&quot;nobr&quot;&gt;filled-in&lt;/span&gt; space.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;passing-a-turn&quot;&gt;Passing a Turn&lt;/h3&gt;
+&lt;p&gt;So, how is the passing of a turn implemented? It&amp;#39;s rather simple: we need to toggle the state of our counter that tells which turn it is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board {
+  counter-reset: White 0 Black 10;
+}
+.board &amp;gt; input:checked {
+  counter-increment: White 10 Black -10;
+}
+.board &amp;gt; input[id^=White]:checked {
+  counter-increment: White -10 Black 10;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we handle this for each color, so it would be easier to use later:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board &amp;gt; section &amp;gt; label &amp;gt; span:after {
+  content: counter(Black);
+}
+
+.board &amp;gt; section &amp;gt; label[for^=White]:after {
+  content: counter(White);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our board has two layers of labels: one set for white stones, and &lt;span class=&quot;nobr&quot;&gt;another —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;for black ones. They&amp;#39;re positioned one over another, so what we would need to do next is to hide each other layer on each other&amp;#39;s turn. And our overflower mechanism allows us to do it. Then we add &lt;code&gt;visibility: hidden&lt;/code&gt; on all items of a layer, and restore it using &lt;code&gt;visibility: visible&lt;/code&gt; only on the part that would be shown on each turn. All of this makes it so only the proper labels are clickable at each moment, and with each click things change.&lt;/p&gt;
+&lt;h3 id=&quot;checked-state&quot;&gt;Checked state&lt;/h3&gt;
+&lt;p&gt;This is a part that could be implemented in a different way, &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#selectors&quot; id=&quot;selectors&quot;&gt;for example&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Or by using 338 selectors for each input-label pair. It would be effective, but not that interesting.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;, by using the &lt;code&gt;:checked&lt;/code&gt; alongside a lot of &lt;code&gt;+&lt;/code&gt; combinators. But there are two problems: it would be harder to handle all the stuff for labels, as they would need to be on the same level, and as I found out, Edge has a limit for a number of combinators that can appear in any given &lt;span class=&quot;nobr&quot;&gt;selector —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;63. Edge won&amp;#39;t like &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#manycombinators&quot; id=&quot;manycombinators&quot;&gt;this selector&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;There are 337 &lt;span class=&quot;nobr&quot;&gt;stars —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;calculated as 13 columns × 13 rows × 2 − 1.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+label
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, in order to be more browser-compatible, and to play more with counters, I&amp;#39;ve implemented the checked state using them. But how? Wouldn&amp;#39;t we need to declare a counter for each input and then somehow connect them to labels?&lt;/p&gt;
+&lt;p&gt;Here is when &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#inline&quot; id=&quot;inline&quot;&gt;inline styles and &lt;abbr&gt;CSS&lt;/abbr&gt; variables&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;I really like how you can use &lt;abbr&gt;CSS&lt;/abbr&gt; variables in inline styles, and I&amp;#39;m working on an article to showcase just that, so keep tuned!&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; comes into play:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;input id=&amp;quot;Black1&amp;quot; type=&amp;quot;radio&amp;quot; style=&amp;quot;--stone:B1;&amp;quot;/&amp;gt;
+
+&amp;lt;label for=&amp;quot;Black1&amp;quot; style=&amp;quot;--stone:B1;&amp;quot;&amp;gt;&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/label&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Those are &lt;abbr&gt;HTML&lt;/abbr&gt; for an input and a corresponding label. Notice the inline style that has the B1 identifier. We now can use it in &lt;abbr&gt;CSS&lt;/abbr&gt;, so, when we check an input, we need to set more counters:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board &amp;gt; input:checked {
+  counter-increment: White 10 Black -10 var(--stone) 10;
+}
+.board &amp;gt; input[id^=White]:checked {
+  counter-increment: White -10 Black 10 var(--stone) 10;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note how we can use a &lt;abbr&gt;CSS&lt;/abbr&gt; variable to pass the identifier of a counter that we want to increment! That works, as well as the following calling of the counter inside our label:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board &amp;gt; section &amp;gt; label &amp;gt; span:after {
+  content: counter(var(--stone));
+}
+.board &amp;gt; section &amp;gt; label:after {
+  content: counter(Black) counter(var(--stone));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we use the logic unit for this counter inside the label (notice how useful is the inheritance of the &lt;abbr&gt;CSS&lt;/abbr&gt; variables: we can catch it on the inner span&amp;#39;s pseudo-element), and also as an &lt;strong&gt;OR&lt;/strong&gt; for our label, so we would see it both on the appropriate player&amp;#39;s turn, and when it is checked.&lt;/p&gt;
+&lt;p&gt;What is also interesting here is that we don&amp;#39;t need to &lt;em&gt;declare&lt;/em&gt; any of those &lt;span class=&quot;nobr&quot;&gt;counters —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;code&gt;counter-increment&lt;/code&gt; is enough and by doing so we can create any number of counters right in your &lt;abbr&gt;HTML&lt;/abbr&gt; (though, I can imagine there can be some limitations).&lt;/p&gt;
+&lt;h3 id=&quot;disabling-other-stones&quot;&gt;Disabling Other Stones&lt;/h3&gt;
+&lt;p&gt;The only thing left now is to disable the stone of another color that is placed at the same spot. With other methods for passing &lt;code&gt;:checked&lt;/code&gt; state we could use other &lt;abbr&gt;CSS&lt;/abbr&gt; properties, like just using &lt;code&gt;z-index&lt;/code&gt; to place our checked label over anything else. But our counter logic allows us to only handle the width, and that is not what we can use for this purpose.&lt;/p&gt;
+&lt;p&gt;But we can use the logical &lt;strong&gt;&lt;abbr&gt;NOT&lt;/abbr&gt;&lt;/strong&gt;! So, each stone would know which other stone to disable:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;input id=&amp;quot;Black1&amp;quot; type=&amp;quot;radio&amp;quot; style=&amp;quot;--stone:B1;--notstone:W1;&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then we&amp;#39;d change the counter logic a bit:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board &amp;gt; input {
+  counter-increment: var(--stone) 10;
+}
+.board &amp;gt; input:checked {
+  counter-increment: White 10 Black -10 var(--stone) 100 var(--notstone) -10;
+}
+.board &amp;gt; input[id^=White]:checked {
+  counter-increment: White -10 Black 10 var(--stone) 100 var(--notstone) -10;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By doing this, when we check one stone, it would make it so another stone won&amp;#39;t achieve its turn state and would always be off!&lt;/p&gt;
+&lt;p&gt;In the final example of the game at the start of this article you can see that we use the turn state in one other place: for displaying which player&amp;#39;s turn is &lt;span class=&quot;nobr&quot;&gt;now —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and that&amp;#39;s a really nice feature of our method: once added, we can then later use those counters as we&amp;#39;d seem fit.&lt;/p&gt;
+&lt;h3 id=&quot;win-conditions-amp-other-stuff&quot;&gt;Win Conditions &amp;amp; Other Stuff&lt;/h3&gt;
+&lt;p&gt;Here are a few other fun things about our board game:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;We can use &lt;code&gt;&amp;lt;button type=&amp;quot;reset&amp;quot;&amp;gt;&lt;/code&gt; to, well, reset the game state when we&amp;#39;d want, as it would reset all our inputs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Our inputs are in fact &lt;code&gt;radio&lt;/code&gt; inputs. And you can notice the absence of the &lt;code&gt;name&lt;/code&gt; 
+attribute: this is important, as we don&amp;#39;t want to have any &lt;em&gt;groups&lt;/em&gt; of inputs, and we don&amp;#39;t want for any checked input to be able to become unchecked on the following click on its label.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We have implemented a win condition: 5 consecutive stones of any color.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This last win condition is a thing that I couldn&amp;#39;t find a counters solution for. Well… there were some ideas, but all of them would have some serious drawbacks. So I&amp;#39;ve used the win condition based on combinators. Here are the selectors that determine which player would win:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.board &amp;gt; :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3))[id^=W]:checked + :checked + :checked + :checked + :checked ~ footer,
+.board &amp;gt; :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
+.board &amp;gt; [id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
+.board &amp;gt; :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer {
+  --endgame: grid;
+  --endmessage: &amp;#39;White won!&amp;#39;;
+}
+
+.board &amp;gt; :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3)):checked + :checked + :checked + :checked + [id^=B]:checked ~ footer,
+.board &amp;gt; :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4)):checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
+.board &amp;gt; :checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
+.board &amp;gt; :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3)):checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer {
+  --endgame: grid;
+  --endmessage: &amp;#39;Black won!&amp;#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;In each selector group the first one is determining the condition for 5 stones in a horizontal row [⋯], the second &lt;span class=&quot;nobr&quot;&gt;one —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;for first diagonal [⋰]︎, &lt;span class=&quot;nobr&quot;&gt;third —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;5 stones in a vertical column [ ⋮ ], and the last &lt;span class=&quot;nobr&quot;&gt;one —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;for another diagonal [︎⋱].&lt;/li&gt;
+&lt;li&gt;Each selector except for the vertical one has an extra condition that prevents the false positives. Those are possible, as our rows are not isolated and the stones go one after another, so five stones in a row could be matched when some of them are in different rows.&lt;/li&gt;
+&lt;li&gt;We can omit most of the extra stuff, but in order to properly determine which stones are selected, we need to either check the color of the first or last one in a selector.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;scaling-and-edge-bugs&quot;&gt;Scaling and Edge bugs&lt;/h3&gt;
+&lt;p&gt;This kind of selectors can be done for a board of any size and for any number of consecutive stones to win, however, there is Edge. It won&amp;#39;t allow us to have selectors with &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#combinators&quot; id=&quot;combinators&quot;&gt;63 or more combinators&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Combined, of any kind, you can see the reduced case in this &lt;a href=&quot;https://codepen.io/kizu/pen/aEydrr&quot;&gt;codepen&lt;/a&gt;&lt;span class=&quot;nobr&quot;&gt; —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the selector which have 62 combinators is applied in Edge, but the one containing one extra is not.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt;. Look at this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;[id^=W]:not(:nth-child(15n-3)):not(:nth-child(15n-2)):not(:nth-child(15n-1)):not(:nth-child(15n)):checked + *+*+*+*+*+*+*+*+*+*+*+*+*+*+* + :checked + *+*+*+*+*+*+*+*+*+*+*+*+*+*+* + :checked + *+*+*+*+*+*+*+*+*+*+*+*+*+*+* + :checked + *+*+*+*+*+*+*+*+*+*+*+*+*+*+* + :checked ~ p
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is a selector for one of the conditions for the 15×15 grid, and that condition won&amp;#39;t work in Edge. So, basically, our board game &lt;em&gt;still&lt;/em&gt; could be played &lt;span class=&quot;nobr&quot;&gt;there —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;the counters conditions would &lt;span class=&quot;nobr&quot;&gt;work —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;but we would need to determine who won manually.&lt;/p&gt;
+&lt;p&gt;This is a case where I&amp;#39;d really like to see a way in &lt;abbr&gt;CSS&lt;/abbr&gt; to say “skip N consecutive elements” or “skin N wrappers”, or nth- variants of the &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;&amp;gt;&lt;/code&gt; combinators. While this would help with an Edge problem (which should be fixed anyway, in my opinion), I often see cases like this or similar, where we need to skip a predetermined number of elements or wrappers, and right now the only tool we have is that clunky rows of stars. And it would be nice to have something better.&lt;/p&gt;
+&lt;h3 id=&quot;generated-boards&quot;&gt;Generated Boards&lt;/h3&gt;
+&lt;p&gt;When I was playing with all of that, I created &lt;a href=&quot;https://codepen.io/kizu/pen/goLLdp?editors=1000&quot;&gt;a Codepen&lt;/a&gt; that generates &lt;abbr&gt;HTML&lt;/abbr&gt; for our boards based on the number of columns and rows, so you can test different layouts and see how, for example, 3x3 or 19x19 would work (or &lt;span class=&quot;nobr&quot;&gt;not —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;in Edge).&lt;/p&gt;
+&lt;p&gt;A few things to note:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The only &lt;abbr&gt;CSS&lt;/abbr&gt; generated (from Pug, so no need in &lt;abbr&gt;CSS&lt;/abbr&gt;-preprocessor) are those win conditions.&lt;/li&gt;
+&lt;li&gt;Everything else is handled by &lt;abbr&gt;CSS&lt;/abbr&gt; variables.&lt;/li&gt;
+&lt;li&gt;I set the number of columns and rows from pug as inline &lt;abbr&gt;CSS&lt;/abbr&gt; variables, so you can just change those two numbers and get the result!&lt;/li&gt;
+&lt;li&gt;Some of the board layouts are untested, for example, the board is drawn using &lt;abbr&gt;CSS&lt;/abbr&gt; gradients, and not everything could work perfectly on each board size.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;It was very fun for me to play with this newfound way to express logic in &lt;abbr&gt;CSS&lt;/abbr&gt;. It is sad that there are a lot of drawbacks with it: that its only appliable for handling stuff that is based on element&amp;#39;s dimensions, and what we can&amp;#39;t use transitions anywhere. But yeah, completing an experiment started in 2013 was really nice.&lt;/p&gt;
+&lt;p&gt;And what would be also very nice is to have something like that in &lt;abbr&gt;CSS&lt;/abbr&gt; natively. Maybe Tab Atkins&amp;#39; ideas about &lt;a href=&quot;https://tabatkins.github.io/specs/css-toggle-states/&quot;&gt;Toggle States&lt;/a&gt; would be there someday? We can only dream. Go and ping your spec authors and browser developers, create your examples of handling logic in &lt;abbr&gt;CSS&lt;/abbr&gt; (I can see how these logic units could be used for form validation, for example), and let us move &lt;abbr&gt;CSS&lt;/abbr&gt; forward, so we would have even more stuff to play with.&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Flexible Overflow</title>
     <link href="http://kizu.ru/en/blog/flexible-overflow/"/>
