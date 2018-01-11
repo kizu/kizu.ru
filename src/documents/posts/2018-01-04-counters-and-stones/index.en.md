@@ -15,7 +15,7 @@ Things you can notice:
 3. When a player places five stones in a row, they win.
 4. Everything there is done using just HTML&CSS, no JS involved.
 
-Until recently, it was known how to achieve most of those points in CSS: you can see it in Una's games, for example. Except for the second point — passing turns ended up to be the hardest thing. When I did my demo for Fronteers, I had to pass turns manually, by doing an extra click after putting a stone. Una handled this by allowing 5 seconds for each player's turn, which is also far from ideal.
+Until recently, it was known how to achieve most of those points in CSS: you can see it in Una's games, for example. [Except](*except "**2018.01.10 update:** [Bence](https://twitter.com/finnhvman) [solved](https://twitter.com/finnhvman/status/916015929565302784) this problem independently in his [“Connect 4” game](https://css-tricks.com/roman-empire-made-pure-css-connect-4-possible/), in a very similar way, but with a few differences.") for the second point — passing turns ended up to be the hardest thing. When I did my demo for Fronteers, I had to pass turns manually, by doing an extra click after putting a stone. Una handled this by allowing 5 seconds for each player's turn, which is also far from ideal.
 
 In this article, I'll show you how this can be handled in a way you'd need to click only once to put a stone to pass a turn.
 
