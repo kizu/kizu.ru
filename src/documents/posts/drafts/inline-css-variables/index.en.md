@@ -6,16 +6,169 @@ You may say: “but aren't inline styles bad?” — and if we would talk about 
 
 ## Specificity
 
-Whenever we use regular CSS properties in our inline styles, the only way to override them is to use `!important` in CSS. And if we'd look at our custom properties — this stays the same. But not exactly. There are two main differences:
+Whenever we use regular CSS properties in our inline styles, the only way to override them is to use `!important` in CSS. And if we'd look at our custom properties — this stays the same. But [not exactly](*skip-specificity "This is rather basic part, if you already know CSS variables pretty well, feel free to [skip to use cases](#use-cases)."). There are two main differences.
 
-1. All the custom properties are inherited to all the children by default. That means that if we're not using the value of this variable right on the element, where it would be defined in inline styles, we could override this variable on children using just anything we'd want, as specificity is not inherited.
+### Inheritance
 
+All the custom properties are inherited to all the children by default. That means that if we're not using the value of this variable right on the element, where it would be defined in inline styles, we could override this variable on children using just anything we'd want, as specificity is not inherited.
 
+[partial:children]
 
+Here is a CSS & HTML for this example:
 
-2. CSS variables are just tools to get some values to our regular CSS properties. And, again, specificity of a variable won't matter for the specificity of the property. If the property itself is not inline, we could override it really easily in CSS.
+    .parent {
+      border: 1px solid;
+      padding: 5px;
+    }
+    .child {
+      padding: 5px;
+      --background: pink;
+      background: var(--background);
+    }
+    {:.language-css}
 
+<!-- -->
 
+    <div class="parent" style='--background: red'>
+      <div class="child">I has pink bg, obviously.</div>
+    </div>
+    {:.language-html}
+
+This is really simple thing, but its sometimes easy to forget that CSS variables are not rendered to anything until you use them.
+
+### Appliance
+
+Another thing not to forget — CSS variables are just tools to get some values to our regular CSS properties. And, again, specificity of a variable won't matter for the specificity of the property. If the property itself is not inline, we could override it really easily in CSS.
+
+[partial:appliance]
+
+Again, very simple HTML & CSS:
+
+    .foo {
+      background: var(--background);
+    }
+    .bar {
+      background: pink;
+    }
+    {:.language-css}
+
+<!-- -->
+
+    <div class="foo bar" style='--background: red'>
+      I has pink bg again, obviously.
+    </div>
+    {:.language-html}
+
+Here the specificity of `background` inside `.foo` isn't attached in any way to the specificity of the variable it uses, so when we'd override it later with another `background`, we won't need to think about specificity.
+
+### Fallbacks
+
+Another method that we could use if we can control the initial usage of variable in CSS not to deal with specificity — variable's fallback values. If we know that some of the variables could become really hard to override, we can create those override hatches manually:
+
+[partial:fallbacks]
+
+Its CSS & HTML:
+
+    .foo {
+      background: var(--background-override, var(--background));
+    }
+    .bar {
+      --background-override: pink;
+    }
+    {:.language-css}
+
+<!-- -->
+
+    <div class="foo bar" style='--background: red'>
+      And once more: pink background.
+    </div>
+    {:.language-html}
+
+If you'd go into dev tools and would disable the `bar` class, you'll see how the `--bg` variable would become used. This is a helpful method which we could use for providing multiple ways of getting our values to CSS properties later.
+
+So, no, we don't have problems with specificity, as we can design our code in a way it won't matter.
+
+## Use Cases
+
+Now that we're a bit more calmer about inline styles and CSS variables inside them, what are exactly use cases? Why would we need inline styles in the first place?
+
+Talking in general, I can think of three main areas for inline CSS variables:
+
+1. API connecting CSS with JS.
+2. Replacement for utility classes.
+3. Providing our CSS with “data” which we could use later.
+
+The first one can be often used when we'd want to move our presentational logic from JS to CSS, Lea Verou [gave a nice talk](https://www.youtube.com/watch?v=UQRSaG1hQ20) [about](*recommended "I recommend you to watch it anyway, as she describes there a lot of really interesting nuances of CSS variables.") CSS variables, mentioning a bunch of use cases for this part in the end of the talk.
+
+While I'll try to cover the other usage examples there, it doesn't mean those could be used only for those — as everything in CSS, you can re-use and re-mix all the methods like you want and invent new ways of doing old stuff, or just the new stuff that becomes available with all the new methods.
+
+## Universal Inline Variables
+
+The first big thing I'll talk about is a general way of using inline styles, but via CSS variables. There are a lot of libraries in CSS and in JS which allow you to have silly “utility” classes like `p10` which would often be just a substitute for inline styles. They are often done in those ways using classnames because of two things: specificity I've talked above, and responsiveness — with classnames its easy to override the values for those classnames.
+
+But with variables, its really easy to create some really flexible ways to have inline utility styles that won't be bad for specificity and could be nicely used with any responsive techniques.
+
+Here is what I mean by a “Universal inline variable”:
+
+    [style*='--bg:'] {
+      background-color: var(--bg);
+    }
+    {:.language-css}
+
+What this does:
+
+1. It allows you to add a background-color in your inline styles.
+2. Does this in a way it would always have the specificity of one class and as if placed where this definition of this variable is placed.
+3. The declaration with the variable would be applied **only** when you set it using inline style, as it would match only the case of its usage there by an appropriate attribute selector.
+4. The above means that there won't be any inheritance, as long as you won't use this variable anywhere else in CSS. In case you'll still want to use it and don't have inheritance, you can use this trick: `* { --bg: initial }`.
+
+If we'd have this snippet for our `--bg` variable, and then we'll add the following CSS and HTML:
+
+[partial:universal1]
+
+    .baz {
+      background: yellow;
+    }
+    {:.language-css}
+
+<!-- -->
+
+    <ul>
+      <li>No background there.</li>
+      <li style='--bg: pink'>This one is pink.</li>
+      <li style='--bg: pink' class='baz'>But this one is yellow!</li>
+    </ul>
+    {:.language-html}
+
+You can see how by default no background is applied, but it can be set by using a `--bg` variable, which would still be overridden by a single classname (if it would be placed after the variable definition in CSS).
+
+On its own this example is not very interesting, but things change when we'd want to add some other styles, for example, we could want all those list items to become lime on hover by default, and give a way to override it by using inline variables:
+
+[partial:universal2]
+
+    [style*='--bg--hover:']:hover:hover {
+      background-color: var(--bg--hover);
+    }
+
+    .hovering:hover {
+      background: lime;
+    }
+    {:.language-css}
+
+<!-- -->
+
+    <ul>
+      <li class='hovering'>Hover me to see the color</li>
+      <li class='hovering baz' style='--bg: pink'>Now, hover me, still same color on hover.</li>
+      <li class='hovering' style='--bg: pink; --bg--hover: aqua'>And I'll be aqua on hover!</li>
+    </ul>
+    {:.language-html}
+
+Things to notice there:
+
+1. Yes, this way we can add hover styles in inline styles! Any other dynamic styles are possible this way: we can just use a variable in the conditions we need.
+2. The specificity of the `.hovering:hover` is always more than the specificity of the universal variable for static bg, so it would always override it.
+3. We've increased the specificity of the universal variable for hover there to make it more specific than the defined selector, but even in that case we could always introduce a new more specific selector in order to override it, and still don't use `!important`.
 
 
 - - -
@@ -56,68 +209,6 @@ I won't talk much about how great CSS grids themselves are: [Rachel Andrew](http
 But there is one thing that can be seen in most examples: we can apply most of the things from the grids in really compact ways, achieving awesome results using just really simple declarations. Where in the past you would need a lot of complex CSS for a grid layout and placement for each element, with grids you now need just one or two very simple declarations. And sometimes those short declarations look really similar to the syntax a lot of grid systems tried to achieve in their class names.
 
 Of course, it wouldn't make sense to create class names like `grid--span-2`. But then, what if you'd want to apply things like this through inline CSS at HTML level? This way it would be really easy to prototype your layouts and/or provide a rather readable way to understand and maintain your layout.
-
-We all know all the problems that come with inline styles: the specificity issue, the absence of media queries… But what if we could somehow solve those issues?
-
-## Inline CSS Variables
-
-Also known as “custom properties”, CSS variables are also really, really powerful. They're not the same thing as variables in preprocessors, as they're dynamic and most of the usual rules that apply for CSS properties also apply to them. One of those rules: we can [use](*use "You can skip to [the final working snippet](#universal-inline-variables) if you don't want to read how I get there.") CSS variables inside HTML's `style` attribute.
-
-To better understand why we are talking about CSS variables look at this:
-
-    --background: red;
-    background: var(--background);
-    {:.language-css}
-
-In this snippet we're using the custom `--background` property as a _proxy_ for our main property. In usual CSS that won't make much sense, but what if we'd use `--background` in inline styles?
-
-    <h1 style="--background: red;">Hello</h1>
-    {:.language-html}
-
-<!-- -->
-
-    h1 { background: var(--background); }
-    {:.language-css}
-
-Now, think about this: what if we'd want to add some different styles for our header in CSS?
-
-    h1:hover { background: lime; }
-    {:.language-css}
-
-Aha! There it is: if we did use the usual property inside the `style` attribute, it would always be more specific than anything that we'd write in our CSS unless we would add `!important` due to how cascade works. But when we use a CSS variable, only the variable itself would be that high in the cascade! While the `background` property would have a specificity of just one HTML element and whenever we'd write something that would override it, this property would lose the connection to the variable. That makes our life so much easier, as we're freeing the specificity and could work with our CSS without bloating it with unnecessary overrides.
-
-But that's not the only thing that we're getting from variables, look at this:
-
-    h1:hover { background: var(--background--hover); }
-
-    @media (max-width: 640px) {
-      h1 { background: var(--background--compact); }
-    }
-    {:.language-css}
-
-Guess what would happen when we would declare `--background-hover` and/or `--background--compact` as an inline style?
-
-We would get a way to set up the styles to the states right in our HTML.
-
-Here is a full example, which also uses the fallbacks for our variables as unset variable would make the property to render with an initial value:
-
-    h1 { background: var(--background); }
-
-    h1:hover {
-      background: var(--background--hover, var(--background));
-    }
-
-    @media (max-width: 640px) {
-      h1 {
-        background:
-          var(--background--compact, var(--background));
-      }
-    }
-    {:.language-css}
-
-**TODO: don't like the flow there ↓**
-
-While there are not [a lot of cases](*inline-cases "We can use this method as a way to provide those with an access for our HTML as a kind of API for the things that are not possible inside plain style attribute. Things like CMS, email clients, or generated HTML could really welcome such things.") where things like that can be used, grids are one of those.
 
 ### Universal Inline Variables
 
@@ -218,7 +309,7 @@ If we'd want, we could easily redefine any of our styles in any conditions as we
     }
     {:.language-css}
 
-This way we could use `--columns-compact` as an inline variable that would set the columns count only at
+This way we could use `--columns-compact` as an inline variable that would set the columns count only at 
 
 ## The End
 

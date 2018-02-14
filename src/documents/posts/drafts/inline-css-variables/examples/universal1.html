@@ -1,0 +1,16 @@
+<style>
+    [style*='--bg:'] {
+      background-color: var(--bg);
+    }
+
+    .baz {
+      background: yellow;
+    }
+
+</style>
+
+<ul>
+  <li>No background there.</li>
+  <li style='--bg: pink'>This one is pink.</li>
+  <li style='--bg: pink' class='baz'>But this one is yellow!</li>
+</ul>

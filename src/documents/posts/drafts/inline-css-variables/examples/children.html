@@ -1,0 +1,15 @@
+<style>
+  .parent {
+    border: 1px solid;
+    padding: 5px;
+  }
+  .child {
+    padding: 5px;
+    --background: pink;
+    background: var(--background);
+  }
+</style>
+
+<div class="parent" style='--background: red'>
+  <div class="child">I has pink bg, obviously.</div>
+</div>

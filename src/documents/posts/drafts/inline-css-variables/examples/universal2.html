@@ -1,0 +1,16 @@
+<style>
+    [style*='--bg--hover:']:hover:hover {
+      background-color: var(--bg--hover);
+    }
+
+    .hovering:hover {
+      background: lime;
+    }
+
+</style>
+
+<ul>
+  <li class='hovering'>Hover me to see the color</li>
+  <li class='hovering baz' style='--bg: pink'>Now, hover me, still same color on hover.</li>
+  <li class='hovering' style='--bg: pink; --bg--hover: aqua'>And I'll be aqua on hover!</li>
+</ul>
