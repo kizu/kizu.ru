@@ -25,7 +25,7 @@ The only thing that we need to do in HTML (we use a regular HTML table for this,
     <tr
       class="table-row"
       style="
-        --order-by-published: 20161221;
+        --order-by-published: 161221;
         --order-by-views: 2431;
       ">
       <th class="table-cell">
@@ -36,7 +36,7 @@ The only thing that we need to do in HTML (we use a regular HTML table for this,
     </tr>
     {:.language-html}
 
-You can see that the values for [those variables](*noname "You can notice that we don't have a variable to sort by name — we rely on DOM order for this.") there are just the date in `YYYYMMDD` format (so it becomes an integer) and the value for view.
+You can see that the values for [those variables](*noname "You can notice that we don't have a variable to sort by name — we rely on DOM order for this.") there are just the date in `YYMMDD` [format](*edgebug "Not with YYYY, as in that case Edge would have a bug there, so it seems that we shouldn't use numbers that big for `order`.") (so it becomes an integer) and the value for view.
 
 For CSS, if I'll omit all the stuff that handles its presentation and UI for the table, the code behind the sorting itself becomes really small:
 
