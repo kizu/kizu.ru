@@ -29,7 +29,7 @@
 &lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;tr
   class=&amp;quot;table-row&amp;quot;
   style=&amp;quot;
-    --order-by-published: 20161221;
+    --order-by-published: 161221;
     --order-by-views: 2431;
   &amp;quot;&amp;gt;
   &amp;lt;th class=&amp;quot;table-cell&amp;quot;&amp;gt;
@@ -39,7 +39,7 @@
   &amp;lt;td class=&amp;quot;table-cell&amp;quot;&amp;gt;2 431&amp;lt;/td&amp;gt;
 &amp;lt;/tr&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can see that the values for &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#noname&quot; id=&quot;noname&quot;&gt;those variables&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can notice that we don&amp;#39;t have a variable to sort by &lt;span class=&quot;nobr&quot;&gt;name —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we rely on &lt;abbr&gt;DOM&lt;/abbr&gt; order for this.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; there are just the date in &lt;code&gt;YYYYMMDD&lt;/code&gt; format (so it becomes an integer) and the value for view.&lt;/p&gt;
+&lt;p&gt;You can see that the values for &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#noname&quot; id=&quot;noname&quot;&gt;those variables&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can notice that we don&amp;#39;t have a variable to sort by &lt;span class=&quot;nobr&quot;&gt;name —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we rely on &lt;abbr&gt;DOM&lt;/abbr&gt; order for this.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; there are just the date in &lt;code&gt;YYMMDD&lt;/code&gt; &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#edgebug&quot; id=&quot;edgebug&quot;&gt;format&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;Not with &lt;abbr&gt;YYYY&lt;/abbr&gt;, as in that case Edge would have a bug there, so it seems that we shouldn&amp;#39;t use numbers that big for &lt;code&gt;order&lt;/code&gt;.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; (so it becomes an integer) and the value for view.&lt;/p&gt;
 &lt;p&gt;For &lt;abbr&gt;CSS&lt;/abbr&gt;, if I&amp;#39;ll omit all the stuff that handles its presentation and UI for the table, the code behind the sorting itself becomes really small:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.table-body {
   display: flex;
