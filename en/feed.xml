@@ -3,12 +3,99 @@
   <title>kizu.ru</title>
   <link href="http://kizu.ru/en/feed.xml" rel="self"/>
   <link href="http://kizu.ru/en/"/>
-  <updated>2018-01-04T00:00:00+03:00</updated>
+  <updated>2018-02-15T00:00:00+03:00</updated>
   <id>http://kizu.ru/en/</id>
   <author>
     <name>Roman Komarov</name>
     <email>kizmarh@ya.ru</email>
   </author>
+  <entry>
+    <title>Variable Order</title>
+    <link href="http://kizu.ru/en/blog/variable-order/"/>
+    <updated>2018-02-15T00:00:00+03:00</updated>
+    <id>http://kizu.ru/en/blog/variable-order</id>
+    <content type="html">&lt;h1 id=&quot;variable-order&quot;&gt;Variable Order&lt;/h1&gt;
+&lt;p&gt;Look at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).&lt;/p&gt;
+&lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/variable-order/#Demo_table&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is done just with &lt;abbr&gt;HTML&lt;/abbr&gt; and &lt;abbr&gt;CSS&lt;/abbr&gt;, no JavaScript involved.&lt;/p&gt;
+&lt;p&gt;But how does this work?&lt;/p&gt;
+&lt;h2 id=&quot;inline-css-variables&quot;&gt;Inline &lt;abbr&gt;CSS&lt;/abbr&gt; Variables&lt;/h2&gt;
+&lt;p&gt;I was researching &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#learn-more&quot; id=&quot;learn-more&quot;&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; variables&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;If you&amp;#39;d want to learn more about &lt;abbr&gt;CSS&lt;/abbr&gt; variables in general, I highly recommend you to watch &lt;a href=&quot;https://www.youtube.com/watch?v=UQRSaG1hQ20&quot;&gt;Lea Verou&amp;#39;s talk about them&lt;/a&gt;, she articulates really nicely a lot of nuances of their usage.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; rather actively for the last 3 months, and initially I wanted to write a long article about just one &lt;span class=&quot;nobr&quot;&gt;aspect —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;&lt;abbr&gt;CSS&lt;/abbr&gt; variables inside inline styles. But there were just so many things to write about, and I found a lot of general use-cases of variables (and not just for inline ones), that I decided to split all my research into smaller articles.&lt;/p&gt;
+&lt;p&gt;This is an article about one of the examples from my research of &lt;abbr&gt;CSS&lt;/abbr&gt; variables in inline styles, and as you could see from the example at the &lt;span class=&quot;nobr&quot;&gt;start —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;it is about &lt;em&gt;sorting&lt;/em&gt; stuff.&lt;/p&gt;
+&lt;p&gt;The main feature that makes that possible is that we can use &lt;abbr&gt;CSS&lt;/abbr&gt; variables right inside the &lt;code&gt;style&lt;/code&gt; attribute in &lt;abbr&gt;HTML&lt;/abbr&gt;. And while it could be possible to define all the values for appropriate class names or nth-child-found elements, there is no need to do this when we can just add them to the corresponding &lt;abbr&gt;HTML&lt;/abbr&gt; tags.&lt;/p&gt;
+&lt;h2 id=&quot;the-sorting&quot;&gt;The Sorting&lt;/h2&gt;
+&lt;p&gt;The code for our implementation of table sorting is not really complicated.&lt;/p&gt;
+&lt;p&gt;The only thing that we need to do in &lt;abbr&gt;HTML&lt;/abbr&gt; (we use a regular &lt;abbr&gt;HTML&lt;/abbr&gt; table for this, which later &lt;span class=&quot;nobr&quot;&gt;re-style&lt;/span&gt; with flex and grid) is an inline style for its rows which we sort:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;tr
+  class=&amp;quot;table-row&amp;quot;
+  style=&amp;quot;
+    --order-by-published: 20161221;
+    --order-by-views: 2431;
+  &amp;quot;&amp;gt;
+  &amp;lt;th class=&amp;quot;table-cell&amp;quot;&amp;gt;
+    &amp;lt;a href=&amp;quot;http://kizu.ru/en/fun/controlling-the-specificity/&amp;quot;&amp;gt;Controlling the Specificity&amp;lt;/a&amp;gt;
+  &amp;lt;/th&amp;gt;
+  &amp;lt;td class=&amp;quot;table-cell&amp;quot;&amp;gt;2016-12-21&amp;lt;/td&amp;gt;
+  &amp;lt;td class=&amp;quot;table-cell&amp;quot;&amp;gt;2 431&amp;lt;/td&amp;gt;
+&amp;lt;/tr&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see that the values for &lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#noname&quot; id=&quot;noname&quot;&gt;those variables&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;You can notice that we don&amp;#39;t have a variable to sort by &lt;span class=&quot;nobr&quot;&gt;name —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;we rely on &lt;abbr&gt;DOM&lt;/abbr&gt; order for this.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; there are just the date in &lt;code&gt;YYYYMMDD&lt;/code&gt; format (so it becomes an integer) and the value for view.&lt;/p&gt;
+&lt;p&gt;For &lt;abbr&gt;CSS&lt;/abbr&gt;, if I&amp;#39;ll omit all the stuff that handles its presentation and UI for the table, the code behind the sorting itself becomes really small:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;.table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  order: calc(var(--order) * var(--sort-order, -1));
+}
+
+#sort-by-published:checked ~ .table &amp;gt; .table-body &amp;gt; .table-row {
+  --order: var(--order-by-published);
+}
+
+#sort-by-views:checked ~ .table &amp;gt; .table-body &amp;gt; .table-row {
+  --order: var(--order-by-views);
+}
+
+#sort-ascending:checked + .table {
+  --sort-order: 1;
+}
+
+#sort-by-name:checked ~ #sort-ascending:checked + .table &amp;gt; .table-body {
+  flex-direction: column-reverse;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This code covers sorting by three possible columns, and a global modifier to inverse the direction of the sorting. So, what happens there? &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The obvious key property for our solution is an &lt;code&gt;order&lt;/code&gt;. When used inside flex or grid content, it defines the placement of an element in the flow.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;For most of our columns, we would use a special variable that defines the direction of sorting: ascending or descending, this variable is &lt;code&gt;--sort-order&lt;/code&gt; with a default value of &lt;code&gt;-1&lt;/code&gt;, which makes elements with the bigger value to appear earlier in the flow than those with lower values. And when needed we can set it to &lt;code&gt;1&lt;/code&gt; to inverse the order.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then, we would define the &lt;code&gt;order&lt;/code&gt; property using a calculation, in which we would use another variable alongside our direction: &lt;code&gt;calc(var(--order) * var(--sort-order, -1))&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And by default, this variable is not set, so the value of this calc would fallback to &lt;code&gt;initial&lt;/code&gt;. And this would make the content to appear in the order it is present in &lt;abbr&gt;HTML&lt;/abbr&gt;: this way we don&amp;#39;t need to introduce another variable and can use the &lt;abbr&gt;DOM&lt;/abbr&gt; order for this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then, when needed (in our &lt;span class=&quot;nobr&quot;&gt;case —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;when we toggle an appropriate radio button, but in reality this could be done by toggling class names or setting the variable by any other condition), we set the &lt;code&gt;--order&lt;/code&gt; variable used above to the one we want to use right &lt;span class=&quot;nobr&quot;&gt;now —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;so when we need to sort by one field, we use the variable for it, and for another field we use the second variable. This way if we&amp;#39;d need to add a fourth field which we could use for sorting, we would need to introduce just one new &lt;abbr&gt;CSS&lt;/abbr&gt; rule.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And now as we say something like “use variable &lt;code&gt;--order-by-published&lt;/code&gt; as a value for &lt;code&gt;--order&lt;/code&gt; for each row”, the value would come from the inline style that we defined in &lt;abbr&gt;HTML&lt;/abbr&gt; and all the elements would be automatically sorted accordingly. Yay!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And lastly, we need to handle an inverted direction case for our default &lt;abbr&gt;DOM&lt;/abbr&gt; order. As we don&amp;#39;t have variables for it which we could invert inside &lt;code&gt;calc&lt;/code&gt;, we need to do something &lt;span class=&quot;nobr&quot;&gt;else —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;and I&amp;#39;m doing this by changing the &lt;code&gt;flex-direction&lt;/code&gt; property to &lt;code&gt;column-reverse&lt;/code&gt;. This works only for flex, and if we would have a grid, as far as I know, we would need to use a variable for our default sorting as well. But here we can cheat a bit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;caveats&quot;&gt;Caveats&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;This solution works the best for anything that can be represented as an integer. In all the other cases we would need to first, on the &lt;abbr&gt;HTML&lt;/abbr&gt; generation step, to somehow represent our value in integer. For some values its possible to do, for &lt;span class=&quot;nobr&quot;&gt;others —&lt;/span&gt;&lt;span class=&quot;thinsp&quot;&gt; &lt;/span&gt;much harder. It is also possible to pre-sort our data per each field and instead of values, use their indexes for each field. But then the sorting itself still could be done just by very simple &lt;abbr&gt;CSS&lt;/abbr&gt;. And don&amp;#39;t forget that we always have the default &lt;abbr&gt;DOM&lt;/abbr&gt; order for non-integer values: in my table, it is used for sorting the names in alphabetical order.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;We can&amp;#39;t animate this sorting, as it uses the default layout mechanism and as long as the &lt;code&gt;order&lt;/code&gt; is not animatable in &lt;abbr&gt;CSS&lt;/abbr&gt; (or, more precisely, is animated in a discrete way), we can&amp;#39;t do much. The ideal would be if the &lt;code&gt;order&lt;/code&gt; could be animated by using the transition from its starting dimensions to its final ones, but we don&amp;#39;t even have transitions for &lt;code&gt;auto&lt;/code&gt; width &amp;amp; height, so we can&amp;#39;t expect the same for &lt;code&gt;order&lt;/code&gt; anytime soon (or maybe ever).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I think this example shows how powerful &lt;abbr&gt;CSS&lt;/abbr&gt; variables can be when used as a part of data: we can pre-fill some of the values which we won&amp;#39;t use right away as some variables, and then later use them when needed. This can be used to sort lists, tables and any other stuff, and even to sort by multiple fields (though this would require a bit more code and couldn&amp;#39;t be applied in &lt;em&gt;every&lt;/em&gt; case, I recommend you to try and implement this yourself).&lt;/p&gt;
+&lt;p&gt;This was the first article from my recent research of &lt;abbr&gt;CSS&lt;/abbr&gt; variables, stay tuned and try to sort your stuff using just &lt;abbr&gt;CSS&lt;/abbr&gt; and &lt;abbr&gt;HTML&lt;/abbr&gt; in the meantime!&lt;/p&gt;
+
+    </content>
+  </entry>
   <entry>
     <title>Counters and Stones</title>
     <link href="http://kizu.ru/en/blog/counters-and-stones/"/>

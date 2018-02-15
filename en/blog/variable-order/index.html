@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="Page Page_post Page_en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Variable Order</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizuruen">
+    <link rel="stylesheet" href="/s/style.css">
+    <link rel="preload" href="/s/extras2.css" as="style" onload="this.rel='stylesheet'">
+  </head>
+  <body class="Page-Body">
+    <header class="Page-Header">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <h1 class="Page-Title"><a href="/en/" class="Page-Title-Link">Roman Komarov</a>
+          </h1>
+          <ul class="Page-Languages">
+            <li data-short="en" class="Page-Language is-current">in English
+            </li>
+            <li class="Page-Language"><a data-short="ru" title="Для этой статьи пока нет перевода, почему — можете узнать перейдя по этой ссылке" href="/blog/just-en/" class="Page-Language-Link">по-русски?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <article role="main" class="Page-Content">
+      <div class="LiquidLayout">
+        <div class="Main LiquidLayout-Content">
+          <header><h1 class="Heading" id="variable-order"><a class="Anchor" aria-hidden="true" href="#variable-order"></a><span class="ss01 hang-m">V</span>ariable Order</h1>
+          </header>
+<p>Look at this table and note that you can click on its head­ers to sort the table by cor­re­spond­ing columns (and click again to change the as­cend­ing/​de­scend­ing or­der).</p>
+<div class="Demo Demo_injected Figure" id="Demo_table">
+
+<style>
+
+/* First, stuff for the sorting itself */
+
+.table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  order: calc(var(--order) * var(--sort-order, -1));
+}
+
+#sort-by-published:checked ~ .table > .table-body > .table-row {
+  --order: var(--order-by-published);
+}
+
+#sort-by-views:checked ~ .table > .table-body > .table-row {
+  --order: var(--order-by-views);
+}
+
+#sort-ascending:checked + .table {
+  --sort-order: 1;
+}
+
+#sort-by-name:checked ~ #sort-ascending:checked + .table > .table-body {
+  flex-direction: column-reverse;
+}
+
+/* Then, everything else: table display, input controls etc. */
+
+.table-wrapper > input {
+  position: fixed;
+  left: 0;
+  right: 0;
+  clip: rect(1px,1px,1px,1px);
+  visibility: hidden;
+}
+
+.table,
+.table-caption,
+.table-head {
+  display: block;
+  margin: 0;
+}
+
+.table-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 7em 4.3em;
+}
+
+.table-cell {
+  text-align: right;
+  padding: 0.25em 0.5em;
+  white-space: nowrap;
+}
+
+.table-cell:first-child {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-orderer {
+  display: none;
+}
+
+.table-head .table-cell {
+  position: relative;
+  display: flex;
+  user-select: none;
+}
+
+.table-head .table-cell:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.table-head .table-cell:not(:first-child) {
+  flex-direction: row-reverse;
+}
+
+.table-sorter:before,
+.table-orderer:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+#sort-by-name:checked ~ .table .table-sorter[for=sort-by-name] ~ .table-orderer,
+#sort-by-published:checked ~ .table .table-sorter[for=sort-by-published] ~ .table-orderer,
+#sort-by-views:checked ~ .table .table-sorter[for=sort-by-views] ~ .table-orderer {
+  display: inline;
+}
+
+#sort-ascending:checked + .table .table-orderer[for=sort-ascending],
+#sort-ascending:not(:checked) + .table .table-orderer[for=sort-descending] {
+  display: none !important;
+}
+
+</style>
+
+
+<div class="table-wrapper">
+  <input type="radio" name="sort" id="sort-by-name" />
+  <input type="radio" name="sort" id="sort-by-published" checked="checked" />
+  <input type="radio" name="sort" id="sort-by-views" />
+  <input type="radio" name="sort-order" id="sort-descending" checked="checked" />
+  <input type="radio" name="sort-order" id="sort-ascending" />
+  <table class="table">
+    <thead class="table-head">
+      <tr class="table-row" class="table-row">
+        <th class="table-cell">
+          <label class="table-sorter" for="sort-by-name">Name</label>
+          <label class="table-orderer" for="sort-ascending">↓</label>
+          <label class="table-orderer" for="sort-descending">↑</label>
+        </th>
+        <th class="table-cell">
+          <label class="table-sorter" for="sort-by-published">Published</label>
+          <label class="table-orderer" for="sort-ascending">↓</label>
+          <label class="table-orderer" for="sort-descending">↑</label>
+        </th>
+        <th class="table-cell">
+          <label class="table-sorter" for="sort-by-views">Views</label>
+          <label class="table-orderer" for="sort-ascending">↓</label>
+          <label class="table-orderer" for="sort-descending">↑</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr class="table-row" style="--order-by-published: 20161021; --order-by-views: 10368;">
+        <th class="table-cell"><a href="http://kizu.ru/en/fun/conditions-for-css-variables/">Conditions for CSS Variables</a></th>
+        <td class="table-cell">2016-10-21</td>
+        <td class="table-cell">10 368</td>
+      </tr>
+      <tr class="table-row" style="--order-by-published: 20161221; --order-by-views: 2431;">
+        <th class="table-cell"><a href="http://kizu.ru/en/fun/controlling-the-specificity/">Controlling the Specificity</a></th>
+        <td class="table-cell">2016-12-21</td>
+        <td class="table-cell">2 431</td>
+      </tr>
+      <tr class="table-row" style="--order-by-published: 20180104; --order-by-views: 4463;">
+        <th class="table-cell"><a href="http://kizu.ru/en/blog/counters-and-stones/">Counters and Stones</a></th>
+        <td class="table-cell">2018-01-04</td>
+        <td class="table-cell">4 463</td>
+      </tr>
+      <tr class="table-row" style="--order-by-published: 20171128; --order-by-views: 6585;">
+        <th class="table-cell"><a href="http://kizu.ru/en/blog/flexible-overflow/">Flexible Overflow</a></th>
+        <td class="table-cell">2017-11-28</td>
+        <td class="table-cell">6 585</td>
+      </tr>
+      <tr class="table-row" style="--order-by-published: 20170627; --order-by-views: 4597;">
+        <th class="table-cell"><a href="http://kizu.ru/en/blog/keyboard-only-focus/">Keyboard-Only Focus</a></th>
+        <td class="table-cell">2017-06-27</td>
+        <td class="table-cell">4 597</td>
+      </tr>
+      <tr class="table-row" style="--order-by-published: 20170531; --order-by-views: 2829;">
+        <th class="table-cell"><a href="http://kizu.ru/en/blog/label-to-input/">Label-to-Input States</a></th>
+        <td class="table-cell">2017-05-31</td>
+        <td class="table-cell">2 829</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<p>This is done just with <abbr>HTML</abbr> and <abbr>CSS</abbr>, no JavaScript in­volved.</p>
+<p>But how does this work?</p>
+<h2 class="Heading" id="inline-css-variables"><a class="Anchor" aria-hidden="true" href="#inline-css-variables"></a><span class="ss01 hang-m">I</span>nline <abbr>CSS</abbr> Variables</h2>
+<p>I was re­search­ing <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#learn-more" id="learn-more"><abbr>CSS</abbr> vari­ables</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>If you&#39;d want to learn more about <abbr>CSS</abbr> vari­ables in gen­eral, I highly rec­om­mend you to watch <a href="https://www.youtube.com/watch?v=UQRSaG1hQ20">Lea Verou&#39;s talk about them</a>, she ar­tic­u­lates re­ally nicely a lot of nu­ances of their us­age.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> rather ac­tively for the last 3 months, and ini­tially I wanted to write a long ar­ti­cle about just one as­<span class="nobr">pect —</span><span class="thinsp"> </span><abbr>CSS</abbr> vari­ables in­side in­line styles. But there were just so many things to write about, and I found a lot of gen­eral use-cases of vari­ables (and not just for in­line ones), that I de­cided to split all my re­search into smaller ar­ticles.</p>
+<p>This is an ar­ti­cle about one of the ex­am­ples from my re­search of <abbr>CSS</abbr> vari­ables in in­line styles, and as you could see from the ex­am­ple at the <span class="nobr">start —</span><span class="thinsp"> </span>it is about <em>sort­ing</em> stuff.</p>
+<p>The main fea­ture that makes that pos­si­ble is that we can use <abbr>CSS</abbr> vari­ables right in­side the <code>style</code> at­tribute in <abbr>HTML</abbr>. And while it could be pos­si­ble to de­fine all the val­ues for ap­pro­pri­ate class names or nth-child-found el­e­ments, there is no need to do this when we can just add them to the cor­re­spond­ing <abbr>HTML</abbr> tags.</p>
+<h2 class="Heading" id="the-sorting"><a class="Anchor" aria-hidden="true" href="#the-sorting"></a><span class="ss01 hang-m">T</span>he Sorting</h2>
+<p>The code for our im­ple­men­ta­tion of table sort­ing is not re­ally com­pli­cated.</p>
+<p>The only thing that we need to do in <abbr>HTML</abbr> (we use a reg­u­lar <abbr>HTML</abbr> table for this, which later <span class="nobr">re-style</span> with flex and grid) is an in­line style for its rows which we sort:</p>
+<pre><code class="language-html">&lt;tr
+  class=&quot;table-row&quot;
+  style=&quot;
+    --order-by-published: 20161221;
+    --order-by-views: 2431;
+  &quot;&gt;
+  &lt;th class=&quot;table-cell&quot;&gt;
+    &lt;a href=&quot;http://kizu.ru/en/fun/controlling-the-specificity/&quot;&gt;Controlling the Specificity&lt;/a&gt;
+  &lt;/th&gt;
+  &lt;td class=&quot;table-cell&quot;&gt;2016-12-21&lt;/td&gt;
+  &lt;td class=&quot;table-cell&quot;&gt;2 431&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+<p>You can see that the val­ues for <span class="Sidenote-Wrapper"><a class="Sidenote-Context" href="#noname" id="noname">those vari­ables</a><span class="Sidenote" role="note"><span class="Sidenote-Misc"> (</span>You can no­tice that we don&#39;t have a vari­able to sort by <span class="nobr">name —</span><span class="thinsp"> </span>we rely on <abbr>DOM</abbr> or­der for this.<span class="Sidenote-Misc">)</span></span><a class="Sidenote-Close" href="#x" aria-hidden="true" tabindex="-1"></a></span> there are just the date in <code>YYYYM­MDD</code> for­mat (so it be­comes an in­te­ger) and the value for view.</p>
+<p>For <abbr>CSS</abbr>, if I&#39;ll omit all the stuff that han­dles its pre­sen­ta­tion and UI for the table, the code be­hind the sort­ing it­self be­comes re­ally small:</p>
+<pre><code class="language-css">.table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-row {
+  order: calc(var(--order) * var(--sort-order, -1));
+}
+
+#sort-by-published:checked ~ .table &gt; .table-body &gt; .table-row {
+  --order: var(--order-by-published);
+}
+
+#sort-by-views:checked ~ .table &gt; .table-body &gt; .table-row {
+  --order: var(--order-by-views);
+}
+
+#sort-ascending:checked + .table {
+  --sort-order: 1;
+}
+
+#sort-by-name:checked ~ #sort-ascending:checked + .table &gt; .table-body {
+  flex-direction: column-reverse;
+}
+</code></pre>
+<p>This code cov­ers sort­ing by three pos­si­ble columns, and a global mod­i­fier to in­verse the di­rec­tion of the sort­ing. So, what hap­pens there? </p>
+<ol>
+<li><p>The ob­vi­ous key prop­erty for our so­lu­tion is an <code>or­der</code>. When used in­side flex or grid con­tent, it de­fines the place­ment of an el­e­ment in the flow.</p>
+</li>
+<li><p>For most of our columns, we would use a spe­cial vari­able that de­fines the di­rec­tion of sort­ing: as­cend­ing or de­scend­ing, this vari­able is <code>--sort-or­der</code> with a de­fault value of <code>-1</code>, which makes el­e­ments with the big­ger value to ap­pear ear­lier in the flow than those with lower val­ues. And when needed we can set it to <code>1</code> to in­verse the order.</p>
+</li>
+<li><p>Then, we would de­fine the <code>or­der</code> prop­erty us­ing a cal­cu­la­tion, in which we would use an­other vari­able along­side our di­rec­tion: <code>calc(var(--or­der) * var(--sort-or­der, -1))</code>.</p>
+</li>
+<li><p>And by de­fault, this vari­able is not set, so the value of this calc would fall­back to <code>ini­tial</code>. And this would make the con­tent to ap­pear in the or­der it is pre­sent in <abbr>HTML</abbr>: this way we don&#39;t need to in­tro­duce an­other vari­able and can use the <abbr>DOM</abbr> or­der for this.</p>
+</li>
+<li><p>Then, when needed (in our <span class="nobr">case —</span><span class="thinsp"> </span>when we tog­gle an ap­pro­pri­ate ra­dio but­ton, but in re­al­ity this could be done by tog­gling class names or set­ting the vari­able by any other con­di­tion), we set the <code>--or­der</code> vari­able used above to the one we want to use right <span class="nobr">now —</span><span class="thinsp"> </span>so when we need to sort by one field, we use the vari­able for it, and for an­other field we use the sec­ond vari­able. This way if we&#39;d need to add a fourth field which we could use for sort­ing, we would need to in­tro­duce just one new <abbr>CSS</abbr> rule.</p>
+</li>
+<li><p>And now as we say some­thing like “use vari­able <code>--or­der-by-pub­lished</code> as a value for <code>--or­der</code> for each row”, the value would come from the in­line style that we de­fined in <abbr>HTML</abbr> and all the el­e­ments would be au­to­mat­i­cally sorted ac­cord­ingly. Yay!</p>
+</li>
+<li><p>And lastly, we need to han­dle an in­verted di­rec­tion case for our de­fault <abbr>DOM</abbr> or­der. As we don&#39;t have vari­ables for it which we could in­vert in­side <code>calc</code>, we need to do some­thing <span class="nobr">else —</span><span class="thinsp"> </span>and I&#39;m do­ing this by chang­ing the <code>flex-di­rec­tion</code> prop­erty to <code>col­umn-re­verse</code>. This works only for flex, and if we would have a grid, as far as I know, we would need to use a vari­able for our de­fault sort­ing as well. But here we can cheat a bit.</p>
+</li>
+</ol>
+<h2 class="Heading" id="caveats"><a class="Anchor" aria-hidden="true" href="#caveats"></a><span class="ss02 hang-xs">C</span>aveats</h2>
+<ul>
+<li><p>This so­lu­tion works the best for any­thing that can be rep­re­sented as an in­te­ger. In all the other cases we would need to first, on the <abbr>HTML</abbr> gen­er­a­tion step, to some­how rep­re­sent our value in in­te­ger. For some val­ues its pos­si­ble to do, for oth­<span class="nobr">ers —</span><span class="thinsp"> </span>much harder. It is also pos­si­ble to pre-sort our data per each field and in­stead of val­ues, use their in­dexes for each field. But then the sort­ing it­self still could be done just by very sim­ple <abbr>CSS</abbr>. And don&#39;t for­get that we al­ways have the de­fault <abbr>DOM</abbr> or­der for <span class="nobr">non-in</span>­te­ger val­ues: in my table, it is used for sort­ing the names in al­pha­bet­i­cal order.</p>
+</li>
+<li><p>We can&#39;t an­i­mate this sort­ing, as it uses the de­fault lay­out mech­a­nism and as long as the <code>or­der</code> is not an­i­mat­able in <abbr>CSS</abbr> (or, more pre­cisely, is an­i­mated in a dis­crete way), we can&#39;t do much. The ideal would be if the <code>or­der</code> could be an­i­mated by us­ing the tran­si­tion from its start­ing di­men­sions to its fi­nal ones, but we don&#39;t even have tran­si­tions for <code>auto</code> width &amp; height, so we can&#39;t ex­pect the same for <code>or­der</code> any­time soon (or maybe ever).</p>
+</li>
+</ul>
+<h2 class="Heading" id="conclusion"><a class="Anchor" aria-hidden="true" href="#conclusion"></a><span class="ss02 hang-xs">C</span>onclusion</h2>
+<p>I think this ex­am­ple shows how pow­er­ful <abbr>CSS</abbr> vari­ables can be when used as a part of data: we can pre-fill some of the val­ues which we won&#39;t use right away as some vari­ables, and then later use them when needed. This can be used to sort lists, ta­bles and any other stuff, and even to sort by mul­ti­ple fields (though this would re­quire a bit more code and couldn&#39;t be ap­plied in <em>every</em> case, I rec­om­mend you to try and im­ple­ment this your­self).</p>
+<p>This was the first ar­ti­cle from my re­cent re­search of <abbr>CSS</abbr> vari­ables, stay tuned and try to sort your stuff us­ing just <abbr>CSS</abbr> and <abbr>HTML</abbr> in the meantime!</p>
+
+          <p class="Metadata Published">Published on 
+            <time datetime="2018-02-15">February 15</time>, in <a href="../" class="Link">the Blog</a>.
+          </p>
+          <aside class="Feedback">
+            <p>If you've spotted a typo or a mistake, or wish to add something on, you could either <a href="https://github.com/kizu/kizu.github.com/issues/new?title=Feedback%20for%20%E2%80%9CVariable%20Order%E2%80%9D" class="Link">write me about this</a> or <a href="https://github.com/kizu/kizu.github.com/blob/source/src/documents/posts/2018-02-15-variable-order/index.en.md" class="Link">edit this article on Github</a>.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <footer class="Page-Footer">
+      <div class="LiquidLayout">
+        <div class="LiquidLayout-Content">
+          <nav class="PrevNext"><a href="/en/blog/counters-and-stones/" class="Link Link_wrapper Link_prev"><span class="Link-Inner">Counters and Stones</span></a>
+          </nav>
+          <p role="contentinfo" class="Page-Copy"><a href="/en/" class="Link Link_wrapper">© 2017 <span class="Link-Inner">Roman Komarov</span>. </a><a href="https://twitter.com/kizmarh" class="Link Link_wrapper"><span class="Link-Inner">Follow me on twitter</span>!</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>var supportsWoff2=function(A){if(!("FontFace"in A)||"function"!=typeof A.FontFace)return!1;var t=new FontFace("t",'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )',{});return t.load()["catch"](function(){}),"loading"==t.status||"loaded"==t.status}(this),h=document.getElementsByTagName("head")[0],link=document.createElement("link");link.href="/s/extras"+(supportsWoff2?"2":"")+".css",link.type="text/css",link.rel="stylesheet",h.appendChild(link);
+    </script>
+    <script src="/j/prism.js"></script>
+    <script src="//mc.yandex.ru/metrika/watch.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter632758 = new Ya.Metrika({id:632758, clickmap:true, trackLinks:true, trackHash:true, webvisor:true}); } catch(e) {} }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f); } else { f(); } })(document, window, "yandex_metrika_callbacks");
+      //]]>
+    </script>
+    <noscript><img src="//mc.yandex.ru/watch/632758" style="position:absolute; left:-9990px;" alt=""></noscript>
+  </body>
+</html>
