@@ -15,7 +15,7 @@
     <updated>2018-02-15T00:00:00+03:00</updated>
     <id>http://kizu.ru/en/blog/variable-order</id>
     <content type="html">&lt;h1 id=&quot;variable-order&quot;&gt;Variable Order&lt;/h1&gt;
-&lt;p&gt;Look at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;Sidenote-Wrapper&quot;&gt;&lt;a class=&quot;Sidenote-Context&quot; href=&quot;#disclaymer&quot; id=&quot;disclaymer&quot;&gt;Look&lt;/a&gt;&lt;span class=&quot;Sidenote&quot; role=&quot;note&quot;&gt;&lt;span class=&quot;Sidenote-Misc&quot;&gt; (&lt;/span&gt;&lt;strong&gt;Important!&lt;/strong&gt; This is just an experiment, made in order to find what is possible to do &lt;em&gt;at all&lt;/em&gt; in &lt;abbr&gt;CSS&lt;/abbr&gt;, this method is not meant for production, as it is bad for a11y.&lt;span class=&quot;Sidenote-Misc&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;a class=&quot;Sidenote-Close&quot; href=&quot;#x&quot; aria-hidden=&quot;true&quot; tabindex=&quot;-1&quot;&gt;&lt;/a&gt;&lt;/span&gt; at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).&lt;/p&gt;
 &lt;p&gt;Look at the demo &lt;a href=&quot;http://kizu.ru/en/blog/variable-order/#Demo_table&quot;&gt;embedded in the post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;This is done just with &lt;abbr&gt;HTML&lt;/abbr&gt; and &lt;abbr&gt;CSS&lt;/abbr&gt;, no JavaScript involved.&lt;/p&gt;
 &lt;p&gt;But how does this work?&lt;/p&gt;
