@@ -18,7 +18,7 @@ The main feature that makes that possible is that we can use CSS variables right
 
 ## The Sorting
 
-The code for our implementation of table sorting is not really complicated.
+[The code](*a11y "**Update:** one big problem with this method is that it can make UI less accessible due to reordering only visually. Thanks to [Thierry Kobientz](https://twitter.com/thierrykoblentz) and [Jen Simmons](https://twitter.com/jensimmons/status/964360059923742720) for bringing this up.") for our implementation of table sorting is not really complicated.
 
 The only thing that we need to do in HTML (we use a regular HTML table for this, which later re-style with flex and grid) is an inline style for its rows which we sort:
 
