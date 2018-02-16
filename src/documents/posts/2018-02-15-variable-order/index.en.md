@@ -1,6 +1,6 @@
 # Variable Order
 
-Look at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).
+[Look](*disclaymer "**Important!** This is just an experiment, made in order to find what is possible to do _at all_ in CSS, this method is not meant for production, as it is bad for a11y.") at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).
 
 [partial:table]
 
