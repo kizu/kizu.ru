@@ -92,6 +92,6 @@ This code covers sorting by three possible columns, and a global modifier to inv
 
 ## Conclusion
 
-I think this example shows how powerful CSS variables can be when used as a part of data: we can pre-fill some of the values which we won't use right away as some variables, and then later use them when needed. This can be used to sort lists, tables and any other stuff, and even to sort by multiple fields (though this would require a bit more code and couldn't be applied in _every_ case, I recommend you to try and implement this yourself).
+I think this example shows how powerful CSS variables can be when used as a part of data: we can pre-fill some of the values which we won't use right away as some variables, and then later use them when needed. This can be used to sort lists, tables and any other stuff, and even to sort by multiple fields (though this would require a bit more code and couldn't be applied in _every_ case, I recommend you to try and implement this yourself, and all of this can be done much better in JS). There are problems with a11y, so this is not a solution for production, but I really hope in future we would get a way to reorder things in CSS without a11y problems.
 
 This was the first article from my recent research of CSS variables, stay tuned and try to sort your stuff using just CSS and HTML in the meantime!
