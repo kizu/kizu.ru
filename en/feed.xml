@@ -93,7 +93,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I think this example shows how powerful &lt;abbr&gt;CSS&lt;/abbr&gt; variables can be when used as a part of data: we can pre-fill some of the values which we won&amp;#39;t use right away as some variables, and then later use them when needed. This can be used to sort lists, tables and any other stuff, and even to sort by multiple fields (though this would require a bit more code and couldn&amp;#39;t be applied in &lt;em&gt;every&lt;/em&gt; case, I recommend you to try and implement this yourself).&lt;/p&gt;
+&lt;p&gt;I think this example shows how powerful &lt;abbr&gt;CSS&lt;/abbr&gt; variables can be when used as a part of data: we can pre-fill some of the values which we won&amp;#39;t use right away as some variables, and then later use them when needed. This can be used to sort lists, tables and any other stuff, and even to sort by multiple fields (though this would require a bit more code and couldn&amp;#39;t be applied in &lt;em&gt;every&lt;/em&gt; case, I recommend you to try and implement this yourself, and all of this can be done much better in JS). There are problems with a11y, so this is not a solution for production, but I really hope in future we would get a way to reorder things in &lt;abbr&gt;CSS&lt;/abbr&gt; without a11y problems.&lt;/p&gt;
 &lt;p&gt;This was the first article from my recent research of &lt;abbr&gt;CSS&lt;/abbr&gt; variables, stay tuned and try to sort your stuff using just &lt;abbr&gt;CSS&lt;/abbr&gt; and &lt;abbr&gt;HTML&lt;/abbr&gt; in the meantime!&lt;/p&gt;
 
     </content>
