@@ -86,6 +86,8 @@ This code covers sorting by three possible columns, and a global modifier to inv
 
 - This solution works the best for anything that can be represented as an integer. In all the other cases we would need to first, on the HTML generation step, to somehow represent our value in integer. For some values its possible to do, for others — much harder. It is also possible to pre-sort our data per each field and instead of values, use their indexes for each field. But then the sorting itself still could be done just by very simple CSS. And don't forget that we always have the default DOM order for non-integer values: in my table, it is used for sorting the names in alphabetical order.
 
+- This solution is not really a solution, but experiment, and as I've already mentioned, can be bad for accessibility — right now its not possible to reorder stuff in a way it would be accessible with keyboard (without confusing teleporting focus) or screen readers. And while for them we can totally gate the sorting feature out, so it would be an enhancement for those who won't have problems with it, its better not to do so outside of experiments and rely on JS solutions for sorting instead.
+
 - We can't animate this sorting, as it uses the default layout mechanism and as long as the `order` is not animatable in CSS (or, more precisely, is animated in a discrete way), we can't do much. The ideal would be if the `order` could be animated by using the transition from its starting dimensions to its final ones, but we don't even have transitions for `auto` width & height, so we can't expect the same for `order` anytime soon (or maybe ever).
 
 ## Conclusion
