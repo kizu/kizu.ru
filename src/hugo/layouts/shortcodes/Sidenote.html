@@ -1,0 +1,14 @@
+<aside role="note" class="Sidenote" id="{{ .Get "id" }}"
+  {{- if (.Get "offset") | or (.Get "span") | or (.Get "align") }} {{/**/ -}}
+    style="
+      {{- with .Get "offset" }}--offset:{{.}};{{ end -}}
+      {{- with .Get "span" }}--span:{{.}};{{ end -}}
+      {{- with .Get "align" }}--align:{{.}};{{ end -}}
+    "
+  {{- end -}}
+>
+  <output aria-hidden="true" class="Highlight" id="{{ .Get "id" }}-Content"></output>
+  <label role="presentation" for="{{ .Get "id" }}-Anchor">
+    {{- .Inner | markdownify -}}
+  </label>
+</aside>

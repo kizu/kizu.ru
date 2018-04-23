@@ -1,0 +1,11 @@
+/*
+  1. Prevents the different widths when there is not enough content to create a scroll.
+*/
+
+html {
+  overflow-y: scroll; /* [1] */
+}
+
+body {
+  margin: 0;
+}

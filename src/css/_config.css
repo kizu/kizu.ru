@@ -1,0 +1,64 @@
+:root {
+  --size--base: 112.5%; /* Should only be set on :root */
+  font-size: var(--size--base);
+
+  --size--base-lh: 2rem;
+  --size--text: calc(1rem + 5px);
+  --size--smalltext: calc(1rem - 2px);
+  --size--codetext: 0.87em;
+
+  --size--footer:   8rem;
+  --size--header:   6rem;
+  --size--page_min: 24rem;
+  --size--content:  42rem;
+  --size--sidebar:  15rem;
+  --size--indent:   2rem;
+
+  /* Setting up grid variables */
+  --h-gap: var(--size--indent);
+  --v-gap: var(--size--indent);
+  --content-max-width: var(--size--content);
+  --content-min-width: var(--size--page_min);
+  --aside-width: var(--size--sidebar);
+
+  --full-width: calc(var(--content-max-width) + var(--aside-width) + var(--h-gap));
+
+  /* Grid! */
+  --grid-side: minmax(min-content, 1fr);
+  --grid-content: minmax(var(--content-min-width), var(--content-max-width));
+
+  --grid-ascii:
+    " full  full     full  "
+    " .     content  aside ";
+
+  --grid-ascii--small:
+    " full  full     full "
+    " .     content  .    "
+    " .     aside    .    ";
+
+  --grid: var(--grid-ascii)
+    / var(--grid-side)
+            var(--grid-content)
+                     var(--grid-side);
+
+  /* Typography! */
+  /* Replace with utility? */
+  --text-indent: var(--size--indent);
+
+  /* Conditions */
+  --initial-at-large: true;
+  --at-large: 1;
+  --at-small: 0;
+}
+
+/* This should be the only MQ for my site, ok */
+@media (max-width: 50em) {
+  :root {
+    --initial-at-large: initial;
+    --initial-at-small: true;
+    --at-large: 0;
+    --at-small: 1;
+
+    --grid-ascii: var(--grid-ascii--small);
+  }
+}

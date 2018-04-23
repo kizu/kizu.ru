@@ -1,0 +1,24 @@
+markup = "mmark"
+
+baseURL = "http://kizu.ru/"
+sourceRelativeLinksEval = true
+
+DefaultContentLanguage = "ru"
+
+[Languages]
+[Languages.en]
+languageCode = "en"
+languagePrefix = "en/"
+title = "My New Hugo Site"
+titleName = "Roman Komarov"
+nameAbbr = "R.K."
+
+[Languages.ru]
+languageCode = "ru"
+languagePrefix = ""
+title = "Мой новый Хьюго-сайт"
+titleName = "Роман Комаров"
+nameAbbr = "Р.К."
+
+[permalinks]
+posts = "/:section/:slug/"

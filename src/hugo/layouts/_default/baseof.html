@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Params.languageCode }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{{ block "title" . }}
+      {{- .Site.Title -}}
+    {{ end }}</title>
+    <link rel="stylesheet" href="/s/style.css">
+  </head>
+  <body>
+    <main>
+      {{- block "main" . -}}{{- end -}}
+      {{- block "footer" . -}}{{- end -}}
+    </main>
+    <header><!-- Goes after main for ~reasons~ -->
+      {{- block "header" . -}}
+        <h1>{{ .Site.Params.titleName }}</h1>
+      {{- end -}}
+    </header>
+    <script src="/j/prism.js"></script>
+  </body>
+</html>

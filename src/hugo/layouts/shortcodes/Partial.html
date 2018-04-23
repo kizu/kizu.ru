@@ -1,0 +1,6 @@
+{{- $file := .Get 0 -}}
+{{- $src := (print "/content/" .Page.Params.srcPath $file) -}}
+<figure>
+  {{- $src  | readFile | safeHTML -}}
+  {{- .Inner | markdownify -}}
+</figure>

@@ -1,0 +1,20 @@
+{{- define "title" -}}
+  {{- .Title -}}
+{{- end -}}
+{{- define "header" -}}
+  <nav>
+    <ul>
+      <li><a href="/{{ .Site.Params.languagePrefix }}">{{ .Site.Params.titleName }}</a></p></li>
+      {{- if .Page.Params.published -}}
+        <li>{{ .Page.Params.published }}</li>
+      {{- else -}}
+        <li><time datetime="{{.Date.Format "2006-01-02"}}">{{.Date.Format "2006-01-02"}}</time></li>
+      {{- end -}}
+    </ul>
+  </nav>
+{{- end -}}
+{{- define "main" -}}
+  {{- $header := (print "<h1>" .Title "</h1>") -}}
+  {{- partial "headerify.html" (dict "context" . "input" $header) -}}
+  {{- partial "headerify.html" (dict "context" . "input" .Content) -}}
+{{- end -}}

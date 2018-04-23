@@ -1,0 +1,39 @@
+:root {
+  --theme-dark: #25220E;
+  --theme-white: #FFF;
+  --theme-bg: #F8FCF9;
+  --theme-text: rgba(37,34,14,0.92);
+  --theme-link: #0985CE;
+  --theme-visited: #8C64B4;
+  --theme-distant: #EDF1ED;
+  --theme-misc: rgba(37,34,14,0.62);
+  --theme-distant_text: rgba(37,34,14,0.48);
+}
+
+html {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+a:link {
+  color: var(--theme-link);
+}
+
+a:visited {
+  color: var(--theme-visited);
+}
+
+/* Wrapper is needed to fix strange IE10+ bugs with text-shadow */
+/* TODO: I think there was a way to do this in reverse, like in normalize? */
+@media screen {
+  @media (min-width: 0px) {
+    html {
+      text-shadow: 0 1px #FFF;
+    }
+  }
+}
+
+::selection {
+  text-shadow: none !important;
+  background: #B1D2FB;
+}

@@ -1,0 +1,102 @@
+/* Utility */
+
+/*
+  1. Define reset (used as `--reset: true` or `--reset-all: true`).
+  2. Proxy variables, made not inheritable.
+
+  Usage: `margin-top: var(--margin-top, 2em);`
+*/
+
+*,
+*::before,
+*::after {
+  /* Problem is here with Safari -_- so the reset-all is not possible. */
+  /* The only to achieve what it does is to do `.foo * { --reset: true }` right now ~_~ */
+  /* --reset: var(--reset-all); */
+  --reset: initial; /* [1] */
+
+   /* [2] */
+  --margin-top: initial;
+  --margin-bottom: initial;
+
+  --text-align: initial;
+
+  --font-size: initial;
+  --line-height: initial;
+  --font-weight: initial;
+}
+
+
+/*
+  For each element we use a special elemnt+property variable for property-ones.
+  This allows us to target and redefine specific elements down the DOM without using combinators.
+
+  Warning: I wanted to use `var(--reset, var(--h1-margin-top))` here,
+  but in Safari there is a bug preventing me from doing so.
+*/
+
+h1 {
+  --margin-top: var(--reset, var(--h1-margin-top));
+  --margin-bottom: var(--reset, var(--h1-margin-bottom));
+
+  --text-align: var(--reset, var(--h1-text-align));
+
+  --font-size: var(--reset, var(--h1-font-size));
+  --line-height: var(--reset, var(--h1-line-height));
+  --font-weight: var(--reset, var(--h1-font-weight));
+}
+
+h2 {
+  --margin-top: var(--reset, var(--h2-margin-top));
+  --margin-bottom: var(--reset, var(--h2-margin-bottom));
+
+  --text-align: var(--reset, var(--h2-text-align));
+
+  --font-size: var(--reset, var(--h2-font-size));
+  --line-height: var(--reset, var(--h2-line-height));
+  --font-weight: var(--reset, var(--h2-font-weight));
+}
+
+h3 {
+  --margin-top: var(--reset, var(--h3-margin-top));
+  --margin-bottom: var(--reset, var(--h3-margin-bottom));
+
+  --text-align: var(--reset, var(--h3-text-align));
+
+  --font-size: var(--reset, var(--h3-font-size));
+  --line-height: var(--reset, var(--h3-line-height));
+  --font-weight: var(--reset, var(--h3-font-weight));
+}
+
+h4 {
+  --margin-top: var(--reset, var(--h4-margin-top));
+  --margin-bottom: var(--reset, var(--h4-margin-bottom));
+
+  --text-align: var(--reset, var(--h4-text-align));
+
+  --font-size: var(--reset, var(--h4-font-size));
+  --line-height: var(--reset, var(--h4-line-height));
+  --font-weight: var(--reset, var(--h4-font-weight));
+}
+
+h5 {
+  --margin-top: var(--reset, var(--h5-margin-top));
+  --margin-bottom: var(--reset, var(--h5-margin-bottom));
+
+  --text-align: var(--reset, var(--h5-text-align));
+
+  --font-size: var(--reset, var(--h5-font-size));
+  --line-height: var(--reset, var(--h5-line-height));
+  --font-weight: var(--reset, var(--h5-font-weight));
+}
+
+h6 {
+  --margin-top: var(--reset, var(--h6-margin-top));
+  --margin-bottom: var(--reset, var(--h6-margin-bottom));
+
+  --text-align: var(--reset, var(--h6-text-align));
+
+  --font-size: var(--reset, var(--h6-font-size));
+  --line-height: var(--reset, var(--h6-line-height));
+  --font-weight: var(--reset, var(--h6-font-weight));
+}

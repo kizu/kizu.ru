@@ -1,0 +1,6 @@
+<p role="note" class="Sidenote" id="{{ .Get "id" }}">
+  <output aria-hidden="true" class="Highlight" id="{{ .Get "id" }}-Content"></output>
+  <label role="presentation" for="{{ .Get "id" }}-Anchor">
+    {{- .Inner | markdownify -}}
+  </label>
+</p>

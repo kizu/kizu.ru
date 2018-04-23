@@ -1,0 +1,286 @@
+/* ======================= *\
+   All the CSS for kizu.ru
+\* ======================= */
+
+@import url("_fonts.css"); /* All the fonts definitions */
+@import url("_config.css"); /* All the constants and configuration */
+@import url("_theme.css"); /* Everything about colors and similar stuff */
+
+@import url("_utility.css"); /* Reset and normalize */
+@import url("_foundation.css"); /* Basic stuff for html & body? */
+
+@import url("_sidenotes.css"); /* Sidenotes & their Sidelinks */
+
+@import url("_prism.css"); /* Prism.js */
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  z-index: 1;
+
+  min-width: var(--size--page_min);
+
+  counter-reset: asides 9;
+
+  font: var(--size--text)/var(--size--base-lh) var(--font--regular);
+}
+
+header {
+  order: -1;
+  text-align: center;
+
+  --h1-font-size: 3.5rem;
+  --h1-font-weight: normal;
+}
+
+header::after {
+  content: counter(asides);
+  grid-column: aside;
+
+  line-height: var(--aside-width);
+  writing-mode: vertical-lr;
+  word-wrap: break-word;
+
+  height: 0;
+  visibility: hidden;
+  margin-left: calc(-1 * var(--aside-width));
+  max-width: calc(2 * var(--aside-width));
+}
+
+/* Replace with proper utility stuff for lists etc. */
+/* BTW, should I go and use there my wtf for working start/value for lists? */
+/* header > nav > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ */
+header,
+main {
+  display: grid;
+  grid-template: var(--grid);
+  grid-gap: 0 var(--h-gap);
+  --grid-column: content;
+}
+
+* {
+  grid-column: var(--grid-column);
+}
+
+figure {
+  /* Here I'd like to _use_ variable, but prevent it from being passed down */
+  grid-column: content;
+  --grid-column: initial;
+}
+
+ul {
+  display: var(--ul-display);
+  justify-content: var(--ul-justify-content);
+}
+
+nav {
+  --ul-display: flex;
+  --ul-justify-content: space-between;
+}
+
+time {
+  font-size: var(--size--smalltext);
+  opacity: 0.75;
+}
+
+:root {
+  --font--regular: '21Cent-Regular', Georgia, serif, Helvetica Neue, Arial;
+  --font--small: Helvetica Neue, Arial, sans-serif;
+}
+
+html {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  cursor: default;
+}
+
+main {
+  text-align: justify;
+}
+
+img {
+  max-width: 100%;
+  border: none;
+  display: var(--img-display, inline-block);
+  margin: var(--img-margin);
+}
+
+img:only-child {
+  --img-display: block;
+  --img-margin: 1rem auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: var(--margin-top, 1rem);
+  margin-bottom: var(--margin-bottom, 1rem);
+
+  text-align: var(--text-align, center);
+  font-size: var(--font-size, 1rem);
+  line-height: var(--line-height, 1em);
+  font-weight: var(--font-weight, 900);
+}
+
+:root {
+  --h1-font-size: 3rem;
+
+  --h2-font-size: 2rem;
+
+  --h3-font-size: 1.5rem;
+  --h3-line-height: 2rem;
+}
+
+
+hr {
+  visibility: hidden;
+}
+
+p {
+  margin: 0;
+  margin-top: var(--p-margin-top);
+  text-indent: var(--p-text-indent);
+}
+
+/* That's the only type of combinator which is allowed I guess */
+p + p,
+p + aside + p {
+  --p-text-indent: var(--text-indent);
+  --p-margin-top: var(--p-p-margin-top);
+}
+
+ul, ol {
+  padding: 0 0 0 var(--size--indent);
+}
+
+aside {
+  --grid-column: aside;
+  grid-row-end: span var(--span);
+  align-self: var(--align, start);
+
+  width: var(--aside-width); /* There was min-width — why not just width? */
+  margin-left: var(--initial-at-large, auto);
+
+  counter-increment: asides;
+
+  text-align: left;
+  font-family: var(--font--small);
+  font-size: var(--size--smalltext);
+  line-height: 1.5em;
+  font-feature-settings: "lnum", "onum" 0;
+  padding-top: 0.375em;
+  margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
+  --text-indent: 0;
+  --p-p-margin-top: 1.5em;
+}
+
+aside[style*='--align:end;'] {
+  padding-top: 0;
+  padding-bottom: 0.375em;
+}
+
+blockquote {
+  padding: var(--v-gap) var(--size--indent);
+  font-style: italic;
+  text-align: left;
+  --text-indent: 0;
+}
+
+code,
+pre,
+kbd {
+  font-feature-settings: "lnum", "onum" 0;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-family: Monaco, Consolas, monospace, monospace;
+  --code-font-style: normal;
+  --code-line-height: 1.5rem;
+  font-size: var(--size--codetext);
+  line-height: 1;
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 1rem 0;
+
+  text-align: left;
+
+  --code-color: currentColor;
+
+  border-radius: 3px;
+}
+
+/* TODO: move to external import, like an escape hatch */
+pre:not(.z):not(.z) {
+  background: #FFF; /* Overrides prism.js one */
+}
+
+code {
+  font: inherit;
+  font-style: var(--code-font-style, italic);
+  line-height: var(--code-line-height, 1);
+  color: var(--code-color, #690);
+  hyphens: none;
+}
+
+/* Handling fancy first letters */
+/* Not ::first-letter as there are some problems with it in some browsers */
+.FirstLetter {
+  margin-left: var(--fletter-offset, -0.15em);
+  font-feature-settings: var(--fletter-style, "ss01");
+}
+
+[aria-label^='C'],
+[aria-label^='С'],
+[aria-label^='Э'] {
+  --fletter-style: "ss02";
+  --fletter-offset: -0.05em;
+}
+[aria-label^='К'],
+[aria-label^='Т'] {
+  --fletter-style: "ss04";
+}
+
+[aria-label^='Ч'] {
+  --fletter-offset: -0.2em;
+}
+
+[aria-label^='А'],
+[aria-label^='A'],
+[aria-label^='Ф'],
+[aria-label^='Д'],
+[aria-label^='З'],
+[aria-label^='О'],
+[aria-label^='O'],
+[aria-label^='Ж'],
+[aria-label^='Я'],
+[aria-label^='Q'],
+[aria-label^='S'],
+[aria-label^='G'],
+[aria-label^='Z'] {
+  --fletter-offset: -0.05em;
+}
+
+/* Kerning is not applied there, need to do manually */
+[aria-label^='Va'] {
+  --fletter-offset: -0.11em;
+}
