@@ -1,0 +1,12 @@
+[build]
+  command = "HUGO_BASEURL=$URL gulp build"
+  publish = "out"
+
+[build.environment]
+  HUGO_VERSION = "0.38.1"
+
+[context.production.environment]
+  HUGO_ENV = "production"
+
+[context.deploy-preview]
+  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL gulp build"
