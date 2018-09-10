@@ -2,39 +2,67 @@
    All the CSS for kizu.ru
 \* ======================= */
 
-@import url("_fonts.css"); /* All the fonts definitions */
-@import url("_config.css"); /* All the constants and configuration */
-@import url("_theme.css"); /* Everything about colors and similar stuff */
+/*
 
-@import url("_utility.css"); /* Reset and normalize */
-@import url("_foundation.css"); /* Basic stuff for html & body? */
+  1. All the `@font-face` for the fonts alongside `@import` of the counter.
+     TODO: keep only the font for headers & use default ones for everything else?
+  2. All the basic variables on `:root` alongside the only media query.
+  3. “Theme” variables: colors etc.
+     FIXME: contains non-variables while it shouldn't.
+  4. Styles for the highlighted CSS got from prism.js.
+*/
 
-@import url("_sidenotes.css"); /* Sidenotes & their Sidelinks */
+@import url("_fonts.css");  /* [1] */
+@import url("_config.css"); /* [2] */
+@import url("_theme.css");  /* [3] */
+@import url("_prism.css");  /* [4] */
 
-@import url("_prism.css"); /* Prism.js */
+/*
+  1. Prevents the different widths when there is not enough content to create a scroll.
+     FIXME: replace with calc padding.
+*/
+
+html {
+  overflow-y: scroll; /* [1] */
+  font-size: var(--THEME_ROOT_FONT_SIZE);
+  background: var(--THEME_BG);
+}
 
 body {
+  /* Default context */
   position: relative;
+  z-index: 1;
+
+  /* Default flex layout */
   display: flex;
   flex-direction: column;
 
-  z-index: 1;
+  /* is it used anywhere else? */
+  min-width: var(--content-min-width);
 
-  min-width: var(--size--page_min);
+  /* Reset */
+  margin: 0;
 
+  /* For subgrid substitute */
   counter-reset: asides 9;
 
-  font: var(--size--text)/var(--size--base-lh) var(--font--regular);
+  /* Should this be a part of utility definition? */
+  font: var(--THEME_FONT);
 }
 
 header {
+  /* For subgrid substitute */
   order: -1;
+
+  /* FIXME: use utility */
   text-align: center;
 
+  /* Utility usage */
   --h1-font-size: 3.5rem;
   --h1-font-weight: normal;
 }
 
+/* For subgrid substitute */
 header::after {
   content: counter(asides);
   grid-column: aside;
@@ -56,7 +84,9 @@ header::after {
   padding: 0;
   margin: 0;
 }
- */
+*/
+
+/* Grid stuff start */
 header,
 main {
   display: grid;
@@ -74,32 +104,34 @@ figure {
   grid-column: content;
   --grid-column: initial;
 }
+/* Grid stuff end */
 
 ul {
+  /* Utility definition */
   display: var(--ul-display);
   justify-content: var(--ul-justify-content);
 }
 
 nav {
+  /* Utility usage */
   --ul-display: flex;
   --ul-justify-content: space-between;
 }
 
 time {
-  font-size: var(--size--smalltext);
-  opacity: 0.75;
+  /* FIXME: replace with utility? */
+  font-size: var(--THEME_FONT_SIZE--SMALL);
+
+  --color-a: 0.75;
 }
 
-:root {
-  --font--regular: '21Cent-Regular', Georgia, serif, Helvetica Neue, Arial;
-  --font--small: Helvetica Neue, Arial, sans-serif;
-}
-
+/* Typography basics, kinda reset stuff? */
 html {
   -webkit-hyphens: auto;
   hyphens: auto;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -108,6 +140,7 @@ html {
 }
 
 main {
+  /* FIXME: use utility? or do we need justify there at all? */
   text-align: justify;
 }
 
@@ -115,7 +148,7 @@ img {
   max-width: 100%;
   border: none;
   display: var(--img-display, inline-block);
-  margin: var(--img-margin);
+  margin: var(--img-margin, 0);
 }
 
 img:only-child {
@@ -123,28 +156,28 @@ img:only-child {
   --img-margin: 1rem auto;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: var(--margin-top, 1rem);
-  margin-bottom: var(--margin-bottom, 1rem);
-
-  text-align: var(--text-align, center);
-  font-size: var(--font-size, 1rem);
-  line-height: var(--line-height, 1em);
-  font-weight: var(--font-weight, 900);
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1em;
+  font-weight: 900;
 }
 
-:root {
-  --h1-font-size: 3rem;
+h1 {
+  font-size: var(--h1-font-size, 3rem);
+  font-weight: var(--h1-font-weight, 900);
+}
 
-  --h2-font-size: 2rem;
+h2 {
+  font-size: 2rem
+}
 
-  --h3-font-size: 1.5rem;
-  --h3-line-height: 2rem;
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 
@@ -166,7 +199,7 @@ p + aside + p {
 }
 
 ul, ol {
-  padding: 0 0 0 var(--size--indent);
+  padding: 0 0 0 var(--THEME_INDENT);
 }
 
 aside {
@@ -180,9 +213,7 @@ aside {
   counter-increment: asides;
 
   text-align: left;
-  font-family: var(--font--small);
-  font-size: var(--size--smalltext);
-  line-height: 1.5em;
+  font: var(--THEME_FONT--SMALL);
   font-feature-settings: "lnum", "onum" 0;
   padding-top: 0.375em;
   margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
@@ -196,7 +227,7 @@ aside[style*='--align:end;'] {
 }
 
 blockquote {
-  padding: var(--v-gap) var(--size--indent);
+  padding: var(--v-gap) var(--THEME_INDENT);
   font-style: italic;
   text-align: left;
   --text-indent: 0;
@@ -213,7 +244,7 @@ pre {
   font-family: Monaco, Consolas, monospace, monospace;
   --code-font-style: normal;
   --code-line-height: 1.5rem;
-  font-size: var(--size--codetext);
+  font-size: var(--THEME_FONT_SIZE--CODE);
   line-height: 1;
 
   position: relative;
@@ -283,4 +314,186 @@ code {
 /* Kerning is not applied there, need to do manually */
 [aria-label^='Va'] {
   --fletter-offset: -0.11em;
+}
+
+
+
+main {
+  counter-reset: sidenote sidenote-link;
+}
+
+/* Sidenotes stuff */
+.Sidenote,
+.Sidelink {
+  position: relative;
+  z-index: 1;
+
+  display: inline-block;
+  text-indent: 0;
+}
+
+.Highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+
+  width: 100%;
+  height: 100%;
+
+  transition: background-color 0.2s 0.2s linear;
+  counter-increment: var(--counter);
+}
+
+.Sidenote:not(:hover),
+.Sidelink:not(:hover) {
+  --highlight-hover: rgba(255, 255, 0, 0.3);
+}
+
+.Highlight:hover {
+  background: var(--highlight-hover);
+}
+
+label[for$=-Anchor] {
+  display: block;
+}
+
+.Sidelink {
+  --counter: sidenote-link;
+}
+
+a[aria-hidden=true]:not([class]) {
+  /* Maybe just reset lol? */
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+}
+
+a[href^='#'][aria-hidden=true]:not([class])::after {
+  content: counter(sidenote-link);
+
+  position: relative;
+  top: -0.555rem;
+
+  cursor: pointer;
+
+  padding: 0 0.16em;
+
+  font-size: 1rem;
+  line-height: 1;
+
+  color: rgba(0,0,0, 0.6);
+
+  font-feature-settings: "smcp";
+}
+
+.Sidenote {
+  --counter: sidenote;
+}
+
+label[for$=-Anchor] {
+  padding-right: var(--h-gap);
+}
+
+.Highlight[id$=-Content]::before {
+  content: counter(sidenote) ". ";
+
+  position: absolute;
+  left: -1.25rem;
+
+  width: 1rem;
+
+  text-align: right;
+  color: rgba(0,0,0, 0.6);
+  transition: opacity 0.2s 0.2s linear;
+
+  opacity: var(--highlight-opacity, calc(1 - var(--at-large)));
+}
+
+.Highlight[id$=-Content]:hover,
+.Sidenote:hover {
+  --highlight-opacity: 1;
+}
+
+
+/* Links */
+a:link {
+  color: var(--THEME_LINK);
+}
+
+a:visited {
+  color: var(--THEME_VISITED);
+}
+
+
+/* Wrapper is needed to fix strange IE10+ bugs with text-shadow */
+/* TODO: I think there was a way to do this in reverse, like in normalize? */
+@media screen {
+  @media (min-width: 0px) {
+    html {
+      text-shadow: var(--THEME_TEXT_SHADOW);
+    }
+  }
+}
+
+
+::selection {
+  text-shadow: none !important;
+  background-color: var(--THEME_SELECTION);
+}
+
+
+/* Same for every theme? Should be moved somewhere? */
+* {
+  color: hsla(
+    var(--color-h, 0),
+    calc(var(--color-s, 0) * 1%),
+    calc(var(--color-l, 0) * 1%),
+    calc(var(--inherited-a, var(--color-a, 1)) + 0 / (1 - var(--color-a, 1)))
+  );
+  --color-a: 1;
+}
+
+:root {
+  --color-h: var(THEME_COLOR_H);
+  --color-s: var(THEME_COLOR_S);
+  --color-l: var(THEME_COLOR_L);
+  --color-a: var(THEME_COLOR_A);
+
+  --inherit-custom-color: 0;
+  --inherited-a: initial;
+}
+
+
+/* Lists */
+
+ol, ul {
+  padding: 0;
+  --list-item-content: "— ";
+}
+
+ol {
+  counter-reset: list;
+  --list-item-content: counter(list) ". ";
+}
+
+li {
+  --p-margin-top: 1rem;
+
+  padding: 0 0 0 var(--THEME_INDENT);
+  text-align: left;
+  list-style-type: none; /* Fixme: screenreaders would die out? */
+}
+
+li::before {
+  content: var(--list-item-content);
+  counter-increment: list;
+
+  position: absolute;
+
+  width: var(--THEME_INDENT);
+  margin-left: calc(-1*var(--THEME_INDENT));
+
+  text-align: left;
+  font-feature-settings: "lnum", "onum" 0;
 }

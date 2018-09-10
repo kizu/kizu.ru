@@ -7,8 +7,6 @@ const spawn = require('child_process').spawn;
 const del = require('del');
 
 // Handling stuff
-const shell = require('shelljs');
-
 const handleMarkdown = require('./handleMarkdown.js');
 
 const clean = done => del(['./out/**/*', './build/hugo/'], done);
