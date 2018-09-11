@@ -60,6 +60,8 @@ header {
   /* Utility usage */
   --h1-font-size: 3.5rem;
   --h1-font-weight: normal;
+  --ul-item-content: none;
+  --list-item-padding: 0;
 }
 
 /* For subgrid substitute */
@@ -77,14 +79,6 @@ header::after {
   max-width: calc(2 * var(--aside-width));
 }
 
-/* Replace with proper utility stuff for lists etc. */
-/* BTW, should I go and use there my wtf for working start/value for lists? */
-/* header > nav > ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-*/
 
 /* Grid stuff start */
 header,
@@ -191,6 +185,10 @@ p {
   text-indent: var(--p-text-indent);
 }
 
+p:empty {
+  display: none;
+}
+
 /* That's the only type of combinator which is allowed I guess */
 p + p,
 p + aside + p {
@@ -219,6 +217,7 @@ aside {
   margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
   --text-indent: 0;
   --p-p-margin-top: 1.5em;
+  --link-underline-offset: 0.5em;
 }
 
 aside[style*='--align:end;'] {
@@ -330,6 +329,7 @@ main {
 
   display: inline-block;
   text-indent: 0;
+  --link-text-shadow: none;
 }
 
 .Highlight {
@@ -360,6 +360,8 @@ label[for$=-Anchor] {
 
 .Sidelink {
   --counter: sidenote-link;
+  --link-underline-color: transparent;
+  --link-underline-color--hover: transparent;
 }
 
 a[aria-hidden=true]:not([class]) {
@@ -417,8 +419,45 @@ label[for$=-Anchor] {
 
 
 /* Links */
+:root {
+  --link-underline-width: 1px;
+  --link-underline-offset: 0.37em;
+  --link-underline-color: hsla(
+    var(--THEME_COLOR_H),
+    var(--THEME_COLOR_S--P),
+    var(--THEME_COLOR_L--P),
+    var(--THEME_COLOR_A--LIGHT)
+  );
+  --link-underline-color--hover: currentColor;
+  --link-text-shadow:
+    -2px 0 0 var(--THEME_BG),
+    2px 0 0 var(--THEME_BG),
+    -1px 0 var(--THEME_BG),
+    1px  0 var(--THEME_BG),
+    0 -1px var(--THEME_BG),
+    0 -2px var(--THEME_BG),
+    0 -3px var(--THEME_BG),
+    0 -4px var(--THEME_BG),
+    0 -5px var(--THEME_BG),
+    0 -6px var(--THEME_BG);
+}
+
 a:link {
   color: var(--THEME_LINK);
+
+  text-decoration: none;
+  --underline-width: var(--link-underline-width);
+  background:
+    linear-gradient(var(--link-underline-color), var(--link-underline-color))
+    repeat-x
+    0 calc(50% + var(--link-underline-offset))/16px
+    var(--underline-width);
+  text-shadow: var(--link-text-shadow);
+}
+
+a:hover {
+  --underline-width: calc(2 * var(--link-underline-width));
+  --link-underline-color: var(--link-underline-color--hover);
 }
 
 a:visited {
@@ -442,8 +481,7 @@ a:visited {
   background-color: var(--THEME_SELECTION);
 }
 
-
-/* Same for every theme? Should be moved somewhere? */
+/* More precise color control etc. */
 * {
   color: hsla(
     var(--color-h, 0),
@@ -467,20 +505,26 @@ a:visited {
 
 /* Lists */
 
+:root {
+  --ul-item-content: var(--THEME_LI_CONTENT);
+  --ol-item-content: var(--THEME_LI_CONTENT--OL);
+  --list-item-padding: var(--THEME_INDENT);
+}
+
 ol, ul {
   padding: 0;
-  --list-item-content: "— ";
+  --list-item-content: var(--ul-item-content);
 }
 
 ol {
   counter-reset: list;
-  --list-item-content: counter(list) ". ";
+  --list-item-content: var(--ol-item-content);
 }
 
 li {
   --p-margin-top: 1rem;
 
-  padding: 0 0 0 var(--THEME_INDENT);
+  padding: 0 0 0 var(--list-item-padding);
   text-align: left;
   list-style-type: none; /* Fixme: screenreaders would die out? */
 }

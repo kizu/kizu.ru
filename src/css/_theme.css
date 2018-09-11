@@ -40,9 +40,16 @@
   --THEME_SELECTION: #B1D2FB;
   --THEME_COLOR_H: 52;
   --THEME_COLOR_S: 45;
+  --THEME_COLOR_S--P: calc(1% * var(--THEME_COLOR_S));
   --THEME_COLOR_L: 10;
+  --THEME_COLOR_L--P: calc(1% * var(--THEME_COLOR_L));
   --THEME_COLOR_A: 0.92;
   --THEME_COLOR_A--MISC: 0.62;
+  --THEME_COLOR_A--LIGHT: 0.42;
+
+  --THEME_LI_CONTENT: "— ";
+  --THEME_LI_CONTENT--OL: counter(list) ". ";
+
 
   /* UNUSED */
   --THEME_COLOR_A--DISTANT: 0.48;
