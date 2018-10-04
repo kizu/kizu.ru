@@ -22,7 +22,7 @@ The goal is to have an element in the end of the list that would go right after 
 
 Here is a demo that uses the effect, described in this argicle, try to resize your browser and then guess what and why happens inside:
 
-{{<Partial "the-flow-of-display1.html" />}}
+{{<Partial src="the-flow-of-display1.html" />}}
 
 Now I'll give you a hint: what could disable the effect of the `float`, but still would have `display` to have an effect on an element? There is one property you can add that would make all the difference.
 
@@ -44,7 +44,7 @@ This means that if our block with `position:absolute` don't have the `top`, `rig
 
 Look at this simple example:
 
-{{<Partial "the-flow-of-display2.html" />}}
+{{<Partial src="the-flow-of-display2.html" />}}
 
 The `html` for those blocks is the same, with the only difference of the used classes:
 
@@ -85,7 +85,7 @@ Wonderful! Think a bit about all this. Of course, the `float` is not needed ther
 
 Now I'll try to explain the case I shown above, I'll show you it once again (resize your browser, blah blah):
 
-{{<Partial "the-flow-of-display1.html" />}}
+{{<Partial src="the-flow-of-display1.html" />}}
 
 What happens here (and what needed to be achieved) is that the last item from the list should be always on the first line, going after all the other items which are wrapped if they don't have enought place for them.
 

@@ -12,49 +12,49 @@ I managed to make this work with one assumption — we would need to know t
 
 1. We would need to have an extra element. HTML for each block would be like this:
 
-        <span class="rotated-text">
-            <span class="rotated-text__inner">
-                Rotated foo
-            </span>
+    ``` HTML
+    <span class="rotated-text">
+        <span class="rotated-text__inner">
+            Rotated foo
         </span>
-    
-        {:.language-html}
+    </span>
+    ```
 
 2. Wrapper would get those styles:
 
-        .rotated-text {
-            display: inline-block;
-            overflow: hidden;
+    ``` CSS
+    .rotated-text {
+        display: inline-block;
+        overflow: hidden;
 
-            width: 1.5em;
-            line-height: 1.5;
-        }
-    
-        {:.language-css}
+        width: 1.5em;
+        line-height: 1.5;
+    }
+    ```
 
     Here we make our element to be inline-block (that’s not critical, the block display would work too, but inline-block is often handier), then we remove all the extra things using overflow (we would need this later) and set the width to the current elements’ height — the mentioned assumption (and `line-height` is placed here as an example of what defines the blocks’ height).
 
 3. Then we make the inner element to be inline-block too, so its width would be collapsed to its content. After this we make it have `white-space:nowrap`, so nothing would wrap (because of the fixed width in the previous step), and then we actually rotate the block from the left top corner using `transform-origin` (for readability the transform properties are given without proper prefixes):
 
-        .rotated-text__inner {
-            display: inline-block;
-            white-space: nowrap;
+    ``` CSS
+    .rotated-text__inner {
+        display: inline-block;
+        white-space: nowrap;
 
-            transform: translate(0,100%) rotate(-90deg);
-            transform-origin: 0 0;
-        }
-    
-        {:.language-css}
+        transform: translate(0,100%) rotate(-90deg);
+        transform-origin: 0 0;
+    }
+    ```
 
 4. And now the key part of my solution: we need to make this inner element to be _square_ — this would make the resulting element to have the height of its width, and the width would be equal to the assumed height on the wrapper. So, to make an element squarish we use this trick:
 
-        .rotated-text__inner:after {
-            content: "";
-            float: left;
-            margin-top: 100%;
-        }
-    
-        {:.language-css}
+    ``` CSS
+    .rotated-text__inner:after {
+        content: "";
+        float: left;
+        margin-top: 100%;
+    }
+    ```
 
     Not that hard, but not a lot of people remember that top and bottom paddings and margins set in percents are using the width of the parent element, not its height. This behavior is not widely used, but here is a case where it’s useful at last.
 
@@ -66,13 +66,13 @@ And just some basic examples of usage:
 
 An obvious example — compact table headers what don’t take that much of horizontal space:
 
-{{<Partial "rotated-text.html" />}}
+{{<Partial src="rotated-text.html" />}}
 
 ## “Bookshelf”
 
 As all the rotated blocks have fair place in a flow, you could arrange them in a row so they won’t overlap each other and the height of the whole row would be equal to the “highest” of them:
 
-{{<Partial "rotated-text_books.html" />}}
+{{<Partial src="rotated-text_books.html" />}}
 
 So, that’s it.
 

@@ -2,4 +2,4 @@
 
 Попробуйте понаводить курсор на этот блок с разных сторон
 
-{{<Partial "hovers.html" />}}
+{{<Partial src="hovers.html" />}}

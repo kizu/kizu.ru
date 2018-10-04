@@ -1,4 +1,4 @@
-# Nested Link[s][ss01]
+# Nested Links
 
 ![Cats playing nested links](nested-links.jpg "asdasd")
 
@@ -16,34 +16,36 @@ HTML specification has a lot of different restrictions. And I have my doubts
 
 And if you’d do this, browser’s parser won’t understand you and, as soon as it’d see the opening tag for the nested link, it would close the first one right there:
 
-    <a href="#Foo">
-        Foo
-        <a href="#Bar">
-            Bar
-        </a>
-        Baz
+``` HTML
+<a href="#Foo">
+    Foo
+    <a href="#Bar">
+        Bar
     </a>
-
-    {:.language-html}
+    Baz
+</a>
+```
 
 in the eyes of the browser would be something like that —
 
-    <a href="#Foo">
-        Foo
-        </a><a href="#Bar">
-            Bar
-        </a>
-        Baz
-
-    {:.language-html}
+``` HTML
+<a href="#Foo">
+    Foo
+    </a><a href="#Bar">
+        Bar
+    </a>
+    Baz
+```
 
 And a live example:
 
-{{<Partial "examples/nested-links-broken.html" />}}
+{{<Partial src="examples/nested-links-broken.html" iframe="true" height="1.5em" />}}
 
 However, there are cases when you’d want to nest one link inside another despite the restrictions.
 
-So, once again, while working on one task I stumbled upon such case. I happen to see and use different workarounds for it before, like an emulation of the nested links with JS (for example, with banal `onclick`), or positioning one of the links around the [shared wrapper](*shared-wrapper "Look at [such solution](http://jsfiddle.net/csswizardry/rxsna/) by Harry Roberts"), but all those workarounds wouldn’t work in all cases, and wouldn’t work perfectly. We’d either lose the nativity of a link, trying to emulate everything from scratch, either won’t be able to make a workaround work just like properly nested elements would.
+So, once again, while working on one task I stumbled upon such case. I happen to see and use different workarounds for it before, like an emulation of the nested links with JS (for example, with banal `onclick`), or positioning one of the links around the shared wrapper[^shared-wrapper], but all those workarounds wouldn’t work in all cases, and wouldn’t work perfectly. We’d either lose the nativity of a link, trying to emulate everything from scratch, either won’t be able to make a workaround work just like properly nested elements would.
+
+[^shared-wrapper]: Look at [such solution](http://jsfiddle.net/csswizardry/rxsna/) by Harry Roberts. <!-- offset="3" -->
 
 So, after trying and weighing all the known workarounds in my head, I found out that I couldn't solve the current task by any of the workarounds other than full JS emulation. But I stopped and decided to experiment a bit more.
 
@@ -52,25 +54,27 @@ And — found a proper solution. HTML-only one, by the way, the one that give
 
 ## The solution
 
-{{<Partial "examples/nested-links-simple.html" />}}
+{{<Partial src="examples/nested-links-simple.html" />}}
 
-    <a href="#a">
-        Foo
-        <object type="lol/wut">
-            <a href="#b">
-                Bar
-            </a>
-        </object>
-        Baz
-    </a>
-
-    {:.language-html}
+``` HTML
+<a href="#a">
+    Foo
+    <object type="owo/uwu">
+        <a href="#b">
+            Bar
+        </a>
+    </object>
+    Baz
+</a>
+```
 
 What we do there is just placing an object between those links. Yep, it works: all parsers of modern browsers suddenly see those links independently, and won’t break your markup anymore. Hooray.
 
 ## Why does it work
 
-What are objects, in theory? They are some external entities, with the type set by the `type` attribute and the content or a link to it placed into the `data` attribute. And the content between the opening and closing `object` tags is, [in fact](*update "Actually, see the [Update](#update-from-2015-03-05)"), a fallback, and it would be shown only when browser wouldn’t be capable of displaying the object defined in the attributes. Like, for example, if you won’t have an installed plugin.
+What are objects, in theory? They are some external entities, with the type set by the `type` attribute and the content or a link to it placed into the `data` attribute. And the content between the opening and closing `object` tags is, in fact[^update], a fallback, and it would be shown only when browser wouldn’t be capable of displaying the object defined in the attributes. Like, for example, if you won’t have an installed plugin.
+
+[^update]: Actually, see the [Update](#update-from-2015-03-05). <!-- offset="3" -->
 
 And if you’d write some gibberish MIME-type into the `type` attribute, a browser wouldn’t understand it and would go straight to displaying the fallback. And, in fact, it would do the same even if you’d omit those “required” attributes at all.
 
@@ -97,22 +101,24 @@ Obviously, the only browsers we’d need to support with such conditions are ol
 
 I don’t know of any easy solution for this problem in old IE. At the very least you could try to fix it somehow by “removing” the nested links using conditional comments:
 
-    <a href="…">
-        content of the main link…
-        <object>
-            <!--[if gte IE 9]><!--><a href="…"><!--<![endif]-->
-                content of the nested link…
-            <!--[if gte IE 9]><!--></a><!--<![endif]-->
-        </object>
-    </a>
+``` HTML
+<a href="…">
+    content of the main link…
+    <object>
+        <!--[if gte IE 9]><!--><a href="…"><!--<![endif]-->
+            content of the nested link…
+        <!--[if gte IE 9]><!--></a><!--<![endif]-->
+    </object>
+</a>
+```
 
-    {:.language-html}
+You’d lose some functionality there, but it could be ok for the most cases. If not[^try-expressions], you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
 
-You’d lose some functionality there, but it could be ok for the most cases. [If not](*try-expressions "Curious ones could think about if it is possible to make a fallback using expressions"), you could then insert those links later, separately, using the same conditional comments, or use other workarounds for this problem.
+[^try-expressions]: Curious ones could think about if it is possible to make a fallback using expressions. <!-- offset="1" -->
 
 ## Is it valid?
 
-Nope, not even close. It is not valid because we don’t have any of the required attributes on an object. We could set some dummy, but [valid mime-type](http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type), like `type="lol/wut"`, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.
+Nope, not even close. It is not valid because we don’t have any of the required attributes on an object. We could set some dummy, but [valid mime-type](http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type), like `type="owo/uwu"`, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.
 
 Obviously, a validator is a tool not showing anything but the formal specifications compliance. In our case, the usage of links inside objects is entirely reasonable and won’t break anything for anyone if we’d make things in a proper way.
 
@@ -139,4 +145,4 @@ The `<object>` trick solves all those problems. The question is only if such u
 
 ## Update from 2015-03-05
 
-[Vladimir Rodkin](https://github.com/VovanR) found out that Firefox’ Flashblock plugin removes “broken objects”, and it treats attributeless `<object>` as such. Adding unknown mime-type like `type="lol/wut"` fixes this problem and Fx starts to show the object correctly.
+[Vladimir Rodkin](https://github.com/VovanR) found out that Firefox’ Flashblock plugin removes “broken objects”, and it treats attributeless `<object>` as such. Adding unknown mime-type like `type="owo/uwu"` fixes this problem and Fx starts to show the object correctly.

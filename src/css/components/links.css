@@ -1,0 +1,66 @@
+/* Links */
+:root {
+  --link-color: var(--THEME_LINK);
+  --link-color--hover: var(--link-color);
+  --link-color--visited: var(--THEME_VISITED);
+  --link-underline-width: 1px;
+  --link-underline-offset: 0.37em;
+  --link-underline-color: hsla(
+    var(--THEME_COLOR_H),
+    var(--THEME_COLOR_S--P),
+    var(--THEME_COLOR_L--P),
+    var(--THEME_COLOR_A--LIGHT)
+  );
+  --link-underline-color--hover: currentColor;
+  --link-text-shadow:
+    -2px 0 0 var(--THEME_BG),
+    2px 0 0 var(--THEME_BG),
+    -1px 0 var(--THEME_BG),
+    1px  0 var(--THEME_BG),
+    0 -0.5px var(--THEME_BG),
+    0 -1px var(--THEME_BG),
+    0 -1.5px var(--THEME_BG),
+    0 -2px var(--THEME_BG),
+    0 -2.5px var(--THEME_BG),
+    0 -3px var(--THEME_BG),
+    0 -3.5px var(--THEME_BG),
+    0 -4px var(--THEME_BG),
+    0 -4.5px var(--THEME_BG),
+    0 -5px var(--THEME_BG),
+    0 -5.5px var(--THEME_BG),
+    0 -6px var(--THEME_BG);
+}
+
+a[href] {
+  color: var(--link-color);
+  hyphens: none;
+}
+
+span {
+  --underline: 0;
+}
+
+a:link {
+  text-decoration: none;
+  text-shadow: var(--link-text-shadow);
+  --underline-width: var(--link-underline-width);
+}
+
+a:link,
+span {
+  background:
+    linear-gradient(var(--link-underline-color), var(--link-underline-color))
+    repeat-x
+    0 calc(50% + var(--link-underline-offset))/16px
+    calc(var(--underline-width) * var(--underline, 1));
+}
+
+a:visited {
+  color: var(--link-color--visited);
+}
+
+a:hover {
+  --underline-width: calc(2 * var(--link-underline-width));
+  --link-underline-color: var(--link-underline-color--hover);
+  color: var(--link-color--hover);
+}

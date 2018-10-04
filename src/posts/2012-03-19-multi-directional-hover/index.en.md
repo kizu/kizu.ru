@@ -2,4 +2,4 @@
 
 Try to hover this block from different directions
 
-{{<Partial "hovers.html" />}}
+{{<Partial src="hovers.html" />}}

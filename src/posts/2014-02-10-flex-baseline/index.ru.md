@@ -12,15 +12,17 @@
 
 Вот пример: все три блока имеют `display: inline-block`. Первый — обычный однострочный и с большим паддингом, второй — многострочный, но с меньшим размером шрифта, третий — однострочный, но с `overflow: auto`.
 
-{{<Partial "examples/flex-baseline1.html" />}}
+{{<Partial src="examples/flex-baseline1.html" />}}
 
-На этом примере [хорошо видно](*safari "Кстати, в последних Сафари, внезапно, блок с overflow ведёт себя не по спецификации"), где у какого блока находится базовая линия.
+На этом примере хорошо видно[^safari], где у какого блока находится базовая линия.
+
+[^safari]: Кстати, в последних Сафари, внезапно, блок с overflow ведёт себя не по спецификации
 
 ## inline-table
 
 В CSS было одно место, где вертикальное выравнивание работало *правильно* — `display: inline-table`. Заменяем инлайн-блоки на него и получаем, казалось бы, то, что нужно:
 
-{{<Partial "examples/flex-baseline2.html" />}}
+{{<Partial src="examples/flex-baseline2.html" />}}
 
 Но тут сразу видно: не работает overflow: auto. К тому же такому блоку нужно задавать `table-layout: fixed`. Получается идеально, если не нужен `overflow: auto`.
 
@@ -28,7 +30,7 @@
 
 Можно ли сделать блок со скроллбаром, который будет правильно выравниваться? Тут на помощь спешат флексбоксы, точнее, `display: inline-flex`. В [теории][flex-baselines] они также имеют правильное положение базовой линии, но что мы получаем на практике?
 
-{{<Partial "examples/flex-baseline3.html" />}}
+{{<Partial src="examples/flex-baseline3.html" />}}
 
 Если вы посмотрите на этот пример в любом браузере кроме Firefox (да, даже в IE 10 и 12-й Опере), то вы видите идельно выровненные блоки.
 
@@ -38,7 +40,7 @@
 
 Очень здорово, что `inline-flex` сам по себе правильно выравнивается относительно остальных блоков, и, если бы не баг Fx, всё было бы совсем замечательно. Но что если мы попробуем выравнивать не разные `inline-flex` относительно друг друга, а элементы внутри флексбокса?
 
-{{<Partial "examples/flex-baseline4.html" />}}
+{{<Partial src="examples/flex-baseline4.html" />}}
 
 Оп! Всё работает! Вот только… Если отдельные блоки с `inline-flex` сами по себе переносятся на новую строку, то для элементов внутри флексбокса нам надо было бы применять `flex-wrap`. Но Firefox его не поддерживал до версии 28.0.
 
@@ -46,11 +48,11 @@
 
 Так! Но ведь если `inline-flex` прокидывает свою базовую линию наверх, а внутренний блок с `overflow: auto` также имеет правильное выравнивание даже в Firefox, то можно же совместить! Добавим в каждый блок по дополнительному элементу, да будем задавать паддинги и overflow уже на них:
 
-{{<Partial "examples/flex-baseline5.html" />}}
+{{<Partial src="examples/flex-baseline5.html" />}}
 
 В нормальных браузерах ничего не поменялось, теперь посмотрим на Firefox… Так, блок уже выравнивается не по нижней границе, но и не по базовой линии. Хотя, измерим разницу: 10 пикселей. Это же наш паддинг! Убираем паддинги по очереди — всё выравнивается правильно, когда верхний паддинг становится равен нулю. Ага, значит Fx в этом случае всё делает почти верно, вот только всплыл новый баг. Пока мы ждём [его исправления][bug2], избавимся-ка от паддинга, заменив его на псевдо-элемент:
 
-{{<Partial "examples/flex-baseline6.html" />}}
+{{<Partial src="examples/flex-baseline6.html" />}}
 
 Идеально!
 
@@ -62,39 +64,41 @@
 
 В Опере очень похожий баг — внутренний блок не реагирует на заданную ширину, из-за чего в блоке нет переносов. Единственный способ это исправить, который я нашёл: добавить родителю `flex-direction: column` — так как у нас всегда только один внутренний элемент, это ни на что не повлияет.
 
-Теперь [идеально](*without-fallbacks "Разве что можно ещё добавить фолбеки для старых браузеров, но это уже выходит за рамки этой статьи"). Вот последний пример с разными вариантами, которые переносятся со строчки на строчку:
+Теперь идеально[^without-fallbacks]. Вот последний пример с разными вариантами, которые переносятся со строчки на строчку:
 
-{{<Partial "examples/flex-baseline7.html" />}}
+[^without-fallbacks]: Разве что можно ещё добавить фолбеки для старых браузеров, но это уже выходит за рамки этой статьи
+
+{{<Partial src="examples/flex-baseline7.html" />}}
 
 Код получается таким:
 
-    .flex {
-        display: -ms-inline-flexbox;
-        display: -webkit-inline-flex;
-        display: inline-flex;
+``` CSS
+.flex {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
 
-        /* Fixing Opera issue */
-        flex-direction: column;
+    /* Fixing Opera issue */
+    flex-direction: column;
 
-        vertical-align: baseline;
-        }
+    vertical-align: baseline;
+    }
 
-    .flex-content {
-        padding: 0 10px 10px;
-        border: 1px solid lime;
+.flex-content {
+    padding: 0 10px 10px;
+    border: 1px solid lime;
 
-        /* Fixing IE issue */
-        -ms-flex-negative: 1;
-        }
+    /* Fixing IE issue */
+    -ms-flex-negative: 1;
+    }
 
-    /* Fixing Fx issue */
-    .flex-content:before {
-        content: "";
-        display: block;
-        padding-top: 10px;
-        }
-
-    {:.language-css}
+/* Fixing Fx issue */
+.flex-content:before {
+    content: "";
+    display: block;
+    padding-top: 10px;
+    }
+```
 
 ## Итого {#resume}
 

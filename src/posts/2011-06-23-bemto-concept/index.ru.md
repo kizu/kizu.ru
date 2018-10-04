@@ -34,52 +34,52 @@
 
 Однако, селекторами дело не ограничивается. Всё то же самое можно сделать и для HAML (и, по идее, для любого шаблонизатора, сам я попробую что-то сделать именно для HAML т.к. его легко парсить, а я не программист :)), в таком случае запись
 
-	.b-bl1
-	  .b-bl2_foo
-	    .__el
-	    .____el_bar
-
-	{:.language-css}
+``` CSS
+.b-bl1
+    .b-bl2_foo
+    .__el
+    .____el_bar
+```
 
 Будет интерпретироваться как
 
-	.b-bl1
-	  .b-bl2.b-bl2_foo
-	    .b-bl2__el
-	    .b-bl1__el.b-bl1__el_bar
-
-	{:.language-css}
+``` CSS
+.b-bl1
+    .b-bl2.b-bl2_foo
+    .b-bl2__el
+    .b-bl1__el.b-bl1__el_bar
+```
 
 Ну а для SASS/SCSS можно написать уже постпроцессор, тогда
 
-	.b-block {
-		…
-		._foo {…}
-		.__element {
-			…
-			._bar {…}
-			}
-		}
-
-	{:.language-css}
+``` CSS
+.b-block {
+    …
+    ._foo {…}
+    .__element {
+        …
+        ._bar {…}
+        }
+    }
+```
 
 будет раскрываться сассом сначала в
 
-	.b-block {…}
-	.b-block ._foo {…}
-	.b-block .__element {…}
-	.b-block .__element ._bar {…}
-
-	{:.language-css}
+``` CSS
+.b-block {…}
+.b-block ._foo {…}
+.b-block .__element {…}
+.b-block .__element ._bar {…}
+```
 
 что потом простейшей регуляркой преобразуется уже в то, что нам нужно:
 
-	.b-block {…}
-	.b-block_foo {…}
-	.b-block__element {…}
-	.b-block__element_bar {…}
-
-	{:.language-css}
+``` CSS
+.b-block {…}
+.b-block_foo {…}
+.b-block__element {…}
+.b-block__element_bar {…}
+```
 
 Вуаля.
 
@@ -87,9 +87,9 @@
 
 И ещё: это пока только начало. В вёрстке и, в частности, в БЭМ я вижу много чего, что можно развивать и улучшать, много моих идей хорошо ложатся рядом с концепцией bemto. Так что, напоследок, можете подумать во что, по моим мыслям, может превратиться следующее:
 
-	.b-block_foo._bar>.__b-link_lol>.__element._
-	
-	{:.language-css}
+``` CSS
+.b-block_foo._bar>.__b-link_lol>.__element._
+```
 
 ## Добавлено:
 

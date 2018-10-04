@@ -1,3 +1,3 @@
 # Попапы и дропдауны
 
-{{<Partial "popups.html" />}}
+{{<Partial src="popups.html" />}}

@@ -24,7 +24,7 @@
 
 Собственно, вот живой пример того, как работает описываемый в этой статье эффект, попробуйте поменять ширину браузера, чтобы увидеть что происходит с элементами списка.
 
-{{<Partial "the-flow-of-display1.html" />}}
+{{<Partial src="the-flow-of-display1.html" />}}
 
 На самом деле тот эффект, что описывается в статье, можно заменить на чуть другой код, но это будет менее лаконично и интересно.
 
@@ -44,37 +44,37 @@
 
 Вот пример работы этого поведения:
 
-{{<Partial "the-flow-of-display2.html" />}}
+{{<Partial src="the-flow-of-display2.html" />}}
 
 HTML обоих примеров одинаков, за исключением классов:
 
-    <p>
-      Hello
-      <span class="a">A</span>
-    </p>
-    <p>
-      Hello
-      <span class="b">B</span>
-    </p>
-    
-    {:.language-html}
+``` HTML
+<p>
+    Hello
+    <span class="a">A</span>
+</p>
+<p>
+    Hello
+    <span class="b">B</span>
+</p>
+```
 
 CSS для них такой:
 
-    .a {
-        float: left;
-        display: inline-block;
-        }
-    .b {
-        float: left;
-        display: block;
-        }
-    .a,
-    .b {
-        position: absolute;
-        }
-
-    {:.language-css}
+``` CSS
+.a {
+    float: left;
+    display: inline-block;
+    }
+.b {
+    float: left;
+    display: block;
+    }
+.a,
+.b {
+    position: absolute;
+    }
+```
 
 Да, `float` тут не нужен, в этом случае он ничего не делает, но он и не будет отменять поведение `display`. И, тогда как оба элемента полностью одинаковы и имеют `position:absolute`, из-за значений `display` результат различается.
 
@@ -88,50 +88,50 @@ CSS для них такой:
 
 Не самая простая задачка, причём я сам её сходу не смог быстро решить, но, по крайней мере, теперь я знаю как это сделать и почему это можно сделать именно так.
 
-HTML для этого списка: 
+HTML для этого списка:
 
-    <ul class="just-some-items">
-        <li class="just-some-item">One</li>
-        <li class="just-some-item">Two</li>
-        <li class="just-some-item">Three</li>
-        <li class="just-some-item">Four</li>
-        <li class="just-some-item">Five</li>
-        <li class="just-some-item">Six</li>
-        <li class="just-some-item">Seven</li>
-        <li class="just-some-item">Eight</li>
-        <li class="just-some-item">Nine</li>
-        <li class="just-some-item">Ten</li>
-        <li class="just-some-item">Eleven</li>
-        <li class="just-some-item">…last</li>
-    </ul>
-
-    {:.language-html}
+``` HTML
+<ul class="just-some-items">
+    <li class="just-some-item">One</li>
+    <li class="just-some-item">Two</li>
+    <li class="just-some-item">Three</li>
+    <li class="just-some-item">Four</li>
+    <li class="just-some-item">Five</li>
+    <li class="just-some-item">Six</li>
+    <li class="just-some-item">Seven</li>
+    <li class="just-some-item">Eight</li>
+    <li class="just-some-item">Nine</li>
+    <li class="just-some-item">Ten</li>
+    <li class="just-some-item">Eleven</li>
+    <li class="just-some-item">…last</li>
+</ul>
+```
 
 А CSS таков (я оставлю часть презентационных стилей за рамками):
 
-    .just-some-items {
-        overflow: hidden;
+``` CSS
+.just-some-items {
+    overflow: hidden;
 
-        height: 2em;
-        padding-right: 2.4em;
-        margin: 0;
-        }
-    .just-some-item {
-        float: left;
+    height: 2em;
+    padding-right: 2.4em;
+    margin: 0;
+    }
+.just-some-item {
+    float: left;
 
-        margin-right: 0.5em;
+    margin-right: 0.5em;
 
-        line-height: 2em;
-        }
-    .just-some-item:last-child {
-        position: absolute;
+    line-height: 2em;
+    }
+.just-some-item:last-child {
+    position: absolute;
 
-        display: inline-block;
+    display: inline-block;
 
-        width: 2.4em;
-        }
-
-    {:.language-css}
+    width: 2.4em;
+    }
+```
 
 Даже зная, что происходит внутри, когда я увидел этот код в первый раз, я не сразу в нём разобрался. А происходит тут следующее:
 

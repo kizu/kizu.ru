@@ -1,3 +1,3 @@
 # Скруглённые внутренние углы
 
-{{<Partial "rounded-inner-corners.html" />}}
+{{<Partial src="rounded-inner-corners.html" />}}

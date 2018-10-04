@@ -19,7 +19,7 @@ Here is an excerpt from the [latest Selectors Level 4 spec](https://drafts.csswg
 
 Here is a simple example of this behaviour:
 
-{{<Partial "examples/1.html" />}}
+{{<Partial src="examples/1.html" />}}
 
 If you're using any modern browser, you could see the input to be highlighted both when you hover the input itself and the label associated with it.
 
@@ -61,7 +61,7 @@ Like this:
 
 And if we'd add the same CSS as for the example above, we'd get the same result:
 
-{{<Partial "examples/2.html" />}}
+{{<Partial src="examples/2.html" />}}
 
 For now the result is the same. But there is one big difference. Let's add some styles like this:
 
@@ -73,7 +73,7 @@ ul.example3 > li:hover {
 
 Now look at the following example and try to hover over the input itself and the associated label:
 
-{{<Partial "examples/3.html" />}}
+{{<Partial src="examples/3.html" />}}
 
 You should see there that, as probably expected, only the actual list item that is hovered would obtain the above styles. Giving the input the `:hover` state using the label trick won't trigger the `:hover` over its parent. All like was written in the specs.
 
@@ -99,7 +99,7 @@ And that means that we can now actually style both hover states in different way
 
 Here is that example working:
 
-{{<Partial "examples/4.html" />}}
+{{<Partial src="examples/4.html" />}}
 
 ## Selecting Siblings
 
@@ -111,7 +111,7 @@ As we saw, the parent is, per spec, won't get the hover state of such delegated 
 
 Like this:
 
-{{<Partial "examples/5.html" />}}
+{{<Partial src="examples/5.html" />}}
 
 In Firefox and browsers based on Webkit/Blink you could see the link that goes after the input to be highlighted even when you hover the label inside another list item! In Edge, sadly, nothing happens there.
 
@@ -121,9 +121,9 @@ And, as in the browsers that support it, this behaviour would work even if the i
 
 The most <input disabled aria-hidden="true" class="lol-example" id="Example6-5" type="radio" /><span class="example-target">fun</span> thing what I found when doing quick experiments <input disabled aria-hidden="true" class="lol-example" id="Example6-6" type="radio" /><span class="example-target">is</span> this:
 
-{{<Partial "examples/6.html" />}}
+{{<Partial src="examples/6.html" />}}
 
-Sadly, there I used the <input disabled aria-hidden="true" class="lol-example" id="Example6-7" type="radio" /><span class="example-target">forbidden in specs</span> nesting of labels inside other labels (which we could actually overcome in terms of _validity_ using either the method for [nesting links](:nested-links) or by DOM manipulation), which surprisingly works as we'd expect: you hover one (visually) item, and then you get visual feedback from any number of places all over the page.
+Sadly, there I used the <input disabled aria-hidden="true" class="lol-example" id="Example6-7" type="radio" /><span class="example-target">forbidden in specs</span> nesting of labels inside other labels (which we could actually overcome in terms of _validity_ using either the method for [nesting links]({{% LinkTo nested-links %}}) or by DOM manipulation), which surprisingly works as we'd expect: you hover one (visually) item, and then you get visual feedback from any number of places all over the page.
 
 Imagine if this would be the thing we could use without hacks and without relying on the label-to-input state delegation.
 

@@ -3,7 +3,6 @@
 \* ======================= */
 
 /*
-
   1. All the `@font-face` for the fonts alongside `@import` of the counter.
      TODO: keep only the font for headers & use default ones for everything else?
   2. All the basic variables on `:root` alongside the only media query.
@@ -13,9 +12,21 @@
 */
 
 @import url("_fonts.css");  /* [1] */
+@import url("_prism.css");  /* [4] */
+
+@import url("_fallback.css");
+
+/* Top level batch supports lock */
+@supports (--var:iables) {
+
 @import url("_config.css"); /* [2] */
 @import url("_theme.css");  /* [3] */
-@import url("_prism.css");  /* [4] */
+@import url("components/asides.css");
+@import url("components/lists.css");
+@import url("components/sidenotes.css");
+@import url("components/firstletters.css");
+@import url("components/links.css");
+@import url("components/color-components.css");
 
 /*
   1. Prevents the different widths when there is not enough content to create a scroll.
@@ -26,6 +37,10 @@ html {
   overflow-y: scroll; /* [1] */
   font-size: var(--THEME_ROOT_FONT_SIZE);
   background: var(--THEME_BG);
+
+  /* Should be tested in IE/Edge */
+  /* There were problems, but with a variable it could be ok? */
+  text-shadow: var(--THEME_TEXT_SHADOW);
 }
 
 body {
@@ -44,7 +59,7 @@ body {
   margin: 0;
 
   /* For subgrid substitute */
-  counter-reset: asides 9;
+  counter-reset: var(--asides-counter) var(--sidenote-counters);
 
   /* Should this be a part of utility definition? */
   font: var(--THEME_FONT);
@@ -64,24 +79,10 @@ header {
   --list-item-padding: 0;
 }
 
-/* For subgrid substitute */
-header::after {
-  content: counter(asides);
-  grid-column: aside;
-
-  line-height: var(--aside-width);
-  writing-mode: vertical-lr;
-  word-wrap: break-word;
-
-  height: 0;
-  visibility: hidden;
-  margin-left: calc(-1 * var(--aside-width));
-  max-width: calc(2 * var(--aside-width));
-}
-
 
 /* Grid stuff start */
 header,
+footer,
 main {
   display: grid;
   grid-template: var(--grid);
@@ -97,25 +98,55 @@ figure {
   /* Here I'd like to _use_ variable, but prevent it from being passed down */
   grid-column: content;
   --grid-column: initial;
+  --text-indent: 0;
+  --link-text-shadow: none;
+
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background: #FFF;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
+
+.Figure {
+  grid-column: figure;
+  --grid-column: content;
+
+  display: grid;
+  grid: var(--figure-subgrid);
+  grid-gap: 0 var(--h-gap);
+  padding: 1rem 0;
+  margin: 2rem 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  background: rgba(37,34,14, 0.05);
+  box-shadow: none;
+  --img-margin: 0 0 0 var(--h-gap);
+  --img-max-width: calc(100% - var(--h-gap));
+}
+
 /* Grid stuff end */
 
+footer {
+  --text-indent: 0;
+}
+
 ul {
-  /* Utility definition */
   display: var(--ul-display);
   justify-content: var(--ul-justify-content);
 }
 
 nav {
-  /* Utility usage */
   --ul-display: flex;
   --ul-justify-content: space-between;
+  --link-color: currentColor;
+  --link-color--visited: currentColor;
+  --link-underline-offset: 0.45em;
+  font-size: var(--THEME_FONT_SIZE--SMALL);
 }
 
 time {
-  /* FIXME: replace with utility? */
-  font-size: var(--THEME_FONT_SIZE--SMALL);
-
   --color-a: 0.75;
 }
 
@@ -133,13 +164,8 @@ html {
   cursor: default;
 }
 
-main {
-  /* FIXME: use utility? or do we need justify there at all? */
-  text-align: justify;
-}
-
 img {
-  max-width: 100%;
+  max-width: var(--img-max-width, 100%);
   border: none;
   display: var(--img-display, inline-block);
   margin: var(--img-margin, 0);
@@ -152,12 +178,20 @@ img:only-child {
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
   text-align: center;
   font-size: 1rem;
   line-height: 1em;
   font-weight: 900;
+}
+
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6 {
+  margin-top: 0;
 }
 
 h1 {
@@ -174,9 +208,16 @@ h3 {
   line-height: 2rem;
 }
 
-
 hr {
   visibility: hidden;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin: 0;
 }
 
 p {
@@ -189,47 +230,34 @@ p:empty {
   display: none;
 }
 
-/* That's the only type of combinator which is allowed I guess */
-p + p,
-p + aside + p {
+/* The only case when we don't need an indent is after headers */
+/* TODO: Do we need this only for _en? */
+:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) + p {
   --p-text-indent: var(--text-indent);
   --p-margin-top: var(--p-p-margin-top);
 }
 
-ul, ol {
-  padding: 0 0 0 var(--THEME_INDENT);
+main {
+  /* text-align: justify; */
 }
 
-aside {
-  --grid-column: aside;
-  grid-row-end: span var(--span);
-  align-self: var(--align, start);
-
-  width: var(--aside-width); /* There was min-width — why not just width? */
-  margin-left: var(--initial-at-large, auto);
-
-  counter-increment: asides;
-
-  text-align: left;
-  font: var(--THEME_FONT--SMALL);
-  font-feature-settings: "lnum", "onum" 0;
-  padding-top: 0.375em;
-  margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
-  --text-indent: 0;
-  --p-p-margin-top: 1.5em;
-  --link-underline-offset: 0.5em;
-}
-
-aside[style*='--align:end;'] {
-  padding-top: 0;
-  padding-bottom: 0.375em;
+em {
+  font-style: var(--em-font-style, italic);
 }
 
 blockquote {
-  padding: var(--v-gap) var(--THEME_INDENT);
+  padding: 0 var(--THEME_INDENT);
+  margin: 1rem 0;
+  box-shadow: inset 2px 0;
   font-style: italic;
-  text-align: left;
   --text-indent: 0;
+  --em-font-style: normal;
+  --code-font-style: normal;
+}
+
+table {
+  margin: 1rem 0;
+  text-align: center;
 }
 
 code,
@@ -239,8 +267,10 @@ kbd {
 }
 
 pre {
+  display: flex;
   white-space: pre-wrap;
   font-family: Monaco, Consolas, monospace, monospace;
+  --code-padding: 0 0 0 var(--h-gap);
   --code-font-style: normal;
   --code-line-height: 1.5rem;
   font-size: var(--THEME_FONT_SIZE--CODE);
@@ -252,292 +282,34 @@ pre {
 
   padding: 1rem 0;
 
-  text-align: left;
-
   --code-color: currentColor;
 
   border-radius: 3px;
 }
 
 /* TODO: move to external import, like an escape hatch */
+/* Or just remove all the unneeded stuff from Prism? */
 pre:not(.z):not(.z) {
+  padding: 1rem 0;
+  margin: 1rem 0;
   background: #FFF; /* Overrides prism.js one */
 }
 
-code {
+code:not(.z):not(.z) {
   font: inherit;
+  white-space: pre-wrap;
+  max-width: 100%;
+  padding: var(--code-padding, 0);
   font-style: var(--code-font-style, italic);
   line-height: var(--code-line-height, 1);
   color: var(--code-color, #690);
   hyphens: none;
 }
 
-/* Handling fancy first letters */
-/* Not ::first-letter as there are some problems with it in some browsers */
-.FirstLetter {
-  margin-left: var(--fletter-offset, -0.15em);
-  font-feature-settings: var(--fletter-style, "ss01");
-}
-
-[aria-label^='C'],
-[aria-label^='С'],
-[aria-label^='Э'] {
-  --fletter-style: "ss02";
-  --fletter-offset: -0.05em;
-}
-[aria-label^='К'],
-[aria-label^='Т'] {
-  --fletter-style: "ss04";
-}
-
-[aria-label^='Ч'] {
-  --fletter-offset: -0.2em;
-}
-
-[aria-label^='А'],
-[aria-label^='A'],
-[aria-label^='Ф'],
-[aria-label^='Д'],
-[aria-label^='З'],
-[aria-label^='О'],
-[aria-label^='O'],
-[aria-label^='Ж'],
-[aria-label^='Я'],
-[aria-label^='Q'],
-[aria-label^='S'],
-[aria-label^='G'],
-[aria-label^='Z'] {
-  --fletter-offset: -0.05em;
-}
-
-/* Kerning is not applied there, need to do manually */
-[aria-label^='Va'] {
-  --fletter-offset: -0.11em;
-}
-
-
-
-main {
-  counter-reset: sidenote sidenote-link;
-}
-
-/* Sidenotes stuff */
-.Sidenote,
-.Sidelink {
-  position: relative;
-  z-index: 1;
-
-  display: inline-block;
-  text-indent: 0;
-  --link-text-shadow: none;
-}
-
-.Highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -2;
-
-  width: 100%;
-  height: 100%;
-
-  transition: background-color 0.2s 0.2s linear;
-  counter-increment: var(--counter);
-}
-
-.Sidenote:not(:hover),
-.Sidelink:not(:hover) {
-  --highlight-hover: rgba(255, 255, 0, 0.3);
-}
-
-.Highlight:hover {
-  background: var(--highlight-hover);
-}
-
-label[for$=-Anchor] {
-  display: block;
-}
-
-.Sidelink {
-  --counter: sidenote-link;
-  --link-underline-color: transparent;
-  --link-underline-color--hover: transparent;
-}
-
-a[aria-hidden=true]:not([class]) {
-  /* Maybe just reset lol? */
-  display: inline;
-  color: inherit;
-  text-decoration: none;
-}
-
-a[href^='#'][aria-hidden=true]:not([class])::after {
-  content: counter(sidenote-link);
-
-  position: relative;
-  top: -0.555rem;
-
-  cursor: pointer;
-
-  padding: 0 0.16em;
-
-  font-size: 1rem;
-  line-height: 1;
-
-  color: rgba(0,0,0, 0.6);
-
-  font-feature-settings: "smcp";
-}
-
-.Sidenote {
-  --counter: sidenote;
-}
-
-label[for$=-Anchor] {
-  padding-right: var(--h-gap);
-}
-
-.Highlight[id$=-Content]::before {
-  content: counter(sidenote) ". ";
-
-  position: absolute;
-  left: -1.25rem;
-
-  width: 1rem;
-
-  text-align: right;
-  color: rgba(0,0,0, 0.6);
-  transition: opacity 0.2s 0.2s linear;
-
-  opacity: var(--highlight-opacity, calc(1 - var(--at-large)));
-}
-
-.Highlight[id$=-Content]:hover,
-.Sidenote:hover {
-  --highlight-opacity: 1;
-}
-
-
-/* Links */
-:root {
-  --link-underline-width: 1px;
-  --link-underline-offset: 0.37em;
-  --link-underline-color: hsla(
-    var(--THEME_COLOR_H),
-    var(--THEME_COLOR_S--P),
-    var(--THEME_COLOR_L--P),
-    var(--THEME_COLOR_A--LIGHT)
-  );
-  --link-underline-color--hover: currentColor;
-  --link-text-shadow:
-    -2px 0 0 var(--THEME_BG),
-    2px 0 0 var(--THEME_BG),
-    -1px 0 var(--THEME_BG),
-    1px  0 var(--THEME_BG),
-    0 -1px var(--THEME_BG),
-    0 -2px var(--THEME_BG),
-    0 -3px var(--THEME_BG),
-    0 -4px var(--THEME_BG),
-    0 -5px var(--THEME_BG),
-    0 -6px var(--THEME_BG);
-}
-
-a:link {
-  color: var(--THEME_LINK);
-
-  text-decoration: none;
-  --underline-width: var(--link-underline-width);
-  background:
-    linear-gradient(var(--link-underline-color), var(--link-underline-color))
-    repeat-x
-    0 calc(50% + var(--link-underline-offset))/16px
-    var(--underline-width);
-  text-shadow: var(--link-text-shadow);
-}
-
-a:hover {
-  --underline-width: calc(2 * var(--link-underline-width));
-  --link-underline-color: var(--link-underline-color--hover);
-}
-
-a:visited {
-  color: var(--THEME_VISITED);
-}
-
-
-/* Wrapper is needed to fix strange IE10+ bugs with text-shadow */
-/* TODO: I think there was a way to do this in reverse, like in normalize? */
-@media screen {
-  @media (min-width: 0px) {
-    html {
-      text-shadow: var(--THEME_TEXT_SHADOW);
-    }
-  }
-}
-
-
 ::selection {
   text-shadow: none !important;
   background-color: var(--THEME_SELECTION);
 }
 
-/* More precise color control etc. */
-* {
-  color: hsla(
-    var(--color-h, 0),
-    calc(var(--color-s, 0) * 1%),
-    calc(var(--color-l, 0) * 1%),
-    calc(var(--inherited-a, var(--color-a, 1)) + 0 / (1 - var(--color-a, 1)))
-  );
-  --color-a: 1;
-}
-
-:root {
-  --color-h: var(THEME_COLOR_H);
-  --color-s: var(THEME_COLOR_S);
-  --color-l: var(THEME_COLOR_L);
-  --color-a: var(THEME_COLOR_A);
-
-  --inherit-custom-color: 0;
-  --inherited-a: initial;
-}
-
-
-/* Lists */
-
-:root {
-  --ul-item-content: var(--THEME_LI_CONTENT);
-  --ol-item-content: var(--THEME_LI_CONTENT--OL);
-  --list-item-padding: var(--THEME_INDENT);
-}
-
-ol, ul {
-  padding: 0;
-  --list-item-content: var(--ul-item-content);
-}
-
-ol {
-  counter-reset: list;
-  --list-item-content: var(--ol-item-content);
-}
-
-li {
-  --p-margin-top: 1rem;
-
-  padding: 0 0 0 var(--list-item-padding);
-  text-align: left;
-  list-style-type: none; /* Fixme: screenreaders would die out? */
-}
-
-li::before {
-  content: var(--list-item-content);
-  counter-increment: list;
-
-  position: absolute;
-
-  width: var(--THEME_INDENT);
-  margin-left: calc(-1*var(--THEME_INDENT));
-
-  text-align: left;
-  font-feature-settings: "lnum", "onum" 0;
+/* End of the top level `@supports` */
 }

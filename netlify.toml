@@ -3,7 +3,7 @@
   command = "HUGO_BASEURL=$URL gulp build"
 
 [build.environment]
-  HUGO_VERSION = "0.38.1"
+  HUGO_VERSION = "0.48"
 
 [context.deploy-preview]
   command = "HUGO_BASEURL=$DEPLOY_PRIME_URL gulp build"

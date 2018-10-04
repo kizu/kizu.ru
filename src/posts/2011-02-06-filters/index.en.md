@@ -5,6 +5,6 @@
 
 Just CSS, no JS, enjoy!
 
-{{<Partial "filters.html" />}}
+{{<Partial src="filters.html" />}}
 
 Only modern browsers supported, can be emulated in IE via expressions, but I'm lazy enough not to do it here.

@@ -1,0 +1,43 @@
+/* Handling fancy first letters */
+/* Not ::first-letter as there are some problems with it in some browsers */
+.FirstLetter {
+  margin-left: var(--fletter-offset, -0.15em);
+  font-feature-settings: var(--fletter-style, "ss01");
+}
+
+[aria-label^='C'],
+[aria-label^='С'],
+[aria-label^='Э'] {
+  --fletter-style: "ss02";
+  --fletter-offset: -0.05em;
+}
+[aria-label^='К'],
+[aria-label^='Т'] {
+  --fletter-style: "ss04";
+}
+
+[aria-label^='Ч'] {
+  --fletter-offset: -0.2em;
+}
+
+[aria-label^='А'],
+[aria-label^='A'],
+[aria-label^='Ф'],
+[aria-label^='Д'],
+[aria-label^='З'],
+[aria-label^='О'],
+[aria-label^='O'],
+[aria-label^='Ж'],
+[aria-label^='Я'],
+[aria-label^='Q'],
+[aria-label^='S'],
+[aria-label^='G'],
+[aria-label^='Z'] {
+  --fletter-offset: -0.05em;
+}
+
+/* Kerning is not applied there, need to do manually */
+[aria-label^='Va'] {
+  --fletter-offset: -0.11em;
+}
+

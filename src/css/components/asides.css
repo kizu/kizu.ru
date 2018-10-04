@@ -1,0 +1,48 @@
+:root {
+  --asides-counter: asides 9;
+}
+
+aside,
+figcaption {
+  --grid-column: aside;
+  grid-row-end: span var(--span);
+  align-self: var(--align, start);
+
+  width: var(--aside-width); /* There was min-width — why not just width? */
+  margin-left: var(--initial-at-large, auto);
+
+  counter-increment: asides;
+
+  font: var(--THEME_FONT--SMALL);
+  font-feature-settings: "lnum", "onum" 0;
+  padding-top: 0.375em;
+  margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
+  --text-indent: 0;
+  --p-p-margin-top: 1.5em;
+  --link-underline-offset: 0.5em;
+}
+
+figcaption {
+  width: calc(var(--aside-width) - var(--h-gap));
+  margin-right: var(--h-gap);
+}
+
+aside[style*='--align:end;'] {
+  padding-top: 0;
+  padding-bottom: 0.375em;
+}
+
+/* For subgrid substitute */
+header::after {
+  content: counter(asides);
+  grid-column: aside;
+
+  line-height: var(--aside-width);
+  writing-mode: vertical-lr;
+  word-wrap: break-word;
+
+  height: 0;
+  visibility: hidden;
+  margin-left: calc(-1 * var(--aside-width));
+  max-width: calc(2 * var(--aside-width));
+}

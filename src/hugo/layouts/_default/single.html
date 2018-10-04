@@ -4,7 +4,7 @@
 {{- define "header" -}}
   <nav>
     <ul>
-      <li><a href="/{{ .Site.Params.languagePrefix }}">{{ .Site.Params.titleName }}</a></p></li>
+      <li><a href="/{{ .Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}">{{ i18n "titleName" }}</a></p></li>
       {{- if .Page.Params.published -}}
         <li>{{ .Page.Params.published }}</li>
       {{- else -}}
@@ -16,5 +16,26 @@
 {{- define "main" -}}
   {{- $header := (print "<h1>" .Title "</h1>") -}}
   {{- partial "headerify.html" (dict "context" . "input" $header) -}}
-  {{- partial "headerify.html" (dict "context" . "input" .Content) -}}
+
+  {{- range .Translations -}}{{- if eq .Params.lang .Lang -}}
+    <aside style="--align: center">
+      <a href="{{ .Permalink }}">{{ .Lang }}: {{ .Title }}</a>
+    </aside>
+  {{- end -}}{{- end -}}
+
+  {{- $content := partial "headerify.html" (dict "context" . "input" .Content) -}}
+  {{- $content := partial "linkify.html" (dict "context" . "input" $content) -}}
+  {{- $content := partial "typography.html" (dict "context" . "input" $content) -}}
+  {{ $content }}
+{{- end -}}
+
+{{- define "footer" -}}
+  <nav>
+    {{- if .PrevInSection -}}
+      <a href="{{.PrevInSection.Permalink}}">{{.PrevInSection.Title}}</a>
+    {{- end -}}
+    {{- if .NextInSection -}}
+      <a href="{{.NextInSection.Permalink}}">{{.NextInSection.Title}}</a>
+    {{- end -}}
+  </nav>
 {{- end -}}

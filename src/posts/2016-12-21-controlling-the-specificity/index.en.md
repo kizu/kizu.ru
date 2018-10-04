@@ -1,6 +1,6 @@
-# Controlling the Specificity
+# Controlling the Specificity
 
-In [the previous article about conditions for CSS variables](:conditions-for-css-variables) I talked about things that could be used rather soon, even if the support for them is not there yet. In this article I'll go even further — I'll be talking about one thing from the [CSS Selectors Level 4](https://drafts.csswg.org/selectors-4/), which is even less adopted.
+In [the previous article about conditions for CSS variables]({{% LinkTo conditions-for-css-variables %}}) I talked about things that could be used rather soon, even if the support for them is not there yet. In this article I'll go even further — I'll be talking about one thing from the [CSS Selectors Level 4](https://drafts.csswg.org/selectors-4/), which is even less adopted.
 
 The part of this spec I'll be looking at today is the new, enhanced `:not()`. Important disclaimer: the feature I would talk about have almost to no support at the moment (only latest Safari?), and even if it did, I wouldn't recommend to use it as something other than experiment. You'll see why. And after discussing what becomes possible with this new `:not()` I'll describe one more usable similar thing and then propose a few things that I think should be there in CSS instead.
 
@@ -16,13 +16,15 @@ So, now we can use comma-separated selector lists inside any `:not()`. The comma
 
 Look at this example — such selector would target all buttons that are not hovered and not focused *at the same time*:
 
-    button:not(:hover, :focus)
-    {:.language-css}
+``` CSS
+button:not(:hover, :focus)
+```
 
 And it is basically an equivalent of
 
-    button:not(:hover):not(:focus)
-    {:.language-css}
+``` CSS
+button:not(:hover):not(:focus)
+```
 
 The difference there is how the specificity works for selector lists inside `:not()`, here is [what Spec says](https://drafts.csswg.org/selectors-4/#specificity-rules):
 
@@ -46,13 +48,15 @@ And, yeah, we're at the point where the magic would happen. What does double neg
 
 If we'd have something like that:
 
-    :not(:not(:hover))
-    {:.language-css}
+``` CSS
+:not(:not(:hover))
+```
 
 That would work just the same as a `:hover` pseudoclass. That's rather simple. But what would happen if we'd have a selector list there?
 
-    :not(:not(:hover), :not(:focus))
-    {:.language-css}
+``` CSS
+:not(:not(:hover), :not(:focus))
+```
 
 As the selector lists inside `:not()` work as a logical **and**, and given that each of the selectors would be returned to its original meaning, the result would be almost the same as `:hover:focus`. The difference would be that the specificity of the double negated selector wouldn't be the same as of the usual complex one. Each of the nested `:not()` would have a specificity of a single pseudoclass, and due to how selector lists work inside `:not()`, the specificity of the whole construction would be equal, again, to a specificity of a single pseudoclass.
 
@@ -62,40 +66,46 @@ I think you can already guess what all of this means. That's right — using the
 
 So, if we'd like to have a multiclass selector with some states, like `.foo.bar.baz:link:hover` and for it to have a specificity of a single class, so it could be easier overridden later on, we could rewrite this selector this way:
 
-    :not(:not(.foo), :not(.bar), :not(.baz), :not(:link), :not(:hover))
-    {:.language-css}
+``` CSS
+:not(:not(.foo), :not(.bar), :not(.baz), :not(:link), :not(:hover))
+```
 
 ### What About Combinators?
 
 But what if we'd like to have more complex selectors with combinators, like this one?
 
-    .foo:hover > .bar .baz
-    {:.language-css}
+``` CSS
+.foo:hover > .bar .baz
+```
 
 They're possible too, but with a slightly more complex code. What would help us is a universal selector. Here is how the selector above could look like if we'd want it to have a specificity of a single class:
 
-    :not(:not(:not(:not(:not(:not(.foo), :not(:hover)) > *), :not(.bar)) *), :not(.baz))
-    {:.language-css}
+``` CSS
+:not(:not(:not(:not(:not(:not(.foo), :not(:hover)) > *), :not(.bar)) *), :not(.baz))
+```
 
-That looks awful, right? But [that works!](*works "Here is a [test at CodePen](http://codepen.io/kizu/pen/PbgYNV) with this selector, if you'd open it in the latest Safari, you'll see it in action.")
+That looks awful, right? But that works[^works]!
+
+[^works]: Here is a [test at CodePen](http://codepen.io/kizu/pen/PbgYNV) with this selector, if you'd open it in the latest Safari, you'll see it in action. <!-- span="3" -->
 
 Of course, it would become a bit readable if we'd use some indentations and stuff:
 
+``` CSS
+:not(
     :not(
         :not(
             :not(
                 :not(
-                    :not(
-                        :not(.foo),
-                        :not(:hover)
-                    ) > *
-                ),
-                :not(.bar)
-            ) *
-        ),
-        :not(.baz)
-    )
-    {:.language-css}
+                    :not(.foo),
+                    :not(:hover)
+                ) > *
+            ),
+            :not(.bar)
+        ) *
+    ),
+    :not(.baz)
+)
+```
 
 Still ugly, but manageable (and now, if you'd imagine all of the `:not()` and universal selectors would disappear, you could read it almost as our original selector).
 
@@ -105,7 +115,9 @@ The algorithm beyond rewriting the selector this way is rather simple: we go fro
 
 ## Complete Control
 
-It worth mentioning that we can already increase the specificity of any given class just by [multiplying it](*foofoofoo "You can read about this method in Harry Roberts' [article on specificity hacks](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity) (and, as Harry, I first saw this method in [Mathias Bynens' talk](https://speakerdeck.com/mathiasbynens/3-dot-14-things-i-didnt-know-about-css-at-css-day-2014))."), so `.foo.foo.foo` matches just the same as `.foo`, but with a specificity of three classes. And as we can now both reduce and increase the specificity of almost any given selectors, that means we can, finally, **control** the specificity of our selectors, regardless of their complexity. Of course, with the exception that we can't reduce the specificity to be less than the one of the biggest single selector's one, so we can't make a selector that contains a class to be as specific as an element selector or a universal one.
+It worth mentioning that we can already increase the specificity of any given class just by multiplying[^foofoofoo] it, so `.foo.foo.foo` matches just the same as `.foo`, but with a specificity of three classes. And as we can now both reduce and increase the specificity of almost any given selectors, that means we can, finally, **control** the specificity of our selectors, regardless of their complexity. Of course, with the exception that we can't reduce the specificity to be less than the one of the biggest single selector's one, so we can't make a selector that contains a class to be as specific as an element selector or a universal one.
+
+[^foofoofoo]: You can read about this method in Harry Roberts' [article on specificity hacks](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity) (and, as Harry, I first saw this method in [Mathias Bynens' talk](https://speakerdeck.com/mathiasbynens/3-dot-14-things-i-didnt-know-about-css-at-css-day-2014)). <!-- offset="1" -->
 
 ## Preprocessors?
 
@@ -117,22 +129,25 @@ One of the easiest targets for controlling the specificity are any resets or nor
 
 For example, you can look at [one part](https://github.com/necolas/normalize.css/blob/1da0911/normalize.css#L125) of Nicolas Gallagher's normalize.css:
 
-    /**
-     * 1. Remove the bottom border in Firefox 39-.
-     * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
-     */
-    abbr[title] {
-      border-bottom: none; /* 1 */
-      text-decoration: underline; /* 2 */
-      text-decoration: underline dotted; /* 2 */
-    }
-    {:.language-css}
+``` CSS
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+    border-bottom: none; /* 1 */
+    text-decoration: underline; /* 2 */
+    text-decoration: underline dotted; /* 2 */
+}
+```
 
 Here if you'd like to have a component that uses `<abbr>` and you'd want a border or text-decoration other than underlined, you couldn't use a single class for this component in your CSS alongside using normalize.css — you'd need to override the specificity of two classes instead.
 
 But if we could reduce the specificity of each selector in our resets and normalizes to the smallest — of a single element or a single class — those tools would become even more powerful and flexible.
 
-Another area where the control over specificity is a must have are any complex CSS methodologies. The easiest example would be Harry Roberts' [itCSS](http://itcss.io) [which](*itcss "There is not much written on it anywhere, if you'd like to read more on it, you can try [this article](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) by Lubos Kmetko.") have layers of selectors united by similar area of responsibility. If we could split those layers so they wouldn't merge in their specificity, we would obtain the ultimate power over CSS (ok, I exaggerated it a bit there).
+Another area where the control over specificity is a must have are any complex CSS methodologies. The easiest example would be Harry Roberts' [itCSS](http://itcss.io) which[^itcss] have layers of selectors united by similar area of responsibility. If we could split those layers so they wouldn't merge in their specificity, we would obtain the ultimate power over CSS (ok, I exaggerated it a bit there).
+
+[^itcss]: There is not much written on it anywhere, if you'd like to read more on it, you can try [this article](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) by Lubos Kmetko. <!-- offset="2" -->
 
 Our general styles for typography would be always higher in specificity than the resets; our generic objects would always override the typography styles of any complexity; our components would always be guaranteed to override the styles of generic objects; and any utilities would always override anything else, and all without using `!important`. And we could even handle things inside each layer by creating sub-layers, to allow modifiers for components to override their base styles even if those base styles are somewhat complex.
 
@@ -146,9 +161,11 @@ Let's say we have an abstract object's selector: `.button:hover`, then a compone
 
 The easiest (and the one method with the most support) way to add the desired specificity is possible if you have control over the HTML of a page: just add a class containing a single underscore to `html` element — `<html class="_">`, and then use the chains of `._._` before your selectors. It would look like this:
 
-    .button:hover {}
-    ._._._ .MyBlock-Submit {}
-    ._._._._._ .is-hidden {}
+``` CSS
+.button:hover {}
+._._._ .MyBlock-Submit {}
+._._._._._ .is-hidden {}
+```
 
 The only issue that can happen is that one of the selectors you're prefixing would have a part that targets a root selector. In case of `:root` or `html` ones we could rather easily properly attach this part to the actual selector, for more ambiguous selectors we'd need to duplicate it like `._._._._.is-hidden, ._._._._ .is-hidden`, though, if you know that you're doing, you probably wouldn't want to use any other classes on root.
 

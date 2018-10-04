@@ -1,0 +1,27 @@
+{{ define "main" }}
+<article>
+  {{- $content := partial "headerify.html" (dict "context" . "input" .Content) -}}
+  {{- $content := partial "linkify.html" (dict "context" . "input" $content) -}}
+  {{- $content := partial "linkify.html" (dict "context" . "input" $content) -}}
+  {{ $content }}
+</article>
+<ul>
+<!-- Ranges through content/post/*.md -->
+{{ range .Data.Pages }}
+    <!-- TODO: user proper regex/?? -->
+    {{ $ProperLink := cond (eq .Site.Params.languageCode .Params.lang) .Permalink (.Permalink | replaceRE "/posts/" "/en/posts/") }}
+    {{ if .Title }}
+        <li>
+            <a href="{{$ProperLink}}">
+                {{ if .Params.published }}
+                    {{.Params.published}}
+                {{ else }}
+                    {{.Date.Format "2006-01-02"}}
+                {{ end }}
+                | {{.Title}}
+            </a>
+        </li>
+    {{ end }}
+{{ end }}
+</ul>
+{{ end }}

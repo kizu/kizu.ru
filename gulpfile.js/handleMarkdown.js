@@ -101,19 +101,11 @@ const handleMarkdown = (initialContent, relativePath) => {
 
     // Convert md footnotes to sidenote shortcodes
     // Sidelink
-    content = content.replace(/([\w '’“”«»]+)\[\^([^\]]+)\]/g, '{{<Sidelink "$2" "$1" />}}');
+    content = content.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, '{{<Sidelink "$2" "$1" />}}');
+    // Sidenotes Item
+    content = content.replace(/\n[ ]+\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<SidenotesItem id="$1" $3>}}$2{{</SidenotesItem>}}');
     // Sidenote
     content = content.replace(/\n\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<Sidenote id="$1" $3>}}$2{{</Sidenote>}}');
-    // Sidenotes Item
-    content = content.replace(/\n[ ]+\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<SidenotesItem id="$1" $3>}}$2{{</Sidenote>}}');
-
-
-    // Typography for markdown
-    // (right now its not that safe, need custom solution for applying it for text nodes only)
-    // content = content.replace(
-    //   /([^А-Яа-яA-Za-z]*)([А-Яа-яA-Za-z].+)/g,
-    //   (match, prefix, text) => prefix + richtypo.full(text, pathData.lang || 'ru')
-    // );
 
     // Output metadata as json at the start of content
     content = JSON.stringify(metadata) + '\n' + content;

@@ -1,6 +1,8 @@
 # Conditions for CSS Variables
 
-I'll start from this: [there are no](*not-those "There is a module named “[CSS Conditional Rules](https://www.w3.org/TR/css3-conditional/)”, but don't expect it to cover the CSS variables — it covers some at-rules stuff. There is even a [proposal](https://tabatkins.github.io/specs/css-when-else/) for `@when`/`@else` at-rules, which, again, do not anything in common with variables.") conditions in specs to use with [CSS variables](https://www.w3.org/TR/css-variables-1/). I think that this is a really big flaw in specs, as while variables already provide a lot of things that were not possible in any other way before, the absence of conditions is really frustrating, as there could be a lot of uses for them.
+I'll start from this: there are no[^not-those] conditions in specs to use with [CSS variables](https://www.w3.org/TR/css-variables-1/). I think that this is a really big flaw in specs, as while variables already provide a lot of things that were not possible in any other way before, the absence of conditions is really frustrating, as there could be a lot of uses for them.
+
+[^not-those]: There is a module named [“CSS Conditional Rules”](https://www.w3.org/TR/css3-conditional/), but don't expect it to cover the CSS variables — it covers some at-rules stuff. There is even a [proposal](https://tabatkins.github.io/specs/css-when-else/) for `@when`/`@else` at-rules, which, again, do not anything in common with variables.
 
 But what if we'd need those imaginary conditional statements for our CSS variables _now_? Well, as with a lot of other CSS stuff, we can hack our way around for same cases.
 
@@ -14,26 +16,26 @@ So, what we need is a way to use a single CSS variable for setting different CSS
 
 Long story short, I'll just present the solution to you right now and would explain it later:
 
-    :root {
-        --is-big: 0;
-    }
+``` CSS
+:root {
+    --is-big: 0;
+}
 
-    .is-big {
-        --is-big: 1;
-    }
+.is-big {
+    --is-big: 1;
+}
 
-    .block {
-        padding: calc(
-            25px * var(--is-big) +
-            10px * (1 - var(--is-big))
-        );
-        border-width: calc(
-            3px * var(--is-big) +
-            1px * (1 - var(--is-big))
-        );
-    }
-
-    {:.language-css}
+.block {
+    padding: calc(
+        25px * var(--is-big) +
+        10px * (1 - var(--is-big))
+    );
+    border-width: calc(
+        3px * var(--is-big) +
+        1px * (1 - var(--is-big))
+    );
+}
+```
 
 In this example, we're making all our elements with `.block` to have paddings equal to `10px` and border widths to `1px` unless the `--is-big` variable on those elements won't be `1`, in which case they would become `25px` and `3px` respectively.
 
@@ -44,15 +46,15 @@ The mechanism beyond this is rather simple: we use both our possible values in a
 
 We can use this method to choose not only from 2 possible values but for choosing from 3 or more values. However, for each new added possible value the calculation becomes more complex. For choosing between 3 possible values it would already look like this:
 
-    .block {
-        padding: calc(
-            100px * (1 - var(--foo)) * (2 - var(--foo)) * 0.5 +
-             20px * var(--foo) * (2 - var(--foo)) +
-              3px * var(--foo) * (1 - var(--foo)) * -0.5
-        );
-    }
-
-    {:.language-css}
+``` CSS
+.block {
+    padding: calc(
+        100px * (1 - var(--foo)) * (2 - var(--foo)) * 0.5 +
+            20px * var(--foo) * (2 - var(--foo)) +
+            3px * var(--foo) * (1 - var(--foo)) * -0.5
+    );
+}
+```
 
 This could accept `0`, `1` and `2` values for `--foo` variable and calculate the padding to `100px`, `20px` or `3px` correspondingly.
 
@@ -74,24 +76,24 @@ As you can see, those calculations could be used only for things that you can _c
 
 But when the support would be there (or if you'd like to experiment on this in browsers with an existing support), we could do things like that:
 
-    :root {
-        --is-red: 0;
-    }
+``` CSS
+:root {
+    --is-red: 0;
+}
 
-    .block {
-        background: rgba(
-            calc(
-                255*var(--is-red) +
-                0*(1 - var(--is-red))
-                ),
-            calc(
-                0*var(--is-red) +
-                255*(1 - var(--is-red))
-                ),
-            0, 1);
-    }
-
-    {:.language-css}
+.block {
+    background: rgba(
+        calc(
+            255*var(--is-red) +
+            0*(1 - var(--is-red))
+            ),
+        calc(
+            0*var(--is-red) +
+            255*(1 - var(--is-red))
+            ),
+        0, 1);
+}
+```
 
 Here we'd have lime color by default and red if the `--is-red` would be set to `1` (note that when the component could be zero we could just omit it at all, making out code more compact, here I kept those for clarity of an algorithm).
 
@@ -100,12 +102,15 @@ As you could do those calculations with any components, it is possible to create
 
 ### Another Trap in the Specs
 
-When I was testing how the conditions work for colors, I found out a really, _really_ [weird limitation in Specs](*issue-resolved "Tab Atkins [commented](https://github.com/kizu/kizu.github.com/issues/186) that this issue with color components was fixed in the specs (but is not yet supported by browsers). Yay! Also he said that as another solution we could just use percentages inside `rgba`, I totally forgot about this feature, haha."). It is called [“Type Checking”](https://twitter.com/kizmarh/status/788504161864261632). I now officially hate it. What this means is that if the property accepts only `<integer>` as a value, if you'd have any divisions or non-integers inside the `calc()` for it, even if the result would be integer, the “resolved type” wouldn't be `<integer>`, it would be `<number>`, and that means that those properties won't accept such values. And when we'd have calculations involving more than two possible values, we'd need to have a non-integer modifiers. And that would make our calculation invalid for using with colors or other integer-only properties (like `z-index`).
+When I was testing how the conditions work for colors, I found out a really, _really_ weird limitation in Specs[^issue-resolved]. It is called [“Type Checking”](https://twitter.com/kizmarh/status/788504161864261632). I now officially hate it. What this means is that if the property accepts only `<integer>` as a value, if you'd have any divisions or non-integers inside the `calc()` for it, even if the result would be integer, the “resolved type” wouldn't be `<integer>`, it would be `<number>`, and that means that those properties won't accept such values. And when we'd have calculations involving more than two possible values, we'd need to have a non-integer modifiers. And that would make our calculation invalid for using with colors or other integer-only properties (like `z-index`).
+
+[^issue-resolved]: Tab Atkins [commented](https://github.com/kizu/kizu.github.com/issues/186) that this issue with color components was fixed in the specs (but is not yet supported by browsers). Yay! Also he said that as another solution we could just use percentages inside `rgba`, I totally forgot about this feature, haha. <!-- offset="1" -->
 
 That is:
 
-    calc(255 * (1 - var(--bar)) * (var(--bar) - 2) * -0.5)
-    {:.language-css}
+``` CSS
+calc(255 * (1 - var(--bar)) * (var(--bar) - 2) * -0.5)
+```
 
 Would be invalid when inside of the `rgba()`. Initially I thought that this behaviour is a bug, especially knowing how the color functions can actually accept the values that go beyond the possible ranges (you can do `rgba(9001, +9001, -9001, 42)` and get a valid yellow color), but this typing thing seems to be too hard for browsers to handle.
 
@@ -120,8 +125,11 @@ But there is another solution that would work for colors — we can use `hsla` i
 
 When the conditions are binary it is still possible to write them by hand. But when we're starting to use more complex conditions, or when we're getting to the colors, we'd better have tools that could make it easier to write. Luckily, we have preprocessors for this purpose.
 
-Here is how I managed to quickly do it in [Stylus](*pen "You can look at [CodePen with this code](http://codepen.io/kizu/pen/zKmyvG) in action."):
+Here is how I managed to quickly do it in Stylus[^pen]:
 
+[^pen]: You can look at [CodePen with this code](http://codepen.io/kizu/pen/zKmyvG) in action. <!-- span="2" -->
+
+``` Stylus
     conditional($var, $values...)
       $result = ''
 
@@ -200,31 +208,35 @@ Here is how I managed to quickly do it in [Stylus](*pen "You can look at [CodePe
         $result = 'hsla(' + conditional($var, $hues) + ', ' + conditional($var, $saturations) + ', ' + conditional($var, $lightnesses) + ', ' + conditional($var, $alphas) +  ')'
 
       return unquote($result)
-    {:.language-styl}
+```
 
 Yep, there is a lot of code, but this mixin can generate conditionals both for numbers and colors, and not only for two possible conditions but for many more.
 
 The usage is really easy:
 
-    border-width: conditional(var(--foo), 10px, 20px)
-    {:.language-styl}
+``` Stylus
+border-width: conditional(var(--foo), 10px, 20px)
+```
 
 The first argument is our variable, the second one is the value that should be applied when the variable would be equal to `0`, the third — when it would be equal to `1`, etc.
 
 This above call would generate proper conditional:
 
-    border-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
-    {:.language-css}
+``` CSS
+border-width: calc(10px * (1 - var(--foo)) + 20px * var(--foo));
+```
 
 And here is a more complex example for the color conditionals:
 
-    color: conditional(var(--bar), red, lime, rebeccapurple, orange)
-    {:.language-styl}
+``` Stylus
+color: conditional(var(--bar), red, lime, rebeccapurple, orange)
+```
 
 Would generate something that you surely wouldn't want to write by hand:
 
-    color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
-    {:.language-css}
+``` CSS
+color: hsla(calc(120 * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 270 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 38.82352941176471 * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(100% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 100% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 49.99999999999999% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 100% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), calc(50% * (1 - var(--bar)) * (var(--bar) - 2) * (var(--bar) - 3) * 0.16666666666666666 + 50% * var(--bar) * (var(--bar) - 2) * (var(--bar) - 3) * 0.5 + 40% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 3) * 0.5 + 50% * var(--bar) * (1 - var(--bar)) * (var(--bar) - 2) * -0.16666666666666666), 1);
+```
 
 Note that there is no detection of `<integer>`-accepting properties, so that won't work for `z-index` and such, but it already converts colors to `hsla()` to make them manageble (though even this could be enhanced so this convertation would happen only when it would be needed). Another thing I didn't implement in this mixin (yet?) is the ability to use CSS variables for the values. This would be possible for non-integer numbers as those values would be inserted as is in the conditional calculations. Maybe, when I'll find time, I'll fix the mixin to accept not only numbers or colors but also variables. For the time being it is still possible to do using the algorithm explained in this article.
 
@@ -233,23 +245,24 @@ Note that there is no detection of `<integer>`-accepting properties, so that won
 
 Of course, if you're planning to actually use this, you'll need to have a way to set fallbacks. They're easy for browsers that just don't support variables: you just declare the fallback value before the conditional declaration:
 
-    .block {
-        padding: 100px; /* fallback */
-        padding: calc(
-            100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
-             20px * (var(--foo) * (2 - var(--foo))) +
-              3px * (var(--foo) * (1 - var(--foo)) / -2)
-        );
-    }
-
-    {:.language-css}
+``` CSS
+.block {
+    padding: 100px; /* fallback */
+    padding: calc(
+        100px * ((1 - var(--foo)) * (2 - var(--foo)) / 2) +
+            20px * (var(--foo) * (2 - var(--foo))) +
+            3px * (var(--foo) * (1 - var(--foo)) / -2)
+    );
+}
+```
 
 
 But when it comes to colors we have a problem: when there is a support for variables, in fact (and that's another really weird place in specs), _just any_ declaration containing variables would be considered valid. And this means that it is not possible in CSS to make a fallback for something containing variables:
 
-    background: blue;
-    background: I 💩 CSS VAR(--I)ABLES;
-    {:.language-css}
+``` CSS
+background: blue;
+background: I 💩 CSS VAR(--I)ABLES;
+```
 
 Is valid CSS and per specs, the background would get an `initial` value, not the one provided in a fallback (even though it is obvious that the other parts of the value are incorrect).
 
@@ -257,15 +270,16 @@ So, what we need in order to provide a fallback in those cases — add `@support
 
 In our case, we need to wrap our conditional colors for Firefox in something like this:
 
+``` CSS
+.block {
+    color: #f00;
+}
+@supports (color: rgb(0, calc(0), 0)) {
     .block {
-        color: #f00;
+        color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
     }
-    @supports (color: rgb(0, calc(0), 0)) {
-        .block {
-            color: rgba(calc(255 * (1 - var(--foo))), calc(255 * var(--foo)), 0, 1);
-      }
-    }
-    {:.language-css}
+}
+```
 
 Here we're testing a support for calculations inside color functions and applying the conditional color only in that case.
 

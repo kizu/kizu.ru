@@ -14,7 +14,7 @@ To understand the problem better, we should look at how things behave in differe
 
 Try to hover, click and switch focus over those controls:
 
-{{<Partial "examples/1.html" />}}
+{{<Partial src="examples/1.html" />}}
 
 Browsers behave a bit differently there:
 
@@ -45,7 +45,7 @@ In theory, `:focus-ring` should help us[^although]: we could use it for keyboar
 
 [^although]: Of course, we'd need to implement it using progressive enhancement: declaring all the styles for `:focus`, then removing the styles on `:not(:focus-ring)`, as otherwise, we would lose in keyboard accessibility at older browsers.
 
-{{<Partial "examples/2.html" />}}
+{{<Partial src="examples/2.html" />}}
 
 If you'd look at this example in Firefox, you could see two different issues:
 
@@ -56,7 +56,9 @@ In other browsers, you shouldn't see anything there unless someone would already
 
 ## My Initial Solution
 
-I was playing with one of my favorite CSS properties — `visibility` — when I had my “bingo” moment. After validating my idea and seeing it work I was really surprised I didn't come to this solution before. After [some testing](*nope "Apparently, I didn't test enough :( As [Ian](https://twitter.com/iandevlin) [pointed out](https://twitter.com/iandevlin/status/879796311566012416) after I initially published this post, I didn't test the solution enough at Firefox for Windows. That meant two things: at Windows  the `<button>` still had the focusring visible, and I didn't know about the heuristic of the `:-moz-focusring` that made the button with my solution completely unusable after user would use keyboard for at least once. I leave this solution to show what could be done if not for Firefox, and invite you to look at the [final proper solution](#proper-solution) below."), I found out that not everything is so smooth, but more on this later.
+I was playing with one of my favorite CSS properties — `visibility` — when I had my “bingo” moment. After validating my idea and seeing it work I was really surprised I didn't come to this solution before. After some testing[^nope], I found out that not everything is so smooth, but more on this later.
+
+[^nope]: Apparently, I didn't test enough. As [Ian](https://twitter.com/iandevlin) [pointed out](https://twitter.com/iandevlin/status/879796311566012416) after I initially published this post, I didn't test the solution enough at Firefox for Windows. That meant two things: at Windows  the `<button>` still had the focusring visible, and I didn't know about the heuristic of the `:-moz-focusring` that made the button with my solution completely unusable after user would use keyboard for at least once. I leave this solution to show what could be done if not for Firefox, and invite you to look at the [final proper solution](#proper-solution) below. <!-- span="4" offset="3" -->
 
 ### Visibility
 
@@ -96,7 +98,7 @@ And then when we'd need to declare all the states like `:hover`, `:active` and `
 
 Here, look at this example (better not in Firefox for now):
 
-{{<Partial "examples/3.html" />}}
+{{<Partial src="examples/3.html" />}}
 
 We're almost there! If you'd look at this example in Chrome or Edge, everything would work perfectly: when you'd click those buttons, they would work and won't become visibly focused, but you would still be able to focus them from the keyboard and see the focus ring.
 
@@ -145,7 +147,7 @@ After spending a lot of time on trying to find a fix for Firefox, the best fix I
 
 With all those fixes, our example would look like this and should work the same in all modern browsers:
 
-{{<Partial "examples/4.html" />}}
+{{<Partial src="examples/4.html" />}}
 
 But not that fast. In Firefox for Windows there are severe problems with buttons' implementation which lead to this solution being unusable. Thanks for [Ian Devlin](@iandevlin) for pointing this out. In Firefox for Windows you still would see the focus ring over the `<button>` there on click, and after you'd use keyboard navigation at least once, things would go completely wrong — Firefox would treat each `:focus` as if it has `:-moz-focusring`, which would be multiplied by another problem with buttons which would lead to `<button>` not to register clicks.
 
@@ -159,7 +161,7 @@ The solution came after watching [this video by Rob Dobson](https://www.youtube.
 
 Look at it:
 
-{{<Partial "examples/5.html" />}}
+{{<Partial src="examples/5.html" />}}
 
 If should work everywhere _except_ for one case: only in Firefox for Windows after you'll use keyboard navigation at least once, you'll see focus ring after clicking on the `<button>` element. Maybe it is possible to fix this case, but its not critical[^ihatefx].
 

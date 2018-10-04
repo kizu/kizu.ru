@@ -6,4 +6,4 @@
 
 Resize the browser’s window to see the switching of overflow effect.
 
-{{<Partial "overflower.html" />}}
+{{<Partial src="overflower.html" />}}

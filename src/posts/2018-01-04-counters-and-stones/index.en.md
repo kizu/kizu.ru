@@ -10,7 +10,7 @@ I'll explain the problem and the solution later, but now look at this, my now fi
 
 [^renju]: This is a really basic implementation of [Gomoku](https://en.wikipedia.org/wiki/Gomoku) — a game where two players compete on who could purt five consecutive stones first. Only the very basic winning rules are implemented of course. <!-- span="2" offset="1" -->
 
-{{<Partial "examples/13x13.html" />}}
+{{<Partial src="examples/13x13.html" />}}
 
 Things you can notice:
 
@@ -43,7 +43,7 @@ Those are integers that CSS counters are able to add to our HTML by using `conte
 
 If we would take our example that has a flexible overflow, then make it so it would have some fixed width, then we'd add the counter's content inside its “jumping down” part… Look:
 
-{{<Partial "examples/logic-unit-draft.html" />}}
+{{<Partial src="examples/logic-unit-draft.html" />}}
 
 You can see how when you click there, the checked input increments our counter by `100000`, and you can see how the flexible overflow makes this counter to jump down (I removed `overflow:hidden` from the container for you to see it) and our hidden content appears.
 
@@ -51,7 +51,7 @@ That is the basic idea: we use the counter to influence the display of an elemen
 
 Now, you can see that it's kinda strange to increment by `100000` just in order for a counter to fit into our box. That is really easy to solve in a way we'd need to change one order of counter to achieve the same:
 
-{{<Partial "examples/logic-unit-shorter.html" />}}
+{{<Partial src="examples/logic-unit-shorter.html" />}}
 
 You can see how not only it works with just changing from 0 to 10, but it also works with any width.
 
@@ -119,7 +119,7 @@ And CSS (with some unneeded visual stuff omited):
 
 The best thing with counters: we can use multiple counters at the same time. That means, we can try to implement some logic for multiple counters!
 
-{{<Partial "examples/logic-unit-and-or.html" />}}
+{{<Partial src="examples/logic-unit-and-or.html" />}}
 
 We achieve this by setting different starting values for our counters and by allowing a different amount of digits to fit it:
 

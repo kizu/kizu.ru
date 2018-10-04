@@ -1,6 +1,6 @@
 # Кастомные контролы без яваскрипта
 
-{{<Partial "controls.html" />}}
+{{<Partial src="controls.html" />}}
 
 Graceful degradation все дела, хотя смотреть лучше всего в вебкитах под мак — там больше вкусняшек.
 

@@ -11,13 +11,19 @@
   <body>
     <main>
       {{- block "main" . -}}{{- end -}}
-      {{- block "footer" . -}}{{- end -}}
     </main>
     <header><!-- Goes after main for ~reasons~ -->
       {{- block "header" . -}}
-        <h1>{{ .Site.Params.titleName }}</h1>
+        <h1>{{ i18n "titleName" }}</h1>
       {{- end -}}
     </header>
+    <footer>
+      {{- block "footer" . -}}{{- end -}}
+      <p role="contentinfo">
+        <a href="/en/">© {{ now.Format "2006"}} {{ i18n "titleName" }}.</a>
+        <a href="https://twitter.com/kizmarh">Follow me on twitter!</a>
+      </p>
+    </footer>
     <script src="/j/prism.js"></script>
   </body>
 </html>

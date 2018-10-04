@@ -1,6 +1,13 @@
-{{- $file := .Get 0 -}}
+{{- $file := .Get "src" -}}
 {{- $src := (print "/content/" .Page.Params.srcPath $file) -}}
 <figure>
-  {{- $src  | readFile | safeHTML -}}
+  {{- if .Get "iframe" -}}
+    <iframe
+      src="/demos/{{ .Page.Slug }}/{{ .Get "src" }}"
+      style="height: {{ .Get "height" }}"
+    ></iframe>
+  {{- else -}}
+    {{- $src  | readFile | safeHTML -}}
+  {{- end -}}
   {{- .Inner | markdownify -}}
 </figure>
