@@ -75,8 +75,6 @@ header {
   /* Utility usage */
   --h1-font-size: 3.5rem;
   --h1-font-weight: normal;
-  --ul-item-content: none;
-  --list-item-padding: 0;
 }
 
 
@@ -102,10 +100,18 @@ figure {
   --link-text-shadow: none;
 
   padding: 0.5rem;
-  margin: 1rem 0;
+  margin: var(--nested-figure-margin, 1rem 0);
   background: #FFF;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.Figure-Toggle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
 .Figure {
@@ -123,12 +129,24 @@ figure {
   background: rgba(37,34,14, 0.05);
   box-shadow: none;
   --img-margin: 0 0 0 var(--h-gap);
+  --nested-figure-margin: 0 0 0 var(--h-gap);
   --img-max-width: calc(100% - var(--h-gap));
+}
+
+.Figure-Demo {
+  margin: 0 0 0 var(--h-gap);
+}
+
+.Figure-Toggle:not(:checked) + * + .Figure-Screenshot,
+.Figure-Toggle:checked + .Figure-Demo {
+  display: none;
 }
 
 /* Grid stuff end */
 
 footer {
+  margin-top: 6rem;
+  margin-bottom: 2rem;
   --text-indent: 0;
 }
 
@@ -140,6 +158,8 @@ ul {
 nav {
   --ul-display: flex;
   --ul-justify-content: space-between;
+  --ul-item-content: none;
+  --list-item-padding: 0;
   --link-color: currentColor;
   --link-color--visited: currentColor;
   --link-underline-offset: 0.45em;

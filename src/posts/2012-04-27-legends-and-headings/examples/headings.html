@@ -1,7 +1,3 @@
----
-framed: true
----
-
 <style>
 
 /* Centered heading with rules */
@@ -36,7 +32,7 @@ framed: true
     left: .5em;
     margin: 0 -50% 0 0;
     }
-#Demo_headings h1>span {
+#Demo_headings h1>span:not([class]) {
     display: inline-block;
     vertical-align: middle;
     white-space: normal;
@@ -51,18 +47,21 @@ framed: true
     background:         linear-gradient(45deg, #f39, yellow);
     padding: 1em;
     text-shadow: none;
+    border-radius: inherit;
     }
 
 </style>
 
-<h1>Hello!</h1>
+<div id="Demo_headings">
+  <h1>Hello!</h1>
 
-<p>Here are the centered headings with horizontal lines.</p>
+  <p>Here are the centered headings with horizontal lines.</p>
 
-<p>They are one-lined by default, but if it needs to be multiline, then you can add an extra span.</p>
+  <p>They are one-lined by default, but if it needs to be multiline, then you can add an extra span.</p>
 
-<h1><span>Multiline heading<br/>with an extra wrapping span</span></h1>
+  <h1><span>Multiline heading<br/>with an extra wrapping span</span></h1>
 
-<h1>Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown.</h1>
+  <h1>Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown.</h1>
 
-<p>↑ Here you can see one-lined heading, <del title="FireFox incorrectly shows the ellipsis on the previous items, so I removed them here." style="cursor: help;">with text-overflow: ellipsis.</del> Since it's too long, the horizontal lines cannot be seen.</p>
+  <p>↑ Here you can see one-lined heading, <del title="FireFox incorrectly shows the ellipsis on the previous items, so I removed them here." style="cursor: help;">with text-overflow: ellipsis.</del> Since it's too long, the horizontal lines cannot be seen.</p>
+</div>

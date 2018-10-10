@@ -6,4 +6,4 @@
 
 Можно поизменять размер окна, чтобы увидеть момент перехода.
 
-{{<Partial src="overflower.html" />}}
+{{<Partial src="overflower.html" style="grid-column: full; font-size: 1rem;" />}}

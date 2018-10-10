@@ -1,13 +1,52 @@
 {{- $file := .Get "src" -}}
 {{- $src := (print "/content/" .Page.Params.srcPath $file) -}}
-<figure>
-  {{- if .Get "iframe" -}}
-    <iframe
-      src="/demos/{{ .Page.Slug }}/{{ .Get "src" }}"
-      style="height: {{ .Get "height" }}"
-    ></iframe>
-  {{- else -}}
-    {{- $src  | readFile | safeHTML -}}
+{{- $id := (replace $file ".html" "") -}}
+{{- $id = (replace $id "examples/" "") -}}
+{{- if .Get "screenshot" -}}
+  {{- $alt := "Screenshot" -}}
+  {{- if .Get "alt" -}}
+    {{- $alt = .Get "alt" -}}
   {{- end -}}
-  {{- .Inner | markdownify -}}
-</figure>
+  <figure class="Figure"
+    {{- if .Get "style" -}}
+      {{/**/}} style="{{ .Get "style" }}"
+    {{- end -}}
+  >
+    <input class="Figure-Toggle" type="checkbox" id="Toggle-{{ $id }}" />
+    <div class="Figure-Demo" title="Live demo">
+      {{- $src  | readFile | safeHTML -}}
+    </div>
+    <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
+    <aside>
+      <p>
+        <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
+          Toggle screenshot/demo
+        </label>
+      </p>
+      {{- .Inner | markdownify -}}
+    </aside>
+  </figure>
+{{- else -}}
+  <figure
+    {{- if .Get "style" -}}
+      {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
+    {{- end -}}
+  >
+    {{- if .Get "iframe" -}}
+      {{- if eq (.Get "iframe") "true" -}}
+        <iframe
+          src="/demos/{{ .Page.Slug }}/{{ .Get "src" }}"
+          style="height: {{ .Get "height" }}"
+        ></iframe>
+      {{- else -}}
+        <iframe
+          src="{{ .Get "iframe" }}"
+          style="height: {{ .Get "height" }}"
+        ></iframe>
+      {{- end -}}
+    {{- else -}}
+      {{- $src  | readFile | safeHTML -}}
+    {{- end -}}
+    {{- .Inner | markdownify -}}
+  </figure>
+{{- end -}}

@@ -6,9 +6,10 @@ Originally, I had an extra wrapper and two extra pseudo-elements on it. Later I 
 
 While this method is simple, there are some limitations:
 
-* the background must be solid
- - however, if you'd try `background-attachment: fixed`…)
+* the background must be solid[^solid]
 * there are some positioning issues
+
+[^solid]: However, if you'd try `background-attachment: fixed`…
 
 But in most regards this method is rather bulletproof.
 
@@ -18,4 +19,4 @@ Enjoy!
 
 **Update:** [Lea Verou](https://twitter.com/leaverou) updated this experiment using the `background-attachment: local`. [Read about it in her post](http://lea.verou.me/2012/04/background-attachment-local/).
 
-{{<Partial src="shadowscroll.html" />}}
+{{<Partial src="shadowscroll.html" style="font: initial;" />}}

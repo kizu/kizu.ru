@@ -3,18 +3,18 @@ markup = "mmark"
 baseURL = "http://kizu.ru/"
 sourceRelativeLinksEval = true
 
-DefaultContentLanguage = "ru"
+DefaultContentLanguage = "en"
 
 title = "kizu.ru"
 
 [permalinks]
-posts = "/:section/:slug/"
+posts = "/:slug/"
 
 [Languages]
 [Languages.en]
 languageCode = "en"
-languagePrefix = "en/"
+languagePrefix = ""
 
 [Languages.ru]
 languageCode = "ru"
-languagePrefix = ""
+languagePrefix = "ru/"

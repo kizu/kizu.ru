@@ -12,7 +12,7 @@ Vitaly offered me this layout: in the centre raw of letters there were shortc
 
 - `option+A` — Opera, that was our main browser, so letter **A**;
 - `option+S` —**S**afari;
-- `option+D` — IE, `D` — 'cause it was **D**umb;
+- `option+D` — IE, `D` — ’cause it was **D**umb;
 - `option+F` — **F**irefox.
 
 Other apps were somewhere near:

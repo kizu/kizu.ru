@@ -12,6 +12,7 @@
     var(--THEME_COLOR_A--LIGHT)
   );
   --link-underline-color--hover: currentColor;
+  --link-underline-pattern-width: 16px;
   --link-text-shadow:
     -2px 0 0 var(--THEME_BG),
     2px 0 0 var(--THEME_BG),
@@ -31,35 +32,57 @@
     0 -6px var(--THEME_BG);
 }
 
-a[href] {
+a[href],
+.Link {
+  cursor: pointer;
   color: var(--link-color);
   hyphens: none;
+}
+
+a[href]::before,
+.Link::before {
+  content: var(--before);
+}
+
+a[href]::after,
+.Link::after {
+  content: var(--after);
 }
 
 span {
   --underline: 0;
 }
 
-a:link {
+a:link,
+.Link {
   text-decoration: none;
   text-shadow: var(--link-text-shadow);
   --underline-width: var(--link-underline-width);
 }
 
 a:link,
+.Link,
 span {
+  --link-underline-image: linear-gradient(var(--link-underline-color), var(--link-underline-color));
   background:
-    linear-gradient(var(--link-underline-color), var(--link-underline-color))
+    var(--link-underline-image)
     repeat-x
-    0 calc(50% + var(--link-underline-offset))/16px
+    0 calc(50% + var(--link-underline-offset))/var(--link-underline-pattern-width)
     calc(var(--underline-width) * var(--underline, 1));
+}
+
+.Link:not(a) {
+  user-select: none;
+  --link-underline-image: linear-gradient(to left, transparent 3px, var(--link-underline-color) 0);
+  --link-underline-pattern-width: 6px;
 }
 
 a:visited {
   color: var(--link-color--visited);
 }
 
-a:hover {
+a:hover,
+.Link:hover {
   --underline-width: calc(2 * var(--link-underline-width));
   --link-underline-color: var(--link-underline-color--hover);
   color: var(--link-color--hover);

@@ -6,4 +6,4 @@
 
 Resize the browser’s window to see the switching of overflow effect.
 
-{{<Partial src="overflower.html" />}}
+{{<Partial src="overflower.html" style="grid-column: full;" />}}

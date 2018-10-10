@@ -14,8 +14,7 @@
   </nav>
 {{- end -}}
 {{- define "main" -}}
-  {{- $header := (print "<h1>" .Title "</h1>") -}}
-  {{- partial "headerify.html" (dict "context" . "input" $header) -}}
+  {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" .Title "</h1>")) -}}
 
   {{- range .Translations -}}{{- if eq .Params.lang .Lang -}}
     <aside style="--align: center">
@@ -23,19 +22,21 @@
     </aside>
   {{- end -}}{{- end -}}
 
-  {{- $content := partial "headerify.html" (dict "context" . "input" .Content) -}}
-  {{- $content := partial "linkify.html" (dict "context" . "input" $content) -}}
-  {{- $content := partial "typography.html" (dict "context" . "input" $content) -}}
-  {{ $content }}
+  {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
 {{- end -}}
 
 {{- define "footer" -}}
-  <nav>
-    {{- if .PrevInSection -}}
-      <a href="{{.PrevInSection.Permalink}}">{{.PrevInSection.Title}}</a>
-    {{- end -}}
-    {{- if .NextInSection -}}
-      <a href="{{.NextInSection.Permalink}}">{{.NextInSection.Title}}</a>
-    {{- end -}}
-  </nav>
+  {{- partial "getPrevNext.html" . -}}
+  {{- $prev := $.Scratch.Get "prevPage" -}}
+  {{- $next := $.Scratch.Get "nextPage" -}}
+  {{- if or $prev $next -}}
+    <ul>
+      {{- if $prev -}}
+        <li><a href="{{$prev.Permalink}}" style="--underline: 0; --before: '← '"><span style="--underline: 1;">{{$prev.Title}}</span></a></li>
+      {{- end -}}
+      {{- if $next -}}
+        <li><a href="{{$next.Permalink}}" style="--underline: 0; --after: ' →'"><span style="--underline: 1;">{{$next.Title}}</span></a></li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
 {{- end -}}

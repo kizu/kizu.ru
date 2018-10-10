@@ -28,7 +28,7 @@ const documents = () => {
     .pipe(tap((file, t) => {
       if (file.extname !== '.md') return;
       const relPath = file.history[0].replace(file.base + '/', '');
-      const content = handleMarkdown(file.contents.toString(), relPath);
+      const content = handleMarkdown(file.contents.toString(), relPath, file.base);
       file.contents = Buffer.from(content);
     }))
     .pipe(gulp.dest('./build/hugo/content/posts'));

@@ -1,0 +1,1 @@
+{{- .input | replaceRE "title=\"\\{:([^}]+)\\}\"" "$1" | safeHTML -}}

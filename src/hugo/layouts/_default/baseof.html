@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Params.languageCode }}">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>{{ block "title" . }}
       {{- .Site.Title -}}
     {{ end }}</title>
-    <link rel="stylesheet" href="/s/style.css">
+    <link rel="stylesheet" href="/s/style.css" />
   </head>
   <body>
     <main>
@@ -17,12 +17,17 @@
         <h1>{{ i18n "titleName" }}</h1>
       {{- end -}}
     </header>
-    <footer>
-      {{- block "footer" . -}}{{- end -}}
-      <p role="contentinfo">
-        <a href="/en/">© {{ now.Format "2006"}} {{ i18n "titleName" }}.</a>
-        <a href="https://twitter.com/kizmarh">Follow me on twitter!</a>
-      </p>
+    <footer role="contentinfo">
+      <nav>
+        {{- block "footer" . -}}{{- end -}}
+        <p>
+          {{- if eq .Page.Kind "home" -}}
+            © {{ now.Format "2006"}} {{ i18n "titleName" }}
+          {{- else -}}
+            <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ now.Format "2006"}} <span style="--underline: 1;">{{ i18n "titleName" }}</span>.</a>
+          {{- end -}}
+        </p>
+      </nav>
     </footer>
     <script src="/j/prism.js"></script>
   </body>

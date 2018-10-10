@@ -29,7 +29,7 @@ const pathRegexp = new RegExp([
   pathsParts.end
 ].join(''));
 
-const handleMarkdown = (initialContent, relativePath) => {
+const handleMarkdown = (initialContent, relativePath, fileBase) => {
   let content = initialContent;
 
   // Handle markdown documents
@@ -70,7 +70,7 @@ const handleMarkdown = (initialContent, relativePath) => {
     metadata.srcPath += pathMatchData[4] || '';
     metadata.srcPath += '/';
 
-    const fileMetadataPath = `${metadata.srcPath}data.json`;
+    const fileMetadataPath = `${fileBase}${metadata.srcPath.replace('posts/', '/')}_data.json`;
     if (shell.test('-e', fileMetadataPath)) {
       fileMetadata = JSON.parse(shell.cat(fileMetadataPath));
       metadata = Object.assign(metadata, fileMetadata);
@@ -81,6 +81,20 @@ const handleMarkdown = (initialContent, relativePath) => {
       content = yamlMetadata.__content.trim();
       delete yamlMetadata.__content;
       metadata = Object.assign(metadata, yamlMetadata);
+    }
+
+    // Create aliases automatically
+    if (!metadata.categories) {
+      metadata.categories = ['blog']
+    }
+    const postDate = new Date(metadata.date);
+    // Only create aliases for articles before march 2018.
+    if (postDate && (postDate.getFullYear() < 2018) || postDate.getMonth() < 2) {
+      metadata.aliases = metadata.aliases || [];
+      const autoAlias = (metadata.lang === 'ru' ? '/' : `/${metadata.lang}/`) + metadata.categories.join('/') + `/${metadata.slug}/`;
+      if (metadata.aliases.indexOf(autoAlias) === -1) {
+        metadata.aliases.push(autoAlias);
+      }
     }
 
     // Handle case when there is no metadata

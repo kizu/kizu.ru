@@ -8,4 +8,4 @@
 
 **Update:** [Lea Verou](https://twitter.com/leaverou) обновила мой эксперимент использовав `background-attachment: local`. [Подробности можно прочитать в её посте](http://lea.verou.me/2012/04/background-attachment-local/).
 
-{{<Partial src="shadowscroll.html" />}}
+{{<Partial src="shadowscroll.html" style="font: initial;" />}}

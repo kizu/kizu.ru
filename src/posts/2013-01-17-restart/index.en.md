@@ -16,7 +16,7 @@ However, after a lot of prototypes, different engines and rewriting the whole 
 
 I could praise and praise GitHub — all the work those people do is worth a bunch of articles. But I’ll mention just one thing now.
 
-GitHub gives you a way to host static sites — [GitHub Pages](http://pages.github.com). You could take your repo, throw some static files in it and after a few simple actions you could look at your own static site either at GitHub, or at your own domain if you’d set it up.
+GitHub gives you a way to host static sites — [GitHub Pages](https://pages.github.com). You could take your repo, throw some static files in it and after a few simple actions you could look at your own static site either at GitHub, or at your own domain if you’d set it up.
 
 But there is more: other than just hosting plain dull static files, GitHub allows you to autogenerate them for you — using [Jekyll](https://github.com/mojombo/jekyll#readme).
 

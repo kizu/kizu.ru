@@ -24,7 +24,7 @@ The syntax for passing the block is rather simple: we call a mixin using a `+` p
 
 After we passed the block to the mixin, this block becomes available inside of it as a named argument — `block`. You can then use it anywhere inside the mixin using an interpolation[^block-call]:
 
-[^block-call]: There is a possibility we would add a way of using it without interpolation in the future though
+[^block-call]: There is a possibility we would add a way of using it without interpolation in the future though. <!-- span="2" offset="2" -->
 
 ``` Stylus
     foo()
@@ -78,7 +78,7 @@ As I already mentioned, in the latest releases of Stylus we added (and polished 
 
 As you can see from this example, the syntax is similar to the objects in JavaScript: the key could be either an indent or a string, and anything could go into value, even nested hashes. An important part: while you can use ordinary blocks with or without curly braces in Stylus, they are mandatory for hashes, while the trailing commas are not[^codestyle].
 
-[^codestyle]: And as with all other optional syntax features of Stylus, you should use a consistent code style in your stylesheets. Otherwise your code would be messy as hell
+[^codestyle]: And as with all other optional syntax features of Stylus, you should use a consistent code style in your stylesheets. Otherwise your code would be messy as hell. <!-- span="3" offset="5" -->
 
 Then, after you defined a hash, you could add new properties to it or redefine old ones using dots or square brackets:
 
@@ -187,9 +187,9 @@ So, if we would then call this function at the end of the document:
 
 We would get what we want.
 
-However, there are a few things to improve in this function: we do not want always to write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords instead of the literal conditions, like `palm`, `portable`, `desk`[^keywords] and so on. With those improvements and all the previous steps the resulting code would be this:
+However, there are a few things to improve in this function: we do not want always to write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords[^keywords] instead of the literal conditions, like `palm`, `portable`, `desk` and so on. With those improvements and all the previous steps the resulting code would be this:
 
-[^keywords]: I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry)
+[^keywords]: I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](@csswizardry). <!-- offset="3" -->
 
 ### Resulting code {#result}
 

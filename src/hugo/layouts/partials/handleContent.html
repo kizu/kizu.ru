@@ -1,0 +1,6 @@
+{{- $content := .input -}}
+{{- $content = partial "handleContent/headerify.html"   (dict "context" . "input" $content) -}}
+{{- $content = partial "handleContent/attributify.html" (dict "context" . "input" $content) -}}
+{{- $content = partial "handleContent/linkify.html"     (dict "context" . "input" $content) -}}
+{{- $content = partial "handleContent/typography.html"  (dict "context" . "input" $content) -}}
+{{- $content -}}
