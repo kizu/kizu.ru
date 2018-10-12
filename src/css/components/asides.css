@@ -1,5 +1,6 @@
 :root {
   --asides-counter: asides 9;
+  --asides-padding-top: calc(0.5rem - 2px);
 }
 
 aside,
@@ -8,18 +9,21 @@ figcaption {
   grid-row-end: span var(--span);
   align-self: var(--align, start);
 
-  width: var(--aside-width); /* There was min-width — why not just width? */
+  width: var(--initial-at-small, var(--aside-width)); /* There was min-width — why not just width? */
   margin-left: var(--initial-at-large, auto);
 
   counter-increment: asides;
 
   font: var(--THEME_FONT--SMALL);
   font-feature-settings: "lnum", "onum" 0;
-  padding-top: 0.375em;
-  margin-top: calc(2rem * (var(--at-large) * var(--offset, 0) + var(--at-small) * 1));
+  padding-top: calc(var(--at-large) * var(--asides-padding-top));
+  margin:
+    calc(var(--THEME_LINE_HEIGHT) * (var(--at-large) * var(--offset, 0) + var(--at-small) * 0.5))
+    calc(var(--at-small) * var(--THEME_INDENT))
+    calc(var(--at-small) * var(--THEME_LINE_HEIGHT));
   --text-indent: 0;
   --p-p-margin-top: 1.5em;
-  --link-underline-offset: 0.5em;
+  --link-underline-offset: 0.4em;
 }
 
 figcaption {
@@ -29,11 +33,12 @@ figcaption {
 
 aside[style*='--align:end;'] {
   padding-top: 0;
-  padding-bottom: 0.375em;
+  padding-bottom: calc(var(--at-large) * var(--asides-padding-top));
 }
 
 /* For subgrid substitute */
-header::after {
+header::after,
+footer::after {
   content: counter(asides);
   grid-column: aside;
 

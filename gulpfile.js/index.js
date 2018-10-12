@@ -49,12 +49,12 @@ const examples = () => {
 const pages = () => {
   return gulp
     .src('./src/pages/**/*', { since: gulp.lastRun(pages) })
-    // .pipe(tap(file => {
-    //   if (file.extname !== '.md') return;
-    //   const relPath = file.history[0].replace(file.base + '/', '');
-    //   const content = handleMarkdown(file.contents.toString(), relPath);
-    //   file.contents = Buffer.from(content);
-    // }))
+    .pipe(tap(file => {
+      if (file.extname !== '.md') return;
+      const relPath = file.history[0].replace(file.base + '/', '');
+      const content = handleMarkdown(file.contents.toString(), relPath, file.base);
+      file.contents = Buffer.from(content);
+    }))
     .pipe(gulp.dest('./build/hugo/content/'));
 };
 
@@ -76,7 +76,7 @@ let hugoProcess;
 const hugoServer = () => {
   hugoProcess = spawn(
     'hugo',
-    ['server', '-s', 'build/hugo'],
+    ['server', '--buildDrafts', '--ignoreCache', '--disableFastRender', '-s', 'build/hugo'],
     { stdio: 'inherit' }
   );
   return hugoProcess;

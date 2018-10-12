@@ -1,0 +1,23 @@
+{{- $date := (.Date.Format (i18n "dateFormat")) -}}
+
+{{- if eq .Lang "ru" -}}
+  {{- $date = (replace $date "January"   "января") -}}
+  {{- $date = (replace $date "February"  "февраля") -}}
+  {{- $date = (replace $date "March"     "марта") -}}
+  {{- $date = (replace $date "April"     "апреля") -}}
+  {{- $date = (replace $date "May"       "мая") -}}
+  {{- $date = (replace $date "June"      "июня") -}}
+  {{- $date = (replace $date "July"      "июля") -}}
+  {{- $date = (replace $date "August"    "августа") -}}
+  {{- $date = (replace $date "September" "сентября") -}}
+  {{- $date = (replace $date "October"   "октября") -}}
+  {{- $date = (replace $date "November"  "ноября") -}}
+  {{- $date = (replace $date "December"  "декабря") -}}
+{{- end -}}
+
+{{- if eq (.Date.Format "2006") (now.Format "2006") -}}
+  {{- $regex := print "(,\\s*)?" (.Date.Format "2006") "(\\s*г\\.)?" -}}
+  {{- $date = (replaceRE $regex "" $date) -}}
+{{- end -}}
+
+<time datetime="{{.Date.Format "2006-01-02"}}">{{ $date }}</time>{{- /**/ -}}

@@ -13,23 +13,7 @@
   );
   --link-underline-color--hover: currentColor;
   --link-underline-pattern-width: 16px;
-  --link-text-shadow:
-    -2px 0 0 var(--THEME_BG),
-    2px 0 0 var(--THEME_BG),
-    -1px 0 var(--THEME_BG),
-    1px  0 var(--THEME_BG),
-    0 -0.5px var(--THEME_BG),
-    0 -1px var(--THEME_BG),
-    0 -1.5px var(--THEME_BG),
-    0 -2px var(--THEME_BG),
-    0 -2.5px var(--THEME_BG),
-    0 -3px var(--THEME_BG),
-    0 -3.5px var(--THEME_BG),
-    0 -4px var(--THEME_BG),
-    0 -4.5px var(--THEME_BG),
-    0 -5px var(--THEME_BG),
-    0 -5.5px var(--THEME_BG),
-    0 -6px var(--THEME_BG);
+  --link-text-shadow-color: var(--THEME_BG);
 }
 
 a[href],
@@ -55,8 +39,25 @@ span {
 
 a:link,
 .Link {
+  padding: var(--link-padding, 0.3em 0);
   text-decoration: none;
-  text-shadow: var(--link-text-shadow);
+  text-shadow: -2px 0 0 var(--link-text-shadow-color),
+    2px 0 0 var(--link-text-shadow-color),
+    -1px 0 var(--link-text-shadow-color),
+    1px  0 var(--link-text-shadow-color),
+    0 -0.5px var(--link-text-shadow-color),
+    0 -1px var(--link-text-shadow-color),
+    0 -1.5px var(--link-text-shadow-color),
+    0 -2px var(--link-text-shadow-color),
+    0 -2.5px var(--link-text-shadow-color),
+    0 -3px var(--link-text-shadow-color),
+    0 -3.5px var(--link-text-shadow-color),
+    0 -4px var(--link-text-shadow-color),
+    0 -4.5px var(--link-text-shadow-color),
+    0 -5px var(--link-text-shadow-color),
+    0 -5.5px var(--link-text-shadow-color),
+    0 -6px var(--link-text-shadow-color);
+  transition: text-shadow var(--link-text-shadow-transition, 0s 0.4s) linear;
   --underline-width: var(--link-underline-width);
 }
 
@@ -69,6 +70,7 @@ span {
     repeat-x
     0 calc(50% + var(--link-underline-offset))/var(--link-underline-pattern-width)
     calc(var(--underline-width) * var(--underline, 1));
+  background-clip: content-box;
 }
 
 .Link:not(a) {

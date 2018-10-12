@@ -1,5 +1,7 @@
 /* More precise color control etc. */
-* {
+*,
+*::before,
+*::after {
   color: hsla(
     var(--color-h, 0),
     calc(var(--color-s, 0) * 1%),

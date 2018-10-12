@@ -3,3 +3,33 @@ other = "Роман Комаров"
 
 [backToMain]
 other = "Вернуться на главную страницу"
+
+[previousArticle]
+other = "Предыдущая статья"
+
+[nextArticle]
+other = "Следующая статья"
+
+[diffLangVersion]
+other = "English language version"
+
+[lquo]
+other = "«"
+
+[lquoDiffLang]
+other = "“"
+
+[rquo]
+other = "»"
+
+[rquoDiffLang]
+other = "”"
+
+[dateFormat]
+other= "2 January 2006 г."
+
+[published]
+other = "Опубликовано"
+
+[thanksTo]
+other = "Спасибо"

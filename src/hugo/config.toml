@@ -14,7 +14,9 @@ posts = "/:slug/"
 [Languages.en]
 languageCode = "en"
 languagePrefix = ""
+diffLanguagePrefix = "ru/"
 
 [Languages.ru]
 languageCode = "ru"
 languagePrefix = "ru/"
+diffLanguagePrefix = ""

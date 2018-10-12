@@ -36,44 +36,45 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
   const pathMatch = relativePath.match(/\.md|\.odt$/);
   if (pathMatch) {
     let metadata = {};
+    metadata.type = fileBase.match(/\/(\w+)s$/)[1];
 
     const pathMatchData = relativePath.match(pathRegexp);
-    const pathData = {
-      directory: pathMatchData[1],
-      date: pathMatchData[2],
-      categories: pathMatchData[3],
-      slug: pathMatchData[4],
-      lang: pathMatchData[6],
-      extension: pathMatchData[7]
-    };
+    if (pathMatchData) {
+      const pathData = {
+        directory: pathMatchData[1],
+        date: pathMatchData[2],
+        categories: pathMatchData[3],
+        slug: pathMatchData[4],
+        lang: pathMatchData[6],
+        extension: pathMatchData[7]
+      };
 
-    if (pathData.slug) {
-      metadata.slug = pathData.slug;
-    }
-    if (pathData.directory) {
-      if (pathData.directory === 'drafts/') {
-        metadata.draft = true;
+      if (pathData.slug) {
+        metadata.slug = pathData.slug;
       }
-    }
-    if (pathData.date) {
-      metadata.date = pathData.date;
-    }
+      if (pathData.directory) {
+        if (pathData.directory === 'drafts/') {
+          metadata.draft = true;
+        }
+      }
+      if (pathData.date) {
+        metadata.date = pathData.date;
+      }
 
-    if (pathData.lang) {
-      metadata.lang = pathData.lang;
-    }
-
-    metadata.srcPath = 'posts/';
-    metadata.srcPath += pathMatchData[1] || '';
-    metadata.srcPath += pathMatchData[2] && pathMatchData[2] + '-' || '';
-    metadata.srcPath += pathMatchData[3] || '';
-    metadata.srcPath += pathMatchData[4] || '';
-    metadata.srcPath += '/';
-
-    const fileMetadataPath = `${fileBase}${metadata.srcPath.replace('posts/', '/')}_data.json`;
-    if (shell.test('-e', fileMetadataPath)) {
-      fileMetadata = JSON.parse(shell.cat(fileMetadataPath));
-      metadata = Object.assign(metadata, fileMetadata);
+      if (pathData.lang) {
+        metadata.lang = pathData.lang;
+      }
+      metadata.srcPath = 'content/posts/';
+      metadata.srcPath += pathMatchData[1] || '';
+      metadata.srcPath += pathMatchData[2] && pathMatchData[2] + '-' || '';
+      metadata.srcPath += pathMatchData[3] || '';
+      metadata.srcPath += pathMatchData[4] || '';
+      metadata.srcPath += '/';
+      const fileMetadataPath = `${fileBase}${metadata.srcPath.replace('content/posts/', '/')}_data.json`;
+      if (shell.test('-e', fileMetadataPath)) {
+        fileMetadata = JSON.parse(shell.cat(fileMetadataPath));
+        metadata = Object.assign(metadata, fileMetadata);
+      }
     }
 
     if (content[0] === '-') {
@@ -84,7 +85,7 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
     }
 
     // Create aliases automatically
-    if (!metadata.categories) {
+    if (metadata.type && !metadata.categories) {
       metadata.categories = ['blog']
     }
     const postDate = new Date(metadata.date);
@@ -111,6 +112,20 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
         metadata.title = title2Match[1];
         content = content.replace(title2Match[0], '');
       }
+    }
+
+    // Summary
+    const summaryMatch = content.match(/^\s*_(.+)_\n/);
+    if (summaryMatch) {
+      metadata.summary = summaryMatch[1];
+      content = content.replace(summaryMatch[0], '');
+    }
+
+    // Warning
+    const warningMatch = content.match(/^\s*\*\*(.+)\*\*\n/);
+    if (warningMatch) {
+      metadata.warning = warningMatch[1];
+      content = content.replace(warningMatch[0], '');
     }
 
     // Convert md footnotes to sidenote shortcodes

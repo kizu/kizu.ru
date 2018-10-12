@@ -19,6 +19,8 @@ ol {
 li {
   padding: 0 0 0 var(--list-item-padding);
   list-style-type: none; /* Fixme: screenreaders would die out? */
+  justify-self: var(--grid-position, var(--li-justify-self));
+  grid-column: var(--grid-position);
 }
 
 li::before {

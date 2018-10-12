@@ -45,7 +45,7 @@
 
   /* Conditions */
   --initial-at-large: true;
-  --at-large: 1;
+  --at-large: calc(1 - var(--at-small));
   --at-small: 0;
 }
 
@@ -54,7 +54,6 @@
   :root {
     --initial-at-large: initial;
     --initial-at-small: true;
-    --at-large: 0;
     --at-small: 1;
 
     --grid-ascii: var(--grid-ascii--small);

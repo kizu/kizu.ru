@@ -1,4 +1,4 @@
-# Articles and Experiments by Roman Komarov
+# **Articles and Experiments** by Roman Komarov
 
 ## Hello!
 

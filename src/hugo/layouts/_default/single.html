@@ -1,28 +1,61 @@
-{{- define "title" -}}
-  {{- .Title -}}
-{{- end -}}
 {{- define "header" -}}
-  <nav>
-    <ul>
-      <li><a href="/{{ .Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}">{{ i18n "titleName" }}</a></p></li>
-      {{- if .Page.Params.published -}}
-        <li>{{ .Page.Params.published }}</li>
-      {{- else -}}
-        <li><time datetime="{{.Date.Format "2006-01-02"}}">{{.Date.Format "2006-01-02"}}</time></li>
-      {{- end -}}
-    </ul>
-  </nav>
+  <header>
+    <nav>
+      <ul>
+        <li style="--grid-position: start;"><a href="/{{ .Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}">{{ i18n "titleName" }}</a></p></li>
+        <li style="--grid-position: end;">
+          {{- if .Page.Params.published -}}
+            {{ .Page.Params.published }}
+          {{- else -}}
+            {{ partial "readableDate.html" . }}
+          {{- end -}}
+        </li>
+      </ul>
+    </nav>
+  </header>
 {{- end -}}
 {{- define "main" -}}
-  {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" .Title "</h1>")) -}}
-
   {{- range .Translations -}}{{- if eq .Params.lang .Lang -}}
     <aside style="--align: center">
-      <a href="{{ .Permalink }}">{{ .Lang }}: {{ .Title }}</a>
+      {{- i18n "diffLangVersion" -}}: <br/>
+      <a href="{{ .Permalink }}" style="--underline: 0;">
+        {{- i18n "lquoDiffLang" -}}
+        <span style="--underline: 1;">{{ .Title }}</span>
+        {{- i18n "rquoDiffLang" -}}
+      </a>
     </aside>
   {{- end -}}{{- end -}}
 
+  {{- if .Params.summary -}}
+    <p class="Summary">{{ .Params.summary | markdownify }}</p>
+  {{- end -}}
+
+  {{- if .Params.warning -}}
+    <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
+  {{- end -}}
+
   {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+
+  <p class="Metadata Published">
+    {{- i18n "published" }} {{ partial "readableDate.html" .}}
+  </p>
+
+  {{- if .Params.thanks_to -}}
+    {{- $thanks := "" -}}
+    {{- if eq (printf "%T" .Params.thanks_to) "string" -}}
+      {{- $thanks = .Params.thanks_to -}}
+    {{- else -}}
+      {{- $thanks = echoParam .Params.thanks_to .Params.lang -}}
+    {{- end -}}
+
+    {{- if and $thanks (ne $thanks "") -}}
+      <p class="Metadata Thanks">{{ i18n "thanksTo" }} {{ partial "handleContent.html" (dict "context" . "input" (markdownify $thanks)) }}.</p>
+    {{- end -}}
+  {{- end -}}
+
+  {{- if .Params.warning -}}
+    <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
+  {{- end -}}
 {{- end -}}
 
 {{- define "footer" -}}
@@ -30,13 +63,11 @@
   {{- $prev := $.Scratch.Get "prevPage" -}}
   {{- $next := $.Scratch.Get "nextPage" -}}
   {{- if or $prev $next -}}
-    <ul>
-      {{- if $prev -}}
-        <li><a href="{{$prev.Permalink}}" style="--underline: 0; --before: '← '"><span style="--underline: 1;">{{$prev.Title}}</span></a></li>
-      {{- end -}}
-      {{- if $next -}}
-        <li><a href="{{$next.Permalink}}" style="--underline: 0; --after: ' →'"><span style="--underline: 1;">{{$next.Title}}</span></a></li>
-      {{- end -}}
-    </ul>
+    {{- if $prev -}}
+      <li style="--grid-position: start;"><a href="{{$prev.Permalink}}" title="{{ i18n "previousArticle" }}" style="--underline: 0; --before: '← '"><span style="--underline: 1;">{{$prev.Title}}</span></a></li>
+    {{- end -}}
+    {{- if $next -}}
+      <li style="--grid-position: end;"><a href="{{$next.Permalink}}" title="{{ i18n "nextArticle" }}" style="--underline: 0; --after: ' →'"><span style="--underline: 1;">{{$next.Title}}</span></a></li>
+    {{- end -}}
   {{- end -}}
 {{- end -}}

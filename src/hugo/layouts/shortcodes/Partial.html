@@ -1,5 +1,5 @@
 {{- $file := .Get "src" -}}
-{{- $src := (print "/content/" .Page.Params.srcPath $file) -}}
+{{- $src := (print "/" .Page.Params.srcPath $file) -}}
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
 {{- if .Get "screenshot" -}}

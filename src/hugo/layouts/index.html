@@ -1,22 +1,20 @@
 {{ define "main" }}
-<article>
   {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
-</article>
-<ul>
-<!-- Ranges through content/post/*.md -->
-{{ range .Data.Pages }}
-    {{ if and (.Title) (eq .Site.Params.languageCode .Params.lang) }}
-        <li>
-            <a href="{{.Permalink}}">
-                {{ if .Params.published }}
-                    {{.Params.published}}
-                {{ else }}
-                    {{.Date.Format "2006-01-02"}}
-                {{ end }}
-                | {{.Title}}
-            </a>
-        </li>
-    {{ end }}
-{{ end }}
-</ul>
+  <ul>
+  <!-- Ranges through content/post/*.md -->
+  {{ range .Data.Pages }}
+      {{ if and (.Title) (eq .Site.Params.languageCode .Params.lang) }}
+          <li>
+              <a href="{{.Permalink}}">
+                  {{ if .Params.published }}
+                      {{.Params.published}}
+                  {{ else }}
+                    {{ partial "readableDate.html" . }}
+                  {{ end }}
+                  | {{.Title}} | {{.Params.summary}}
+              </a>
+          </li>
+      {{ end }}
+  {{ end }}
+  </ul>
 {{ end }}

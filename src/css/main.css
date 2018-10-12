@@ -21,6 +21,7 @@
 
 @import url("_config.css"); /* [2] */
 @import url("_theme.css");  /* [3] */
+@import url("components/anchor.css");
 @import url("components/asides.css");
 @import url("components/lists.css");
 @import url("components/sidenotes.css");
@@ -41,6 +42,12 @@ html {
   /* Should be tested in IE/Edge */
   /* There were problems, but with a variable it could be ok? */
   text-shadow: var(--THEME_TEXT_SHADOW);
+}
+
+/* TODO: replace home pages' one with a special case */
+.Page_type_page {
+  --h1-font-weight: 400;
+  --h1-margin-bottom: 1rem;
 }
 
 body {
@@ -65,6 +72,10 @@ body {
   font: var(--THEME_FONT);
 }
 
+body::before {
+  display: none;
+}
+
 header {
   /* For subgrid substitute */
   order: -1;
@@ -81,11 +92,28 @@ header {
 /* Grid stuff start */
 header,
 footer,
-main {
+main,
+article {
   display: grid;
   grid-template: var(--grid);
   grid-gap: 0 var(--h-gap);
   --grid-column: content;
+
+  width: auto;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+article::after {
+  content: "";
+  grid-column: content;
+
+  border-top: 1px solid;
+  margin-top: 2rem;
+  margin-bottom: -1px;
+
+  --color-a: 0.15;
 }
 
 * {
@@ -97,9 +125,11 @@ figure {
   grid-column: content;
   --grid-column: initial;
   --text-indent: 0;
-  --link-text-shadow: none;
+  --link-text-shadow-color: transparent;
+  --link-padding: 0;
 
   padding: 0.5rem;
+  border: none;
   margin: var(--nested-figure-margin, 1rem 0);
   background: #FFF;
   border-radius: 3px;
@@ -145,29 +175,48 @@ figure {
 /* Grid stuff end */
 
 footer {
-  margin-top: 6rem;
-  margin-bottom: 2rem;
+  display: var(--footer-display, grid);
+  margin-top: var(--footer-margin-top, 2rem);
+  margin-bottom: var(--footer-margin-bottom, 2rem);
   --text-indent: 0;
+}
+
+.Metadata {
+  margin-top: 1rem;
+  text-align: right;
+
+  font: italic var(--THEME_FONT--SMALL);
+
+  --text-indent: 0;
+  --time-color-a: 1;
+}
+
+.Metadata + .Metadata {
+  margin-top: 0;
 }
 
 ul {
   display: var(--ul-display);
-  justify-content: var(--ul-justify-content);
+  grid: var(--ul-grid);
 }
 
 nav {
-  --ul-display: flex;
-  --ul-justify-content: space-between;
+  grid-column: content;
+  --ul-display: grid;
   --ul-item-content: none;
   --list-item-padding: 0;
   --link-color: currentColor;
   --link-color--visited: currentColor;
-  --link-underline-offset: 0.45em;
+  --link-underline-offset: 0.4em;
   font-size: var(--THEME_FONT_SIZE--SMALL);
+  --ul-grid: "start end";
+  --li-justify-self: start;
+  --li-justify-self-even: end;
+  --grid-column: auto;
 }
 
 time {
-  --color-a: 0.75;
+  --color-a: var(--time-color-a, 0.75);
 }
 
 /* Typography basics, kinda reset stuff? */
@@ -196,6 +245,10 @@ img:only-child {
   --img-margin: 1rem auto;
 }
 
+strong, b {
+  font-weight: var(--strong-font-weight, 700);
+}
+
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
   margin-top: 2rem;
@@ -204,6 +257,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   line-height: 1em;
   font-weight: 900;
+  --strong-font-weight: 900;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  --anchor-active: 1;
 }
 
 h1 + h2,
@@ -217,6 +275,9 @@ h5 + h6 {
 h1 {
   font-size: var(--h1-font-size, 3rem);
   font-weight: var(--h1-font-weight, 900);
+  line-height: var(--h1-line-height, 4rem);
+  margin-top: var(--h1-margin-top, 3rem);
+  margin-bottom: var(--h1-margin-bottom, 3rem);
 }
 
 h2 {
@@ -252,17 +313,52 @@ p:empty {
 
 /* The only case when we don't need an indent is after headers */
 /* TODO: Do we need this only for _en? */
-:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) + p {
+:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.Summary):not(.Warning) + p {
   --p-text-indent: var(--text-indent);
   --p-margin-top: var(--p-p-margin-top);
 }
 
-main {
-  /* text-align: justify; */
-}
-
 em {
   font-style: var(--em-font-style, italic);
+  font-size: var(--em-font-size);
+  font-weight: var(--em-font-weight);
+}
+
+.Summary {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.Warning {
+  display: flex;
+  --grid-column: full;
+
+  border: 0.5rem dashed #FFCA51;
+  padding: 2rem calc(2rem * var(--at-small));
+  margin: 0 2rem 2rem;
+
+  background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+  background-clip: padding-box, border-box;
+
+  text-align: center;
+
+  font-size: 1.5rem;
+  --strong-font-weight: normal;
+  --em-font-style: normal;
+  --em-font-weight: 900;
+}
+
+.Warning::before,
+.Warning::after {
+  content: var(--initial-at-small, "⚠️");
+  align-self: center;
+  font-size: 3rem;
+  margin: 2rem;
+}
+
+.Warning:last-child {
+  margin: 2rem 2rem 0;
 }
 
 blockquote {

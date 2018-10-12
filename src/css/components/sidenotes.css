@@ -22,7 +22,6 @@
 
   display: inline-block;
   text-indent: 0;
-  --link-text-shadow: none;
 }
 
 .Highlight {
@@ -52,6 +51,11 @@ label[for$=-Anchor] {
   display: block;
 }
 
+
+.Highlight:hover + label[for$=-Anchor] {
+  --link-text-shadow-color: transparent;
+  --link-text-shadow-transition: 0s;
+}
 .Sidelink {
   --counter: sidenote-link;
   --link-underline-color: transparent;
@@ -91,10 +95,15 @@ label[for$=-Anchor] {
   padding-right: var(--h-gap);
 }
 
+p[role=note] {
+  --asides-padding-top: 0;
+}
+
 .Highlight[id$=-Content]::before {
   content: counter(sidenote) ". ";
 
   position: absolute;
+  top: calc(var(--at-large) * var(--asides-padding-top));
   left: -1.25rem;
 
   width: 1rem;

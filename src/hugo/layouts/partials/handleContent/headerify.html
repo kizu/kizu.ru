@@ -1,1 +1,1 @@
-{{- .input | replaceRE "(<h\\d[^>]*)(>\\s*)([A-ZА-Я])([^<]*)" "$1 aria-label='$3$4'$2<span class='FirstLetter' aria-hidden='true'>$3</span>$4" | replaceRE "(<h\\d id=\"([^\"]+)\"[^>]*>)" "$1<a class='Anchor' aria-hidden='true' href='#$2'></a>" | safeHTML -}}
+{{- .input | replaceRE "(<h\\d[^>]*)(>(?:<strong>)?\\s*(?:<strong>)?)([A-ZА-Я])([^<]*)" "$1 aria-label='$3$4'$2<span class='FirstLetter' aria-hidden='true'>$3</span>$4" | replaceRE "(<h\\d id=\"([^\"]+)\"[^>]*>)" "$1<a class='Anchor' aria-hidden='true' href='#$2'></a>" | safeHTML -}}

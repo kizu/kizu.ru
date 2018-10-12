@@ -3,3 +3,33 @@ other = "Roman Komarov"
 
 [backToMain]
 other = "Go back to homepage"
+
+[previousArticle]
+other = "Previous article"
+
+[nextArticle]
+other = "Next article"
+
+[diffLangVersion]
+other = "Русскоязычная версия"
+
+[lquo]
+other = "“"
+
+[lquoDiffLang]
+other = "«"
+
+[rquo]
+other = "”"
+
+[rquoDiffLang]
+other = "»"
+
+[dateFormat]
+other= "January 2, 2006"
+
+[published]
+other = "Published on"
+
+[thanksTo]
+other = "Thanks to"

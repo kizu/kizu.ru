@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Params.languageCode }}">
+<html lang="{{ .Site.Params.languageCode }}" class="Page Page_type_{{.Params.type}}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{{ block "title" . }}
-      {{- .Site.Title -}}
+      {{- if .Title -}}
+        {{- .Title | markdownify | plainify -}}
+      {{- else -}}
+        {{- .Site.Title | plainify -}}
+      {{- end -}}
     {{ end }}</title>
     <link rel="stylesheet" href="/s/style.css" />
   </head>
   <body>
-    <main>
-      {{- block "main" . -}}{{- end -}}
-    </main>
-    <header><!-- Goes after main for ~reasons~ -->
-      {{- block "header" . -}}
-        <h1>{{ i18n "titleName" }}</h1>
+    {{- if eq .Page.Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
+      {{- if .Title -}}
+        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" (markdownify .Title) "</h1>")) -}}
       {{- end -}}
-    </header>
+
+      {{- block "main" . -}}{{- end -}}
+    {{- if eq .Page.Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
+    <!-- Goes after main for ~reasons~ -->
+    {{- block "header" . -}}{{- end -}}
+
     <footer role="contentinfo">
       <nav>
-        {{- block "footer" . -}}{{- end -}}
-        <p>
+        <ul>
+          {{- block "footer" . -}}{{- end -}}
+          <li style="--grid-position: start;">
+            {{- if eq .Page.Kind "home" -}}
+              © {{ now.Format "2006"}} {{ i18n "titleName" }}
+            {{- else -}}
+              <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ now.Format "2006"}} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+            {{- end -}}
+          </li>
+          {{ $currentLang := .Site.Params.languageCode }}
+          {{ $Site := .Site }}
           {{- if eq .Page.Kind "home" -}}
-            © {{ now.Format "2006"}} {{ i18n "titleName" }}
-          {{- else -}}
-            <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ now.Format "2006"}} <span style="--underline: 1;">{{ i18n "titleName" }}</span>.</a>
+              <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
           {{- end -}}
-        </p>
+        </ul>
       </nav>
     </footer>
     <script src="/j/prism.js"></script>

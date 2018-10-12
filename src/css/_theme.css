@@ -13,14 +13,13 @@
   --THEME_INDENT: 2rem;
 
   --THEME_FONT_SIZE: calc(1rem + 5px);
-  --THEME_FONT_SIZE--SMALL: calc(1rem - 2px);
+  --THEME_FONT_SIZE--SMALL: 1rem;
   --THEME_FONT_SIZE--CODE: calc(1rem + 2px);
 
   --THEME_LINE_HEIGHT: 2rem;
-  --THEME_LINE_HEIGHT--SMALL: 1.5em;
+  --THEME_LINE_HEIGHT--SMALL: 1.3888em;
 
   --THEME_FONT_FAMILY: '21Cent-Regular', Georgia, serif, Helvetica Neue, Arial; /* [2] */
-  --THEME_FONT_FAMILY--SMALL: Helvetica Neue, Arial, sans-serif;
 
   /* Same for every theme? Should be moved somewhere? */
   --THEME_FONT:
@@ -29,7 +28,7 @@
 
   --THEME_FONT--SMALL:
     var(--THEME_FONT_SIZE--SMALL)/var(--THEME_LINE_HEIGHT--SMALL)
-    var(--THEME_FONT_FAMILY--SMALL);
+    var(--THEME_FONT_FAMILY);
 
   /* Colors */
   --THEME_BG: hsl(135, 40%, 98%);
