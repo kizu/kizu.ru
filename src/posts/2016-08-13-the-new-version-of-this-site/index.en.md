@@ -1,5 +1,7 @@
 # The New Version of This Site
 
+#Blog #Meta
+
 Around one and a half month ago, on June, 23rd[^yep], I published a new version of my site. Once again. It is rather hard to remember which version number it should be now. If we'd count it from the very start, from the times when I didn't know how to markup pages properly, this would be the thirteenth version. Or something around that. Of course, that is if we won't count all the unfinished and trashed versions.
 
 [^yep]: Yep, it was more than a month from the publishing of a site till I published this post — I wanted to see how the new site would work in production and fix some things here and there.

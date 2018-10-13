@@ -6,6 +6,8 @@ thanks_to: "[Shagen Ogandzhanyan](@shabunc) for some proofreading"
 
 # Correct Cursor on Active Elements
 
+#Practical #Design #Accessibility
+
 Every active element must have a set `cursor` on hover. And it should be `cursor:pointer` in most cases.
 
 By active elements I mean links, buttons, selects, labels with checkboxes and radio buttons, and other similar elements.

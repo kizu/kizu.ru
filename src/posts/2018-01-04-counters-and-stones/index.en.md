@@ -1,6 +1,10 @@
 # Counters and Stones
 
-Today's article is a bit special for me: I'll explain a solution which I couldn't find for more than four years. The problem is not very practical: it was one aspect of CSS-only stuff that could be much easier handled by JS, but I really wanted to find a clean HTML&CSS-only solution for. And I have found it. And in this article, I'll explain what was the problem and how the solution works.
+#Experiment #CSS_Logic #CSS
+
+_HTML&CSS-only gomoku game? Binary logic in CSS via counters? So many combinators, Edge stops to understand what is even going on? All of this and a bunch of other weird CSS stuff in the experiment that I started back in 2013._
+
+This article is a bit special for me: I'll explain a solution which I couldn't find for more than four years. The problem is not very practical: it was one aspect of CSS-only stuff that could be much easier handled by JS, but I really wanted to find a clean HTML&CSS-only solution for. And I have found it. And in this article, I'll explain what was the problem and how the solution works.
 
 But first, I need to say thanks to [Una](https://twitter.com/Una). I was browsing internets and found out myself looking at on one of her articles — [“Pure CSS Games with Counter-Increment”](https://una.im/css-games/). While I had read this article a few times before (I really like CSS experiments like that as you can guess!), this time something clicked. I remembered one of my older unfinished experiments[^fronteers] which was a bit similar to one of the games Una created, and how both our examples didn't solve one hard aspect. But looking at this article now, when I just wrote the article on [Flexible Overflow](http://kizu.ru/en/blog/flexible-overflow/), I looked at the “Counter-Increment” part and the puzzle in my head completed.
 
@@ -8,7 +12,7 @@ But first, I need to say thanks to [Una](https://twitter.com/Una). I was browsin
 
 I'll explain the problem and the solution later, but now look at this, my now finished experiment[^renju] from the past:
 
-[^renju]: This is a really basic implementation of [Gomoku](https://en.wikipedia.org/wiki/Gomoku) — a game where two players compete on who could purt five consecutive stones first. Only the very basic winning rules are implemented of course. <!-- span="2" offset="1" -->
+[^renju]: This is a really basic implementation of [Gomoku](https://en.wikipedia.org/wiki/Gomoku) — a game where two players compete on who could put five consecutive stones first. Only the very basic winning rules are implemented of course. <!-- span="2" offset="1" -->
 
 {{<Partial src="examples/13x13.html" />}}
 

@@ -1,8 +1,10 @@
 # Conditions for CSS Variables
 
+#Practical #CSS_Logic #CSS_Variables #Future_CSS #Preprocessing #Bugs #CSS
+
 I'll start from this: there are no[^not-those] conditions in specs to use with [CSS variables](https://www.w3.org/TR/css-variables-1/). I think that this is a really big flaw in specs, as while variables already provide a lot of things that were not possible in any other way before, the absence of conditions is really frustrating, as there could be a lot of uses for them.
 
-[^not-those]: There is a module named [“CSS Conditional Rules”](https://www.w3.org/TR/css3-conditional/), but don't expect it to cover the CSS variables — it covers some at-rules stuff. There is even a [proposal](https://tabatkins.github.io/specs/css-when-else/) for `@when`/`@else` at-rules, which, again, do not anything in common with variables.
+[^not-those]: There is a module named [“CSS Conditional Rules”](https://www.w3.org/TR/css3-conditional/), but don't expect it to cover the CSS variables — it covers some at-rules stuff. There is even a [proposal](https://tabatkins.github.io/specs/css-when-else/) for `@when`/`@else` at-rules, which, again, do not anything in common with variables. <!-- span="2" -->
 
 But what if we'd need those imaginary conditional statements for our CSS variables _now_? Well, as with a lot of other CSS stuff, we can hack our way around for same cases.
 

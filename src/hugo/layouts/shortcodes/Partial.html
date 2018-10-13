@@ -2,18 +2,29 @@
 {{- $src := (print "/" .Page.Params.srcPath $file) -}}
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
-{{- if .Get "screenshot" -}}
-  {{- $alt := "Screenshot" -}}
-  {{- if .Get "alt" -}}
-    {{- $alt = .Get "alt" -}}
+{{- $a11y := .Get "a11y" -}}
+<figure
+  {{- if .Get "style" -}}
+    {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
   {{- end -}}
-  <figure class="Figure"
-    {{- if .Get "style" -}}
-      {{/**/}} style="{{ .Get "style" }}"
+  {{- if ne $a11y true -}}
+    {{/**/}} aria-label="
+      {{- if .Get "a11y-notice" -}}
+        {{- .Get "a11y-notice" -}}
+      {{- else -}}
+        This demo is not yet adapted and inaccessible, sorry.
+      {{- end -}}
+    "
+  {{- end -}}
+>
+  {{- if .Get "screenshot" -}}
+    {{- $alt := "Screenshot" -}}
+    {{- if .Get "alt" -}}
+      {{- $alt = .Get "alt" -}}
     {{- end -}}
-  >
+
     <input class="Figure-Toggle" type="checkbox" id="Toggle-{{ $id }}" />
-    <div class="Figure-Demo" title="Live demo">
+    <div class="Figure-Demo" {{ if ne $a11y true }} aria-hidden="true"{{ end }}>
       {{- $src  | readFile | safeHTML -}}
     </div>
     <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
@@ -25,13 +36,9 @@
       </p>
       {{- .Inner | markdownify -}}
     </aside>
-  </figure>
-{{- else -}}
-  <figure
-    {{- if .Get "style" -}}
-      {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
-    {{- end -}}
-  >
+
+  {{- else -}}
+
     {{- if .Get "iframe" -}}
       {{- if eq (.Get "iframe") "true" -}}
         <iframe
@@ -45,8 +52,10 @@
         ></iframe>
       {{- end -}}
     {{- else -}}
-      {{- $src  | readFile | safeHTML -}}
+      <div class="Figure-Demo"{{ if ne $a11y true }} aria-hidden="true"{{ end }}>
+        {{- $src  | readFile | safeHTML -}}
+      </div>
     {{- end -}}
     {{- .Inner | markdownify -}}
-  </figure>
-{{- end -}}
+  {{- end -}}
+</figure>

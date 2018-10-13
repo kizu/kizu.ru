@@ -1,5 +1,9 @@
 # Flexible Overflow
 
+#Practical #CSS_Flex #Responsive #CSS
+
+_Flex display mode allows us to create a lot of interesting interactions. In this article I'll show how to use it to implement a responsive block which could substitute one content with another, all based on which one would fit inside the container._
+
 ![Gif animation showing this article's effect in action](sad-lions.gif)
 
 A lot of people love responsive sites, and we used to make them with the help of Media Queries. Today, in the era of components, we can't rely just on the width of our viewport anymore. Our components need to be independent and work in any conditions.
@@ -8,7 +12,7 @@ One of the solutions everyone is waiting for is [Container Queries](https://gith
 
 But should we rely on JS or look at our news feeds in anticipation of Container Queries all the time? What if CSS is already powerful enough to solve some of the potential Container Queries use cases right now? What if CSS could even solve some of the responsive cases that even Container Queries probably couldn't solve[^queryless]?
 
-[^queryless]: Very often we don't know the dimensions we could rely on, even on per-component basis, so _queries_ not always could help us, and we need to learn how to use more complex CSS to achieve what we want. <!-- align="end" -->
+[^queryless]: Very often we don't know the dimensions we could rely on, even on per-component basis, so _queries_ not always could help us, and we need to learn how to use more complex CSS to achieve what we want. <!-- span="4" offset="4" -->
 
 Today I'll present you with one of those cases.
 
@@ -109,7 +113,7 @@ So, how and why does this work? Let's look at CSS:
 
     When there is enough space for the long part it would always take this space. But when its parent would become shorter than the contents of the long part, the magic part would happen: it would jump to the new line as there was another item before it, and that shorter item, that had basically 0 width before, would _grow_ to take all the suddenly vacant space.
 
-{{<Sidenotes offset="1">}}
+{{<Sidenotes>}}
     [^ie11]: We miss IE11 here, and maybe with some hacks, we could make it work as well, but I don't think it would worth the effort. You can try though if you want.
 
     [^lh-unit]: That would be an ideal case for [the lh unit](https://drafts.csswg.org/css-values/#lh), can we have it already, please?

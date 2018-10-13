@@ -114,6 +114,13 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
       }
     }
 
+    // Tags
+    const tagsMatch = content.match(/\n\#([^#\s].+)\n/);
+    if (tagsMatch) {
+      metadata.tags = tagsMatch[1].split(/\s+#/);
+      content = content.replace(tagsMatch[0], '');
+    }
+
     // Summary
     const summaryMatch = content.match(/^\s*_(.+)_\n/);
     if (summaryMatch) {

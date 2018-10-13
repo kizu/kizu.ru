@@ -1,5 +1,7 @@
 # Markdowning YAML for Jekyll
 
+#Blog #Meta #Jekyll
+
 While I’m struggling to write a lengthy article, here is a small one, on a little Jekyll trick I use.
 
 In Jekyll you need to use YAML front matter to add any metadata to the post or page. Actually, Jekyll “sees” only those files that have the YAML front matter, so it is a somewhat important thing.

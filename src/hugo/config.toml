@@ -3,6 +3,8 @@ markup = "mmark"
 baseURL = "http://kizu.ru/"
 sourceRelativeLinksEval = true
 
+preserveTaxonomyNames = true
+
 DefaultContentLanguage = "en"
 
 title = "kizu.ru"

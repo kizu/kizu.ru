@@ -1,16 +1,12 @@
 # **Articles and Experiments** by Roman Komarov
 
+Hello, this is my site. I write there about front-end and about some other stuff, here is everything that is available right now:
+
+{{<ArticleList>}}
+
 ## Hello!
 
 I’m working as a Front-end Web Developer at [Oyst](http://www.oyst.com) (before that — at a similar position at [Yandex](http://yandex.com)), occasionally doing different stuff for Russian [“Web Standards”](http://web-standards.ru/about/en/) community, committing to open source projects, experimenting on CSS, and blogging on this site.
-
-
-### The latest publications
-
-[partial:latest_posts]
-
-See also [the whole list of publications](everything/).
-
 
 ### Projects
 

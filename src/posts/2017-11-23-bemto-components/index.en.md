@@ -1,8 +1,12 @@
 # Bemto-Components
 
-Here is a thing I'm working on at my free time these days:
+#Project #Practical #React #BEM
 
-[bemto-components](http://kizu.ru/bemto-components/) ([github repo](https://github.com/kizu/bemto-components)).
+_Working within a React stack and using Styled Components, I found out that I still miss a lot of aspects of BEM. This lead to me starting a new side-project which not only allows to use BEM-style elements and modifiers, but also enhances the overall developer experience._
+
+So, here is a thing I'm working on at my free time these days:
+
+> [bemto-components](http://kizu.ru/bemto-components/) ([github repo](https://github.com/kizu/bemto-components)).
 
 In the last 6 months, I was working mostly with CSS for projects using React and I've tried a few ways of doing components and styles for them. For styling purposes I found out that [styled-components](https://www.styled-components.com) work the best for me: you write proper CSS there (and not some kinds of JS object abominations), and everything works pretty nice.
 

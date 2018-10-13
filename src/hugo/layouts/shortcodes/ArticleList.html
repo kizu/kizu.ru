@@ -1,0 +1,23 @@
+{{- with .Site -}}
+  <!-- Make into a filter, so it would be possible to show all articles etc. -->
+  <ul class="ArticleList">
+    <!-- Ranges through content/post/*.md -->
+    {{- $count := 0 -}}
+    {{- range .Pages -}}
+      {{- if and (.Title) (eq .Site.Params.languageCode .Params.lang) (eq .Draft false) -}}
+        {{ $count = add $count 1 }}
+        <li{{ if le $count 2 }} style="--priority: 1;"{{ end }}>
+          <article class="ArticleList-Item">
+            <h2><a class="ArticleList-Link" href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <p class="Metadata Published">
+              {{ partial "readableDate.html" . }}{{ partial "taglist.html" . }}
+            </p>
+            {{- if .Params.summary -}}
+              <p>{{ .Params.summary | markdownify }}</p>
+            {{- end -}}
+          </article>
+        </li>
+      {{- end -}}
+    {{- end -}}
+  </ul>
+{{- end -}}

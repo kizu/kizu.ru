@@ -2,6 +2,7 @@
 
 body {
   font: 1.5em/1.5 Georgia, sans-serif;
+  padding: 2em;
 }
 
 body:before {
@@ -24,7 +25,6 @@ article {
   display: block;
   box-sizing: border-box;
   width: 36em;
-  padding: 2em;
   max-width: 100%;
   margin: 0 auto;
 }

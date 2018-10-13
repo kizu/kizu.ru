@@ -1,5 +1,7 @@
 # Filtering elements without JS
 
+#Experiment #CSS
+
 - Colors are just checkboxes.
 - Shapes — radiobuttons with an upgrade: you can uncheck once it's checked.
 

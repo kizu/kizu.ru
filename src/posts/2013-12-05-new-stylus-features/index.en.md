@@ -1,5 +1,7 @@
 # New Stylus Features
 
+#Blog #Project #Preprocessing
+
 Not so long ago I became a maintainer[^maintaining] for [Stylus](gh:LearnBoost/stylus) CSS preprocessor. At the end of the last week, we released a new version — [0.41.0](https://github.com/LearnBoost/stylus/blob/master/History.md#0410--2013-11-30) — where we added some new features. And in the two earlier releases we added support for the hashes and polished it, so after all this work it is now possible to do a lot of interesting new things. In this article, I'll explain one new tech[^example-sidenote] that is now possible in the new Stylus, but I'll describe the new features for a start.
 
 {{<Sidenotes span="2">}}

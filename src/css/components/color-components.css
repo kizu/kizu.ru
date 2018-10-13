@@ -2,7 +2,8 @@
 *,
 *::before,
 *::after {
-  color: hsla(
+  /* Replaced color with --color as there were visited problems */
+  --color: hsla(
     var(--color-h, 0),
     calc(var(--color-s, 0) * 1%),
     calc(var(--color-l, 0) * 1%),
@@ -17,6 +18,5 @@
   --color-l: var(--THEME_COLOR_L);
   --color-a: var(--THEME_COLOR_A);
 
-  --inherit-custom-color: 0;
   --inherited-a: initial;
 }

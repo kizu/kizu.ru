@@ -1,5 +1,7 @@
 # Legends and Headings
 
+#Experiment #CSS
+
 One day in the last december I tried to find out what we can do with the `legend` element. I wanted to move it in the fieldset’s frame, and didn’t want to style it out ’cause the fieldsets with legend have this special behavior: the fieldset’s border gets the gap for the legend to fit in.
 
 So, I made some tricks to emulate different behaviors: move the legend to the right, center or even make visually two legends in one fieldset.

@@ -1,5 +1,7 @@
 # Restarting kizu.ru
 
+#Blog #Meta #Jekyll
+
 Hi there! That was a long way and I think I’m somewhere near the end — I’m relaunching my site. I can’t remember how many versions of it were there when it was entirely in Russian, but that would be the second version of my site in English.
 
 Oh, did I say I’m near the end? I lied. You know what is the main feature of this version? It’s rough. It’s terribly, awfully draft, it's broken and smelling. Don’t look at the source — you won’t find there anything better than ugly, barely working code. Really, I’m not joking. Why is it so? I decided to fight my perfectionism. I tended to polish, refine and then polish again my site before; I tried to show only the bestestest code I wrote. But now, this version — it is so far from anything I would like before. And that’s awesome.

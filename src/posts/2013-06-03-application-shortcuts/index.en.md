@@ -1,5 +1,7 @@
 # Application shortcuts
 
+#Blog #Workflow
+
 Here is one workflow thing I use all the time and I want to share — using keyboard shortcuts to switch between applications.
 
 I’m talking not about those system shortcuts — `cmd+tab`/`alt+tab`. They are awful — because they are modal. You can’t tell at any given time what would be the result of using such shortcut: those shortcuts switch focus between the recent used apps, so you need to remember which applications you used and in which order. Which could be rather frustrating when you use more than two applications.

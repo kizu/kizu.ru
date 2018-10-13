@@ -18,7 +18,9 @@
         {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" (markdownify .Title) "</h1>")) -}}
       {{- end -}}
 
-      {{- block "main" . -}}{{- end -}}
+      {{- block "main" . -}}
+        {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+      {{- end -}}
     {{- if eq .Page.Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
     <!-- Goes after main for ~reasons~ -->
     {{- block "header" . -}}{{- end -}}

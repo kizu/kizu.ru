@@ -1,5 +1,9 @@
 # Keyboard-Only Focus
 
+#Practical #Accessibility #Bugs #CSS #HTML
+
+_After playing a lot with HTML & CSS, I present you with a very robust and practical solution to one of the most annoying problems: keyboard-only focus on interactive elements. All thanks to `tabindex` in HTML and almost to no CSS._
+
 One of the things I couldn't manage to find a solution for a long time was a problem of focus styles on interactive elements. The problem was: when you have an element with some `:focus` styles, they're applied not only to the focused state itself but also after you just click on this element (and it behaves differently for different elements in different browsers, of course).
 
 What this meant is that whenever you wanted to have some custom element, you would need to compromise in how the focus state would look like, because if you'd make it too bright or distinct from the normal state, users would see it whenever they'd click the elements with those styles. So you're either getting the too noticeable effect when it is not needed or not enough noticeable effect when it is needed. Accessibility-wise, the former is, of course, better, but what if we could make those styles not to apply when you click at all?
@@ -106,7 +110,7 @@ However, there are a few issues in other browsers: Safari and Firefox. In Safari
 
 But in Firefox… Well, our `:hover:active` stuff just doesn't work. And even more to it, if we'd actually listen to the button's events, then on `<button>` we won't get[^fxbug] a `click` when we click (and that should be a _click_, not a tap!). That only happens when you change the `visibility` of a `<button>` on the `:active` state.
 
-[^fxbug]: I suspect that there is [a related bug in bugzilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1375877) for this, but maybe there are others, feel free to find if some other bug fits better! <!-- align="end" -->
+[^fxbug]: I suspect that there is [a related bug in bugzilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1375877) for this, but maybe there are others, feel free to find if some other bug fits better! <!-- offset="2" span="2" -->
 
 ### Fixing Firefox
 

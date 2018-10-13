@@ -1,5 +1,9 @@
 # Label-to-Input States
 
+#Experiment #HTML #CSS
+
+_Sometimes there are very unusual mechanics hidden deep in the interactions of HTML and CSS. In this article I show one of those — the nuances of how HTML labels interact with inputs and CSS applied to them._
+
 When fiddling with inputs & labels for them, I remembered one thing that amused me for a long time[^for-a-long-time]. Look at this HTML:
 
 [^for-a-long-time]: Fun fact: when I started the research for this article, I found [this question](https://stackoverflow.com/questions/9098581/why-is-hover-for-input-triggered-on-corresponding-label-in-css) at StackOverflow, with a really detailed answer by BoltClock. The fun part is that I was the one who asked this question at this far February of the year 2012, and now totally forgot about it. Also, the “Even more” part of this question is still actual for Webkits/Blinks. <!-- offset="1" span="3" -->

@@ -20,4 +20,4 @@
   {{- $date = (replaceRE $regex "" $date) -}}
 {{- end -}}
 
-<time datetime="{{.Date.Format "2006-01-02"}}">{{ $date }}</time>{{- /**/ -}}
+<time datetime="{{.Date.Format "2006-01-02"}}">{{ if .Params.published }}{{ .Params.published }}{{ else }}{{ $date }}{{ end }}</time>{{- /**/ -}}

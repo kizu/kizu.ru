@@ -1,5 +1,7 @@
 # Scrolling shadows
 
+#Experiment #Practical #CSS
+
 Here’s an old idea, but recreated with pure CSS.
 
 Originally, I had an extra wrapper and two extra pseudo-elements on it. Later I decided to rewrite the code and to use just a single element (by using radial gradients).

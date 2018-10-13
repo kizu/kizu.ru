@@ -32,7 +32,6 @@ figcaption {
 }
 
 aside[style*='--align:end;'] {
-  padding-top: 0;
   padding-bottom: calc(var(--at-large) * var(--asides-padding-top));
 }
 

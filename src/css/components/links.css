@@ -16,19 +16,21 @@
   --link-text-shadow-color: var(--THEME_BG);
 }
 
-a[href],
+a,
 .Link {
+  position: var(--link-position);
+  z-index: var(--link-z-index);
   cursor: pointer;
   color: var(--link-color);
   hyphens: none;
 }
 
-a[href]::before,
+a::before,
 .Link::before {
   content: var(--before);
 }
 
-a[href]::after,
+a::after,
 .Link::after {
   content: var(--after);
 }
@@ -37,9 +39,10 @@ span {
   --underline: 0;
 }
 
-a:link,
+a,
 .Link {
   padding: var(--link-padding, 0.3em 0);
+  margin: var(--link-margin);
   text-decoration: none;
   text-shadow: -2px 0 0 var(--link-text-shadow-color),
     2px 0 0 var(--link-text-shadow-color),
@@ -61,7 +64,7 @@ a:link,
   --underline-width: var(--link-underline-width);
 }
 
-a:link,
+a,
 .Link,
 span {
   --link-underline-image: linear-gradient(var(--link-underline-color), var(--link-underline-color));
@@ -84,8 +87,10 @@ a:visited {
 }
 
 a:hover,
+a:not([href^='#']):focus,
 .Link:hover {
   --underline-width: calc(2 * var(--link-underline-width));
   --link-underline-color: var(--link-underline-color--hover);
   color: var(--link-color--hover);
+  z-index: var(--link-hover-z-index, var(--link-z-index));
 }

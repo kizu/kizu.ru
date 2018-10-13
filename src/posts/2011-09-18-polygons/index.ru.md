@@ -1,5 +1,7 @@
 # Честные полигоны на CSS3
 
+#Experiment #Practical #CSS
+
 Используя вращение при помощи трансформов, `overflow:hidden` и связку `visibility:hidden` для врапперов и `visibility:visible` у последнего ребёнка, можно делать любые выпуклые маски, честно кликабельные по всей своей площади.
 
 {{<Partial iframe="http://kizu.github.com/Polygons/" height="33em" />}}

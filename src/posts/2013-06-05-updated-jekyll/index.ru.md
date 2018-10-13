@@ -1,5 +1,7 @@
 # Обновлённый Jekyll
 
+#Blog #Meta #Jekyll
+
 Недавно Jekyll стал совсем большим — [была выпущена](https://github.com/blog/1502-jekyll-turns-1-0) версия «1.0».
 
 В [ченджлоге](https://github.com/mojombo/jekyll/blob/master/History.markdown#100—2013-05-06) довольно много изменений: есть как новые фичи, так и всяческие исправления. О том, что критично знать про это обновление, можно прочитать в [этой статье](http://jekyllrb.com/docs/upgrading/).
