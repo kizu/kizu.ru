@@ -3,12 +3,44 @@
   grid-gap: var(--THEME_INDENT);
   grid-template-columns: repeat(auto-fit, minmax(15.6rem, 1fr));
   grid-auto-flow: dense;
-  padding: calc(2 * var(--THEME_INDENT)) var(--THEME_INDENT);
+  padding: calc(2 * var(--THEME_INDENT)) var(--THEME_INDENT) var(--THEME_INDENT);
   --grid-column: auto;
   --ul-display: grid;
   --ul-item-content: none;
   --list-item-padding: 0;
   --text-indent: 0;
+  --everything-shown: true;
+}
+
+ .ArticleList-Li:nth-child(n + 11) {
+   display: var(--everything-shown, none);
+ }
+
+.ArticleList-Flag {
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.ArticleList-Flag + .ArticleList {
+  --everything-shown: initial;
+}
+
+.ArticleList-Flag:target + .ArticleList {
+  --everything-shown: true;
+}
+
+.ArticleList-Flag:target + .ArticleList + p {
+  --ArticleList-Flag: none;
+}
+
+.isShown-whenOnlyRecent {
+  display: var(--ArticleList-Flag);
+}
+
+.isShown-whenShownAll {
+  display: none var(--ArticleList-Flag, );
 }
 
 .ArticleList-Item {

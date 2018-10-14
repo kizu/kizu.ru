@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/s/style.css" />
   </head>
   <body>
+    {{- partial "header.html" (dict "context" . "a11y" "true") -}}
     {{- if eq .Page.Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
       {{- if .Title -}}
         {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" (markdownify .Title) "</h1>")) -}}
@@ -23,7 +24,7 @@
       {{- end -}}
     {{- if eq .Page.Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
     <!-- Goes after main for ~reasons~ -->
-    {{- block "header" . -}}{{- end -}}
+    {{- partial "header.html" (dict "context" . "a11y" "false") -}}
 
     <footer role="contentinfo">
       <nav>
@@ -36,10 +37,20 @@
               <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ now.Format "2006"}} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
             {{- end -}}
           </li>
-          {{ $currentLang := .Site.Params.languageCode }}
-          {{ $Site := .Site }}
+
           {{- if eq .Page.Kind "home" -}}
-              <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
+            <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
+          {{- else -}}
+            <li style="--grid-position: end;">
+              {{- if .Page.Params.originalPath -}}
+                <a href="https://github.com/kizu/kizu.github.com/blob/feature/hugo-rewrite/src/{{ .Page.Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
+              {{- else -}}
+                <a href="https://github.com/kizu" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
+              {{- end }}
+              <span aria-hidden="true">·</span>
+              <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
+              <span aria-hidden="true">·</span>
+              <a href="{{ i18n "twitterLink" }}" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
           {{- end -}}
         </ul>
       </nav>

@@ -44,10 +44,16 @@ a,
   padding: var(--link-padding, 0.3em 0);
   margin: var(--link-margin);
   text-decoration: none;
-  text-shadow: -2px 0 0 var(--link-text-shadow-color),
-    2px 0 0 var(--link-text-shadow-color),
+  /* Oh, hello, an absense of spread in text-shadow >_> */
+  text-shadow:
+    -2px 0 0 var(--link-text-shadow-color),
+    -1.5px 0 var(--link-text-shadow-color),
     -1px 0 var(--link-text-shadow-color),
-    1px  0 var(--link-text-shadow-color),
+    -0.5px 0 var(--link-text-shadow-color),
+    0.5px 0 var(--link-text-shadow-color),
+    1px 0 var(--link-text-shadow-color),
+    2px 0 0 var(--link-text-shadow-color),
+    1.5px 0 var(--link-text-shadow-color),
     0 -0.5px var(--link-text-shadow-color),
     0 -1px var(--link-text-shadow-color),
     0 -1.5px var(--link-text-shadow-color),
@@ -76,10 +82,12 @@ span {
   background-clip: content-box;
 }
 
-.Link:not(a) {
+.Link:not(a),
+.Link_pseudo {
   user-select: none;
   --link-underline-image: linear-gradient(to left, transparent 3px, var(--link-underline-color) 0);
   --link-underline-pattern-width: 6px;
+  --link-color--visited: var(--link-color);
 }
 
 a:visited {

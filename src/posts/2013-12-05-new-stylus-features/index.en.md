@@ -95,7 +95,7 @@ You can get the values from the hash in the same way — either by using a dot o
 
 I won't describe [all the features](http://learnboost.github.io/stylus/docs/hashes.html) of the hashes, I'll just mention that you can use the built-in `length()` function with them, you can iterate through them, use them in conditions (`if baz in foo`), and there are also some built-in functions to work with hashes (`keys()`, `values()`, `merge()`). And you can interpolate hashes into CSS.
 
-## `selector()` function {#selector}
+## The `selector()` function {#selector}
 
 There is now one small but important feature in Stylus — `selector()`. While you can construct complex selectors in Stylus by using nested blocks, interpolations, mixins and other things, you couldn't **get** the compiled selector, they only existed in the compiled CSS.
 

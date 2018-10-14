@@ -2,7 +2,7 @@
 
 #Experiment #CSS_Logic #CSS
 
-_HTML&CSS-only gomoku game? Binary logic in CSS via counters? So many combinators, Edge stops to understand what is even going on? All of this and a bunch of other weird CSS stuff in the experiment that I started back in 2013._
+_HTML&CSS-only gomoku game? Binary logic in CSS via counters? So many combinators, Edge stops to understand what is even going on? All of this and a bunch of other weird CSS stuff in the experiment that I started back in 2013._
 
 This article is a bit special for me: I'll explain a solution which I couldn't find for more than four years. The problem is not very practical: it was one aspect of CSS-only stuff that could be much easier handled by JS, but I really wanted to find a clean HTML&CSS-only solution for. And I have found it. And in this article, I'll explain what was the problem and how the solution works.
 

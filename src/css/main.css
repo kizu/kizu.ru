@@ -90,6 +90,10 @@ header {
   /* Utility usage */
   --h1-font-size: 3.5rem;
   --h1-font-weight: normal;
+
+  overflow: hidden;
+  max-height: calc(0px * var(--invisible));
+  opacity: calc(0 * var(--invisible));
 }
 
 

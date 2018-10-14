@@ -33,3 +33,48 @@ other = "Published on"
 
 [thanksTo]
 other = "Thanks to"
+
+[withTags]
+other = "with tags"
+
+[tag]
+other = "Tag"
+
+[githubTitle]
+other = "Edit on GitHub"
+
+[GitHub]
+other = "GitHub"
+
+[Twitter]
+other = "Twitter"
+
+[twitterTitle]
+other = "Follow on Twitter"
+
+[twitterLink]
+other = "https://twitter.com/kizmarh"
+
+[Feed]
+other = "Feed"
+
+[feedTitle]
+other = "Subscribe to the feed"
+
+[feedLink]
+other = "http://feeds.feedburner.com/kizuruen"
+
+[recentShown]
+other = "Only the 10 recent items shown"
+
+[everythingShown]
+other = "All the items shown"
+
+[showEverything]
+other = "Show the rest"
+
+[showOnlyRecent]
+other = "Show only the 10 recent ones"
+
+[lastPost]
+other = "Last post"

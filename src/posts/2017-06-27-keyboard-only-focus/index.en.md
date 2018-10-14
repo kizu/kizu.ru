@@ -2,7 +2,7 @@
 
 #Practical #Accessibility #Bugs #CSS #HTML
 
-_After playing a lot with HTML & CSS, I present you with a very robust and practical solution to one of the most annoying problems: keyboard-only focus on interactive elements. All thanks to `tabindex` in HTML and almost to no CSS._
+_After playing a lot with HTML & CSS, I present you with a very robust and practical solution to one of the most annoying problems: keyboard-only focus on interactive elements. All thanks to `tabindex` in HTML and almost to no CSS._
 
 One of the things I couldn't manage to find a solution for a long time was a problem of focus styles on interactive elements. The problem was: when you have an element with some `:focus` styles, they're applied not only to the focused state itself but also after you just click on this element (and it behaves differently for different elements in different browsers, of course).
 

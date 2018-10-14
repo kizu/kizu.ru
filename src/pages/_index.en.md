@@ -1,25 +1,19 @@
 # **Articles and Experiments** by Roman Komarov
 
-Hello, this is my site. I write there about front-end and about some other stuff, here is everything that is available right now:
+Welcome! I’m Roman, a front-end web developer. I love CSS, and most of the things I do, write, or think about are CSS-related. On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
+
+Sometimes I find myself improving the ways I write CSS: I’m an author of [Hayaku](https://github.com/hayaku/hayaku/), [bemto-components](https://github.com/bemto/bemto-components), [bemto for Pug.js](https://github.com/kizu/bemto/), and used to maintain [Stylus](https://github.com/stylus/stylus/).
+
+Below you will find links to some of the articles I wrote and experiments I did, alongside some other stuff.
 
 {{<ArticleList>}}
 
-## Hello!
+Note that those are all in English, there is also a [Russian version of this site](/ru/) where you could find some older articles and experiments in Russian.
 
-I’m working as a Front-end Web Developer at [Oyst](http://www.oyst.com) (before that — at a similar position at [Yandex](http://yandex.com)), occasionally doing different stuff for Russian [“Web Standards”](http://web-standards.ru/about/en/) community, committing to open source projects, experimenting on CSS, and blogging on this site.
+You can subscribe to the new posts with [my site's RSS/Atom Feed](http://feeds.feedburner.com/kizuruen).
 
-### Projects
+## How to contact me
 
-I created [Hayaku](http://hayakubundle.com), [Jekiller](gh:shower/jekyller), and [Bemto](gh:kizu/bemto); I'm a maintainer of [Stylus](gh:stylus/stylus), and sometimes committing in different ways to other open source projects.
+The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
 
-
-### Talks
-
-Sometimes I talk about different front-end stuff at conferences, mostly Russian ones, but I managed to [give a talk](http://vimeo.com/51897358) at [Fronteers Jam Session in 2012](http://fronteers.nl/congres/2012/jam-session), and then [another one in 2013](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source) at the same place.
-
-
-### How to contact me
-
-The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
-
-I participate in different social networks, but there is no point to list them there. The chances are — _I do not want to add you to my professional network on LinkedIn_, but if you'd go and [look at all the cats in my Instagram](https://instagram.com/ki_zu) — I'll be happy.
+Some other places where you could sometimes find me:[Twitter](@kizmarh), [GitHub](gh:kizu), [Instagram with mostly cats](https://instagram.com/ki_zu).

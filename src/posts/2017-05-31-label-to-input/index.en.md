@@ -2,7 +2,7 @@
 
 #Experiment #HTML #CSS
 
-_Sometimes there are very unusual mechanics hidden deep in the interactions of HTML and CSS. In this article I show one of those — the nuances of how HTML labels interact with inputs and CSS applied to them._
+_Sometimes there are very unusual mechanics hidden deep in the interactions of HTML and CSS. In this article I show one of those — the nuances of how HTML labels interact with inputs and CSS applied to them._
 
 When fiddling with inputs & labels for them, I remembered one thing that amused me for a long time[^for-a-long-time]. Look at this HTML:
 

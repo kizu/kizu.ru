@@ -2,7 +2,7 @@
 
 #Practical #CSS_Flex #Responsive #CSS
 
-_Flex display mode allows us to create a lot of interesting interactions. In this article I'll show how to use it to implement a responsive block which could substitute one content with another, all based on which one would fit inside the container._
+_Flex display mode allows us to create a lot of interesting interactions. In this article I’ll show how to use it to implement a responsive block which could substitute one content with another, all based on which one would fit inside the container._
 
 ![Gif animation showing this article's effect in action](sad-lions.gif)
 

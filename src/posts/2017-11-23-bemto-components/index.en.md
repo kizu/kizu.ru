@@ -2,7 +2,7 @@
 
 #Project #Practical #React #BEM
 
-_Working within a React stack and using Styled Components, I found out that I still miss a lot of aspects of BEM. This lead to me starting a new side-project which not only allows to use BEM-style elements and modifiers, but also enhances the overall developer experience._
+_Working within a React stack and using Styled Components, I found out that I still miss a lot of aspects of BEM. This lead to me starting a new side-project which not only allows to use BEM-style elements and modifiers, but also enhances the overall developer experience._
 
 So, here is a thing I'm working on at my free time these days:
 

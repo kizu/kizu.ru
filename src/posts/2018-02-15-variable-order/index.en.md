@@ -2,9 +2,9 @@
 
 #Experiment #CSS_Variables #CSS #HTML
 
-_Is it possible to sort some data using only HTML and CSS? The answer is “Yes”, and in this article you would see one experimental way to achieve this with CSS variables and an `order` property. Even if it is not practical and bad for accessibility, it is still fun._
+_Is it possible to sort some data using only HTML and CSS? The answer is “Yes”, and in this article you would see one experimental way to achieve this with CSS variables and an `order` property. Even if it is not practical and bad for accessibility, it is still fun._
 
-**_Warning!_ Changes made to the elements’ order by this method won’t be reflected in the accessibility tree, so the content in screen readers and the tab order inside would always be the same as in the original DOM. Therefore, do not use this method in production for any human-readable data. JS would do the same job much easier.**
+**_Warning!_ Changes made to the elements’ order by this method won’t be reflected in the accessibility tree, so the content in screen readers and the tab order inside would always be the same as in the original DOM. Therefore, do not use this method in production for any human-readable data. JS would do the same job much easier.**
 
 Look at this table and note that you can click on its headers to sort the table by corresponding columns (and click again to change the ascending/descending order).
 

@@ -7,6 +7,6 @@
 
 Только CSS, никакого JS.
 
-{{<Partial src="filters.html" />}}
+{{<Partial src="examples/filters.html" iframe="true" height="12em" />}}
 
 Опять же — только современные браузеры, в IE можно было бы эмулировать экспрешнами, но лень.

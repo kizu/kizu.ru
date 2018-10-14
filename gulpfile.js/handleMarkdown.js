@@ -64,6 +64,9 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
       if (pathData.lang) {
         metadata.lang = pathData.lang;
       }
+
+      metadata.originalPath = fileBase.replace(/^.+\/src\//, '') + '/' + relativePath;
+
       metadata.srcPath = 'content/posts/';
       metadata.srcPath += pathMatchData[1] || '';
       metadata.srcPath += pathMatchData[2] && pathMatchData[2] + '-' || '';
