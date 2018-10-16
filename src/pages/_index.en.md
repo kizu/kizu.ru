@@ -14,7 +14,7 @@ Below you will find links to some of the articles I wrote and experiments I 
 
 Note that those are all in English, there is also a [Russian version of this site](/ru/) where you could find some older articles and experiments in Russian.
 
-You can subscribe to the new posts with [my site's RSS/Atom Feed](http://feeds.feedburner.com/kizuruen).
+You can subscribe to the new posts with [my site's RSS/Atom Feed](https://feeds.feedburner.com/kizuruen).
 
 ## How to contact me
 

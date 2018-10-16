@@ -62,7 +62,7 @@ other = "Feed"
 other = "Subscribe to the feed"
 
 [feedLink]
-other = "http://feeds.feedburner.com/kizuruen"
+other = "https://feeds.feedburner.com/kizuruen"
 
 [recentShown]
 other = "Only the 10 recent items shown"

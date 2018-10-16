@@ -62,7 +62,7 @@ other = "Фид"
 other = "Подписаться на фид"
 
 [feedLink]
-other = "http://feeds.feedburner.com/kizu"
+other = "https://feeds.feedburner.com/kizu"
 
 [recentShown]
 other = "Показаны только последние 10"
