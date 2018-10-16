@@ -49,7 +49,7 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
         extension: pathMatchData[7]
       };
 
-      if (pathData.slug) {
+      if (pathData.slug && metadata.type && metadata.type === 'post') {
         metadata.slug = pathData.slug;
       }
       if (pathData.directory) {
@@ -88,7 +88,7 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
     }
 
     // Create aliases automatically
-    if (metadata.type && !metadata.categories) {
+    if (metadata.type && metadata.type === 'post' && !metadata.categories) {
       metadata.categories = ['blog']
     }
     const postDate = new Date(metadata.date);
@@ -122,6 +122,10 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
     if (tagsMatch) {
       metadata.tags = tagsMatch[1].split(/\s+#/);
       content = content.replace(tagsMatch[0], '');
+    }
+
+    if (metadata.categories && metadata.categories.indexOf('old') !== -1) {
+      metadata.tags.push('Outdated');
     }
 
     // Summary

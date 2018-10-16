@@ -3,8 +3,9 @@
   --h-gap: var(--THEME_INDENT);
   --v-gap: var(--THEME_INDENT);
   --content-max-width: 42rem;
-  --content-min-width: 24rem;
+  --content-min-width: calc(24rem * var(--at-large));
   --aside-width: 15rem;
+  --viewport-padding: calc(var(--THEME_INDENT) * (1 - 0.25 * var(--at-small)));
 
   /* Grid! */
   --grid-side: minmax(min-content, 1fr);

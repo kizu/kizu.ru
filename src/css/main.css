@@ -48,9 +48,9 @@ html {
 }
 
 /* TODO: replace home pages' one with a special case */
-.Page_type_page {
+.Page_type_home {
   --h1-font-weight: 400;
-  --h1-margin-bottom: 1rem;
+  --h1-margin-bottom: 2rem;
 }
 
 body {
@@ -63,7 +63,7 @@ body {
   flex-direction: column;
 
   /* is it used anywhere else? */
-  min-width: var(--content-min-width);
+  min-width: 26rem;
 
   /* Reset */
   padding: 0;
@@ -104,7 +104,7 @@ main,
 article {
   display: grid;
   grid-template: var(--grid);
-  grid-gap: 0 var(--h-gap);
+  grid-gap: 0 var(--viewport-padding);
   --grid-column: content;
 
   width: auto;
@@ -139,9 +139,9 @@ figure {
 
   padding: 0.5rem;
   border: none;
-  margin: var(--nested-figure-margin, 1rem 0);
+  margin: var(--nested-figure-margin, 1rem calc(-1.5rem * var(--at-small)));
   background: #FFF;
-  border-radius: 3px;
+  border-radius: var(--initial-at-small, 3px);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -170,10 +170,6 @@ figure {
   --img-margin: 0 0 0 var(--h-gap);
   --nested-figure-margin: 0 0 0 var(--h-gap);
   --img-max-width: calc(100% - var(--h-gap));
-}
-
-.Figure-Demo {
-  margin: 0 0 0 var(--h-gap);
 }
 
 .Figure-Toggle:not(:checked) + * + .Figure-Screenshot,
@@ -284,11 +280,13 @@ h5 + h6 {
 }
 
 h1 {
-  font-size: var(--h1-font-size, 3rem);
+  font-size: var(--h1-font-size, calc(3rem - 0.5rem * var(--at-small)));
   font-weight: var(--h1-font-weight, 900);
-  line-height: var(--h1-line-height, 4rem);
+  line-height: var(--h1-line-height, 1em);
   margin-top: var(--h1-margin-top, 3rem);
   margin-bottom: var(--h1-margin-bottom, 3rem);
+  -webkit-hyphens: var(--initial-at-large, none);
+  hyphens: var(--initial-at-large, none);
 }
 
 h2 {
@@ -318,7 +316,7 @@ iframe {
 p {
   margin: 0;
   margin-top: var(--p-margin-top);
-  text-indent: var(--p-text-indent);
+  text-indent: calc(var(--p-text-indent) * var(--at-large));
 }
 
 p:empty {
@@ -329,7 +327,7 @@ p:empty {
 /* TODO: Do we need this only for _en? */
 :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.Summary):not(.Warning) + p {
   --p-text-indent: var(--text-indent);
-  --p-margin-top: var(--p-p-margin-top);
+  --p-margin-top: var(--p-p-margin-top, calc(1rem * var(--at-small)));
 }
 
 em {
@@ -349,8 +347,8 @@ em {
   --grid-column: full;
 
   border: 0.5rem dashed #FFCA51;
-  padding: 2rem calc(2rem * var(--at-small));
-  margin: 0 2rem 2rem;
+  padding: 2rem calc(1rem * var(--at-small));
+  margin: 0 var(--viewport-padding) 2rem;
 
   background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
   background-clip: padding-box, border-box;

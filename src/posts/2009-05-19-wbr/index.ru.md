@@ -1,3 +1,7 @@
+---
+aliases: [/webdev/wbr/]
+---
+
 # WBR и его эмуляция
 
 #Practical #CSS #HTML #Bugs

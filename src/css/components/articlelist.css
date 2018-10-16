@@ -1,9 +1,9 @@
 .ArticleList {
   grid-column: full;
   grid-gap: var(--THEME_INDENT);
-  grid-template-columns: repeat(auto-fit, minmax(15.6rem, 1fr));
+  grid-template-columns: var(--initial-at-small, repeat(auto-fit, minmax(15.6rem, 1fr)));
   grid-auto-flow: dense;
-  padding: calc(2 * var(--THEME_INDENT)) var(--THEME_INDENT) var(--THEME_INDENT);
+  padding: calc(2 * var(--THEME_INDENT)) var(--viewport-padding) var(--THEME_INDENT);
   --grid-column: auto;
   --ul-display: grid;
   --ul-item-content: none;

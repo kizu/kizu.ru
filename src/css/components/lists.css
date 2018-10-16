@@ -21,7 +21,7 @@ li {
   list-style-type: none; /* Fixme: screenreaders would die out? */
   justify-self: var(--grid-position, var(--li-justify-self));
   grid-column: var(--grid-position, auto / span var(--initial-at-small, var(--span)));
-  --priority: 0;
+  --priority: var(--at-small);
   --span: calc(var(--priority) * 2);
 }
 

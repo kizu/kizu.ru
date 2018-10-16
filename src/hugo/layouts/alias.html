@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<title>{{ i18n "pageIsMoved" }}</title>
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta http-equiv="refresh" content="5; url='{{ .Permalink }}'" />
+<script>
+  window.location.href="{{ .Permalink }}"+(window.location.hash||"")
+</script>
+<h1><a href="{{ .Permalink }}">{{ i18n "pageIsMoved" }}: {{ .Permalink }}</a></h1>

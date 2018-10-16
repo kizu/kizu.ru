@@ -9,7 +9,8 @@
   {{- $count := 0 -}}
   {{- range .data.Pages -}}
     {{- $langCheck := or $isTagsPage (eq .Site.Params.languageCode .Params.lang) -}}
-    {{- if and .Title $langCheck (eq .Draft false) -}}
+    {{- $typeCheck := or $isTagsPage (eq .Params.type "post") -}}
+    {{- if and .Title $langCheck $typeCheck (eq .Draft false) -}}
       {{ $count = add $count 1 }}
       <li class="ArticleList-Li"{{ if and (le $count 2) (not $isTagsPage) }} style="--priority: 1;"{{ end }}>
         <article class="ArticleList-Item">

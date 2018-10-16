@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>Demo</title>
+
+<style>
+DD {
+	background:blue;
+	color:#FFF;
+	padding:.2em;
+	}
+
+
+.class1.class2 .ex1 {
+	background:green;
+	}
+.nonsence.class2 .ex1 {
+	background:red;
+	}
+.class1.class2 .ex2 {
+	background:green;
+	}
+.class2 .ex2 {
+	background:red;
+	}
+
+.class1 .class2 .ex3 {
+	background:green;
+	}
+.nonsence .class2 .ex3 {
+	background:red;
+	}
+.class1 .class2 .ex4 {
+	background:green;
+	}
+.class2 .ex4 {
+	background:red;
+	}
+
+	</style>
+</head>
+<div class="class1 class2">
+	<div class="class1 class2">
+		<dl>
+			<dt>Пример 1</dt>
+			<dd class="ex1">example1 (red in ie)</dd>
+			<dt>Пример 2</dt>
+			<dd class="ex2">example2 (red in ie)</dd>
+			<dt>Пример 3</dt>
+			<dd class="ex3">example3 (ok)</dd>
+			<dt>Пример 4</dt>
+			<dd class="ex4">example4 (ok)</dd>
+		</dl>
+	</div>
+</div>

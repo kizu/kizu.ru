@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>Demo</title>
+
+<style>
+OPTION[LABEL] {
+	-moz-binding: url("select-label.xml#select-label");
+	}
+</style>
+<!--[if lte IE 7]><style>
+OPTION {
+	width:expression(
+		function(that){
+			if (that.label) {
+				that.innerHTML = that.label;
+				if (that.parentNode.currentStyle.width=='auto') {
+					that.parentNode.runtimeStyle.width = 'auto'; /*recalculating select's width*/
+				}
+			}
+			that.runtimeStyle.width = 'auto';
+		}(this));
+	}
+</style><![endif]-->
+<dl>
+	<dt>Чаще всего встречающийся селект</dt>
+	<dd>
+		<select>
+			<option>Please select something</option>
+			<option>option item 1</option>
+			<option>option item 2</option>
+			<option>option item 3</option>
+			<option>option item 4</option>
+		</select>
+	</dd>
+</dl>
+<dl>
+	<dt>«Правильный» вариант</dt>
+	<dd>
+		<select>
+			<option disabled="disabled" selected="selected" label="Please select something"></option>
+			<option>option item 1</option>
+			<option>option item 2</option>
+			<option>option item 3</option>
+			<option>option item 4</option>
+		</select>
+	</dd>
+</dl>

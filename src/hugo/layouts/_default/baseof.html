@@ -1,15 +1,35 @@
+{{- $type := .Params.type -}}
+{{- if eq .Page.Kind "home" -}}
+  {{- $type = "home" -}}
+{{- end -}}
+
 <!DOCTYPE html>
-<html lang="{{ .Site.Params.languageCode }}" class="Page Page_type_{{.Params.type}}">
+<html lang="{{ .Site.Params.languageCode }}" class="Page Page_type_{{$type}}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+
     <title>{{ block "title" . }}
       {{- if .Title -}}
-        {{- .Title | markdownify | plainify -}}
+        {{- .Title | markdownify | plainify | replaceRE "&amp;" "&" -}}
       {{- else -}}
         {{- .Site.Title | plainify -}}
       {{- end -}}
     {{ end }}</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="http://feeds.feedburner.com/kizu{{ if eq .Lang "en" }}ruen{{ end }}" />
+    {{- if eq .Page.Kind "home" }}
+    <link rel="alternate" hreflang="en" href="http://kizu.ru/" />
+    <link rel="alternate" hreflang="ru" href="http://kizu.ru/ru/" />
+    {{- else -}}
+      {{- $origLang := .Lang -}}
+      {{- $permalink := .Permalink -}}
+      {{- range .Translations -}}{{- if eq .Params.lang .Lang }}
+    <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+    <link rel="alternate" hreflang="{{ $origLang }}" href="{{ $permalink }}">
+      {{- end -}}{{- end -}}
+    {{- end }}
+
     <link rel="stylesheet" href="/s/style.css" />
   </head>
   <body>
@@ -32,9 +52,9 @@
           {{- block "footer" . -}}{{- end -}}
           <li style="--grid-position: start;">
             {{- if eq .Page.Kind "home" -}}
-              © {{ now.Format "2006"}} {{ i18n "titleName" }}
+              © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
             {{- else -}}
-              <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ now.Format "2006"}} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+              <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
             {{- end -}}
           </li>
 

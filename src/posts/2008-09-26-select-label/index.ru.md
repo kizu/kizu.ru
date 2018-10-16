@@ -1,3 +1,7 @@
+---
+aliases: [/webdev/select-label/]
+---
+
 # Мелочь в селекте
 
 #Practical #Bugs #HTML

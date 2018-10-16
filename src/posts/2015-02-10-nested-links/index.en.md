@@ -2,7 +2,7 @@
 
 #Experiment #HTML
 
-![Cats playing nested links](nested-links.jpg "asdasd")
+<!-- ![Cats playing nested links](nested-links.jpg "{:width='640' height='480'}") -->
 
 ## The problem
 

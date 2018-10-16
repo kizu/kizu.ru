@@ -1,3 +1,7 @@
+---
+aliases: [/webdev/life-without-inline-block/, /tag/inline-block/, /webdev/inline-block-solved/]
+---
+
 # Решение inline-block
 
 #Practical #Bugs #CSS

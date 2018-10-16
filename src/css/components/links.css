@@ -68,6 +68,7 @@ a,
     0 -6px var(--link-text-shadow-color);
   transition: text-shadow var(--link-text-shadow-transition, 0s 0.4s) linear;
   --underline-width: var(--link-underline-width);
+  --time-color-a: invalid;
 }
 
 a,

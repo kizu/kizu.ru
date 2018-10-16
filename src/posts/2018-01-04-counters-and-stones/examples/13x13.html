@@ -83,9 +83,13 @@
   width: 0;
   height: var(--stone-size);
 }
-.board > section > label:hover > span:before {
-  width: var(--stone-size);
+
+@media (pointer: fine) {
+  .board > section > label:hover > span:before {
+    width: var(--stone-size);
+  }
 }
+
 .board > section > label > span:before {
   border-radius: 50%;
   box-shadow:

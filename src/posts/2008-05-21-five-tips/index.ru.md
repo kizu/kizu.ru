@@ -1,3 +1,7 @@
+---
+aliases: [/webdev/five-tips/]
+---
+
 # 5 советов верстальщику
 
 #Blog #Thoughts

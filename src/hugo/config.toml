@@ -9,6 +9,9 @@ DefaultContentLanguage = "en"
 
 title = "kizu.ru"
 
+[author]
+name = "Roman Komarov"
+
 [permalinks]
 posts = "/:slug/"
 

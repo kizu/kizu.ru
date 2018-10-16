@@ -1,4 +1,8 @@
-# **Articles and Experiments** by Roman Komarov
+---
+aliases: [/en/everything/]
+---
+
+# **Articles & Experiments** by Roman Komarov
 
 Welcome! I’m Roman, a front-end web developer. I love CSS, and most of the things I do, write, or think about are CSS-related. On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
 
@@ -16,4 +20,4 @@ You can subscribe to the new posts with [my site's RSS/Atom Feed](http://feeds.f
 
 The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
 
-Some other places where you could sometimes find me:[Twitter](@kizmarh), [GitHub](gh:kizu), [Instagram with mostly cats](https://instagram.com/ki_zu).
+Some other places where you could sometimes find me: [Twitter](@kizmarh), [GitHub](gh:kizu), [Instagram (mostly with cats)](https://instagram.com/ki_zu).

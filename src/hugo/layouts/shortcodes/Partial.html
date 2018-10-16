@@ -28,14 +28,6 @@
       {{- $src  | readFile | safeHTML -}}
     </div>
     <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
-    <aside>
-      <p>
-        <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
-          Toggle screenshot/demo
-        </label>
-      </p>
-      {{- .Inner | markdownify -}}
-    </aside>
 
   {{- else -}}
 
@@ -58,4 +50,15 @@
     {{- end -}}
     {{- .Inner | markdownify -}}
   {{- end -}}
+
 </figure>
+{{- if .Get "screenshot" -}}
+  <aside style="--offset: 1;">
+    <p>
+      <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
+        Toggle screenshot/demo
+      </label>
+    </p>
+    {{- .Inner | markdownify -}}
+  </aside>
+{{- end -}}

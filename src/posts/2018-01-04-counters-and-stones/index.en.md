@@ -14,7 +14,7 @@ I'll explain the problem and the solution later, but now look at this, my now fi
 
 [^renju]: This is a really basic implementation of [Gomoku](https://en.wikipedia.org/wiki/Gomoku) — a game where two players compete on who could put five consecutive stones first. Only the very basic winning rules are implemented of course. <!-- span="2" offset="1" -->
 
-{{<Partial src="examples/13x13.html" />}}
+{{<Partial src="examples/13x13.html" style="padding: 0;" />}}
 
 Things you can notice:
 

@@ -1,3 +1,7 @@
+---
+aliases: [/en/bemto/]
+---
+
 # bemto
 
 #Project #BEM #Preprocessing
