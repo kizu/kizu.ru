@@ -47,5 +47,5 @@ As most of posts won’t have a lot of metadata, those extra lines won’t b
 The only thing I don’t like there is that YAML is so strict. You can’t add indents in the front of data, or use lists with hyphens here — those could be rendered even nicer. Also, if someone would see any other possibility to enhance the readability of the YAML front matters — tell me via twitter or by issues on GitHub.
 
 
-[bad]: http://img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png
-[good]: http://img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png
+[bad]: //img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png
+[good]: //img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png

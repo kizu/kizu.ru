@@ -48,5 +48,5 @@ prev_section: sites
 
 
 
-[bad]: http://img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png
-[good]: http://img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png
+[bad]: //img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png
+[good]: //img-fotki.yandex.ru/get/5625/1076905.1/0_97899_16bfcbbf_orig.png
