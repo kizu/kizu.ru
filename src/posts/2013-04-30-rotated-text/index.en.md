@@ -80,4 +80,4 @@ So, that’s it.
 
 Once again: we need to know the initial height of the rotated block, so if we’d need to rotate multiline blocks, we’d need to change their resulting width accordingly.
 
-Also, this method could work in IE — by adding matrix filter and converting a pseudo-element to an actual one — but I’m lazy enough to do this. But if you’d like, you could make it by yourself and even submit a Pull Requests to [those](https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text.html) [examples](https://github.com/kizu/kizu.github.com/blob/master/demos/rotated-text_books.html) :)
+Also, this method could work in IE — by adding matrix filter and converting a pseudo-element to an actual one — but I’m lazy enough to do this. But if you’d like, you could try and make it by yourself :)

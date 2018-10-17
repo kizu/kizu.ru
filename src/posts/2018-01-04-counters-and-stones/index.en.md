@@ -66,7 +66,9 @@ box-sizing: border-box;
 padding-left: calc(100% - 1.5ch);
 ```
 
-I'm using the `1.5ch` instead of `1ch` there to ensure there won't be any weird stuff happening on the edge values: 1 digit would always fit `1.5ch`, and two digits would always overflow it.
+I'm using the `1.5ch` instead of `1ch` there to ensure there won't be any weird stuff happening on the edge values: 1 digit would always fit `1.5ch`, and two digits would always[^monospace] overflow it.
+
+[^monospace]: One thing that should be mentioned: the font for the letters should be monospace, otherwise there is a chance that, for example, `11` would take less space than intended. <!-- span="4" offset="2" -->
 
 You can remember what `ch` stands for from [the specs](https://www.w3.org/TR/css-values-3/#ch):
 

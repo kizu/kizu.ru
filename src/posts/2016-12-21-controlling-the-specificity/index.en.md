@@ -2,6 +2,8 @@
 
 #CSS_Specificity #Future_CSS #CSS #Preprocessing
 
+_Specificity is one of the most unique and complex aspects of CSS. And right now, the only way to control it are to add stuff to it. But what if we could have a way to reduce the specificity? I’ll look into the coming-up features of `: not ()` and how they could help us to achieve this._
+
 In [the previous article about conditions for CSS variables]({{% LinkTo conditions-for-css-variables %}}) I talked about things that could be used rather soon, even if the support for them is not there yet. In this article I'll go even further — I'll be talking about one thing from the [CSS Selectors Level 4](https://drafts.csswg.org/selectors-4/), which is even less adopted.
 
 The part of this spec I'll be looking at today is the new, enhanced `:not()`. Important disclaimer: the feature I would talk about have almost to no support at the moment (only latest Safari?), and even if it did, I wouldn't recommend to use it as something other than experiment. You'll see why. And after discussing what becomes possible with this new `:not()` I'll describe one more usable similar thing and then propose a few things that I think should be there in CSS instead.
