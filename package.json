@@ -1,14 +1,22 @@
 {
+  "private": true,
   "name": "hugo-kizu",
-  "version": "1.11.0",
-  "description": "",
-  "main": "index.js",
+  "version": "14.0.0",
+  "author": "Roman Komarov <kizmarh@ya.ru> (https://www.kizu.ru/)",
+  "description": "Gulp- and Hugo-based version of kizu.ru",
+  "homepage": "https://www.kizu.ru/",
+  "bugs": {
+    "url": "https://github.com/kizu/kizu.ru/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kizu/kizu.ru.git"
+  },
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
   "license": "MIT",
   "devDependencies": {
     "css-tree": "1.0.0-alpha.29",

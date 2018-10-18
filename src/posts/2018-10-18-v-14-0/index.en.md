@@ -44,6 +44,8 @@ All of that was made in a backward-compatible way, with redirects for all the
 
 [^redirects]: Moving the articles to the root made making the redirects much easier, as I didn’t need to care about previously `ru` pages becoming `en` (except for the `kizu.ru` homepage). <!-- offset="1" span="2" -->
 
+Ah, and, as I now use Netlify, I’ve switched to https and now the domain is prefixed by `www`. My current DNS provider does not support ALIAS, so I’ll live for a bit with those `www`, but would think about moving my DNS to Netlify as well maybe. We’ll see.
+
 ### Design & Typography
 
 The foundation of the design is still the same, but there are a lot of changes, some bigger, some smaller. I could miss some of them, but basically:
