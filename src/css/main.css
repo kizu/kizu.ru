@@ -120,8 +120,8 @@ nav {
   --ul-display: grid;
   --ul-item-content: none;
   --list-item-padding: 0;
-  --link-color: currentColor;
-  --link-color--visited: currentColor;
+  --link-color: var(--color);
+  --link-color--visited: var(--color);
   --link-underline-offset: 0.4em;
   font-size: var(--THEME_FONT_SIZE--SMALL);
   --ul-grid: "start end";
