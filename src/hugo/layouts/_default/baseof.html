@@ -36,7 +36,13 @@
     {{- partial "header.html" (dict "context" . "a11y" "true") -}}
     {{- if eq .Page.Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
       {{- if .Title -}}
-        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" (markdownify .Title) "</h1>")) -}}
+        {{- $prefix := "" -}}
+        {{- $isTag := eq .Page.Kind "taxonomy" -}}
+        {{- $title := (markdownify .Title) -}}
+        {{- if $isTag -}}
+          {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
+        {{- end -}}
+        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
       {{- end -}}
 
       {{- block "main" . -}}
