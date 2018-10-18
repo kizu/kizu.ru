@@ -1,0 +1,81 @@
+{{- $type := .Params.type -}}
+{{- if eq .Page.Kind "home" -}}
+  {{- $type = "home" -}}
+{{- end -}}
+
+<!DOCTYPE html>
+<html lang="{{ .Site.Params.languageCode }}" class="Page Page_type_{{$type}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>{{ block "title" . }}
+      {{- if .Title -}}
+        {{- .Title | markdownify | plainify | replaceRE "&amp;" "&" -}}
+      {{- else -}}
+        {{- .Site.Title | plainify -}}
+      {{- end -}}
+    {{ end }}</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom feed" href="{{ i18n "feedLink" }}" />
+    {{- if eq .Page.Kind "home" }}
+    <link rel="alternate" hreflang="en" href="//kizu.ru/" />
+    <link rel="alternate" hreflang="ru" href="//kizu.ru/ru/" />
+    {{- else -}}
+      {{- $origLang := .Lang -}}
+      {{- $permalink := .Permalink -}}
+      {{- range .Translations -}}{{- if eq .Params.lang .Lang }}
+    <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+    <link rel="alternate" hreflang="{{ $origLang }}" href="{{ $permalink }}">
+      {{- end -}}{{- end -}}
+    {{- end }}
+
+    <link rel="stylesheet" href="/s/style.css" />
+  </head>
+  <body>
+    {{- partial "header.html" (dict "context" . "a11y" "true") -}}
+    {{- if eq .Page.Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
+      {{- if .Title -}}
+        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" (markdownify .Title) "</h1>")) -}}
+      {{- end -}}
+
+      {{- block "main" . -}}
+        {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+      {{- end -}}
+    {{- if eq .Page.Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
+    <!-- Goes after main for ~reasons~ -->
+    {{- partial "header.html" (dict "context" . "a11y" "false") -}}
+
+    <footer role="contentinfo">
+      <nav>
+        <ul>
+          {{- block "footer" . -}}{{- end -}}
+          <li style="--grid-position: start;">
+            {{- if eq .Page.Kind "home" -}}
+              © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
+            {{- else -}}
+              <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+            {{- end -}}
+          </li>
+
+          {{- if eq .Page.Kind "home" -}}
+            <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
+          {{- else -}}
+            <li style="--grid-position: end;">
+              {{- if .Page.Params.originalPath -}}
+                <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Page.Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
+              {{- else -}}
+                <a href="https://github.com/kizu" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
+              {{- end }}
+              <span aria-hidden="true">·</span>
+              <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
+              <span aria-hidden="true">·</span>
+              <a href="{{ i18n "twitterLink" }}" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
+          {{- end -}}
+        </ul>
+      </nav>
+    </footer>
+    <script src="/j/prism.js"></script>
+    {{ partial "metrika.html" }}
+  </body>
+</html>

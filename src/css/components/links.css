@@ -1,0 +1,105 @@
+/* Links */
+:root {
+  --link-color: var(--THEME_LINK);
+  --link-color--hover: var(--link-color);
+  --link-color--visited: var(--THEME_VISITED);
+  --link-underline-width: 1px;
+  --link-underline-offset: 0.37em;
+  --link-underline-color: hsla(
+    var(--THEME_COLOR_H),
+    var(--THEME_COLOR_S--P),
+    var(--THEME_COLOR_L--P),
+    var(--THEME_COLOR_A--LIGHT)
+  );
+  --link-underline-color--hover: currentColor;
+  --link-underline-pattern-width: 16px;
+  --link-text-shadow-color: var(--THEME_BG);
+}
+
+a,
+.Link {
+  position: var(--link-position);
+  z-index: var(--link-z-index);
+  cursor: pointer;
+  color: var(--link-color);
+  hyphens: none;
+}
+
+a::before,
+.Link::before {
+  content: var(--before);
+}
+
+a::after,
+.Link::after {
+  content: var(--after);
+}
+
+span {
+  --underline: 0;
+}
+
+a,
+.Link {
+  padding: var(--link-padding, 0.3em 0);
+  margin: var(--link-margin);
+  text-decoration: none;
+  /* Oh, hello, an absense of spread in text-shadow >_> */
+  text-shadow:
+    -2px 0 0 var(--link-text-shadow-color),
+    -1.5px 0 var(--link-text-shadow-color),
+    -1px 0 var(--link-text-shadow-color),
+    -0.5px 0 var(--link-text-shadow-color),
+    0.5px 0 var(--link-text-shadow-color),
+    1px 0 var(--link-text-shadow-color),
+    2px 0 0 var(--link-text-shadow-color),
+    1.5px 0 var(--link-text-shadow-color),
+    0 -0.5px var(--link-text-shadow-color),
+    0 -1px var(--link-text-shadow-color),
+    0 -1.5px var(--link-text-shadow-color),
+    0 -2px var(--link-text-shadow-color),
+    0 -2.5px var(--link-text-shadow-color),
+    0 -3px var(--link-text-shadow-color),
+    0 -3.5px var(--link-text-shadow-color),
+    0 -4px var(--link-text-shadow-color),
+    0 -4.5px var(--link-text-shadow-color),
+    0 -5px var(--link-text-shadow-color),
+    0 -5.5px var(--link-text-shadow-color),
+    0 -6px var(--link-text-shadow-color);
+  transition: text-shadow var(--link-text-shadow-transition, 0s 0.4s) linear;
+  --underline-width: var(--link-underline-width);
+  --time-color-a: invalid;
+}
+
+a,
+.Link,
+span {
+  --link-underline-image: linear-gradient(var(--link-underline-color), var(--link-underline-color));
+  background:
+    var(--link-underline-image)
+    repeat-x
+    0 calc(50% + var(--link-underline-offset))/var(--link-underline-pattern-width)
+    calc(var(--underline-width) * var(--underline, 1));
+  background-clip: content-box;
+}
+
+.Link:not(a),
+.Link_pseudo {
+  user-select: none;
+  --link-underline-image: linear-gradient(to left, transparent 3px, var(--link-underline-color) 0);
+  --link-underline-pattern-width: 6px;
+  --link-color--visited: var(--link-color);
+}
+
+a:visited {
+  color: var(--link-color--visited);
+}
+
+a:hover,
+a:not([href^='#']):focus,
+.Link:hover {
+  --underline-width: calc(2 * var(--link-underline-width));
+  --link-underline-color: var(--link-underline-color--hover);
+  color: var(--link-color--hover);
+  z-index: var(--link-hover-z-index, var(--link-z-index));
+}

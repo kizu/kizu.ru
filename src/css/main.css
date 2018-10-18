@@ -1,0 +1,316 @@
+/* ======================= *\
+   All the CSS for kizu.ru
+\* ======================= */
+
+/*
+  1. All the `@font-face` for the fonts alongside `@import` of the counter.
+     TODO: keep only the font for headers & use default ones for everything else?
+  2. All the basic variables on `:root` alongside the only media query.
+  3. “Theme” variables: colors etc.
+     FIXME: contains non-variables while it shouldn't.
+  4. Styles for the highlighted CSS got from prism.js.
+*/
+
+@import url("_fonts.css");  /* [1] */
+@import url("_prism.css");  /* [4] */
+
+@import url("_fallback.css");
+
+/* Top level batch supports lock */
+@supports (--var:iables) {
+
+@import url("_config.css"); /* [2] */
+@import url("_theme.css");  /* [3] */
+@import url("components/color-components.css");
+
+@import url("components/articlelist.css");
+@import url("components/anchor.css");
+@import url("components/asides.css");
+@import url("components/figure.css");
+@import url("components/layout.css");
+@import url("components/lists.css");
+@import url("components/metadata.css");
+@import url("components/sidenotes.css");
+@import url("components/summary.css");
+@import url("components/taglist.css");
+@import url("components/firstletters.css");
+@import url("components/links.css");
+@import url("components/warning.css");
+
+/*
+  1. Prevents the different widths when there is not enough content to create a scroll.
+     FIXME: replace with calc padding.
+*/
+
+html {
+  overflow-y: scroll; /* [1] */
+  font-size: var(--THEME_ROOT_FONT_SIZE);
+  background: var(--THEME_BG);
+
+  /* Should be tested in IE/Edge */
+  /* There were problems, but with a variable it could be ok? */
+  text-shadow: var(--THEME_TEXT_SHADOW);
+  color: var(--color);
+}
+
+/* TODO: replace home pages' one with a special case */
+.Page_type_home {
+  --h1-font-weight: 400;
+  --h1-margin-bottom: 2rem;
+}
+
+body {
+  /* Default context */
+  position: relative;
+  z-index: 1;
+
+  /* Default flex layout */
+  display: flex;
+  flex-direction: column;
+
+  /* is it used anywhere else? */
+  min-width: 26rem;
+
+  /* Reset */
+  padding: 0;
+  margin: 0;
+
+  /* For subgrid substitute */
+  counter-reset: var(--asides-counter) var(--sidenote-counters);
+
+  /* Should this be a part of utility definition? */
+  font: var(--THEME_FONT);
+}
+
+body::before {
+  display: none;
+}
+
+header {
+  /* For subgrid substitute */
+  order: -1;
+
+  /* FIXME: use utility */
+  text-align: center;
+
+  /* Utility usage */
+  --h1-font-size: 3.5rem;
+  --h1-font-weight: normal;
+
+  overflow: hidden;
+  max-height: calc(0px * var(--invisible));
+  opacity: calc(0 * var(--invisible));
+}
+
+footer {
+  display: var(--footer-display, grid);
+  margin-top: var(--footer-margin-top, 2rem);
+  margin-bottom: var(--footer-margin-bottom, 2rem);
+  --text-indent: 0;
+}
+
+
+ul {
+  display: var(--ul-display);
+  grid: var(--ul-grid);
+}
+
+nav {
+  grid-column: content;
+  --ul-display: grid;
+  --ul-item-content: none;
+  --list-item-padding: 0;
+  --link-color: currentColor;
+  --link-color--visited: currentColor;
+  --link-underline-offset: 0.4em;
+  font-size: var(--THEME_FONT_SIZE--SMALL);
+  --ul-grid: "start end";
+  --li-justify-self: start;
+  --li-justify-self-even: end;
+  --grid-column: auto;
+}
+
+time {
+  color: var(--color);
+  --color-a: var(--time-color-a, 0.75);
+}
+
+/* Typography basics, kinda reset stuff? */
+html {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  cursor: default;
+}
+
+img {
+  max-width: var(--img-max-width, 100%);
+  border: none;
+  display: var(--img-display, inline-block);
+  margin: var(--img-margin, 0);
+}
+
+img:only-child {
+  --img-display: block;
+  --img-margin: 1rem auto;
+}
+
+strong, b {
+  font-weight: var(--strong-font-weight, 700);
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: var(--heading-margin-top, 2rem);
+  margin-bottom: var(--heading-margin-bottom, 1rem);
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1em;
+  font-weight: 900;
+  --strong-font-weight: 900;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  --anchor-active: 1;
+}
+
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6 {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: var(--h1-font-size, calc(3rem - 0.5rem * var(--at-small)));
+  font-weight: var(--h1-font-weight, 900);
+  line-height: var(--h1-line-height, 1em);
+  margin-top: var(--h1-margin-top, 3rem);
+  margin-bottom: var(--h1-margin-bottom, 3rem);
+  -webkit-hyphens: var(--initial-at-large, none);
+  hyphens: var(--initial-at-large, none);
+}
+
+h2 {
+  font-size: var(--h2-font-size, 2rem);
+  line-height: var(--h2-line-height, 1em);
+  margin-top: var(--h2-margin-top, var(--heading-margin-top, 2rem));
+  margin-bottom: var(--h2-margin-bottom, var(--heading-margin-bottom, 1rem));
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+hr {
+  visibility: hidden;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  margin-top: var(--p-margin-top);
+  text-indent: calc(var(--p-text-indent) * var(--at-large));
+}
+
+p:empty {
+  display: none;
+}
+
+/* The only case when we don't need an indent is after headers */
+/* TODO: Do we need this only for _en? */
+:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.Summary):not(.Warning) + p {
+  --p-text-indent: var(--text-indent);
+  --p-margin-top: var(--p-p-margin-top, calc(1rem * var(--at-small)));
+}
+
+em {
+  font-style: var(--em-font-style, italic);
+  font-size: var(--em-font-size);
+  font-weight: var(--em-font-weight);
+}
+
+
+blockquote {
+  padding: 0 var(--THEME_INDENT);
+  margin: 1rem 0;
+  box-shadow: inset 2px 0;
+  font-style: italic;
+  --text-indent: 0;
+  --em-font-style: normal;
+  --code-font-style: normal;
+}
+
+table {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+code,
+pre,
+kbd {
+  font-feature-settings: "lnum", "onum" 0;
+}
+
+pre {
+  display: flex;
+  white-space: pre-wrap;
+  font-family: Monaco, Consolas, monospace, monospace;
+  --code-padding: 0 0 0 var(--h-gap);
+  --code-font-style: normal;
+  --code-line-height: 1.5rem;
+  font-size: var(--THEME_FONT_SIZE--CODE);
+  line-height: 1;
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 1rem 0;
+
+  --code-color: currentColor;
+
+  border-radius: 3px;
+}
+
+/* TODO: move to external import, like an escape hatch */
+/* Or just remove all the unneeded stuff from Prism? */
+pre:not(.z):not(.z) {
+  padding: 1rem 0;
+  margin: 1rem 0;
+  background: #FFF; /* Overrides prism.js one */
+}
+
+code:not(.z):not(.z) {
+  font: inherit;
+  white-space: pre-wrap;
+  max-width: 100%;
+  padding: var(--code-padding, 0);
+  font-style: var(--code-font-style, italic);
+  line-height: var(--code-line-height, 1);
+  color: var(--code-color, #690);
+  hyphens: none;
+}
+
+::selection {
+  text-shadow: none !important;
+  background-color: var(--THEME_SELECTION);
+}
+
+/* End of the top level `@supports` */
+}

@@ -1,0 +1,3 @@
+<aside style="{{ if .Get "offset" }}--offset: {{ .Get "offset" }}; {{ end }}{{ if .Get "span" }}--span: {{ .Get "span" }};{{ end }}">
+  {{- .Inner -}}
+</aside>

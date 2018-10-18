@@ -1,0 +1,14 @@
+.Metadata {
+  margin-top: var(--Metadata-margin-top, 1rem);
+  margin-bottom: var(--Metadata-margin-bottom, 0);
+  text-align: var(--Metadata-text-align, right);
+
+  font: italic var(--THEME_FONT--SMALL);
+
+  --text-indent: 0;
+  --time-color-a: 1;
+}
+
+.Metadata + .Metadata {
+  margin-top: 0;
+}

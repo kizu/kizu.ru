@@ -1,0 +1,89 @@
+[titleName]
+other = "Roman Komarov"
+
+[backToMain]
+other = "Go back to homepage"
+
+[previousArticle]
+other = "Previous article"
+
+[nextArticle]
+other = "Next article"
+
+[diffLangVersion]
+other = "Русскоязычная версия"
+
+[lquo]
+other = "“"
+
+[lquoDiffLang]
+other = "«"
+
+[rquo]
+other = "”"
+
+[rquoDiffLang]
+other = "»"
+
+[dateFormat]
+other= "January 2, 2006"
+
+[published]
+other = "Published on"
+
+[thanksTo]
+other = "Thanks to"
+
+[withTags]
+other = "with tags"
+
+[tag]
+other = "Tag"
+
+[githubTitle]
+other = "Edit on GitHub"
+
+[GitHub]
+other = "GitHub"
+
+[Twitter]
+other = "Twitter"
+
+[twitterTitle]
+other = "Follow on Twitter"
+
+[twitterLink]
+other = "https://twitter.com/kizmarh"
+
+[Feed]
+other = "Feed"
+
+[feedTitle]
+other = "Subscribe to the feed"
+
+[feedLink]
+other = "https://feeds.feedburner.com/kizuruen"
+
+[recentShown]
+other = "Only the 10 recent items shown"
+
+[everythingShown]
+other = "All the items shown"
+
+[showEverything]
+other = "Show the rest"
+
+[showOnlyRecent]
+other = "Show only the 10 recent ones"
+
+[lastPost]
+other = "Last post"
+
+[pageIsMoved]
+other = "This page is permanently moved to a new address"
+
+[readFull]
+other ="Read the full article on kizu.ru"
+
+[lastBuild]
+other = "Last build date"

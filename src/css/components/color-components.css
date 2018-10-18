@@ -1,0 +1,22 @@
+/* More precise color control etc. */
+*,
+*::before,
+*::after {
+  /* Replaced color with --color as there were visited problems */
+  --color: hsla(
+    var(--color-h, 0),
+    calc(var(--color-s, 0) * 1%),
+    calc(var(--color-l, 0) * 1%),
+    calc(var(--inherited-a, var(--color-a, 1)) + 0 / (1 - var(--color-a, 1)))
+  );
+  --color-a: 1;
+}
+
+:root {
+  --color-h: var(--THEME_COLOR_H);
+  --color-s: var(--THEME_COLOR_S);
+  --color-l: var(--THEME_COLOR_L);
+  --color-a: var(--THEME_COLOR_A);
+
+  --inherited-a: initial;
+}

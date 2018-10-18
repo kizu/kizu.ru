@@ -1,8 +1,0 @@
-ul
-  - for post in posts.slice(0, 3)
-    li
-      a(href='/' + post.url)
-        = post.title
-
-      = " — "
-      time.published(datetime=post.date)= published_format(post.date)

@@ -1,0 +1,1 @@
+{{- .input | replaceRE "\\s+—\\s+" " — " | replaceRE "(\\d)[xх](\\d)" "$1×$2" | safeHTML -}}

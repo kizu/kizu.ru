@@ -1,0 +1,26 @@
+<style>
+.ProjectionTable_small {
+  grid-template-areas:
+    " full  full     full   "
+    " .     both     .      "
+    " .     content  .      "
+    " .     aside    .      ";
+}
+</style>
+
+<div class="ProjectionTable ProjectionTable_small">
+  <div class="Area" style="grid-area: full;">grid-area: full</div>
+  <div class="Area" style="grid-area: both;">grid-area: both</div>
+  <div class="Area" style="grid-area: content">grid-area: content</div>
+  <div class="Area" style="grid-area: aside">grid-area: aside</div>
+
+  <div class="Label Column" style="grid-row: -7; grid-column: full;">full</div>
+  <div class="Label Column" style="grid-row: -8; grid-column: both;">both</div>
+  <div class="Label Column" style="grid-row: -9; grid-column: content;">content</div>
+  <div class="Label Column" style="grid-row: -10; grid-column: aside;">aside</div>
+
+  <div class="Label Row" style="grid-column: -5; grid-row: full;">full</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: both;">both</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: content;">content</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: aside;">aside</div>
+</div>

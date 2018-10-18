@@ -1,0 +1,35 @@
+<style>
+
+.inline-flex-wrapper {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+
+    -webkit-align-items: baseline;
+    align-items: baseline;
+
+    vertical-align: baseline;
+    }
+
+.inline-flex-item {
+    padding: 10px;
+    border: 1px solid lime;
+    }
+</style>
+
+<div class="baseline-wrapper">
+    <div class="inline-flex-wrapper">
+        <div class="inline-flex-item" style="padding: 20px">
+            I'm an inline-flex
+        </div>
+
+        <div class="inline-flex-item" style="font-size: 0.8em">
+            I'm an inline-flex<br/>
+            With a second line
+        </div>
+
+        <div class="inline-flex-item" style="width: 7em; overflow: auto;">
+            I'm an inline-flex with an overflow auto
+        </div>
+    </div>
+</div>

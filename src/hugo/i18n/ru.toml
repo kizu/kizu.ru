@@ -1,0 +1,89 @@
+[titleName]
+other = "Роман Комаров"
+
+[backToMain]
+other = "Вернуться на главную страницу"
+
+[previousArticle]
+other = "Предыдущая статья"
+
+[nextArticle]
+other = "Следующая статья"
+
+[diffLangVersion]
+other = "English language version"
+
+[lquo]
+other = "«"
+
+[lquoDiffLang]
+other = "“"
+
+[rquo]
+other = "»"
+
+[rquoDiffLang]
+other = "”"
+
+[dateFormat]
+other= "2 January 2006 г."
+
+[published]
+other = "Опубликовано"
+
+[thanksTo]
+other = "Спасибо"
+
+[withTags]
+other = "с метками"
+
+[tag]
+other = "Метка"
+
+[GitHub]
+other = "Гитхаб"
+
+[githubTitle]
+other = "Редактировать на Гитхабе"
+
+[Twitter]
+other = "Твиттер"
+
+[twitterTitle]
+other = "Зафолловить на Твиттере"
+
+[twitterLink]
+other = "https://twitter.com/ki_zu"
+
+[Feed]
+other = "Фид"
+
+[feedTitle]
+other = "Подписаться на фид"
+
+[feedLink]
+other = "https://feeds.feedburner.com/kizu"
+
+[recentShown]
+other = "Показаны только последние 10"
+
+[everythingShown]
+other = "Показаны все"
+
+[showEverything]
+other = "Показать оставшиеся"
+
+[showOnlyRecent]
+other = "Показать только последние 10"
+
+[lastPost]
+other = "Последний пост"
+
+[pageIsMoved]
+other = "Эта страница навсегда перемещена по новому адресу"
+
+[readFull]
+other ="Прочитайте статьи целиком на kizu.ru"
+
+[lastBuild]
+other = "Дата последнего билда"

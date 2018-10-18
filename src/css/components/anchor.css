@@ -1,0 +1,27 @@
+:root {
+  --anchor-active: 0;
+}
+
+.Anchor {
+  display: inline-block;
+  width: 0.8em;
+  padding-top: 0;
+  border-right: 0.2em solid transparent;
+  margin: -0.5em 0 -0.5em -1em;
+  text-shadow: none;
+  line-height: 1;
+  opacity: var(--anchor-active);
+  transform: translate(calc(100% * (1 - var(--anchor-active))), 0);
+  transition: 0.3s calc(1s - 0.7s * var(--anchor-active));
+  transition-property: opacity, transform;
+  --before: "#";
+}
+
+.Anchor::before {
+  font-feature-settings: "smcp";
+}
+
+.Anchor:focus {
+  --anchor-active: 1;
+  transition: none;
+}

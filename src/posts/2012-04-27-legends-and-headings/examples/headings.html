@@ -1,0 +1,67 @@
+<style>
+
+/* Centered heading with rules */
+#Demo_headings h1 {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+
+    font: 1.6em/1.1 Georgia;
+    padding: .2em 0;
+    text-shadow: 0 1px rgba(255,255,255,.6);
+    }
+#Demo_headings h1:before,
+#Demo_headings h1:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 2px;
+
+    vertical-align: middle;
+    background: #000;
+    background-clip: content-box;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+#Demo_headings h1:before {
+    left: -.5em;
+    margin: 0 0 0 -50%;
+    }
+#Demo_headings h1:after {
+    left: .5em;
+    margin: 0 -50% 0 0;
+    }
+#Demo_headings h1>span:not([class]) {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: normal;
+    }
+
+/* Works on any background */
+#Demo_headings {
+    background: #FFA046;
+    background: -webkit-linear-gradient(45deg, #f39, yellow);
+    background:    -moz-linear-gradient(45deg, #f39, yellow);
+    background:      -o-linear-gradient(45deg, #f39, yellow);
+    background:         linear-gradient(45deg, #f39, yellow);
+    padding: 1em;
+    text-shadow: none;
+    border-radius: inherit;
+    }
+
+</style>
+
+<div id="Demo_headings">
+  <h1>Hello!</h1>
+
+  <p>Here are the centered headings with horizontal lines.</p>
+
+  <p>They are one-lined by default, but if it needs to be multiline, then you can add an extra span.</p>
+
+  <h1><span>Multiline heading<br/>with an extra wrapping span</span></h1>
+
+  <h1>Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown. Some long, long heading without a wrapping span, so it would be overflown.</h1>
+
+  <p>↑ Here you can see one-lined heading, <del title="FireFox incorrectly shows the ellipsis on the previous items, so I removed them here." style="cursor: help;">with text-overflow: ellipsis.</del> Since it's too long, the horizontal lines cannot be seen.</p>
+</div>

@@ -1,0 +1,38 @@
+:root {
+  --ul-item-content: var(--THEME_LI_CONTENT);
+  --ol-item-content: var(--THEME_LI_CONTENT--OL);
+  --list-item-padding: var(--THEME_INDENT);
+}
+
+ol, ul {
+  padding: 0;
+  margin: 0;
+  --list-item-content: var(--ul-item-content);
+  --p-margin-top: 0;
+}
+
+ol {
+  counter-reset: list;
+  --list-item-content: var(--ol-item-content);
+}
+
+li {
+  padding: 0 0 0 var(--list-item-padding);
+  list-style-type: none; /* Fixme: screenreaders would die out? */
+  justify-self: var(--grid-position, var(--li-justify-self));
+  grid-column: var(--grid-position, auto / span var(--initial-at-small, var(--span)));
+  --priority: var(--at-small);
+  --span: calc(var(--priority) * 2);
+}
+
+li::before {
+  content: var(--list-item-content);
+  counter-increment: list;
+
+  position: absolute;
+
+  width: var(--THEME_INDENT);
+  margin-left: calc(-1*var(--THEME_INDENT));
+
+  font-feature-settings: "lnum", "onum" 0;
+}

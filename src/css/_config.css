@@ -1,0 +1,64 @@
+:root {
+  /* Setting up grid variables */
+  --h-gap: var(--THEME_INDENT);
+  --v-gap: var(--THEME_INDENT);
+  --content-max-width: 42rem;
+  --content-min-width: calc(24rem * var(--at-large));
+  --aside-width: 15rem;
+  --viewport-padding: calc(var(--THEME_INDENT) * (1 - 0.25 * var(--at-small)));
+
+  /* Grid! */
+  --grid-side: minmax(min-content, 1fr);
+  --grid-content: minmax(var(--content-min-width), var(--content-max-width));
+
+  --grid-ascii:
+    " full  full     full   "
+    " .     both     both   "
+    " .     content  aside  ";
+
+  --grid-ascii--small:
+    " full  full     full "
+    " .     both     .    "
+    " .     content  .    "
+    " .     aside    .    ";
+
+  --grid:
+    var(--grid-ascii)
+    / var(--grid-side)
+            var(--grid-content)
+                     var(--grid-side);
+
+  --figure-subgrid-ascii:
+    " full    full  "
+    " content aside ";
+
+  --figure-subgrid-ascii--small:
+    " full    "
+    " content "
+    " aside ";
+
+  --figure-subgrid: var(--figure-subgrid-ascii)
+    / var(--grid-content)
+              var(--grid-side);
+
+  /* Typography! */
+  /* Replace with utility? */
+  --text-indent: var(--THEME_INDENT);
+
+  /* Conditions */
+  --initial-at-large: true;
+  --at-large: calc(1 - var(--at-small));
+  --at-small: 0;
+}
+
+/* This should be the only MQ for my site, ok */
+@media (max-width: 50em) {
+  :root {
+    --initial-at-large: initial;
+    --initial-at-small: true;
+    --at-small: 1;
+
+    --grid-ascii: var(--grid-ascii--small);
+    --figure-subgrid-ascii: var(--figure-subgrid-ascii--small);
+  }
+}

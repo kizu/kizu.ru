@@ -1,0 +1,30 @@
+.Warning {
+  display: flex;
+  --grid-column: full;
+
+  border: 0.5rem dashed #FFCA51;
+  padding: 2rem calc(1rem * var(--at-small));
+  margin: 0 var(--viewport-padding) 2rem;
+
+  background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+  background-clip: padding-box, border-box;
+
+  text-align: center;
+
+  font-size: 1.5rem;
+  --strong-font-weight: normal;
+  --em-font-style: normal;
+  --em-font-weight: 900;
+}
+
+.Warning::before,
+.Warning::after {
+  content: var(--initial-at-small, "⚠️");
+  align-self: center;
+  font-size: 3rem;
+  margin: 2rem;
+}
+
+.Warning:last-child {
+  margin: 2rem 2rem 0;
+}

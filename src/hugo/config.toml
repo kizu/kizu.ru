@@ -1,0 +1,27 @@
+markup = "mmark"
+
+baseURL = "http://kizu.ru/"
+sourceRelativeLinksEval = true
+
+preserveTaxonomyNames = true
+
+DefaultContentLanguage = "en"
+
+title = "kizu.ru"
+
+[author]
+name = "Roman Komarov"
+
+[permalinks]
+posts = "/:slug/"
+
+[Languages]
+[Languages.en]
+languageCode = "en"
+languagePrefix = ""
+diffLanguagePrefix = "ru/"
+
+[Languages.ru]
+languageCode = "ru"
+languagePrefix = "ru/"
+diffLanguagePrefix = ""

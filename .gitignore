@@ -1,3 +1,7 @@
 _site/
 .DS_Store
 node_modules/
+tmp/
+build/
+out/
+package-lock.json

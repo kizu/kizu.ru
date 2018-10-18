@@ -1,0 +1,64 @@
+{{- $file := .Get "src" -}}
+{{- $src := (print "/" .Page.Params.srcPath $file) -}}
+{{- $id := (replace $file ".html" "") -}}
+{{- $id = (replace $id "examples/" "") -}}
+{{- $a11y := .Get "a11y" -}}
+<figure
+  {{- if .Get "style" -}}
+    {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
+  {{- end -}}
+  {{- if ne $a11y true -}}
+    {{/**/}} aria-label="
+      {{- if .Get "a11y-notice" -}}
+        {{- .Get "a11y-notice" -}}
+      {{- else -}}
+        This demo is not yet adapted and inaccessible, sorry.
+      {{- end -}}
+    "
+  {{- end -}}
+>
+  {{- if .Get "screenshot" -}}
+    {{- $alt := "Screenshot" -}}
+    {{- if .Get "alt" -}}
+      {{- $alt = .Get "alt" -}}
+    {{- end -}}
+
+    <input class="Figure-Toggle" type="checkbox" id="Toggle-{{ $id }}" />
+    <div class="Figure-Demo" {{ if ne $a11y true }} aria-hidden="true"{{ end }}>
+      {{- $src  | readFile | safeHTML -}}
+    </div>
+    <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
+
+  {{- else -}}
+
+    {{- if .Get "iframe" -}}
+      {{- if eq (.Get "iframe") "true" -}}
+        <iframe
+          src="/demos/{{ .Page.Slug }}/{{ .Get "src" }}"
+          style="height: {{ .Get "height" }}"
+        ></iframe>
+      {{- else -}}
+        <iframe
+          src="{{ .Get "iframe" }}"
+          style="height: {{ .Get "height" }}"
+        ></iframe>
+      {{- end -}}
+    {{- else -}}
+      <div class="Figure-Demo"{{ if ne $a11y true }} aria-hidden="true"{{ end }}>
+        {{- $src  | readFile | safeHTML -}}
+      </div>
+    {{- end -}}
+    {{- .Inner | markdownify -}}
+  {{- end -}}
+
+</figure>
+{{- if .Get "screenshot" -}}
+  <aside style="--offset: 1;">
+    <p>
+      <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
+        Toggle screenshot/demo
+      </label>
+    </p>
+    {{- .Inner | markdownify -}}
+  </aside>
+{{- end -}}

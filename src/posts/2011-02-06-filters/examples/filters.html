@@ -1,0 +1,416 @@
+<style>
+/*_*/
+
+html {
+    background: #FFF;
+    }
+
+/* Fix for +/~ selectors in webkit */
+@-webkit-keyframes bugfix { from { padding: 0; } to { padding: 0; } }
+.b-filter {
+    -webkit-animation: bugfix infinite 1s;
+    }
+
+
+.b-list {
+    position: relative;
+    z-index: 9;
+
+    padding: 0.5em 0.5em 0;
+
+    list-style: none;
+    background: #CCC;
+
+    text-align: center;
+
+    border-radius: 1em;
+    }
+
+.b-list-item {
+    display: inline-block;
+
+    margin: 0 0.25em 0.5em 0.25em;
+
+    vertical-align: top;
+
+    transition: all .3s ease;
+    }
+
+.b-list-item_round {
+    width: 2em;
+    height: 2em;
+    border: none !important;
+
+    border-radius: 1em;
+    }
+.b-list-item_square {
+    width: 2em;
+    height: 2em;
+    border: none !important;
+    }
+
+.b-list-item_triangle {
+    width: 0 !important;
+    height: 0 !important;
+    border-bottom: 2em solid;
+    border-left: 1em dashed transparent;
+    border-right: 1em dashed transparent;
+
+    background: none !important;
+    }
+
+.b-list-item_red {
+    background: red;
+    color: red;
+    }
+
+.b-list-item_blue {
+    background: blue;
+    color: blue;
+    }
+
+.b-list-item_yellow {
+    background: yellow;
+    color: yellow;
+    }
+
+.b-list-item_black {
+    background: black;
+    color: black;
+    }
+
+.b-list-item_green {
+    background: green;
+    color: green;
+    }
+
+.b-list-item_white {
+    background: white;
+    color: white;
+    }
+
+/* Meta
+---------------------*/
+.b-filter-meta {
+    position: fixed;
+    top: 0;
+    left: -99px;
+    }
+
+/* Hide elements */
+input.b-filter-meta#ShapeRound:checked ~ .b-list > .b-list-item_square,
+input.b-filter-meta#ShapeRound:checked ~ .b-list > .b-list-item_triangle,
+input.b-filter-meta#ShapeSquare:checked ~ .b-list > .b-list-item_round,
+input.b-filter-meta#ShapeSquare:checked ~ .b-list > .b-list-item_triangle,
+input.b-filter-meta#ShapeTriangle:checked ~ .b-list > .b-list-item_square,
+input.b-filter-meta#ShapeTriangle:checked ~ .b-list > .b-list-item_round,
+.b-filter-meta[id^=Color]:checked ~ .b-list > .b-list-item {
+    width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    margin: 0 0 0.5em;
+
+    opacity: 0;
+    }
+
+/* Show elements */
+.b-filter-meta#ColorRed:checked ~ .b-list > .b-list-item_red,
+.b-filter-meta#ColorBlue:checked ~ .b-list > .b-list-item_blue,
+.b-filter-meta#ColorYellow:checked ~ .b-list > .b-list-item_yellow,
+.b-filter-meta#ColorBlack:checked ~ .b-list > .b-list-item_black,
+.b-filter-meta#ColorGreen:checked ~ .b-list > .b-list-item_green,
+.b-filter-meta#ColorWhite:checked ~ .b-list > .b-list-item_white {
+    width: 2em;
+    border-left-width: 1em;
+    border-right-width: 1em;
+    margin: 0 0.25em 0.5em 0.25em;
+
+    opacity: 1;
+    }
+
+
+/* Checkboxes */
+.b-filter-checks {
+    margin-left: .5em;
+    }
+
+.b-filter-checks .b-filter-label {
+    display: inline-block;
+
+    padding: 0.25em 0.5em;
+    margin: 0 0.5em 0 0;
+
+    cursor: pointer;
+
+    font-size: 0.8em;
+
+    color: rgba(0,0,0,0.3);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+
+    background: rgba(0,0,0,0.12);
+
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    border-radius: 1em;
+    user-select: none;
+    }
+    .b-filter-checks .b-filter-label:before {
+        content: "";
+        display: inline-block;
+
+        width: 0.75em;
+        height: 0.75em;
+        margin: 0 0.3em 0 0;
+
+        background: #FFF;
+
+        box-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+        border-radius: 1em;
+        }
+
+
+.b-filter-meta#ColorRed:checked ~ .b-filter-controls .b-filter-label[for=ColorRed],
+.b-filter-meta#ColorBlue:checked ~ .b-filter-controls .b-filter-label[for=ColorBlue],
+.b-filter-meta#ColorYellow:checked ~ .b-filter-controls .b-filter-label[for=ColorYellow],
+.b-filter-meta#ColorBlack:checked ~ .b-filter-controls .b-filter-label[for=ColorBlack],
+.b-filter-meta#ColorGreen:checked ~ .b-filter-controls .b-filter-label[for=ColorGreen],
+.b-filter-meta#ColorWhite:checked ~ .b-filter-controls .b-filter-label[for=ColorWhite] {
+
+    color: #333;
+
+    background: rgba(0,0,0,0.2);
+
+    box-shadow: 0 1px 1px rgba(0,0,0,0.6);
+    }
+    .b-filter-meta#ColorRed:checked ~ .b-filter-controls .b-filter-label[for=ColorRed]:before,
+    .b-filter-meta#ColorBlue:checked ~ .b-filter-controls .b-filter-label[for=ColorBlue]:before,
+    .b-filter-meta#ColorYellow:checked ~ .b-filter-controls .b-filter-label[for=ColorYellow]:before,
+    .b-filter-meta#ColorBlack:checked ~ .b-filter-controls .b-filter-label[for=ColorBlack]:before,
+    .b-filter-meta#ColorGreen:checked ~ .b-filter-controls .b-filter-label[for=ColorGreen]:before,
+    .b-filter-meta#ColorWhite:checked ~ .b-filter-controls .b-filter-label[for=ColorWhite]:before {
+        box-shadow: 0 -1px 1px rgba(0,0,0,0.8);
+        }
+
+/* Radiobuttons */
+.b-filter-radios {
+    position: relative;
+
+    display: inline-block;
+    margin-left: .5em;
+
+    background: rgba(0,0,0,0.4);
+
+    border-radius: 1em;
+    user-select: none;
+    }
+.b-filter-radios .b-filter-label {
+    position: relative;
+    z-index: 9;
+
+    display: inline-block;
+    padding: 0.15em 0.5em;
+
+    cursor: pointer;
+
+    color: rgba(255,255,255,.9);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+.b-filter-radios .b-filter-label:first-child {
+    padding-left: 0.75em;
+    border-radius: 1em 0 0 1em;
+    }
+.b-filter-radios .b-filter-label:nth-last-child(2) {
+    padding-right: 0.75em;
+
+    border-radius: 0 1em 1em 0;
+    }
+.b-filter-radios .b-filter-label_none {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
+
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+    }
+
+
+.b-filter-meta#ShapeRound:checked ~ .b-filter-controls .b-filter-label[for=ShapeRound],
+.b-filter-meta#ShapeSquare:checked ~ .b-filter-controls .b-filter-label[for=ShapeSquare],
+.b-filter-meta#ShapeTriangle:checked ~ .b-filter-controls .b-filter-label[for=ShapeTriangle] {
+    z-index: 7;
+
+    color: #FFF;
+    background: rgba(255,255,255,0.1);
+
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.6);
+    }
+
+.b-filter-meta#ShapeRound:checked ~ .b-filter-controls .b-filter-label[for=ShapeRound]:after,
+.b-filter-meta#ShapeSquare:checked ~ .b-filter-controls .b-filter-label[for=ShapeSquare]:after,
+.b-filter-meta#ShapeTriangle:checked ~ .b-filter-controls .b-filter-label[for=ShapeTriangle]:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    width: 7px;
+    height: 7px;
+    margin: 0 0 -4px -3px;
+
+    background: #A3A3A3;
+
+    transform: rotate(-45deg);
+    }
+
+.b-filter-reset {
+    position: relative;
+    top: -2.2em;
+
+    display: inline-block;
+
+    box-sizing: content-box;
+    height: 2em;
+    padding: 0;
+    border: solid transparent;
+    border-width: 0 1em;
+    margin: 0 0 0 3em;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+    text-decoration: none;
+
+    font-size: 12px;
+    line-height: 2;
+
+    color: #FFF;
+    background: #CCC;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+
+    border-radius: 0 0 1em 1em;
+    user-select: none;
+    transition: all .3s ease;
+
+    -moz-appearance: none;
+    }
+    .b-filter-reset::-moz-focus-inner {
+        padding: 0;
+        border: none;
+        }
+    .b-filter-reset:before {
+        content: "";
+        position: absolute;
+        top: -1em;
+        right: 100%;
+
+        width: 1em;
+        height: 1em;
+        border: solid #CCC;
+        border-width: 1em 1em 0 0;
+
+        border-radius: 0 2em 0 0;
+
+        clip: rect(1em 1em auto auto);
+        }
+    .b-filter-reset:after {
+        content: "";
+        position: absolute;
+        top: -1em;
+        left: 100%;
+
+        width: 1em;
+        height: 1em;
+        border: solid #CCC;
+        border-width: 1em 0 0 1em;
+
+        border-radius: 2em 0 0 0;
+
+        clip: rect(1em auto auto 1em);
+        }
+.b-filter-meta:not(#ShapeNone):checked ~ .b-filter-reset {
+    top: -1px;
+    }
+</style>
+
+<form class="b-filter">
+    <input type="radio" checked="checked" class="b-filter-meta" name="types" id="ShapeNone" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeRound" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeSquare" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeTriangle" />
+
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorRed" />
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorBlue" />
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorYellow" />
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorBlack" />
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorGreen" />
+    <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorWhite" />
+    <div class="b-filter-controls">
+        <p>
+            Choose colors:
+            <span class="b-filter-checks">
+                <label class="b-filter-label" for="ColorRed">Red</label>
+                <label class="b-filter-label" for="ColorBlue">Blue</label>
+                <label class="b-filter-label" for="ColorYellow">Yellow</label>
+                <label class="b-filter-label" for="ColorBlack">Black</label>
+                <label class="b-filter-label" for="ColorGreen">Green</label>
+                <label class="b-filter-label" for="ColorWhite">White</label>
+            </span>
+        </p>
+        <p>
+            Choose a shape:
+            <span class="b-filter-radios">
+                <label class="b-filter-label" for="ShapeRound">Circles</label
+               ><label class="b-filter-label" for="ShapeSquare">Squares</label
+               ><label class="b-filter-label" for="ShapeTriangle">Triangles</label>
+                <label class="b-filter-label_none" for="ShapeNone"></label>
+            </span>
+        </p>
+    </div>
+    <div class="b-list">
+        <span class="b-list-item b-list-item_round  b-list-item_red  "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_round  b-list-item_black "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_white "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_black "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_white "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_green "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_red   "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_red   "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_round  b-list-item_black "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_white "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_black "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_white "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_green "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_round  b-list-item_red   "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_red   "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_round  b-list-item_black "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_blue  "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_black "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_white "></span
+       ><span class="b-list-item b-list-item_triangle b-list-item_white "></span
+       ><span class="b-list-item b-list-item_round  b-list-item_green "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_yellow"></span
+       ><span class="b-list-item b-list-item_round  b-list-item_red   "></span
+       ><span class="b-list-item b-list-item_square   b-list-item_green "></span>
+    </div>
+    <button class="b-filter-reset" type="reset">Show all</button>
+</form>

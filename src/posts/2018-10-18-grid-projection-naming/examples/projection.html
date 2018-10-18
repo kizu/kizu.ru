@@ -1,0 +1,119 @@
+<style>
+
+.ProjectionTable {
+  position: relative;
+  overflow: auto;
+  padding: 1px;
+
+  display: grid;
+  grid-gap: 1em;
+
+  grid-template:
+    " full  full     full   "
+    " .     both     both   "
+    " .     content  aside  ";
+  grid-template-columns: repeat(3, 1fr);
+
+  font: initial;
+  font-family: Helvetica Neue, Arial, sans-serif;
+  white-space: nowrap;
+}
+
+.ProjectionTable::before {
+  content: "";
+  border: 2px solid #D2D2D2;
+  grid-area: 1 / 1 / -1 / -1;
+}
+
+.Area,
+.Label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Area {
+  position: relative;
+  border: 1px solid;
+  padding: 1em 0.5em;
+  background: aliceblue;
+}
+
+.Area::before,
+.Area::after {
+  content: "";
+  position: absolute;
+  top: -99em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px red;
+  transition: opacity 0.2s linear;
+}
+
+.Area::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -99em;
+}
+
+.Area:hover::before,
+.Area:hover::after {
+  opacity: 1;
+}
+
+.Label {
+  border-radius: 99em;
+  padding: 0.5em;
+  transition: opacity 0.2s linear;
+}
+
+.Column {
+  background: antiquewhite;
+}
+
+.Row {
+  background: pink;
+}
+
+@supports (writing-mode: vertical-rl) {
+  .Row {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+}
+
+/* Sadly, there is way that I know, which you could use to make this with a single selector. Well, except for using much more mark-up and/or some other more experimentsal methods of course. */
+.Area[style*=" full"]:hover ~ .Label:not([style*=" full"]),
+.Area[style*=" both"]:hover ~ .Label:not([style*=" both"]),
+.Area[style*=" content"]:hover ~ .Label:not([style*=" content"]),
+.Area[style*=" aside"]:hover ~ .Label:not([style*=" aside"]),
+.Area[style*=" left"]:hover ~ .Label:not([style*=" left"]),
+.Area[style*=" middle"]:hover ~ .Label:not([style*=" middle"]),
+.Area[style*=" right"]:hover ~ .Label:not([style*=" right"]),
+.Area[style*=" sans-right"]:hover ~ .Label:not([style*=" sans-right"]),
+.Area[style*=" sans-left"]:hover ~ .Label:not([style*=" sans-left"]) {
+  opacity: 0.35;
+}
+
+</style>
+
+<div class="ProjectionTable">
+  <div class="Area" style="grid-area: full;">grid-area: full</div>
+  <div class="Area" style="grid-area: both;">grid-area: both</div>
+  <div class="Area" style="grid-area: content">grid-area: content</div>
+  <div class="Area" style="grid-area: aside">grid-area: aside</div>
+
+  <div class="Label Column" style="grid-row: -5; grid-column: full;">full</div>
+  <div class="Label Column" style="grid-row: -6; grid-column: both;">both</div>
+  <div class="Label Column" style="grid-row: -7; grid-column: content;">content</div>
+  <div class="Label Column" style="grid-row: -7; grid-column: aside;">aside</div>
+
+  <div class="Label Row" style="grid-column: -5; grid-row: full;">full</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: both;">both</div>
+  <div class="Label Row" style="grid-column: -6; grid-row: content;">content</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: aside;">aside</div>
+</div>

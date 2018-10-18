@@ -1,0 +1,48 @@
+<style>
+
+
+.almost-final-flex {
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+
+    vertical-align: baseline;
+    }
+
+.almost-final-flex-content {
+    padding: 0 10px 10px;
+    border: 1px solid lime;
+    }
+
+.almost-final-flex-content:before {
+    content: "";
+    display: block;
+    padding-top: 10px;
+    }
+
+.almost-final-flex:first-child > .almost-final-flex-content:before {
+    padding-top: 20px;
+    }
+
+</style>
+
+<div class="baseline-wrapper">
+    <div class="almost-final-flex">
+        <div class="almost-final-flex-content" style="padding: 0 20px 20px">
+            I'm an inline-flex
+        </div>
+    </div>
+
+    <div class="almost-final-flex">
+        <div class="almost-final-flex-content" style="font-size: 0.8em">
+            I'm an inline-flex<br/>
+            With a second line
+        </div>
+    </div>
+
+    <div class="almost-final-flex" style="width: 7em;">
+        <div class="almost-final-flex-content" style="overflow: auto;">
+            I'm an inline-flex with an overflow auto
+        </div>
+    </div>
+</div>

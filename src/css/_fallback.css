@@ -1,0 +1,36 @@
+/* TODO: remove extra stuff that should be hidden from keyboard nav */
+
+body {
+  font: 1.5em/1.5 Georgia, sans-serif;
+  padding: 2em;
+}
+
+body:before {
+  content: "Your browser does not support CSS variables and a lot of other modern stuff. Most of the content should still be accessible, but a lot of the examples won’t work.";
+  display: block;
+
+  border: 2px solid;
+  background: pink;
+  padding: 2em;
+  margin: 4em auto;
+  width: 42em;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+header,
+footer,
+main,
+article {
+  display: block;
+  box-sizing: border-box;
+  width: 36em;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+figure {
+  border: 2px solid;
+  padding: 1em;
+  border-radius: 5px;
+}

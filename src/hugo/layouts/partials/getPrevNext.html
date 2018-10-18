@@ -1,0 +1,13 @@
+{{- $currentPage := . -}}
+{{- $scr := newScratch -}}
+{{- range .Site.Pages -}}
+  {{- if and (eq .Params.type "post") (.Title) (eq .Site.Params.languageCode .Params.lang) (eq .Draft false) -}}
+    {{- if eq .Permalink $currentPage.Permalink -}}
+      {{- $.Scratch.Set "nextPage" ($scr.Get "prevPointer") -}}
+    {{- end -}}
+    {{- if eq ($scr.Get "prevPointer").Permalink $currentPage.Permalink -}}
+      {{- $.Scratch.Set "prevPage" . -}}
+    {{- end -}}
+    {{- $scr.Set "prevPointer" . -}}
+  {{- end -}}
+{{- end -}}

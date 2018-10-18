@@ -1,0 +1,15 @@
+.TagList {
+  display: inline-block;
+  max-width: 100%;
+
+  --link-position: relative;
+  --link-z-index: 9;
+  --link-hover-z-index: 10;
+  --link-color: currentColor;
+  --link-color--visited: currentColor;
+  --link-padding: 0.3em 0.15em;
+  --link-margin: 0 -0.15em;
+
+  color: var(--color);
+  --color-a: 0.5;
+}

@@ -1,0 +1,61 @@
+{{- define "main" -}}
+  {{- range .Translations -}}{{- if eq .Params.lang .Lang -}}
+    <aside style="--align: center">
+      {{- i18n "diffLangVersion" -}}: <br/>
+      <a href="{{ .Permalink }}" style="--underline: 0;">
+        {{- i18n "lquoDiffLang" -}}
+        <span style="--underline: 1;">{{ .Title }}</span>
+        {{- i18n "rquoDiffLang" -}}
+      </a>
+    </aside>
+  {{- end -}}{{- end -}}
+
+  {{- if .Params.summary -}}
+    <p class="Summary">{{ .Params.summary | markdownify }}</p>
+  {{- end -}}
+
+  {{- if .Params.warning -}}
+    <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
+  {{- end -}}
+
+  {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+
+  {{- if eq .Params.type "post" -}}
+    <p class="Metadata Published">
+      {{- i18n "published" }} {{ partial "readableDate.html" . }}{{ partial "taglist.html" . }}
+    </p>
+  {{- end -}}
+
+  {{- if .Params.thanks_to -}}
+    {{- $thanks := "" -}}
+    {{- if eq (printf "%T" .Params.thanks_to) "string" -}}
+      {{- $thanks = .Params.thanks_to -}}
+    {{- else -}}
+      {{- $thanks = echoParam .Params.thanks_to .Params.lang -}}
+    {{- end -}}
+
+    {{- if and $thanks (ne $thanks "") -}}
+      <p class="Metadata Thanks">{{ i18n "thanksTo" }} {{ partial "handleContent.html" (dict "context" . "input" (markdownify $thanks)) }}.</p>
+    {{- end -}}
+  {{- end -}}
+
+  {{- if .Params.warning -}}
+    <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
+  {{- end -}}
+{{- end -}}
+
+{{- define "footer" -}}
+  {{- if eq .Params.type "post" -}}
+    {{- partial "getPrevNext.html" . -}}
+    {{- $prev := $.Scratch.Get "prevPage" -}}
+    {{- $next := $.Scratch.Get "nextPage" -}}
+    {{- if or $prev $next -}}
+      {{- if $prev -}}
+        <li style="--grid-position: start;"><a href="{{$prev.Permalink}}" aria-label="{{ i18n "previousArticle" }} — {{ $prev.Title }}" style="--underline: 0;"><span aria-hidden="true">←</span> <span style="--underline: 1;">{{$prev.Title}}</span></a></li>
+      {{- end -}}
+      {{- if $next -}}
+        <li style="--grid-position: end;"><a href="{{$next.Permalink}}" aria-label="{{ i18n "nextArticle" }} — {{ $next.Title }}" style="--underline: 0;"><span style="--underline: 1;">{{$next.Title}}</span> <span aria-hidden="true">→</a></li>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
