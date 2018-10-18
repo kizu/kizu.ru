@@ -283,7 +283,7 @@ pre {
 
   padding: 1rem 0;
 
-  --code-color: currentColor;
+  --code-color: var(--color);
 
   border-radius: 3px;
 }

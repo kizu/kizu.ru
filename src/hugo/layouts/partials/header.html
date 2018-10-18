@@ -3,7 +3,7 @@
   <header{{ if eq .a11y "true" }} style="--invisible: 1;"{{ else }} aria-hidden="true"{{ end }}>
     <nav>
       <ul>
-        <li style="--grid-position: start;"><a href="/{{ $Page.Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}">{{ i18n "titleName" }}</a></p></li>
+        <li style="--grid-position: start;"><a href="/{{ $Page.Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}">{{ i18n "titleName" }}</a></li>
         {{- if eq $Page.Params.type "post" -}}
           <li style="--grid-position: end;">
             {{ partial "readableDate.html" $Page }}
