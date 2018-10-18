@@ -1,0 +1,45 @@
+code,
+pre,
+kbd {
+  font-feature-settings: "lnum", "onum" 0;
+}
+
+pre {
+  display: flex;
+  white-space: pre-wrap;
+  font-family: Monaco, Consolas, monospace, monospace;
+  --code-padding: 0 0 0 var(--h-gap);
+  --code-font-style: normal;
+  --code-line-height: 1.5rem;
+  font-size: var(--THEME_FONT_SIZE--CODE);
+  line-height: 1;
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 1rem 0;
+
+  --code-color: var(--color);
+
+  border-radius: 3px;
+}
+
+/* TODO: move to external import, like an escape hatch */
+/* Or just remove all the unneeded stuff from Prism? */
+pre:not(.z):not(.z) {
+  padding: 1rem 0;
+  margin: 1rem 0;
+  background: #FFF; /* Overrides prism.js one */
+}
+
+code:not(.z):not(.z) {
+  font: inherit;
+  white-space: pre-wrap;
+  max-width: 100%;
+  padding: var(--code-padding, 0);
+  font-style: var(--code-font-style, italic);
+  line-height: var(--code-line-height, 1);
+  color: var(--code-color, #690);
+  hyphens: none;
+}
