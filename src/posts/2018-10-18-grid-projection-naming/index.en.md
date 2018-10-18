@@ -53,7 +53,7 @@ Until I looked at my layout and noticed that it is not a two-axis layout. 
 
 ``` CSS
 main {
-  grid-template:
+  grid-template-areas:
     " full  full     full   "
     " .     both     both   "
     " .     content  aside  "
@@ -113,7 +113,7 @@ Other than my site’s layout, there are, of course, a lot more use cases you
 
 ``` CSS
 main {
-  grid-template: "left middle right";
+  grid-template-areas: "left middle right";
 }
 ```
 
