@@ -1,0 +1,29 @@
+<style>
+.ProjectionTable_enhanced {
+  grid-template-areas:
+    " left        middle      right     "
+    " sans-right  sans-right  .         "
+    " .           sans-left   sans-left ";
+  grid-template-rows: auto;
+}
+</style>
+
+<div class="ProjectionTable ProjectionTable_enhanced">
+  <div class="Area" style="grid-area: left;">grid-area: left</div>
+  <div class="Area" style="grid-area: middle;">grid-area: middle</div>
+  <div class="Area" style="grid-area: right">grid-area: right</div>
+  <div class="Area" style="grid-area: sans-right">grid-area: sans-right</div>
+  <div class="Area" style="grid-area: sans-left">grid-area: sans-left</div>
+
+  <div class="Label Column" style="grid-row: -7; grid-column: left;">left</div>
+  <div class="Label Column" style="grid-row: -7; grid-column: middle;">middle</div>
+  <div class="Label Column" style="grid-row: -7; grid-column: right;">right</div>
+  <div class="Label Column" style="grid-row: -6; grid-column: sans-right;">sans-right</div>
+  <div class="Label Column" style="grid-row: -5; grid-column: sans-left;">sans-left</div>
+
+  <div class="Label Row" style="grid-column: -7; grid-row: left;">left</div>
+  <div class="Label Row" style="grid-column: -6; grid-row: middle;">middle</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: right;">right</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: sans-right;">sans-right</div>
+  <div class="Label Row" style="grid-column: -5; grid-row: sans-left;">sans-left</div>
+</div>

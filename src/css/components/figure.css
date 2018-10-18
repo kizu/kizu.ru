@@ -1,0 +1,47 @@
+figure {
+  /* Here I'd like to _use_ variable, but prevent it from being passed down */
+  grid-column: content;
+  --grid-column: initial;
+  --text-indent: 0;
+  --link-text-shadow-color: transparent;
+  --link-padding: 0;
+
+  padding: 0.5rem;
+  border: none;
+  margin: var(--nested-figure-margin, 1rem calc(-1.5rem * var(--at-small)));
+  background: #FFF;
+  border-radius: var(--initial-at-small, 3px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.Figure-Toggle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.Figure {
+  grid-column: both;
+  --grid-column: content;
+
+  display: grid;
+  grid: var(--figure-subgrid);
+  grid-gap: 0 var(--h-gap);
+  padding: 1rem 0;
+  margin: 2rem 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  background: rgba(37,34,14, 0.05);
+  box-shadow: none;
+  --img-margin: 0 0 0 var(--h-gap);
+  --nested-figure-margin: 0 0 0 var(--h-gap);
+  --img-max-width: calc(100% - var(--h-gap));
+}
+
+.Figure-Toggle:not(:checked) + * + .Figure-Screenshot,
+.Figure-Toggle:checked + .Figure-Demo {
+  display: none;
+}
