@@ -14,6 +14,10 @@
   --link-underline-color--hover: currentColor;
   --link-underline-pattern-width: 16px;
   --link-text-shadow-color: var(--THEME_BG);
+
+  /* Windows problems with %? */
+  /* --link-underline-position: calc(50% + var(--link-underline-offset)) */
+  --link-underline-position: bottom 24%;
 }
 
 a,
@@ -37,6 +41,7 @@ a::after,
 
 span {
   --underline: 0;
+  --link-underline-position: bottom 5%;
 }
 
 a,
@@ -78,7 +83,7 @@ span {
   background:
     var(--link-underline-image)
     repeat-x
-    0 calc(50% + var(--link-underline-offset))/var(--link-underline-pattern-width)
+    left 0 var(--link-underline-position)/var(--link-underline-pattern-width)
     calc(var(--underline-width) * var(--underline, 1));
   background-clip: content-box;
 }

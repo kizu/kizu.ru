@@ -16,6 +16,11 @@ ol {
   --list-item-content: var(--ol-item-content);
 }
 
+ul {
+  display: var(--ul-display);
+  grid-template-areas: var(--ul-grid);
+}
+
 li {
   padding: 0 0 0 var(--list-item-padding);
   list-style-type: none; /* Fixme: screenreaders would die out? */

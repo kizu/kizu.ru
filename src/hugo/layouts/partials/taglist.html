@@ -3,7 +3,7 @@
     {{- range .Params.tags -}}
       {{- $tag := index $.Site.Taxonomies . -}}
       {{- $tagLink := ($.Site.GetPage (print "/tags/" .)).Permalink -}}
-      <a rel="tag" href="{{ $tagLink }}" style="--underline: 0;"><span aria-label="{{ i18n "tag" }}">#</span><span style="--underline: 1;">{{ . | replaceRE "_" " " }}</span></a> {{/**/ -}}
+      <a rel="tag" href="{{ $tagLink }}" style="--underline: 0;"><span aria-label="{{ i18n "tag" }}">#</span><span style="--underline: 1;">{{ . | replaceRE "_" " " }}</span></a> {{/**/ -}}
     {{- end -}}
   </span>
 {{- end -}}

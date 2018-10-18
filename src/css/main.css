@@ -2,30 +2,22 @@
    All the CSS for kizu.ru
 \* ======================= */
 
-/*
-  1. All the `@font-face` for the fonts alongside `@import` of the counter.
-     TODO: keep only the font for headers & use default ones for everything else?
-  2. All the basic variables on `:root` alongside the only media query.
-  3. “Theme” variables: colors etc.
-     FIXME: contains non-variables while it shouldn't.
-  4. Styles for the highlighted CSS got from prism.js.
-*/
-
-@import url("_fonts.css");  /* [1] */
-@import url("_prism.css");  /* [4] */
+@import url("_fonts.css");
+@import url("_prism.css");
 
 @import url("_fallback.css");
 
 /* Top level batch supports lock */
 @supports (--var:iables) {
 
-@import url("_config.css"); /* [2] */
-@import url("_theme.css");  /* [3] */
+@import url("_config.css");
+@import url("_theme.css");
 @import url("components/color-components.css");
 
 @import url("components/articlelist.css");
 @import url("components/anchor.css");
 @import url("components/asides.css");
+@import url("components/code.css");
 @import url("components/figure.css");
 @import url("components/layout.css");
 @import url("components/lists.css");
@@ -37,13 +29,8 @@
 @import url("components/links.css");
 @import url("components/warning.css");
 
-/*
-  1. Prevents the different widths when there is not enough content to create a scroll.
-     FIXME: replace with calc padding.
-*/
-
 html {
-  overflow-y: scroll; /* [1] */
+  overflow-y: scroll;
   font-size: var(--THEME_ROOT_FONT_SIZE);
   background: var(--THEME_BG);
 
@@ -51,6 +38,20 @@ html {
   /* There were problems, but with a variable it could be ok? */
   text-shadow: var(--THEME_TEXT_SHADOW);
   color: var(--color);
+}
+
+/* Typography basics, kinda reset stuff? */
+html {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  cursor: default;
 }
 
 /* TODO: replace home pages' one with a special case */
@@ -86,6 +87,7 @@ body::before {
   display: none;
 }
 
+
 header {
   /* For subgrid substitute */
   order: -1;
@@ -109,19 +111,13 @@ footer {
   --text-indent: 0;
 }
 
-
-ul {
-  display: var(--ul-display);
-  grid: var(--ul-grid);
-}
-
 nav {
   grid-column: content;
   --ul-display: grid;
   --ul-item-content: none;
   --list-item-padding: 0;
-  --link-color: currentColor;
-  --link-color--visited: currentColor;
+  --link-color: var(--color);
+  --link-color--visited: var(--color);
   --link-underline-offset: 0.4em;
   font-size: var(--THEME_FONT_SIZE--SMALL);
   --ul-grid: "start end";
@@ -133,20 +129,6 @@ nav {
 time {
   color: var(--color);
   --color-a: var(--time-color-a, 0.75);
-}
-
-/* Typography basics, kinda reset stuff? */
-html {
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-
-  text-rendering: optimizelegibility;
-  -webkit-font-smoothing: subpixel-antialiased;
-
-  cursor: default;
 }
 
 img {
@@ -259,52 +241,6 @@ blockquote {
 table {
   margin: 1rem 0;
   text-align: center;
-}
-
-code,
-pre,
-kbd {
-  font-feature-settings: "lnum", "onum" 0;
-}
-
-pre {
-  display: flex;
-  white-space: pre-wrap;
-  font-family: Monaco, Consolas, monospace, monospace;
-  --code-padding: 0 0 0 var(--h-gap);
-  --code-font-style: normal;
-  --code-line-height: 1.5rem;
-  font-size: var(--THEME_FONT_SIZE--CODE);
-  line-height: 1;
-
-  position: relative;
-
-  overflow: hidden;
-
-  padding: 1rem 0;
-
-  --code-color: var(--color);
-
-  border-radius: 3px;
-}
-
-/* TODO: move to external import, like an escape hatch */
-/* Or just remove all the unneeded stuff from Prism? */
-pre:not(.z):not(.z) {
-  padding: 1rem 0;
-  margin: 1rem 0;
-  background: #FFF; /* Overrides prism.js one */
-}
-
-code:not(.z):not(.z) {
-  font: inherit;
-  white-space: pre-wrap;
-  max-width: 100%;
-  padding: var(--code-padding, 0);
-  font-style: var(--code-font-style, italic);
-  line-height: var(--code-line-height, 1);
-  color: var(--code-color, #690);
-  hyphens: none;
 }
 
 ::selection {
