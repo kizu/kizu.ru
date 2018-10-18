@@ -13,16 +13,17 @@
 
   --grid-ascii:
     " full  full     full   "
-    " .     figure   figure "
+    " .     both     both   "
     " .     content  aside  ";
 
   --grid-ascii--small:
     " full  full     full "
-    " .     figure  .    "
+    " .     both     .    "
     " .     content  .    "
     " .     aside    .    ";
 
-  --grid: var(--grid-ascii)
+  --grid:
+    var(--grid-ascii)
     / var(--grid-side)
             var(--grid-content)
                      var(--grid-side);

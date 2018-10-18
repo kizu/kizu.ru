@@ -68,7 +68,7 @@ const stylesFile = require('./stylesFileTask.js');
 // External tasks
 const hugoBuild = () => spawn(
   'hugo',
-  ['-s', 'build/hugo', '-d', '../../out/'],
+  ['--buildFuture', '-s', 'build/hugo', '-d', '../../out/'],
   { stdio: 'inherit' }
 );
 
@@ -76,7 +76,7 @@ let hugoProcess;
 const hugoServer = () => {
   hugoProcess = spawn(
     'hugo',
-    ['server', '--buildDrafts', '--ignoreCache', '--disableFastRender', '-s', 'build/hugo'],
+    ['server', '--buildDrafts', '--buildFuture', '--ignoreCache', '--disableFastRender', '-s', 'build/hugo'],
     { stdio: 'inherit' }
   );
   return hugoProcess;

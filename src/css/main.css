@@ -154,7 +154,7 @@ figure {
 }
 
 .Figure {
-  grid-column: figure;
+  grid-column: both;
   --grid-column: content;
 
   display: grid;
