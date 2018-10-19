@@ -15,9 +15,13 @@
   {{- $date = (replace $date "December"  "декабря") -}}
 {{- end -}}
 
+{{/* Can be confusing for those who do not know about this feature.
+
 {{- if eq (.Date.Format "2006") (now.Format "2006") -}}
   {{- $regex := print "(,\\s*)?" (.Date.Format "2006") "(\\s*г\\.)?" -}}
   {{- $date = (replaceRE $regex "" $date) -}}
 {{- end -}}
+
+*/}}
 
 <time datetime="{{.Date.Format "2006-01-02"}}">{{ if .Params.published }}{{ .Params.published }}{{ else }}{{ $date }}{{ end }}</time>{{- /**/ -}}
