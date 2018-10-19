@@ -88,7 +88,7 @@ So. What is inside?
 
 - One single media query with the only things changed being five variables on the `:root()`. A lot of the layout changes are handled by CSS Grid layout, and I need only one MQ stop for smaller screens, with everything else handled by CSS Variables. Actually, look at the next item.
 
-- [Conditions for CSS variables](http://localhost:1313/conditions-for-css-variables/). Slightly similar to those I described in my article but evolved in some ways to become more simple to use. This is one of the things I would totally write in the future, so stay tuned!
+- [Conditions for CSS variables]({{% LinkTo conditions-for-css-variables %}}). Slightly similar to those I described in my article but evolved in some ways to become more simple to use. This is one of the things I would totally write in the future, so stay tuned!
 
 - Some aspects of atomic CSS principles. But by using CSS variables. This works kinda nice, especially alongside BEM stuff that I still use in some places.
 
