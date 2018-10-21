@@ -150,6 +150,24 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
     // Sidenote
     content = content.replace(/\n\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<Sidenote id="$1" $3>}}$2{{</Sidenote>}}');
 
+    const searchIndex = content
+      .replace(/\{\{((?!\}\}).)+\}\}/g, '')
+      .replace(/\n\n```((?!```)[\s\S])+\n```/g, '')
+      .split(/\n#+ /)
+      .map((cntnt, index) => {
+        const titleMatch = index && cntnt.match(/.+/);
+        const title = titleMatch ? titleMatch[0] : null;
+        return {
+          title: title,
+          order: index,
+          content: (index ? cntnt.replace(title, '') : cntnt).trim(),
+        }
+      });
+
+    if (searchIndex) {
+      metadata.searchIndex = searchIndex;
+    }
+
     // Output metadata as json at the start of content
     content = JSON.stringify(metadata) + '\n' + content;
     // console.log(metadata)

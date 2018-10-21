@@ -1,0 +1,24 @@
+{{/* Generates a valid Algolia search index */}}
+{{- $.Scratch.Add "index" slice -}}
+{{- $section := $.Site.GetPage "section" .Section }}
+{{- range .Pages -}}
+  {{- if and (eq .Site.Params.languageCode .Params.lang) (not .Draft) (not .Params.private) -}}
+    {{- $item := . -}}
+    {{- $title := $item.Title | markdownify | plainify | replaceRE "&amp;" "&" -}}
+    {{- if $item.Params.searchIndex -}}
+      {{- range $item.Params.searchIndex -}}
+        {{- $subtitle := .title -}}
+        {{- $order := .order -}}
+        {{- $hash := "" -}}
+        {{- if $subtitle -}}
+          {{- $hash = print "#" ($subtitle | replaceRE "\\W+" "-" | replaceRE "-$" "" | replaceRE "^-" "" | lower) -}}
+        {{- end -}}
+        {{- $content := .content | markdownify | plainify -}}
+        {{- $.Scratch.Add "index" (dict "objectID" (print $item.UniqueID $hash) "date" $item.Date.UTC.Unix "summary" $item.Params.summary "lang" $item.Lang "permalink" (print $item.Permalink $hash) "publishdate" $item.PublishDate "title" $title "type" $item.Type "tags" $item.Params.Tags "subtitle" $subtitle "content" $content "order" $order)}}
+      {{- end -}}
+    {{- else -}}
+      {{- $.Scratch.Add "index" (dict "objectID" $item.UniqueID "date" $item.Date.UTC.Unix "summary" $item.Params.summary "lang" $item.Lang "permalink" $item.Permalink "publishdate" $item.PublishDate "title" $title "type" $item.Type "tags" $item.Params.Tags)}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}
