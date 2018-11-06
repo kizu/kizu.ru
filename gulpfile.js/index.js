@@ -3,6 +3,8 @@ const gulp = require('gulp');
 const tap = require('gulp-tap');
 const rename = require('gulp-rename');
 
+const webpack = require('webpack-stream');
+
 const log = require('fancy-log');
 const spawn = require('child_process').spawn;
 const del = require('del');
@@ -65,6 +67,17 @@ const stylesSrc = () => {
 
 const stylesFile = require('./stylesFileTask.js');
 
+const scripts = () => {
+  return gulp.src('./src/js/index.js')
+    .pipe(webpack({
+      mode: 'production',
+      output: {
+        filename: 'scripts.js'
+      }
+    }))
+    .pipe(gulp.dest('./build/hugo/static/j/'));
+}
+
 // External tasks
 const hugoBuild = () => spawn(
   'hugo',
@@ -89,6 +102,7 @@ const watchEverything = () => {
   gulp.watch('./src/posts/**/*', documents);
   gulp.watch('./src/posts/**/examples/*.html', examples);
   gulp.watch('./src/pages/**/*', pages);
+  gulp.watch('./src/js/**/*.js', scripts);
   gulp.watch('./src/css/**/*.css', gulp.parallel(stylesFile, stylesSrc));
 }
 
@@ -114,7 +128,7 @@ const watchReloaded = () => {
 
 // Defining tasks
 gulp.task('styles', gulp.parallel(stylesFile, stylesSrc));
-gulp.task('buildForHugo', gulp.parallel(hugoSrc, pages, documents, examples, 'styles'));
+gulp.task('buildForHugo', gulp.parallel(hugoSrc, pages, documents, examples, scripts, 'styles'));
 gulp.task('prepareHugo', gulp.series(clean, 'buildForHugo'));
 gulp.task('build', gulp.series('prepareHugo', hugoBuild));
 

@@ -1,0 +1,109 @@
+.Button {
+  -moz-appearance: none;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: baseline;
+  overflow: visible;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  --_visibility: hidden;
+  --_box-shadow: none;
+  --_Text-transform: none;
+  --_Text-transition: none;
+}
+
+.Button_disabled {
+  pointer-events: none;
+}
+
+.Button::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+.Button-Content {
+  position: relative;
+  display: block;
+  display: inline-flex;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: inherit;
+  padding: var(--Button-padding);
+}
+
+
+.Button:focus {
+  --_visibility: inherit;
+  --_box-shadow: 0 0 2px 2px #6F9DEC, inset 0 0 2px 1px #6F9DEC;
+}
+
+.Button:not(:-moz-focusring):focus {
+  --_visibility: hidden;
+}
+
+.Button-Focus {
+  visibility: var(--_visibility);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 3px;
+
+  box-shadow: var(--_box-shadow);
+}
+
+.Button-BLHelper {
+  float: left;
+  width: 0;
+  min-width: 0;
+}
+
+.Button-BLHelper::before {
+  content: "\\a0";
+}
+
+.Button-Text {
+  display: block;
+  flex-shrink: 1;
+  flex-basis: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  transition: var(--_Text-transition);
+  transform: var(--_Text-transform);
+}
+
+.Button-Before {
+  align-self: center;
+  flex-shrink: 0;
+  float: left;
+}
+
+.Button-After {
+  order: 1;
+  align-self: center;
+  flex-shrink: 0;
+  float: right;
+}
+
+.Button:focus,
+.Button-Content:focus {
+  outline: none;
+}

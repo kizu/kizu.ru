@@ -1,0 +1,8 @@
+{{- if not (findRE "/search/$" .context.Permalink) -}}
+<a href="/{{ .Site.Params.languagePrefix }}search/" class="SearchButton Button"{{ if .tabindex }} tabindex="{{ .tabindex }}"{{ end }} onclick="mySearch.focusSearch('{{ .position }}', this, event)" aria-label="Toggle the search form">
+  <span class="Button-Content" tabindex="-1">
+    <span class="Button-Text" aria-hidden="true">🔎</span>
+  </span>
+  <span class="Button-Focus"></span>
+</a>
+{{- end -}}

@@ -30,6 +30,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-tap": "^1.0.1",
     "shelljs": "^0.8.1",
+    "webpack-stream": "^5.1.1",
     "yaml-front-matter": "^3.4.0"
   }
 }
