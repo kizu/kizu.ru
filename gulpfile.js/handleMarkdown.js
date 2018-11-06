@@ -142,13 +142,39 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
       content = content.replace(warningMatch[0], '');
     }
 
+    let rawerContent = content;
+
     // Convert md footnotes to sidenote shortcodes
     // Sidelink
     content = content.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, '{{<Sidelink "$2" "$1" />}}');
+    rawerContent = rawerContent.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, '$1');
+
     // Sidenotes Item
     content = content.replace(/\n[ ]+\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<SidenotesItem id="$1" $3>}}$2{{</SidenotesItem>}}');
+    rawerContent = rawerContent.replace(/\n[ ]+\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n$2');
     // Sidenote
     content = content.replace(/\n\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n{{<Sidenote id="$1" $3>}}$2{{</Sidenote>}}');
+    rawerContent = rawerContent.replace(/\n\[\^([^\]]+)\]:((?:(?!<!--).)+)[ ]*(?:<!--\s*(.*\S)\s*-->)?/g, '\n$2');
+
+    const searchIndex = rawerContent
+      .replace(/\{\{((?!\}\}).)+\}\}/g, '')
+      .replace(/\{[\#\:][^\}]+\}/g, '')
+      .replace(/\n\n```((?!```)[\s\S])+\n```/g, '')
+      .replace(/\[([^\]]+)\]\(\)/g, '$1')
+      .split(/\n#+ /)
+      .map((cntnt, index) => {
+        const titleMatch = index && cntnt.match(/.+/);
+        const title = titleMatch ? titleMatch[0] : null;
+        return {
+          title: title,
+          order: index,
+          content: (index ? cntnt.replace(title, '') : cntnt).trim(),
+        }
+      });
+
+    if (searchIndex) {
+      metadata.searchIndex = searchIndex;
+    }
 
     // Output metadata as json at the start of content
     content = JSON.stringify(metadata) + '\n' + content;

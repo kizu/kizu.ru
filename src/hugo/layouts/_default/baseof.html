@@ -19,8 +19,8 @@
 
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="{{ i18n "feedLink" }}" />
     {{- if eq .Page.Kind "home" }}
-    <link rel="alternate" hreflang="en" href="//kizu.ru/" />
-    <link rel="alternate" hreflang="ru" href="//kizu.ru/ru/" />
+    <link rel="alternate" hreflang="en" href="//www.kizu.ru/" />
+    <link rel="alternate" hreflang="ru" href="//www.kizu.ru/ru/" />
     {{- else -}}
       {{- $origLang := .Lang -}}
       {{- $permalink := .Permalink -}}
@@ -62,6 +62,8 @@
             {{- else -}}
               <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
             {{- end -}}
+            {{- print " " -}}
+            {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
           </li>
 
           {{- if eq .Page.Kind "home" -}}
@@ -80,8 +82,12 @@
           {{- end -}}
         </ul>
       </nav>
+      {{- if not (findRE "/search/$" .Page.Permalink) -}}
+        {{- partial "search.html" . -}}
+      {{- end -}}
     </footer>
-    <script src="/j/prism.js"></script>
+    <script src="/j/scripts.js"></script>
+
     {{ partial "metrika.html" }}
   </body>
 </html>

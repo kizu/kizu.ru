@@ -1,5 +1,6 @@
 ---
 aliases: [/en/resume/]
+private: true
 ---
 
 # Résumé

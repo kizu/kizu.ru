@@ -17,11 +17,13 @@
 @import url("components/articlelist.css");
 @import url("components/anchor.css");
 @import url("components/asides.css");
+@import url("components/button.css");
 @import url("components/code.css");
 @import url("components/figure.css");
 @import url("components/layout.css");
 @import url("components/lists.css");
 @import url("components/metadata.css");
+@import url("components/search.css");
 @import url("components/sidenotes.css");
 @import url("components/summary.css");
 @import url("components/taglist.css");
@@ -87,10 +89,13 @@ body::before {
   display: none;
 }
 
+article {
+  --search-margin: 0;
+}
 
 header {
   /* For subgrid substitute */
-  order: -1;
+  order: calc(-2 + var(--invisible, 0));
 
   /* FIXME: use utility */
   text-align: center;
@@ -98,10 +103,6 @@ header {
   /* Utility usage */
   --h1-font-size: 3.5rem;
   --h1-font-weight: normal;
-
-  overflow: hidden;
-  max-height: calc(0px * var(--invisible));
-  opacity: calc(0 * var(--invisible));
 }
 
 footer {
@@ -120,10 +121,18 @@ nav {
   --link-color--visited: var(--color);
   --link-underline-offset: 0.4em;
   font-size: var(--THEME_FONT_SIZE--SMALL);
-  --ul-grid: "start end";
+  --ul-grid:
+    "full full"
+    "start end";
   --li-justify-self: start;
   --li-justify-self-even: end;
   --grid-column: auto;
+
+  overflow: hidden;
+  max-height: calc(0px * var(--invisible));
+  padding: calc(var(--nav-padding, 1rem) * (1 - var(--invisible, 0)));
+  margin: calc(var(--nav-margin, -1rem) * (1 - var(--invisible, 0)));
+  opacity: calc(0 * var(--invisible));
 }
 
 time {
@@ -241,6 +250,14 @@ blockquote {
 table {
   margin: 1rem 0;
   text-align: center;
+}
+
+mark {
+  padding: 0.2em 0 0.1em;
+
+  color: inherit;
+  text-shadow: none;
+  background: rgba(255, 255, 0, 0.5);
 }
 
 ::selection {

@@ -1,6 +1,6 @@
 markup = "mmark"
 
-baseURL = "http://kizu.ru/"
+baseURL = "https://www.kizu.ru/"
 sourceRelativeLinksEval = true
 
 preserveTaxonomyNames = true
@@ -14,6 +14,20 @@ name = "Roman Komarov"
 
 [permalinks]
 posts = "/:slug/"
+
+[outputs]
+home = ["HTML", "RSS", "Algolia"]
+
+[outputFormats.Algolia]
+baseName = "algolia"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
+
+[params.algolia]
+vars = ["title", "subtitle", "summary", "content", "date", "publishdate", "permalink"]
+params = ["tags"]
+
 
 [Languages]
 [Languages.en]
