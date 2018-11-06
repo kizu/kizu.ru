@@ -4,22 +4,20 @@
 
 _For a new site update I have implemented a site-wide search, and in this article, I would write about the solution I have used for this, as well as would talk about what had to be done and what issues are left._
 
-Some time ago I have started to notice that a lot of sites[^sites] with open source documentation have a very nice full-text search implemented. As most of those sites were static-generated, I was interested to see how it was done, so I decided to dig deeper into it, in case I'll need something like that for one of my projects.
+Some time ago I have started to notice that a lot of sites with open source documentation had a very nice full-text search implemented. As most of those sites were static-generated, I was interested to see how it was done, so in case I'll need something like that for one of my projects, I decided to dig deeper into it.
 
-[^sites]: For example, [Hugo](https://gohugo.io), [Netlify](https://www.netlify.com), [React](https://reactjs.org) and others.
+The project that allowed those static sites to have search was [Algolia DocSearch](https://community.algolia.com/docsearch/). However, in this post, I won't talk about it. Looking at the project's site, I found out that it is very easy to implement it for your open source project for free, but I wanted to have more challenge, so I looked into what Algolia provides for regular sites.
 
-The project that allowed those static sites to have search was [Algolia DocSearch](https://community.algolia.com/docsearch/). However, in this post, I won't talk about it. Looking at the project's site, I found out that it is very easy to use it for your open source project for free, but I wanted to have more challenge, so I looked into what Algolia provides for regular sites.
-
-Basically, they provide a free tier with rather loose limitations[^free-plan-rates-link], so it is totally possible to implement it for your project. That's what I've done for my site, and in this post, I'll describe how I did it and what challenges were there.
+Basically, they provide a free tier with rather loose limitations[^free-plan-rates-link], so it is totally possible to implement it for your project. That's what I've done for my site, and in this post, I'll describe how I did this and what challenges there were.
 
 [^free-plan-rates-link]: See the [“free plan rates”](#free-plan-rates) section of this post.
 
 ## The Search Itself
 
-In order for you not to go elsewhere, you can try and use the search right away[^issues] — just press this emoji button: {{% SearchButton %}}
+In order for you not to go elsewhere, you can try and use the search right away[^issues]: just press this emoji button: {{% SearchButton %}}
 
 {{<Sidenotes span="5" offset="1">}}
-  [^issues]: There are a bunch of issues with my implementation, as I didn't refine everything and implemented everything rather fast, as a kinda proof of concept. I'll cover [most of the issues](#known-issues) later in the article.
+  [^issues]: There are a bunch of issues with my implementation, as I didn't refine everything and implemented everything rather fast, as a kinda proof of concept. I'll cover all the issues later in the article.
 
   [^query]: So, when using this page, it is possible to have a link to the results, for example, a search page for [“search”](http://localhost:1313/search/?query=search).
 {{</Sidenotes>}}
@@ -30,7 +28,7 @@ Note how almost every page of this site has this button both in the header and f
 
 ## Implementing the Search
 
-The project that I've used to achieve this is called [InstantSearch.js](https://community.algolia.com/instantsearch.js/). The main difference from the DocSearch that I see there (apart from the usage conditions etc.) is that you don't get the DocSearch's UI. This is because docs often have their own data structure, and the indexing for DocSearch is made on the Algolia side via a crawler, so they can prepare everything for the UI right away. But InstantSearch is a general solution, it doesn't know anything about the site you'll use it for, and so you need to set up everything almost from scratch.
+The project that I've used to achieve this is called [InstantSearch.js](https://community.algolia.com/instantsearch.js/). The main difference from the DocSearch that I see there (apart from the conditions etc.) is that you don't get the DocSearch's UI. This is because docs often have their own data structure, and the indexing for DocSearch is made on the Algolia side via a crawler, so they can prepare everything for the UI right away. But InstantSearch is a general solution, it doesn't know anything about the site you'll use it for, and so you need to set up everything almost from scratch.
 
 Everything you need to do can be described as the following parts:
 
@@ -45,7 +43,7 @@ The infrastructure part took me one just evening (with some basic indexing as we
 
 I didn't expect this, but setting everything up was the easiest part. For signing up you can use GitHub or Google accounts, everything went rather smoothly for me, so I'm not even sure what to write there?
 
-The part that was _slightly_ harder was setting up the build step for sending my index (that I would create in the next step) to Algolia. I have used the [atomic-algolia](https://www.npmjs.com/package/atomic-algolia) package — it is really nice as it allows you to send only parts of your index that were changed, so you won't exhaust much the quota in your plan.
+The part that was ~slightly~ harder was setting up the build step for sending my index (that I would create in the next step). I have used the [atomic-algolia](https://www.npmjs.com/package/atomic-algolia) package, its really nice as it allows you to send only parts of your index that were changed, so you won't exhaust much the quota in your plan.
 
 All you need for this package to work (other than the `algolia.json` which would be generated later) are some environment variables. The best way to handle those locally is via `.env` file, for me, it is something like this[^privacy]:
 
@@ -79,9 +77,9 @@ However, you wouldn't want to run this command _every time you do changes_, so I
   command = "HUGO_BASEURL=$URL gulp build && npm run algolia"
 ```
 
-This command would run only when I would make changes that would go into a production version of my site. And unless I'll want to test some stuff, I won't ever need to run this command manually, this way my search index would always be synchronized with the production, even if the changes would be made via a pull request at GitHub, for example.
+So this command would run only when I would make changes that would go into a production site. And unless I'll want to test some stuff, I won't ever need to run this command manually, this way my search index would always be synchronized with the production copy of the site, even if the changes would be made via a pull request at GitHub, for example.
 
-As I'm building everything at Netlify, I also need to have my [environment variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) there, I'm doing it via dashboard, and it is probably the best way, as you probably do not want to have your secret keys in your `netlify.toml`, though you could use it for the more public variables, like in case you'd want to push to different indices for different versions of your site.
+As I'm building everything at Netlify, I also need to have my [environment variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) there, I'm doing it via dashboard, and it is probably the best way, as you probably do not want to have your secret keys in your `netlify.toml`, though you could use it for the more public variables, like in case you'd want to push to different indices.
 
 ### Indexing
 
@@ -103,7 +101,9 @@ After splitting everything, it is possible then to merge[^distinct] everything b
 
 #### Generating Fields
 
-There can be a lot of ways to generate the needed JSON, if you're using just Hugo, for example, it can be harder, as you'll need to set this up just using its template engine (which is far from perfect and usable), but as I'm [preparing everything in gulp]({{% LinkTo v-14-0 %}}#engine), I can make it much easier, preparing some extra metadata just for the search index for each post, and then in Hugo I would need to do much fewer things.
+There can be a lot of ways to generate the needed JSON, if you're using just Hugo, for example, it can be harder, as you'll need to set this up just using its template engine[^mustache] (which is far from perfect and usable), but as I'm preparing everything in gulp, I can make it much easier, preparing some extra metadata just for the search index for each post, and then in Hugo I would need to do much fewer things.
+
+[^mustache]: InstantSearch uses [mustache](http://mustache.github.io/mustache.5.html) in its native JS variant, but there are also implementations of InstantSearch for React, Vue.js etc. as well. <!-- span="2" offset="2" -->
 
 I would omit the code for generating everything, but I'll describe the fields I have decided to include in my `algolia.json`.
 
@@ -135,23 +135,21 @@ This is probably far from the perfect structure, and I'm not yet sure all the fi
 
 There are a lot of things you can set up in the Algolia dashboard for your index.
 
-There is [“Faceting”](https://www.algolia.com/doc/guides/searching/faceting/) — you can use it to narrow down results. Right now I'm using it only to differentiate between languages, but maybe in the future, I'll implement a more advanced search form, so could add more facets like `type` and `tags`.
+There is “Faceting” — you can use it to narrow down results. Right now I'm using it only to differentiate between languages, but maybe in the future, I'll implement a more advanced search form, so could add more facets like `type` and `tags`.
 
-Then, there is [“Ranking”](https://www.algolia.com/doc/guides/ranking/ranking-formula/) — Algolia has a lot of built-in ranking stuff going on under the hood, but it also provides you with some ways you can have an influence on it. The basics are just the order of all the searchable attributes and some ranking criteria for sorting the hits when everything else would be ranked the same.
+Then, there is “Ranking” — Algolia has a lot of built-in ranking stuff going on under the hood, but it also provides you with some ways you can have an influence on it. The basics are just the order of all the searchable attributes and some ranking criteria for sorting the hits when everything else would be ranked the same.
 
 #### Free Plan Rates
 
-Free tier includes a bunch of available records & indexing operations, reset monthly, as well as an obligatory display of their logo) — totally enough for a personal site, for example. Here is a screenshot of my usage stats at the moment of writing this article:
+Free tier includes a bunch of available records & indexing operations, reset monthly, as well as an obligatory display of their logo) — totally enough for a personal site, for example. Note that all those operations are including all the testing I've done and changes to the data, so in actual usage, there would be much fewer operations per month.
 
 ![Free plan stats (Records: 339/10000, indexing operations: 1765/100000)](setup-stats.png)
 
-Note that all those operations are including all the testing I've done and changes to the data, so in actual usage, there would be much fewer operations per month.
-
-[Paid plans](https://www.algolia.com/pricing) provide much better rates, and the essential plan is free for open source projects, but the free community tier is totally enough for me and would be enough for most of the smaller sites.
+[Paid plans](https://www.algolia.com/pricing) provide much better rates, and the essential plan is free for open source projects, but the free tier is totally enough for me and would be enough for most of the smaller sites.
 
 ### Design
 
-I'm not a designer, so most of the things I'm doing design-wise are iterative and based on what I already have. However, I found that for implementing search the design is the most complex thing, mostly because a lot of other decisions come from deciding what and how you want to display as your search results. The only thing that design does not really impact — infrastructure, but how you set up the indexing, and how you would then implement it all come from the design decisions.
+I'm not a designer. So, most of the things I'm doing design-wise are iterative and based on what I already have. However, I found that, for implementing search, the design is the most complex thing, mostly because a lot of other decisions come from deciding what and how you want to display as your search results. The only thing that design does not really impact — infrastructure, but how you set up the indexing, and how you would then implement it all come from the design decisions.
 
 When coming up with the design for the search at my site, I had to answer the following questions:
 
@@ -160,24 +158,21 @@ When coming up with the design for the search at my site, I had to answer the fo
 - How the search results should look? What to include there? In which cases? (The hardest part, probably)
 - What interactions should I have? Keyboard nav? What else?
 
-I'm sure I forgot a lot of things there, and I'm sure there are a lot of things to improve. What I have now is basically a “good enough” proof of concept.
+I'm sure I forgot a lot of things there, and I'm sure there are a lot of things to improve there. What I have now is basically a “good enough” proof of concept.
 
 ### Front-end Implementation
 
-I won't describe each and every nuance[^changes] that there was in my implementation, but there are some notes about what I have done, maybe someday later I'll write more about something from there:
+I won't describe each and every nuance that there was in implementation[^changes], but in short:
 
-[^changes]: You can go through [all the changes related to search](https://github.com/kizu/kizu.ru/pull/212/files) at my GitHub if you want, but the code can be a bit messy.
+[^changes]: You can go through [all the changes related to search](https://github.com/kizu/kizu.ru/pull/212/files) at my GitHub if you want, but the code can be a bit messy. <!-- span="2" offset="1" -->
 
 - I did not use the provided CSS styles for the InstantSearch, because all the CSS for my site is [extremely experimental]({{% LinkTo v-14-0 %}}#new-extremely-experimental-css), and I wanted for it to be in the same vein.
-- As the mustache[^mustache] templates used for everything are not very powerful, I had to prepare the data I recieve from the Algolia, that was easy enough via a `transformData` hook at the [hits widget](https://community.algolia.com/instantsearch.js/v2/widgets/hits.html).
-- I do not load the search by default (except for the [dedicated search page](/search/)), at least, not all of it. So visitors of my site wouldn't need to load the InstantSearch.js from the CDN unless they would request the search.
+- I do not load the search by default (except for the [dedicated search page](/search/)), at least, not all of it.
 - While it is possible to have multiple search forms and results on a page, I have decided to have only one open at each moment.
 - The search button toggle is actually a link to the dedicated search page, so the search can be opened at a new browser tab if needed.
-- A search form is actually a form, and while I override the submit and do everything on each `onInput`, the form's action also leads to this dedicated search page, so if you'll manage to submit it natively, things would still kinda work.
+- A search form is actually a form, and while I override the submit and do everything on each `onInput`, the form's action is also this dedicated search page, so if you'll manage to submit it natively, things would still kinda work.
 - There is some limited keyboard navigation inside: both tab-based and with up/down arrows.
 - I've implemented some kind of an HTML&CSS-only display of the highlighted parts in the content results, but it looks a bit bad on the left side, where there is no ellipsis on text overflow. This is probably the hardest part of both the design and implementation — how to show the found context, how to strip what is not needed etc. I would totally continue working on this in the future.
-
-[^mustache]: InstantSearch uses [mustache](http://mustache.github.io/mustache.5.html) in its native JS variant, but there are also implementations of InstantSearch for React, Vue.js etc. as well. <!-- offset="3" -->
 
 There is a lot of stuff going on behind the scenes, but most of it was kind easy to implement. InstantSearch API is rather nice.
 
@@ -197,4 +192,4 @@ Making the search to behave properly in a no means an easy task. I've implemente
 
 There are things that could be improved in the InstantSearch, like built-in tools for working with keyboard navigation, more semantic initial templates, some other minor quality of life improvements. But overall I was impressed with what they provide, especially at the infrastructure side. And it works really, really fast.
 
-So, now my site now has a built-in search. I do not have a lot of content, but maybe I could now find my own articles when I need them a bit easier. And if you'd want to have a search form for your site, you could try this solution as well.
+So, now my site now has a built-in search. I do not have a lot of content, but maybe I could now find my own articles when I need them a bit easier.

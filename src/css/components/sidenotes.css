@@ -104,9 +104,9 @@ p[role=note] {
 
   position: absolute;
   top: calc(var(--at-large) * var(--asides-padding-top));
-  left: -1.25rem;
+  left: -2.25rem;
 
-  width: 1rem;
+  width: 2rem;
 
   text-align: right;
   color: rgba(0,0,0, 0.6);
