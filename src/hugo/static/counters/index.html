@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Shower Presentation Engine</title>
+    <title>Not your usual CSS counters</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
@@ -52,6 +52,9 @@
         }
         .slide pre code {
           line-height: 1.4;
+        }
+        .slide.no-counter::after {
+          visibility: hidden;
         }
         .slide::after {
           text-align: right;
@@ -118,7 +121,7 @@
         <p>Roman Komarov</p>
     </header>
 
-    <section class="slide columns" id="cover" style="--code-size: 85px;">
+    <section class="slide columns no-counter" id="cover" style="--code-size: 85px;">
       <script type="text/plain" class="language-css">
 /*
  * Not your usual CSS counters
@@ -149,98 +152,10 @@
 
     </section>
 
-    <section class="slide columns" style="--code-size: 80px;">
+    <section class="slide columns no-counter" style="--code-size: 80px;">
       <script type="text/plain" class="language-css">
 /*
- * 1. Unusual Inheritance
- *    (siblings & children)
- */
-      </script>
-    </section>
-
-    <section class="slide columns three" style="--code-size: 30px;">
-      <script type="text/plain" class="language-css">
-.foo {
-  counter-increment: foo 1;
-}
-
-.foo::before {
-  content: "before: " counter(foo);
-}
-
-.foo::after {
-  content: "after: " counter(foo);
-}
-      </script>
-      <script type="text/plain" class="language-html">
-<div class="foo">
-  <div class="foo"></div>
-
-  <div class="foo">
-    <div class="foo">
-      <div class="foo"></div>
-    </div>
-  </div>
-</div>
-
-<div class="foo">
-  <div class="foo"></div>
-</div>
-      </script>
-      <div class="example">
-<div class="foo">
-  <div class="foo"></div>
-
-  <div class="foo">
-    <div class="foo">
-      <div class="foo"></div>
-    </div>
-  </div>
-</div>
-
-<div class="foo">
-  <div class="foo"></div>
-</div>
-
-<style>
-
-.foo {
-  font: 34px Helvetica Neue;
-  border: 1px solid;
-  padding: 0.35em 1em;
-  margin: 0.5em 0;
-  display: block;
-  vertical-align: middle;
-  counter-increment: foo 1;
-}
-
-.foo:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-.foo::before,
-.foo::after {
-  display: block;
-}
-
-.foo::before {
-  content: "before: " counter(foo);
-}
-.foo::after {
-  content: "after: " counter(foo);
-}
-
-</style>
-      </div>
-    </section>
-
-
-
-
-    <section class="slide columns" style="--code-size: 80px;">
-      <script type="text/plain" class="language-css">
-/*
- * 2. Rendering the Counters
+ * 1. Rendering the Counters
  *    (not just the numbers)
  */
       </script>
@@ -328,8 +243,86 @@ ol > li::before {
       </div>
     </section>
 
+    <section class="slide columns no-counter" style="--code-size: 80px;">
+      <script type="text/plain" class="language-css">
+/*
+ * 2. Unusual Inheritance
+ *    (siblings & children)
+ */
+      </script>
+    </section>
 
-    <section class="slide columns" style="--code-size: 80px;">
+    <section class="slide columns two" style="--code-size: 36px;">
+    <div>
+      <script type="text/plain" class="language-css">
+.foo {
+  counter-increment: foo 1;
+}
+.foo::before {
+  content: "before: " counter(foo);
+}
+.foo::after {
+  content: "after: " counter(foo);
+}
+      </script>
+      <script type="text/plain" class="language-html">
+<div class="foo">
+  <div class="foo"></div>
+  <div class="foo">
+    <div class="foo"></div>
+  </div>
+</div>
+<div class="foo">
+  <div class="foo"></div>
+</div>
+      </script>
+      </div>
+      <div class="example">
+<div class="foo">
+  <div class="foo"></div>
+  <div class="foo">
+    <div class="foo"></div>
+  </div>
+</div>
+<div class="foo">
+  <div class="foo"></div>
+</div>
+
+<style>
+
+.foo {
+  font: 39px Helvetica Neue;
+  border: 1px solid;
+  padding: 0.35em 1em;
+  margin: 0.5em 0;
+  display: block;
+  vertical-align: middle;
+  counter-increment: foo 1;
+}
+
+.foo:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.foo::before,
+.foo::after {
+  display: block;
+}
+
+.foo::before {
+  content: "before: " counter(foo);
+}
+.foo::after {
+  content: "after: " counter(foo);
+}
+
+</style>
+      </div>
+    </section>
+
+
+
+    <section class="slide columns no-counter" style="--code-size: 80px;">
       <script type="text/plain" class="language-css">
 /*
  * 3. Counters and Layout
@@ -369,7 +362,7 @@ ol > li::before {
       </div>
     </section>
 
-    <section class="slide" style="
+    <section class="slide no-counter" style="
       --code-size: 42px;
     ">
       <img class="cover" src="matrix.jpg" alt="Matrix-like view over the gomoku example with counters visible">
@@ -382,6 +375,7 @@ ol > li::before {
       <script type="text/plain" class="language-css">
 /*
  * Thanks!
+ * Experiment responsibly.
  *
  * These slides: [kizu.ru/counters](https://www.kizu.ru/counters)
  * (with links)
