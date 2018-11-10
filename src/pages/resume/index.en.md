@@ -5,34 +5,55 @@ private: true
 
 # Résumé
 
+<style>
+h1 {
+  margin-bottom: 1rem !important;
+}
+h3 {
+  display: flex;
+  align-items: baseline;
+}
+h3 > em {
+  margin-left: auto;
+}
+dl,dt,dd {margin:0;padding: 0;}
+</style>
+
 ## Summary
 
-I am a **Front-End Web Developer** with 10 years of professional experience, researching and implementing highly performant, scalable and maintainable CSS practices for large websites and web-applications, as well as standards-compliant, semantic and accessible HTML, and JavaScript for complex UI behaviors.
-
-
-## Objective
-
-I'm looking for a place where I could apply my CSS skills. I can solve any possible CSS issue: from vertical centering to project's architecture, but the more complex problems you can provide, the happier I would be dealing with them. One day I dream to work on CSS itself by contributing to specifications, so there is that.
-
-I'm currently located in Russia, and I'm looking for opportunities to relocate to somewhere else (Canada, Europe, USA, New Zealand and so on).
+I am a **Senior Front-End Web Developer** with 11+ years of professional experience, researching and implementing highly performant, scalable and maintainable CSS practices for large websites and web-applications.
 
 ## Experience
 
-### [Yandex](https://yandex.com/company/), Moscow    _December 2009 – Present_
+### [Oyst](https://www.oyst.com), Paris    _May 2017 – Present_
+
+Senior Front-End Web Developer, responsible for the UI of the company's payment app, as well as for a lot of other things.
+
+- Implemented all the UI elements for the payment web app and multiple back-office systems in React & styled-components.
+- Implemented and merged the ideas of BEM and utility-first CSS methodologies alongside styled-components.
+- Suggested and implemented some elements of design systems and styleguide for all company's common components.
+- Hand-coded some CSS animations, ported some heavy JS animations to much lighter and performant CSS ones.
+- Utilized PostCSS for some smaller projects.
+- Encouraged the usage of SVG to designers.
+
+
+### [Yandex](https://yandex.com/company/), Moscow    _December 2009 – May 2017_
 
 Front-End Web Developer, responsible for most of the CSS&HTML for the Yandex.Mail web app (Yandex' Mail service), as well as for some satellite pages and services.
 
 - Developed and delivered the CSS&HTML architecture for two major versions of Yandex.Mail web app using BEM methodology.
 - Rewrote the CSS codebase of Yandex.Mail using Stylus preprocessor, creating an intricate but easy to use theming engine.
-- Implemented SVG sprites with `<use>`; promoted SVG usage for designers.
-- Implemented Yandex' UI style into reusable Stylus components used at Yandex.Mail and some other Yandex' services.
+- Implemented SVG sprites with `<use>`; promoted SVG usage to designers.
+- Implemented Yandex' UI styleguide into reusable Stylus components used at Yandex.Mail and some other Yandex' services.
 - Maintained Yandex.Mail's CSS codebase through years of development.
 - Developed some JavaScript-based UI solutions for Yandex.Mail (sticky headers and blocks, animations, states etc).
 - Developed the CSS&HTML codebase for other Yandex projects: Calendar, Web Messenger, Share Pop-Up and others.
 - Coded a lot of secondary pages for Yandex.Mail: landings, promos, e-mails etc.
-- Consulted the team on CSS, solving a lot of complex issues.
+- Participated in various Yandex' developer education initiatives, including giving lectures on CSS for students.
+- Consulted multiple teams on CSS, solving a lot of complex issues.
 - Managed a few Front-End Developer interviews.
 
+<br class="only-print" />
 
 ### [Monographic](http://monographic.ru)    _March 2009 – July 2012_
 
@@ -51,15 +72,14 @@ XHTML&CSS Developer for LiveJournal.com and several other company's projects.
 - Coded a lot of HTML&CSS for LiveJournal.com.
 - Developed a framework for creating LiveJournal themes using S2 language.
 - Created CSS and S2 code for a lot of LiveJournal themes.
-- Coded a lot of HTML&CSS for Championat.ru's projects.
-- Developed CSS for UI of a web-based instant messenger used for Championat.ru.
+- Coded a lot of HTML&CSS for Championat.ru's projects, including all the UI of a web-based instant messenger.
 
 
 ### [X-Project](http://www.xproject.ru), Moscow    _January 2007 – September 2007_
 
 HTML&CSS Developer at X-Project design studio.
 
-- Developed studio's designs in HTML&CSS for several web-sites.
+- Developed studio's designs in HTML&CSS.
 - Worked with SMARTY templates, implementing hand-coded HTML.
 - Promoted best typography practices for several of studio's projects (most notably for Accounts Chamber of Russia).
 
@@ -76,16 +96,24 @@ Contractor Front-End Web Developer, helped the design studio with HTML&CSS for s
 
 ## Speaking
 
-I gave [around 20 talks](http://kizu.ru/talks/), mostly in Russian, but also managed to give two talks in English at Fronteers Jam Sessions:
+I gave [around 20 talks](http://kizu.ru/talks/), mostly in Russian, but also managed to give a few ligntning talks in English:
 
+- [“Not your usual CSS counters”](https://twitter.com/mauriz/status/1060544263904206849), 4m lightning talk at dotCSS, November 8, 2018 (video coming soon).
 - [“Don’t look into the source”](https://vimeo.com/77929464), 10m talk at Fronteers Jam Session, October 9, 2013.
 - [“Use CSS transitions for pseudo-elements right now”](http://fronteers.nl/congres/2012/jam-session/use-css-transitions-for-pseudo-elements-right-now-roman-komarov), 10m talk at Fronteers Jam Session, October 3, 2012.
 
+<br class="only-print" />
 
 ## Open Source
 
 I engage with open source on a regular basis, opening issues and sending pull requests for different projects, but mostly investing in three projects: Stylus, Hayaku, and Bemto.
 
+<br class="only-print" />
+
+
+### [Bemto-components](https://github.com/kizu/bemto-components)    _October 2017 – Present_
+
+The author of bemto-components — re-implementation of some Bemto ideas for React and styled-components, allowing usage of some of the BEM methodology ideas alongside some general quality of life tools for developing components.
 
 ### [Bemto](https://github.com/kizu/bemto)    _May 2014 – Present_
 
@@ -105,6 +133,10 @@ Maintainer of Stylus preprocessor for CSS.
 - Monitored and answered questions on StackOverflow for the project.
 - Managed main project's developer helping to implement new features and fix bugs.
 
+<br class="only-print" />
+<br class="only-print" />
+<br class="only-print" />
+
 ### [Hayaku](https://github.com/hayaku/hayaku)    _August 2010 – Present_
 
 The author of Hayaku — a Sublime Text and Textmate plugin for the fastest CSS writing experience.
@@ -119,17 +151,17 @@ The author of Hayaku — a Sublime Text and Textmate plugin for the fastest CSS 
 
 ## Skills
 
-- CSS (2.1, level 3 modules and all the following), as well as preprocessors and postprocessors: Stylus, Sass, PostCSS.
-- HTML4, XHTML1, HTML5, SVG, XSLT as well as preprocessors (Jade, HAML) and light markup languages (Markdown, Textile).
+- CSS, including preprocessors, postprocessors & CSS-in-JS: Styled-components, CSSTree, Stylus, Sass, PostCSS.
+- HTML, SVG, XSLT, as well as preprocessors (Pug.js, HAML) and markdown.
 - BEM, OOCSS, SMACSS, as well as my own variations of those methodologies.
-- JavaScript (native, node.js, mocha.js, jQuery).
+- JavaScript (native, node.js, React.js).
 - Typography, Web Fonts, OpenType features on the web.
 - Git, SVN, NPM.
 - Gulp, Make, Travis CI.
-
-- Various static site generators: Docpad, Jekyll, nanoc.
+- Basic knowledge of Python & Ruby.
+- Various static site generators: Hugo, Docpad, Jekyll, nanoc.
 - Various templating engines: SMARTY, tt2, erb.
-- Sketch, Photoshop, Fireworks.
-- Sublime Text 2/3, vim, TextMate.
+- Figma, Sketch, Adobe Photoshop.
+- VS Code, Sublime Text 2/3, vim, TextMate.
 - Collaborating with small to large teams, as well as remote working.
 

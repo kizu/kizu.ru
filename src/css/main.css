@@ -6,6 +6,7 @@
 @import url("_prism.css");
 
 @import url("_fallback.css");
+@import url("_print.css");
 
 /* Top level batch supports lock */
 @supports (--var:iables) {
