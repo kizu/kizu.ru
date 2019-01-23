@@ -1,0 +1,107 @@
+.Wireframe {
+  width: var(--wireframe-width, 78em);
+  height: var(--wireframe-height, 47em);
+  font-size: 3px;
+  padding: 0;
+  border-radius: 2px;
+}
+
+.Wireframe-Text {
+  --fg: #CFCECA;
+  --bg: #FFF;
+  --lh: 6px;
+  --text-height: 4px;
+  --pixel-offset: 8px;
+  --line-offset: 6;
+
+  --bg-solid: linear-gradient(var(--bg), var(--bg));
+  --fg-solid: linear-gradient(var(--fg), var(--fg));
+  --bg-fill: linear-gradient(var(--bg) var(--text-height), transparent 0) repeat-y;
+  --fg-fill: linear-gradient(var(--fg) var(--text-height), transparent 0) repeat-y;
+
+  /* Cicada principle FTW */
+  --indent: var(--bg-fill) 0 calc(var(--pixel-offset) + var(--lh) * (var(--line-offset) - 13))/var(--lh);
+  --ending: var(--bg-fill) right -1px top calc(var(--pixel-offset) + var(--lh) * (var(--line-offset) - 14));
+
+  --cicada-1: calc(var(--lh) * 13);
+  --cicada-2: calc(var(--lh) * 17);
+  --cicada-3: calc(var(--lh) * 23);
+
+  /* Set to 0 to hide visually */
+  --header: 1;
+
+  background:
+    /* “Header” */
+    var(--fg-solid) 50% var(--pixel-offset)/calc(var(--header) * 56px) var(--lh) no-repeat,
+    var(--bg-solid) 0 0/calc(var(--header) * 100%) calc(var(--pixel-offset) + var(--lh) * 2) no-repeat,
+
+    /* “Paragraphs” indents */
+    var(--indent) var(--cicada-1),
+    var(--indent) var(--cicada-2),
+    var(--indent) var(--cicada-3),
+
+    /* “Paragraphs” line-endings */
+    var(--ending)/25% var(--cicada-1),
+    var(--ending)/19% var(--cicada-2),
+    var(--ending)/40% var(--cicada-3),
+
+    /* “Paragraphs” */
+    var(--fg-fill) 0 var(--pixel-offset)/100% var(--lh);
+}
+
+.MyGrid.Wireframe {
+  position: static;
+  position: var(--initial-at-small, sticky);
+  top: var(--v-gap);
+  margin-right: var(--initial-at-large, auto);
+  margin-left: var(--initial-at-large, auto);
+}
+
+@supports (position: sticky) {
+  .MyGrid.Wireframe::before {
+    content: var(--initial-at-small, "");
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    z-index: -2;
+    box-sizing: content-box;
+    width: var(--wireframe-width, 78em);
+    height: var(--wireframe-height, 47em);
+    padding: 1px;
+    background: var(--THEME_BG);
+  }
+
+  .MyGrid.Wireframe::after {
+    content: var(--initial-at-small, "");
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: inherit;
+    border-radius: inherit;
+    box-shadow: inherit;
+  }
+}
+
+.MyGrid {
+  display: grid;
+  grid: " .            content        aside      "
+        / var(--side)  var(--middle)  var(--side);
+  grid-gap: 0 var(--gap);
+
+  --middle: minmax(24em, 42em);
+  --side: minmax(min-content, 1fr);
+  --gap: 2em;
+}
+
+.MyGrid-Content {
+  grid-column: content;
+}
+
+.MyGrid-Aside {
+  grid-column: aside;
+  width: 15em;
+  margin-right: var(--gap);
+}

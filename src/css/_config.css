@@ -12,9 +12,9 @@
   --grid-content: minmax(var(--content-min-width), var(--content-max-width));
 
   --grid-ascii:
-    " full  full     full   "
-    " .     both     both   "
-    " .     content  aside  ";
+    " full  full     full  "
+    " .     both     both  "
+    " .     content  aside ";
 
   --grid-ascii--small:
     " full  full     full "
@@ -35,14 +35,13 @@
   --figure-subgrid-ascii--small:
     " full    "
     " content "
-    " aside ";
+    " aside   ";
 
   --figure-subgrid: var(--figure-subgrid-ascii)
     / var(--grid-content)
               var(--grid-side);
 
   /* Typography! */
-  /* Replace with utility? */
   --text-indent: var(--THEME_INDENT);
 
   /* Conditions */

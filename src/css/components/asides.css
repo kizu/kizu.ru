@@ -4,7 +4,8 @@
 }
 
 aside,
-figcaption {
+figcaption,
+.Aside {
   --grid-column: aside;
   grid-row-end: span var(--span);
   align-self: var(--align, start);
@@ -24,6 +25,10 @@ figcaption {
   --text-indent: 0;
   --p-p-margin-top: 1.5em;
   --link-underline-offset: 0.4em;
+}
+
+.Aside {
+  grid-column: aside;
 }
 
 figcaption {
