@@ -60,5 +60,5 @@ Path — не открытая социальная сеть, по крайн
 
 [1]: http://itunes.apple.com/app/path/id403639508
 [2]: https://market.android.com/details?id=com.path&hl=en
-[Path]: http://i.kizu.ru/misc/path.jpg
-[Path-bubble]: http://i.kizu.ru/misc/path-bubble.jpg
+[Path]: path.jpg
+[Path-bubble]: path-bubble.jpg
