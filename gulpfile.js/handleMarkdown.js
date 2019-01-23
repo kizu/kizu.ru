@@ -160,6 +160,7 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
       .replace(/\{\{((?!\}\}).)+\}\}/g, '')
       .replace(/\{[\#\:][^\}]+\}/g, '')
       .replace(/\n\n```((?!```)[\s\S])+\n```/g, '')
+      .replace(/<style>[^<]*<\/style>/g, '')
       .replace(/\[([^\]]+)\]\(\)/g, '$1')
       .split(/\n#+ /)
       .map((cntnt, index) => {

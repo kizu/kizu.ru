@@ -146,3 +146,12 @@ The only main problem of this method — its impossible[^impossible] to use wh
 
 [^impossible]: Ok, not entirely impossible, there are possible _ways_ to do something like that, but I won’t get into those this time, as they’re much more fragile and won’t fit most of the use cases.
 
+<style>
+/* Temp. fix for the chrome sidenotes bug :\ */
+aside:nth-of-type(1) { grid-row-start: 3; }
+aside:nth-of-type(2) { grid-row-start: 6; }
+aside:nth-of-type(4) { grid-row-start: 12; }
+aside:nth-of-type(5) { grid-row-start: 16; }
+aside:nth-of-type(6) { grid-row-start: 18; }
+aside:nth-of-type(7) { grid-row-start: 26; }
+</style>
