@@ -17,14 +17,9 @@
       {{- end -}}
     {{ end }}</title>
 
-    <!-- Resources -->
-    <link rel="preconnect dns-prefetch" href="https://mc.yandex.ru" crossorigin />
-    <link rel="preconnect dns-prefetch" href="https://hello.myfonts.net" crossorigin />
-
     <link rel="stylesheet" href="/s/style.css" />
     {{ partial "metrika.html" }}
 
-    <!-- All the secondary meta -->
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="{{ i18n "feedLink" }}" />
     {{- if eq .Page.Kind "home" }}
     <link rel="alternate" hreflang="en" href="//www.kizu.ru/" />

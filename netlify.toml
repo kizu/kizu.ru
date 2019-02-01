@@ -12,7 +12,7 @@
   command = "HUGO_BASEURL=$DEPLOY_PRIME_URL gulp build"
 
 [[headers]]
-  for = "/*"
+  for = "/*.html"
   [headers.values]
     Link = [
       "</s/21Cent-Black.woff2>; rel=preload; as=font; type=font/woff2; crossorigin",
@@ -20,5 +20,7 @@
       "</s/21Cent-Italic.woff2>; rel=preload; as=font; type=font/woff2; crossorigin",
       "</s/21Cent-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin",
       "</s/style.css>; rel=preload; as=style",
-      "</j/scripts.js>; rel=preload; as=script"
+      "</j/scripts.js>; rel=preload; as=script",
+      "<https://mc.yandex.ru>; rel=preconnect dns-prefetch; crossorigin",
+      "<https://hello.myfonts.net>; rel=preconnect dns-prefetch; crossorigin"
     ]
