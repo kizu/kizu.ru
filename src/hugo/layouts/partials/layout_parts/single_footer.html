@@ -1,0 +1,13 @@
+{{- if eq .Params.type "post" -}}
+  {{- partial "getPrevNext.html" . -}}
+  {{- $prev := $.Scratch.Get "prevPage" -}}
+  {{- $next := $.Scratch.Get "nextPage" -}}
+  {{- if or $prev $next -}}
+    {{- if $prev -}}
+      <li style="--grid-position: start;"><a href="{{$prev.Permalink}}" aria-label="{{ i18n "previousArticle" }} — {{ $prev.Title }}" style="--underline: 0;"><span aria-hidden="true">←</span> <span style="--underline: 1;">{{$prev.Title}}</span></a></li>
+    {{- end -}}
+    {{- if $next -}}
+      <li style="--grid-position: end;"><a href="{{$next.Permalink}}" aria-label="{{ i18n "nextArticle" }} — {{ $next.Title }}" style="--underline: 0;"><span style="--underline: 1;">{{$next.Title}}</span> <span aria-hidden="true">→</a></li>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

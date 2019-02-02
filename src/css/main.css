@@ -65,6 +65,18 @@ html {
 }
 
 body {
+  /* is it used anywhere else? */
+  min-width: 26rem;
+
+  /* Reset */
+  padding: 0;
+  margin: 0;
+
+  /* Should this be a part of utility definition? */
+  font: var(--THEME_FONT);
+}
+
+.Root {
   /* Default context */
   position: relative;
   z-index: 1;
@@ -73,18 +85,8 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* is it used anywhere else? */
-  min-width: 26rem;
-
-  /* Reset */
-  padding: 0;
-  margin: 0;
-
   /* For subgrid substitute */
   counter-reset: var(--asides-counter) var(--sidenote-counters);
-
-  /* Should this be a part of utility definition? */
-  font: var(--THEME_FONT);
 }
 
 body::before {

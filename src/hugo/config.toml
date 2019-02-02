@@ -16,7 +16,11 @@ name = "Roman Komarov"
 posts = "/:slug/"
 
 [outputs]
-home = ["HTML", "RSS", "Algolia"]
+home = ["HTML", "JSON", "RSS", "Algolia"]
+page= ["HTML", "JSON"]
+section= ["HTML", "JSON"]
+taxonomyTerm= ["HTML", "JSON"]
+taxonomy= ["HTML", "JSON"]
 
 [outputFormats.Algolia]
 baseName = "algolia"
@@ -27,7 +31,6 @@ notAlternative = true
 [params.algolia]
 vars = ["title", "subtitle", "summary", "content", "date", "publishdate", "permalink"]
 params = ["tags"]
-
 
 [Languages]
 [Languages.en]
