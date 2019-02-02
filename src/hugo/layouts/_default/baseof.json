@@ -1,0 +1,11 @@
+{{- $type := .Params.type -}}
+{{- if eq .Page.Kind "home" -}}
+  {{- $type = "home" -}}
+{{- end -}}
+
+{
+  "lang": "{{ .Site.Params.languageCode }}",
+  "type": "{{ $type }}",
+  "title": "{{- partial "layout_parts/doc_title.html" . | replaceRE "\"" "\\\"" | replaceRE "\\n" "\\n" | replaceRE "&amp;" "&" -}}",
+  "html": "{{- replace (partial "layout_parts/root_layout.html" .) "\\" "\\\\" | replaceRE "\"" "\\\"" | replaceRE "\\n" "\\n" -}}"
+}

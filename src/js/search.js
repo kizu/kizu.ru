@@ -1,6 +1,6 @@
 const searchScriptSrc = "https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.2";
 
-const isSearchPage = !!document.URL.match(/\/search\//);
+const isSearchPage = location.pathname.indexOf('/search/') !== -1;
 const pageLang = document.documentElement.lang || "en";
 
 const i18n = {

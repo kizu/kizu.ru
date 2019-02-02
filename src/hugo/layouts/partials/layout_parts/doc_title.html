@@ -1,0 +1,5 @@
+{{- if .Title -}}
+  {{- .Title | markdownify | plainify | replaceRE "&amp;" "&" -}}
+{{- else -}}
+  {{- .Site.Title | plainify -}}
+{{- end -}}
