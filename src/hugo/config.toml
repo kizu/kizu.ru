@@ -16,11 +16,17 @@ name = "Roman Komarov"
 posts = "/:slug/"
 
 [outputs]
-home = ["HTML", "JSON", "RSS", "Algolia"]
+home = ["HTML", "JSON", "RSS", "Algolia", 'versions']
 page= ["HTML", "JSON"]
 section= ["HTML", "JSON"]
 taxonomyTerm= ["HTML", "JSON"]
 taxonomy= ["HTML", "JSON"]
+
+[outputFormats.versions]
+baseName = "versions"
+isPlainText = true
+mediaType = "application/json"
+notAlternative = true
 
 [outputFormats.Algolia]
 baseName = "algolia"

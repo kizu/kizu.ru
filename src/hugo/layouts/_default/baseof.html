@@ -34,8 +34,8 @@
     {{- end }}
   </head>
   <body>
-    <div class="Root">
-      {{- partial "layout_parts/root_layout.html" . -}}
+    <div class="Root" aria-atomic="true" aria-live="polite">
+      {{- partial "layout_parts/root_layout.html" (dict "context" .) -}}
     </div>
     {{ partial "metrika.html" }}
   </body>

@@ -1,61 +1,63 @@
-{{- partial "header.html" (dict "context" . "a11y" "true") -}}
-{{- if eq .Page.Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
-  {{- if .Title -}}
-    {{- $prefix := "" -}}
-    {{- $isTag := eq .Page.Kind "taxonomy" -}}
-    {{- $title := (markdownify .Title) -}}
-    {{- if $isTag -}}
-      {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
+{{- with .context -}}
+  {{- partial "header.html" (dict "context" . "a11y" "true") -}}
+  {{- if eq .Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
+    {{- if .Title -}}
+      {{- $prefix := "" -}}
+      {{- $isTag := eq .Kind "taxonomy" -}}
+      {{- $title := (markdownify .Title) -}}
+      {{- if $isTag -}}
+        {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
+      {{- end -}}
+      {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
     {{- end -}}
-    {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
-  {{- end -}}
 
-  {{- if and (eq .Page.Kind "page") .Title -}}
-    {{- partial "layout_parts/single_main.html" . -}}
-  {{- else if eq .Page.Kind "home" -}}
-    {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
-  {{- else -}}
-    {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
-    {{- partial "articleList.html" (dict "context" . "data" .Data) -}}
-  {{- end -}}
+    {{- if and (eq .Kind "page") .Title -}}
+      {{- partial "layout_parts/single_main.html" . -}}
+    {{- else if eq .Kind "home" -}}
+      {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+    {{- else -}}
+      {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
+      {{- partial "articleList.html" (dict "context" . "data" .Data) -}}
+    {{- end -}}
 
-{{- if eq .Page.Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
-<!-- Goes after main for ~reasons~ -->
-{{- partial "header.html" (dict "context" . "a11y" "false") -}}
+  {{- if eq .Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
+  <!-- Goes after main for ~reasons~ -->
+  {{- partial "header.html" (dict "context" . "a11y" "false") -}}
 
-<footer role="contentinfo">
-  <nav>
-    <ul>
-      {{- if eq .Page.Kind "page" -}}
-        {{- partial "layout_parts/single_footer.html" . -}}
-      {{- end -}}
-      <li style="--grid-position: start;">
-        {{- if eq .Page.Kind "home" -}}
-          © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
-        {{- else -}}
-          <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+  <footer role="contentinfo">
+    <nav>
+      <ul>
+        {{- if eq .Kind "page" -}}
+          {{- partial "layout_parts/single_footer.html" . -}}
         {{- end -}}
-        {{- print " " -}}
-        {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
-      </li>
-
-      {{- if eq .Page.Kind "home" -}}
-        <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
-      {{- else -}}
-        <li style="--grid-position: end;">
-          {{- if .Page.Params.originalPath -}}
-            <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Page.Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
+        <li style="--grid-position: start;">
+          {{- if eq .Kind "home" -}}
+            © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
           {{- else -}}
-            <a href="https://github.com/kizu" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
-          {{- end }}
-          <span aria-hidden="true">·</span>
-          <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
-          <span aria-hidden="true">·</span>
-          <a href="{{ i18n "twitterLink" }}" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
-      {{- end -}}
-    </ul>
-  </nav>
-  {{- if not (findRE "/search/$" .Page.Permalink) -}}
-    {{- partial "search.html" . -}}
-  {{- end -}}
-</footer>
+            <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+          {{- end -}}
+          {{- print " " -}}
+          {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
+        </li>
+
+        {{- if eq .Kind "home" -}}
+          <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
+        {{- else -}}
+          <li style="--grid-position: end;">
+            {{- if .Params.originalPath -}}
+              <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
+            {{- else -}}
+              <a href="https://github.com/kizu" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
+            {{- end }}
+            <span aria-hidden="true">·</span>
+            <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
+            <span aria-hidden="true">·</span>
+            <a href="{{ i18n "twitterLink" }}" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
+        {{- end -}}
+      </ul>
+    </nav>
+    {{- if not (findRE "/search/$" .Permalink) -}}
+      {{- partial "search.html" . -}}
+    {{- end -}}
+  </footer>
+{{- end -}}
