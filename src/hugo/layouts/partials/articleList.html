@@ -1,7 +1,7 @@
 <!-- Make into a filter, so it would be possible to show all articles etc. -->
 {{- $context := . -}}{{- if .context -}}{{- $context = .context -}}{{- end -}}
 {{- $onlyRecent := .onlyRecent -}}
-{{- $isTagsPage := eq $context.Page.Kind "taxonomyTerm" -}}
+{{- $isTagsPage := eq "asd" "taxonomyTerm" -}}
 
 {{- if $onlyRecent -}}<span class="ArticleList-Flag" id="Everything"></span>{{- end -}}
 <ul class="ArticleList" id="Articles">

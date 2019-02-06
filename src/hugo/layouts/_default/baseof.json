@@ -7,5 +7,5 @@
   "lang": "{{ .Site.Params.languageCode }}",
   "type": "{{ $type }}",
   "title": "{{- partial "layout_parts/doc_title.html" . | replaceRE "\"" "\\\"" | replaceRE "\\n" "\\n" | replaceRE "&amp;" "&" -}}",
-  "html": "{{- replace (partial "layout_parts/root_layout.html" .) "\\" "\\\\" | replaceRE "\"" "\\\"" | replaceRE "\\n" "\\n" -}}"
+  "html": "{{- replace (partial "layout_parts/root_layout.html" (dict "context" .)) "\\" "\\\\" | replaceRE "\"" "\\\"" | replaceRE "\\n" "\\n" -}}"
 }

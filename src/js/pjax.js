@@ -2,11 +2,9 @@ if ('fetch' in window) {(() => {
   const states = {};
   const html = document.documentElement;
 
-  const getURL = url => {
-    const parsedCurrentURL = new URL(url || window.location.href);
-    return parsedCurrentURL.origin + parsedCurrentURL.pathname;
-  };
+  const getURL = url => url || (new URL(window.location.href)).pathname;
 
+  let versions = {en: {}, ru: {}};
   let currentURL = getURL();
   let shouldApplyPopState = true;
 
@@ -25,18 +23,14 @@ if ('fetch' in window) {(() => {
 
   states[currentURL] = getCurrentState();
 
-  const applyUrlStateDOM = url => {
-    const state = states[url];
-    if (!state) {
-      return;
-    }
+  const applyStateDOM = state => {
     if (!state.domRoot) {
       const newRoot = document.createElement('div');
       newRoot.className = 'Root';
       newRoot.innerHTML = state.html;
       Prism.highlightAllUnder(newRoot);
       state.domRoot = newRoot;
-      if (url.indexOf('/search/') !== -1) {
+      if (state.url.indexOf('/search/') !== -1) {
         mySearch.focusSearch('article');
       }
     }
@@ -44,84 +38,140 @@ if ('fetch' in window) {(() => {
     html.className = html.className.replace(/Page_type_\w*/, 'Page_type_' + state.type);
   };
 
-  const applyUrlStateMeta = url => {
-    const state = states[url];
-    if (!state) {
-      return;
-    }
+  const applyStateMeta = state => {
     document.title = state.title;
     html.setAttribute('lang', state.lang);
     HTMLElement.lang = state.lang;
     currentURL = state.url;
   };
 
-  const applyUrlState = url => {
-    applyUrlStateDOM(url);
-    applyUrlStateMeta(url);
+  const applyUrlState = (url, hash, retry) => {
+    const state = states[url];
+    if (!state && !retry) {
+      goToPage(url, hash, true);
+      return;
+    }
+    applyStateDOM(state);
+    applyStateMeta(state);
   };
 
-  const goToUrl = (url, hash) => {
+  const getLang = url => {
+    const matchedLang = url.match(/^\/(\w{2})\//)
+    return matchedLang ? matchedLang[1] : 'en';
+  }
+
+  const fetchVersions = lang => {
+    if (!Object.keys(versions[lang]).length) {
+      versions[lang] = { isFetching: true };
+      // TODO: use proper lang from args
+      fetch(`/${lang === 'en' ? '' : (lang + '/') }versions.json`)
+        .then(response => response.json())
+        .then(responseObject => {
+          versions[lang] = responseObject;
+        });
+    }
+  }
+
+  const goToUrl = (url, hash, noPush) => {
     const state = states[url];
 
     if (hash) {
       shouldApplyPopState = false;
-      applyUrlStateDOM(url);
+      applyStateDOM(state);
       location.hash = hash;
-      window.history.replaceState({ url: url }, state.title, state.url + hash);
-      applyUrlStateMeta(url);
+      if (!noPush) {
+        window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
+      }
+      applyStateMeta(state);
       shouldApplyPopState = true;
     } else {
-      window.history.pushState({ url: url }, state.title, state.url);
-      applyUrlState(url);
+      if (!noPush) {
+        window.history.pushState({ url: url }, state.title, state.url);
+      }
+      applyUrlState(url, false, noPush);
       window.scrollTo(0, 0);
     }
   };
 
+  const getFromLocalStorage = (url, callback) => {
+    const lang = getLang(url);
+    if (Object.keys(versions[lang]).length && !versions[lang].isFetching) {
+      const state = localStorage.getItem(url);
+      const parsedState = state && JSON.parse(state);
+      if (parsedState && versions[lang][url] === parsedState.version) {
+        states[url] = parsedState;
+        callback && callback();
+        return parsedState;
+      }
+    }
+  }
+
   let plannedURL;
-  const goToPage = (url, hash) => {
+  const goToPage = (url, hash, noPush) => {
+    fetchVersions(getLang(url));
     if (states[url]) {
       if (states[url].isPreFetching) {
         plannedURL = url + hash;
         states[url].plannedNav = { url, hash };
       } else if (!states[url].isFetching) {
-        goToUrl(url, hash);
+        goToUrl(url, hash, noPush);
       }
-    } else {
-      states[url] = { isFetching: true };
-      fetch(url + 'index.json')
-        .then(response => response.json())
-        .then(state => {
-          state.url = url;
-          states[url] = state;
-          goToUrl(url, hash);
-        })
-        .catch(() => {
-          // In case of a fetch error, just go there manually.
-          window.location.href = url + hash;
-        });
+      return;
     }
+
+    const localStorageVersion = getFromLocalStorage(url, () => goToUrl(url, hash, noPush));
+    if (localStorageVersion) {
+      return;
+    }
+
+    states[url] = { isFetching: true };
+    fetch(url + 'index.json')
+      .then(response => response.json())
+      .then(state => {
+        state.url = url;
+        states[url] = state;
+        goToUrl(url, hash, noPush);
+      })
+      .catch(() => {
+        // In case of a fetch error, just go there manually.
+        window.location.href = url + hash;
+      });
   };
 
   const preloadPage = url => {
     if (url && !states[url]) {
+      const localStorageVersion = getFromLocalStorage(url);
+      if (localStorageVersion) {
+        return;
+      }
+
       states[url] = { isPreFetching: true };
       fetch(url + 'index.json')
         .then(response => response.json())
         .then(state => {
           const plannedNav = { ...states[url].plannedNav };
+          const lang = getLang(url);
           state.url = url;
+          if (Object.keys(versions[lang]).length && versions[lang][url]) {
+            state.version = versions[lang][url];
+            localStorage.setItem(url, JSON.stringify(state));
+          }
           states[url] = state;
+
           if (plannedURL === plannedNav.url + plannedNav.hash) {
             goToUrl(plannedNav.url, plannedNav.hash);
           }
-        })
-        .catch(() => {});
+        });
     }
   };
 
+  window.addEventListener("load", function () {
+    fetchVersions(getLang(currentURL));
+  });
+
   window.onpopstate = function (event) {
-    if (shouldApplyPopState && (event.state || (new URL(currentURL)).pathname !== location.pathname)) {
-      applyUrlState(event.state && event.state.url || getURL());
+    if (shouldApplyPopState && (event.state || currentURL !== location.pathname)) {
+      applyUrlState(event.state && event.state.url || getURL(), event.state && event.state.hash);
     }
   };
 
@@ -163,7 +213,7 @@ if ('fetch' in window) {(() => {
     if (link) {
       const url = getURLToHandle(link);
       if (url) {
-        goToPage(url.origin + url.pathname, url.hash);
+        goToPage(url.pathname, url.hash);
         return false;
       }
     }
@@ -172,7 +222,7 @@ if ('fetch' in window) {(() => {
   document.addEventListener('mousemove', function (e) {
     const link = getLinkFromEvent(e);
     if (link) {
-      preloadPage(getURLToHandle(link))
+      preloadPage((getURLToHandle(link) || {}).pathname)
     }
   }, false);
 })()};

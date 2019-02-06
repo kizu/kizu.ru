@@ -1,6 +1,5 @@
 .TagList {
   display: inline-block;
-  max-width: 100%;
 
   --link-position: relative;
   --link-z-index: 9;
