@@ -1,4 +1,4 @@
-if ('fetch' in window) {(() => {
+(() => {
   const states = {};
   const html = document.documentElement;
 
@@ -225,4 +225,4 @@ if ('fetch' in window) {(() => {
       preloadPage((getURLToHandle(link) || {}).pathname)
     }
   }, false);
-})()};
+})();

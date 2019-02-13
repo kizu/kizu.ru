@@ -285,4 +285,4 @@ if (isSearchPage) {
   mySearch.focusSearch('article');
 }
 
-module.exports = mySearch;
+export default mySearch;
