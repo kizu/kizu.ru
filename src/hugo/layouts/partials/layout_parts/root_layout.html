@@ -47,12 +47,12 @@
             {{- if .Params.originalPath -}}
               <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
             {{- else -}}
-              <a href="https://github.com/kizu" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
+              <a href="https://github.com/kizu" rel="me" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
             {{- end }}
             <span aria-hidden="true">·</span>
             <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
             <span aria-hidden="true">·</span>
-            <a href="{{ i18n "twitterLink" }}" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
+            <a href="{{ i18n "twitterLink" }}" rel="me" aria-label="{{ i18n "twitterTitle" }}">{{ i18n "Twitter" }}</a></li>
         {{- end -}}
       </ul>
     </nav>
