@@ -38,6 +38,12 @@
     html.className = html.className.replace(/Page_type_\w*/, 'Page_type_' + state.type);
   };
 
+  const applyMetrikaHit = (from, to, title) => {
+    if (ym) {
+      ym(632758, 'hit', to, { referer: from, title: title });
+    }
+  };
+
   const applyStateMeta = state => {
     document.title = state.title;
     html.setAttribute('lang', state.lang);
@@ -81,12 +87,14 @@
       location.hash = hash;
       if (!noPush) {
         window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
+        applyMetrikaHit(currentURL, state.url, state.title);
       }
       applyStateMeta(state);
       shouldApplyPopState = true;
     } else {
       if (!noPush) {
         window.history.pushState({ url: url }, state.title, state.url);
+        applyMetrikaHit(currentURL, state.url, state.title);
       }
       applyUrlState(url, false, noPush);
       window.scrollTo(0, 0);

@@ -16,7 +16,7 @@ name = "Roman Komarov"
 posts = "/:slug/"
 
 [outputs]
-home = ["HTML", "JSON", "RSS", "Algolia", 'versions']
+home = ["HTML", "JSON", "RSS", "Algolia", "versions"]
 page= ["HTML", "JSON"]
 section= ["HTML", "JSON"]
 taxonomyTerm= ["HTML", "JSON"]
