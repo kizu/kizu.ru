@@ -60,7 +60,7 @@ html {
 
 /* TODO: replace home pages' one with a special case */
 .Page_type_home {
-  --h1-font-weight: 400;
+  --h1-font-weight: normal;
   --h1-margin-bottom: 2rem;
 }
 
@@ -157,7 +157,7 @@ img:only-child {
 }
 
 strong, b {
-  font-weight: var(--strong-font-weight, 700);
+  font-weight: var(--strong-font-weight, bold);
 }
 
 /* Headers */

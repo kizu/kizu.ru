@@ -19,7 +19,7 @@
   --THEME_LINE_HEIGHT: 2rem;
   --THEME_LINE_HEIGHT--SMALL: 1.3888em;
 
-  --THEME_FONT_FAMILY: '21Cent-Regular', Georgia, serif, Helvetica Neue, Arial; /* [2] */
+  --THEME_FONT_FAMILY: '21Cent-Regular', '21Cent-Fallback', Georgia, serif, Helvetica Neue, Arial; /* [2] */
 
   /* Same for every theme? Should be moved somewhere? */
   --THEME_FONT:
