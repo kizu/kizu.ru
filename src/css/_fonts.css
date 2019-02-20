@@ -40,6 +40,22 @@
 @font-face {
   font-family: '21Cent-Regular';
   font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+  src: url('21Cent-Black.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: '21Cent-Fallback';
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+  src: url('21Cent-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: '21Cent-Regular';
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
   src: url('21Cent-Regular.woff2') format('woff2');
@@ -59,12 +75,4 @@
   font-weight: bold;
   font-style: normal;
   src: url('21Cent-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: '21Cent-Regular';
-  font-display: swap;
-  font-weight: 900;
-  font-style: normal;
-  src: url('21Cent-Black.woff2') format('woff2');
 }

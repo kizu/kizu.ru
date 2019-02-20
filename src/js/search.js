@@ -250,8 +250,6 @@ const mySearch = {
   }
 };
 
-document.documentElement.classList.add("withSearch")
-
 const getKey = event => {
   const key = event.key || event.keyCode;
   if (key === 'ArrowUp' || key === 38) {

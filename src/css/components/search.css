@@ -115,7 +115,7 @@
   justify-content: flex-end;
 }
 
-html:not(.withSearch) .SearchButton {
+html:not(.withJS) .SearchButton {
   display: none;
 }
 

@@ -1,10 +1,17 @@
 {
   {{- range .Site.Pages -}}
-    {{- $title := (partial "layout_parts/doc_title.html" .) -}}
     {{- if and (eq .Draft false) (not (or (eq .Title "") (eq .RelPermalink "/tags/") (eq .RelPermalink "/ru/tags/") (eq .RelPermalink "/posts/") (in .RelPermalink "/categories/"))) -}}
-      {{- $content := (partial "layout_parts/root_layout.html" (dict "context" . "Data" .Data ) | replaceRE "© <time.+</time>" "© ") -}}
+      {{- $type := .Params.type -}}
+      {{- if eq .Kind "home" -}}
+        {{- $type = "home" -}}
+      {{- end -}}
+      {{- if not $type -}}
+        {{- $type = "other" -}}
+      {{- end -}}
 
-      "{{.RelPermalink}}": {{- (print $title $content) | sha256 | truncate 8 "" | jsonify -}},
+      {{- $title := (partial "layout_parts/doc_title.html" .) -}}
+      {{- $content := (partial "layout_parts/root_layout.html" (dict "context" . "Data" .Data ) | replaceRE "© <time.+</time>" "© ") -}}
+      "{{.RelPermalink}}": {{- (print $type $title $content) | sha256 | truncate 8 "" | jsonify -}},
     {{- end -}}
   {{- end -}}
 

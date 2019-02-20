@@ -2,7 +2,9 @@
 {{- if eq .Page.Kind "home" -}}
   {{- $type = "home" -}}
 {{- end -}}
-
+{{- if not $type -}}
+  {{- $type = "other" -}}
+{{- end -}}
 {
   "lang": "{{ .Site.Params.languageCode }}",
   "type": "{{ $type }}",

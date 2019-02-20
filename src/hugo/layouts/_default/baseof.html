@@ -11,9 +11,11 @@
 
     <title>{{- partial "layout_parts/doc_title.html" . -}}</title>
 
+    <script>document.documentElement.classList.add("withJS")</script>
+
     <!-- Resources -->
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Black.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Regular.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Black.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Italic.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Bold.woff2" crossorigin />
     <link rel="preload" as="style" href="/s/style.css" />
@@ -22,8 +24,7 @@
     <link rel="preconnect dns-prefetch" href="https://hello.myfonts.net" crossorigin />
 
     <link rel="stylesheet" href="/s/style.css" />
-
-    <script src="/j/scripts.js" async></script>
+    <script src="/j/scripts.js" defer></script>
 
     <!-- All the secondary meta -->
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="{{ i18n "feedLink" }}" />
