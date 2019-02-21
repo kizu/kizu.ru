@@ -4,7 +4,7 @@
 
   const getURL = url => url || (new URL(window.location.href)).pathname;
 
-  let versions = {en: {}, ru: {}};
+  let versions = { en: {}, ru: {} };
   let currentURL = getURL();
   let shouldApplyPopState = true;
 
@@ -24,6 +24,7 @@
   states[currentURL] = getCurrentState();
 
   const applyStateDOM = state => {
+    const oldRoot = document.getElementsByClassName('Root')[0];
     if (!state.domRoot) {
       const newRoot = document.createElement('div');
       newRoot.className = 'Root';
@@ -34,7 +35,7 @@
         mySearch.focusSearch('article');
       }
     }
-    document.body.replaceChild(state.domRoot, document.body.getElementsByClassName('Root')[0]);
+    oldRoot.parentNode.replaceChild(state.domRoot, oldRoot);
     html.className = html.className.replace(/Page_type_\w*/, 'Page_type_' + state.type);
   };
 
@@ -62,12 +63,14 @@
   };
 
   const getLang = url => {
-    const matchedLang = url.match(/^\/(\w{2})\//)
+    const matchedLang = url && url.match(/^\/(\w{2})\//);
     return matchedLang ? matchedLang[1] : 'en';
   }
 
+  const hasVersions = lang => Object.keys(versions[lang]).length;
+
   const fetchVersions = lang => {
-    if (!Object.keys(versions[lang]).length) {
+    if (!hasVersions(lang)) {
       versions[lang] = { isFetching: true };
       // TODO: use proper lang from args
       fetch(`/${lang === 'en' ? '' : (lang + '/') }versions.json`)
@@ -103,7 +106,7 @@
 
   const getFromLocalStorage = (url, callback) => {
     const lang = getLang(url);
-    if (Object.keys(versions[lang]).length && !versions[lang].isFetching) {
+    if (hasVersions(lang) && !versions[lang].isFetching) {
       const state = localStorage.getItem(url);
       const parsedState = state && JSON.parse(state);
       if (parsedState && versions[lang][url] === parsedState.version) {
@@ -147,7 +150,8 @@
   };
 
   const preloadPage = url => {
-    if (url && !states[url]) {
+    const lang = getLang(url);
+    if (url && !states[url] && hasVersions(lang)) {
       const localStorageVersion = getFromLocalStorage(url);
       if (localStorageVersion) {
         return;
@@ -158,9 +162,8 @@
         .then(response => response.json())
         .then(state => {
           const plannedNav = { ...states[url].plannedNav };
-          const lang = getLang(url);
           state.url = url;
-          if (Object.keys(versions[lang]).length && versions[lang][url]) {
+          if (versions[lang][url]) {
             state.version = versions[lang][url];
             localStorage.setItem(url, JSON.stringify(state));
           }
@@ -186,8 +189,9 @@
   const getLinkFromEvent = (e, filterModifier) => {
     e = e || window.event;
     const withModifier = e.ctrlKey || e.metaKey || e.shiftKey || e.altKey;
+    const notPrimaryClick = e.which > 1 || e.button > 1;
     let link;
-    if (!(filterModifier && withModifier)) {
+    if (!(filterModifier && withModifier) && !notPrimaryClick) {
       const path = e.path || (e.composedPath && e.composedPath());
       if (path) {
         for (let index = 0; index < path.length; index++) {
@@ -207,20 +211,23 @@
   };
 
   const getURLToHandle = link => {
-    const parsedCurrentURL = new URL(window.location.href);
-    const parsedNewURL = new URL(link.href);
-    const isSameOrigin = parsedCurrentURL.origin === parsedNewURL.origin;
-    const isSamePath = isSameOrigin && parsedCurrentURL.pathname === parsedNewURL.pathname;
-    if (isSameOrigin && !isSamePath && !link.onclick) {
-      return parsedNewURL;
+    if (link) {
+      const parsedCurrentURL = new URL(window.location.href);
+      const parsedNewURL = new URL(link.href);
+      const isSameOrigin = parsedCurrentURL.origin === parsedNewURL.origin;
+      const isSamePath = isSameOrigin && parsedCurrentURL.pathname === parsedNewURL.pathname;
+      if (isSameOrigin && !isSamePath && !link.onclick) {
+        return parsedNewURL;
+      }
     }
+    return {};
   }
 
   document.onclick = function (e) {
     const link = getLinkFromEvent(e, true);
     if (link) {
       const url = getURLToHandle(link);
-      if (url) {
+      if (url.pathname) {
         goToPage(url.pathname, url.hash);
         return false;
       }
@@ -228,9 +235,6 @@
   };
 
   document.addEventListener('mousemove', function (e) {
-    const link = getLinkFromEvent(e);
-    if (link) {
-      preloadPage((getURLToHandle(link) || {}).pathname)
-    }
+    preloadPage(getURLToHandle(getLinkFromEvent(e)).pathname);
   }, false);
 })();
