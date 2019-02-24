@@ -7,6 +7,7 @@ aside,
 figcaption,
 .Aside {
   --grid-column: aside;
+  grid-row-start: var(--start);
   grid-row-end: span var(--span);
   align-self: var(--align, start);
 

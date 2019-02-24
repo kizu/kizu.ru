@@ -13,7 +13,6 @@
 
     <script>document.documentElement.classList.add("withJS")</script>
 
-    <!-- Resources -->
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Regular.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Black.woff2" crossorigin />
     {{ if or (eq .Site.Params.languageCode "ru") (eq $type "home") -}}
@@ -25,7 +24,7 @@
     <link rel="preload" as="style" href="/s/style.css" />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Italic.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Bold.woff2" crossorigin />
-    {{ if eq .Site.Params.languageCode "ru" -}}
+    {{- if eq .Site.Params.languageCode "ru" -}}
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Italic_cyrillic.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Bold_cyrillic.woff2" crossorigin />
     {{- end }}
