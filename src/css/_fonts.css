@@ -41,7 +41,6 @@
   font-family: '21Cent-Regular';
   font-display: swap;
   font-weight: 900;
-  font-style: normal;
   src: url('21Cent-Black.woff2') format('woff2');
 }
 
@@ -49,7 +48,6 @@
   font-family: '21Cent-Regular';
   font-display: swap;
   font-weight: 900;
-  font-style: normal;
   unicode-range: U+0410-044F, U+0401, U+0451;
   src: url('21Cent-Black_cyrillic.woff2') format('woff2');
 }
@@ -57,16 +55,12 @@
 @font-face {
   font-family: '21Cent-Fallback';
   font-display: swap;
-  font-weight: normal;
-  font-style: normal;
   src: url('21Cent-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: '21Cent-Fallback';
   font-display: swap;
-  font-weight: normal;
-  font-style: normal;
   unicode-range: U+0410-044F, U+0401, U+0451;
   src: url('21Cent-Regular_cyrillic.woff2') format('woff2');
 }
@@ -74,16 +68,12 @@
 @font-face {
   font-family: '21Cent-Regular';
   font-display: swap;
-  font-weight: normal;
-  font-style: normal;
   src: url('21Cent-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: '21Cent-Regular';
   font-display: swap;
-  font-weight: normal;
-  font-style: normal;
   unicode-range: U+0410-044F, U+0401, U+0451;
   src: url('21Cent-Regular_cyrillic.woff2') format('woff2');
 }
@@ -91,7 +81,6 @@
 @font-face {
   font-family: '21Cent-Regular';
   font-display: swap;
-  font-weight: normal;
   font-style: italic;
   src: url('21Cent-Italic.woff2') format('woff2');
 }
@@ -99,7 +88,6 @@
 @font-face {
   font-family: '21Cent-Regular';
   font-display: swap;
-  font-weight: normal;
   font-style: italic;
   unicode-range: U+0410-044F, U+0401, U+0451;
   src: url('21Cent-Italic_cyrillic.woff2') format('woff2');
@@ -109,7 +97,6 @@
   font-family: '21Cent-Regular';
   font-display: swap;
   font-weight: bold;
-  font-style: normal;
   src: url('21Cent-Bold.woff2') format('woff2');
 }
 
@@ -117,7 +104,6 @@
   font-family: '21Cent-Regular';
   font-display: swap;
   font-weight: bold;
-  font-style: normal;
   unicode-range: U+0410-044F, U+0401, U+0451;
   src: url('21Cent-Bold_cyrillic.woff2') format('woff2');
 }
