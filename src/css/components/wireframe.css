@@ -67,7 +67,7 @@
     left: 0;
     z-index: -2;
     box-sizing: content-box;
-    width: inherit;
+    width: var(--wireframe-width, 78em);
     height: inherit;
     background: var(--THEME_BG);
   }
