@@ -1,4 +1,4 @@
-(() => {
+const initPjax = (queue, lazyQueue) => {
   const states = {};
   const html = document.documentElement;
 
@@ -40,9 +40,11 @@
   };
 
   const applyMetrikaHit = (from, to, title) => {
-    if (ym) {
-      ym(632758, 'hit', to, { referer: from, title: title });
-    }
+    queue.pushTask(() => {
+      if (window.galite) {
+        galite('send', 'pageview')
+      }
+    })
   };
 
   const applyStateMeta = state => {
@@ -73,11 +75,11 @@
     if (!hasVersions(lang)) {
       versions[lang] = { isFetching: true };
       // TODO: use proper lang from args
-      fetch(`/${lang === 'en' ? '' : (lang + '/') }versions.json`)
+      lazyQueue.pushTask(() => fetch(`/${lang === 'en' ? '' : (lang + '/')}versions.json`)
         .then(response => response.json())
         .then(responseObject => {
           versions[lang] = responseObject;
-        });
+        }));
     }
   }
 
@@ -158,7 +160,7 @@
       }
 
       states[url] = { isPreFetching: true };
-      fetch(url + 'index.json')
+      lazyQueue.pushTask(() => fetch(url + 'index.json')
         .then(response => response.json())
         .then(state => {
           const plannedNav = { ...states[url].plannedNav };
@@ -172,13 +174,11 @@
           if (plannedURL === plannedNav.url + plannedNav.hash) {
             goToUrl(plannedNav.url, plannedNav.hash);
           }
-        });
+        }));
     }
   };
 
-  window.addEventListener("load", function () {
-    fetchVersions(getLang(currentURL));
-  });
+  fetchVersions(getLang(currentURL));
 
   window.onpopstate = function (event) {
     if (shouldApplyPopState && (event.state || currentURL !== location.pathname)) {
@@ -237,4 +237,6 @@
   document.addEventListener('mousemove', function (e) {
     preloadPage(getURLToHandle(getLinkFromEvent(e)).pathname);
   }, false);
-})();
+};
+
+export default initPjax;
