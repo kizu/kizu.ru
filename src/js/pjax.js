@@ -39,7 +39,7 @@ const initPjax = (queue, lazyQueue) => {
     html.className = html.className.replace(/Page_type_\w*/, 'Page_type_' + state.type);
   };
 
-  const applyMetrikaHit = (from, to, title) => {
+  const applyMetrikaHit = () => {
     queue.pushTask(() => {
       if (window.galite) {
         galite('send', 'pageview')
@@ -92,14 +92,14 @@ const initPjax = (queue, lazyQueue) => {
       location.hash = hash;
       if (!noPush) {
         window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
-        applyMetrikaHit(currentURL, state.url, state.title);
+        applyMetrikaHit();
       }
       applyStateMeta(state);
       shouldApplyPopState = true;
     } else {
       if (!noPush) {
         window.history.pushState({ url: url }, state.title, state.url);
-        applyMetrikaHit(currentURL, state.url, state.title);
+        applyMetrikaHit();
       }
       applyUrlState(url, false, noPush);
       window.scrollTo(0, 0);
