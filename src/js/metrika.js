@@ -1,8 +1,16 @@
-const metrika = () => {
+import galite from 'ga-lite';
+
+const initAnalytics = (id) => {
   if (navigator.doNotTrack !== 1 && window.doNotTrack !== 1) {
-    (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.defer = true, k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(632758, "init", { id: 632758, clickmap: false, trackLinks: true, accurateTrackBounce: true, trackHash: true });
+    galite('create', id, 'auto')
+    galite('send', 'pageview')
+    window.galite = galite;
+
+    window.addEventListener(
+      'unload',
+      () => galite('send', 'timing', 'JS Dependencies', 'unload')
+    );
   }
 };
 
-export default metrika;
+export default initAnalytics;

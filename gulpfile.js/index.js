@@ -3,12 +3,6 @@ const gulp = require('gulp');
 const tap = require('gulp-tap');
 const rename = require('gulp-rename');
 
-const source = require('vinyl-source-stream');
-const rollup = require('rollup-stream');
-const babel = require('rollup-plugin-babel');
-const uglify = require("gulp-uglify");
-const buffer = require('vinyl-buffer');
-
 const log = require('fancy-log');
 const spawn = require('child_process').spawn;
 const del = require('del');
@@ -71,26 +65,13 @@ const stylesSrc = () => {
 
 const stylesFile = require('./stylesFileTask.js');
 
-const scripts = () => {
-  return rollup({
-    input: './src/js/index.js',
-    format: 'iife',
-    plugins: [
-      babel({
-        exclude: [
-          './node_modules/**',
-          './src/js/prism.js',
-        ],
-      }),
-    ],
-  })
-  .pipe(source('scripts.js'))
-  .pipe(buffer())
-  .pipe(uglify())
-  .pipe(gulp.dest('./build/hugo/static/j/'));
-}
-
 // External tasks
+const scripts = () => spawn(
+  'rollup',
+  ['-c'],
+  { stdio: 'inherit' }
+);
+
 const hugoBuild = () => spawn(
   'hugo',
   ['--buildFuture', '-s', 'build/hugo', '-d', '../../out/'],

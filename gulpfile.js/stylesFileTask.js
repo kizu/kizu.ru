@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const tap = require('gulp-tap');
 const shell = require('shelljs');
+const fs = require('fs');
+const path = require('path');
 const log = require('fancy-log');
 
 const rename = require('gulp-rename');
@@ -45,10 +47,9 @@ const stylesFile = () => {
       const newCSS = csstree.generate(compressedAst.ast, {
        sourceMap: true
       });
-      const sourceMapAnnotation = '\n' +
-        '/*# sourceMappingURL=data:application/json;base64,' +
-        Buffer.from(newCSS.map.toString()).toString('base64') +
-        ' */';
+      shell.mkdir('-p', path.join(__dirname, '../build/hugo/static/s/'));
+      fs.writeFileSync(path.join(__dirname, '../build/hugo/static/s/styles.css.map'), newCSS.map.toString());
+      const sourceMapAnnotation = '\n/*# sourceMappingURL=styles.css.map */';
 
       file.contents = Buffer.from(newCSS.css + sourceMapAnnotation);
     }))
