@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 export default {
   input: './src/js/index.js',
   output: {
-    file: './build/hugo/static/j/scripts.js',
+    file: './build/hugo/assets/j/scripts.js',
     format: 'iife',
   },
   plugins: [

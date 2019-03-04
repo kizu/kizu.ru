@@ -1,3 +1,14 @@
+{{- $scripts := resources.Get "j/scripts.js" | resources.Fingerprint "md5" -}}
+{{- $font_regular := resources.Get "s/21Cent-Regular.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_black := resources.Get "s/21Cent-Black.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_italic := resources.Get "s/21Cent-Italic.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_bold := resources.Get "s/21Cent-Bold.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_regular_cyr := resources.Get "s/21Cent-Regular_cyrillic.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_black_cyr := resources.Get "s/21Cent-Black_cyrillic.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_italic_cyr := resources.Get "s/21Cent-Italic_cyrillic.woff2" | resources.Fingerprint "md5" -}}
+{{- $font_bold_cyr := resources.Get "s/21Cent-Bold_cyrillic.woff2" | resources.Fingerprint "md5" -}}
+{{- $styles := resources.Get "s/style.css" | resources.ExecuteAsTemplate "s/style.css" (dict "font_regular" $font_regular.RelPermalink "font_black" $font_black.RelPermalink "font_bold" $font_bold.RelPermalink "font_italic" $font_italic.RelPermalink "font_regular_cyr" $font_regular_cyr.RelPermalink "font_black_cyr" $font_black_cyr.RelPermalink "font_bold_cyr" $font_bold_cyr.RelPermalink "font_italic_cyr" $font_italic_cyr.RelPermalink) | resources.Fingerprint "md5" -}}
+
 {{- $type := .Params.type -}}
 {{- if eq .Page.Kind "home" -}}
   {{- $type = "home" -}}
@@ -13,27 +24,27 @@
 
     <script>document.documentElement.classList.add("withJS")</script>
 
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Regular.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Black.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_regular.RelPermalink }}" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_black.RelPermalink }}" crossorigin />
     {{ if or (eq .Site.Params.languageCode "ru") (eq $type "home") -}}
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Regular_cyrillic.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_regular_cyr.RelPermalink }}" crossorigin />
     {{ end -}}
     {{ if eq .Site.Params.languageCode "ru" -}}
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Black_cyrillic.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_black_cyr.RelPermalink }}" crossorigin />
     {{ end -}}
-    <link rel="preload" as="style" href="/s/style.css" />
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Italic.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Bold.woff2" crossorigin />
+    <link rel="preload" as="style" href="{{ $styles.RelPermalink }}" />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_italic.RelPermalink }}" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_bold.RelPermalink }}" crossorigin />
     {{- if eq .Site.Params.languageCode "ru" -}}
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Italic_cyrillic.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/s/21Cent-Bold_cyrillic.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_italic_cyr.RelPermalink }}" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="{{ $font_bold_cyr.RelPermalink }}" crossorigin />
     {{- end }}
-    <link rel="preload" as="script" href="/j/scripts.js" />
+    <link rel="preload" as="script" href="{{ $scripts.RelPermalink }}" />
 
     <link rel="preconnect dns-prefetch" href="https://hello.myfonts.net" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="/s/style.css" />
-    <script src="/j/scripts.js" defer></script>
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+    <script src="{{ $scripts.RelPermalink }}" defer></script>
 
     <!-- All the secondary meta -->
     <link rel="alternate" type="application/atom+xml" title="Atom feed" href="{{ i18n "feedLink" }}" />

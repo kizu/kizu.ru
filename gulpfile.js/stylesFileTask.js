@@ -54,7 +54,7 @@ const stylesFile = () => {
       file.contents = Buffer.from(newCSS.css + sourceMapAnnotation);
     }))
     .pipe(rename('style.css'))
-    .pipe(gulp.dest('./build/hugo/static/s/'));
+    .pipe(gulp.dest('./build/hugo/assets/s/'));
 };
 
 module.exports = stylesFile;

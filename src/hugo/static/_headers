@@ -1,0 +1,11 @@
+/s/*.css
+  Cache-Control: max-age=31536000, immutable
+
+/s/src/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/s/*.woff2
+  Cache-Control: max-age=31536000, immutable
+
+/j/*.js
+  Cache-Control: max-age=31536000, immutable
