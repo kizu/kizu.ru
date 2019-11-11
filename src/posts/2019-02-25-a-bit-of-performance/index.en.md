@@ -36,7 +36,7 @@ Then, there was that one thing that I've noticed when going through my site's pa
 
 Even though my internet connection is quite fast, I still felt that going from page to page was quite slow. After looking at what happens, I have noticed that browser extensions can affect the performance of web pages quite significantly. In my main browser profile, for example, their effect could cause up to 1–1.5 extra seconds before the [`DOMContentLoaded`](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded) event would happen!
 
-Browser extensions are initialized for every page you, and the parsing and evaluation of those extensions' JS can add a lot to the page's load time.
+Browser extensions are initialized for every page you visit, and the parsing and evaluation of those extensions' JS can add a lot to the page's load time.
 
 Basically, on mobile pages, we have latency and slow JS, and on the desktop, even with a decent internet connection, we could have all the extra work happening by all the browser extensions. So I have tried to see how I could manage this as well, as it is not very fun when your highly optimized static site gets slowed down so significantly by outside factors.
 
