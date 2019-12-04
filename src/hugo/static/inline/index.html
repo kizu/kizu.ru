@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" style="/* filter: hue-rotate(180deg) invert(1); */">
+<head>
+    <title>Utility of Inline Styles</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
+    <link rel="stylesheet" href="i/prism.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+            --slide-width: 1920px;
+
+            --color-key: #ААА;
+            --color-black: #FEFEFE;
+            --color-dark: #CCC;
+            --color-medium: #AAA;
+            --color-light: #888;
+            --color-back: #222;
+            --color-yellow: #fff59d;
+            --color-yellow-light: #ffffcf;
+        }
+        footer {
+          color: #000;
+        }
+        .slide {
+          padding: 0;
+          background: #010101;
+          color: #FFF;
+          font-size: 60px;
+          line-height: 1.3;
+        }
+        .slide h2 {
+          font-size: 80px;
+          margin-bottom: 1em;
+        }
+        .slide li + li {
+          margin-top: 0.5em;
+        }
+
+        .slide pre {
+          overflow: hidden;
+          background: none;
+          font-size: var(--code-size, 42px);
+          padding: 60px;
+          margin: 0;
+          width: fit-content;
+          place-self: center;
+        }
+        .slide.two pre + pre {
+          padding-top: 0;
+        }
+        .slide pre code {
+          line-height: 1.4;
+        }
+        .slide.no-counter::after {
+          visibility: hidden;
+        }
+        .slide::after {
+          text-align: right;
+          padding-right: 1em;
+          color: #EEE;
+          font-size: 0.75em;
+        }
+
+        .columns {
+          align-items: center;
+          grid-column-gap: 0;
+        }
+
+        .example {
+          display: grid;
+          place-items: center;
+          box-sizing: border-box;
+          padding: 60px;
+          width: 100%;
+          align-self: stretch;
+          background: #333;
+        }
+
+        .example .cp_embed_wrapper {
+          width: 33%;
+          transform: scale(3);
+          transform-origin: 0 50%;
+        }
+
+        .example ol,
+        .example li::before {
+          all: unset;
+        }
+
+
+        .shower.list .slide {
+          --slide-scale: 0.1125;
+        }
+        @media (min-width: 1174px) {
+            .shower.list .slide {
+                --slide-scale: 0.225;
+            }
+        }
+
+        @media (min-width: 2348px) {
+            .shower.list .slide {
+                --slide-scale: 0.45;
+            }
+        }
+
+        .slide pre .comment {
+          position: relative;
+          display: inline-block;
+          color: #FFF;
+        }
+
+
+        .comment::before,
+        .small-comments .comment::after,
+        .language-html .comment::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3ch;
+          background: rgba(0,0,0,0.5);
+        }
+        .language-html .comment::after,
+        .small-comments .comment::after {
+          left: auto;
+          right: 0;
+          width: 2ch;
+        }
+        .language-html .comment::before,
+        .language-html .comment::after {
+          width: 4ch;
+        }
+
+        .warning .token:not(.string):not(.important) {
+          opacity: 0.33;
+        }
+
+        .token.punctuation {
+          color: rgb(230, 219, 116, 0.5);
+        }
+        .token.attr-value {
+          color: #f8f8f2;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+<header class="caption">
+  <h1>Utility of Inline Styles</h1>
+  <p>Roman Komarov</p>
+</header>
+
+<section class="slide columns no-counter" id="cover" style="--code-size: 100px;">
+  <script type="text/plain" class="language-css">
+/*
+ * Utility of Inline Styles
+ * (with custom properties)
+ */
+  </script>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 74px;
+">
+  <script type="text/plain" class="language-css">
+/*
+ * Inpired by “Utility” or “Atomic” CSS
+ *                    (and JSX “props”)
+ * Must-read:
+ *  “[In Defense of Utility-First CSS](https://frontstuff.io/in-defense-of-utility-first-css)”
+ *   by [Sarah Dayan](https://twitter.com/frontstuff_io)
+ *
+ * Examples: [Tailwind](https://tailwindcss.com/), [Tachyons](https://tachyons.io/), etc.
+ */
+  </script>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 74px;
+">
+  <script type="text/plain" class="language-css">
+/*
+ * > “Might as well use inline styles”
+ *
+ * > This way of styling
+ * > is unanimously considered
+ * > a bad practice
+ */
+  </script>
+</section>
+
+<section class="slide warning" style="
+  --code-size: 65px;
+  border: 2rem double #ffca51;
+  border-radius: 1em;
+  background: linear-gradient(#010101,#010101), linear-gradient(red,#d61313 0);
+  background-clip: padding-box, border-box;
+">
+  <h1 style="text-align: center; margin-bottom: 0;font-size: 2em;">⚠️</h1>
+  <script type="text/plain" class="language-css">
+.Browser:not(#IE)::after {
+  content: "Only modern browsers" !important;
+}
+
+[style*='--experimental:']::before {
+  content: "Potential performance issues";
+}
+  </script>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 88px;
+">
+  <div>
+    <script type="text/plain" class="language-html">
+        <p style="
+          --margin-top: var(--size-small);
+        ">
+      </script>
+  </div>
+  <div class="next">
+    <script type="text/plain" class="language-css">
+      [style*='--margin-top:'] {
+        margin-top: var(--margin-top);
+      }
+    </script>
+  </div>
+</section>
+
+
+<section class="slide columns" style="
+  --code-size: 72px;
+">
+  <script type="text/plain" class="language-css">
+/*
+ * - CSS is very short
+ *
+ * - Specificity of an attribute selector
+ *
+ * - Order and priorities are in CSS
+ */
+  </script>
+</section>
+
+<section class="slide small-comments columns" style="
+  --code-size: 64px;
+">
+  <div>
+    <script type="text/plain" class="language-html">
+<!-- Hover and other states! -->
+<a style="
+  --text-decoration: var(--at-hover, underline);
+">
+    </script>
+  </div>
+  <div class="next">
+    <script type="text/plain" class="language-css">
+/* Invalid value; plus disables inheritance */
+* { --at-hover: _; }
+
+/* Applies fallback value on hover */
+*:hover { --at-hover: initial; }
+    </script>
+  </div>
+</section>
+
+<!--
+<section class="slide columns" style="
+  --code-size: 60px;
+">
+  <div>
+    <script type="text/plain" class="language-css">
+      [style*='--hover-value:'] {
+        --use-hover: initial;
+      }
+      [style*='--hover-value:']:hover {
+        --use-hover: var(--hover-value);
+      }
+    </script>
+    <script type="text/plain" class="language-html">
+      <a style="
+        --background: var(--use-hover, pink);
+        --hover-value: tomato;
+      ">
+    </script>
+  </div>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 74px;
+">
+  <div>
+    <script type="text/plain" class="language-html">
+      <a style="
+        --background: var(--use-hover, pink);
+        --hover-value: tomato;
+
+        --color: var(--use-hover2, black);
+        --hover-value2: white;
+      ">
+    </script>
+  </div>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 62px;
+">
+  <div>
+    <script type="text/plain" class="language-css">
+:root {
+  --at-above-medium: _;
+  --at-below-medium: initial;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --at-above-medium: initial;
+    --at-below-medium: _;
+  }
+}
+</script>
+  </div>
+</section>
+-->
+
+<section class="slide columns" style="
+  --code-size: 74px;
+">
+  <div>
+    <script type="text/plain" class="language-html">
+      <!-- Media queries! -->
+
+      <aside style="
+        --float: var(--at-above-medium, right);
+
+        --padding: var(--above-medium, 2em);
+        --below-medium: 1em;
+      ">
+    </script>
+  </div>
+</section>
+
+<section class="slide columns small-comments" style="
+  --code-size: 62px;
+">
+  <div>
+    <script type="text/plain" class="language-css">
+[style*='--below-medium:'] {
+  --above-medium: initial;
+}
+
+@media (min-width: 768px) {
+  [style*='--below-medium:'] {
+    --above-medium: var(--below-medium);
+  }
+}
+</script>
+  </div>
+</section>
+
+<section class="slide columns" style="
+  --code-size: 62px;
+">
+  <script type="text/plain" class="language-css">
+/* More: “[Conditions for CSS Variables](https://www.kizu.ru/conditions-for-css-variables/)” by [me](https://twitter.com/kizmarh),
+ *
+ * as well as articles by [Ana Tudor](https://twitter.com/anatudor):
+ *
+ * “DRY State Switching With CSS Variables:
+ *    Part 1: [The Difference of One Declaration](https://css-tricks.com/dry-switching-with-css-variables-the-difference-of-one-declaration/)
+ *    Part 2: [Fallbacks and Invalid Values](https://css-tricks.com/dry-state-switching-with-css-variables-fallbacks-and-invalid-values/)”
+ *
+ * && “[Logical Operations with CSS Variables](https://css-tricks.com/logical-operations-with-css-variables/)”.
+ */
+  </script>
+</section>
+
+
+<section class="slide columns" style="
+  --code-size: 64px;
+">
+  <script type="text/plain" class="language-css">
+/*
+ * Finally:
+ *
+ * - ⚠️ browser support and performance ⚠️
+ *
+ * - Future could make things better:
+ *    - Houdini — inheritance, initial values
+ *    - attr(data-dog length) ?
+ *    - …native conditions? T_T
+ */
+  </script>
+</section>
+
+
+<section class="slide columns" style="
+  --code-size: 87px;
+">
+  <script type="text/plain" class="language-css">
+/*
+ * Thanks!
+ * Experiment responsibly.
+ *
+ * These slides: [kizu.ru/inline](https://www.kizu.ru/inline)
+ * (with links)
+ */
+  </script>
+</section>
+
+    <script src="i/prism.js"></script>
+    <script src="shower/shower.min.js"></script>
+<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(632758, "init", { id:632758, clickmap:true, trackLinks:true, accurateTrackBounce:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/632758" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+
+</body>
+</html>
