@@ -198,11 +198,3 @@ Making the search to behave properly in a no means an easy task. I've implemente
 There are things that could be improved in the InstantSearch, like built-in tools for working with keyboard navigation, more semantic initial templates, some other minor quality of life improvements. But overall I was impressed with what they provide, especially at the infrastructure side. And it works really, really fast.
 
 So, now my site now has a built-in search. I do not have a lot of content, but maybe I could now find my own articles when I need them a bit easier. And if you'd want to have a search form for your site, you could try this solution as well.
-
-
-<style>
-/* Temp. fix for the chrome sidenotes bug :\ */
-aside:nth-of-type(3) { grid-row-start: 7; }
-aside:nth-of-type(4) { grid-row-start: 18; }
-aside:nth-of-type(5) { grid-row-start: 23; }
-</style>

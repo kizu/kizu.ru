@@ -13,6 +13,7 @@
 
 @import url("_config.css");
 @import url("_theme.css");
+@import url("_utility.css");
 @import url("components/color-components.css");
 
 @import url("components/articlelist.css");
@@ -27,6 +28,7 @@
 @import url("components/search.css");
 @import url("components/sidenotes.css");
 @import url("components/summary.css");
+@import url("components/table-of-contents.css");
 @import url("components/taglist.css");
 @import url("components/firstletters.css");
 @import url("components/links.css");

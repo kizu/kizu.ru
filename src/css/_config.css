@@ -8,23 +8,25 @@
   --viewport-padding: calc(var(--THEME_INDENT) * (1 - 0.25 * var(--at-small)));
 
   /* Grid! */
+  --grid-toc: minmax(0, 1fr);
   --grid-side: minmax(min-content, 1fr);
   --grid-content: minmax(var(--content-min-width), var(--content-max-width));
 
   --grid-ascii:
     " full  full     full  "
-    " .     both     both  "
-    " .     content  aside ";
+    " toc   both     both  "
+    " toc   content  aside ";
 
   --grid-ascii--small:
     " full  full     full "
+    " .     toc      .    "
     " .     both     .    "
     " .     content  .    "
     " .     aside    .    ";
 
   --grid:
     var(--grid-ascii)
-    / var(--grid-side)
+    / var(--grid-toc)
             var(--grid-content)
                      var(--grid-side);
 
@@ -48,9 +50,10 @@
   --initial-at-large: true;
   --at-large: calc(1 - var(--at-small));
   --at-small: 0;
+  --initial-at-reduced-motion: initial;
 }
 
-/* This should be the only MQ for my site, ok */
+/* This should be the only “width” MQ for my site */
 @media (max-width: 50em) {
   :root {
     --initial-at-large: initial;
@@ -59,5 +62,11 @@
 
     --grid-ascii: var(--grid-ascii--small);
     --figure-subgrid-ascii: var(--figure-subgrid-ascii--small);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --initial-at-reduced-motion: true;
   }
 }

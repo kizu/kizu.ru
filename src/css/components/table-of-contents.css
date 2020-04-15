@@ -1,0 +1,167 @@
+:root {
+  --finger-to-right: "☞";
+  --hair-space: " ";
+  --nbsp: " ";
+}
+
+.ToC {
+  --ToC-Width: 220px;
+
+  position: var(--initial-at-small, sticky);
+  z-index: 11;
+  top: -0.5rem;
+  left: 0;
+  overflow: visible;
+  visibility: hidden;
+
+  grid-column: toc;
+  grid-row-end: span 7;
+
+  justify-self: center;
+  width: fit-content;
+  padding: 0;
+  margin: 1em 0 0;
+
+  font-size: 16px;
+  line-height: 18px;
+
+  --ul-display: block;
+  --active-content: "";
+  --counters: counters(ToC, ".") ". ";
+  --list-item-padding: calc(1rem + 1rem * var(--at-large));
+  --link-text-shadow-color: transparent;
+  --is-hovered: 0;
+}
+
+.ToC:hover {
+  --is-hovered: 1;
+}
+
+.ToC:not(:hover) {
+  --ToC-opacity: var(--initial-at-small, 0.4);
+}
+
+.ToC::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  visibility: visible;
+}
+.ToC::before {
+  content: var(--initial-at-small, "Table of Contents");
+  position: sticky;
+  top: 1rem;
+  left: 0;
+  display: inline-block;
+  height: 0;
+  visibility: visible;
+  pointer-events: none;
+  transform: translateX(0.5rem) translateY(1rem) rotate(-90deg) translateX(-100%);
+  transform-origin: 0 0;
+  white-space: nowrap;
+  opacity: 0.5;
+}
+
+.ToC-LI + .ToC-LI {
+  margin-top: var(--ToC-LI-margin, 0.5rem);
+}
+
+.ToC-UL {
+  padding-right: 0.5rem;
+  counter-reset: ToC 0;
+}
+
+.ToC-LI {
+  position: relative;
+  counter-increment: ToC 1;
+  --is-active: 0;
+}
+
+.ToC-LI_active {
+  --is-active: 1;
+  --active-content: var(--finger-to-right) var(--hair-space);
+}
+
+.ToC-UL_nested {
+  padding-right: 0;
+  --ToC-LI-margin: 0;
+  --counters: var(--nbsp);
+  --active-content: "•";
+
+  --list-item-padding: calc(1rem * var(--at-large));
+}
+
+.ToC-Link {
+  position: relative;
+  display: flex;
+  --link-underline-width: 0;
+  opacity: calc(
+    var(--ToC-opacity) +
+    var(--is-active) * (1 - var(--ToC-opacity))
+  );
+}
+
+.ToC-Link::before {
+  content: var(--active-content) var(--counters);
+  position: var(--initial-at-small, absolute);
+  right: 100%;
+  flex-shrink: 0;
+  white-space: nowrap;
+  opacity: calc(0.5 + 0.5 * var(--is-active));
+}
+
+.ToC-Link::first-letter {
+  color: red;
+}
+
+.ToC-Link::after {
+  content: var(--initial-at-small, "");
+  position: absolute;
+  right: 100%;
+  left: -200px;
+  top: 0;
+  bottom: 0;
+}
+
+.ToC-Link + .ToC-UL {
+  margin-bottom: 0.5rem;
+}
+
+.ToC-Header {
+  text-align: left;
+  padding: 0 1rem;
+  margin: 0 0 1rem;
+
+  font-size: 1em;
+  opacity: var(--ToC-opacity);
+}
+
+/* Hack to cause an guaranteed overflow */
+.ToC-Header::before {
+  content: "                                                                                                                                                            ";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  max-width: calc(var(--ToC-Width) + 1px);
+}
+
+.ToC-Content {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  overflow: auto; /* Do my “hide-scrollbar” thingy? */
+  overflow-x: hidden;
+  visibility: visible;
+
+  box-sizing: border-box;
+  padding: 1rem 0;
+  width: calc((100% - var(--ToC-Width))*999);
+  max-width: 100%;
+  height: 100%;
+  max-height: var(--initial-at-small, 100vh);
+  min-width: calc(var(--is-hovered) * var(--ToC-Width));
+  background: var(--THEME_BG);
+}

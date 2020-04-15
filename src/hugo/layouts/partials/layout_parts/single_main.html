@@ -17,6 +17,8 @@
   <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
 {{- end -}}
 
+{{ .TableOfContents | replaceRE "<nav([^>]*)>\\s*<ul>\\s*<li>([\\s\\S]+)</li>\\s*</ul>\\s*</nav>" "<nav$1><div class='ToC-Content'><h2 class='ToC-Header'>Table of Contents</h2>$2</div></nav>" | replaceRE "<nav " "<nav class='ToC' " | replaceRE "(</a>\\s*)<ul>" "$1<ul class='ToC-UL ToC-UL_nested'>" | replaceRE "<ul>" "<ul class='ToC-UL'>" | replaceRE "<li" "<li class='ToC-LI'" | replaceRE "<a([^>]+)>" "<a class='ToC-Link'$1><span>" | replaceRE "</a>" "</span></a>" | safeHTML }}
+
 {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
 
 {{- if eq .Params.type "post" -}}

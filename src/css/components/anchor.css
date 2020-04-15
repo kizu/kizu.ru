@@ -1,5 +1,14 @@
 :root {
+  /* Cannot use because of the need for instant navigation,
+     probably could fix with some js, like adding a className that would disable it
+     before navigating, but that would be overhead.
+  */
+  /* scroll-behavior: var(--initial-at-reduced-motion, smooth); */
   --anchor-active: 0;
+}
+
+[id] {
+  scroll-margin: 0.5rem;
 }
 
 .Anchor {
@@ -12,7 +21,9 @@
   line-height: 1;
   opacity: var(--anchor-active);
   transform: translate(calc(100% * (1 - var(--anchor-active))), 0);
-  transition: 0.3s calc(1s - 0.7s * var(--anchor-active));
+  transition:
+    var(--initial-at-reduced-motion, 0.3s)
+    var(--initial-at-reduced-motion, calc(1s - 0.7s * var(--anchor-active)));
   transition-property: opacity, transform;
   --before: "#";
 }

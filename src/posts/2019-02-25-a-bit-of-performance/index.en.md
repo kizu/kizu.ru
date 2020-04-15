@@ -26,7 +26,7 @@ I would consider my site on the lighter side, with the fonts being the heaviest 
 
 Even though I subsetted the font and had used woff2, I could still experience FOUT[^fout] sometimes, especially for all the headers, so looking into how I could reduce it was a priority.
 
-[^fout]: “Flash of Unstyled Text”, see also this handy entry at CSS-tricks for a bit more complete description of this and similar abbreviations: [“FOUT, FOIT, FOFT”](https://css-tricks.com/fout-foit-foft/). <!-- offset="1" span="2" start="11" -->
+[^fout]: “Flash of Unstyled Text”, see also this handy entry at CSS-tricks for a bit more complete description of this and similar abbreviations: [“FOUT, FOIT, FOFT”](https://css-tricks.com/fout-foit-foft/). <!-- offset="1" span="2" -->
 
 There were also some other aspects of the initial page load, like an order of all the resources which I didn't optimize before, but the fonts were an obvious bottleneck.
 
@@ -48,7 +48,7 @@ I won't go into the details of implementation for everything I've done to make t
 
 The thing that I saw helping me the most[^preload] with the FOUT was adding the `<link rel="preload">` tags for my fonts.
 
-[^preload]: Difference between adding preload links in `<head>` or in HTTP headers seems to be almost non-existent, at least from what I saw in my experiments. And also at Netlify, you cannot currently attach those headers only to HTML pages, so those headers would be attached to every request, even for all other resources, which seems completely unnecessary. The `<head>` variant is also much more reusable and versatile, so I can't see a lot of reasons to use preload headers instead of `<link>`s. <!-- span="3" start="21" -->
+[^preload]: Difference between adding preload links in `<head>` or in HTTP headers seems to be almost non-existent, at least from what I saw in my experiments. And also at Netlify, you cannot currently attach those headers only to HTML pages, so those headers would be attached to every request, even for all other resources, which seems completely unnecessary. The `<head>` variant is also much more reusable and versatile, so I can't see a lot of reasons to use preload headers instead of `<link>`s. <!-- span="3" -->
 
 Here is how it looks for this article, for example (for other pages it could be different, I'll talk a bit about it [later](#subsetting-and-preloading)):
 
@@ -68,7 +68,7 @@ Here is how it looks for this article, for example (for other pages it could be 
 
 Important things to note about those preload links[^links-preload]:
 
-[^links-preload]: To read more about them look into one of the articles [I mention a bit later](#links). <!-- span="2" start="24" -->
+[^links-preload]: To read more about them look into one of the articles [I mention a bit later](#links). <!-- span="2" -->
 
 1. The resources would be requested in the order you list them there.
 2. The preloading would be triggered as soon as the browser would see those links while parsing the HTML.

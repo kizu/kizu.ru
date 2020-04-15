@@ -145,13 +145,3 @@ One important thing to note: as with any other grid placement, all of this on
 The only main problem of this method — its impossible[^impossible] to use when you need both rows and columns. What could be interesting — an ability to define _multiple_ templates for a grid layout, which when placed one over another, with a condition of having the same number of rows and columns, would create intersected _areas_. How cool that would be? Actually, maybe we just need a way to define three-dimensional grids? Hmmm! But I would leave you to think about the prospects of something like that for yourself. For now.
 
 [^impossible]: Ok, not entirely impossible, there are possible _ways_ to do something like that, but I won’t get into those this time, as they’re much more fragile and won’t fit most of the use cases.
-
-<style>
-/* Temp. fix for the chrome sidenotes bug :\ */
-aside:nth-of-type(1) { grid-row-start: 3; }
-aside:nth-of-type(2) { grid-row-start: 6; }
-aside:nth-of-type(4) { grid-row-start: 12; }
-aside:nth-of-type(5) { grid-row-start: 16; }
-aside:nth-of-type(6) { grid-row-start: 18; }
-aside:nth-of-type(7) { grid-row-start: 26; }
-</style>

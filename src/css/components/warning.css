@@ -1,4 +1,7 @@
 .Warning {
+  position: relative;
+  z-index: 12;
+
   display: flex;
   --grid-column: full;
 
