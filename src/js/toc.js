@@ -3,7 +3,9 @@ export const getToCMethods = () => {
   const headersMap = new Map();
   const visibleElements = new Map();
   let previousHeader = '';
-  let previousHeaderElement;
+
+  const removeActiveHeaders = () => Array.from(document.getElementsByClassName('ToC-LI_active'))
+    .forEach(item => item.classList.remove('ToC-LI_active'))
 
   const getCurrentHeader = () => {
     let scoredFirstHeader = false;
@@ -30,14 +32,11 @@ export const getToCMethods = () => {
   const setCurrentHeaderInToC = () => {
     const header = getCurrentHeader();
     if (header !== previousHeader) {
-      if (previousHeaderElement) {
-        previousHeaderElement.classList.remove('ToC-LI_active');
-      }
+      removeActiveHeaders();
       const linkElement = document.querySelector(`.ToC-Link[href='#${header}']`);
       if (linkElement) {
         const newHeader = linkElement.parentElement;
         newHeader.classList.add('ToC-LI_active');
-        previousHeaderElement = newHeader;
       }
       previousHeader = header;
     }
@@ -74,8 +73,8 @@ export const getToCMethods = () => {
     visibleElements.clear();
     lastHeader = '';
     previousHeader = '';
-    previousHeaderElement = undefined;
     observer.disconnect();
+    removeActiveHeaders();
   }
 
   return { registerToC, unregisterToC };
