@@ -1,4 +1,9 @@
+import { getToCMethods } from './toc.js';
+
 const initPjax = (queue, lazyQueue) => {
+  const { registerToC, unregisterToC } = getToCMethods();
+  registerToC();
+
   const states = {};
   const html = document.documentElement;
 
@@ -24,6 +29,7 @@ const initPjax = (queue, lazyQueue) => {
   states[currentURL] = getCurrentState();
 
   const applyStateDOM = state => {
+    unregisterToC();
     const oldRoot = document.getElementsByClassName('Root')[0];
     if (!state.domRoot) {
       const newRoot = document.createElement('div');
@@ -37,6 +43,7 @@ const initPjax = (queue, lazyQueue) => {
     }
     oldRoot.parentNode.replaceChild(state.domRoot, oldRoot);
     html.className = html.className.replace(/Page_type_\w*/, 'Page_type_' + state.type);
+    registerToC();
   };
 
   const applyMetrikaHit = () => {
