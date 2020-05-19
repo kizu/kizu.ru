@@ -21,6 +21,13 @@
     <meta name="viewport" content="width=device-width" />
 
     <title>{{- partial "layout_parts/doc_title.html" . -}}</title>
+    <meta name="description" content="
+      {{- if .Params.summary -}}
+        {{ .Params.summary }}
+      {{- else -}}
+        {{ i18n "defaultDescription" }}
+      {{- end -}}
+    " />
 
     <script>document.documentElement.classList.add("withJS")</script>
 

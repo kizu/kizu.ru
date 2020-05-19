@@ -87,3 +87,6 @@ other ="Read the full article on kizu.ru"
 
 [lastBuild]
 other = "Last build date"
+
+[defaultDescription]
+other = "Personal site, blog and experiments with CSS and other front-end technologies."
