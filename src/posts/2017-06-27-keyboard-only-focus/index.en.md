@@ -40,14 +40,14 @@ We can already see that for most elements in all browsers we would get that focu
 
 One thing we should always do when we start experimenting is to see if there is already a solution in current or incoming specifications.
 
-[The latest draft of Selectors Level 4](https://drafts.csswg.org/selectors-4/#the-focusring-pseudo) provides us with two new focus-related pseudo-classes: `focus-within` and `focus-ring`.
+[The latest draft of Selectors Level 4](https://drafts.csswg.org/selectors-4/#the-focus-visible-pseudo) provides us with two new focus-related pseudo-classes: `focus-within` and `focus-visible`.
 
 - `:focus-within` is essentially a `:focus` that works like `:hover` — whenever children of an element would get `:focus`, the element would get `:focus-within` (and the element would get it when focused itself, of course). I can see how that would be a really useful tool in future, but for our case it's rather useless (unless we'd try to do some really wild things).
-- `:focus-ring` seems like a tool made specifically for our use-case — it is kinda the old `:focus`, but with this added: <q>[…] and the UA determines via heuristics that the focus should be specially indicated on the element</q>.
+- `:focus-visible` seems like a tool made specifically for our use-case — it is kinda the old `:focus`, but with this added: <q>[…] and the user agent determines via heuristics that the focus should be made evident on the element</q>.
 
-In theory, `:focus-ring` should help us[^although]: we could use it for keyboard focus styles while leaving the normal `:focus` without anything excess. But there are two problems: no browser, as far as I know, supports the property from the spec and only Firefox supports its `:-moz-focusring` — [old proprietary pseudo-class](https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring), which was a base for a new one. And this pseudo-class is already a bit flawed:
+In theory, `:focus-visible` should help us[^although]: we could use it for keyboard focus styles while leaving the normal `:focus` without anything excess. But there are two problems: it still has a limited browser support, and this pseudo-class is already a bit flawed:
 
-[^although]: Of course, we'd need to implement it using progressive enhancement: declaring all the styles for `:focus`, then removing the styles on `:not(:focus-ring)`, as otherwise, we would lose in keyboard accessibility at older browsers.
+[^although]: Of course, we'd need to implement it using progressive enhancement: declaring all the styles for `:focus`, then removing the styles on `:not(:focus-visible)`, as otherwise, we would lose in keyboard accessibility at older browsers.
 
 {{<Partial src="examples/2.html" />}}
 
@@ -56,7 +56,7 @@ If you'd look at this example in Firefox, you could see two different issues:
 1. At Firefox for Mac it would work properly unless you'd click on a styled span, in which case you'll see the focus-ring. That's unfortunate, as while for proper native controls things are ok, I'm sure there would be cases when people would like to have this kind of control over interactive parts of pages that should have the same behavior as the native controls. But as things are work as intended at Windows, maybe that behavior at Mac is a bug? Probably we could see it fixed in future.
 2. This issue is bigger and worse — as [Patrick has mentioned](https://twitter.com/patrick_h_lauke/status/879808288669433857), there is a really weird heuristic which makes the `:-moz-focusring` to apply all-the-time once you've used a keyboard navigation on page at least once. That makes this solution not stable enough. Especially, given that in some cases I managed to “break” Firefox making it to consider **every** page to be in this keyboard-navigation always-on from the start and on refresh, which was fixed only after the browser restart.
 
-In other browsers, you shouldn't see anything there unless someone would already implement the `:focus-ring`. If that would happen — tell me and I'll update this post!
+In other browsers, you shouldn't see anything there unless someone would already implement the `:focus-visible`. If that would happen — tell me and I'll update this post!
 
 ## My Initial Solution
 
