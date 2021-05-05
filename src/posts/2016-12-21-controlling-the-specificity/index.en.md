@@ -184,7 +184,9 @@ That's why I propose to add the necessary tools to native CSS — to allow devel
 
 What exactly I propose? Certainly **not** something like a pseudoclass for modifying the specificity of a given selector. That would have too complex syntax (how would you pass the specificity to it?) and you'll need to use this just anywhere when solving your usual CSS problems. That's bad.
 
-What I'd like to see is some kind of a more general way of controlling the specificity not for specific selectors or rules, but for groups of rules. I think of some kind of an @-rule for it, so you could group any number of rules in a “layer”, then somehow determine the relationships of those layers between themselves, and voilà — you'd have a way to control the _cascade_ itself, the thing that always was out of touch when you were developing your stylesheets.
+What I'd like to see is some kind of a more general way of controlling the specificity not for specific selectors or rules, but for groups of rules. I think of some kind of an @-rule for it, so you could group any number of rules in a “layer[^at-layer]”, then somehow determine the relationships of those layers between themselves, and voilà — you'd have a way to control the _cascade_ itself, the thing that always was out of touch when you were developing your stylesheets.
+
+[^at-layer]: **Edit from May 2021:** there is now [a proposal for a `@layer`](https://www.w3.org/TR/css-cascade-5/#at-layer) in the 5th level of the CSS Cascade and Inheritance module thanks to [Miriam](@TerribleMia) <!-- offset="3" -->
 
 And the best part — specificity is a part of CSS that is applied only for selectors, it doesn't depend on DOM, on any inheritance there etc. So there shouldn't be a lot of troubles implementing something that changes the specificity itself (or creates groups of it like it is already there with the different parts of the cascade).
 
