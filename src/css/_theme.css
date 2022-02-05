@@ -47,7 +47,7 @@
   --THEME_COLOR_A--LIGHT: 0.42;
 
   --THEME_LI_CONTENT: "— ";
-  --THEME_LI_CONTENT--OL: counter(list) ". ";
+  --THEME_LI_CONTENT--OL: counter(list-item) ". ";
 
 
   /* UNUSED */

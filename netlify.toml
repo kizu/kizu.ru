@@ -3,7 +3,7 @@
   command = "HUGO_BASEURL=$URL gulp build"
 
 [build.environment]
-  HUGO_VERSION = "0.54.0"
+  HUGO_VERSION = "0.88.1"
 
 [context.production]
   command = "HUGO_BASEURL=$URL gulp build && npm run algolia"

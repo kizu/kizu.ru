@@ -1,6 +1,6 @@
 # Counters and Stones
 
-#Experiment #CSS_Logic #CSS
+#Experiment #CSS_Logic #CSS_Counters #CSS
 
 _HTML&CSS-only gomoku game? Binary logic in CSS via counters? So many combinators, Edge stops to understand what is even going on? All of this and a bunch of other weird CSS stuff in the experiment that I started back in 2013._
 

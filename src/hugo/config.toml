@@ -1,4 +1,11 @@
-markup = "mmark"
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.highlight]
+    codeFences = false
+  [markup.tableOfContents]
+    endLevel = 6
+  [markup.goldmark.renderer]
+    unsafe= true
 
 baseURL = "https://www.kizu.ru/"
 sourceRelativeLinksEval = true

@@ -28,6 +28,12 @@ figcaption,
   --link-underline-offset: 0.4em;
 }
 
+aside:first-child,
+figcaption:first-child,
+.Aside:first-child {
+  --asides-padding-top: 0;
+}
+
 .Aside {
   grid-column: aside;
 }

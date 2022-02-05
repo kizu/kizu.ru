@@ -12,7 +12,6 @@ ol, ul {
 }
 
 ol {
-  counter-reset: list;
   --list-item-content: var(--ol-item-content);
 }
 
@@ -32,12 +31,12 @@ li {
 
 li::before {
   content: var(--list-item-content);
-  counter-increment: list;
 
   position: absolute;
 
-  width: var(--THEME_INDENT);
-  margin-left: calc(-1*var(--THEME_INDENT));
+  width: var(--list-item-padding);
+  margin-left: calc(-1*var(--list-item-padding));
+  text-align: var(--list-marker-align);
 
   font-feature-settings: "lnum", "onum" 0;
 }
