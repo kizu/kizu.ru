@@ -7,7 +7,7 @@
     var(--color-h, 0),
     calc(var(--color-s, 0) * 1%),
     calc(var(--color-l, 0) * 1%),
-    calc(var(--inherited-a, var(--color-a, 1)) + 0 / (1 - var(--color-a, 1)))
+    calc(var(--inherited-a, var(--color-a, 1)) + 0 / (1.001 - var(--color-a, 1)))
   );
   --color-a: 1;
 }

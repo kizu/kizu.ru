@@ -2,9 +2,9 @@
   "private": true,
   "name": "hugo-kizu",
   "version": "14.0.0",
-  "author": "Roman Komarov <kizmarh@ya.ru> (https://www.kizu.ru/)",
-  "description": "Gulp- and Hugo-based version of kizu.ru",
-  "homepage": "https://www.kizu.ru/",
+  "author": "Roman Komarov <kizmarh@ya.ru> (https://kizu.dev)",
+  "description": "Gulp- and Hugo-based version of kizu.dev",
+  "homepage": "https://kizu.dev",
   "bugs": {
     "url": "https://github.com/kizu/kizu.ru/issues"
   },

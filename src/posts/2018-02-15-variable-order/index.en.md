@@ -40,7 +40,7 @@ The only thing that we need to do in HTML (we use a regular HTML table for
     --order-by-views: 2431;
   ">
   <th class="table-cell">
-    <a href="http://kizu.ru/en/fun/controlling-the-specificity/">Controlling the Specificity</a>
+    <a href="https://kizu.dev/en/fun/controlling-the-specificity/">Controlling the Specificity</a>
   </th>
   <td class="table-cell">2016-12-21</td>
   <td class="table-cell">2 431</td>

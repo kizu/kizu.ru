@@ -96,7 +96,7 @@ Contractor Front-End Web Developer, helped the design studio with HTML&CSS for s
 
 ## Speaking
 
-I gave [around 20 talks](http://kizu.ru/talks/), mostly in Russian, but also managed to give a few ligntning talks in English:
+I gave [around 20 talks](https://kizu.dev/ru/talks/), mostly in Russian, but also managed to give a few ligntning talks in English:
 
 - [“Not your usual CSS counters”](https://twitter.com/mauriz/status/1060544263904206849), 4m lightning talk at dotCSS, November 8, 2018 (video coming soon).
 - [“Don’t look into the source”](https://vimeo.com/77929464), 10m talk at Fronteers Jam Session, October 9, 2013.
