@@ -145,7 +145,7 @@ Here is a list of the issues I stumbled[^report] over at the time:
 
 The most serious issue was, of course, the absence of the implementation in Firefox, but the other issues in Chromium and Webkit could be a bit annoying when you would try to override the display of the counters and then use the HTML attributes to control them.
 
-## Prior Art
+## Aknowledgements
 
 When first did my experiments with the counters, I didn’t find any mentions of the implicit list-item counters except for the specs[^also]. Since then there were a few mentions of them:
 
@@ -164,7 +164,7 @@ However, the things would be the same for the `::marker` — it also has the ac
 
 ## Accessibility
 
-I’m not an accessibility expert, so I’m not sure if things did improve, but at least in `2019` there was an issue where Safari/VoiceOver could lose the role of the list, here is a good article about it — [“Fixing” Lists] by [Scott O’Hara](@scottohara). The gist is — even though it is generally not recommended to duplicate the role of the elements that have it intrinsically, we might want to still add a `role="list"` to our lists if we’re heavily styling them (and not to forget to test things, making sure the content is available to everyone).
+I’m not an accessibility expert, so I’m not sure if things did improve, but at least in `2019` there was an issue where Safari/VoiceOver could lose the role of the list, here is a good article about it — [“Fixing” Lists](https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html) by [Scott O’Hara](@scottohara). The gist is — even though it is generally not recommended to duplicate the role of the elements that have it intrinsically, we might want to still add a `role="list"` to our lists if we’re heavily styling them (and not to forget to test things, making sure the content is available to everyone).
 
 Hopefully, the support for `::marker` would be one day perfect, so there won’t be a need to override the `list-style`, but even we would need to be careful.
 
