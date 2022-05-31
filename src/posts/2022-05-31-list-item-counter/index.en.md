@@ -145,7 +145,7 @@ Here is a list of the issues I stumbled[^report] over at the time:
 
 The most serious issue was, of course, the absence of the implementation in Firefox, but the other issues in Chromium and Webkit could be a bit annoying when you would try to override the display of the counters and then use the HTML attributes to control them.
 
-## Aknowledgements
+## Acknowledgements
 
 When first did my experiments with the counters, I didn’t find any mentions of the implicit list-item counters except for the specs[^also]. Since then there were a few mentions of them:
 
