@@ -1,1 +1,1 @@
-# kizu.ru
+# kizu.dev

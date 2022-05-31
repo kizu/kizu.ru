@@ -7,14 +7,14 @@
   [markup.goldmark.renderer]
     unsafe= true
 
-baseURL = "https://www.kizu.ru/"
+baseURL = "https://kizu.dev/"
 sourceRelativeLinksEval = true
 
 preserveTaxonomyNames = true
 
 DefaultContentLanguage = "en"
 
-title = "kizu.ru"
+title = "kizu.dev"
 
 [author]
 name = "Roman Komarov"

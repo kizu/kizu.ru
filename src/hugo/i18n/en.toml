@@ -83,7 +83,7 @@ other = "Last post"
 other = "This page is permanently moved to a new address"
 
 [readFull]
-other ="Read the full article on kizu.ru"
+other ="Read the full article on kizu.dev"
 
 [lastBuild]
 other = "Last build date"
