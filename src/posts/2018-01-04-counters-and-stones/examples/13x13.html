@@ -4,7 +4,7 @@
 /* ⋰ */ .board > :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
 /* ⋮  */ .board > [id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer,
 /* ⋱ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3))[id^=W]:checked +*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked ~ footer {
-  --endgame: grid;
+  --endgame: flex;
   --endmessage: 'White won!';
 }
 
@@ -12,7 +12,7 @@
 /* ⋰ */ .board > :not(:nth-child(13n+1)):not(:nth-child(13n+2)):not(:nth-child(13n+3)):not(:nth-child(13n+4)):checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
 /* ⋮  */ .board > :checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer,
 /* ⋱ */ .board > :not(:nth-child(13n-0)):not(:nth-child(13n-1)):not(:nth-child(13n-2)):not(:nth-child(13n-3)):checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+:checked+*+*+*+*+*+*+*+*+*+*+*+*+*+ [id^=B]:checked ~ footer {
-  --endgame: grid;
+  --endgame: flex;
   --endmessage: 'Black won!';
 }
 
@@ -111,6 +111,7 @@
   content: counter(Black) counter(var(--stone));
 
   flex-basis: 100%;
+  min-width: max-content;
   font-family: monospace;
   font-size: 10px;
   position: relative;
@@ -203,7 +204,7 @@
 
   position: relative;
   flex-basis: 100%;
-
+  min-width: max-content;
   box-sizing: border-box;
   height: 100%;
   padding-left: calc(100% - 1.5ch);
@@ -225,15 +226,22 @@
   grid-column: 2;
   grid-row: 1;
 
+  position: absolute;
+  left: 0;
+  right: 0;
   z-index: 99;
+  height: 100%;
+  grid-column: 1;
 
   display: var(--endgame, none);
+  flex-direction: column;
 
   justify-content: center;
   text-align: center;
   align-content: center;
+  align-items: center;
 
-  grid-gap: 1em;
+  gap: 1em;
   margin: calc(-0.5 * var(--stone-size));
 
   font: 40px/1.5 Hevetica Neue, Arial, sans-serif;
@@ -242,17 +250,21 @@
   background: rgba(255,255,255,0.9);
 }
 .board > footer:before {
+  grid-row: 1;
+  grid-column: inherit;
   content: var(--endmessage);
 }
 
 /* New game after win button */
 .board > footer > button {
+  grid-row: 2;
   font-size: 1em;
   border: 2px solid;
   padding: 0.5em 1em;
   border-radius: 9em;
   background: #FFF;
   cursor: pointer;
+  max-width: max-content;
 }
 
 /* The board visuals */

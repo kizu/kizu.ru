@@ -112,6 +112,7 @@ And CSS (with some unneeded visual stuff omited):
 
 .overflower-long {
   flex-basis: 100%;
+  min-width: max-content; /* Safari fix */
   box-sizing: border-box;
   padding-left: calc(100% - 1.5ch);
 }
