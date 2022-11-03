@@ -10,6 +10,7 @@
   /* Grid! */
   --grid-toc: minmax(0, 1fr);
   --grid-side: minmax(min-content, 1fr);
+  --grid-side--small: minmax(0, 1fr);
   --grid-content: minmax(var(--content-min-width), var(--content-max-width));
 
   --grid-ascii:
@@ -61,6 +62,7 @@
     --at-small: 1;
 
     --grid-ascii: var(--grid-ascii--small);
+    --grid-side: var(--grid-side--small);
     --figure-subgrid-ascii: var(--figure-subgrid-ascii--small);
   }
 }
