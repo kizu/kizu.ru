@@ -1,0 +1,10 @@
+# Netlify redirects for mastodon.
+# Inspired by:
+# - https://blog.netnerds.net/2022/11/alias-mastodon/
+# - https://gist.github.com/hallettj/e469f88b96184ac909b7f768b80a3a4e
+
+/.well-known/nodeinfo  resource=acct:kizu@kizu.dev  https://front-end.social/.well-known/nodeinfo?resource=acct:kizu@front-end.social   301
+/.well-known/webfinger resource=acct:kizu@kizu.dev  https://front-end.social/.well-known/webfinger?resource=acct:kizu@front-end.social  301
+/.well-known/host-meta resource=acct:kizu@kizu.dev  https://front-end.social/.well-known/host-meta?resource=acct:kizu@front-end.social  301
+
+/@kizu  https://front-end.social/@kizu  301

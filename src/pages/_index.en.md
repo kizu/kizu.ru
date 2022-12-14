@@ -12,12 +12,10 @@ Below you will find links to some of the articles I wrote and experiments I 
 
 {{<ArticleList>}}
 
-Note that those are all in English, there is also a [Russian version of this site](/ru/) where you could find some older articles and experiments in Russian.
-
 You can subscribe to the new posts with [my site's RSS/Atom Feed](https://feeds.feedburner.com/kizuruen).
 
 ## How to contact me
 
-The best way to contact me is to write me a letter to my e-mail address — [kizmarh@ya.ru](mailto:kizmarh@ya.ru).
+The best way to contact me is to write me a letter to my e-mail address — [kizmarh@gmail.com](mailto:kizmarh@gmail.com).
 
-Some other places where you could sometimes find me: [Mastodon](https://front-end.social/@kizu "{:rel='me'}"), [Twitter](@kizmarh "{:rel='me'}"), [GitHub](gh:kizu "{:rel='me'}"), [Instagram (mostly with cats)](https://instagram.com/ki_zu "{:rel='me'}").
+Some other places where you could sometimes find me: [Mastodon](https://front-end.social/@kizu "{:rel='me'}") and [GitHub](gh:kizu "{:rel='me'}").
