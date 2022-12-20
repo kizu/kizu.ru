@@ -16,6 +16,6 @@ You can subscribe to the new posts with [my site's RSS/Atom Feed](https://feeds.
 
 ## How to contact me
 
-The best way to contact me is to write me a letter to my e-mail address — [kizmarh@gmail.com](mailto:kizmarh@gmail.com).
+The best way to contact me is to write a letter to my e-mail address — [kizmarh@gmail.com](mailto:kizmarh@gmail.com).
 
 Some other places where you could sometimes find me: [Mastodon](https://front-end.social/@kizu "{:rel='me'}") and [GitHub](gh:kizu "{:rel='me'}").
