@@ -12,4 +12,4 @@
   command = "HUGO_BASEURL=$DEPLOY_PRIME_URL HUGO_BUILDDRAFTS=true gulp build"
 
 [context.branch-deploy]
-  command = "HUGO_BASEURL=$DEPLOY_URL HUGO_BUILDDRAFTS=true gulp build"
+  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL HUGO_BUILDDRAFTS=true gulp build"
