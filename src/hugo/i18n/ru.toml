@@ -31,6 +31,12 @@ other= "2 January 2006 г."
 [published]
 other = "Опубликовано"
 
+[draft]
+other = "Черновик в прогрессе"
+
+[draftWarning]
+other = "Эта статья всё ещё в процессе написания, не делитесь ей, пожалуйста!"
+
 [thanksTo]
 other = "Спасибо"
 

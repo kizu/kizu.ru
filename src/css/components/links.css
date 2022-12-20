@@ -86,6 +86,7 @@ span {
     left 0 var(--link-underline-position)/var(--link-underline-pattern-width)
     calc(var(--underline-width) * var(--underline, 1));
   background-clip: content-box;
+  --code-color: var(--link-color);
 }
 
 .Link:not(a),
@@ -98,6 +99,8 @@ span {
 
 a:visited {
   color: var(--link-color--visited);
+  --code-color: var(--link-color--visited);
+
 }
 
 a:hover,
@@ -106,5 +109,6 @@ a:not([href^='#']):focus,
   --underline-width: calc(2 * var(--link-underline-width));
   --link-underline-color: var(--link-underline-color--hover);
   color: var(--link-color--hover);
+  --code-color: var(--link-color--hover);
   z-index: var(--link-hover-z-index, var(--link-z-index));
 }

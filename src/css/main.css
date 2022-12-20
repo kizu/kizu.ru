@@ -248,9 +248,26 @@ blockquote {
   margin: 1rem 0;
   box-shadow: inset 2px 0;
   font-style: italic;
+  --dl-margin: 0;
   --text-indent: 0;
   --em-font-style: normal;
   --code-font-style: normal;
+}
+
+dl {
+  margin: var(--dl-margin, 1em) 0;
+  font-style: normal;
+  --em-font-style: italic;
+  --code-font-style: italic;
+}
+
+dt {
+  font-style: italic;
+}
+
+dd {
+  font-style: normal;
+  margin-left: var(--THEME_INDENT);
 }
 
 table {

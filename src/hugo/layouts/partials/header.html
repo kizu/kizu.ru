@@ -7,7 +7,11 @@
         <li style="--grid-position: start;"><a href="/{{ $Page.Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}" tabindex="{{ $tabindex }}">{{ i18n "titleName" }}</a> {{ partial "searchButton.html" (dict "context" $Page "tabindex" $tabindex "position" "header") }}</li>
         {{- if eq $Page.Params.type "post" -}}
           <li style="--grid-position: end;">
-            {{ partial "readableDate.html" $Page }}
+            {{- if eq $Page.Params.draft true -}}
+              {{- i18n "draft" }}
+            {{- else -}}
+              {{ partial "readableDate.html" $Page }}
+            {{- end -}}
           </li>
         {{- end -}}
       </ul>

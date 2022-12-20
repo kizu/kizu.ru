@@ -9,6 +9,10 @@
   </aside>
 {{- end -}}{{- end -}}
 
+{{- if eq .Page.Params.draft true -}}
+  <p class="Warning"><strong>{{- i18n "draftWarning" -}}</strong></p>
+{{- end -}}
+
 {{- if .Params.summary -}}
   <p class="Summary">{{ .Params.summary | markdownify }}</p>
 {{- end -}}
@@ -22,9 +26,14 @@
 {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
 
 {{- if eq .Params.type "post" -}}
-  <p class="Metadata Published">
-    {{- i18n "published" }} {{ partial "readableDate.html" . }}{{ partial "taglist.html" . }}
-  </p>
+    <p class="Metadata Published">
+      {{- if eq .Page.Params.draft true -}}
+        {{- i18n "draft" }}
+      {{- else -}}
+        {{- i18n "published" }} {{ partial "readableDate.html" . }}
+      {{- end -}}
+      {{ partial "taglist.html" . }}
+    </p>
 {{- end -}}
 
 {{- if .Params.thanks_to -}}
@@ -42,4 +51,8 @@
 
 {{- if .Params.warning -}}
   <p class="Warning"><strong>{{ .Params.warning | markdownify }}</strong></p>
+{{- end -}}
+
+{{- if eq .Page.Params.draft true -}}
+  <p class="Warning"><strong>{{- i18n "draftWarning" -}}</strong></p>
 {{- end -}}

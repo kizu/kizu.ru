@@ -3,6 +3,8 @@
   z-index: 12;
 
   display: flex;
+  justify-content: center;  
+  align-items: center;
   --grid-column: full;
 
   border: 0.5rem dashed #FFCA51;

@@ -31,6 +31,12 @@ other= "January 2, 2006"
 [published]
 other = "Published on"
 
+[draft]
+other = "In-progress draft"
+
+[draftWarning]
+other = "This article is an in-progress draft, do not share it yet, please! However, I'd be grateful for any feedback, of course :)"
+
 [thanksTo]
 other = "Thanks to"
 
@@ -46,14 +52,14 @@ other = "Edit on GitHub"
 [GitHub]
 other = "GitHub"
 
-[Twitter]
-other = "Twitter"
+[Mastodon]
+other = "Mastodon"
 
-[twitterTitle]
-other = "Follow on Twitter"
+[mastodonTitle]
+other = "Follow on Mastodon"
 
-[twitterLink]
-other = "https://twitter.com/kizmarh"
+[mastodonLink]
+other = "https://front-end.social/@kizu"
 
 [Feed]
 other = "Feed"
