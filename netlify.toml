@@ -9,4 +9,4 @@
   command = "HUGO_BASEURL=$URL gulp build && npm run algolia"
 
 [context.deploy-preview]
-  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL gulp build"
+  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL HUGO_BUILDDRAFTS=true gulp build"
