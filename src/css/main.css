@@ -231,7 +231,8 @@ p:empty {
 
 /* The only case when we don't need an indent is after headers */
 /* TODO: Do we need this only for _en? */
-:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(.Summary):not(.Warning) + p {
+:not(h1, h2, h3, h4, h5, h6, .Summary, .Warning, ul, ol, aside) + p,
+:not(h1, h2, h3, h4, h5, h6, .Summary, .Warning, ul, ol) + aside + p {
   --p-text-indent: var(--text-indent);
   --p-margin-top: var(--p-p-margin-top, calc(1rem * var(--at-small)));
 }
