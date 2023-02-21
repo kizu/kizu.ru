@@ -1,0 +1,81 @@
+<style>
+  .example2 {
+    position: relative;
+    font-size: 24px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    container-type: size;
+
+    height: calc(100px * var(--height-times));
+    --height-times: 2.5;
+    --width-times: 4.5;
+    --seconds-per-100px: 0.5s;
+  }
+
+  .example2 .target {
+    position: relative;
+    anchor-name: var(--is);
+    grid-area: 1/1/1/1;
+    width: 1em;
+    height: 1em;
+    background: hotpink;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: linear infinite alternate;
+    animation-name: horizontal, vertical;
+    animation-play-state: paused;
+    --delay: 0s;
+    --width-variation: 0s;
+    --height-variation: 0s;
+    --height-duration: calc(var(--height-times) * var(--seconds-per-100px));
+    --width-duration: calc(var(--width-times) * var(--seconds-per-100px));
+    animation-delay: var(--delay);
+    animation-duration:
+      calc(var(--width-duration) + var(--width-variation)),
+      calc(var(--height-duration) + var(--height-variation));
+  }
+  .example2:is(:hover, :focus) .target {
+    animation-play-state: running;
+  }
+  @keyframes horizontal {
+    from { left: 0 }
+    to { left: 100% }
+  }
+  @keyframes vertical {
+    from { top: 0 }
+    to { top: 100cqh }
+  }
+  .example2 .start {
+    --is: --start;
+    background: #E40303;
+    --width-variation: 0.14s;
+    --height-variation: 0.12s;
+    --delay: -19.6s;
+  }
+  .example2 .end {
+    --is: --end;
+    background: #732982;
+    --width-variation: 0.37s;
+    --height-variation: 1s;
+    --delay: -24.1s;
+  }
+  .example2 .connection {
+    --_from: var(--from, --start);
+    --_to: var(--to, --end);
+    position: absolute;
+    transform: translate(-0.5em, -0.5em);
+    background: pink;
+  }
+  .example2--intro .connection {
+    top:    anchor(var(--_from) center);
+    left:   anchor(var(--_from) center);
+    right:  anchor(var(--_to) center);
+    bottom: anchor(var(--_to) center);
+  }
+</style>
+<div class="example2 example2--intro" tabindex="0">
+  <div class="target start"></div>
+  <div class="target end"></div>
+  <div class="connection"></div>
+</div>

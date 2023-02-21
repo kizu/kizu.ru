@@ -286,7 +286,7 @@ mark {
 
 ::selection {
   text-shadow: none !important;
-  background-color: var(--THEME_SELECTION);
+  background-color: var(--THEME_SELECTION, #B1D2FB);
 }
 
 /* End of the top level `@supports` */

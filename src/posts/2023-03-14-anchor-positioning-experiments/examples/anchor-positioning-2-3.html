@@ -1,0 +1,34 @@
+<style>
+  .example2--with-workaround .connection {
+    --min: 0px;
+    top:    calc(anchor(var(--_from) center) - var(--min));
+    right:  calc(anchor(var(--_to)   center) - var(--min));
+    bottom: calc(anchor(var(--_to)   center) - var(--min));
+    left:   calc(anchor(var(--_from) center) - var(--min));
+    --flip-x: 0;
+    --flip-y: 0;
+    transform:
+      translate(-0.5em, -0.5em)
+      scaleX(calc(1 - 2 * var(--flip-x)))
+      scaleY(calc(1 - 2 * var(--flip-y)));
+  }
+  .example2--with-workaround .connection--flip-x {
+    --flip-x: 1;
+    left:  calc(anchor(var(--_to)   center) - var(--min));
+    right: calc(anchor(var(--_from) center) - var(--min));
+  }
+  .example2--with-workaround .connection--flip-y {
+    --flip-y: 1;
+    top:    calc(anchor(var(--_to)   center) - var(--min));
+    bottom: calc(anchor(var(--_from) center) - var(--min));
+  }
+</style>
+<div class="example2 example2--with-gradient example2--with-workaround" tabindex="0">
+  <div class="target start"></div>
+  <div class="target end"></div>
+
+  <div class="connection"></div>
+  <div class="connection connection--flip-x"></div>
+  <div class="connection connection--flip-y"></div>
+  <div class="connection connection--flip-x connection--flip-y"></div>
+</div>

@@ -1,0 +1,146 @@
+<style>
+  .example3 {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+  }
+  .tree {
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    --offset: 4px;
+    /* Would be used to target only the first line */
+    --lh: 1.2em;
+    /* Ensures that there would be less ideal horizontal alignment, leading to the connector disappearing */
+    margin-bottom: 2px;
+  }
+  .tree-item {
+    all: unset;
+    display: flex;
+    gap: 2em;
+    align-items: center;
+  }
+  .tree-item-details {
+    /* We have to do this, as we cannot use flex/grid on the details tag itself :( */
+    display: contents;
+  }
+  .tree-item-details:not([open])::before {
+    content: "+";
+    position: absolute;
+    left: anchor(var(--is) right);
+  }
+  .tree-item-label {
+    hyphens: none;
+    line-height: var(--lh);
+    anchor-name: var(--is);
+    --link-underline-position: bottom 12%;
+  }
+  summary.tree-item-label {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-shadow: none;
+    user-select: none;
+  }
+  summary.tree-item-label::marker {
+    content: "";
+  }
+  .tree-item::before {
+    all: unset;
+  }
+  .tree-item-label::before,
+  .tree-item-label::after {
+    position: absolute;
+    content: "";
+    left:  anchor(var(--to) right);
+    right: anchor(var(--is) left);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0c25 0 50 50 50 50s25 50 50 50' stroke='currentColor' vector-effect='non-scaling-stroke' fill='none' /%3E%3C/svg%3E");
+    background-size: calc(100% - var(--offset) * 2) 100%;
+    background-position: var(--offset) 0;
+    background-repeat: no-repeat;
+    /* They should not ever be in the way */
+    pointer-events: none;
+  }
+  .tree-item-label::before {
+    top:    calc(anchor(var(--to) top) + 0.5 * var(--lh));
+    bottom: anchor(var(--is) center);
+  }
+  .tree-item-label::after {
+    bottom: calc(anchor(var(--to) top) - 0.5 * var(--lh));
+    top:    anchor(var(--is) center);
+    transform: scaleY(-1);
+  }
+
+</style>
+<div class="example3">
+  <ul class="tree">
+    <li class="tree-item" style="--is: --node-1">
+      <details role="group" class="tree-item-details" open>
+        <summary class="tree-item-label">CSS selectors</summary>
+        <ul class="tree" style="--to: --node-1">
+          <li class="tree-item" style="--is: --node-1-1">
+            <details role="group" class="tree-item-details" open>
+              <summary class="tree-item-label">Basic selectors</summary>
+              <ul class="tree" style="--to: --node-1-1">
+                <li class="tree-item" style="--is: --node-1-1-1">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors">Universal</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-1-2">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors">Type</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-1-3">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors">Class</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-1-4">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors">ID</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-1-5">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">Attribute</a></p>
+                </li>
+              </ul>
+            </details>
+          </li>
+          <li class="tree-item" style="--is: --node-1-2">
+            <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">Selector list</a></p>
+          </li>
+          <li class="tree-item" style="--is: --node-1-3">
+            <details role="group" class="tree-item-details" open>
+              <summary class="tree-item-label">Combinators</summary>
+              <ul class="tree" style="--to: --node-1-3">
+                <li class="tree-item" style="--is: --node-1-3-1">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator">Descendant</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-3-2">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator">Child</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-3-3">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator">General sibling</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-3-4">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">Adjacent sibling</a></p>
+                </li>
+              </ul>
+            </details>
+          </li>
+          <li class="tree-item" style="--is: --node-1-4">
+            <details role="group" class="tree-item-details" open>
+              <summary class="tree-item-label">Pseudos</summary>
+              <ul class="tree" style="--to: --node-1-4">
+                <li class="tree-item" style="--is: --node-1-4-1">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo classes</a></p>
+                </li>
+                <li class="tree-item" style="--is: --node-1-4-2">
+                  <p class="tree-item-label"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">Pseudo elements</a></p>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </details>
+    </li>
+  </ul>
+
+</div>

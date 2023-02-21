@@ -1,0 +1,58 @@
+<style>
+  .example2--with-line .connection {
+    --min: 1px;
+    --mask: linear-gradient(
+      to top right,
+      transparent calc(50% - 1.5px),
+      hotpink calc(50% - 1px),
+      hotpink calc(50% + 1px),
+      transparent calc(50% + 1.5px)
+    );
+    background: var(--mask);
+  }
+  .example2--with-gradient.example2--with-line .connection {
+    background: var(--rainbow);
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+  }
+</style>
+<div class="example2 example2--with-gradient example2--with-line example2--with-workaround" tabindex="0">
+  <div class="target start" style="--is: --dot-a"></div>
+  <div class="target end" style="--is: --dot-b"></div>
+  <div class="target end" style="
+    --is: --dot-c;
+    --width-variation: -0.3s;
+    --height-variation: 0.6s;
+    --delay: -27s;
+  "></div>
+  <div class="target start" style="
+    --is: --dot-d;
+    --width-variation: 0.2s;
+    --height-variation: 0.4s;
+    --delay: -17s;
+  "></div>
+  <div style="--from: --dot-a; --to: --dot-b;">
+    <div class="connection"></div>
+    <div class="connection connection--flip-x"></div>
+    <div class="connection connection--flip-y"></div>
+    <div class="connection connection--flip-x connection--flip-y"></div>
+  </div>
+  <div style="--from: --dot-a; --to: --dot-c;">
+    <div class="connection"></div>
+    <div class="connection connection--flip-x"></div>
+    <div class="connection connection--flip-y"></div>
+    <div class="connection connection--flip-x connection--flip-y"></div>
+  </div>
+  <div style="--from: --dot-d; --to: --dot-c;">
+    <div class="connection"></div>
+    <div class="connection connection--flip-x"></div>
+    <div class="connection connection--flip-y"></div>
+    <div class="connection connection--flip-x connection--flip-y"></div>
+  </div>
+  <div style="--from: --dot-d; --to: --dot-b;">
+    <div class="connection"></div>
+    <div class="connection connection--flip-x"></div>
+    <div class="connection connection--flip-y"></div>
+    <div class="connection connection--flip-x connection--flip-y"></div>
+  </div>
+</div>

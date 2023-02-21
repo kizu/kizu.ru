@@ -1,0 +1,69 @@
+<style>
+  .example1 [style*='--is:'] {
+    anchor-name: var(--is);
+  }
+
+  .example1 [style*='--for:']:is(:hover, :focus-visible)::after {
+    content: "";
+
+    position: absolute;
+    top:    anchor(var(--for) top);
+    right:  anchor(var(--for) right);
+    bottom: anchor(var(--for) bottom);
+    left:   anchor(var(--for) left);
+
+    box-shadow: 0 0 0 4px hotpink;
+  }
+
+  /* Showing the screenshot by default if we don't have anchor-name support */
+  @supports not (anchor-name: --foo) {
+    :root[class] {
+      --toggler-on: none;
+      --toggler-off: inline;
+    }
+
+    .Figure-Demo::after {
+      content: "\26A0 \FE0F Your browser does not support anchor-name";
+      display: block;
+      background: --THEME_BG--DISTANT;
+
+      border: 2px dashed #FFCA51;
+      padding: 0.5rem;
+      margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
+      border-radius: 0 0 3px 3px;
+      text-align: center;
+
+      background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+      background-clip: padding-box, border-box;
+    }
+  }
+
+</style>
+<div class="example1" style="display: grid; place-items: center; gap: 0.5em;">
+  <p>Which <em tabindex="0" style="--for: --property">property</em> corresponds with which <em tabindex="0" style="--for: --value">value</em>?</p>
+  <div style="display: grid; grid-template-columns: repeat(2, min-content); gap: 1em;">
+    <ol style="--is: --property">
+      <li style="--for: --none" tabindex="0">
+        <code style="--is: --display">display</code>
+      </li>
+      <li style="--for: --hidden" tabindex="0">
+        <code style="--is: --visibility">visibility</code>
+      </li>
+      <li style="--for: --zero" tabindex="0">
+        <code style="--is: --opacity">opacity</code>
+      </li>
+    </ol>
+    <ol style="--is: --value">
+      <li style="--for: --visibility" tabindex="0">
+        <code style="--is: --hidden">hidden</code>
+      </li>
+      <li style="--for: --opacity" tabindex="0">
+        <code style="--is: --zero">0</code>
+      </li>
+      <li style="--for: --display" tabindex="0">
+        <code style="--is: --none">none</code>
+      </li>
+    </ol>
+  </div>
+</div>
+

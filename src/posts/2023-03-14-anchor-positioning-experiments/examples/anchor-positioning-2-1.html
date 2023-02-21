@@ -1,0 +1,25 @@
+<style>
+  .example2--min .connection {
+    top: min(
+      anchor(var(--_from) center),
+      anchor(var(--_to)   center)
+    );
+    left: min(
+      anchor(var(--_from) center),
+      anchor(var(--_to)   center)
+    );
+    right: min(
+      anchor(var(--_from) center),
+      anchor(var(--_to)   center)
+    );
+    bottom: min(
+      anchor(var(--_from) center),
+      anchor(var(--_to)   center)
+    );
+  }
+</style>
+<div class="example2 example2--min" tabindex="0">
+  <div class="target start"></div>
+  <div class="target end"></div>
+  <div class="connection"></div>
+</div>

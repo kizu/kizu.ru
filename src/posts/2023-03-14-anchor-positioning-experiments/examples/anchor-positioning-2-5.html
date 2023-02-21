@@ -1,0 +1,96 @@
+<style>
+  .example2--with-step .start,
+  .example2--with-step .end {
+    background: hotpink;
+  }
+  .example2--with-step .connection {
+    --min: 0.5em;
+    --line-color: hotpink;
+    --fill: var(--line-color), var(--line-color);
+    overflow: hidden;
+    container-type: size;
+    background: none;
+  }
+  .example2--with-step .connection::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: no-repeat;
+    background-image:
+      linear-gradient(var(--fill)),
+      linear-gradient(var(--fill)),
+      linear-gradient(var(--fill));
+    --half: calc(0.5em - 1px);
+    background-size:
+      2px calc(50% - var(--half)),
+      2px calc(50% - var(--half)),
+      calc(100% - 2 * var(--half)) 2px;
+    background-position:
+    var(--half) var(--half),
+      calc(100% - var(--half)) calc(100% - var(--half)),
+      var(--half) 50%;
+  }
+  @container (orientation: landscape) {
+    .example2--with-step .connection::before {
+      background-size:
+        calc(50% - var(--half)) 2px,
+        calc(50% - var(--half)) 2px,
+        2px calc(100% - 2 * var(--half));
+      background-position:
+        var(--half) var(--half),
+        calc(100% - var(--half)) calc(100% - var(--half)),
+        50% var(--half);
+    }
+  }
+  @container (max-width: calc(1em - 0.2px)) or (max-height: calc(1em - 0.2px)) {
+    .example2--with-step .connection::before,
+    .example2--with-step .connection::after {
+      visibility: hidden;
+    }
+  }
+  .example2--with-step .connection::after {
+    content: "";
+    bottom: 1em;
+    right: 1px;
+    --w: 0.5em;
+    width: var(--w);
+    height: var(--w);
+    transform-origin: 0 100%;
+    transform:
+      translate(1px)
+      rotate(-45deg);
+    box-sizing: border-box;
+    border: solid hotpink;
+    border-width: 0 0 2px 2px;
+    position: absolute;
+  }
+  @container (orientation: landscape) {
+    .example2--with-step .connection::after {
+      bottom: 1px;
+      right: 1em;
+      transform-origin: 100% 0;
+      transform:
+        translate(1px, 1px)
+        rotate(45deg);
+      border-width: 2px 2px 0 0;
+    }
+  }
+  .example2--with-step svg {
+    position: absolute;
+    --distance: calc(0.5em);
+    top: var(--distance);
+    left: var(--distance);
+    width: calc(100% - 2 * var(--distance));
+    height: calc(100% - 2 * var(--distance));
+    overflow: visible;
+  }
+</style>
+<div class="example2 example2--with-step example2--with-workaround" tabindex="0">
+  <div class="target start"></div>
+  <div class="target end"></div>
+
+  <div class="connection"></div>
+  <div class="connection connection--flip-x"></div>
+  <div class="connection connection--flip-y"></div>
+  <div class="connection connection--flip-x connection--flip-y"></div>
+</div>
