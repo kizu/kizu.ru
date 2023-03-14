@@ -85,29 +85,32 @@
   position: relative;
 }
 
-@container (min-width: 27em) {
-  /* Have to use a wrapper, as we cannot regularly position an element/pseudo from the aside itself */
-  .example4 .aside-content {
-    position: absolute;
-    grid-column: 2;
-    left: anchor(var(--prev) left, 0);
-    right: 0;
-    anchor-name: var(--is);
-    
-    /* works for figures, or other regular elements */
-    top: max(
-      anchor(var(--for)  top),
-      anchor(var(--prev) bottom) + 0.5em
-    );
-  }
+/* We need an at-supports here as otherwise the sidenotes would not be accessible due to the absolute positioning. */
+@supports (anchor-name: --foo) {
+  @container (min-width: 27em) {
+    /* Have to use a wrapper, as we cannot regularly position an element/pseudo from the aside itself */
+    .example4 .aside-content {
+      position: absolute;
+      grid-column: 2;
+      left: anchor(var(--prev) left, 0);
+      right: 0;
+      anchor-name: var(--is);
+      
+      /* works for figures, or other regular elements */
+      top: max(
+        anchor(var(--for)  top),
+        anchor(var(--prev) bottom) + 0.5em
+      );
+    }
 
-  .example4 .aside-content a {
-    color: unset;
-    background: unset;
-  }
+    .example4 .aside-content a {
+      color: unset;
+      background: unset;
+    }
 
-  .example4 aside {
-    display: contents;
+    .example4 aside {
+      display: contents;
+    }
   }
 }
 

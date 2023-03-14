@@ -339,7 +339,7 @@ Or use an SVG with its overflow behavior and the `marker`'s auto-rotation.
 
 And so on — even with this non-ideal workaround, we could already do _a lot_ of different effects using this type of connection as a building block.
 
-This ability to connect elements visually that anchor positioning can be incredibly versatile, and we did not have anything like that available with just plain HTML&CSS before.
+This ability to connect elements visually can be incredibly versatile, and we did not have anything like that available with just plain HTML&CSS before.
 
 ### Using the Connections
 
@@ -352,7 +352,7 @@ The example shows lines connecting items with their parents in a nested tree l
 
 Thanks to [Yoksel](@yoksel_en)'s [URL-encoder for SVG](https://yoksel.github.io/url-encoder/), I embedded the SVG as a background for pseudo-elements.
 
-Note that I have no idea what I’m doing when handling SVG — so if something could be improved/fixed — let me know!
+Note that I have no idea what I’m doing when handling SVG — so if something could be improved or fixed — let me know!
 {{</Partial>}}
 
 How cool is that? This list does not have any positions hard-coded — the only thing we need to set up is all the connections in HTML. Then, anchor positioning would be responsible for placing all the connectors.
@@ -381,7 +381,7 @@ How cool is that? This list does not have any positions hard-coded — the only
 }
 ```
 
-We can see how we can connect our pseudo-elements to two elements and also modify the value with a `calc()` — in this case, I’m attaching the left part not to the center of the element but to the center of the first line — as if the text would wrap[^wrap], due to an uneven right edge, it is better not to point the connectors to the center.
+We can see how we can connect our pseudo-elements to two elements and also modify the value with a `calc()` — in this case, I’m attaching the left part not to the center of the element but to the center of the first line — as if the text would wrap[^wrap]. Due to an uneven right edge, it is better not to point the connectors to the center. An alternative to a calculation could be placing an inline element at the item’s start, then targeting its vertical position instead.
 
 [^wrap]: If you can — you can try resizing the page — things will mostly adapt correctly when the words would wrap. <!-- offset="3" span="2" -->
 
@@ -422,7 +422,7 @@ In the example above, we have a regular HTML table where we can highlight an
 
 Without anchor positioning, this is almost impossible to achieve with just CSS — this can be _kinda_ possible if we would implement the table using CSS grids, but we’d have _a lot_ of problems, starting from accessibility (as we’d need to override table display), and finishing with the “outside of the table” requirement — we’d need to hack things in some way structure-wise; otherwise, the grid’s named rows and columns won’t be available outside of it.
 
-And with regular tables! Even though we could do something similar with some `:has()` usage, without heavy hard-coding, we could not style only _specific cells_ and not any arbitrary spans.
+And even though we could do something similar when using `:has()`, we could not style only _specific cells_ and not any arbitrary spans without heavy hard-coding.
 
 But with anchors, things are _so easy_!
 
@@ -485,23 +485,25 @@ In this example, whenever we target something, we can use from 2 to 4 differ
 
 A few notes:
 
-1. Look at how the CSS does not have anything hard-coded — we only mention rows & columns, we don’t mention any specific names, and so on.
-2. For targeting the first column, we have to create a pseudo-element, as we can’t assign two different anchor names to the same element, so we have to add an extra one just for the additional anchor name. While we could mention the `--chrome` anchor there, that would mean hard-coding it into the CSS, making it less reusable. Another option would be to define an additional API for the component, where we could provide the “first column” via a separate CSS variable.
+1. Look at how we don’t have anything hard-coded in CSS — we only mention rows & columns, we don’t mention any specific names, and so on.
+2. For targeting the first column, we have to create a pseudo-element, as we can’t assign two different anchor names to the same element, so we have to add an extra one just for the additional anchor name. While we could mention the `--chrome` anchor there, that would mean hard-coding it into wedon't it less reusable. Another in CSS option would be to define an additional API for the component, where we could provide the “first column” via a separate CSS variable.
 3. We can use a CSS-like API with “shorthands” for rows/columns when mentioning them, by default targeting everything from the first column and row to the end of the `tbody` and allowing specifying any of the boundaries manually, either as a whole row or column, or only a specific part like a start or end.
 
 I’m fascinated by how we can use modern CSS to define such expressive APIs for our components!
 
 ### Sidenotes Layout
 
-For the final experiment, I wanted to do something different. Maybe not as shiny and captivating _visually_, but something that tries to get the maximum of what we could from the anchor positioning — trying to apply it for _layouts_.
+For the final experiment, I wanted to do something different. Maybe not as shiny and captivating _visually_, but something that tries to get the maximum of what we could from the anchor positioning — trying to apply it for _layouts_[^layouts].
+
+[^layouts]: Unlike other examples, this one could be harder to handle from a graceful degradation standpoint. Even when the anchor positioning becomes available, we will still need to be careful about using it for such purposes. <!-- offset="3" span="3"  -->
 
 When we talk about absolute positioning in the context of layouts, we often think of it as this very fragile/hard-coded way of doing them, as absolutely positioned elements do not know anything about each other, so it is hard to make things responsive or context-aware.
 
-With anchor positioning, we can make them behave with more sophisticated rules, especially when we can attach one absolutely-positioned element to another. Though currently there is a significant limitation in _when_ this works, making the actual usage of this behavior complicated and probably not production-friendly, let’s first look at the example.
+With anchor positioning, we can make them behave with more sophisticated rules, especially when we can attach one absolutely-positioned element to another. Though currently there is a significant limitation in _when_ this works, making the actual usage of this behavior complicated and probably not production-friendly — let’s first look at the example.
 
-For the example, I chose, once again, a thing that is present in the design of my blog, which is, again, the side-notes!
+For the example[^fun-fact], I chose, once again, a thing that is present in the design of my blog, which is, again, the side-notes!
 
-Fun fact about this anchor positioning usage — it was mentioned as a use case in [Eric Meyer](https://mastodon.social/@Meyerweb)'s [CSS Wish List 2023](https://meyerweb.com/eric/thoughts/2023/02/08/css-wish-list-2023/#anchored-positioning).
+[^fun-fact]: Fun fact about this anchor positioning usage — it was mentioned as a use case in [Eric Meyer](https://mastodon.social/@Meyerweb)'s [CSS Wish List 2023](https://meyerweb.com/eric/thoughts/2023/02/08/css-wish-list-2023/#anchored-positioning). <!-- offset="-1.75" -->
 
 {{<Partial src="examples/anchor-positioning-4.html" screenshot="true" video="true" a11y="true" style="overflow: hidden; resize: horizontal;">}}
 This example only makes sense on a wide screen — in a narrow context, the sidenotes would become just footnotes, appearing at the end of the text, but when wide enough, you should see the experiment in action.
@@ -526,7 +528,7 @@ I won’t show you the complete code of this experiment, as a lot is going 
 
 #### The Problem
 
-Let me quote the place from the specs — [the definition of the _acceptable anchor_](https://drafts.csswg.org/css-anchor-position-1/#acceptable-anchor-element) that describes our limitation:
+Let me quote the place from the specs — [the definition of the _acceptable anchor_](https://drafts.csswg.org/css-anchor-position-1/#acceptable-anchor-element) that describes our limitations:
 
 > An element `el` is a acceptable anchor element for an [absolutely positioned](https://drafts.csswg.org/css-position-3/#absolute-position) element `query el` if any of the following are true:
 > -   `query el` is in a higher [root layer](https://drafts.csswg.org/css-anchor-position-1/#root-layer) than `el`.
