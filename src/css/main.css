@@ -171,6 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1em;
   font-weight: 900;
   --strong-font-weight: 900;
+  text-wrap: balance;
 }
 
 h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
@@ -286,7 +287,14 @@ mark {
 
 ::selection {
   text-shadow: none !important;
-  background-color: var(--THEME_SELECTION);
+  background-color: var(--THEME_SELECTION, #B1D2FB);
+}
+
+/* Inspired by https://kennethormandy.com/list/2022-11-25/ 
+   Though, is not used yet, as I need to find a way to apply this properly to the headers.
+*/
+.nbsp {
+  display: var(--initial-at-large, inline-block);
 }
 
 /* End of the top level `@supports` */

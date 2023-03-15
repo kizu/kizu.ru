@@ -2,19 +2,9 @@
 {{- $src := (print "/" .Page.Params.srcPath $file) -}}
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
-{{- $a11y := .Get "a11y" -}}
 <figure
   {{- if .Get "style" -}}
     {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
-  {{- end -}}
-  {{- if ne $a11y true -}}
-    {{/**/}} aria-label="
-      {{- if .Get "a11y-notice" -}}
-        {{- .Get "a11y-notice" -}}
-      {{- else -}}
-        This demo is not yet adapted and inaccessible, sorry.
-      {{- end -}}
-    "
   {{- end -}}
 >
   {{- if .Get "screenshot" -}}
@@ -24,10 +14,14 @@
     {{- end -}}
 
     <input class="Figure-Toggle" type="checkbox" id="Toggle-{{ $id }}" />
-    <div class="Figure-Demo" {{ if ne $a11y true }} aria-hidden="true"{{ end }}>
+    <div class="Figure-Demo">
       {{- $src  | readFile | safeHTML -}}
     </div>
-    <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
+    {{- if .Get "video" -}}
+      <video class="Figure-Screenshot" controls muted playsinline preload="none" poster="{{ replace $file ".html" ".jpg" }}" width="1474" height="310"><source src="{{ replace $file ".html" ".mp4" }}" type="video/mp4"></video>
+    {{- else -}}
+      <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
+    {{- end -}}
 
   {{- else -}}
 
@@ -44,7 +38,7 @@
         ></iframe>
       {{- end -}}
     {{- else -}}
-      <div class="Figure-Demo"{{ if ne $a11y true }} aria-hidden="true"{{ end }}>
+      <div class="Figure-Demo">
         {{- $src  | readFile | safeHTML -}}
       </div>
     {{- end -}}
@@ -53,12 +47,14 @@
 
 </figure>
 {{- if .Get "screenshot" -}}
-  <aside style="--offset: 1;">
+  <aside style="--offset: 1;{{- if .Get "span" -}}--span: {{ .Get "span" }}{{- end  -}}">
     <p>
       <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
-        Toggle screenshot/demo
+        Toggle to a <span class="Figure-Toggler-Screenshot">{{- if .Get "video" -}}video{{- else -}}screenshot{{- end -}}</span><span class="Figure-Toggler-Demo">live example</span>
       </label>
     </p>
-    {{- .Inner | markdownify -}}
+    {{- if .Inner -}}
+      <p>{{- .Inner | markdownify -}}</p>
+    {{- end  -}}
   </aside>
 {{- end -}}

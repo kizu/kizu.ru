@@ -112,3 +112,7 @@ a:not([href^='#']):focus,
   --code-color: var(--link-color--hover);
   z-index: var(--link-hover-z-index, var(--link-z-index));
 }
+
+summary.Link {
+  width: max-content;
+}

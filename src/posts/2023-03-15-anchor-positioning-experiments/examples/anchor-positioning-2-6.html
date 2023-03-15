@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0; ">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" 
+      refX="16" refY="5" orient="auto" fill="hotpink">
+        <polygon points="0 0, 10 5, 0 10" />
+    </marker>
+  </defs>
+</svg>
+<style>
+  .example2--with-svg .start,
+  .example2--with-svg .end {
+    background: hotpink;
+  }
+  .example2--with-svg svg {
+    position: absolute;
+    --distance: calc(0.5em);
+    top: var(--distance);
+    left: var(--distance);
+    width: calc(100% - 2 * var(--distance));
+    height: calc(100% - 2 * var(--distance));
+    overflow: visible;
+    color: hotpink;
+    /* Prevents weird marker bugs */
+    min-width: 1px;
+    min-height: 1px;
+  }
+  .example2--with-svg line {
+    stroke: currentColor;
+    stroke-width: 2px;
+    marker-end: url(#arrowhead);
+  }
+  @container (max-width: calc(1em - 0.2px)) or (max-height: calc(1em - 0.2px)) {
+    .example2--with-svg svg {
+      display: none;
+    }
+  }
+  .example2--with-svg .connection {
+    --min: 0.5em;
+    overflow: visible;
+    container-type: size;
+    /* Not using background as embedded in data uri, as in this case the `overflow: visible` behavior on SVG won't work, where we could want to show the full arrow even if the SVG/connector is 1px thick. */
+    background: none;
+  }
+</style>
+<div class="example2 example2--with-svg example2--with-workaround" tabindex="0">
+  <div class="target start"></div>
+  <div class="target end"></div>
+
+  <div class="connection">
+    <svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" /></svg>
+  </div>
+  <div class="connection connection--flip-x">
+    <svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" /></svg>
+  </div>
+  <div class="connection connection--flip-y">
+    <svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" /></svg>
+  </div>
+  <div class="connection connection--flip-x connection--flip-y">
+    <svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" /></svg>
+  </div>
+</div>

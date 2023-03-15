@@ -6,6 +6,8 @@ figure {
   --link-text-shadow-color: transparent;
   --link-padding: 0;
 
+  max-width: calc(100% + 3rem * var(--at-small));
+  box-sizing: border-box;
   padding: 0.5rem;
   border: none;
   margin: var(--nested-figure-margin, 1rem calc(-1.5rem * var(--at-small)));
@@ -14,12 +16,59 @@ figure {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
+.Figure-Screenshot {
+  vertical-align: top;
+}
+
+video.Figure-Screenshot {
+  max-width: calc(100% + 1rem);
+  height: auto;
+  margin: -0.5rem;
+  border-radius: inherit;
+}
+
 .Figure-Toggle {
   position: fixed;
   top: 0;
   left: 0;
   opacity: 0;
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+figure:has(input:focus-visible) + aside > * > .Figure-Toggler {
+  outline: 1px dotted #212121;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+@supports not selector(figure:has(input:focus-visible)) {
+  figure:focus-within + aside > * > .Figure-Toggler {
+    outline: 1px dotted #212121;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+}
+
+:root {
+  --_toggler-on: var(--toggler-on, inline);
+  --_toggler-off: var(--toggler-off, none);
+}
+
+.Figure-Toggler-Demo::before {
+  content: " / ";
+}
+@supports selector(figure:has(input:checked)) {
+  .Figure-Toggler-Demo::before {
+    content: "";
+  }
+}
+
+figure:has(input:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot,
+figure:not(:has(input:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo {
+  display: var(--_toggler-off);
+}
+
+figure:has(input:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo,
+figure:not(:has(input:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot {
+  display: var(--_toggler-on);
 }
 
 .Figure {
@@ -43,5 +92,10 @@ figure {
 
 .Figure-Toggle:not(:checked) + * + .Figure-Screenshot,
 .Figure-Toggle:checked + .Figure-Demo {
-  display: none;
+  display: var(--_toggler-off);
+}
+
+.Figure-Toggle:not(:checked) + .Figure-Demo,
+.Figure-Toggle:checked + * + .Figure-Screenshot {
+  display: var(--_toggler-on);
 }

@@ -8,7 +8,10 @@ pre {
   display: flex;
   white-space: pre-wrap;
   font-family: Monaco, Consolas, monospace, monospace;
-  --code-padding: 0 0 0 var(--h-gap);
+  --code-padding: 0 0 0 calc(
+    var(--h-gap) * var(--at-large) +
+    var(--viewport-padding) * var(--at-small)
+  );
   --code-font-style: normal;
   --code-line-height: 1.5rem;
   font-size: var(--THEME_FONT_SIZE--CODE);
@@ -29,7 +32,8 @@ pre {
 /* Or just remove all the unneeded stuff from Prism? */
 pre:not(.z):not(.z) {
   padding: 1rem 0;
-  margin: 1rem 0;
+  margin: 1rem;
+  margin-inline: var(--initial-at-large, calc(-1 * var(--viewport-padding)));
   background: #FFF; /* Overrides prism.js one */
 }
 

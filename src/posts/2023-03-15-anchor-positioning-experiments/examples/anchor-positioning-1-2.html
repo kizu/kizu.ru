@@ -1,0 +1,97 @@
+<style>
+  /* Removing blog's main styles */
+  .slider-item,
+  .slider-item::before {
+    all: unset;
+  }
+
+  .slider {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 3em;
+    place-content: center;
+    anchor-name: --slider-menu;
+    --target: --slider-menu;
+  }
+
+  .slider-item {
+    display: flex;
+    place-items: center;
+  }
+
+  .slider-link {
+    all: unset;
+    padding: 0.5em 1em;
+    anchor-name: var(--is);
+    cursor: pointer;
+  }
+
+  .slider::before {
+    content: "";
+    position: absolute;
+
+    top:    anchor(var(--target) top);
+    left:   anchor(var(--target) left);
+    right:  anchor(var(--target) right);
+    bottom: anchor(var(--target) bottom);
+
+    box-shadow: inset 0 0 0 0.5em hotpink;
+    border-radius: 9em;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+
+  .slider-item:nth-child(1) { --is: --item-1 }
+  .slider:has(:nth-child(1) > .slider-link:is(:hover, :focus-visible)) {
+    --target: --item-1;
+  }
+
+  .slider-item:nth-child(2) { --is: --item-2 }
+  .slider:has(:nth-child(2) > .slider-link:is(:hover, :focus-visible)) {
+    --target: --item-2;
+  }
+
+  .slider-item:nth-child(3) { --is: --item-3 }
+  .slider:has(:nth-child(3) > .slider-link:is(:hover, :focus-visible)) {
+    --target: --item-3;
+  }
+
+  .slider-item:nth-child(4) { --is: --item-4 }
+  .slider:has(:nth-child(4) > .slider-link:is(:hover, :focus-visible)) {
+    --target: --item-4;
+  }
+
+  .slider-item:nth-child(5) { --is: --item-5 }
+  .slider:has(:nth-child(5) > .slider-link:is(:hover, :focus-visible)) {
+    --target: --item-5;
+  }
+
+  .slider:not(:has(.slider-link:is(:hover, :focus-visible)))::before {
+    visibility: hidden;
+    opacity: 0;
+    /* Can be slow, but it is a demo! */
+    filter: blur(2em);
+  }
+
+</style>
+<div class="example1-2">
+  <ul class="slider">
+    <li class="slider-item">
+      <a class="slider-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors" target="_blank">Universal</a>
+    </li>
+    <li class="slider-item">
+      <a class="slider-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors" target="_blank">Type</a>
+    </li>
+    <li class="slider-item">
+      <a class="slider-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors" target="_blank">Class</a>
+    </li>
+    <li class="slider-item">
+      <a class="slider-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors" target="_blank">ID</a>
+    </li>
+    <li class="slider-item">
+      <a class="slider-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors" target="_blank">Attribute</a>
+    </li>
+  </ul>
+</div>

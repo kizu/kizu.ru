@@ -1,0 +1,164 @@
+<style>
+.example4 {
+  position: relative;
+  z-index: 0;
+  container-type: inline-size;
+  font: var(--THEME_FONT--SMALL);
+}
+
+.example4 .wrapper {
+  position: relative;
+}
+
+.example4 .grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--THEME_LINE_HEIGHT--SMALL);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+@container (min-width: 27em) {
+  .example4 .grid {
+    display: grid;
+    grid-template-columns: minmax(auto, 27em) minmax(9em, 1fr);
+  }
+  .example4 .grid > * {
+    grid-column: 1;
+  }
+}
+
+.example4 aside {
+  width: 100%;
+}
+
+
+.example4 sup > a::before,
+.example4 .aside-content::before {
+  content: "";
+  position: absolute;
+  inset: -0.25em -0.5em;
+  z-index: -1;
+  pointer-events: none;
+  transition: background 2s 1s;
+  display: none;
+}
+
+/* Lol, cannot not use the highly experimental @initial here, just for fun */
+@initial {
+  .example4 sup > a::before,
+  .example4 .aside-content::before {
+    background: var(--THEME_SELECTION);
+  }
+}
+
+.example4 sup > a:target::before,
+.example4 .aside-content:has(> a:target)::before {
+  display: unset;
+}
+
+.example4 figure {
+  margin: 0 20px 0 0;
+  align-self: start;
+  overflow: hidden;
+  resize: vertical;
+  background: var(--THEME_BG--DISTANT);
+}
+
+.example4 .grid sup {
+  vertical-align: baseline;
+  font-size: 1em;
+  anchor-name: var(--is);
+  display: inline-block;
+  /* Could be done better, just for the demonstration */
+  transform: scale(0.7) translateY(-0.3em);
+}
+
+.example4 .aside-content a,
+.example4 sup a {
+  scroll-margin: 3em;
+}
+
+.example4 .aside-content,
+.example4 sup a {
+  position: relative;
+}
+
+/* We need an at-supports here as otherwise the sidenotes would not be accessible due to the absolute positioning. */
+@supports (anchor-name: --foo) {
+  @container (min-width: 27em) {
+    /* Have to use a wrapper, as we cannot regularly position an element/pseudo from the aside itself */
+    .example4 .aside-content {
+      position: absolute;
+      grid-column: 2;
+      left: anchor(var(--prev) left, 0);
+      right: 0;
+      anchor-name: var(--is);
+      
+      /* works for figures, or other regular elements */
+      top: max(
+        anchor(var(--for)  top),
+        anchor(var(--prev) bottom) + 0.5em
+      );
+    }
+
+    .example4 .aside-content a {
+      color: unset;
+      background: unset;
+    }
+
+    .example4 aside {
+      display: contents;
+    }
+  }
+}
+
+.example4 aside:is(:hover, :has(> * > :focus-visible))::before {
+  content: "";
+  position: absolute;
+  left: anchor(var(--for) center);
+  top:  anchor(var(--for) top);
+  aspect-ratio: 1;
+  height: anchor-size(var(--for) height);
+
+  /* due to us using the transform on the element, we need to replicate it here as well */
+  transform: translateX(-50%) scale(0.7) translateY(-0.3em);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px hotpink;
+}
+
+</style>
+<div class="example4">
+  <div class="wrapper">
+    <div class="wrapper">
+      <div class="grid">
+        <p>This is the first paragraph of this example, which contains a sidenote reference<sup style="--is: --sup-1"><a id="example-ref-1" href="#example-note-1">1</a></sup>, with its content displayed in the second column, starting from the same line as its reference. A one-sided cross-referencing is also implemented in this example, so feel free to hover over a sidenote to locate its reference!</p>
+        
+        <p>Hello, I am the second paragraph. The sidenote in this paragraph would go after a figure that is displayed in the second column before<sup style="--is: --sup-2"><a id="example-ref-2" href="#example-note-2">2</a></sup> it. It would be displayed <em>after</em> the figure, even though its reference comes vertically before the figure ends.</p>
+
+        <figure style="grid-column: 2; anchor-name: --figure;">
+          An in-grid figure that moves the next sidenote down
+        </figure>
+        
+        <p>Hello, I am the third paragraph, which starts from some text that does not have any sidenotes, so we could start the next sidenote somewhere later, padded by a few more text that I’m currently writing to pad the vertical space alongside its reference<sup style="--is: --sup-3"><a id="example-ref-3" href="#example-note-3">3</a></sup>.</p>
+
+        <p>The next paragraph contains a sidenote<sup style="--is: --sup-4"><a id="example-ref-4" href="#example-note-4">4</a></sup> right away, which would be shifted down because the previous sidenote is there above it.</p>
+
+        <p>We would also need an extra paragraph with some extra words, just so there would be space for that last sidenote — because it is absolutely positioned, otherwise it would go out of this exmaple’s bounds, oops.</p>
+
+        <aside style="--for: --sup-1; --is: --aside-1; --prev: --aside-0;"><div class="aside-content"><a id="example-note-1" href="#example-ref-1">1.</a> I’m a sidenote that should start on the same line as my reference!</div></aside>
+      </div>
+      <aside style="--for: --sup-2; --is: --aside-2; --prev: --figure;"><div class="aside-content"><a id="example-note-2" href="#example-ref-2">2.</a> The figure above is resizable if your browser supports <code>resize</code> property.</div></aside>
+    </div>
+    <aside
+      
+      style="
+        --for: --sup-3;
+        --is: --aside-3;
+        --prev: --aside-2;
+      "
+    ><div class="aside-content"><a id="example-note-3" href="#example-ref-3">3.</a> Remember how these sidenotes are absolutely positioned, but be aware of their context!</div></aside>
+  </div>
+  <aside style="--for: --sup-4; --is: --aside-4; --prev: --aside-3;"><div class="aside-content"><a id="example-note-4" href="#example-ref-4">4.</a> I’m the last sidenote in this example.</div></aside>
+</div>

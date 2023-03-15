@@ -1,0 +1,127 @@
+<style>
+  .example1b table {
+    margin-inline: auto;
+  }
+  .example1b td,
+  .example1b th {
+    padding-inline: 0.5em;
+  }
+  .example1b .cell-start {
+    text-align: left;
+  }
+  .example1b .cell-range {
+    text-align: left;
+  }
+  .example1b .cell-end {
+    text-align: right;
+  }
+
+  .example1b .cell-range::before {
+    content: "= ";
+    visibility: hidden;
+  }
+
+  .example1b .cell-aligner {
+    visibility: hidden;
+  }
+
+  .example1b tbody {
+    anchor-name: --tbody;
+  }
+  .example1b [style*='--column-id:'] {
+    anchor-name: var(--column-id);
+  }
+  .example1b [style*='--row-id:'] {
+    anchor-name: var(--row-id);
+  }
+  .example1b .first-column::before {
+    content: "";
+    display: block;
+    margin-inline: -0.5em;
+    anchor-name: --first-column;
+  }
+  .example1b .pointer {
+    --column: initial;
+    --row: --tbody;
+    --column-start: var(--column, --first-column);
+    --column-end:   var(--column, --tbody);
+    --row-start:    var(--row);
+    --row-end:      var(--row);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+  /* `:has(> :focus-visible)` is basically `:focus-visible-within` haha */
+  .example1b .pointer:is(:hover, :focus-visible, :has(> :focus-visible))::before {
+    content: "";
+    position: absolute;
+    top:    anchor(var(--row-start)    top);
+    bottom: anchor(var(--row-end)      bottom);
+    left:   anchor(var(--column-start) left);
+    right:  anchor(var(--column-end)   right);
+    outline: 2px solid hotpink;
+    border-radius: 0.5em;
+  }
+
+</style>
+
+<div class="example1b">
+  <p>
+    Types of support:
+    <span tabindex="0" class="pointer" style="--row: --no">no support</span>,
+    <span tabindex="0" class="pointer" style="--row: --partial">partial</span>,
+    <span tabindex="0" class="pointer" style="--row: --full">full support</span>.
+  </p>
+  <p>
+    Browsers shown:
+    <span tabindex="0" class="pointer" style="--column: --chrome">Chrome</span>,
+    <span tabindex="0" class="pointer" style="--column: --safari">Safari</span>,
+    <span tabindex="0" class="pointer" style="--column: --firefox">Firefox</span>.
+  </p>
+  <table>
+    <caption><code>position: sticky</code> browser support</caption>
+    <thead>
+      <tr>
+        <th>Support</th>
+        <th class="cell-range first-column" style="--column-id: --chrome">Chrome</th>
+        <th class="cell-range" style="--column-id: --safari">Safari</th>
+        <th class="cell-range" style="--column-id: --firefox">Firefox</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="--row-id: --no">
+        <td class="cell-start">No</td>
+        <td class="cell-start">≤ 55<span class="cell-aligner">.0</span></td>
+        <td class="cell-start">≤ 6<span class="cell-aligner">.0</span></td>
+        <td class="cell-start">≤ 31<span class="cell-aligner">.0</span></td>
+      </tr>
+      <tr style="--row-id: --partial">
+        <td class="cell-start">Partial</td>
+        <td class="cell-range">56 – 90<span class="cell-aligner">.0</span></td>
+        <td class="cell-range">6.1 – 7<span class="cell-aligner">.0</span></td>
+        <td class="cell-range">32 – 58<span class="cell-aligner">.0</span></td>
+      </tr>
+      <tr style="--row-id: --full">
+        <td class="cell-start">Full</td>
+        <td class="cell-end">≥ 91<span class="cell-aligner">.0</span></td>
+        <td class="cell-end">≥ 6.1</td>
+        <td class="cell-end">≥ 59<span class="cell-aligner">.0</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li>
+      A parent with <code>overflow</code> set to <code>auto</code> will prevent <code>position: sticky</code> from working in <span tabindex="0" class="pointer" style="--column: --safari;">Safari</span>
+    </li>
+    <li>
+      <span tabindex="0" class="pointer" style="--column: --firefox; --row-end: --partial">Firefox 58 & below</span>,
+      <span tabindex="0" class="pointer" style="--column: --chrome; --row-end: --partial">Chrome 63 & below</span> and
+      <span tabindex="0" class="pointer" style="--column: --safari; --row-end: --partial">Safari 7 & below</span>
+      do not appear to support sticky table headers.
+    </li>
+    <li>
+      <span class="pointer" style="--column: --chrome; --row: --no"><span tabindex="0" class="pointer" style="--column-start: --safari; --row-start: --partial">Hover or focus me</span></span>
+      to highlight two completely different spans!
+    </li>
+  </ul>
+</div>
