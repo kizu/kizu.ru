@@ -97,6 +97,7 @@ label[for$=-Anchor] {
 
 p[role=note] {
   --asides-padding-top: 0;
+  --p-p-margin-top: calc(var(--at-large) * -0.75rem + var(--THEME_LINE_HEIGHT) * (var(--at-large) * var(--offset, 0) + var(--at-small) * 0.5));
 }
 
 .Highlight[id$=-Content]::before {

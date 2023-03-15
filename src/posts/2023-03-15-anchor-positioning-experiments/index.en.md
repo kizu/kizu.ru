@@ -12,12 +12,15 @@ This article is quite long! Before we dive in, I want to mention a few disc
 1. My testing only covers what is present in [Chrome Canary](https://www.google.com/chrome/canary/)'s experimental implementation[^Canary]. There is no guarantee that if things change, I will come back and modify the examples to work with the new version of the specs/implementation. Each demo comes with a video recording, allowing you to see how things work even if you cannot access this version of Chrome right now. However, I highly recommend checking everything in it for the complete experience.
 2. Even though things could change, I still urge you to read the current [Editor’s Draft][the specs] of the “CSS Anchor Positioning” spec and play with the current implementation yourself. If you would then give your feedback to the CSSWG, that would be even better!
 3. My experiments in this article do not touch all parts of the specs & the implementation. For example, I haven’t had a chance to experiment with all of the [fallback][] stuff or explore the [`anchor-scroll`][] property yet. More to think about for future experiments!
-4. I would submit most of my feedback about the specs &amp; implementation in GitHub issues and would try to provide the links to them where appropriate.
+4. I did submit[^issues] most of my feedback about the specs &amp; implementation in GitHub issues and provided the links to them where appropriate.
 5. I would not go too deep into the details of my experiments' implementation — things could change, and my goal is to show _what is possible_ rather than _how to do stuff_. The code can also be messy — it is not of production quality, could be improved a lot, and so on. You know, it is “experimental”.
 6. I’m sure my experiments have room for improvement from the accessibility standpoint. If you’d notice something you know could be improved, let me know about it! My goal with the examples was to get to a proof-of-concept, so I probably cut some corners.
 7. Again, this is experimental and unstable — don’t use it in production, even with graceful degradation/progressive enhancement.
 
-[^Canary]: Version `113.0.5640.0` at the time of writing. <!-- offset="1" -->
+{{<Sidenotes offset="1">}}
+  [^Canary]: Version `113.0.5653.0` at the time of publishing.
+  [^issues]: Total, for now, I did submit seven new issues and commented on two more. <!-- offset="13" -->
+{{</Sidenotes>}}
 
 
 ## What is Anchor Positioning
@@ -28,7 +31,7 @@ I won’t try to re-explain [the specs][] or rephrase what Jhey wrote (I did
 
 In short, anchor positioning _augments_ absolute[^and-fixed] positioning by allowing us to use the positions and dimensions of elements other than the element’s usual positioning context.
 
-[^and-fixed]: And `fixed` — but, for now, not explicitly. The spec only mentions this in a few examples, but does not elaborate how it should work. When I would later mention “absolute” — consider that it _could_ as well work with “fixed”. <!-- span="3" -->
+[^and-fixed]: And `fixed` — but, for now, not explicitly. The spec only mentions this in a few examples, but does not elaborate how it should work. I did open [an issue](https://github.com/w3c/csswg-drafts/issues/8583) to clarify this. When I would later mention “absolute” — consider that it _could_ as well work with “fixed”. <!-- span="3" -->
 
 In our current CSS, absolute-positioned blocks are usually positioned _relative_ to their closest positioned ancestor or the initial containing block, so if we say something like `left: 1em` or `width: 100%`, it is that ancestor that the browser would use.
 
@@ -112,9 +115,9 @@ A few things to note:
 
 2. While the examples use simple names for those idents, in reality, those currently behave closer to the HTML’s `id`s, so in practice, those would need to be unique.
 
-    It is possible to have multiple anchors with the same name, but only if they’re isolated by some positioning context. The experiments that reuse the same anchor names would have the whole example wrapped with a `position: relative`. That is a bit limiting, and I’d wish there was a way to control this further.
+    It is possible to have multiple anchors with the same name, but only if they’re isolated by some positioning context. The experiments that reuse the same anchor names would have the whole example wrapped with a `position: relative`. That is a bit limiting, and I’d wish there was a way to control this further — and I did open [an issue](https://github.com/w3c/csswg-drafts/issues/8588) where we could discuss this.
 
-3. Ideally, I would want to use something like `inset: anchor(var(--for))` here, but the spec does not define in any way how the inset shorthand properties should behave, so this doesn’t work (or doesn’t do what I’m expecting it to).
+3. Ideally, I would want to use something like `inset: anchor(var(--for))` here, but the spec does not define in any way how the inset shorthand properties should behave, so this doesn’t work (or doesn’t do what I’m expecting it to). I did open [an issue](https://github.com/w3c/csswg-drafts/issues/8582) about this.
 
 
 ### Transitions
@@ -194,7 +197,7 @@ I also tried to do something like this, which did not work:
 }
 ```
 
-But while the positioning itself works — we can dynamically assign the `anchor-name` to the hovered items — the transitions do not. But how elegant it could’ve been if re-assigning the `anchor-name` resulted in the same transition between the old and new states!
+But while the positioning itself works — we can dynamically assign the `anchor-name` to the hovered items — the transitions do not. But how elegant it could’ve been if re-assigning the `anchor-name` resulted in the same transition between the old and new states! I did weight in on at in [an issue related to this](https://github.com/w3c/csswg-drafts/issues/8181#issuecomment-1469910645).
 
 ### “Four Quadrants”
 
@@ -208,9 +211,11 @@ The examples in this section would contain two elements inside a box, with the
 
 A small disclaimer about this animation’s limitations:
 
-1. I’m using the animation for `top` & `left` in a `position: relative` context. Ideally, for better performance, we could want to use a `transform` or maybe even an [`offset-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Motion_Path), but — anchoring would be calculated _before_ any transforms and offset-path, so we cannot (hopefully, yet?) rely on these.
+1. I’m using the animation for `top` & `left` in a `position: relative` context. Ideally, for better performance, we could want to use a `transform` or maybe even an [`offset-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Motion_Path), but — anchoring would be calculated _before_ any transforms and offset-path, so we cannot (hopefully[^hopefully], yet?) rely on these.
 
 2. I could position the elements absolutely instead of relatively, but for this, I would need to change the layout, as there are currently limitations in attaching things to other absolutely positioned elements. More on this later.
+
+[^hopefully]: I did open [an issue](https://github.com/w3c/csswg-drafts/issues/8584) about this — if you would find use cases where this could help — add them to it! <!-- offset="3" -->
 
 #### The Challenge
 
@@ -275,7 +280,9 @@ Corners match up only for the initial position but not when the elements' arran
 
 We can see that the red color is always in the top left, and violet — in the bottom right, not corresponding with the appropriate element’s color.
 
-What we could want is to be able to determine the actual direction here. However, the current spec doesn’t allow us to. If only we could use the `anchor()` and `anchor-size()` for things like `background-size`, `background-position` and `transform` — this could potentially help us determine the relative positions of our elements and could allow us to achieve this and much more complicated effects!
+What we could want is to be able to determine the actual direction here. However, the current spec[^two-issues] doesn’t allow us to. If only we could use the `anchor()` and `anchor-size()` for things like `background-size`, `background-position` and `transform` — this could potentially help us determine the relative positions of our elements and could allow us to achieve this and much more complicated effects!
+
+[^two-issues]: I did submit two issues related to this: [one](https://github.com/w3c/csswg-drafts/issues/8585) for the potential to query the anchors similar to style queries, [another](https://github.com/w3c/csswg-drafts/issues/8586) for using the existing anchors for other properties. I lied, there is a [third](https://github.com/w3c/csswg-drafts/issues/8587) related issue, where I dream about a way to use any arbitrary properties of the anchored element. <!-- offset="1" span="3" -->
 
 #### The Technique Itself
 
@@ -579,6 +586,8 @@ For example — what if one more acceptable condition (when nothing else works
 At least, the case above with the sidenotes would work without extra wrappers — we would only need to mention the previous item.
 
 We would still not have the ability to cross-reference elements in both ways — I don’t think we can target things inside those absolutely positioned elements from our references, and there could be other limitations, or maybe even other workarounds — but unlocking the DOM-order-dependent targeting for absolutely positioned elements would be tremendously helpful.
+
+If you have your thoughts on this topic as well, it would be nice if you would write them down in [an issue about this](https://github.com/w3c/csswg-drafts/issues/8165#issuecomment-1469912952).
 
 ## Conclusion
 
