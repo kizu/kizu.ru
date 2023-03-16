@@ -13,7 +13,7 @@ Let’s say we want to change[^styles] the ordered list’s markers to have b
 {{<Sidenotes span="5" offset="-2">}}
   [^details]: If you’d want to read more about lists in CSS, other than reading [the specs](https://www.w3.org/TR/css-lists-3/), I can recommend this in-depth article by [Rachel Andrew](@rachelandrew): [“CSS Lists, Markers, and Counters”](https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/).
 
-  [^styles]: The live examples in this article would have some extra styles with them — these would be just styles for my blog, which conveniently are using what I’m talking in this article about (with some CSS variables thrown in for convenience).
+  [^styles]: The live examples in this article would have some extra styles with them — these would be just styles for my blog, which conveniently are using what I’m talking in this article about (with some CSS variables thrown in for convenience). <!-- offset="1" -->
 {{</Sidenotes>}}
 
 ```CSS
