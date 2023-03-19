@@ -1,6 +1,6 @@
 # Future CSS: Anchor Positioning
 
-#Experiments #Anchor_Positioning #Future_CSS #CSS_Variables #CSS
+#Experiment #Anchor_Positioning #Future_CSS #CSS_Variables #CSS
 
 _Anchor positioning might be one of the most exciting features coming to CSS. It is currently available under an experimental flag in Chrome Canary, and after playing with it for a bit, I couldn’t stop myself from sharing what I found. In this article, I will show you some of my experiments._
 
