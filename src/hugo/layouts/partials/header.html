@@ -4,13 +4,13 @@
   <header{{ if eq .a11y "true" }} style="--invisible: 1;"{{ else }} aria-hidden="true"{{ end }}>
     <nav>
       <ul>
-        <li style="--grid-position: start;"><a href="/{{ $Page.Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}" tabindex="{{ $tabindex }}">{{ i18n "titleName" }}</a> {{ partial "searchButton.html" (dict "context" $Page "tabindex" $tabindex "position" "header") }}</li>
+        <li style="--grid-position: start;"><a href="/{{ $Page.Site.Params.languagePrefix }}" title="{{ i18n "backToMain" }}" tabindex="{{ $tabindex }}"{{ if eq .a11y "true" }}{{else}} style="--view-name: full-name"{{ end }}>{{ i18n "titleName" }}</a> {{ partial "searchButton.html" (dict "context" $Page "tabindex" $tabindex "position" "header") }}</li>
         {{- if eq $Page.Params.type "post" -}}
           <li style="--grid-position: end;">
             {{- if eq $Page.Params.draft true -}}
               {{- i18n "draft" }}
             {{- else -}}
-              {{ partial "readableDate.html" $Page }}
+              <span{{ if eq .a11y "true" }}{{else}} style="--view-name: {{ $Page.Title | replaceRE "[^A-Za-z]+" "" }}-published"{{ end }}>{{ partial "readableDate.html" $Page }}</span>
             {{- end -}}
           </li>
         {{- end -}}
