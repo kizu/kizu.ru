@@ -2,7 +2,7 @@
 aliases: [/en/everything/]
 ---
 
-# **Articles & Experiments** by Roman Komarov
+# **Articles & Experiments** by <span style="--view-name: full-name">Roman Komarov</span>
 
 Welcome! I’m Roman, a front-end web developer at [Datadog](https://www.datadoghq.com/). I love CSS, and most of the things I do, write, or think about are CSS-related. On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
 

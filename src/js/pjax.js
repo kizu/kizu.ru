@@ -93,24 +93,35 @@ const initPjax = (queue, lazyQueue) => {
   const goToUrl = (url, hash, noPush) => {
     const state = states[url];
 
-    if (hash) {
-      shouldApplyPopState = false;
-      applyStateDOM(state);
-      location.hash = hash;
-      if (!noPush) {
-        window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
-        applyMetrikaHit();
+    const updateDOM = () => {
+      if (hash) {
+        shouldApplyPopState = false;
+        applyStateDOM(state);
+        location.hash = hash;
+        if (!noPush) {
+          window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
+          applyMetrikaHit();
+        }
+        applyStateMeta(state);
+        shouldApplyPopState = true;
+      } else {
+        if (!noPush) {
+          window.history.pushState({ url: url }, state.title, state.url);
+          applyMetrikaHit();
+        }
+        applyUrlState(url, false, noPush);
+        window.scrollTo(0, 0);
       }
-      applyStateMeta(state);
-      shouldApplyPopState = true;
-    } else {
-      if (!noPush) {
-        window.history.pushState({ url: url }, state.title, state.url);
-        applyMetrikaHit();
-      }
-      applyUrlState(url, false, noPush);
-      window.scrollTo(0, 0);
     }
+
+    if (!document.startViewTransition) {
+      updateDOM();
+      return;
+    }
+
+    document.startViewTransition(() => {
+      updateDOM();
+    });    
   };
 
   const getFromLocalStorage = (url, callback) => {

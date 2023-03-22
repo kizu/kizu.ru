@@ -1,3 +1,7 @@
 [style*='--display:'] {
   display: var(--display);
 }
+
+[style*='--view-name:'] {
+  view-transition-name: var(--view-name);
+}

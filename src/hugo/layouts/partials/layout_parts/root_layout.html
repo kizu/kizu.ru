@@ -8,7 +8,7 @@
       {{- if $isTag -}}
         {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
       {{- end -}}
-      {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
+      {{- partial "handleContent.html" (dict "context" . "input" (print "<h1 style=\"--view-name: " (.Title | replaceRE "[^A-Za-z]+" "") "-header\">" $title "</h1>")) -}}
     {{- end -}}
 
     {{- if and (eq .Kind "page") .Title -}}
