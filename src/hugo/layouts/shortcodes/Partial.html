@@ -6,6 +6,9 @@
   {{- if .Get "style" -}}
     {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
   {{- end -}}
+  {{- if .Inner -}}
+    {{/**/}} aria-labelledby="Label-{{ $id }}"
+  {{- end -}}
 >
   {{- if .Get "screenshot" -}}
     {{- $alt := "Screenshot" -}}
@@ -46,15 +49,17 @@
   {{- end -}}
 
 </figure>
-{{- if .Get "screenshot" -}}
+{{- if or (.Get "screenshot") (.Inner) -}}
   <aside style="--offset: 1;{{- if .Get "span" -}}--span: {{ .Get "span" }}{{- end  -}}">
-    <p>
-      <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
-        Toggle to a <span class="Figure-Toggler-Screenshot">{{- if .Get "video" -}}video{{- else -}}screenshot{{- end -}}</span><span class="Figure-Toggler-Demo">live example</span>
-      </label>
-    </p>
+    {{- if .Get "screenshot" -}}
+      <p>
+        <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">
+          Toggle to a <span class="Figure-Toggler-Screenshot">{{- if .Get "video" -}}video{{- else -}}screenshot{{- end -}}</span><span class="Figure-Toggler-Demo">live example</span>
+        </label>
+      </p>
+    {{- end  -}}
     {{- if .Inner -}}
-      <p>{{- .Inner | markdownify -}}</p>
+      <p id="Label-{{ $id }}">{{- .Inner | markdownify -}}</p>
     {{- end  -}}
   </aside>
 {{- end -}}
