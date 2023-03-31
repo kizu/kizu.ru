@@ -1,0 +1,78 @@
+<style>
+.example3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.example3 figure {
+  all: initial; /* Reset the blog's styles */
+
+  position: relative;
+  display: flex;
+}
+
+.example3 figcaption {
+  all: initial; /* Reset the blog's styles */
+
+  position: absolute;
+  inset: 0;
+  container: figcaption / size;
+}
+
+.example3 figcaption > span {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  padding-block: 4px;
+  padding-inline: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #FFF;
+  --rotate: 0deg;
+  --translate-value: 100%;
+  --translate: translate(0, -100%);
+  transform: var(--translate) rotate(var(--rotate));
+  transition: transform, opacity;
+  transition-duration: 0.3s;
+  font-family: sans-serif;
+}
+
+.example3 figure:not(:hover, :focus-visible) > figcaption > span {
+  opacity: 0;
+  --translate: translate(0, 0);
+}
+
+@container (aspect-ratio < 1) {
+  .example3 figcaption > span {
+    height: 100%;
+    writing-mode: tb;
+    --rotate: 180deg;
+    --translate: translate(-100%, 0);
+    letter-spacing: 0.5px;
+  }
+  
+  @supports (writing-mode: sideways-lr) {
+    .example3 figcaption > span {
+      writing-mode: sideways-lr;
+      --rotate: 0deg;
+    }
+  }
+}
+
+</style>
+<div class="example3">
+  <figure tabindex="0">
+    <img src="./examples/200×200.png" alt="Pink 200×200 placeholder image." />
+    <figcaption><span>A figure caption spanning multiple lines</span></figcaption>
+  </figure>
+  <figure tabindex="0">
+    <img src="./examples/100×200.png" alt="Pink 100×200 placeholder image." />
+    <figcaption><span>A figure caption spanning multiple lines</span></figcaption>
+  </figure>
+  <figure tabindex="0">
+    <img src="./examples/200×100.png" alt="Pink 200×100 placeholder image." />
+    <figcaption><span>A figure caption spanning multiple lines</span></figcaption>
+  </figure>
+</div>
+

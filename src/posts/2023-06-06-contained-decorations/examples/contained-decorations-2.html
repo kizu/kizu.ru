@@ -1,0 +1,62 @@
+<style>
+
+.example2 {
+  padding: 1rem;
+  min-height: 4.5rem;
+}
+
+.section-header {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-header h3 {
+  all: unset;
+}
+
+.section-line {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* We can use full size here without containing the original element, as we only use it for the decorations inside. */
+  container-type: size;
+
+  color: var(--THEME_CODE);
+}
+
+.section-line::before {
+  content: "";
+  position: absolute;
+  border: 3px;
+} 
+
+@container (height <= 2rem) {
+  .section-line::before {
+    inset: -0.5rem;
+    inset-block-start: auto;
+    border-bottom-style: solid;
+  } 
+}
+
+@container (height > 2rem) {
+  .section-line::before {
+    inset-block: -0.5rem;
+    inset-inline-start: -1rem;
+    border-left-style: solid;
+  } 
+}
+
+</style>
+<div class="example2">
+  <div class="section-header">
+    <h3>Latest articles</h3>
+    <span class="link-wrap">
+      <a href="#x">View all →</a>
+    </span>
+    <span class="section-line"></span>
+  </div>
+</div>
