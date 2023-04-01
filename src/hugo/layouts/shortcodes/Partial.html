@@ -38,6 +38,12 @@
         <iframe
           src="{{ .Get "iframe" }}"
           style="height: {{ .Get "height" }}"
+          title="{{ .Get "alt" }}"
+          scrolling="no"
+          frameborder="no"
+          loading="lazy"
+          allowtransparency="true"
+          allowfullscreen="true"
         ></iframe>
       {{- end -}}
     {{- else -}}
