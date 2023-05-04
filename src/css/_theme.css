@@ -7,6 +7,9 @@
   2. Uses extra families after `serif` to enable better symbols absent in default `serif`.
 */
 :root {
+  /* Need this for the scrollbars on the window. */
+  color-scheme: light dark;
+
   /* Sizes & fonts */
   --THEME_ROOT_FONT_SIZE: 112.5%; /* [1] */
 
@@ -32,6 +35,7 @@
 
   /* Colors */
   --THEME_BG: hsl(135, 40%, 98%);
+  --THEME_BG--INVERTED: hsl(120deg 33% 2%);
   --THEME_BG--DISTANT: hsl(120, 12%, 94%);
   --THEME_LINK: hsl(202, 92%, 42%);
   --THEME_VISITED: hsl(270, 35%, 55%);
@@ -56,4 +60,16 @@
     inset 0 1px 0 rgba(255,255,255,.9),
     0 0 0 1px rgba(37,34,14,.05),
     0 0 40px -5px rgba(37,34,14,.3);
+}
+
+/* FIXME: Replace with a proper implementation. Added this as otherwise my eyes hurn lol. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    background: var(--THEME_BG--INVERTED);
+  }
+  .Root {
+    /* Need to revert the color-scheme, as it would be inverted */
+    color-scheme: light;
+    filter: hue-rotate(180deg) invert(1);
+  }
 }
