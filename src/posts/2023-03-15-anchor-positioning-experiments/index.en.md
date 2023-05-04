@@ -589,6 +589,10 @@ We would still not have the ability to cross-reference elements in both ways 
 
 If you have your thoughts on this topic as well, it would be nice if you would write them down in [an issue about this](https://github.com/w3c/csswg-drafts/issues/8165#issuecomment-1469912952).
 
+#### Update from 2023-05-05
+
+The issue was closed by simplifying the acceptance criteria, allowing targeting absolutely positioned elements that are earlier in the DOM (see [this PR](https://github.com/w3c/csswg-drafts/pull/8779))! And, as an addition to that, when multiple acceptable anchors share a name, the _last_ one of them would be used, which would be very helpful for this exact case with the sidenotes. Can’t wait for this change to appear in Chrome Canary to test it out!
+
 ## Conclusion
 
 That’s it for now. I did _a lot_ of other experiments — some of which were also very promising, but if I had tried to fit everything into this article, I would’ve never finished it. The last few years have been _very_ good for CSS in general, with so many great features coming our ways, and we have so many other things on the roadmap! Maybe I would write more about anchor positioning, or I would write about something else — I don’t know yet. But the future is bright, and so many once-impossible things become closer and closer to us.
