@@ -24,7 +24,7 @@ a,
 .Link {
   position: var(--link-position);
   z-index: var(--link-z-index);
-  cursor: pointer;
+  cursor: var(--link-cursor, pointer);
   color: var(--link-color);
   hyphens: none;
 }
@@ -48,6 +48,7 @@ a,
 .Link {
   padding: var(--link-padding, 0.3em 0);
   margin: var(--link-margin);
+  overflow-wrap: break-word;
   text-decoration: none;
   /* Oh, hello, an absense of spread in text-shadow >_> */
   text-shadow:

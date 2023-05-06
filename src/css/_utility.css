@@ -2,8 +2,10 @@
   display: var(--display);
 }
 
+/*
 @media (prefers-reduced-motion: no-preference) {
   [style*='--view-name:'] {
     view-transition-name: var(--view-name);
   }
 }
+*/

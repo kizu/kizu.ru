@@ -97,20 +97,32 @@
   --_transition: 0;
 }
 
-.ArticleList-Link::before {
-  position: absolute;
-  left: calc(-0.5 * var(--THEME_INDENT));
-  right: calc(-0.5 * var(--THEME_INDENT));
-  top: calc(1px - var(--THEME_INDENT));
-  bottom: 0;
-  z-index: 1;
+/* Only enhance the clickable area for fine pointer devices */
+@media (pointer: fine) {
+  .ArticleList-Link::before {
+    position: absolute;
+    left: calc(-0.25 * var(--THEME_INDENT));
+    right: calc(-0.25 * var(--THEME_INDENT));
+    top: calc(1px - var(--THEME_INDENT));
+    bottom: 0;
+    z-index: 1;
 
-  opacity: var(--_hover);
-  box-shadow:
-    0 1px 3px 1px var(--color),
-    0 2px 7px -1px var(--color),
-    0 -1px var(--THEME_BG);
-  --color-a: calc(0.15 * var(--_hover));
-  transition: var(--_transition) linear;
-  transition-property: opacity, box-shadow;
+    opacity: var(--_hover);
+    box-shadow:
+      0 1px 3px 1px var(--color),
+      0 2px 7px -1px var(--color),
+      0 -1px var(--THEME_BG);
+    --color-a: calc(0.15 * var(--_hover));
+    transition: var(--_transition) linear;
+    transition-property: opacity, box-shadow;
+  }
+
+  .ArticleList-Item.is-selecting .ArticleList-Link::before,
+  :root:active .ArticleList-Link:not(:active)::before {
+    visibility: hidden;
+  }
+
+  .ArticleList-Item.is-selecting {
+    --link-cursor: text;
+  }
 }

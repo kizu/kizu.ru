@@ -57,7 +57,6 @@ html {
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
 
-  cursor: default;
 }
 
 /* TODO: replace home pages' one with a special case */
