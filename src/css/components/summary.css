@@ -1,5 +1,67 @@
 .Summary {
   font-size: 1.5rem;
+  line-height: 1.75;
   font-style: italic;
   margin-bottom: 2rem;
+}
+
+@supports (-webkit-initial-letter: 2) {
+  .Summary::first-letter {
+    -webkit-initial-letter: 2;
+    font-style: normal;
+    font-weight: 900;
+    margin-inline-end: var(--fletter-inline-end, 0.5em);
+  }
+}
+@supports (initial-letter: 2) {
+  .Summary::first-letter {
+    /* No webkit one, as it doesn't support font-feature-settings on the first-letter */
+    initial-letter: 2;
+    font-style: normal;
+    font-weight: 900;
+    font-feature-settings: var(--fletter-style, "ss02");
+    padding: 0 0.25em;
+    margin-inline-start: calc(-0.5em - var(--fletter-hanging, 0.5em));
+    margin-inline-end: var(--fletter-inline-end, 0.25em);
+    margin-block-end: var(--fletter-block-end, -0.25em);
+  }
+
+  .Summary[data-fletter=B] { --fletter-style: "ss03" }
+  .Summary[data-fletter=C] {
+    --fletter-style: "ss01";
+    --fletter-hanging: 0em;
+  }
+  .Summary[data-fletter=D] {
+    --fletter-style: "ss03";
+    --fletter-hanging: 0.25em;
+  }
+  .Summary[data-fletter=E] { --fletter-style: "ss03" }
+  .Summary[data-fletter=G] { --fletter-hanging: 0em }
+  .Summary[data-fletter=F] { --fletter-style: "ss03" }
+  .Summary[data-fletter=I] { --fletter-hanging: 0.75em }
+  .Summary[data-fletter=K] { --fletter-style: "ss03" }
+  .Summary[data-fletter=N] { --fletter-style: "ss03" }
+  .Summary[data-fletter=O] {
+    --fletter-style: "ss04";
+    --fletter-hanging: 0em;
+  }
+  .Summary[data-fletter=Q] {
+    --fletter-hanging: 0em;
+    --fletter-block-end: -0.5em;
+    --fletter-inline-end: -0.75em;
+  }
+  .Summary[data-fletter=R] {
+    --fletter-inline-end: -0.75em;
+  }
+  .Summary[data-fletter=S] {
+    --fletter-style: "ss03";
+    --fletter-hanging: 0em;
+  }
+  .Summary[data-fletter=T] { --fletter-style: "ss03" }
+  .Summary[data-fletter=U] {
+    --fletter-style: "ss02";
+    --fletter-inline-end: -0.25em;
+  }
+  .Summary[data-fletter=X] { --fletter-style: "ss01" }
+  .Summary[data-fletter=Z] { --fletter-style: "ss01" }
 }

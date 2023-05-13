@@ -14,7 +14,7 @@
 {{- end -}}
 
 {{- if .Params.summary -}}
-  <p class="Summary" style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-summary">{{ .Params.summary | markdownify }}</p>
+  <p class="Summary" style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-summary" data-fletter="{{ substr .Params.summary 0 1 }}">{{ .Params.summary | markdownify }}</p>
 {{- end -}}
 
 {{- if .Params.warning -}}
