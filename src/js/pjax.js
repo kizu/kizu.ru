@@ -114,14 +114,19 @@ const initPjax = (queue, lazyQueue) => {
       }
     }
 
-    if (!document.startViewTransition) {
-      updateDOM();
-      return;
-    }
+    updateDOM();
 
-    document.startViewTransition(() => {
-      updateDOM();
-    });    
+    // Without changing the design, the transitions seem too obnoxious,
+    // so I'm disabling this for the time being.
+
+    // if (!document.startViewTransition) {
+    //   updateDOM();
+    //   return;
+    // }
+
+    // document.startViewTransition(() => {
+    //   updateDOM();
+    // });
   };
 
   const getFromLocalStorage = (url, callback) => {
