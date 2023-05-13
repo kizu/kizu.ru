@@ -5,62 +5,70 @@
   margin-bottom: 2rem;
 }
 
-@supports (-webkit-initial-letter: 2) {
-  .Summary::first-letter {
-    -webkit-initial-letter: 2;
-    font-style: normal;
-    font-weight: 900;
-    margin-inline-end: var(--fletter-inline-end, 0.5em);
-  }
+.Summary::first-letter {
+  -webkit-initial-letter: 2;
+  initial-letter: 2;
+  font-style: normal;
+  font-weight: 900;
+  font-feature-settings: var(--fletter-style, "ss02");
+  margin-inline-start: calc(var(--font-size-modifier, 1) * (-0.25em - var(--fletter-hanging, 0.5em)));
+  margin-inline-end: calc(var(--font-size-modifier, 1) * (0.25em + var(--fletter-inline-end, 0.25em)));
+  margin-block-start: var(--fletter-block-start, 0em);
+  margin-block-end: calc(var(--font-size-modifier, 1) * var(--fletter-block-end, -0.25em));
 }
-@supports (initial-letter: 2) {
-  .Summary::first-letter {
-    /* No webkit one, as it doesn't support font-feature-settings on the first-letter */
-    initial-letter: 2;
-    font-style: normal;
-    font-weight: 900;
-    font-feature-settings: var(--fletter-style, "ss02");
-    margin-inline-start: calc(-0.25em - var(--fletter-hanging, 0.5em));
-    margin-inline-end: calc(0.25em + var(--fletter-inline-end, 0.25em));
-    margin-block-end: var(--fletter-block-end, -0.25em);
-  }
 
-  .Summary[data-fletter=B] { --fletter-style: "ss03" }
-  .Summary[data-fletter=C] {
-    --fletter-style: "ss01";
-    --fletter-hanging: 0em;
+/* Firefox does not support initial-letter, but we can emulate it via float and font-size */
+@supports not ((-webkit-initial-letter: 2) or (initial-letter: 2)) {
+  .Summary::first-letter {
+    float: left;
+    font-size: 3.4em;
+    --font-size-modifier: 0.29411765;
+    --fletter-block-start: 0.11em;
   }
-  .Summary[data-fletter=D] {
-    --fletter-style: "ss03";
-    --fletter-hanging: 0.25em;
-  }
-  .Summary[data-fletter=E] { --fletter-style: "ss03" }
-  .Summary[data-fletter=G] { --fletter-hanging: 0em }
-  .Summary[data-fletter=F] { --fletter-style: "ss03" }
-  .Summary[data-fletter=I] { --fletter-hanging: 0.75em }
-  .Summary[data-fletter=K] { --fletter-style: "ss03" }
-  .Summary[data-fletter=N] { --fletter-style: "ss03" }
-  .Summary[data-fletter=O] {
-    --fletter-style: "ss04";
-    --fletter-hanging: 0em;
-  }
-  .Summary[data-fletter=Q] {
-    --fletter-hanging: 0em;
-    --fletter-block-end: -0.5em;
-    --fletter-inline-end: -0.75em;
-  }
-  .Summary[data-fletter=R] {
-    --fletter-inline-end: -0.75em;
-  }
-  .Summary[data-fletter=S] {
-    --fletter-style: "ss03";
-    --fletter-hanging: 0em;
-  }
-  .Summary[data-fletter=T] { --fletter-style: "ss03" }
-  .Summary[data-fletter=U] {
-    --fletter-style: "ss02";
-    --fletter-inline-end: -0.25em;
-  }
-  .Summary[data-fletter=X] { --fletter-style: "ss01" }
-  .Summary[data-fletter=Z] { --fletter-style: "ss01" }
 }
+
+@supports (-webkit-initial-letter: 2) and (not (initial-letter: 2)) {
+  /* Safari does not support font-feature-settings on the ::first-letter, so we need to remove the margin adjustments from it */
+  .Summary::first-letter {
+    margin: 0 0.5em 0 0;
+  }
+}
+
+.Summary[data-fletter=B] { --fletter-style: "ss03" }
+.Summary[data-fletter=C] {
+  --fletter-style: "ss01";
+  --fletter-hanging: 0em;
+}
+.Summary[data-fletter=D] {
+  --fletter-style: "ss03";
+  --fletter-hanging: 0.25em;
+}
+.Summary[data-fletter=E] { --fletter-style: "ss03" }
+.Summary[data-fletter=G] { --fletter-hanging: 0em }
+.Summary[data-fletter=F] { --fletter-style: "ss03" }
+.Summary[data-fletter=I] { --fletter-hanging: 0.75em }
+.Summary[data-fletter=K] { --fletter-style: "ss03" }
+.Summary[data-fletter=N] { --fletter-style: "ss03" }
+.Summary[data-fletter=O] {
+  --fletter-style: "ss04";
+  --fletter-hanging: 0em;
+}
+.Summary[data-fletter=Q] {
+  --fletter-hanging: 0em;
+  --fletter-block-end: -0.5em;
+  --fletter-inline-end: -0.75em;
+}
+.Summary[data-fletter=R] {
+  --fletter-inline-end: -0.75em;
+}
+.Summary[data-fletter=S] {
+  --fletter-style: "ss03";
+  --fletter-hanging: 0em;
+}
+.Summary[data-fletter=T] { --fletter-style: "ss03" }
+.Summary[data-fletter=U] {
+  --fletter-style: "ss02";
+  --fletter-inline-end: -0.25em;
+}
+.Summary[data-fletter=X] { --fletter-style: "ss01" }
+.Summary[data-fletter=Z] { --fletter-style: "ss01" }
