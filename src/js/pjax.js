@@ -1,5 +1,7 @@
 import { getToCMethods } from './toc.js';
 
+let hadFetchError = false;
+
 const initPjax = (queue, lazyQueue) => {
   const { registerToC, unregisterToC } = getToCMethods();
   registerToC();
@@ -83,10 +85,17 @@ const initPjax = (queue, lazyQueue) => {
       versions[lang] = { isFetching: true };
       // TODO: use proper lang from args
       lazyQueue.pushTask(() => fetch(`/${lang === 'en' ? '' : (lang + '/')}versions.json`)
-        .then(response => response.json())
+        .then(response => response?.json())
         .then(responseObject => {
+          if (!responseObject) {
+            console.log('versions fail')
+          }
           versions[lang] = responseObject;
-        }));
+        }).catch((e) => {
+          hadFetchError = true;
+          console.warn(e.message);
+        })
+      )
     }
   }
 
@@ -162,13 +171,17 @@ const initPjax = (queue, lazyQueue) => {
 
     states[url] = { isFetching: true };
     fetch(url + 'index.json')
-      .then(response => response.json())
+      .then(response => response?.json())
       .then(state => {
+        if (!state) {
+          return;
+        }
         state.url = url;
         states[url] = state;
         goToUrl(url, hash, noPush);
       })
       .catch(() => {
+        hadFetchError = true;
         // In case of a fetch error, just go there manually.
         window.location.href = url + hash;
       });
@@ -184,8 +197,11 @@ const initPjax = (queue, lazyQueue) => {
 
       states[url] = { isPreFetching: true };
       lazyQueue.pushTask(() => fetch(url + 'index.json')
-        .then(response => response.json())
+        .then(response => response?.json())
         .then(state => {
+          if (!state) {
+            return;
+          }
           const plannedNav = { ...states[url].plannedNav };
           state.url = url;
           if (versions[lang][url]) {
@@ -197,7 +213,10 @@ const initPjax = (queue, lazyQueue) => {
           if (plannedURL === plannedNav.url + plannedNav.hash) {
             goToUrl(plannedNav.url, plannedNav.hash);
           }
-        }));
+        }).catch((e) => {
+          console.warn(e.message);
+        })
+      );
     }
   };
 
@@ -252,7 +271,7 @@ const initPjax = (queue, lazyQueue) => {
       const url = getURLToHandle(link);
       if (url.pathname) {
         goToPage(url.pathname, url.hash);
-        return false;
+        return hadFetchError;
       }
     }
   };
