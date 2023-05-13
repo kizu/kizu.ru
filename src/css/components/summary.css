@@ -6,7 +6,8 @@
 }
 
 .Summary::first-letter {
-  -webkit-initial-letter: 2;
+  /* Not webkit-initial-letter, as it doesn't support stylistic alternates for some reason. */
+  /* -webkit-initial-letter: 2; */
   initial-letter: 2;
   font-style: normal;
   font-weight: 900;
@@ -17,20 +18,17 @@
   margin-block-end: calc(var(--font-size-modifier, 1) * var(--fletter-block-end, -0.25em));
 }
 
-/* Firefox does not support initial-letter, but we can emulate it via float and font-size */
-@supports not ((-webkit-initial-letter: 2) or (initial-letter: 2)) {
+/* Firefox does not support initial-letter, but we can emulate it via float and font-size. Also used for Safari, in order to make the stylistic alternates work. */
+@supports not (initial-letter: 2) {
   .Summary::first-letter {
     float: left;
+    /* Not yet sure how to properly calculate this from the initial-letter. There is probably somewhere an article about this, but on the first glance, we'd need to use the font-metrics for `lh` and `cap`. Using an approximate magic number for now. */
     font-size: 3.4em;
+    /* Reverse of the font-size, so the margins would use the original font-size. Could be replaced with `rem` to be stable, but I'm lazy haha. */
     --font-size-modifier: 0.29411765;
+    /* Not super sure what this margin is about, probably some baseline adjustment. */
     --fletter-block-start: 0.11em;
-  }
-}
-
-@supports (-webkit-initial-letter: 2) and (not (initial-letter: 2)) {
-  /* Safari does not support font-feature-settings on the ::first-letter, so we need to remove the margin adjustments from it */
-  .Summary::first-letter {
-    margin: 0 0.5em 0 0;
+    line-height: 0.9; /* Workaround for Safari */
   }
 }
 
