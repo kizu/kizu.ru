@@ -16,22 +16,18 @@
   margin-inline-end: calc(var(--font-size-modifier, 1) * (0.25em + var(--fletter-inline-end, 0.25em)));
   margin-block-start: var(--fletter-block-start, 0em);
   margin-block-end: calc(var(--font-size-modifier, 1) * var(--fletter-block-end, -0.25em));
+  /* Does not work in Chrome sadly */
+  shape-outside: polygon(
+    0 0,
+    var(--fletter-top-inset, 100%) 0,
+    min(var(--fletter-top-inset, 100%), var(--fletter-bottom-inset, 100%)) 33%,
+    min(var(--fletter-top-inset, 100%), var(--fletter-bottom-inset, 100%)) 66%,
+    var(--fletter-bottom-inset, 100%) 100%, 0 100%);
 }
 
-/* Firefox does not support initial-letter, but we can emulate it via float and font-size. Also used for Safari, in order to make the stylistic alternates work. */
-@supports not (initial-letter: 2) {
-  .Summary::first-letter {
-    float: left;
-    /* Not yet sure how to properly calculate this from the initial-letter. There is probably somewhere an article about this, but on the first glance, we'd need to use the font-metrics for `lh` and `cap`. Using an approximate magic number for now. */
-    font-size: 3.4em;
-    /* Reverse of the font-size, so the margins would use the original font-size. Could be replaced with `rem` to be stable, but I'm lazy haha. */
-    --font-size-modifier: 0.29411765;
-    /* Not super sure what this margin is about, probably some baseline adjustment. */
-    --fletter-block-start: 0.11em;
-    line-height: 0.9; /* Workaround for Safari */
-  }
+.Summary[data-fletter=A] {
+  --fletter-top-inset: 80%;
 }
-
 .Summary[data-fletter=B] { --fletter-style: "ss03" }
 .Summary[data-fletter=C] {
   --fletter-style: "ss01";
@@ -42,14 +38,32 @@
   --fletter-hanging: 0.25em;
 }
 .Summary[data-fletter=E] { --fletter-style: "ss03" }
-.Summary[data-fletter=G] { --fletter-hanging: 0em }
-.Summary[data-fletter=F] { --fletter-style: "ss03" }
+.Summary[data-fletter=F] {
+  --fletter-style: "ss03";
+  --fletter-bottom-inset: 90%;
+}
+.Summary[data-fletter=G] {
+  --fletter-hanging: 0em;
+  --fletter-top-inset: 90%;
+}
 .Summary[data-fletter=I] { --fletter-hanging: 0.75em }
-.Summary[data-fletter=K] { --fletter-style: "ss03" }
+.Summary[data-fletter=J] {
+  --fletter-bottom-inset: 90%;
+}
+.Summary[data-fletter=K] {
+  --fletter-style: "ss02";
+  --fletter-top-inset: 90%;
+}
+.Summary[data-fletter=L] {
+  --fletter-top-inset: 60%;
+}
 .Summary[data-fletter=N] { --fletter-style: "ss03" }
 .Summary[data-fletter=O] {
   --fletter-style: "ss04";
   --fletter-hanging: 0em;
+}
+.Summary[data-fletter=P] {
+  --fletter-bottom-inset: 60%;
 }
 .Summary[data-fletter=Q] {
   --fletter-hanging: 0em;
@@ -58,15 +72,53 @@
 }
 .Summary[data-fletter=R] {
   --fletter-inline-end: -0.75em;
+  --fletter-top-inset: 90%;
 }
 .Summary[data-fletter=S] {
   --fletter-style: "ss03";
   --fletter-hanging: 0em;
+  --fletter-block-end: 0.25em;
 }
-.Summary[data-fletter=T] { --fletter-style: "ss03" }
+.Summary[data-fletter=T] {
+  --fletter-style: "ss03";
+  --fletter-bottom-inset: 90%;
+}
 .Summary[data-fletter=U] {
-  --fletter-style: "ss02";
-  --fletter-inline-end: -0.25em;
+  --fletter-style: "ss01"; /* If not for Fx would use ss02 */
+}
+.Summary[data-fletter=V] {
+  --fletter-bottom-inset: 60%;
+}
+.Summary[data-fletter=W] {
+  --fletter-bottom-inset: 70%;
 }
 .Summary[data-fletter=X] { --fletter-style: "ss01" }
+.Summary[data-fletter=Y] {
+  --fletter-bottom-inset: 80%;
+}
 .Summary[data-fletter=Z] { --fletter-style: "ss01" }
+
+
+/* Firefox does not support initial-letter, but we can emulate it via float and font-size. Also used for Safari, in order to make the stylistic alternates work. */
+@supports not (initial-letter: 2) {
+  .Summary::first-letter {
+    float: left;
+    /* Not yet sure how to properly calculate this from the initial-letter. There is probably somewhere an article about this, but on the first glance, we'd need to use the font-metrics for `lh` and `cap`. Using an approximate magic number for now. */
+    font-size: 3.4375em;
+    /* Reverse of the font-size, so the margins would use the original font-size. Could be replaced with `rem` to be stable, but I'm lazy haha. */
+    --font-size-modifier: 0.29411765;
+    /* Not super sure what this margin is about, probably some baseline adjustment. */
+    --fletter-block-start: 0.11em;
+    line-height: 0.9; /* Workaround for Safari */
+  }
+
+  .Summary[data-fletter=Q],
+  .Summary[data-fletter=R] {
+    --fletter-inline-end: 0.125em;
+  }
+
+  .Summary[data-fletter=V],
+  .Summary[data-fletter=W] {
+    --fletter-inline-end: 0.625em;
+  }
+}
