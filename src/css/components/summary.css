@@ -1,124 +1,172 @@
 .Summary {
   font-size: 1.5rem;
-  line-height: 1.75;
+  line-height: 2.5rem;
   font-style: italic;
   margin-bottom: 2rem;
+
+  --first-line-inset: 0;
+  --second-line-inset: 0;
+  --top-adjustment: 0;
+  --top-adjustment-fx: 0;
+  --bottom-adjustment: 0;
+  --left-adjustment: -1.16;
+  --right-adjustment: -0.222;
+
+  --text-indent: calc(
+    -1rem * var(--first-line-inset, 0)
+    + 1rem * var(--second-line-inset, 0)
+  );
+  /* Using text-indent as Chrome does not understand shape-outside for the first-letter */
+  text-indent: var(--text-indent);
 }
 
 .Summary::first-letter {
-  /* Not webkit-initial-letter, as it doesn't support stylistic alternates for some reason. */
-  /* -webkit-initial-letter: 2; */
-  initial-letter: 2;
+  float: left;
+  font-size: 7rem;
+  line-height: 1;
   font-style: normal;
   font-weight: 900;
   font-feature-settings: var(--fletter-style, "ss02");
-  margin-inline-start: calc(var(--font-size-modifier, 1) * (-0.25em - var(--fletter-hanging, 0.5em)));
-  margin-inline-end: calc(var(--font-size-modifier, 1) * (0.25em + var(--fletter-inline-end, 0.25em)));
-  margin-block-start: var(--fletter-block-start, 0em);
-  margin-block-end: calc(var(--font-size-modifier, 1) * var(--fletter-block-end, -0.25em));
-  /* Does not work in Chrome sadly */
-  shape-outside: polygon(
-    0 0,
-    var(--fletter-top-inset, 100%) 0,
-    min(var(--fletter-top-inset, 100%), var(--fletter-bottom-inset, 100%)) 33%,
-    min(var(--fletter-top-inset, 100%), var(--fletter-bottom-inset, 100%)) 66%,
-    var(--fletter-bottom-inset, 100%) 100%, 0 100%);
+
+  /* Chrome does not allow resetting text-indent, so using this to have same behavior in Safari & Chrome */
+  --text-indent-compensation: -1 * var(--text-indent);
+  margin-block-start: calc(
+    -1.3333rem
+    + 1rem * var(--top-adjustment)
+    + 1rem * var(--top-adjustment-fx)
+  );
+  margin-block-end: calc(-1rem + 1rem * var(--bottom-adjustment));
+  margin-inline-start: calc(
+    var(--text-indent-compensation)
+    + 1rem * var(--left-adjustment) * var(--at-large)
+  );
+  margin-inline-end: calc(
+    1rem
+    - 1rem * var(--second-line-inset)
+    + 1rem * var(--right-adjustment)
+  );
+
+  /* Not opacity as it has a bug in Safari */
+  color: hsla(
+    var(--color-h, 0),
+    calc(var(--color-s, 0) * 1%),
+    calc(var(--color-l, 0) * 1%),
+    0.85
+  );
+}
+
+@media screen and (min--moz-device-pixel-ratio:0) {
+  .Summary::first-letter {
+    --top-adjustment-fx: 0.36;
+    --text-indent-compensation: 0rem;
+  }
 }
 
 .Summary[data-fletter=A] {
-  --fletter-top-inset: 80%;
+  --first-line-inset: 1.5;
 }
-.Summary[data-fletter=B] { --fletter-style: "ss03" }
+.Summary[data-fletter=B] {
+  --fletter-style: "ss03";
+  --left-adjustment: -1.444;
+}
 .Summary[data-fletter=C] {
   --fletter-style: "ss01";
-  --fletter-hanging: 0em;
 }
 .Summary[data-fletter=D] {
   --fletter-style: "ss03";
-  --fletter-hanging: 0.25em;
 }
-.Summary[data-fletter=E] { --fletter-style: "ss03" }
+.Summary[data-fletter=E] {
+  --fletter-style: "ss03";
+}
 .Summary[data-fletter=F] {
   --fletter-style: "ss03";
-  --fletter-bottom-inset: 90%;
+  --bottom-adjustment: 0.5;
 }
 .Summary[data-fletter=G] {
-  --fletter-hanging: 0em;
-  --fletter-top-inset: 90%;
+  --fletter-style: "ss03";
+  --bottom-adjustment: 0.5;
 }
-.Summary[data-fletter=I] { --fletter-hanging: 0.75em }
+.Summary[data-fletter=H] { 
+  --first-line-inset: 0.5;
+}
+.Summary[data-fletter=I] {
+  --first-line-inset: 0.5;
+}
 .Summary[data-fletter=J] {
-  --fletter-bottom-inset: 90%;
+  --bottom-adjustment: 0.75;
+  --right-adjustment: -0.5;
 }
 .Summary[data-fletter=K] {
   --fletter-style: "ss02";
-  --fletter-top-inset: 90%;
+  --first-line-inset: 2.5;
+  --right-adjustment: 1.5;
+  --bottom-adjustment: 0.5;
 }
-.Summary[data-fletter=L] {
-  --fletter-top-inset: 60%;
+/* .Summary[data-fletter=L] {} */
+.Summary[data-fletter=M] {
+  --first-line-inset: 0.5;
 }
-.Summary[data-fletter=N] { --fletter-style: "ss03" }
+.Summary[data-fletter=N] {
+  --fletter-style: "ss03";
+  --right-adjustment: -0.5;
+}
 .Summary[data-fletter=O] {
   --fletter-style: "ss04";
-  --fletter-hanging: 0em;
+  --first-line-inset: 0.222;
+  --left-adjustment: -0.222;
 }
 .Summary[data-fletter=P] {
-  --fletter-bottom-inset: 60%;
+  --first-line-inset: 0.222;
+  --second-line-inset: 3;
 }
 .Summary[data-fletter=Q] {
-  --fletter-hanging: 0em;
-  --fletter-block-end: -0.5em;
-  --fletter-inline-end: -0.75em;
+  --left-adjustment: -0.222;
+  --first-line-inset: 1.5;
+  --right-adjustment: 1.5;
+  --bottom-adjustment: 0.5;
 }
 .Summary[data-fletter=R] {
-  --fletter-inline-end: -0.75em;
-  --fletter-top-inset: 90%;
+  --first-line-inset: 2;
+  --right-adjustment: 1.5;
+  --bottom-adjustment: 0.5;
 }
 .Summary[data-fletter=S] {
   --fletter-style: "ss03";
-  --fletter-hanging: 0em;
-  --fletter-block-end: 0.25em;
+  --bottom-adjustment: 0.5;
 }
 .Summary[data-fletter=T] {
   --fletter-style: "ss03";
-  --fletter-bottom-inset: 90%;
+  --right-adjustment: -0.5;
 }
 .Summary[data-fletter=U] {
   --fletter-style: "ss01"; /* If not for Fx would use ss02 */
+  --right-adjustment: -0.611;
 }
 .Summary[data-fletter=V] {
-  --fletter-bottom-inset: 60%;
+  --second-line-inset: 1;
+  --right-adjustment: -1;
 }
 .Summary[data-fletter=W] {
-  --fletter-bottom-inset: 70%;
+  --second-line-inset: 1;
+  --right-adjustment: -1;
 }
-.Summary[data-fletter=X] { --fletter-style: "ss01" }
+.Summary[data-fletter=X] {
+  --fletter-style: "ss01";
+  --first-line-inset: 1;
+}
 .Summary[data-fletter=Y] {
-  --fletter-bottom-inset: 80%;
+  --right-adjustment: -2;
 }
-.Summary[data-fletter=Z] { --fletter-style: "ss01" }
+.Summary[data-fletter=Z] {
+  --fletter-style: "ss01";
+}
 
-
-/* Firefox does not support initial-letter, but we can emulate it via float and font-size. Also used for Safari, in order to make the stylistic alternates work. */
-@supports not (initial-letter: 2) {
-  .Summary::first-letter {
-    float: left;
-    /* Not yet sure how to properly calculate this from the initial-letter. There is probably somewhere an article about this, but on the first glance, we'd need to use the font-metrics for `lh` and `cap`. Using an approximate magic number for now. */
-    font-size: 3.4375em;
-    /* Reverse of the font-size, so the margins would use the original font-size. Could be replaced with `rem` to be stable, but I'm lazy haha. */
-    --font-size-modifier: 0.29411765;
-    /* Not super sure what this margin is about, probably some baseline adjustment. */
-    --fletter-block-start: 0.11em;
-    line-height: 0.9; /* Workaround for Safari */
-  }
-
-  .Summary[data-fletter=Q],
-  .Summary[data-fletter=R] {
-    --fletter-inline-end: 0.125em;
-  }
-
-  .Summary[data-fletter=V],
-  .Summary[data-fletter=W] {
-    --fletter-inline-end: 0.625em;
-  }
+/* When the page is translated, remove all letter-specific adjustments */
+.Summary:not(:lang(en)) {
+  --first-line-inset: 0;
+  --second-line-inset: 0;
+  --top-adjustment: 0;
+  --bottom-adjustment: 0;
+  --left-adjustment: 0;
+  --right-adjustment: 0;
 }
