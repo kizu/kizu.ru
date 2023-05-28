@@ -1,6 +1,6 @@
 # Future CSS: Anchor Positioning
 
-#Experiment #Anchor_Positioning #Future_CSS #CSS_Variables #CSS
+#Anchor_Positioning #Future_CSS #Experiment #CSS_Variables #CSS
 
 _Anchor positioning might be one of the most exciting features coming to CSS. It is currently available under an experimental flag in Chrome Canary, and after playing with it for a bit, I couldn’t stop myself from sharing what I found. In this article, I will show you some of my experiments._
 
@@ -493,14 +493,14 @@ In this example, whenever we target something, we can use from 2 to 4 differ
 A few notes:
 
 1. Look at how we don’t have anything hard-coded in CSS — we only mention rows & columns, we don’t mention any specific names, and so on.
-2. For targeting the first column, we have to create a pseudo-element, as we can’t assign two different anchor names to the same element, so we have to add an extra one just for the additional anchor name. While we could mention the `--chrome` anchor there, that would mean hard-coding it into wedon't it less reusable. Another in CSS option would be to define an additional API for the component, where we could provide the “first column” via a separate CSS variable.
+2. For targeting the first column, we have to create a pseudo-element, as we can’t assign two different anchor names to the same element, so we have to add an extra one just for the additional anchor name. While we could mention the `--chrome` anchor there, that would mean hard-coding it into CSS, making it less reusable. Another option would be to define an additional API for the component, where we could provide the “first column” via a separate CSS variable.
 3. We can use a CSS-like API with “shorthands” for rows/columns when mentioning them, by default targeting everything from the first column and row to the end of the `tbody` and allowing specifying any of the boundaries manually, either as a whole row or column, or only a specific part like a start or end.
 
 I’m fascinated by how we can use modern CSS to define such expressive APIs for our components!
 
 ### Sidenotes Layout
 
-For the final experiment, I wanted to do something different. Maybe not as shiny and captivating _visually_, but something that tries to get the maximum of what we could from the anchor positioning — trying to apply it for _layouts_[^layouts].
+For the final experiment, I wanted to do something different. Maybe not as shiny and captivating _visually_, but something that tries to get to the maximum of what we could do with anchor positioning — trying to apply it for _layouts_[^layouts].
 
 [^layouts]: Unlike other examples, this one could be harder to handle from a graceful degradation standpoint. Even when the anchor positioning becomes available, we will still need to be careful about using it for such purposes. <!-- offset="3" span="3"  -->
 

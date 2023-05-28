@@ -44,6 +44,6 @@ code:not(.z):not(.z) {
   padding: var(--code-padding, 0);
   font-style: var(--code-font-style, italic);
   line-height: var(--code-line-height, 1);
-  color: var(--code-color, #567E00);
+  color: var(--code-color, var(--THEME_CODE));
   hyphens: none;
 }

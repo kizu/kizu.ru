@@ -157,6 +157,7 @@ img:only-child {
 }
 
 strong, b {
+  font-style: normal; /* I don't load the bold italic font. */
   font-weight: var(--strong-font-weight, bold);
 }
 
