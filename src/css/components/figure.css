@@ -27,6 +27,11 @@ video.Figure-Screenshot {
   border-radius: inherit;
 }
 
+:is([style*='padding: 0'], [style*='padding:0']) > video.Figure-Screenshot {
+  margin: 0;
+  max-width: 100%;
+}
+
 .Figure-Toggle {
   position: fixed;
   top: 0;

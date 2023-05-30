@@ -1,0 +1,154 @@
+<style>
+.example-3-1 {
+  overflow: auto;
+  anchor-name: --scroll-box;
+  height: 100%;
+}
+
+.example-3-1 .toc {
+  all: unset;
+  position: sticky;
+  align-self: start;
+  top: 0;
+  padding: 0.5rem;
+  grid-column: 1;
+  anchor-name: --toc;
+  font: var(--THEME_FONT--SMALL);
+}
+
+.example-3-1 .toc-item {
+  all: unset;
+  display: block;
+}
+
+.example-3-1 .toc-item::before {
+  display: none;
+}
+
+.example-3-1 .toc-link {
+  display: block;
+  width: max-content;
+  anchor-name: var(--is);
+  padding: 0 0.5rem;
+}
+
+.toc-link:not(:hover, :focus-visible) {
+  color: inherit;
+}
+
+.example-3-1 .header {
+  padding: 2rem 0 1rem;
+  margin: 0;
+}
+
+.example-3-1 .header:first-child {
+  padding-top: 1rem;
+}
+
+.example-3-1 .header::before {
+  content: "";
+  position: fixed;
+  z-index: 1;
+
+  anchor-default: var(--for);
+  anchor-scroll: --scroll-box;
+  right: anchor(right);
+  left: anchor(left);
+  top: anchor(top);
+  bottom: anchor(bottom);
+
+  margin: 0 -0.25rem;
+  border-radius: 99em;
+  background: #0000;
+  pointer-events: none;
+
+  -webkit-backdrop-filter: contrast(1.5) invert(1);
+  backdrop-filter: contrast(1.5) invert(1);
+
+  opacity: var(--state);
+}
+
+
+.example-3-1 .layout {
+  width: 30em;
+  display: grid;
+  grid-template-columns: 10em 1fr;
+  gap: 1em;
+}
+
+.example-3-1 :where(.layout) > * {
+  grid-column: 2;
+}
+
+@keyframes state-change {
+  35%,
+  65% {
+    --state: 1;
+  }
+}
+
+.example-3-1 section {
+  animation: state-change auto linear both;
+  --state: 0;
+  animation-timeline: view();
+}
+
+.example-3-1 .some-content {
+  height: 10rem;
+  padding: 2rem;
+  background: pink;
+}
+
+</style>
+
+<div class="example-3-1">
+  <div class="layout">
+      <ul class="toc">
+        <li class="toc-item">
+          <a class="toc-link" style="--is: --header-1" href="#header-1">
+            This is the first title
+          </a>
+        </li>
+        <li class="toc-item">
+          <a class="toc-link" style="--is: --header-2" href="#header-2">
+            This is the second title
+          </a>
+        </li>
+        <li class="toc-item">
+          <a class="toc-link" style="--is: --header-3" href="#header-3">
+            This is the third title
+          </a>
+        </li>
+        <li class="toc-item">
+          <a class="toc-link" style="--is: --header-4" href="#header-4">
+            This is the fourth title
+          </a>
+        </li>
+        <li class="toc-item">
+          <a class="toc-link" style="--is: --header-5" href="#header-5">
+            This is the fifth title
+          </a>
+        </li>
+      </ul>
+    <section>
+      <h4 class="header" id="header-1" style="--for: --header-1">This is the first title</h4>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section>
+      <h5 class="header" id="header-2" style="--for: --header-2">This is the second title</h5>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section>
+      <h6 class="header" id="header-3" style="--for: --header-3">This is the third title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section>
+      <h5 class="header" id="header-4" style="--for: --header-4">This is the fourth title</h5>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section>    
+      <h6 class="header" id="header-5" style="--for: --header-5">This is the fifth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+  </div>  
+</div>

@@ -133,6 +133,7 @@
 }
 .Summary[data-fletter=S] {
   --fletter-style: "ss03";
+  --right-adjustment: -1;
   --bottom-adjustment: 0.5;
 }
 .Summary[data-fletter=T] {

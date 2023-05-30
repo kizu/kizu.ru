@@ -18,6 +18,7 @@ ol {
 ul {
   display: var(--ul-display);
   grid-template-areas: var(--ul-grid);
+  gap: var(--ul-gap);
 }
 
 li {

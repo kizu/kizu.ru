@@ -1,0 +1,153 @@
+<style>
+  @keyframes shrink-text {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(var(--reduce-to));
+    }
+  }
+  
+  @keyframes reveal-and-shrink-bg {
+    from {
+      opacity: 0;
+      transform: scaleY(1);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(var(--reduce-to));
+    }
+  }
+  
+  .sticky {
+    --height: 2em;
+    --reduce-to: 0.5;
+    --distance: calc(var(--height) * (1 - var(--reduce-to)));
+  
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    font-size: 1em;
+    
+    padding: 0 2.5rem;
+    margin: 0;  
+  
+    --animation-range:
+      entry 100cqh
+      entry calc(100cqh + var(--distance));
+  }
+  
+  .sticky-text {
+    height: var(--height);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    
+    transform-origin: 0 0;
+    animation: auto linear shrink-text both;
+    animation-timeline: view();
+    animation-range: var(--animation-range);
+  }
+  
+  .sticky::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+  
+    transform-origin: 0 0;
+    background: var(--THEME_BG--DISTANT);
+    box-shadow: 0 5px 5px -5px; 
+    animation: auto linear reveal-and-shrink-bg both;
+    animation-timeline: view();
+    animation-range: var(--animation-range);
+  }
+  
+  
+  
+  
+  .spacer {
+    height: 10em;
+  /*   background: red; */
+  }
+  
+  
+  
+  
+  
+  
+.example-1 {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+  container-type: size;
+
+  background-color: #FFF;
+  background-attachment: local;
+  border-radius: var(--initial-at-small, 3px);
+
+  /* via https://css-pattern.com/ */
+  --s: 2em; /* control the size */    
+  --_g: #0000 90deg,#3661 0;
+  background-image: 
+    conic-gradient(from 90deg at 2px 2px,var(--_g)),
+    conic-gradient(from 90deg at 1px 1px,var(--_g));
+  background-size: var(--s) var(--s), calc(var(--s)/4) calc(var(--s)/4);
+}
+
+
+
+/* Showing the screenshot by default if we don't have anchor-name support */
+@supports not (animation-timeline: view()) {
+  :root[class] {
+    --toggler-on: none;
+    --toggler-off: inline;
+  }
+
+  .Figure-Demo::after {
+    content: "\26A0 \FE0F  Your browser does not support animation-timeline";
+    display: block;
+    background: --THEME_BG--DISTANT;
+
+    border: 2px dashed #FFCA51;
+    padding: 0.5rem;
+    margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
+    border-radius: 0 0 3px 3px;
+    text-align: center;
+    hyphens: none;
+
+    background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+    background-clip: padding-box, border-box;
+  }
+}
+
+</style>
+
+<div class="example-1">
+  <div>
+    <div class="spacer"></div>
+  
+    <h4 class="sticky">
+      <span class="sticky-text">Header that reduces to 0.5 when stuck</span>
+    </h4>
+  
+    <div class="spacer"></div>
+  </div>
+  
+  <div>
+    <h4 class="sticky" style="--reduce-to: 0.75">
+      <span class="sticky-text">Header that reduces to 0.75 when stuck</span>
+    </h4>
+  
+    <div class="spacer"></div>
+  </div>
+  
+  <div>
+    <h4 class="sticky" style="--reduce-to: 0.25">
+      <span class="sticky-text">Header that reduces to 0.25 when stuck</span>
+    </h4>
+  
+    <div class="spacer" style="height: 24em"></div>
+  </div>  
+</div>

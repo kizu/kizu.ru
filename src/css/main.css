@@ -120,11 +120,12 @@ nav {
   grid-column: content;
   --ul-display: grid;
   --ul-item-content: none;
+  --ul-gap: 0.5rem 1rem;
   --list-item-padding: 0;
   --link-color: var(--color);
   --link-color--visited: var(--color);
   --link-underline-offset: 0.4em;
-  font-size: var(--THEME_FONT_SIZE--SMALL);
+  font: var(--THEME_FONT--SMALL);
   --ul-grid:
     "full full"
     "start end";
@@ -282,6 +283,14 @@ mark {
   color: inherit;
   text-shadow: none;
   background: rgba(255, 255, 0, 0.5);
+}
+
+details {
+  margin: 1rem 0;
+}
+
+summary {
+
 }
 
 ::selection {
