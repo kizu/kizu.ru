@@ -241,8 +241,8 @@ Implementation notes:
     margin-bottom: calc(-1 * var(--height));
 
     animation-range:
-	    contain 0px
-	    contain var(--height); /* [4] */
+      contain 0px
+      contain var(--height); /* [4] */
   }
 
   .example-2-1 .shadow--bottom {
@@ -250,8 +250,8 @@ Implementation notes:
     margin-top: calc(-1 * var(--height));
 
     animation-range:
-	    contain calc(100% - var(--height))
-	    contain 100%; /* [5] */
+      contain calc(100% - var(--height))
+      contain 100%; /* [5] */
     animation-direction: reverse; /* [6] */
 
     /* background omitted */
