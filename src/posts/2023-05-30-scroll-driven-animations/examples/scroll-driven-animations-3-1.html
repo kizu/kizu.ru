@@ -1,48 +1,84 @@
 <style>
-.example-3-1 {
+/* Common styles for both implementations */
+.example-3 {
   overflow: auto;
-  anchor-name: --scroll-box;
+  overscroll-behavior: contain;
   height: 100%;
 }
 
-.example-3-1 .toc {
+:where(.example-3) .toc {
   all: unset;
   position: sticky;
   align-self: start;
   top: 0;
   padding: 0.5rem;
   grid-column: 1;
-  anchor-name: --toc;
   font: var(--THEME_FONT--SMALL);
 }
 
-.example-3-1 .toc-item {
+.example-3 .toc-item {
   all: unset;
   display: block;
 }
 
-.example-3-1 .toc-item::before {
+.example-3 .toc-item::before {
   display: none;
 }
 
-.example-3-1 .toc-link {
+:where(.example-3) .toc-link {
   display: block;
   width: max-content;
-  anchor-name: var(--is);
   padding: 0 0.5rem;
 }
 
-.toc-link:not(:hover, :focus-visible) {
+.example-3 .toc-link:not(:hover, :focus-visible) {
   color: inherit;
 }
 
-.example-3-1 .header {
+.example-3 .header {
   padding: 2rem 0 1rem;
   margin: 0;
 }
 
-.example-3-1 .header:first-child {
+.example-3 .header:first-child {
   padding-top: 1rem;
+}
+
+.example-3 .some-content {
+  height: 10rem;
+  padding: 2rem;
+  background: pink;
+}
+
+.example-3 .layout {
+  width: 30em;
+  display: grid;
+  grid-template-columns: 10em 1fr;
+  --gap: 1em;
+  gap: var(--gap);
+}
+
+:where(.example-3 .layout) > * {
+  grid-column: 2;
+}
+
+/* Anchor-positioning implementation (kinda outdated, but still fun) */
+.example-3-1 {
+  anchor-name: --scroll-box;
+}
+
+.example-3-1 .toc {
+  anchor-name: --toc;
+}
+
+.example-3-1 .toc-link {
+  anchor-name: var(--is);
+}
+
+.example-3-1 section {
+  animation: state-change auto linear both;
+  --state: 0;
+  animation-timeline: view();
 }
 
 .example-3-1 .header::before {
@@ -68,40 +104,15 @@
   opacity: var(--state);
 }
 
-
-.example-3-1 .layout {
-  width: 30em;
-  display: grid;
-  grid-template-columns: 10em 1fr;
-  gap: 1em;
-}
-
-.example-3-1 :where(.layout) > * {
-  grid-column: 2;
-}
-
 @keyframes state-change {
   35%,
   65% {
     --state: 1;
   }
 }
-
-.example-3-1 section {
-  animation: state-change auto linear both;
-  --state: 0;
-  animation-timeline: view();
-}
-
-.example-3-1 .some-content {
-  height: 10rem;
-  padding: 2rem;
-  background: pink;
-}
-
 </style>
 
-<div class="example-3-1">
+<div class="example-3 example-3-1">
   <div class="layout">
       <ul class="toc">
         <li class="toc-item">

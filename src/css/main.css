@@ -290,7 +290,21 @@ details {
 }
 
 summary {
+  cursor: pointer;
+}
 
+.Details-subgrid {
+  grid-column: 1 / span 3;
+}
+
+.Details-subgrid summary {
+  margin: 0 auto;
+}
+
+.Details-content {
+  display: grid;
+  grid-template: var(--grid);
+  grid-gap: 0 var(--viewport-padding);  
 }
 
 ::selection {

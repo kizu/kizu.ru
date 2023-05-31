@@ -1,0 +1,178 @@
+<style>
+.example-3-2 {
+  container-type: size;
+}
+
+.example-3-2 .toc {
+  max-height: 100cqh;
+  box-sizing: border-box;
+  overflow: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+}
+
+.example-3-2 .layout {
+  timeline-scope: var(--scopes);
+}
+
+.example-3-2 .toc-link {
+  padding-top: 0.1rem;
+  margin-top: -0.1rem;
+  border-radius: 99em;
+}
+
+.example-3-2 .toc-link:not(:hover, :focus-visible) {
+  animation:
+    current-item linear,
+    var(--snap-animation, none) linear;
+  animation-timeline: var(--for);
+  /* % works based on the element height, and we need to base this on the container/viewport. */
+  animation-range:
+    entry min(33cqh, 33%)
+    exit calc(100% - min(33cqh, 33%));
+}
+  
+.example-3-2
+  .toc:not(:hover, :has(:focus-visible))
+    .toc-link {
+      --snap-animation: snap-to-current;
+}
+
+.example-3-2 section {
+  view-timeline: var(--is);
+}
+
+.example-3-2 .some-content {
+  overflow: hidden;
+  resize: block;
+}
+
+@keyframes current-item {
+  0%,
+  /* Have a weird bug when it is 100% */
+  99.9% {
+    color: #FFF;
+    background: #000;
+  }
+}
+
+@keyframes snap-to-current {
+  to {
+    scroll-snap-align: center;
+  }
+}
+
+
+</style>
+  
+<div class="example-3 example-3-2">
+  <div
+    class="layout"
+    style="
+      --scopes:
+        --section-1,
+        --section-2,
+        --section-3,
+        --section-4,
+        --section-5,
+        --section-6,
+        --section-7,
+        --section-8,
+        --section-9,
+        --section-10;
+    "
+  >
+    <ul class="toc">
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-1" href="#section-1">
+          The first title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-2" href="#section-2">
+          The second title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-3" href="#section-3">
+          The third title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-4" href="#section-4">
+          The fourth title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-5" href="#section-5">
+          The fifth title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-6" href="#section-6">
+          The sixth title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-7" href="#section-7">
+          The seventh title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-8" href="#section-8">
+          The eighth title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-9" href="#section-9">
+          The nineth title
+        </a>
+      </li>
+      <li class="toc-item">
+        <a class="toc-link" style="--for: --section-10" href="#section-10">
+          The nineth title
+        </a>
+      </li>
+    </ul>
+    <section id="section-1" style="--is: --section-1">
+      <h4 class="header">This is the first title</h4>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-2" style="--is: --section-2">
+      <h5 class="header">This is the second title</h5>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-3" style="--is: --section-3">
+      <h6 class="header">This is the third title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-4" style="--is: --section-4">
+      <h5 class="header">This is the fourth title</h5>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-5" style="--is: --section-5" >
+      <h6 class="header">This is the fifth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-6" style="--is: --section-6" >
+      <h6 class="header">This is the sixth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-7" style="--is: --section-7" >
+      <h6 class="header">This is the seventh title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-8" style="--is: --section-8" >
+      <h6 class="header">This is the eighth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-9" style="--is: --section-9" >
+      <h6 class="header">This is the nineth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+    <section id="section-10" style="--is: --section-10" >
+      <h6 class="header">This is the tenth title</h6>
+      <div class="some-content">Just some content filler.</div>
+    </section>
+  </div>  
+</div>
