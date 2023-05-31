@@ -312,7 +312,7 @@ After a few tries[^tries], I did achieve this with scroll-driven animations. L
 
 [^tries]: Initially, while reading the spec and playing with the implementation in Chrome Canary, I did not find anything that would allow me to do this just with scroll-driven animations, so I managed to do a [proof-of-concept](#solution-based-on-anchor-positioning) using anchor positioning. Of course, [Bramus pointed out on Mastodon](https://front-end.social/@bramus/110458876067809316) that we now have a `timeline-scope`, so the final solution is much cleaner thanks to him! <!-- offset="-8.75" -->
 
-{{<Partial src="examples/scroll-driven-animations-3-2.html" screenshot="true" video="true" style="height: 12rem; padding: 0; overflow: hidden; resize: block;" >}}
+{{<Partial src="examples/scroll-driven-animations-3-2.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
 {{</Partial>}}
 
@@ -454,7 +454,7 @@ Initially, I did not think we could hoist the animation timelines outside of 
 
 As an initial proof-of-concept, I did manage to achieve this with scroll-driven animations combined with [anchor positioning](/anchor-positioning-experiments/). Let’s look at the example:
 
-{{<Partial src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="height: 12rem; padding: 0; overflow: hidden; resize: block;" >}}
+{{<Partial src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
 {{</Partial>}}
 
