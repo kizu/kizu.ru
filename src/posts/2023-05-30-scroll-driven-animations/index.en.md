@@ -405,7 +405,7 @@ And, then there is another interesting CSS aspect I’d want to point out.
 
 ##### Scroll Synchronization
 
-If you did not notice it — go [back to the example](solution-using-timeline-scope) and scroll its content to the bottom and up again. What happens is that our table of contents' scrollbar moves alongside our main one!
+If you did not notice it — go [back to the example](#solution-using-timeline-scope) and scroll its content to the bottom and up again. What happens is that our table of contents' scrollbar moves alongside our main one!
 
 That is another part that is usually achieved only with JS. Now — only with CSS! Let’s look at it:
 
