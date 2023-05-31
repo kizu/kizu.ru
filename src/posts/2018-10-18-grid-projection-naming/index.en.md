@@ -9,7 +9,7 @@ For my new site[^new-site], I wanted to use CSS Grids[^grids], but I also 
 {{<Sidenotes span="3">}}
   [^new-site]: If you have missed it — I’ve redesigned and rewrote the engine for my site, and [wrote an article]({{% LinkTo v-14-0%}}) about it. While doing this, I came up with a lot of stuff I want to write about — and this article is the first of those.
 
-  [^grids]: If you’re just starting with grids, I recommend you to read [Jen Simmons](@jensimmons)’ and [Rachel Andrew](@rachelandrew)’s articles. You can start with the [“Quick way to try out grid”](http://jensimmons.com/post/aug-15-2017/heres-super-quick-way-try-out-css-grid) article by Jen, for example.
+  [^grids]: If you’re just starting with grids, I recommend you to read [Jen Simmons](@jensimmons)’ and [Rachel Andrew](@rachelandrew)’s articles. You can start with the [“Quick way to try out grid”](http://jensimmons.com/post/aug-15-2017/heres-super-quick-way-try-out-css-grid) article by Jen, for example. <!-- offset="1" -->
 {{</Sidenotes>}}
 
 In this article, I would tell you about one trick I came up for naming my layout’s grid columns. Everything else — how the layout works and what were the problems with it — I’ll save for another article, otherwise, this one would become too big.

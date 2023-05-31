@@ -71,6 +71,7 @@
 }
 .Summary[data-fletter=C] {
   --fletter-style: "ss01";
+  --right-adjustment: -0.75;
 }
 .Summary[data-fletter=D] {
   --fletter-style: "ss03";
