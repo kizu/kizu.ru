@@ -300,19 +300,161 @@ I can’t wait for this to be widely available! And, the best part — when 
 
 ### Table of Contents with Highlighted Current Sections
 
-The final example I would like to show you today is the most experimental: it even uses[^attachment] another thing from the future — [anchor positioning](/anchor-positioning-experiments/).
-
-[^attachment]: I _think_, ideally, we could use [`scroll-timeline-attachment`](https://www.w3.org/TR/scroll-animations-1/#scroll-timeline-attachment) to have the animations on our items deferred to the scrollable container. However, it seems not implemented in Chrome Canary yet, so I’m using the anchor positioning workaround. <!-- offset="1" span="3" -->
-
-We often see _tables of contents_ on various blogs, documentation sites and design systems. One pattern in them is to mark the currently shown items in some way as “active”, letting the reader know where they are right now.
+We often see _tables of contents_ on various blogs, documentation sites, and design systems. One pattern in them is to mark the currently shown items as “active”, letting the reader know where they are on the page.
 
 Usually, this is done by either listening to the scroll in JS and marking the locations of all sections or (more efficiently) by using an intersection observer.
 
-What if we could do this just with CSS?
+What if we could do this only with CSS?
 
-As a proof-of-concept, I did manage to achieve this with scroll-driven animations combined with anchor positioning. Let’s look at the example:
+#### Solution Using `timeline-scope`
 
-{{<Partial src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="height: 12rem; padding: 0; overflow: hidden; resize: block;" >}}
+After a few tries[^tries], I did achieve this with scroll-driven animations. Let’s look at the example:
+
+[^tries]: Initially, while reading the spec and playing with the implementation in Chrome Canary, I did not find anything that would allow me to do this just with scroll-driven animations, so I managed to do a [proof-of-concept](#solution-based-on-anchor-positioning) using anchor positioning. Of course, [Bramus pointed out on Mastodon](https://front-end.social/@bramus/110458876067809316) that we now have a `timeline-scope`, so the final solution is much cleaner thanks to him! <!-- offset="-8.75" -->
+
+{{<Partial src="examples/scroll-driven-animations-3-2.html" screenshot="true" video="true" style="padding: 0;" >}}
+Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
+{{</Partial>}}
+
+With just HTML&CSS, we have achieved two things: highlighting the currently shown sections in the table of contents and synchronizing the sidebar’s scroll position with the content, making it so we always see the current section!
+
+How is it possible?
+
+First, the highlighting of the current items itself. Omitting the non-important styles (and things related to the scroll synchronization for now), the final CSS required for this is relatively simple:
+
+```CSS
+.example-3-2 .layout {
+  timeline-scope: var(--scopes);
+}
+
+.example-3-2 .toc-link:not(:hover, :focus-visible) {
+  animation: current-item linear;
+  animation-timeline: var(--for);
+  animation-range:
+    entry min(33cqh, 33%)
+    exit calc(100% - min(33cqh, 33%));
+}
+
+.example-3-2 section {
+  view-timeline: var(--is);
+}
+
+@keyframes current-item {
+  0%, 99.9% {
+    color: #FFF;
+    background: #000;
+  }
+}
+
+```
+
+So, not a lot, huh? But maybe you can notice the place that hides _some_ complexity — we’re using CSS variables to assign the `timeline-scope`, `animation-timeline`, and `view-timeline` properties[^needs-edits]. Where do we set them? Right in our HTML:
+
+[^needs-edits]: At the moment of writing this, the changes that did add these properties are not even in the specs — they only exist inside the Canary’s implementation and in the [corresponding CSSWG GitHub issue](https://github.com/w3c/csswg-drafts/issues/7759). I’ll try to remember and update the links once the changes land in the specs. <!-- offset="2" span="2" -->
+
+```HTML
+<div
+  class="layout"
+  style="
+    --scopes:
+      --section-1,
+      --section-2,
+      /* […] */
+      --section-10;
+  "
+>
+  <ul class="toc">
+    <li class="toc-item">
+      <a
+        class="toc-link"
+        style="--for: --section-1"
+        href="#section-1"
+      >
+        The first title
+      </a>
+    </li>
+    <!-- […] -->
+  </ul>
+  <section id="section-1" style="--is: --section-1">
+    <h4 class="header">This is the first title</h4>
+    <!-- […] -->
+  </section>
+  <!-- […] -->
+</div>
+```
+
+We need to do 2 things in HTML:
+
+1. List all our sections in the `--scopes` which would go into `timeline-scope` — without it, we cannot make our links outside the scroller to know about the sections and how they move in their view timelines.
+2. Connect our links with the corresponding sections via `--is` and `--for` variables[^variables].
+
+[^variables]: I also used this method extensively in my [anchor positioning](/anchor-positioning-experiments/) article. I find it very useful for all the connections we can now make in CSS with named entities. <!-- offset="5" span="2" -->
+
+And — that’s it! While this might seem to bump HTML a bit, in reality, this does not add a lot of logic — outside of the necessity to wrap our sections in elements for the view transitions to work[^maybe-a-workaround], things are straightforward: the most complicated thing would be to compile the list of all sections for the `timeline-scope`, but given we would already have the data to iterate through for the table of contents itself, I don’t think this is too big of an issue.
+
+[^maybe-a-workaround]: Do you think there might be a workaround for a flat list of elements? <!-- offset="-3" span="2" -->
+
+After all — in the end, we get the solution free of JS!
+
+There are still a few things I’d want to talk about in its CSS:
+
+- This time I did use the `animation-range` with both `entry` and `exit` parts, each calculated based on container’s size and the element’s size. We could still tweak this part for a better effect, but I found the combination I used work quite good for my examples. It gives a good result smaller and larger sections.
+- The keyframes are a bit weird: `0%, 99.9%` with the same value. The `99.9%` is a workaround for a bug (I still need to isolate and fill it), and I found using this way of setting the styles to work quite well, as we would essentially get it applied as a state based on if any part of the section fits into its view timeline.
+
+And, then there is another interesting CSS aspect I’d want to point out.
+
+##### Scroll Synchronization
+
+If you did not notice it — go [back to the example](#solution-using-timeline-scope) and scroll its content to the bottom and up again. What happens is that our table of contents' scrollbar moves alongside our main one!
+
+That is another part that is usually achieved only with JS. Now — only with CSS! Let’s look at it:
+
+```CSS
+.example-3-2 .toc {
+  scroll-snap-type: y mandatory;
+}
+
+.example-3-2 .toc-link:not(:hover, :focus-visible) {
+  animation:
+    current-item linear,
+    var(--snap-animation, none) linear;
+  animation-timeline: var(--for);
+}
+
+.example-3-2
+  .toc:not(:hover, :has(:focus-visible))
+    .toc-link {
+      --snap-animation: snap-to-current;
+}
+
+@keyframes snap-to-current {
+  to {
+    scroll-snap-align: center;
+  }
+}
+```
+
+What we did here is we added a second animation to the mix — one that enables the [`scroll-snap-align`](https://drafts.csswg.org/css-scroll-snap/#scroll-snap-align) to the selected elements, bringing them to the center of the table of contents' (scrollbox where we apply [`scroll-snap-type`](https://drafts.csswg.org/css-scroll-snap/#scroll-snap-type))!
+
+Then, one more thing — using the `:not()` to disable the snapping when we hover over the table of contents or if we have a keyboard focus[^focus-visible-within] inside. That makes it so the snapping won’t interfere with our interactions inside the scrollbox.
+
+[^focus-visible-within]: We can think of `:has(:focus-visible)` is basically a `:focus-visible-within`. <!-- offset="2" span="2" -->
+
+At first, I did not think all of this would work! But here we are — with another two modern CSS features playing nicely together, unlocking yet another previously unthinkable CSS-only solution.
+
+Just one additional disclaimer: manipulation of the scroll snapping could sometimes be too limiting — this would require more extensive accessibility testing, so be careful!
+
+#### Solution based on Anchor Positioning
+
+Initially, I did not think we could hoist the animation timelines outside of a scrollable container, so I did work around this by using anchor positioning. Given we actually can (see the previous section), this solution looks much more flawed. In case you’re still interested, you can look at it. Otherwise, feel free to skip right to the conclusions.
+
+<details class="Details-subgrid">
+<summary class="Link Link_pseudo">An outdated example and its explanation.</summary>
+<div class="Details-content">
+
+As an initial proof-of-concept, I did manage to achieve this with scroll-driven animations combined with [anchor positioning](/anchor-positioning-experiments/). Let’s look at the example:
+
+{{<Partial src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
 {{</Partial>}}
 
@@ -326,9 +468,10 @@ Overall, how it works:
 
 Sadly, there is one issue with this approach: anchor positioning doesn’t work correctly with sticky positioning — when the element gets stuck, it does not get the proper scroll offset. That means we cannot use `overflow: auto` for the table of contents, thus making this less useful for larger pages.
 
-There are some other aspects of this solution that I do not like or which I do not yet fully understand (well, they are mostly about the `animation-range` and how it applies), so I would not recommend even trying this method with graceful degradation (especially given it requires anchor positioning).
+Thus, I'm glad I came up with a solution that uses just scroll-driven animations — this way, things are much more straightforward and versatile!
 
-Let’s wait until things become more stable, but in the meantime, I think it is still quite fun to experiment with scroll-driven animations. And when we could test the `scroll-timeline-attachment`, maybe this example could become much less hacky and more usable!
+</div>
+</details>
 
 ## In Conclusion
 
