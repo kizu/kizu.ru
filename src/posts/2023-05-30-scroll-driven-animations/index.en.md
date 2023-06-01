@@ -444,7 +444,7 @@ At first, I did not think all of this would work! But here we are — with 
 
 Just one additional disclaimer: manipulation of the scroll snapping could sometimes be too limiting — this would require more extensive accessibility testing, so be careful!
 
-#### Solution based on Anchor Positioning
+#### Solution Based on Anchor Positioning
 
 Initially, I did not think we could hoist the animation timelines outside of a scrollable container, so I did work around this by using anchor positioning. Given we actually can (see the previous section), this solution looks much more flawed. In case you’re still interested, you can look at it. Otherwise, feel free to skip right to the conclusions.
 

@@ -117,4 +117,5 @@ a:not([href^='#']):focus,
 
 summary.Link {
   width: max-content;
+  max-width: 100%;
 }
