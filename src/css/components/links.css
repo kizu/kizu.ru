@@ -106,7 +106,7 @@ a:visited {
 }
 
 a:hover,
-a:not([href^='#']):focus,
+a:not([href^='#']):focus-visible,
 .Link:hover {
   --underline-width: calc(2 * var(--link-underline-width));
   --link-underline-color: var(--link-underline-color--hover);
@@ -117,7 +117,10 @@ a:not([href^='#']):focus,
 
 summary.Link {
   width: max-content;
-  max-width: 100%;
+  max-width: calc(100% - var(--viewport-padding) * 2);
   background: none;
   text-decoration: underline dashed;
+  text-decoration-color: var(--link-underline-color);
+  text-decoration-thickness: var(--underline-width);
+  text-underline-offset: 2px;
 }
