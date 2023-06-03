@@ -114,6 +114,7 @@ footer {
   margin-top: var(--footer-margin-top, 2rem);
   margin-bottom: var(--footer-margin-bottom, 2rem);
   --text-indent: 0;
+  text-wrap: balance;
 }
 
 nav {
