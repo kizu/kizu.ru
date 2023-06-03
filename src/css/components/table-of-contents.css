@@ -18,7 +18,8 @@
   grid-row-end: span 7;
 
   justify-self: center;
-  width: fit-content;
+  width: 100%;
+  max-width: max-content;
   padding: 0;
   margin: 1em 0 0;
 
