@@ -1,0 +1,147 @@
+<style>
+  .example-logic-gates {
+    --_: var(--_);
+    --ON: var(--_);
+    --OFF: var(--_,);
+
+    --TRUE: palegreen;
+    --FALSE: lightpink;
+  }
+
+  .example-logic-gates table {
+    width: 100%;
+    margin: 0;
+  }
+
+  .example-logic-gates th[colspan] {
+    background: var(--THEME_BG--DISTANT);
+  }
+
+  .A {
+    --NOT-A: var(--A) var(--FALSE);
+    background:
+      var(--A, var(--TRUE))
+      var(--NOT-A,);
+  }
+  .B {
+    --NOT-B: var(--B) var(--FALSE);
+    background:
+      var(--B, var(--TRUE))
+      var(--NOT-B,);
+  }
+  .AND {
+    --A-AND-B: var(--A, var(--B));
+    --A-NAND-B: var(--A-AND-B) var(--FALSE);
+    background:
+      var(--A-AND-B, var(--TRUE))
+      var(--A-NAND-B,);
+  }
+  .NAND {
+    --A-AND-B: var(--A, var(--B));
+    --A-NAND-B: var(--A-AND-B) var(--TRUE);
+    background:
+      var(--A-AND-B, var(--FALSE))
+      var(--A-NAND-B,);
+  }
+  .OR {
+    --A-OR-B: var(--A) var(--B);
+    --A-NOR-B: var(--A-OR-B) var(--FALSE);
+    background:
+      var(--A-OR-B, var(--TRUE))
+      var(--A-NOR-B,);
+  }
+  .NOR {
+    --A-OR-B: var(--A) var(--B);
+    --A-NOR-B: var(--A-OR-B) var(--TRUE);
+    background:
+      var(--A-OR-B, var(--FALSE))
+      var(--A-NOR-B,);
+  }
+  .XOR {
+    --A-AND-B: var(--A, var(--B));
+    --A-OR-B: var(--A) var(--B);
+    --A-NOR-B: var(--A-OR-B) var(--FALSE);
+    --A-NAND-B:
+      var(--A-AND-B)
+      var(--A-OR-B, var(--TRUE))
+      var(--A-NOR-B,);
+    background:
+      var(--A-AND-B, var(--A-OR-B, var(--FALSE)))
+      var(--A-NAND-B,);
+  }
+  .XNOR {
+    --A-AND-B: var(--A, var(--B));
+    --A-OR-B: var(--A) var(--B);
+    --A-NOR-B: var(--A-OR-B) var(--TRUE);
+    --A-NAND-B:
+      var(--A-AND-B)
+      var(--A-OR-B, var(--FALSE))
+      var(--A-NOR-B,);
+    background:
+      var(--A-AND-B, var(--A-OR-B, var(--TRUE)))
+      var(--A-NAND-B,);
+  }
+</style>
+
+<div class="example-logic-gates">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Input</th>
+        <th colspan="6">Output</th>
+      </tr>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>AND</th>
+        <th>NAND</th>
+        <th>OR</th>
+        <th>NOR</th>
+        <th>XOR</th>
+        <th>XNOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="--A: var(--OFF); --B: var(--OFF);">
+        <td class="A">0</td>
+        <td class="B">0</td>
+        <td class="AND">0</td>
+        <td class="NAND">1</td>
+        <td class="OR">0</td>
+        <td class="NOR">1</td>
+        <td class="XOR">0</td>
+        <td class="XNOR">1</td>
+      </tr>
+      <tr style="--A: var(--OFF); --B: var(--ON);">
+        <td class="A">0</td>
+        <td class="B">1</td>
+        <td class="AND">0</td>
+        <td class="NAND">1</td>
+        <td class="OR">1</td>
+        <td class="NOR">0</td>
+        <td class="XOR">1</td>
+        <td class="XNOR">0</td>
+      </tr>
+      <tr style="--A: var(--ON); --B: var(--OFF);">
+        <td class="A">1</td>
+        <td class="B">0</td>
+        <td class="AND">0</td>
+        <td class="NAND">1</td>
+        <td class="OR">1</td>
+        <td class="NOR">0</td>
+        <td class="XOR">1</td>
+        <td class="XNOR">0</td>
+      </tr>
+      <tr style="--A: var(--ON); --B: var(--ON);">
+        <td class="A">1</td>
+        <td class="B">1</td>
+        <td class="AND">1</td>
+        <td class="NAND">0</td>
+        <td class="OR">1</td>
+        <td class="NOR">0</td>
+        <td class="XOR">0</td>
+        <td class="XNOR">1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

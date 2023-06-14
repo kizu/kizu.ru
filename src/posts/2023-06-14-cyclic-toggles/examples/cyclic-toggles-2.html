@@ -1,0 +1,36 @@
+<style>
+  .example-2 .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:
+      var(--level--default, 0.5rem)
+      var(--level--success, 2.5rem)
+      var(--level--warning, 0)
+      var(--level--error,   0);
+    transition: all 0.5s;
+  }
+
+  .example-2 .info::before {
+    content:
+      var(--level--success, "\2705 ")        /* ✅ */
+      var(--level--warning, "\26A0 \FE0F ")  /* ⚠️ */
+      var(--level--error,   "\26D4 \FE0F "); /* ⛔️ */
+  }
+</style>
+
+<input
+  type="checkbox"
+  id="e2-checkbox"
+/><label for="e2-checkbox"> Check me</label>
+<div class="example-1 example-2">
+  <div class="info"></div>
+  <div
+    class="info"
+    style="--level: var(--level--success)"
+  ></div>
+  <div class="info info-states" style="
+    --static: var(--level--warning);
+    --hover: var(--level--error);
+  "></div>
+</div>

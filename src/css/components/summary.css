@@ -114,7 +114,7 @@
 }
 .Summary[data-fletter=O] {
   --fletter-style: "ss04";
-  --first-line-inset: 0.222;
+  --right-adjustment: -1;
   --left-adjustment: -0.222;
 }
 .Summary[data-fletter=P] {

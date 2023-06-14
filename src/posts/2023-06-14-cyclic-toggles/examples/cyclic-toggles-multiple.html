@@ -1,0 +1,38 @@
+<style>
+  .example-multiple {
+    display: grid;
+    padding: 2rem 0;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+  }
+  .with-some-toggles {
+    width: 5rem;
+    height: 5rem;
+
+    --is-round:   var(--toggles,);
+    --is-pink:    var(--toggles,);
+    --has-shadow: var(--toggles,);
+
+    border-radius: var(--is-round, 50%);
+    background:    var(--is-pink, pink);
+    box-shadow:    var(--has-shadow,
+      5px 5px 2px 4px var(--THEME_BG--DISTANT)
+    );
+  }
+
+</style>
+
+<div class="example-multiple">
+  <div class="with-some-toggles" style="
+    --toggles: var(--is-pink);
+  "></div>
+  <div class="with-some-toggles" style="
+    --toggles: var(--is-round) var(--is-pink);
+  "></div>
+  <div class="with-some-toggles" style="
+    --toggles: var(--is-round) var(--has-shadow);
+  "></div>
+  <div class="with-some-toggles" style="
+    --toggles: var(--is-round) var(--is-pink) var(--has-shadow);
+  "></div>
+</div>

@@ -1,0 +1,49 @@
+<style>
+  .example-1 {
+    display: grid;
+    gap: 16px;
+    grid: 5rem / repeat(4, 5rem);
+  }
+  .info {
+    border-radius: 2.5rem;
+
+    --level: var(--level--default);
+
+    --level--default: var(--level,);
+    --level--success: var(--level,);
+    --level--warning: var(--level,);
+    --level--error:   var(--level,);
+
+    background:
+      var(--level--default, lavender)
+      var(--level--success, palegreen)
+      var(--level--warning, khaki)
+      var(--level--error,   lightpink);
+  }
+
+  :checked + * + * > .info:first-child {
+    --level: var(--level--success);
+  }
+  .info-states {
+    --level: var(--static);
+  }
+  .info-states.info:hover {
+    --level: var(--hover);
+  }
+</style>
+
+<input
+  type="checkbox"
+  id="e1-checkbox"
+/><label for="e1-checkbox"> Check me</label>
+<div class="example-1">
+  <div class="info"></div>
+  <div
+    class="info"
+    style="--level: var(--level--success)"
+  ></div>
+  <div class="info info-states" style="
+    --static: var(--level--warning);
+    --hover: var(--level--error);
+  "></div>
+</div>

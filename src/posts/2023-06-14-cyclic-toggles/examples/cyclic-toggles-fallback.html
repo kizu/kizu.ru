@@ -1,0 +1,39 @@
+<style>
+  .example-fallback .info {
+    --border: var(--_space-toggle,);
+    --border--none: var(--border,);
+    --border--thin: var(--border,);
+    --border--thick: var(--border,);
+
+    --_border-fallback:
+      var(--border)
+      var(--level--default, 0)
+      var(--level--success, 0)
+      var(--level--warning, 1px)
+      var(--level--error,   10px);
+
+    border: solid
+      var(--_border-fallback,)
+      var(--border--none, 0)
+      var(--border--thin, 1px)
+      var(--border--thick, 10px);
+  }
+</style>
+
+<div class="example-grid example-fallback">
+    <input
+    type="checkbox"
+    id="e3-checkbox"
+  /><label for="e3-checkbox"> Check me</label>
+  <div class="example-1 example-2">
+    <div class="info" style="--border: var(--border--thick);"></div>
+    <div
+      class="info"
+      style="--level: var(--level--success)"
+    ></div>
+    <div class="info info-states" style="
+      --static: var(--level--warning);
+      --hover: var(--level--error);
+    "></div>
+  </div>
+</div>
