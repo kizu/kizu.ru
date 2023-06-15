@@ -242,7 +242,7 @@ Even the toggle variable itself can be a space toggle: we did have a default
 
 We can _almost_ produce [logic gates](https://en.wikipedia.org/wiki/Logic_gate) for our space toggles: we can use logic[^or-skip] to return final values, but the main issue is that due to the inability to _invert_ a “bit” stored in the space toggle, we cannot make a logic gate that outputs a space toggle itself.
 
-[^or-skip]: Feel free to skip until the [“fallback values”](#fallback-values) section if you don’t want to get into CSS. <!-- offset="1" span="2" -->
+[^or-skip]: Feel free to skip until the [“fallback values”](#fallback-values) section if you don’t want to get into CSS binary logic. <!-- offset="1" span="2" -->
 
 Here is an example that uses our logic gates to compute the backgrounds for each cell.
 
