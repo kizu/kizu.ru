@@ -21,7 +21,7 @@
       {{- $src  | readFile | safeHTML -}}
     </div>
     {{- if .Get "video" -}}
-      <video class="Figure-Screenshot" controls muted playsinline preload="none" poster="{{ replace $file ".html" ".jpg" }}" width="1474" height="310"><source src="{{ replace $file ".html" ".mp4" }}" type="video/mp4"></video>
+      <video class="Figure-Screenshot" controls muted playsinline preload="none" poster="{{ replace $file ".html" ".jpg" }}"><source src="{{ replace $file ".html" ".mp4" }}" type="video/mp4"></video>
     {{- else -}}
       <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" title="{{$alt}}" />
     {{- end -}}
