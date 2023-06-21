@@ -1,6 +1,6 @@
 # Obscure CSS: Implicit List-Item Counter
 
-#Practical #CSS_Counters #CSS
+#Practical #CSS_Counters #Typography #CSS
 
 _A few years ago I wanted to share one little-known CSS feature — a built-in `list-item` counter for ordered lists. But then there were a few browser issues preventing us from using it fully. Now, given that most of those bugs are fixed, we can try starting using them for our lists._
 

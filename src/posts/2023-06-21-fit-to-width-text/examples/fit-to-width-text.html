@@ -1,0 +1,109 @@
+<style>
+/* The numbers reference the corresponding explanations from the article text. */
+/* 1 */
+@supports (animation-timeline: view(inline)) {
+  .fit-to-width {
+    font-size: 30vh;  /* 2 */
+    overflow: hidden; /* 3 */
+
+    scroll-snap-type: x mandatory; /* 4 */
+
+    & > * {
+      inline-size: max-content; /* 5 */
+      line-height: 1;           /* 6 */
+      transform-origin: 0 0;    /* 7 */
+
+      animation: apply-text-ratio linear; /* 8 */
+      animation-timeline: view(inline);   /* 9 */
+      animation-range: entry-crossing;    /* 10 */
+
+      display: block;           /* 11 */
+      scroll-snap-align: start; /* 12 */
+      contain: layout;          /* 13 */
+    }
+  }
+}
+
+/* 14 */
+@keyframes apply-text-ratio {
+  from {
+    transform: scale(0); /* 15 */
+    margin-block-end: -1lh; /* 16 */
+  }
+}
+
+
+/* Showing the screenshot by default if we don't have animation-timeline support */
+@supports not (animation-timeline: view(inline)) {
+  :root[class] {
+    --toggler-on: none;
+    --toggler-off: inline;
+  }
+
+  .Figure-Demo::after {
+    content: "\26A0 \FE0F  Your browser does not support animation-timeline";
+    display: block;
+    background: --THEME_BG--DISTANT;
+
+    border: 2px dashed #FFCA51;
+    padding: 0.5rem;
+    margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
+    border-radius: 0 0 3px 3px;
+    text-align: center;
+    hyphens: none;
+
+    background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+    background-clip: padding-box, border-box;
+  }
+}
+
+/* Experimenting with making the example sticky */
+@supports (animation-timeline: view(inline)) {
+  figure[style*='--sticky:'] {
+    position: var(--initial-at-small, sticky);
+    top: 0;
+    z-index: 2;
+
+    --height: 550px;
+    --reduce-to: 0.35;
+    --distance: 0px;
+    --animation-range:
+      entry 100cqh
+      entry calc(100cqh + var(--distance));
+
+    transform-origin: 0 0;
+    animation: var(--initial-at-small, linear shrink-figure both);
+    animation-timeline: view();
+    animation-range: var(--animation-range);
+
+    @media (prefers-reduced-motion: no-preference) {
+      --distance: calc(var(--height) * (1 - var(--reduce-to)));
+    }
+  }
+}
+
+@keyframes shrink-figure {
+  from {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  to {
+    transform: translateY(1rem) translateX(calc(100% + var(--viewport-padding))) scale(var(--reduce-to));
+    resize: none;
+    width: 100%;
+  }
+}
+
+/* FIXME: allow passing dimensions to the partial. */
+video.Figure-Screenshot {
+  height: 547px;
+}
+
+</style>
+
+<p class="fit-to-width" contentEditable>
+  <span>What if I will tell you</span>
+  <span>how we could use</span>
+  <em>scroll-driven animations</em>
+  <strong>to solve</strong>
+  <span>fit-to-width text?</span>
+</p>

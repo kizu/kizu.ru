@@ -150,8 +150,7 @@
   --right-adjustment: -1;
 }
 .Summary[data-fletter=W] {
-  --second-line-inset: 1;
-  --right-adjustment: -1;
+  --right-adjustment: -2;
 }
 .Summary[data-fletter=X] {
   --fletter-style: "ss01";

@@ -1,6 +1,6 @@
 # Styling inline code
 
-#Practical #Design #CSS
+#Practical #Design #Typography #CSS
 
 When I was working on [my site's new version]({{% LinkTo the-new-version-of-this-site %}}), I tried to think more about how everything should look and read typography-wise. And one of the things I always had problems with was how to style inline code blocks. Most of the time we can see small colorful rectangles in place of them. And the more you put those things inside your text, the worse the reading experience becomes.
 
