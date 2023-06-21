@@ -6,7 +6,7 @@ _What if I will tell you how we could solve fit-to-width text with pure CSS w
 
 ## The Example
 
-Let me start with the demonstration: if you’d look at the following example in the browser[^browser] that supports [scroll-driven animations](/scroll-driven-animations/), you would see how the text fits the width of its container. The example has [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable), so you could play with it or resize the container/browser window to see it automatically adapt to it.
+Let me start with the demonstration: if you’d look at the following example in the browser[^browser] that supports [scroll-driven animations](/scroll-driven-animations/), you would see how the text fits the width of its container. The example has [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable), so you could play with it or resize the container or browser window to see it automatically adapt to it.
 
 [^browser]: At the time of writing this article, I’m testing it in Chrome Canary `116.0.5843.0`. <!-- offset="1" -->
 
@@ -32,7 +32,7 @@ Let me walk you through this example: its code is not that long. The HTML is 
 </p>
 ```
 
-CSS is more involved: I would show you the complete code[^nesting] for this example and then would try to explain what each line does:
+CSS is more involved: I will show you the complete code[^nesting] for this example and then would try to explain what each line does:
 
 [^nesting]: I’m trying to get used to CSS nesting, so I’ll have it in my example. All browsers that would support scroll-driven animations will support nesting. <!-- span="2" -->
 
@@ -113,16 +113,16 @@ There might be other issues: note that this method is experimental, was not t
 
 I would like to see this implemented natively and not rely on an unintended usage of scroll-driven animations, even though the final code is relatively straightforward.
 
-Here is [an issue about this on CSSWG](https://github.com/w3c/csswg-drafts/issues/2528) — I recommend liking it and providing your use cases and thoughts on the potential API and requirements of this feature.
+There is [an issue about this on CSSWG](https://github.com/w3c/csswg-drafts/issues/2528) — I recommend liking it and providing your use cases and thoughts on the potential API and requirements of this feature.
 
 ## Final Words
 
-Fun fact: this is a “third-order” article. A few weeks back, I started writing a continuation of [my article about anchor positioning](/anchor-positioning-experiments/). Then, when doing experiments for it, I created something using multiple different techniques. That led to me starting to write a second article about that experiment. As a part of this experiment, I used this method of getting the ratio of an element to its parent via scroll-driven animations. And then, the following morning, I randomly thought about another use case for this ratios technique — and now you’re reading this article.
+Fun fact: this is a “third-order” article. A few weeks back, I started writing a continuation of [my article about anchor positioning](/anchor-positioning-experiments/). Then, when doing experiments for it, I created something using multiple different techniques. That led to me starting to write a second article about that experiment. As a part of this experiment, I used this method of getting the ratio of an element to its parent via scroll-driven animations. And then, the following morning, I randomly thought about another use case for this ratio technique — and now you’re reading this article.
 
-That means you have at least two more articles coming your way. At least one of them would have a different usage for this “ratios via a suspended animations” technique — and until we would get [an ability to strip units in calculations](https://github.com/w3c/csswg-drafts/issues/545), which was added to the [`css-values-4` spec](https://www.w3.org/TR/css-values-4/#calc-type-checking) a while ago, but was not implemented[^bug-trackers] in any browser yet. If you ever wanted to get ratios out of different lengths, try using this technique and let me know about the results!
+That means you have at least two more articles coming your way. At least one of them would have a different usage for this “ratio from a suspended animation” technique — and until we would get [an ability to strip units in calculations](https://github.com/w3c/csswg-drafts/issues/545), which was added to the [`css-values-4` spec](https://www.w3.org/TR/css-values-4/#calc-type-checking) a while ago, but was not implemented[^bug-trackers] in any browser yet. If you ever wanted to get ratios out of different lengths, try using this technique and let me know about the results!
 
-[^bug-trackers]: Links to the bug trackers: [Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1432187&q=division%20of%20same%20types&can=2), [WebKit](https://bugs.webkit.org/show_bug.cgi?id=255280), [Mozilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1827404). <!-- offset="5" -->
+[^bug-trackers]: Links to the bug trackers: [Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1432187&q=division%20of%20same%20types&can=2), [WebKit](https://bugs.webkit.org/show_bug.cgi?id=255280), [Mozilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1827404). <!-- offset="4" -->
 
-I cannot wait for the scroll-driven animations to be available everywhere — it is fascinating what getting access to the information about the overflow and the scroll position in CSS allows us to do. Another recent example (though much hackier) was [Johannes Odland](https://front-end.social/@johannes) coming up with the [“Scroll-persisted State”](https://johannesodland.github.io/state/scroll-snap/scroll-driven-animations/2023/06/18/scroll-persisted-state.html) article.
+I cannot wait for the scroll-driven animations to be available everywhere — it is fascinating what getting access to the information about the overflow and the scroll position in CSS allows us to do. Another recent example (though much hackier) was [Johannes Odland](https://front-end.social/@johannes) coming up with the [“Scroll-persisted State”](https://johannesodland.github.io/state/scroll-snap/scroll-driven-animations/2023/06/18/scroll-persisted-state.html) technique.
 
 I hope other browsers will start implementing this spec soon!
