@@ -1,6 +1,6 @@
 # Rotated text
 
-#Practical #CSS
+#Practical #Typography #CSS
 
 Once I already shared this solution on twitter, but this time I’m going to write a bit more on it.
 

@@ -32,6 +32,11 @@ video.Figure-Screenshot {
   max-width: 100%;
 }
 
+:is([style*='padding: 1rem'], [style*='padding:1rem']) > video.Figure-Screenshot {
+  margin: -1rem;
+  max-width: calc(100% + 2rem);
+}
+
 .Figure-Toggle {
   position: fixed;
   top: 0;
