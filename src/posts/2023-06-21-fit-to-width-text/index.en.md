@@ -40,7 +40,7 @@ CSS is more involved: I will show you the complete code[^nesting] for this exa
 /* 1 */
 @supports (animation-timeline: view(inline)) {
   .fit-to-width {
-    font-size: 30vh;  /* 2 */
+    font-size: 13rem; /* 2 */
     overflow: hidden; /* 3 */
 
     scroll-snap-type: both mandatory; /* 4 */
