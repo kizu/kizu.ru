@@ -38,7 +38,7 @@ CSS is more involved: I will show you the complete code[^nesting] for this exa
 
 ```CSS
 /* 1 */
-@supports (animation-timeline: view(inline)) {
+@supports (animation-range: entry-crossing) {
   .fit-to-width {
     font-size: 13rem; /* 2 */
     overflow: hidden; /* 3 */
@@ -71,7 +71,7 @@ CSS is more involved: I will show you the complete code[^nesting] for this exa
 }
 ```
 
-1. I’m wrapping everything in a `@supports`, checking for the [`animation-timeline`](https://www.w3.org/TR/css-animations-2/#propdef-animation-timeline). Without scroll-driven animations, the rest of the code does not make much sense and will look broken.
+1. I’m wrapping everything in a `@supports`, checking for the `animation-range: entry-crossing` (checking for the `animation-timeline` made the example break in the current Firefox Nightly). Without scroll-driven animations, the rest of the code does not make much sense and will look broken.
 
 2. The exact value for the `font-size` is not super important. However, we can think of it as “max-font-size”: our text won’t get bigger than this value, but it would shrink.
 

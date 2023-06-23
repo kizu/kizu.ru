@@ -1,7 +1,7 @@
 <style>
 /* The numbers reference the corresponding explanations from the article text. */
 /* 1 */
-@supports (animation-timeline: view(inline)) {
+@supports (animation-range: entry-crossing) {
   .fit-to-width {
     font-size: 13rem; /* 2 */
     overflow: hidden; /* 3 */
@@ -34,14 +34,14 @@
 
 
 /* Showing the screenshot by default if we don't have animation-timeline support */
-@supports not (animation-timeline: view(inline)) {
+@supports not (animation-range: entry-crossing) {
   :root[class] {
     --toggler-on: none;
     --toggler-off: inline;
   }
 
   .Figure-Demo::after {
-    content: "\26A0 \FE0F  Your browser does not support animation-timeline";
+    content: "\26A0 \FE0F  Your browser does not support scroll-driven animations";
     display: block;
     background: --THEME_BG--DISTANT;
 
@@ -58,7 +58,7 @@
 }
 
 /* Experimenting with making the example sticky */
-@supports (animation-timeline: view(inline)) {
+@supports (animation-range: entry-crossing) {
   figure[style*='--sticky:'] {
     position: var(--initial-at-small, sticky);
     top: 0;
