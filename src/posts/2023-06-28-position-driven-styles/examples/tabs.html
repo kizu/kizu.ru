@@ -1,0 +1,58 @@
+<style>
+  .example-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+
+    & li,
+    & li::before {
+      all: unset;
+    }
+
+    & a {
+      padding: 0.5rem;
+      font: var(--THEME_FONT--SMALL);
+      background: none;
+      border-block-end: 1px solid;
+
+      &:hover {
+        color: inherit;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: auto 0;
+        height: 2.5rem;
+        box-sizing: border-box;
+        margin-block-start: calc(-0.5rem - 1px);
+        visibility: var(--is-block-end, hidden);
+        border-block-end: 1px solid;
+      }
+    }
+
+    & .wrapping {
+      display: flex;
+      flex-wrap: wrap;
+
+      & > a {
+        width: var(--is-inline-start, 100%);
+
+        &::before {
+          visibility: var(--no-inline-start, hidden);
+        }
+      }
+    }
+  }
+</style>
+
+<p class="example-edges example-tabs">
+  <a class="item" href="#Home">Home</a>
+  <span class="wrapping item">
+    <a href="#About">About</a>
+    <a href="#Services">Services</a>
+    <a href="#Hire_us">Hire us</a>
+    <a href="#Contact">Contact</a>
+  </span>
+</p>

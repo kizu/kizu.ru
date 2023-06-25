@@ -1,0 +1,127 @@
+<style>
+  .example-staggered .item {
+    position: relative;
+    animation:
+      y-distribution ease-in-out reverse both,
+      x-distribution ease-in-out reverse both;
+    animation-timeline: view(),       view(inline);
+    animation-range:    var(--range), var(--range-x);
+
+    background: none;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: inherit;
+
+      --sum: calc((var(--x) + var(--y) /2 ));
+      background: color-mix(
+        in oklch,
+        var(--pink) calc(100% * var(--sum)),
+        var(--yellow)
+      );
+
+      --c: round(var(--sum) * 255 * 1.75, 255);
+      color: rgb(var(--c), var(--c), var(--c));
+
+      --x-animatable: var(--x);
+      --y-animatable: var(--y);
+      --sum-animatable: calc(
+        (var(--x-animatable) + var(--y-animatable)) / 2
+      );
+    }
+  }
+
+  .example-staggered:is(:hover, :focus-visible) > .item::before,
+  *:has(.infinite-animation:checked) > .example-staggered > .item::before {
+      animation: appear 0.5s calc(2s * var(--sum-animatable)) 2 alternate-reverse linear both;
+  }
+
+  *:has(.infinite-animation:checked) > .example-staggered > .item::before {
+    animation: appear-infinitely 2s calc(2s * var(--sum-animatable)) infinite linear both;
+  }
+
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes appear-infinitely {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    25%, 75% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  @property --x-animatable {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @property --y-animatable {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+</style>
+
+<ol tabindex="0" class="example-items example-at-property example-staggered">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ol>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="height-limiter" /> Make scrollable</label>
+    <label><input type="checkbox" class="infinite-animation" /> Run infinitely</label>
+  </fieldset>
+</div>

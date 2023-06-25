@@ -1,0 +1,128 @@
+<style>
+  .example-diagonal > .item {
+    position: relative;
+    z-index: 0;
+    animation:
+      gradient-simple linear reverse both,
+      gradient-y linear reverse both,
+      gradient-x linear reverse both;
+    animation-timeline: view(), view(), view(inline);
+    animation-range: var(--range);
+
+    --is-light--y: initial;
+    --is-dark--y: ;
+    --is-light--x: initial;
+    --is-dark--x: ;
+    --is-dark: var(--is-light--x, var(--is-light--y)) #000;
+    color:
+      var(--is-light--x, var(--is-light--y, #FFF))
+      var(--is-dark,);
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: inherit;
+      inset: 0;
+      animation:
+        /* Intentionally not “both” */
+        gradient-simple linear reverse;
+      animation-timeline: view(inline);
+      animation-range: var(--range-x);
+
+      mix-blend-mode: lighten;
+    }
+  }
+
+  @keyframes gradient-simple {
+    from {
+      background: var(--pink);
+      }
+    to {
+      background: var(--yellow);
+    }
+  }
+  @keyframes gradient-x {
+    from {
+      --is-light--x: initial;
+      --is-dark--x: ;
+      }
+    50% {
+      --is-light--x: initial;
+      --is-dark--x: ;
+    }
+    50.01% {
+      --is-light--x: ;
+      --is-dark--x: initial;
+      }
+    to {
+      --is-light--x: ;
+      --is-dark--x: initial;
+    }
+  }
+  @keyframes gradient-y {
+    from {
+      --is-light--y: initial;
+      --is-dark--y: ;
+      }
+    50% {
+      --is-light--y: initial;
+      --is-dark--y: ;
+    }
+    50.01% {
+      --is-light--y: ;
+      --is-dark--y: initial;
+      }
+    to {
+      --is-light--y: ;
+      --is-dark--y: initial;
+    }
+  }
+</style>
+
+<ol class="example-items example-gradient example-diagonal">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ol>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="height-limiter" /> Make scrollable</label>
+  </fieldset>
+</div>
+

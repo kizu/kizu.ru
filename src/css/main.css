@@ -305,7 +305,31 @@ summary {
 .Details-content {
   display: grid;
   grid-template: var(--grid);
-  grid-gap: 0 var(--viewport-padding);  
+  grid-gap: 0 var(--viewport-padding);
+}
+
+fieldset {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin: 0;
+
+  font: var(--THEME_FONT--SMALL);
+}
+
+fieldset label {
+  display: inline-block;
+}
+
+fieldset label:not(:has(> :checked)) {
+  cursor: pointer;
+}
+
+fieldset label > input {
+  cursor: inherit;
+}
+
+fieldset label:active {
+  user-select: none;
 }
 
 ::selection {
@@ -313,7 +337,7 @@ summary {
   background-color: var(--THEME_SELECTION, #B1D2FB);
 }
 
-/* Inspired by https://kennethormandy.com/list/2022-11-25/ 
+/* Inspired by https://kennethormandy.com/list/2022-11-25/
    Though, is not used yet, as I need to find a way to apply this properly to the headers.
 */
 .nbsp {

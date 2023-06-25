@@ -39,18 +39,17 @@ video.Figure-Screenshot {
 
 .Figure-Toggle {
   position: fixed;
-  top: 0;
-  left: 0;
   opacity: 0;
   clip: rect(1px, 1px, 1px, 1px);
+  pointer-events: none;
 }
 
-figure:has(input:focus-visible) + aside > * > .Figure-Toggler {
+figure:has(.Figure-Toggle:focus-visible) + aside > * > .Figure-Toggler {
   outline: 1px dotted #212121;
   outline: 5px auto -webkit-focus-ring-color;
 }
 
-@supports not selector(figure:has(input:focus-visible)) {
+@supports not selector(figure:has(.Figure-Toggle:focus-visible)) {
   figure:focus-within + aside > * > .Figure-Toggler {
     outline: 1px dotted #212121;
     outline: 5px auto -webkit-focus-ring-color;
@@ -65,19 +64,19 @@ figure:has(input:focus-visible) + aside > * > .Figure-Toggler {
 .Figure-Toggler-Demo::before {
   content: " / ";
 }
-@supports selector(figure:has(input:checked)) {
+@supports selector(figure:has(.Figure-Toggle:checked)) {
   .Figure-Toggler-Demo::before {
     content: "";
   }
 }
 
-figure:has(input:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot,
-figure:not(:has(input:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo {
+figure:has(.Figure-Toggle:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot,
+figure:not(:has(.Figure-Toggle:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo {
   display: var(--_toggler-off);
 }
 
-figure:has(input:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo,
-figure:not(:has(input:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot {
+figure:has(.Figure-Toggle:checked) + aside > * > .Figure-Toggler > .Figure-Toggler-Demo,
+figure:not(:has(.Figure-Toggle:checked)) + aside > * > .Figure-Toggler > .Figure-Toggler-Screenshot {
   display: var(--_toggler-on);
 }
 

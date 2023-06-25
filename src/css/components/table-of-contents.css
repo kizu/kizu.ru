@@ -39,6 +39,10 @@
   --is-hovered: 1;
 }
 
+:root:active .ToC:not(:active) {
+  --is-hovered: 0;
+}
+
 .ToC:not(:hover) {
   --ToC-opacity: var(--initial-at-small, 0.4);
 }

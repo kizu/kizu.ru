@@ -1,0 +1,40 @@
+<style>
+  .example-auto-margin {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+
+    & li,
+    & li::before {
+      all: unset;
+    }
+
+    & a {
+      padding: 0.5rem;
+      font: var(--THEME_FONT--SMALL);
+      background: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    & .wrapping {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-inline-start:
+        var(--is-block-start, auto)
+        var(--no-block-start, 0.5rem);
+    }
+  }
+</style>
+
+<p class="example-edges example-auto-margin">
+  <a class="item" href="#Home">Ahmad Shadeed</a>
+  <span class="wrapping item">
+    <button type="button">Edit</button>
+    <button type="button">Bookmark</button>
+  </span>
+</p>

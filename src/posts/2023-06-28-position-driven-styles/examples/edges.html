@@ -1,0 +1,93 @@
+<style>
+  @keyframes block-detection {
+    from {
+      --is-block-start: initial;
+      --no-block-start: ;
+    }
+    to {
+      --is-block-end: initial;
+      --no-block-end: ;
+    }
+  }
+
+  @keyframes inline-detection {
+    from {
+      --is-inline-start: initial;
+      --no-inline-start: ;
+    }
+    to {
+      --is-inline-end: initial;
+      --no-inline-end: ;
+    }
+  }
+
+  .example-edges {
+    display: flex;
+    flex-wrap: wrap;
+
+    & .item {
+      flex: 1 1 var(--min-width);
+
+      animation:
+        block-detection  linear forwards,
+        block-detection  linear reverse backwards,
+        inline-detection linear forwards,
+        inline-detection linear reverse backwards;
+
+      animation-timeline:
+        view(),
+        view(),
+        view(inline),
+        view(inline);
+
+      animation-range:
+        exit    0 exit    1px,
+        contain 0 contain 1px,
+        exit    0 exit    1px,
+        contain 0 contain 1px;
+
+      --is-block-start: ;
+      --no-block-start: initial;
+      --is-block-end: ;
+      --no-block-end: initial;
+      --is-inline-start: ;
+      --no-inline-start: initial;
+      --is-inline-end: ;
+      --no-inline-end: initial;
+    }
+  }
+
+  .example-pseudos > .item {
+    text-align-last: justify;
+
+    &::after {
+      content:
+        ' '
+        var(--is-inline-start, '←')
+        var(--is-block-start, '↑')
+        var(--is-block-end, '↓')
+        var(--is-inline-end, '→');
+    }
+  }
+</style>
+
+<ol class="example-items example-edges example-pseudos">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ol>
