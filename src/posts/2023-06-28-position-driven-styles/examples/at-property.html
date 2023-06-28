@@ -1,0 +1,106 @@
+<style>
+  @property --x {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @property --y {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @keyframes x-distribution {
+    from { --x: 0 }
+    to   { --x: 1 }
+  }
+
+  @keyframes y-distribution {
+    from { --y: 0 }
+    to   { --y: 1 }
+  }
+
+  .example-distributed .item {
+    animation:
+      y-distribution ease-in-out reverse both,
+      x-distribution ease-in-out reverse both;
+      animation-timeline: view(),       view(inline);
+      animation-range:    var(--range), var(--range-x);
+
+    --center: calc(
+      0.5 * (
+        sin(var(--x) * pi) +
+        sin(var(--y) * pi)
+      )
+    );
+    background: color-mix(
+      in oklch,
+      var(--pink) calc(100% * var(--center)),
+      var(--yellow)
+    );
+
+    color:
+      hsl(0, 0%, round(var(--center) * 100% * 1.75, 100%));
+    --scale: calc((1 + var(--center))/2);
+
+    --x2: (var(--x) - 0.5)*2;
+    --y2: (var(--y) - 0.5)*2;
+    --rotation: calc(var(--x2) * var(--y2) * -22.5deg);
+    --translate:
+      calc(var(--x2) * var(--x2) * var(--x2) * -25%),
+      calc(var(--y2) * var(--y2) * var(--y2) * -35%);
+    @supports (animation-range: entry-crossing) {
+      transform:
+        scale(var(--scale))
+        rotate(var(--rotation))
+        translate(var(--translate));
+    }
+  }
+</style>
+
+<ol class="example-items example-at-property example-distributed">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ol>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="height-limiter" /> Make scrollable</label>
+  </fieldset>
+</div>

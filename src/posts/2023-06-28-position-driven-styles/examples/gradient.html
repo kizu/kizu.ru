@@ -1,0 +1,201 @@
+<style>
+  @keyframes gradient {
+    from {
+      background: var(--pink);
+      color: #FFF;
+    }
+    60% {
+      color: #FFF;
+    }
+    60.01% {
+      color: #000;
+    }
+    to {
+      background: var(--yellow);
+      color: #000;
+    }
+  }
+
+  .example-items {
+    --pink-l: 55%;
+    --pink-c: .45;
+    --pink-h: 350;
+    --pink: oklch(
+      var(--pink-l)
+      var(--pink-c)
+      var(--pink-h)
+    );
+    --yellow-l: 100%;
+    --yellow-c: .4;
+    --yellow-h: 95;
+    --yellow: oklch(
+      var(--yellow-l)
+      var(--yellow-c)
+      var(--yellow-h)
+    );
+    --min-width: 6rem;
+    --min-height: 2rem;
+
+    --range:
+      cover var(--min-height)
+      cover calc(100% - var(--min-height));
+    --range-x:
+      cover var(--min-width)
+      cover calc(100% - var(--min-width));
+
+    overflow: hidden;
+
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--min-width)), 1fr)
+    );
+
+    & .item {
+      height: var(--min-height);
+      padding: 0.25rem;
+      box-sizing: border-box;
+      border-radius: 0.25rem;
+      color: #000;
+      background: pink;
+
+      text-align: center;
+      line-height: calc(var(--min-height) - 0.5rem);
+      text-shadow: none;
+
+      &::before {
+        position: static;
+        width: auto;
+        margin: 0;
+        content: counter(list-item);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .example-gradient {
+    /* For some reason, using the cyclic toggles for
+       direction specifically does not work? */
+    --gradient-direction: block;
+    --gradient-range: var(--range);
+
+    & .item {
+      animation: gradient linear reverse both;
+      /* Yep, adding `var(--a,)` here breaks it */
+      animation-timeline: view(var(--gradient-direction));
+      animation-range: var(--gradient-range);
+    }
+  }
+
+  *:has(label:nth-of-type(2) > [name^=direction]:checked) > .example-gradient {
+    --gradient-direction: inline;
+    --gradient-range: var(--range-x);
+  }
+
+  *:has(.height-limiter:checked) > .example-items {
+    overflow: auto;
+    --limit: 4;
+    height: calc(var(--limit) * var(--min-height) + (var(--limit) - 1) * 0.5rem);
+    resize: vertical
+  }
+
+  *:not(:has(.height-limiter:checked)) > .example-items {
+    /* Override resized height */
+    height: auto !important;
+  }
+
+  *:has(.default-range:checked) > .example-items {
+    --gradient-range: normal !important;
+  }
+
+  .fieldsets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-start: 0.5rem;
+
+    & > * {
+      flex: 1 1 var(--min-width);
+    }
+  }
+
+/* Showing the screenshot by default if we don't have animation-timeline support */
+@supports not (animation-range: entry-crossing) {
+  :root[class] {
+    --toggler-on: none;
+    --toggler-off: inline;
+  }
+
+  .Figure-Demo::after {
+    content: "\26A0 \FE0F  Your browser does not support scroll-driven animations";
+    display: block;
+    background: --THEME_BG--DISTANT;
+
+    border: 2px dashed #FFCA51;
+    padding: 0.5rem;
+    margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
+    border-radius: 0 0 3px 3px;
+    text-align: center;
+    hyphens: none;
+
+    background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+    background-clip: padding-box, border-box;
+  }
+}
+
+</style>
+
+<ol class="example-items example-gradient">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ol>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Gradient direction</legend>
+    <label><input name="direction-e1" type="radio" checked/> Vertical</label>
+    <label><input name="direction-e1" type="radio"/> Horizontal</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="height-limiter" /> Make scrollable</label>
+    <label><input type="checkbox" class="default-range" /> Use default range</label>
+  </fieldset>
+</div>
+

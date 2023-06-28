@@ -1,0 +1,61 @@
+<style>
+  .example-flex-wrap-1 {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    position: relative;
+
+    @supports (animation-range: entry-crossing) {
+      height: 2rem;
+      overflow: hidden;
+    }
+
+    & h5.item {
+      all: unset;
+      font-weight: bold;
+      padding-left: 0.5rem;
+    }
+
+    & li,
+    & li::before {
+      all: unset;
+    }
+
+    & a {
+      padding: 0.5rem;
+      font: var(--THEME_FONT--SMALL);
+      background: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @supports (animation-range: entry-crossing) {
+      & .pancakes {
+        display: flex;
+        flex-basis: 0;
+        min-width: 1px;
+        margin-inline-start: auto;
+        justify-content: end;
+        visibility: var(--no-inline-end, hidden);
+      }
+
+      & ul.item {
+        visibility: var(--no-block-start, hidden);
+      }
+    }
+  }
+</style>
+
+<div class="example-edges example-flex-wrap-1">
+  <h5 class="item">Logo</h5>
+  <div class="item pancakes"><button type="button">Menu</button></div>
+  <ul class="item">
+    <li><a href="#Home">Home</a></li>
+    <li><a href="#About">About</a></li>
+    <li><a href="#Services">Services</a></li>
+    <li><a href="#Hire_us">Hire us</a></li>
+    <li><a href="#Contact">Contact</a></li>
+  </ul>
+</div>

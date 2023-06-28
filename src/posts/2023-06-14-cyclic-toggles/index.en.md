@@ -505,6 +505,10 @@ This limitation makes for a more strict API, which can be good. However, we n
 
 Style queries would be much more powerful as we could apply them from anywhere via inheritance.
 
+### Animations
+
+We cannot toggle a cyclic toggle inside an animation because that would lead to _all_ the values becoming [“animation-tainted”](https://www.w3.org/TR/css-variables-1/#animation-tainted) and thus rendering invalid.
+
 ### Naming
 
 Because we have to initiate each possible value as a custom property, there could be a potential for name clashes. That’s why, in my first example, I used BEM-like notation for the values: `--level--default` instead of `--default`. While the latter could be used for simple cases, as soon as we want to add a second cyclic toggle, the names could potentially clash.

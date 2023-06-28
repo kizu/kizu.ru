@@ -1,0 +1,65 @@
+<style>
+  .example-corners .item {
+    border: 2px dashed;
+
+    --not-start-start:
+      var(--is-block-start, var(--is-inline-start)) 0.5rem;
+    --not-start-end:
+      var(--is-block-start, var(--is-inline-end))   0.5rem;
+    --not-end-start:
+      var(--is-block-end,   var(--is-inline-start)) 0.5rem;
+    --not-end-end:
+      var(--is-block-end,   var(--is-inline-end))   0.5rem;
+
+    border-start-start-radius:
+      var(--is-block-start, var(--is-inline-start,  1.5rem))
+      var(--not-start-start,);
+    border-end-start-radius:
+      var(--is-block-end,   var(--is-inline-start,  1.5rem))
+      var(--not-end-start,);
+    border-start-end-radius:
+      var(--is-block-start, var(--is-inline-end,    1.5rem))
+      var(--not-start-end,);
+    border-end-end-radius:
+      var(--is-block-end,   var(--is-inline-end,    1.5rem))
+      var(--not-end-end,);
+  }
+</style>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); align-items: start; gap: 2rem; padding: 1.5rem;">
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+  </ol>
+
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+  <ol class="example-items example-edges example-corners">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+</div>

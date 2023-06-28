@@ -63,6 +63,10 @@
     0 0 40px -5px rgba(37,34,14,.3);
 }
 
+.only-in-dark {
+  display: none;
+}
+
 /* FIXME: Replace with a proper implementation. Added this as otherwise my eyes hurn lol. */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -72,5 +76,9 @@
     /* Need to revert the color-scheme, as it would be inverted */
     color-scheme: light;
     filter: hue-rotate(180deg) invert(1);
+  }
+
+  .only-in-dark {
+    display: unset;
   }
 }

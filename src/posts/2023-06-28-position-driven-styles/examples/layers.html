@@ -1,0 +1,72 @@
+<style>
+  .example-layers {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    width: var(--min-width);
+    padding: 1rem 2rem;
+
+    & .item {
+      position: relative;
+      margin: -0.5rem;
+      animation: y-distribution linear reverse both;
+      animation-timeline: view();
+      --range-offset: 2.5rem;
+      animation-range:
+        cover var(--range-offset)
+        cover calc(100% - var(--range-offset));
+
+      background: color-mix(
+        in oklch,
+        var(--pink) calc(100% * var(--y)),
+        var(--yellow)
+      );
+
+      --c: round(var(--y) * 255 * 1.75, 255);
+      color: rgb(var(--c), var(--c), var(--c));
+      box-shadow: 0 2px 5px -1px #0008;
+      transform: translateX(calc(-2rem * (0.5 - var(--y))));
+    }
+  }
+
+  .example-layers--reverse .item {
+    z-index: calc(100000 * (1 - var(--y)));
+  }
+
+  .example-layers--middle .item {
+    z-index: calc(100000 * sin(var(--y) * pi));
+  }
+
+</style>
+
+<div style="display: grid; padding: 2rem; gap: 2rem; grid-template-columns: repeat(3, 1fr); justify-items: center; align-items: start;">
+  <ol class="example-items example-at-property example-layers">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+
+  <ol class="example-items example-at-property example-layers example-layers--reverse">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+
+  <ol class="example-items example-at-property example-layers example-layers--middle">
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+    <li class="item"></li>
+  </ol>
+</div>
