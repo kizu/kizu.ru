@@ -258,7 +258,7 @@ If we can assign variables per element, could we use them for “staggered”
 In some cases, we can! Not in a straightforward way, but it is possible.
 
 {{<Partial src="examples/staggered.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
-Try hovering of focusing the example to play the animation once. I know it is not the prettiest — I’m not good at cool effects.<br/><br/>I hope someone else will create other awesome examples using this method!
+Try hovering or focusing the example to play the animation once. I know it is not the prettiest — I’m not good at cool effects.<br/><br/>I hope someone else will create other awesome examples using this method!
 {{</Partial>}}
 
 There were two things I had to do to make this work:
