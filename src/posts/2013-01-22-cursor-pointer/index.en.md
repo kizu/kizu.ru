@@ -1,6 +1,6 @@
 ---
 
-thanks_to: "[Shagen Ogandzhanyan](@shabunc) for some proofreading"
+thanks_to: "[Shagen Ogandzhanyan](https://github.com/Schahen) for some proofreading"
 
 ---
 
@@ -78,7 +78,7 @@ There is a great example from one company’s service:
 
 You could try to guess which marked elements are links, which are not; which have `cursor:pointer`, which don’t. What would happen when you’ll hover or click any of those elements? You can think for a while, and I’ll give you an answer later.
 
-If you’d say straightforwardly “only everything that have `href` must have a cursor” then a lot of confusing things could appear. For example, if there would be one element visually, but with different tags underneath (like [bootstrap’s buttons](http://twitter.github.com/bootstrap/base-css.html#buttons) are), then it would be strange and confusing if there’d be a difference between the button made of `<a>` and `<button>`. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you’d make the `default` one, then it would become really confusing, ’cause there could be a disabled state for this button and you would need to spot the change of the button’s background in order to know could it be pressed or no. And then if you’d remove the `cursor:pointer` from an actual link it won’t be any better, so the only proper way is to have `cursor:pointer` in both cases.
+If you’d say straightforwardly “only everything that have `href` must have a cursor” then a lot of confusing things could appear. For example, if there would be one element visually, but with different tags underneath (like bootstrap’s buttons are), then it would be strange and confusing if there’d be a difference between the button made of `<a>` and `<button>`. So, I hope everyone would agree that the cursor over every such element should be consistent. And If you’d make the `default` one, then it would become really confusing, ’cause there could be a disabled state for this button and you would need to spot the change of the button’s background in order to know could it be pressed or no. And then if you’d remove the `cursor:pointer` from an actual link it won’t be any better, so the only proper way is to have `cursor:pointer` in both cases.
 
 We could find a lot of examples with buttons, links and their states would conflict with each other and the overall UX. Making the `cursor:pointer` to mark only actionable elements makes sense and won’t create any conflicts other than slight discomfort for some persons.
 
@@ -112,7 +112,7 @@ BTW it’s very interesting to look at different services in the search for c
 
 ### “But the specs say…”
 
-[SelenIT](@SelenIT2) brings [another argument](http://habrahabr.ru/qa/19097/) (in Russian): both the [CSS2.1](http://www.w3.org/TR/CSS21/ui.html#propdef-cursor) spec and the [CSS3 Basic UI](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer) clearly states[^spec-update] that “the cursor is a pointer that indicates a link”. He also gives a link to a [Gérard Talbot’s message](http://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html), where he declines a change to one of the CSS2.1 tests. However, it couldn’t be an argument for this issue — the context of this message is a **test for spec**, and if spec says something, then the test should cover only this.
+[SelenIT](https://github.com/SelenIT) brings [another argument](http://habrahabr.ru/qa/19097/) (in Russian): both the [CSS2.1](http://www.w3.org/TR/CSS21/ui.html#propdef-cursor) spec and the [CSS3 Basic UI](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer) clearly states[^spec-update] that “the cursor is a pointer that indicates a link”. He also gives a link to a [Gérard Talbot’s message](http://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html), where he declines a change to one of the CSS2.1 tests. However, it couldn’t be an argument for this issue — the context of this message is a **test for spec**, and if spec says something, then the test should cover only this.
 
 [^spec-update]: **Update from 2018-10-16:** After a long battle at CSSWG github issues, [we have managed to push](https://github.com/w3c/csswg-drafts/issues/1936#issuecomment-420722704) the more correct wording to the spec! <!-- offset="1" -->
 

@@ -28,7 +28,7 @@ The main feature that makes that possible is that we can use CSS variables rig
 
 The code[^disca11ylaimer] for our implementation of table sorting is not really complicated.
 
-[^disca11ylaimer]: **Update:** one big problem with this method is that it can make UI less accessible due to reordering only visually. Thanks to [Thierry Kobientz](https://twitter.com/thierrykoblentz) and [Jen Simmons](https://twitter.com/jensimmons/status/964360059923742720) for bringing this up. <!-- span="2" -->
+[^disca11ylaimer]: **Update:** one big problem with this method is that it can make UI less accessible due to reordering only visually. Thanks to Thierry Kobientz and [Jen Simmons](https://jensimmons.com/) for bringing this up. <!-- span="2" -->
 
 The only thing that we need to do in HTML (we use a regular HTML table for this, which later re-style with flex and grid) is an inline style for its rows which we sort:
 

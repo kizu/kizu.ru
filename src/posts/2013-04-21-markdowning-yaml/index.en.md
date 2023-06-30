@@ -44,7 +44,7 @@ Instead of a useless header we would get YAML nicely separated from content, 
 
 As most of posts won’t have a lot of metadata, those extra lines won’t bloat the code. And, in my opinion, this code style is also more readable when you’re working with actual code, so I don’t see any reasons why you shouldn’t use it all the time for YAML front matters.
 
-The only thing I don’t like there is that YAML is so strict. You can’t add indents in the front of data, or use lists with hyphens here — those could be rendered even nicer. Also, if someone would see any other possibility to enhance the readability of the YAML front matters — tell me via twitter or by issues on GitHub.
+The only thing I don’t like there is that YAML is so strict. You can’t add indents in the front of data, or use lists with hyphens here — those could be rendered even nicer. Also, if someone would see any other possibility to enhance the readability of the YAML front matters — tell me via mastodon or by issues on GitHub.
 
 
 [bad]: //img-fotki.yandex.ru/get/6430/1076905.1/0_9789a_239b2fc2_orig.png

@@ -53,5 +53,5 @@ Thank you if you managed to read this post till this point. At first, I planned 
 
 [^old-versions]: Maybe one day I'll write more about all the different old versions. When I'll be ready. <!-- offset="2" -->
 
-As always, if you'll find any typos or mistakes in the texts, or bugs in markup — feel free to write me [an e-mail](mailto:kizmarh@ya.ru), fill up an [issue at GitHub](gh:kizu/kizu.github.com/issues), or let me know at [twitter](@kizmarh) anytime. I'll be glad! If you'd review the design and typography in details and would have any questions — they're welcome too, of course! While I have plans for future posts, if you would be interested in something specific, I will be happy to elaborate on it, as this would be a nice motivator for me to continue writing.
+As always, if you'll find any typos or mistakes in the texts, or bugs in markup — feel free to write me [an e-mail](mailto:kizmarh@ya.ru), fill up an [issue at GitHub](gh:kizu/kizu.github.com/issues), or let me know on [mastodon](https://kizu.dev/@kizu) anytime. I'll be glad! If you'd review the design and typography in details and would have any questions — they're welcome too, of course! While I have plans for future posts, if you would be interested in something specific, I will be happy to elaborate on it, as this would be a nice motivator for me to continue writing.
 

@@ -19,6 +19,6 @@ If you replace the CSS-gradients with simple images, this method could work in I
 
 Enjoy!
 
-**Update:** [Lea Verou](https://twitter.com/leaverou) updated this experiment using the `background-attachment: local`. [Read about it in her post](http://lea.verou.me/2012/04/background-attachment-local/).
+**Update:** [Lea Verou](https://lea.verou.me/) updated this experiment using the `background-attachment: local`. [Read about it in her post](http://lea.verou.me/2012/04/background-attachment-local/).
 
 {{<Partial src="shadowscroll.html" style="font: initial;" />}}
