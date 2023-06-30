@@ -6,7 +6,7 @@ _HTML&CSS-only gomoku game? Binary logic in CSS via counters? So many combinat
 
 This article is a bit special for me: I'll explain a solution which I couldn't find for more than four years. The problem is not very practical: it was one aspect of CSS-only stuff that could be much easier handled by JS, but I really wanted to find a clean HTML&CSS-only solution for. And I have found it. And in this article, I'll explain what was the problem and how the solution works.
 
-But first, I need to say thanks to [Una](https://twitter.com/Una). I was browsing internets and found out myself looking at on one of her articles — [“Pure CSS Games with Counter-Increment”](https://una.im/css-games/). While I had read this article a few times before (I really like CSS experiments like that as you can guess!), this time something clicked. I remembered one of my older unfinished experiments[^fronteers] which was a bit similar to one of the games Una created, and how both our examples didn't solve one hard aspect. But looking at this article now, when I just wrote the article on [Flexible Overflow](https://kizu.dev/en/blog/flexible-overflow/), I looked at the “Counter-Increment” part and the puzzle in my head completed.
+But first, I need to say thanks to [Una](https://una.im/). I was browsing internets and found out myself looking at on one of her articles — [“Pure CSS Games with Counter-Increment”](https://una.im/css-games/). While I had read this article a few times before (I really like CSS experiments like that as you can guess!), this time something clicked. I remembered one of my older unfinished experiments[^fronteers] which was a bit similar to one of the games Una created, and how both our examples didn't solve one hard aspect. But looking at this article now, when I just wrote the article on [Flexible Overflow](https://kizu.dev/en/blog/flexible-overflow/), I looked at the “Counter-Increment” part and the puzzle in my head completed.
 
 [^fronteers]: I've mentioned this experiment in my old lightning talk [“Don’t look into the source”](https://fronteers.nl/congres/2013/jam-session/dont-look-into-the-source) at Fronteers 2013 Jam Session. <!-- offset="5" -->
 
@@ -25,7 +25,7 @@ Things you can notice:
 
 Until recently, it was known how to achieve most of those points in CSS: you can see it in Una's games, for example. Except[^except] for the second point — passing turns ended up to be the hardest thing. When I did my demo for Fronteers, I had to pass turns manually, by doing an extra click after putting a stone. Una handled this by allowing 5 seconds for each player's turn, which is also far from ideal.
 
-[^except]: **2018.01.10 update:** [Bence](https://twitter.com/finnhvman) [solved](https://twitter.com/finnhvman/status/916015929565302784) this problem independently in his [“Connect 4” game](https://css-tricks.com/roman-empire-made-pure-css-connect-4-possible/), in a very similar way, but with a few differences. <!-- offset="1" -->
+[^except]: **2018.01.10 update:** [Bence](https://finnhvman.com/) solved this problem independently in his [“Connect 4” game](https://css-tricks.com/roman-empire-made-pure-css-connect-4-possible/), in a very similar way, but with a few differences. <!-- offset="1" -->
 
 In this article, I'll show you how this can be handled in a way you'd need to click only once to put a stone to pass a turn.
 

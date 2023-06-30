@@ -11,7 +11,7 @@ I don’t want to go into all the details of using CSS for styling lists[^de
 Let’s say we want to change[^styles] the ordered list’s markers to have brackets after the numbers rather than dots:
 
 {{<Sidenotes span="5" offset="-2">}}
-  [^details]: If you’d want to read more about lists in CSS, other than reading [the specs](https://www.w3.org/TR/css-lists-3/), I can recommend this in-depth article by [Rachel Andrew](@rachelandrew): [“CSS Lists, Markers, and Counters”](https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/).
+  [^details]: If you’d want to read more about lists in CSS, other than reading [the specs](https://www.w3.org/TR/css-lists-3/), I can recommend this in-depth article by [Rachel Andrew](https://rachelandrew.co.uk/): [“CSS Lists, Markers, and Counters”](https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/).
 
   [^styles]: The live examples in this article would have some extra styles with them — these would be just styles for my blog, which conveniently are using what I’m talking in this article about (with some CSS variables thrown in for convenience). <!-- offset="1" -->
 {{</Sidenotes>}}
@@ -139,7 +139,7 @@ Here is a list of the issues I stumbled[^report] over at the time:
 
 [^report]: Honestly, it feels good to report bugs when they get fixed later — especially with Webkit the bug was fixed in less than a month! Whenever you find a bug like this — always try to look through the engines' bug trackers to see if someone has ever reported the issue, and there is a big chance that you could be the one making things better for everyone by doing so. <!-- span="4" -->
 
-- [Mozilla](https://bugzilla.mozilla.org/show_bug.cgi?id=288704) — reported by [David Baron](@davidbaron) in April of 2005, fixed in March of 2019.
+- [Mozilla](https://bugzilla.mozilla.org/show_bug.cgi?id=288704) — reported by [David Baron](https://dbaron.org/) in April of 2005, fixed in March of 2019.
 - [Webkit](https://bugs.webkit.org/show_bug.cgi?id=181084) — reported by me in December of 2017, fixed in January of 2018 (wow, fast).
 - [Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=796961) — reported by me in December of 2017, fixed in July of 2020.
 
@@ -151,8 +151,8 @@ When first did my experiments with the counters, I didn’t find any mentions 
 
 [^also]: As well as some StackOverflow answers and browser engines' bug reports. If you know about other articles about this feature — let me know! <!-- offset="1" span="2" -->
 
-- In a 2019 [“CSS Lists, Markers, And Counters”](https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/) article on Smashing Magazine by [Rachel Andrew](@rachelandrew) — following the fix in Mozilla she uses extensively this implicit counter in the examples.
-- In a 2020 [“Custom bullets with CSS `::marker`”](https://web.dev/css-marker-pseudo-element/) article by [Adam Argyle](@argyleink) and [Oriol Brufau](https://github.com/Loirooriol) — mentions using it for overriding the display of ordered lists' `::marker`s.
+- In a 2019 [“CSS Lists, Markers, And Counters”](https://www.smashingmagazine.com/2019/07/css-lists-markers-counters/) article on Smashing Magazine by [Rachel Andrew](https://rachelandrew.co.uk/) — following the fix in Mozilla she uses extensively this implicit counter in the examples.
+- In a 2020 [“Custom bullets with CSS `::marker`”](https://web.dev/css-marker-pseudo-element/) article by [Adam Argyle](https://nerdy.dev/) and [Oriol Brufau](https://github.com/Loirooriol) — mentions using it for overriding the display of ordered lists' `::marker`s.
 
 I would explain the low coverage of this CSS feature first by its absence in Firefox, and then by some of the issues that were present at the time.
 
@@ -164,7 +164,7 @@ However, the things would be the same for the `::marker` — it also has the ac
 
 ## Accessibility
 
-I’m not an accessibility expert, so I’m not sure if things did improve, but at least in `2019` there was an issue where Safari/VoiceOver could lose the role of the list, here is a good article about it — [“Fixing” Lists](https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html) by [Scott O’Hara](@scottohara). The gist is — even though it is generally not recommended to duplicate the role of the elements that have it intrinsically, we might want to still add a `role="list"` to our lists if we’re heavily styling them (and not to forget to test things, making sure the content is available to everyone).
+I’m not an accessibility expert, so I’m not sure if things did improve, but at least in `2019` there was an issue where Safari/VoiceOver could lose the role of the list, here is a good article about it — [“Fixing” Lists](https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html) by [Scott O’Hara](https://www.scottohara.me/). The gist is — even though it is generally not recommended to duplicate the role of the elements that have it intrinsically, we might want to still add a `role="list"` to our lists if we’re heavily styling them (and not to forget to test things, making sure the content is available to everyone).
 
 Hopefully, the support for `::marker` would be one day perfect, so there won’t be a need to override the `list-style`, but even we would need to be careful.
 

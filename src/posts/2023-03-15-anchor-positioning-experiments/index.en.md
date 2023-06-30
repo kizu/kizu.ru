@@ -357,7 +357,7 @@ So, for this one, I would put just one practical example:
 {{<Partial src="examples/anchor-positioning-3.html" screenshot="true" video="true" a11y="true" style="position: relative; overflow: hidden; resize: horizontal;">}}
 The example shows lines connecting items with their parents in a nested tree list with `<details>` allowing collapsing branches.
 
-Thanks to [Yoksel](@yoksel_en)'s [URL-encoder for SVG](https://yoksel.github.io/url-encoder/), I embedded the SVG as a background for pseudo-elements.
+Thanks to [Yoksel](https://github.com/yoksel)'s [URL-encoder for SVG](https://yoksel.github.io/url-encoder/), I embedded the SVG as a background for pseudo-elements.
 
 Note that I have no idea what I’m doing when handling SVG — so if something could be improved or fixed — let me know!
 {{</Partial>}}
@@ -530,7 +530,7 @@ I won’t show you the complete code of this experiment, as a lot is going 
     ```
 
     Here we’re using the `max()` to decide where we would show the sidenote — either on the line with its designated reference (`top` of the `--for` one) or 0.5em below the sidenote or figure before it (`bottom` of the `--prev`; note how we can use calculations inside `max()` without `calc()`).
-    
+
 2. The worst part of this demo is the HTML. While aligning the elements on the same line as their references works as expected, the other sidenotes with `--prev` have absolute position. It leads to very limiting consequences — a need to _hack_ the HTML to make this work. And this hack is very ugly.
 
 #### The Problem
@@ -543,7 +543,7 @@ Let me quote the place from the specs — [the definition of the _acceptable 
 >     -   Either `el` is a descendant of `query el`’s [containing block](https://drafts.csswg.org/css-display-4/#containing-block), or `query el`’s containing block is the [initial containing block](https://drafts.csswg.org/css-display-4/#initial-containing-block).
 >     -   If `el` has the same [containing block](https://drafts.csswg.org/css-display-4/#containing-block) as `query el`, `el` is not [absolutely positioned](https://drafts.csswg.org/css-position-3/#absolute-position).
 >     -   If `el` has a different [containing block](https://drafts.csswg.org/css-display-4/#containing-block) from `query el`, the last containing block in `el`’s [containing block chain](https://drafts.csswg.org/css-display-4/#containing-block-chain) before reaching `query el`’s containing block is not [absolutely positioned](https://drafts.csswg.org/css-position-3/#absolute-position).
-> 
+>
 > For the purposes of this algorithm, an element is in a particular root layer corresponding to the closest [inclusive ancestor](https://dom.spec.whatwg.org/#concept-tree-inclusive-ancestor) that is in the [top layer](https://fullscreen.spec.whatwg.org/#top-layer), or the document if there isn’t one. [Root layers](https://drafts.csswg.org/css-anchor-position-1/#root-layer) are “higher” if their corresponding element is later in the top layer list; the layer corresponding to the document is lower than all other layers.
 
 Ok, so the first problem — this description sounds maybe a bit too complicated. Did you get what it talks about right away?
@@ -551,7 +551,7 @@ Ok, so the first problem — this description sounds maybe a bit too complica
 I imagine there are a lot of nuances, but I’ll try to rephrase it at least in the context of our example:
 
 > Our absolutely-positioned element cannot target another absolutely-positioned one if they exist inside the same positioning context. So, the two siblings could not target one another.
-> 
+>
 > However, if the structure is such that one of the elements has a relatively positioned wrapper, the outer element could target the inner, but not vice versa.
 
 At least, this is how it works for the current implementation: we cannot just place our sidenotes as siblings one after another in the end. We need to hack around this limitation.
@@ -566,9 +566,9 @@ The hack is “simple”: for **each** sidenote, we need to add another wrapp
     <div class="wrapper">
       <div class="wrapper">
         <h1 />, <p /> and other content
-        
+
         <aside class="sidenote" />
-      </div>  
+      </div>
       <aside class="sidenote" />
     </div>
     <aside class="sidenote" />

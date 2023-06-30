@@ -1,1 +1,1 @@
-{{- .input | replaceRE "href=\"@" "href=\"https://twitter.com/" | replaceRE "href=\"gh:" "href=\"https://github.com/" | replaceRE "(<a[^>]*)(>\\s*)([“«])([^<]*)([”»])<" "$1 style='--underline:0'$2$3<span style='--underline:1'>$4</span>$5<" | safeHTML -}}
+{{- .input | replaceRE "href=\"@" "href=\"https://web.archive.org/web/20230000000000*/https://twitter.com/" | replaceRE "href=\"gh:" "href=\"https://github.com/" | replaceRE "(<a[^>]*)(>\\s*)([“«])([^<]*)([”»])<" "$1 style='--underline:0'$2$3<span style='--underline:1'>$4</span>$5<" | safeHTML -}}

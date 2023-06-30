@@ -2,7 +2,7 @@
 
 #Practical #Typography #CSS
 
-Once I already shared this solution on twitter, but this time I’m going to write a bit more on it.
+Once I already shared this solution on the birdsite, but this time I’m going to write a bit more on it.
 
 **The task** is to get the text rotated by 90 degrees.
 

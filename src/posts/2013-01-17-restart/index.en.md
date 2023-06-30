@@ -42,7 +42,7 @@ I’m not sure about the format of the blog/site, because everything could easi
 
 As I already mentioned — right now there is only basement for the site that gives me an easy way to write a new article, change any previous one or just play with anything. Everything else is unfinished.
 
-Markup is in a state of an early prototype, there is almost nothing interesting here. Well, some nice touches are there hopefully, but they are covered with layers of trash. Bad selectors, no continuous code style (the styles are generated from Stylus actually), a lot of copy-and-pasting, extra code and other bad things. Don’t read my CSS. All the things that _are_ nice I’ll mention in all the new shiny posts, so you could just subscribe to the RSS or [follow updates in my twitter](@kizmarh).
+Markup is in a state of an early prototype, there is almost nothing interesting here. Well, some nice touches are there hopefully, but they are covered with layers of trash. Bad selectors, no continuous code style (the styles are generated from Stylus actually), a lot of copy-and-pasting, extra code and other bad things. Don’t read my CSS. All the things that _are_ nice I’ll mention in all the new shiny posts, so you could just subscribe to the RSS or [follow updates in my mastodon](https://kizu.dev/@kizu).
 
 Design, on the other hand, is almost stable. Yeah, there would be changes and a lot of them, but the whole concept is there.
 
@@ -52,7 +52,7 @@ Design, on the other hand, is almost stable. Yeah, there would be changes and
 
     The whole font story is really tough and long. You can guess if it would translate into an article someday.
 
-2. Minimalism. I’ve already mentioned it at twitter — it’s very hard to make a minimalistic textual site and not fall into cloning great [iA’s site](http://informationarchitects.net). Some of the iterations I did for my site were dangerously close to that one. Maybe that’s not that bad after all, but I’ve stopped and tried to find what to do to make my site somehow stand out of similar ones. Minimalistic text-only sites are a trend, so it would be nice if my site would be recognisable in some way. Of course, it’s not finished, but I hope the shape can be seen.
+2. Minimalism. I’ve already mentioned it at the birdsite — it’s very hard to make a minimalistic textual site and not fall into cloning great [iA’s site](http://informationarchitects.net). Some of the iterations I did for my site were dangerously close to that one. Maybe that’s not that bad after all, but I’ve stopped and tried to find what to do to make my site somehow stand out of similar ones. Minimalistic text-only sites are a trend, so it would be nice if my site would be recognisable in some way. Of course, it’s not finished, but I hope the shape can be seen.
 
 3. Visual features. I’ll certainly write more posts on that, so only briefly now: look at the gamma and colors. I tried to reduce number of plain black and gray colors (and plain white too), using a small tint to everything. Also look at the header and footer (on desktop) — I know, it’s not a new effect, but I kinda liked it and wanted to use it there as it perfectly fits into theme. And look at the links — the colors, the visited ones and especially look at the small thingy that can be visible on the underline that appears on hover.
 
@@ -66,6 +66,6 @@ This whole idea on going open source for articles is great, so there would be
 
 ## That’s it or tl;dr
 
-Ok, so you can see the first post from a list of all those I’ll write — with a new site under them. It’s drafty, broken in a lot of ways and smells inside, but that would change someday. Everything would be better and better and I’ll try to cover all the changes I do either in articles, or just in twitter.
+Ok, so you can see the first post from a list of all those I’ll write — with a new site under them. It’s drafty, broken in a lot of ways and smells inside, but that would change someday. Everything would be better and better and I’ll try to cover all the changes I do either in articles, or just on mastodon.
 
 So, thank you for reading this lengthy post (or scrolling till the end at least). Follow the updates, send pull requests and stay tuned!

@@ -54,7 +54,7 @@ In theory, `:focus-visible` should help us[^although]: we could use it for keyb
 If you'd look at this example in Firefox, you could see two different issues:
 
 1. At Firefox for Mac it would work properly unless you'd click on a styled span, in which case you'll see the focus-ring. That's unfortunate, as while for proper native controls things are ok, I'm sure there would be cases when people would like to have this kind of control over interactive parts of pages that should have the same behavior as the native controls. But as things are work as intended at Windows, maybe that behavior at Mac is a bug? Probably we could see it fixed in future.
-2. This issue is bigger and worse — as [Patrick has mentioned](https://twitter.com/patrick_h_lauke/status/879808288669433857), there is a really weird heuristic which makes the `:-moz-focusring` to apply all-the-time once you've used a keyboard navigation on page at least once. That makes this solution not stable enough. Especially, given that in some cases I managed to “break” Firefox making it to consider **every** page to be in this keyboard-navigation always-on from the start and on refresh, which was fixed only after the browser restart.
+2. This issue is bigger and worse — as Patrick has mentioned on the birdsite, there is a really weird heuristic which makes the `:-moz-focusring` to apply all-the-time once you've used a keyboard navigation on page at least once. That makes this solution not stable enough. Especially, given that in some cases I managed to “break” Firefox making it to consider **every** page to be in this keyboard-navigation always-on from the start and on refresh, which was fixed only after the browser restart.
 
 In other browsers, you shouldn't see anything there unless someone would already implement the `:focus-visible`. If that would happen — tell me and I'll update this post!
 
@@ -62,7 +62,7 @@ In other browsers, you shouldn't see anything there unless someone would already
 
 I was playing with one of my favorite CSS properties — `visibility` — when I had my “bingo” moment. After validating my idea and seeing it work I was really surprised I didn't come to this solution before. After some testing[^nope], I found out that not everything is so smooth, but more on this later.
 
-[^nope]: Apparently, I didn't test enough. As [Ian](https://twitter.com/iandevlin) [pointed out](https://twitter.com/iandevlin/status/879796311566012416) after I initially published this post, I didn't test the solution enough at Firefox for Windows. That meant two things: at Windows  the `<button>` still had the focusring visible, and I didn't know about the heuristic of the `:-moz-focusring` that made the button with my solution completely unusable after user would use keyboard for at least once. I leave this solution to show what could be done if not for Firefox, and invite you to look at the [final proper solution](#proper-solution) below. <!-- span="4" offset="3" -->
+[^nope]: Apparently, I didn't test enough. As [Ian](https://iandevlin.com/) pointed out on the birdsite after I initially published this post, I didn't test the solution enough at Firefox for Windows. That meant two things: at Windows  the `<button>` still had the focusring visible, and I didn't know about the heuristic of the `:-moz-focusring` that made the button with my solution completely unusable after user would use keyboard for at least once. I leave this solution to show what could be done if not for Firefox, and invite you to look at the [final proper solution](#proper-solution) below. <!-- span="4" offset="3" -->
 
 ### Visibility
 
@@ -153,7 +153,7 @@ With all those fixes, our example would look like this and should work the same 
 
 {{<Partial src="examples/4.html" />}}
 
-But not that fast. In Firefox for Windows there are severe problems with buttons' implementation which lead to this solution being unusable. Thanks for [Ian Devlin](@iandevlin) for pointing this out. In Firefox for Windows you still would see the focus ring over the `<button>` there on click, and after you'd use keyboard navigation at least once, things would go completely wrong — Firefox would treat each `:focus` as if it has `:-moz-focusring`, which would be multiplied by another problem with buttons which would lead to `<button>` not to register clicks.
+But not that fast. In Firefox for Windows there are severe problems with buttons' implementation which lead to this solution being unusable. Thanks for [Ian Devlin](https://iandevlin.com/) for pointing this out. In Firefox for Windows you still would see the focus ring over the `<button>` there on click, and after you'd use keyboard navigation at least once, things would go completely wrong — Firefox would treat each `:focus` as if it has `:-moz-focusring`, which would be multiplied by another problem with buttons which would lead to `<button>` not to register clicks.
 
 You can see how this initial solution worked on [this CodePen pen](https://codepen.io/kizu/pen/dRZzyP?editors=1100), without any extra styling (except for `all: initial` on buttons).
 
@@ -161,7 +161,7 @@ You can see how this initial solution worked on [this CodePen pen](https://codep
 
 After writing and publishing this article, and then finding out the actual solution just don't work in Firefox for Windows (and not just not work — in some conditions it makes the buttons inaccessible), I've tried to find a proper solution. And, I think, I found it! Still not ideal at Firefox for Windows, but without those severe problems. I hope.
 
-The solution came after watching [this video by Rob Dobson](https://www.youtube.com/watch?v=Pe0Ce1WtnUM) that [Vadim Makeev](@pepelsbey_) had suggested to me and reading [this article about tabindex](https://www.sitepoint.com/when-do-elements-take-the-focus/) that was suggested by [Patrick H. Lauke](@patrick_h_lauke).
+The solution came after watching [this video by Rob Dobson](https://www.youtube.com/watch?v=Pe0Ce1WtnUM) that [Vadim Makeev](https://pepelsbey.dev/) had suggested to me and reading [this article about tabindex](https://www.sitepoint.com/when-do-elements-take-the-focus/) that was suggested by [Patrick H. Lauke](https://mastodon.social/@patrick_h_lauke).
 
 Look at it:
 

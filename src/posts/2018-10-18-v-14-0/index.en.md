@@ -100,4 +100,4 @@ I think that I totally forgot about something, and there can be much more I 
 
 Feel free to explore the source of my site, or just play with it and wonder how things are done. Just be cautious: I didn’t try to write it in an understandable or maintainable way. Everything is a prototype, an experiment, a bunch of sticks and rocks glued together. There are interesting bits but do not expect a masterful work of art.
 
-I would like to know what do you think of my site, what seemed to be bad or good, what can be improved and so on. I’m open for emails at [kizmarh@ya.ru](mailto:kizmarh@ya.ru), and you can always write to me at twitter: [@kizmarh](@kizmarh). I hope you’ll find something interesting for you here!
+I would like to know what do you think of my site, what seemed to be bad or good, what can be improved and so on. I’m open for emails at [kizmarh@ya.ru](mailto:kizmarh@ya.ru), and you can always write to me [on mastodon](https://kizu.dev/@kizu). I hope you’ll find something interesting for you here!

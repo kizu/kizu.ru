@@ -135,7 +135,7 @@ At first, I wanted to describe all the possible use cases for the nested link
 
 - Sidenotes, footnotes, and nested terms are all too can be inside links, why not.
 
-- Any complex UI with a lot of nested entities, which could happen to be described as links. Those could be tweets in any of the Twitter’s interface, leading to the tweet’s page, but at the same time containing other links — to users, hashtags, and external pages. Those could be mail interfaces, where the snippet of a message in an inbox that should be a link to a message itself could contain other links — attachments, link to threads, labels, etc.
+- Any complex UI with a lot of nested entities, which could happen to be described as links. Those could be posts in any of the Mastodon’s interface, leading to the post’s page, but at the same time containing other links — to users, hashtags, and external pages. Those could be mail interfaces, where the snippet of a message in an inbox that should be a link to a message itself could contain other links — attachments, link to threads, labels, etc.
 
 ## * * *
 

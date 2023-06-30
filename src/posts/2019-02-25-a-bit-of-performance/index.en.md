@@ -125,15 +125,15 @@ There were probably some other minor things I forgot to mention that helped with
 
 Here is a list of articles[^links] on this topic I have read while playing with all of the above:
 
-[^links]: Thanks to [Rachel Andrew](@rachelandrew) for [the idea](https://twitter.com/rachelandrew/status/1098960269575966722) of crediting the articles used for the research even if you do not quote them directly. Attributing other people is very important and I must admit I do forget about this sometimes. <!-- span="2"  -->
+[^links]: Thanks to [Rachel Andrew](https://rachelandrew.co.uk/) for the idea of crediting the articles used for the research even if you do not quote them directly. Attributing other people is very important and I must admit I do forget about this sometimes. <!-- span="2"  -->
 
 - [“Font-display” playground](https://font-display.glitch.me) by [Monica Dinculescu](notwaldorf) — a nice explainer and a demo of how different values of the `font-display` property work.
-- [“Building the DOM faster: speculative parsing, async, defer and preload”](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by [Milica Mihajlija](@bibydigital) — a good article about the difference between async/defer and a bit about the link preloading.
-- [“The Critical Request”](https://calibreapp.com/blog/critical-request/) by [Ben Schwarz](@benschwarz) — a nice article about the resource loading priorities, preload links and so on.
-- [“Preloading Fonts and the Puzzle of Priorities”](https://andydavies.me/blog/2019/02/12/preloading-fonts-and-the-puzzle-of-priorities/) by [Andy Davies](@andydavies) — a bit more deep dive into the preload links.
-- [“The Web Fonts: Preloaded”](https://www.zachleat.com/web/preload/) by [Zach Leatherman](@zachleat) — another article on preload, with some benchmarks.
-- [“What forces layout/reflow”](https://gist.github.com/paulirish/5d52fb081b3570c81e3a) by [Paul Irish](@paul_irish) — I have changed some minor stuff in my JS to prevent extra layout thrashing, but those were quite minor to mention there.
-- [“Make your Google Fonts render faster”](https://googlefonts.3perf.com) by [Ivan Akulov](@iamakulov) – if you're using Google Fonts, this tool could help you with adding the preload links for them very easily.
+- [“Building the DOM faster: speculative parsing, async, defer and preload”](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by [Milica Mihajlija](https://mihajlija.github.io/) — a good article about the difference between async/defer and a bit about the link preloading.
+- [“The Critical Request”](https://calibreapp.com/blog/critical-request/) by [Ben Schwarz](https://germanforblack.com/) — a nice article about the resource loading priorities, preload links and so on.
+- [“Preloading Fonts and the Puzzle of Priorities”](https://andydavies.me/blog/2019/02/12/preloading-fonts-and-the-puzzle-of-priorities/) by [Andy Davies](https://andydavies.me/) — a bit more deep dive into the preload links.
+- [“The Web Fonts: Preloaded”](https://www.zachleat.com/web/preload/) by [Zach Leatherman](https://www.zachleat.com/) — another article on preload, with some benchmarks.
+- [“What forces layout/reflow”](https://gist.github.com/paulirish/5d52fb081b3570c81e3a) by [Paul Irish](https://www.paulirish.com/) — I have changed some minor stuff in my JS to prevent extra layout thrashing, but those were quite minor to mention there.
+- [“Make your Google Fonts render faster”](https://googlefonts.3perf.com) by [Ivan Akulov](https://3perf.com/) – if you're using Google Fonts, this tool could help you with adding the preload links for them very easily.
 - [WebPageTest](https://www.webpagetest.org) — quite a useful service to test your requests, shows a lot of information.
 
 
@@ -167,10 +167,10 @@ There are a bunch of projects that implement similar approaches, but I have trie
 
 Here is a list of useful resources I stumbled upon while implementing everything above:
 
-- [The PRPL Pattern](https://developers.google.com/web/fundamentals/performance/prpl-pattern/) by [Addy Osmani](@addyosmani) — the thorough description of this pattern.
+- [The PRPL Pattern](https://developers.google.com/web/fundamentals/performance/prpl-pattern/) by [Addy Osmani](https://addyosmani.com/) — the thorough description of this pattern.
 - [PRPL Pattern at Gatsby docs](https://www.gatsbyjs.org/docs/prpl-pattern/) — Gatsby.js implements a lot of the same things I have implemented by myself, maybe except for the localStorage caching (from what I have noticed), so if you have a blog on Gatsby, you could have a lot of things I have described already.
-- [pjax npm package](https://github.com/MoOx/pjax) by [Maxime Thirouin](@MoOx) — implementing the approach without using the JSON files, just by fetching the `.html` pages and doing some JS stuff to replace the changed parts. I didn't try to use it, but it seems interesting and you can see if it would work for you.
-- [http://instantclick.io](http://instantclick.io) and [https://instant.page](https://instant.page) by [Alexandre Dieulot](@dieulot) — projects implementing the “hover to load” approach. Also didn't test those, but the instant.page looks like a nice way to quickly do this by utilizing the link prefetch.
+- [pjax npm package](https://github.com/MoOx/pjax) by [Maxime Thirouin](https://moox.io/) — implementing the approach without using the JSON files, just by fetching the `.html` pages and doing some JS stuff to replace the changed parts. I didn't try to use it, but it seems interesting and you can see if it would work for you.
+- [http://instantclick.io](http://instantclick.io) and [https://instant.page](https://instant.page) by [Alexandre Dieulot](https://dieulot.fr/) — projects implementing the “hover to load” approach. Also didn't test those, but the instant.page looks like a nice way to quickly do this by utilizing the link prefetch.
 
 
 ## What Is Next?
