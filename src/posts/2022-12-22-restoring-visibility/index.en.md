@@ -1,3 +1,7 @@
+---
+mastodon_post_id: "109558173485906737"
+---
+
 # Obscure CSS: Restoring Visibility
 
 #Practical #CSS_Variables #CSS
@@ -46,18 +50,18 @@ Now, let’s look at an example:
 <div>
   <style>
     #visibility:checked ~ .intro-example .is-hidden { visibility: hidden }
-    #visibility:checked ~ .intro-example .is-visible { visibility: visible }    
+    #visibility:checked ~ .intro-example .is-visible { visibility: visible }
     #display:checked ~ .intro-example .is-hidden { display: none }
-    #display:checked ~ .intro-example .is-visible { display: block }    
+    #display:checked ~ .intro-example .is-visible { display: block }
     #opacity:checked ~ .intro-example .is-hidden { opacity: 0 }
-    #opacity:checked ~ .intro-example .is-visible { opacity: 1 }    
+    #opacity:checked ~ .intro-example .is-visible { opacity: 1 }
   </style>
   <span>Hide using:</span>
   <input name="hide-property" type="radio" id="visibility" checked /><label for="visibility">visibility</label>
   <input name="hide-property" type="radio" id="display" /><label for="display">display</label>
   <input name="hide-property" type="radio" id="opacity" /><label for="opacity">opacity</label>
   <input name="hide-property" type="radio" id="nothing" /><label for="nothing">nothing</label>
-  <div class="intro-example" style="min-height: calc(var(--THEME_LINE_HEIGHT) * 4);">  
+  <div class="intro-example" style="min-height: calc(var(--THEME_LINE_HEIGHT) * 4);">
     <figure>
       <div class="is-hidden">
         <p>I should be always hidden</p>

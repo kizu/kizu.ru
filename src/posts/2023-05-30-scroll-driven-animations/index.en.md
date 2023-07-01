@@ -1,3 +1,7 @@
+---
+mastodon_post_id: "110458449744849158"
+---
+
 # Future CSS: Wishes Granted by Scroll-driven Animations
 
 #Scroll_Driven_Animations #Position_Sticky #Future_CSS #Experiment #CSS
@@ -121,7 +125,7 @@ Here we define our timeline[^timeline-bug] as `view ()`, our range to the var
       transform: scale(var(--reduce-to));
     }
   }
-  
+
   @keyframes reveal-and-shrink-bg {
     from {
       opacity: 0;
@@ -231,7 +235,7 @@ Implementation notes:
 
     opacity: 0; /* [3] */
     animation: auto linear to-opaque both;
-    animation-timeline: scroll();  
+    animation-timeline: scroll();
 
     /* background omitted */
   }
@@ -255,7 +259,7 @@ Implementation notes:
     animation-direction: reverse; /* [6] */
 
     /* background omitted */
-  }  
+  }
 }
 
 @keyframes to-opaque {

@@ -1,3 +1,7 @@
+---
+mastodon_post_id: "110123785653621377"
+---
+
 # React Hook Component
 
 #Practical #Experiment #React #TypeScript

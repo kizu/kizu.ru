@@ -51,6 +51,8 @@
   --initial-at-large: true;
   --at-large: calc(1 - var(--at-small));
   --at-small: 0;
+  --at-small-toggle: ;
+  --at-large-toggle: initial;
   --initial-at-reduced-motion: initial;
 }
 
@@ -60,6 +62,8 @@
     --initial-at-large: initial;
     --initial-at-small: true;
     --at-small: 1;
+    --at-small-toggle: initial;
+    --at-large-toggle: ;
 
     --grid-ascii: var(--grid-ascii--small);
     --grid-side: var(--grid-side--small);
