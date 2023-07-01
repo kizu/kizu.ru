@@ -1,5 +1,8 @@
 :root {
-  --finger-to-right: "☞";
+  --finger-to-right: "\261E ";
+  --finger-to-left: "\261C ";
+  --finger-to-top: "\261D \FE0E ";
+  --finger-to-bottom: "\261F ";
   --hair-space: " ";
   --nbsp: " ";
 }

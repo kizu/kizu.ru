@@ -1,0 +1,51 @@
+<template id="mastodon-post-info-template">
+  <style>
+    :host {
+      display: contents;
+    }
+    [data-field]:empty {
+      display: none;
+    }
+
+    [data-field]::marker {
+      content: "";
+    }
+    [data-field]:first-child::marker,
+    :empty + [data-field]:not(:empty)::marker {
+      content:
+        var(--at-small-toggle, var(--finger-to-top))
+        var(--at-large-toggle, var(--finger-to-left))
+        ' ';
+      font-style: normal;
+    }
+
+    ::slotted(p) {
+      font: var(--THEME_FONT--SMALL);
+      text-align: right;
+    }
+
+    aside {
+      grid-column: aside;
+      grid-row-end: span 3;
+      width: var(--initial-at-small, var(--aside-width));
+      margin-left: var(--initial-at-large, auto);
+      font: var(--THEME_FONT--SMALL);
+    }
+
+    ul {
+      display: var(--at-small-toggle, flex);
+      gap: var(--at-small-toggle, 0.5rem);
+      padding: 0;
+      margin: 0;
+      font-style: italic;
+    }
+  </style>
+  <slot></slot>
+  <aside>
+    <ul>
+      <li data-field="replies"></li>
+      <li data-field="reblogs"></li>
+      <li data-field="favourites"></li>
+    </ul>
+  </aside>
+</template>

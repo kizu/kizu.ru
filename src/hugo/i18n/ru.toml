@@ -31,6 +31,9 @@ other= "2 January 2006 г."
 [published]
 other = "Опубликовано"
 
+[mastodon_reply]
+other = "Вы можете прокомментировать эту статью в Мастодоне."
+
 [draft]
 other = "Черновик в прогрессе"
 

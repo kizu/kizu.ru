@@ -25,6 +25,19 @@
 
 {{- partial "handleContent.html" (dict "context" . "input" .Content) -}}
 
+<hr />
+{{- if .Params.mastodon_post_id -}}
+<mastodon-post-info>
+  <p style="font: var(--THEME_FONT--SMALL); text-align: right;">
+    <a href="https://front-end.social/@kizu/{{ echoParam .Params "mastodon_post_id" }}">{{- i18n "mastodon_reply" }}</a>
+  </p>
+</mastodon-post-info>
+{{- else -}}
+<p style="font: var(--THEME_FONT--SMALL); text-align: right;">
+  <a href="https://front-end.social/@kizu">{{- i18n "mastodon_reply" }}</a>
+</p>
+{{- end -}}
+
 {{- if eq .Params.type "post" -}}
     <p class="Metadata Published">
       {{- if eq .Page.Params.draft true -}}

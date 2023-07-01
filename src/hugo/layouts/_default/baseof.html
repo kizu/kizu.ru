@@ -71,5 +71,7 @@
     <div class="Root">
       {{- partial "layout_parts/root_layout.html" (dict "context" .) -}}
     </div>
+
+    {{ partial "web_components/mastodon_post_info.html" . }}
   </body>
 </html>

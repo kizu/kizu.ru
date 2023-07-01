@@ -31,6 +31,9 @@ other= "January 2, 2006"
 [published]
 other = "Published on"
 
+[mastodon_reply]
+other = "Let me know what you think about this article on Mastodon!"
+
 [draft]
 other = "In-progress draft"
 
