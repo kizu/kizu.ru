@@ -25,11 +25,8 @@
     }
 
     aside {
-      grid-column: aside;
-      grid-row-end: span 3;
-      width: var(--initial-at-small, var(--aside-width));
-      margin-left: var(--initial-at-large, auto);
-      font: var(--THEME_FONT--SMALL);
+      --span: 3;
+      --asides-padding-top: 0;
     }
 
     ul {
@@ -41,7 +38,7 @@
     }
   </style>
   <slot></slot>
-  <aside>
+  <aside part="aside">
     <ul>
       <li data-field="replies"></li>
       <li data-field="reblogs"></li>

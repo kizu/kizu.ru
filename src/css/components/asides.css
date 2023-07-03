@@ -5,7 +5,8 @@
 
 aside,
 figcaption,
-.Aside {
+.Aside,
+mastodon-post-info::part(aside) {
   --grid-column: aside;
   grid-row-start: var(--start);
   grid-row-end: span var(--span);
