@@ -1,3 +1,7 @@
+---
+mastodon_post_id: "110686018570616601"
+---
+
 # New Blog: blog.kizu.dev
 
 #Blog
