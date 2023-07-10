@@ -1,7 +1,7 @@
 <template id="mastodon-post-info-template">
   <style>
     :host {
-      display: contents;
+      display: var(--initial-at-small, contents);
     }
     [data-field]:empty {
       display: none;
@@ -22,15 +22,18 @@
     ::slotted(p) {
       font: var(--THEME_FONT--SMALL);
       text-align: right;
+      text-wrap: balance;
     }
 
     aside {
       --span: 3;
       --asides-padding-top: 0;
+      margin-right: var(--initial-at-small, var(--aside-margin-x)) !important;
     }
 
     ul {
       display: var(--at-small-toggle, flex);
+      justify-content: end;
       gap: var(--at-small-toggle, 0.5rem);
       padding: 0;
       margin: 0;
