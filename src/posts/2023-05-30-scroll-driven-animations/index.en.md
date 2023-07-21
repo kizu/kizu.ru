@@ -47,7 +47,7 @@ Let me start right away with an example[^grid]:
 
 [^grid]: Credit for the pattern in the examples’ backgrounds — [Temani Afif](https://front-end.social/@css)'s [CSS Pattern](https://css-pattern.com/#g13). <!-- offset="-1.375" -->
 
-{{<Partial src="examples/scroll-driven-animations-1-1.html" screenshot="true" video="true" style="padding: 0;" >}}
+{{<Partial class="require-animation-range" src="examples/scroll-driven-animations-1-1.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example demonstrates how the sticky headers change when getting stuck.
 {{</Partial>}}
 
@@ -146,7 +146,7 @@ Scroll-driven animations allow us to have something similar to the “bottom 
 
 Look at this example:
 
-{{<Partial src="examples/scroll-driven-animations-1-2.html" screenshot="true" video="true" style="padding: 0;" >}}
+{{<Partial class="require-animation-range" src="examples/scroll-driven-animations-1-2.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example demonstrates how the sticky headers combine when getting stuck.
 {{</Partial>}}
 
@@ -215,7 +215,7 @@ For my second example, I want to come back to one of my older experiments 
 
 Let me show you the demo first, and then I will talk about why I can call it a “proper” implementation this time.
 
-{{<Partial src="examples/scroll-driven-animations-2-1.html" screenshot="true" video="true" >}}
+{{<Partial class="require-animation-range" src="examples/scroll-driven-animations-2-1.html" screenshot="true" video="true">}}
 Scrolling through the first container, we can see the shadows appear and disappear and go over complex background and foreground elements.
 {{</Partial>}}
 
@@ -316,7 +316,7 @@ After a few tries[^tries], I did achieve this with scroll-driven animations. L
 
 [^tries]: Initially, while reading the spec and playing with the implementation in Chrome Canary, I did not find anything that would allow me to do this just with scroll-driven animations, so I managed to do a [proof-of-concept](#solution-based-on-anchor-positioning) using anchor positioning. Of course, [Bramus pointed out on Mastodon](https://front-end.social/@bramus/110458876067809316) that we now have a `timeline-scope`, so the final solution is much cleaner thanks to him! <!-- offset="-8.75" -->
 
-{{<Partial src="examples/scroll-driven-animations-3-2.html" screenshot="true" video="true" style="padding: 0;" >}}
+{{<Partial class="require-animation-range require-timeline-scope" src="examples/scroll-driven-animations-3-2.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
 {{</Partial>}}
 
@@ -458,7 +458,7 @@ Initially, I did not think we could hoist the animation timelines outside of 
 
 As an initial proof-of-concept, I did manage to achieve this with scroll-driven animations combined with [anchor positioning](/anchor-positioning-experiments/). Let’s look at the example:
 
-{{<Partial src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="padding: 0;" >}}
+{{<Partial class="require-animation-range require-anchor-name" src="examples/scroll-driven-animations-3-1.html" screenshot="true" video="true" style="padding: 0;" >}}
 Scrolling through the example, we can see the Table of Contents items being highlighted, mirroring the sections that are currently present in the viewport.
 {{</Partial>}}
 

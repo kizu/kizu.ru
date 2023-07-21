@@ -38,7 +38,7 @@ An easy way to demonstrate how an item can get affected by its position in 
 
 Let’s say we want to give list items a value based on their vertical position inside their container in a linear fashion, choosing a solid background from a gradient.
 
-{{<Partial src="examples/gradient.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/gradient.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
   Gradient: [“Peaches”](https://gradient.style/#type=linear&space=oklab&linear_named_angle=to+bottom&linear_angle=180&stops=%7B%22kind%22%3A%22stop%22%2C%22color%22%3A%22oklch%2855%25+.45+350%29%22%2C%22auto%22%3A0%2C%22position1%22%3A0%2C%22position2%22%3A0%7D&stops=%7B%22kind%22%3A%22hint%22%2C%22auto%22%3A50%2C%22percentage%22%3A50%7D&stops=%7B%22kind%22%3A%22stop%22%2C%22color%22%3A%22oklch%28100%25+.4+95%29%22%2C%22auto%22%3A100%2C%22position1%22%3A100%2C%22position2%22%3A100%7D) by [Adam Argyle](https://nerdy.dev/)<span class="only-in-dark"> (inverted, due to my cheap “dark mode”)</span>.
 {{</Partial>}}
 
@@ -103,7 +103,7 @@ In the above example, we could easily switch between the vertical and horizont
 
 There could be multiple approaches to this; the one method I liked the most was to overlay the same gradient via `mix-blend-mode`, applying animations on two elements and mixing their backgrounds.
 
-{{<Partial src="examples/diagonal.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/diagonal.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 
 {{</Partial>}}
 
@@ -163,7 +163,7 @@ And if we can distribute two properties over both axes from `0` to `1`, we 
 
 [^others-could-do-better]: I’m curious what people like [Ana](https://codepen.io/thebabydino), [Sanne](https://sinds1971.nl/cssday/), [Jhey](https://codepen.io/jh3y), and [Amit](https://codepen.io/amit_sheen), among others, could come up with when using this technique! <!-- offset="1" -->
 
-{{<Partial src="examples/at-property.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/at-property.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 
 {{</Partial>}}
 
@@ -261,7 +261,7 @@ If we can assign variables per element, could we use them for “staggered”
 
 In some cases, we can! Not in a straightforward way, but it is possible.
 
-{{<Partial src="examples/staggered.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/staggered.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 Try hovering or focusing the example to play the animation once. I know it is not the prettiest — I’m not good at cool effects.<br/><br/>I hope someone else will create other awesome examples using this method!
 {{</Partial>}}
 
@@ -330,7 +330,7 @@ By default, elements that go later in the DOM would be shown on top of ite
 
 In the below example, the first stack is in the regular order, which we change to reverse for the second stack, and then make it stack from the center for the third one.
 
-{{<Partial src="examples/layers.html" screenshot="true">}}
+{{<Partial class="require-animation-range" src="examples/layers.html" screenshot="true">}}
 {{</Partial>}}
 
 In this example, for the reverse and the centered stacks, I’m doing the following:
@@ -355,7 +355,7 @@ However, there are four simple exceptions: the edges.
 
 We could define our animations in a way where we could independently retrieve the information about our element’s location: is it located at a certain edge — the start or end of an inline or block direction?
 
-{{<Partial src="examples/edges.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/edges.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 
 {{</Partial>}}
 
@@ -445,7 +445,7 @@ And that’s it! Now we can use our space toggles, alongside any boolean logic
 
 A simple use case for this method could be applying the consistent `border-radius` for the elements at the corners of a list.
 
-{{<Partial src="examples/corners.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/corners.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 
 {{</Partial>}}
 
@@ -483,7 +483,7 @@ border-end-end-radius:
 
 Another case [I saw requested](https://github.com/w3c/csswg-drafts/issues/1943) — styling the items on the first line differently from the rest. With edge detection, we can do this!
 
-{{<Partial src="examples/first-line.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem">}}
+{{<Partial class="require-animation-range" src="examples/first-line.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;">}}
 
 {{</Partial>}}
 
@@ -517,7 +517,7 @@ In this example[^please-resize], we want to detect when our menu does not ent
 
 [^please-resize]: Try resizing this and following examples to see them in action.
 
-{{<Partial src="examples/site-header.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8rem" />}}
+{{<Partial class="require-animation-range" src="examples/site-header.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8rem;" />}}
 
 For this example, we want to prepare HTML in a way we could place our menu button between the logo and the following list:
 
@@ -558,7 +558,7 @@ The crucial part is toggling the `visibility` of both the button and the menu.
 
 In this example, we want to expand _all_ items when they do not fit.
 
-{{<Partial src="examples/tabs.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem" />}}
+{{<Partial class="require-animation-range" src="examples/tabs.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem;" />}}
 
 One thing we have to prepare in HTML is to wrap all the items except for the first in an element, allowing them to wrap as a whole (and be tracked by the edge detection):
 
@@ -600,7 +600,7 @@ And that’s it!
 
 In this example, we want to remove the auto-margin when the right part wraps.
 
-{{<Partial src="examples/auto-margin.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem; min-height: 5rem; display: grid; align-items: center;" />}}
+{{<Partial class="require-animation-range" src="examples/auto-margin.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 6rem; min-height: 5rem; display: grid; align-items: center;" />}}
 
 That was the simplest case. With this HTML:
 

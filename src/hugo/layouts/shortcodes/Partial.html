@@ -3,6 +3,9 @@
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
 <figure
+  {{- if .Get "class" -}}
+    {{/**/}} class="{{ print (.Get "class") }}"
+  {{- end -}}
   {{- if .Get "style" -}}
     {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
   {{- end -}}

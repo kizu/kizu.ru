@@ -108,3 +108,52 @@ figure:not(:has(.Figure-Toggle:checked)) + aside > * > .Figure-Toggler > .Figure
 .Figure-Toggle:checked + * + .Figure-Screenshot {
   display: var(--_toggler-on);
 }
+
+/* Would only be shown if any of the required variables is defined */
+figure[class|=require] .Figure-Demo::after {
+  content:
+    "\26A0 \FE0F  Your browser does not support `"
+    var(--require-anchor-name,
+      var(--require-animation-range,
+        var(--require-timeline-scope)))
+    '`';
+  display: block;
+  background: --THEME_BG--DISTANT;
+
+  border: 2px dashed #FFCA51;
+  padding: 0.5rem;
+  margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
+  border-radius: 0 0 3px 3px;
+  text-align: center;
+  hyphens: none;
+
+  background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
+  background-clip: padding-box, border-box;
+}
+
+@supports not (anchor-name: --foo) {
+  .require-anchor-name,
+  .require-anchor-name + aside {
+    --require-anchor-name: 'anchor-name';
+    --_toggler-on: none;
+    --_toggler-off: inline;
+  }
+}
+
+@supports not (animation-range: entry-crossing) {
+  .require-animation-range,
+  .require-animation-range + aside {
+    --require-animation-range: 'animation-range';
+    --_toggler-on: none;
+    --_toggler-off: inline;
+  }
+}
+
+@supports not (timeline-scope: --foo) {
+  .require-timeline-scope,
+  .require-timeline-scope + aside {
+    --require-timeline-scope: 'timeline-scope';
+    --_toggler-on: none;
+    --_toggler-off: inline;
+  }
+}

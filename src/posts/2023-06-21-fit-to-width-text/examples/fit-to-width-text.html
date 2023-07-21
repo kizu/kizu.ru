@@ -32,31 +32,6 @@
   }
 }
 
-
-/* Showing the screenshot by default if we don't have animation-timeline support */
-@supports not (animation-range: entry-crossing) {
-  :root[class] {
-    --toggler-on: none;
-    --toggler-off: inline;
-  }
-
-  .Figure-Demo::after {
-    content: "\26A0 \FE0F  Your browser does not support scroll-driven animations";
-    display: block;
-    background: --THEME_BG--DISTANT;
-
-    border: 2px dashed #FFCA51;
-    padding: 0.5rem;
-    margin: 0.5rem calc(-0.5rem - 1px) calc(-0.5rem - 1px);
-    border-radius: 0 0 3px 3px;
-    text-align: center;
-    hyphens: none;
-
-    background: linear-gradient(#FFF, #FFF), linear-gradient(#FF2475,#FF2475);
-    background-clip: padding-box, border-box;
-  }
-}
-
 /* Experimenting with making the example sticky */
 @supports (animation-range: entry-crossing) {
   figure[style*='--sticky:'] {

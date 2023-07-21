@@ -14,7 +14,7 @@ Let me start with the demonstration: if you’d look at the following example
 
 [^browser]: At the time of writing this article, I’m testing it in Chrome Canary `116.0.5843.0`. <!-- offset="1" -->
 
-{{<Partial src="examples/fit-to-width-text.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8em; padding: 1rem; --sticky: yep;">}}
+{{<Partial class="require-animation-range" src="examples/fit-to-width-text.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8em; padding: 1rem; --sticky: yep;">}}
   Each line of the text in the example fits the width perfectly and follows the dimensions of the container when we resize it.
 {{</Partial>}}
 

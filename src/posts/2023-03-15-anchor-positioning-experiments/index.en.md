@@ -67,7 +67,7 @@ I will start with an example that I’d already want to use in production �
 
 That is the ability to visually _transfer_ hover or focus state from one element to another, highlighting the context that might be in a different place on the page.
 
-{{<Partial src="examples/anchor-positioning-1-1.html" screenshot="true" video="true" >}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-1-1.html" screenshot="true" video="true">}}
 Hovering or focusing on various items in this example would highlight the other corresponding elements.
 {{</Partial>}}
 
@@ -128,7 +128,7 @@ A few things to note:
 
 So, we can position elements over other elements, but can we change our targets dynamically? Yes, and one thing I tried immediately (and that seemed to work, partially) — transitions between those states!
 
-{{<Partial src="examples/anchor-positioning-1-2.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal;" span="2">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-1-2.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal;" span="2">}}
 Hovering or focusing over elements shows a moving pink ring over them.
 {{</Partial>}}
 
@@ -240,7 +240,7 @@ In the first example, let us do this:
 
 Here we use one element in anchors for `top` and `left`, and another for `right` and `bottom`:
 
-{{<Partial src="examples/anchor-positioning-2-0.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-0.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 Hovering or focusing over this and following examples allows us to see their animation. Remember — no JS was involved in any of the experiments on this page.
 {{</Partial>}}
 
@@ -271,14 +271,14 @@ Now, my first idea to fix this was to do the following:
 
 Because math functions like `calc()` or `min()` support anchor values inside, we can always choose an appropriate element’s position and get the box drawn always!
 
-{{<Partial src="examples/anchor-positioning-2-1.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-1.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 {{</Partial>}}
 
 This shows how we can “draw” a rectangle between two points! And there is no transition or animation on the rectangle — it just gets its `top`, `right`, `bottom`, and `left` from the two circles.
 
 Why is this not the final technique? I don’t think there are _a lot_ of use cases for _this exact_ solution — all due to the rectangle not being aware of the actual circle positions. It might seem that the rectangle “rotates”, but it really doesn’t. We can easily see this if we would add a background with a gradient that has corners matching our elements:
 
-{{<Partial src="examples/anchor-positioning-2-2.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-2.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 Corners match up only for the initial position but not when the elements' arrangement changes.
 {{</Partial>}}
 
@@ -292,7 +292,7 @@ What we could want is to be able to determine the actual direction here. Ho
 
 Until we would get something that would allow us to do this on one element, here is a demonstration of the technique that I propose:
 
-{{<Partial src="examples/anchor-positioning-2-3.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-3.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 Corners now correctly line up with their items.
 {{</Partial>}}
 
@@ -336,15 +336,15 @@ Instead of one element with the `min()`, we can use four, only one of which w
 
 This method allows us to create various effects:
 
-{{<Partial src="examples/anchor-positioning-2-4.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-4.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 We can connect as many items as we want.
 {{</Partial>}}
 
-{{<Partial src="examples/anchor-positioning-2-5.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-5.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 We can draw something inside using HTML & CSS and maybe even utilize container queries for swapping based on orientation!
 {{</Partial>}}
 
-{{<Partial src="examples/anchor-positioning-2-6.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-2-6.html" screenshot="true" video="true" style="width: 450px; justify-self: center; overflow: hidden; resize: horizontal;">}}
 Or use an SVG with its overflow behavior and the `marker`'s auto-rotation.
 {{</Partial>}}
 
@@ -358,7 +358,7 @@ There are so many things I want to implement using these connectors! But if 
 
 So, for this one, I would put just one practical example:
 
-{{<Partial src="examples/anchor-positioning-3.html" screenshot="true" video="true" a11y="true" style="position: relative; overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-3.html" screenshot="true" video="true" a11y="true" style="position: relative; overflow: hidden; resize: horizontal;">}}
 The example shows lines connecting items with their parents in a nested tree list with `<details>` allowing collapsing branches.
 
 Thanks to [Yoksel](https://github.com/yoksel)'s [URL-encoder for SVG](https://yoksel.github.io/url-encoder/), I embedded the SVG as a background for pseudo-elements.
@@ -423,7 +423,7 @@ Potentially, we could eliminate the second part if we could have something li
 
 This experiment is more of a continuation of the first one — where we’re highlighting something, but this time we’re basing things on two or more elements at the same time:
 
-{{<Partial src="examples/anchor-positioning-1-3.html" screenshot="true" video="true">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-1-3.html" screenshot="true" video="true">}}
 Hovering/focusing over the spans with dotted underlines highlights the corresponding cells in the table.
 
 Data: [caniuse.com/css-sticky](https://caniuse.com/css-sticky).
@@ -516,7 +516,7 @@ For the example[^fun-fact], I chose, once again, a thing that is present in 
 
 [^fun-fact]: Fun fact about this anchor positioning usage — it was mentioned as a use case in [Eric Meyer](https://mastodon.social/@Meyerweb)'s [CSS Wish List 2023](https://meyerweb.com/eric/thoughts/2023/02/08/css-wish-list-2023/#anchored-positioning). <!-- offset="-1.75" -->
 
-{{<Partial src="examples/anchor-positioning-4.html" screenshot="true" video="true" a11y="true" style="overflow: hidden; resize: horizontal;">}}
+{{<Partial class="require-anchor-name" src="examples/anchor-positioning-4.html" screenshot="true" video="true" a11y="true" style="overflow: hidden; resize: horizontal;">}}
 This example only makes sense on a wide screen — in a narrow context, the sidenotes would become just footnotes, appearing at the end of the text, but when wide enough, you should see the experiment in action.
 
 By the way, the text of the experiment describes what is happening inside of it as a kind of alt text.

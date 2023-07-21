@@ -13,17 +13,19 @@ mastodon-post-info::part(aside) {
   align-self: var(--align, start);
 
   width: var(--initial-at-small, var(--aside-width)); /* There was min-width — why not just width? */
-  margin-left: var(--initial-at-large, auto);
 
   counter-increment: asides;
 
   font: var(--THEME_FONT--SMALL);
   font-feature-settings: "lnum", "onum" 0;
   padding-top: calc(var(--at-large) * var(--asides-padding-top));
+  --aside-margin-top: calc(var(--THEME_LINE_HEIGHT) * (var(--at-large) * var(--offset, 0) + var(--at-small) * 0.5));
+  --aside-margin-x: calc(var(--at-small) * var(--THEME_INDENT));
+  --aside-margin-bottom: calc(var(--at-small) * var(--THEME_LINE_HEIGHT));
   margin:
-    calc(var(--THEME_LINE_HEIGHT) * (var(--at-large) * var(--offset, 0) + var(--at-small) * 0.5))
-    calc(var(--at-small) * var(--THEME_INDENT))
-    calc(var(--at-small) * var(--THEME_LINE_HEIGHT));
+    var(--aside-margin-top)
+    var(--aside-margin-x)
+    var(--aside-margin-bottom);
   --text-indent: 0;
   --p-p-margin-top: 1.5em;
   --link-underline-offset: 0.4em;
