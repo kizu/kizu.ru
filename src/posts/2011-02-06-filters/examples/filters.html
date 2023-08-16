@@ -181,6 +181,14 @@ input.b-filter-meta#ShapeTriangle:checked ~ .b-list > .b-list-item_round,
 
     box-shadow: 0 1px 1px rgba(0,0,0,0.6);
     }
+    .b-filter-meta#ColorRed:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorRed],
+    .b-filter-meta#ColorBlue:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorBlue],
+    .b-filter-meta#ColorYellow:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorYellow],
+    .b-filter-meta#ColorBlack:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorBlack],
+    .b-filter-meta#ColorGreen:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorGreen],
+    .b-filter-meta#ColorWhite:focus-visible ~ .b-filter-controls .b-filter-label[for=ColorWhite] {
+        outline: 2px solid limegreen;
+        }
     .b-filter-meta#ColorRed:checked ~ .b-filter-controls .b-filter-label[for=ColorRed]:before,
     .b-filter-meta#ColorBlue:checked ~ .b-filter-controls .b-filter-label[for=ColorBlue]:before,
     .b-filter-meta#ColorYellow:checked ~ .b-filter-controls .b-filter-label[for=ColorYellow]:before,
@@ -202,6 +210,11 @@ input.b-filter-meta#ShapeTriangle:checked ~ .b-list > .b-list-item_round,
     border-radius: 1em;
     user-select: none;
     }
+
+.b-filter-meta[type=radio]:focus-visible ~ .b-filter-controls .b-filter-radios {
+    outline: 2px solid limegreen;
+    }
+
 .b-filter-radios .b-filter-label {
     position: relative;
     z-index: 9;
@@ -338,17 +351,18 @@ input.b-filter-meta#ShapeTriangle:checked ~ .b-list > .b-list-item_round,
 </style>
 
 <form class="b-filter">
-    <input type="radio" checked="checked" class="b-filter-meta" name="types" id="ShapeNone" />
-    <input type="radio" class="b-filter-meta" name="types" id="ShapeRound" />
-    <input type="radio" class="b-filter-meta" name="types" id="ShapeSquare" />
-    <input type="radio" class="b-filter-meta" name="types" id="ShapeTriangle" />
-
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorRed" />
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorBlue" />
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorYellow" />
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorBlack" />
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorGreen" />
     <input type="checkbox" class="b-filter-meta b-filter-meta_color" id="ColorWhite" />
+
+    <input type="radio" checked="checked" class="b-filter-meta" name="types" id="ShapeNone" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeRound" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeSquare" />
+    <input type="radio" class="b-filter-meta" name="types" id="ShapeTriangle" />
+
     <div class="b-filter-controls">
         <p>
             Choose colors:
