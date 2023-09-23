@@ -1,0 +1,42 @@
+<style>
+.shrinkwrap--fleurons {
+  padding-inline: 1.3em;
+}
+
+.shrinkwrap--fleurons::before,
+.shrinkwrap--fleurons::after {
+  border: none;
+  inset-block: 0;
+  display: flex;
+  align-items: center;
+}
+
+.shrinkwrap--fleurons::before {
+  content: "☙";
+  inset-inline-start: auto;
+}
+
+.shrinkwrap--fleurons::after {
+  content: "❧";
+  inset-inline-end: auto;
+}
+
+</style>
+
+<div class="example example-headings">
+  <h4 class="as-h3 shrinkwrap shrinkwrap--lines shrinkwrap--fleurons">
+    <span class="shrinkwrap-target">
+      Some text inside a centered h5 that should span over two lines
+    </span>
+  </h4>
+  <h4 class="as-h3 shrinkwrap shrinkwrap--lines shrinkwrap--fleurons">
+    <span class="shrinkwrap-target">Not enough content to wrap</span>
+  </h4>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="shrinkwrap-disable" /> Disable the shrinkwrap fix</label>
+  </fieldset>
+</div>

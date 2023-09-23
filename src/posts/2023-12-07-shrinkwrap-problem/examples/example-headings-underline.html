@@ -1,0 +1,31 @@
+<style>
+.shrinkwrap--underline {
+}
+
+.shrinkwrap--underline::before {
+  content: "";
+  position: absolute;
+  inset-block-end: -2px;
+  inset-inline: anchor(--target auto-same);
+  border-bottom: 2px solid;
+}
+
+</style>
+
+<div class="example example-headings">
+  <h4 class="as-h3 shrinkwrap shrinkwrap--underline">
+    <span class="shrinkwrap-target">
+      Some text inside a centered h5 that should span over two lines
+    </span>
+  </h4>
+  <h4 class="as-h3 shrinkwrap shrinkwrap--underline">
+    <span class="shrinkwrap-target">Not enough content to wrap</span>
+  </h4>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="shrinkwrap-disable" /> Disable the shrinkwrap fix</label>
+  </fieldset>
+</div>

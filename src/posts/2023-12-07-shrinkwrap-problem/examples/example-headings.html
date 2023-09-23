@@ -1,0 +1,26 @@
+<style>
+.example-headings :is(h4, h5):first-child {
+  margin-top: 0;
+}
+
+</style>
+
+<div class="example example-headings">
+  <h5 class="as-h3 shrinkwrap shrinkwrap--lines">
+    <span class="shrinkwrap-target">
+      Some text inside a centered h5 that should span over two lines
+    </span>
+  </h5>
+  <p>Just some paragraph</p>
+  <h5 class="as-h3 shrinkwrap shrinkwrap--lines">
+    <span class="shrinkwrap-target">Not enough content to wrap</span>
+  </h5>
+  <p>The header won't wrap (at least at the default desktop browser width, and a non-resized example).</p>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="shrinkwrap-disable" /> Disable the shrinkwrap fix</label>
+  </fieldset>
+</div>

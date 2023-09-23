@@ -1,0 +1,77 @@
+<style>
+.example2-ib {
+  --text-align: center;
+}
+
+.example2-ib .wrapper {
+  position: relative;
+  isolation: isolate;
+  text-align: var(--text-align);
+
+  --column-width: 7em;
+  --padding: 1em;
+
+  padding: calc(0.5 * var(--padding));
+}
+
+.example2-ib ul {
+  display: inline;
+  anchor-name: --wrapper;
+}
+
+.example2-ib li {
+  display: inline-block;
+  vertical-align: top;
+  list-style: none;
+  padding: var(--padding);
+  margin: calc(0.5 * var(--padding));
+  border-radius: 0.5em;
+  background: var(--THEME_BG);
+}
+
+.example2-ib li::before {
+  content: none;
+}
+
+.example2-ib ul::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-block: var(--padding);
+  anchor-default: --wrapper;
+  inset-inline: anchor(auto-same);
+  margin: calc(-1 * var(--padding)) calc(-0.5 * var(--padding));
+  background: var(--PINK);
+  border-radius: 0.5em;
+}
+
+*:has(label:nth-of-type(1) > [name^=text-align]:checked) > .example2-ib {
+  --text-align: start;
+}
+*:has(label:nth-of-type(3) > [name^=text-align]:checked) > .example2-ib {
+  --text-align: end;
+}
+</style>
+<div class="example2-ib">
+  <div class="wrapper">
+    <ul role="list"
+      ><li role="listitem">An item</li
+      ><li role="listitem">Second item</li
+      ><li role="listitem">Third item</li
+      ><li role="listitem">Fourth item</li
+      ><li role="listitem">Fifth item</li
+      ><li role="listitem">Sixth item</li
+      ><li role="listitem">Seventh item</li
+      ><li role="listitem">Eighth item</li
+    ></ul>
+  </div>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>text-align</legend>
+    <label><input name="text-align4" type="radio"/> start</label>
+    <label><input name="text-align4" type="radio" checked/> center</label>
+    <label><input name="text-align4" type="radio"/> end</label>
+  </fieldset>
+</div>

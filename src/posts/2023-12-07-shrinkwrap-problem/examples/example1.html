@@ -1,0 +1,91 @@
+<style>
+  .example1 {
+    --text-align: var(--center);
+    --left: var(--text-align,);
+    --center: var(--text-align,);
+    --right: var(--text-align,);
+
+    --text-wrap: balance;
+  }
+
+  .example1 p {
+    width: max-content;
+    margin: 1em;
+    margin-inline:
+      var(--left, 0 auto)
+      var(--center, auto)
+      var(--right, auto 0)
+    ;
+    text-align:
+      var(--left, left)
+      var(--center, center)
+      var(--right, right)
+    ;
+    max-width: min(26em, 100%);
+    box-sizing: border-box;
+    background: var(--PINK);
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    hyphens: none;
+    text-wrap: var(--text-wrap);
+  }
+
+  @supports (anchor-name: --foo) {
+    .example1 p.fixed {
+      position: relative;
+      isolation: isolate;
+      background: none;
+
+      & > span {
+        anchor-name: --span;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: var(--GREEN);
+        border-radius: inherit;
+        anchor-default: --span;
+        inset:
+          0
+          calc(anchor(auto-same) - 1em);
+      }
+    }
+  }
+
+  *:has(label:nth-of-type(1) > [name^=text-align]:checked) > .example1 {
+    --text-align: var(--left);
+  }
+
+  *:has(label:nth-of-type(3) > [name^=text-align]:checked) > .example1 {
+    --text-align: var(--right);
+  }
+
+  *:has(label:nth-of-type(2) > [name^=text-wrap]:checked) > .example1 {
+    --text-wrap: wrap;
+  }
+
+</style>
+<div class="example1">
+  <p contenteditable="plaintext-only">This does not wrap.</p>
+  <p contenteditable="plaintext-only">Now, this would wrap as it has an overwhelmingly-long word.</p>
+  <p class="fixed">
+    <span contenteditable="plaintext-only">This does not wrap.</span>
+  </p>
+  <p class="fixed"><span contenteditable="plaintext-only">This would also wrap as it has an overwhelmingly-long word.</span></p>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Align</legend>
+    <label><input name="text-align" type="radio"/> left</label>
+    <label><input name="text-align" type="radio" checked/> center</label>
+    <label><input name="text-align" type="radio"/> right</label>
+  </fieldset>
+  <fieldset>
+    <legend>Text-wrap</legend>
+    <label><input name="text-wrap" type="radio" checked/> balance</label>
+    <label><input name="text-wrap" type="radio"/> wrap</label>
+  </fieldset>
+</div>

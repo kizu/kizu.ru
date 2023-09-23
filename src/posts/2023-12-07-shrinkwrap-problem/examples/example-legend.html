@@ -1,0 +1,56 @@
+<style>
+.example-legend fieldset {
+  font-size: 1em;
+  border: 2px solid;
+  margin-block-end: 1em;
+}
+.example-legend legend {
+  width: 100%;
+  font-size: 1.1em;
+  line-height: 1.1;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.shrinkwrap--lines::before,
+.shrinkwrap--lines::after {
+  content: "";
+  position: absolute;
+  anchor-default: --target;
+  top: calc(50% - 1px);
+  inset-inline: 0;
+  border-bottom: 2px solid;
+}
+
+.shrinkwrap--lines::before {
+  inset-inline-end: anchor(auto);
+  margin-inline-end: 0.5em;
+}
+.shrinkwrap--lines::after {
+  inset-inline-start: anchor(auto);
+  margin-inline-start: 0.5em;
+}
+
+</style>
+
+<div class="example example-legend">
+  <fieldset>
+    <legend class="shrinkwrap shrinkwrap--lines">
+      <span class="shrinkwrap-target">Some text inside a centered legend that should span over two lines</span>
+    </legend>
+    <p>Just some content inside a fieldset</p>
+  </fieldset>
+  <fieldset>
+    <legend class="shrinkwrap shrinkwrap--lines">
+      <span class="shrinkwrap-target">Not enough content to wrap</span>
+    </legend>
+    <p>The legend won't wrap (at least at the default desktop browser width, and a non-resized example).</p>
+  </fieldset>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="shrinkwrap-disable" /> Disable the shrinkwrap fix</label>
+  </fieldset>
+</div>

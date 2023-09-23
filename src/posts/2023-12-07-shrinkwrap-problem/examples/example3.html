@@ -1,0 +1,85 @@
+<style>
+.example3 {
+  container-type: inline-size;
+
+  --column-width: 6em;
+  --padding: 1em;
+  --gap: 1em;
+}
+.example3 ul {
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  gap: var(--gap);
+
+  padding: var(--padding);
+
+  box-sizing: content-box;
+  max-width: max-content;
+  width: calc(
+    round(down,
+      100%
+      +
+      var(--gap)
+      -
+      2 * var(--padding)
+      ,
+      var(--column-width)
+      +
+      var(--gap)
+    )
+    -
+    var(--gap)
+  );
+  margin: 0 auto;
+
+  background: var(--PINK);
+  border-radius: 0.5em;
+}
+
+.example3 li {
+  list-style: none;
+  padding: var(--padding);
+  width: var(--column-width);
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 0.5em;
+  background: var(--THEME_BG);
+}
+
+.example3 li::before {
+  content: none;
+}
+
+</style>
+<div class="example3">
+  <ul role="list">
+    <li role="listitem">
+      An item
+    </li>
+    <li role="listitem">
+      Second item
+    </li>
+    <li role="listitem">
+      Third item
+    </li>
+    <li role="listitem">
+      Fourth item
+    </li>
+    <li role="listitem">
+      Fifth item
+    </li>
+    <li role="listitem">
+      Sixth item
+    </li>
+    <li role="listitem">
+      Seventh item
+    </li>
+    <li role="listitem">
+      Eighth item
+    </li>
+  </ul>
+</div>

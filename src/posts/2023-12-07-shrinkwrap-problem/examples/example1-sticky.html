@@ -1,0 +1,55 @@
+<style>
+  .example-sticky {
+    width: var(--aside-width);
+    font-size: 0.9em;
+  }
+  .example-sticky p.fixed {
+    text-align: left;
+    outline-offset: 3px;
+  }
+
+  .outer {
+    outline: 3px dotted var(--PINK);
+  }
+
+  .example-sticky p.fixed::after {
+    background: transparent;
+    transition: inset 0.3s;
+  }
+
+  .example-sticky:is(:hover, :focus-within) p.fixed::after {
+    inset: calc(anchor(auto-same) - 2px);
+  }
+
+  .example-sticky p.fixed::after,
+  .middle {
+    outline: 2px solid var(--GREEN);
+  }
+  .inner {
+    outline: 1px dashed var(--RED);
+  }
+
+  .example-legend {
+    margin-left: calc(0.5 * var(--THEME_INDENT));
+  }
+
+  .example-legend dt {
+    width: max-content;
+    outline-offset: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-legend dd {
+    margin-left: calc(0.5 * var(--THEME_INDENT));
+    margin-bottom: 1rem;
+  }
+
+</style>
+<div class="example1 example-sticky">
+  <p class="fixed outer">
+    <span class="inner" contenteditable="plaintext-only">
+      Example with
+      an overwhelmingly-long word.
+    </span>
+  </p>
+</div>

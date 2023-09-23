@@ -1,0 +1,124 @@
+<style>
+
+.example-bubbles :where(.shrinkwrap, .shrinkwrap-target) {
+  all: unset;
+}
+
+.shrinkwrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.shrinkwrap-target {
+  position: relative;
+  display: inline-block;
+  anchor-name: --target;
+
+  .with-pseudo &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    anchor-default: --target;
+    anchor-name: --shrinkwrap;
+    inset: 0;
+    inset-inline: anchor(auto-same);
+  }
+}
+
+.example-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.example-bubbles {
+  padding-block: 1em;
+}
+.example-bubbles .shrinkwrap {
+  --padding-block: 0.5em;
+  --padding-inline: 1em;
+  --bg: var(--GREEN);
+  --side: var(--start);
+  --start: var(--side,);
+  --end: var(--side,);
+
+  text-wrap: balance;
+
+  margin-inline:
+    var(--start, 1em 2em)
+    var(--end, 2em 1em);
+}
+
+.example-bubbles .shrinkwrap-target {
+  padding: var(--padding-block) var(--padding-inline);
+}
+
+.example-bubbles .end {
+  --bg: var(--PINK);
+  --side: var(--end);
+  align-self: end;
+  text-align: end;
+  margin-inline: 2em 1em;
+}
+.example-bubbles .shrinkwrap-target::before {
+  border-radius: 1em;
+  background: var(--bg);
+}
+.example-bubbles .shrinkwrap-target::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--start, -0.9em) auto var(--end, -0.9em);
+  inset-block-end: 0.5em;
+  width: 1em;
+  height: 1em;
+  background: radial-gradient(circle at var(--start, 0) var(--end, 100%) 0, transparent 70%, var(--bg) 0);
+}
+
+.example-bubbles .shrinkwrap.liked::after {
+  content: "❤️";
+  position: absolute;
+  top: -0.25em;
+  anchor-default: --shrinkwrap;
+  inset-inline-end: -0.25em;
+  inset-inline-end: calc(anchor(auto-same) - 0.25em);
+  rotate: 15deg;
+}
+
+@supports (anchor-name: --foo) {
+  *:not(:has(.shrinkwrap-disable:checked)) {
+    & > .example-bubbles .shrinkwrap {
+      padding: var(--padding-block) var(--padding-inline);
+    }
+    & > .example .shrinkwrap-target {
+      position: static;
+      display: inline;
+      padding: 0;
+    }
+    & > .example-bubbles .shrinkwrap-target::before {
+      margin-inline: calc(-1 * var(--padding-inline));
+    }
+  }
+}
+
+</style>
+<div class="example example-bubbles">
+  <blockquote class="shrinkwrap with-pseudo">
+    <p class="shrinkwrap-target">Hello, there!</p>
+  </blockquote>
+  <blockquote class="shrinkwrap with-pseudo end">
+    <p class="shrinkwrap-target">Oh hey, this is a bubble with a lot of text, so it would wrap, hopefully!</p>
+  </blockquote>
+  <blockquote class="shrinkwrap with-pseudo liked">
+    <p class="shrinkwrap-target">This is cool! I like how the bubbles go neatly around the wrapped text.</p>
+  </blockquote>
+  <blockquote class="shrinkwrap with-pseudo end">
+    <p class="shrinkwrap-target">We can even continue using anchor positioning to attach things to this “fake” background, like the emoji on the previous message!</p>
+  </blockquote>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Debug</legend>
+    <label><input type="checkbox" class="shrinkwrap-disable" /> Disable the shrinkwrap fix</label>
+  </fieldset>
+</div>

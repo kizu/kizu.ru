@@ -59,7 +59,7 @@
 
 </figure>
 {{- if or (.Get "screenshot") (.Inner) -}}
-  <aside style="--offset: 1;{{- if .Get "span" -}}--span: {{ .Get "span" }}{{- end  -}}">
+  <aside style="--offset: {{ if .Get "offset" }}{{ .Get "offset" }}{{ else }}1{{ end }};{{- if .Get "span" -}}--span: {{ .Get "span" }}{{- end  -}}">
     {{- if .Get "screenshot" -}}
       <p>
         <label class="Link Figure-Toggler" for="Toggle-{{ $id }}">

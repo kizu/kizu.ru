@@ -1,0 +1,28 @@
+<style>
+.example1--limitations p {
+  margin-inline: auto 0;
+}
+</style>
+
+<div class="example1 example1--limitations">
+  <p contenteditable="plaintext-only">This is ok.</p>
+  <p contenteditable="plaintext-only">Now, this would wrap as it has an overwhelmingly-long word.</p>
+  <p class="fixed">
+    <span contenteditable="plaintext-only">↓</span>
+  </p>
+  <p class="fixed"><span contenteditable="plaintext-only">This would also wrap as it has an overwhelmingly-long word.</span></p>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Text-align</legend>
+    <label><input name="text-align2" type="radio" checked/> left</label>
+    <label><input name="text-align2" type="radio"/> center</label>
+    <label><input name="text-align2" type="radio"/> right</label>
+  </fieldset>
+  <fieldset>
+    <legend>Text-wrap</legend>
+    <label><input name="text-wrap2" type="radio" checked/> balance</label>
+    <label><input name="text-wrap2" type="radio"/> wrap</label>
+  </fieldset>
+</div>

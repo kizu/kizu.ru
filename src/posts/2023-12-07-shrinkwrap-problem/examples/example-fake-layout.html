@@ -1,0 +1,54 @@
+<style>
+  .fake-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    font-size: 0.75em;
+    line-height: 1.5;
+  }
+
+  .fake-layout ul::after {
+    anchor-name: --list;
+  }
+
+  .fill-available {
+    padding: 1em;
+    background: var(--GREEN);
+    overflow: auto;
+    border-radius: 0.5em;
+  }
+
+  .fake-layout .fill-available {
+    position: absolute;
+    inset: 0;
+    inset-inline-start: anchor(--list end);
+    margin-left: 1em;
+  }
+
+</style>
+<div class="example2-ib">
+  <div class="fake-layout">
+    <div class="wrapper">
+      <ul role="list"
+        ><li role="listitem">An item</li
+        ><li role="listitem">Second item</li
+        ><li role="listitem">Third item</li
+        ><li role="listitem">Fourth item</li
+        ><li role="listitem">Fifth item</li
+        ><li role="listitem">Sixth item</li
+        ><li role="listitem">Seventh item</li
+        ><li role="listitem">Eighth item</li
+      ></ul>
+    </div>
+    <div class="fill-available" contenteditable="plaintext-only">This element takes the rest of the space.</div>
+  </div>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>text-align</legend>
+    <label><input name="text-align3" type="radio" checked /> start</label>
+    <label><input name="text-align3" type="radio" /> center</label>
+    <label><input name="text-align3" type="radio" /> end</label>
+  </fieldset>
+</div>

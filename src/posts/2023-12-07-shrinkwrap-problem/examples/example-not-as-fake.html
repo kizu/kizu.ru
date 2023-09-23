@@ -1,0 +1,68 @@
+<style>
+  .complex-layout {
+    --ratio: 2;
+    display: grid;
+    gap: 1em;
+    /* calc does not work with fractions? */
+    grid-template-columns: 2fr 1fr;
+    font-size: 0.75em;
+    line-height: 1.5;
+  }
+
+  .complex-layout ul {
+    margin: 0;
+  }
+
+  .complex-layout .fill-available {
+    margin-left: calc(
+      round(down,
+        var(--ratio) * 100%
+        +
+        var(--gap)
+        -
+        2 * var(--padding)
+        ,
+        var(--column-width)
+        +
+        var(--gap)
+      )
+      +
+      var(--gap)
+      -
+      var(--ratio) * 100%
+    );
+  }
+
+</style>
+
+<div class="example3">
+  <div class="complex-layout">
+    <ul role="list">
+      <li role="listitem">
+        An item
+      </li>
+      <li role="listitem">
+        Second item
+      </li>
+      <li role="listitem">
+        Third item
+      </li>
+      <li role="listitem">
+        Fourth item
+      </li>
+      <li role="listitem">
+        Fifth item
+      </li>
+      <li role="listitem">
+        Sixth item
+      </li>
+      <li role="listitem">
+        Seventh item
+      </li>
+      <li role="listitem">
+        Eighth item
+      </li>
+    </ul>
+    <div class="fill-available" contenteditable="plaintext-only">This element takes the rest of the space.</div>
+  </div>
+</div>

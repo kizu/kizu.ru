@@ -1,0 +1,98 @@
+<style>
+.example2 {
+  --justify-content: center;
+}
+.example2 ul {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: var(--justify-content);
+
+  --column-width: 7em;
+  --padding: 1em;
+  gap: var(--padding);
+
+  padding: var(--padding);
+}
+
+.example2 li {
+  list-style: none;
+  padding: var(--padding);
+  margin: 0;
+  anchor-name: var(--is);
+  border-radius: 0.5em;
+  background: var(--THEME_BG);
+}
+
+.example2 li::before {
+  content: none;
+}
+
+.example2 ul::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-block: var(--padding);
+  inset-inline:
+    min(
+      anchor(--a auto-same),
+      anchor(--b auto-same),
+      anchor(--c auto-same),
+      anchor(--d auto-same),
+      anchor(--e auto-same)
+    );
+  margin: calc(-1 * var(--padding));
+  background: var(--PINK);
+  border-radius: 0.5em;
+}
+
+*:has(label:nth-of-type(1) > [name^=justify-content]:checked) > .example2 {
+  --justify-content: start;
+}
+*:has(label:nth-of-type(3) > [name^=justify-content]:checked) > .example2 {
+  --justify-content: end;
+}
+*:has(label:nth-of-type(4) > [name^=justify-content]:checked) > .example2 {
+  --justify-content: space-around;
+}
+*:has(label:nth-of-type(5) > [name^=justify-content]:checked) > .example2 {
+  --justify-content: space-between;
+}
+*:has(label:nth-of-type(6) > [name^=justify-content]:checked) > .example2 {
+  --justify-content: space-evenly;
+}
+</style>
+<div class="example2">
+  <ul role="list">
+    <li role="listitem" style="--is: --a">
+      An item
+    </li>
+    <li role="listitem" style="--is: --b">
+      Second item
+    </li>
+    <li role="listitem" style="--is: --c">
+      Third item
+    </li>
+    <li role="listitem" style="--is: --d">
+      Fourth item
+    </li>
+    <li role="listitem" style="--is: --e">
+      Fifth item
+    </li>
+  </ul>
+</div>
+
+<div class="fieldsets">
+  <fieldset>
+    <legend>Justify-content</legend>
+    <label><input name="justify-content" type="radio"/> start</label>
+    <label><input name="justify-content" type="radio" checked/> center</label>
+    <label><input name="justify-content" type="radio"/> end</label>
+    <label><input name="justify-content" type="radio"/> space-around</label>
+    <label><input name="justify-content" type="radio"/> space-between</label>
+    <label><input name="justify-content" type="radio"/> space-evenly</label>
+  </fieldset>
+</div>
