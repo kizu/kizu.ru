@@ -337,11 +337,36 @@ fieldset label:active {
   background-color: var(--THEME_SELECTION, #B1D2FB);
 }
 
+sup,
+sub {
+  vertical-align:baseline;
+  position:relative;
+  font-size:.7em;
+  line-height:1;
+}
+sup {
+  bottom:1.4ex;
+}
+sub {
+  top:.5ex;
+}
+
+
 /* Inspired by https://kennethormandy.com/list/2022-11-25/
    Though, is not used yet, as I need to find a way to apply this properly to the headers.
 */
 .nbsp {
   display: var(--initial-at-large, inline-block);
+}
+
+/* Taken from https://www.tpgi.com/the-anatomy-of-visually-hidden/ */
+.visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 /* End of the top level `@supports` */

@@ -57,7 +57,7 @@ Talking about animations — note how we’re not just getting a binary stuck/
 
 {{<Sidenotes offset="1" span="3">}}
 
-  [^state-query]: Which could be potentially possible in the future via [state-based container queries](https://github.com/w3c/csswg-drafts/issues/6402).
+  [^state-queries]: Which could be potentially possible in the future via [state-based container queries](https://github.com/w3c/csswg-drafts/issues/6402).
   [^omit]: I omit some unrelated to the scroll-driven animations code — feel free to look at the source for more context.
 
 {{</Sidenotes>}}

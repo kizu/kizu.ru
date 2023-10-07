@@ -1,6 +1,6 @@
 {{- with .context -}}
   {{- partial "header.html" (dict "context" . "a11y" "true") -}}
-  {{- if eq .Kind "page" -}}<article role="main">{{- else -}}<main>{{- end -}}
+  {{- if eq .Kind "page" -}}<article role="main" style="--scopes:{{.Params.sidenotes | safeCSS}}">{{- else -}}<main>{{- end -}}
     {{- if .Title -}}
       {{- $prefix := "" -}}
       {{- $isTag := eq .Kind "taxonomy" -}}

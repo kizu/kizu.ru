@@ -1,3 +1,4 @@
+{{$counter := 3 -}}
 {{- $scripts := resources.Get "j/scripts.js" | resources.Fingerprint "md5" -}}
 {{- $font_regular := resources.Get "s/21Cent-Regular.woff2" | resources.Fingerprint "md5" -}}
 {{- $font_black := resources.Get "s/21Cent-Black.woff2" | resources.Fingerprint "md5" -}}
@@ -66,7 +67,7 @@
       {{- end -}}{{- end -}}
     {{- end }}
   </head>
-  <body aria-live="polite">
+  <body>
     <div class="Root">
       {{- partial "layout_parts/root_layout.html" (dict "context" .) -}}
     </div>

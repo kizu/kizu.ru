@@ -144,9 +144,17 @@ const handleMarkdown = (initialContent, relativePath, fileBase) => {
 
     let rawerContent = content;
 
+    const sidenotes = [];
+
     // Convert md footnotes to sidenote shortcodes
     // Sidelink
-    content = content.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, '{{<Sidelink "$2" "$1" />}}');
+    content = content.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, (_, p1, p2) => {
+      sidenotes.push(p2);
+      return `{{<Sidelink "${p2}" "${p1}" />}}`;
+    });
+
+    metadata.sidenotes = sidenotes.map(id => `--${id}`).join(',');
+
     rawerContent = rawerContent.replace(/([\wА-Яа-я '’“”«»]+)\[\^([^\]]+)\]/g, '$1');
 
     // Sidenotes Item

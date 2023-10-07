@@ -18,81 +18,42 @@
 .Sidenote,
 .Sidelink {
   position: relative;
-  z-index: 1;
+  z-index: 0;
 
   display: inline-block;
   text-indent: 0;
 }
 
-.Highlight {
+.Sidenote::after,
+.Sidelink::after {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -2;
-
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 
   transition: background-color 0.2s 0.2s linear;
-  counter-increment: var(--counter);
-  pointer-events: none;
+  background:
+    var(--state, rgba(255, 255, 0, 0.3))
+    var(--not-state, transparent);
 }
 
-.Sidenote:not(:hover),
-.Sidelink:not(:hover) {
-  --highlight-hover: rgba(255, 255, 0, 0.3);
+.Sidelink::after {
+  left: -0.16rem;
 }
 
-.Highlight:hover {
-  background: var(--highlight-hover);
+.Sidenote::after {
+  left: -2rem;
 }
 
-label[for$=-Anchor] {
-  display: block;
-}
-
-
-.Highlight:hover + label[for$=-Anchor] {
-  --link-text-shadow-color: transparent;
-  --link-text-shadow-transition: 0s;
-}
 .Sidelink {
   --counter: sidenote-link;
   --link-underline-color: transparent;
   --link-underline-color--hover: transparent;
 }
 
-a[aria-hidden=true]:not([class]) {
-  /* Maybe just reset lol? */
-  display: inline;
-  color: inherit;
-  text-decoration: none;
-}
-
-a[href^='#'][aria-hidden=true]:not([class])::after {
-  content: counter(sidenote-link);
-
-  position: relative;
-  top: -0.555rem;
-
-  cursor: pointer;
-
-  padding: 0 0 0 0.16em;
-
-  font-size: 1rem;
-  line-height: 1;
-
-  color: rgba(0,0,0, 0.6);
-
-  font-feature-settings: "smcp";
-}
-
 .Sidenote {
   --counter: sidenote;
-}
-
-label[for$=-Anchor] {
-  padding-right: var(--h-gap);
 }
 
 p[role=note] {
@@ -100,8 +61,8 @@ p[role=note] {
   --p-p-margin-top: calc(var(--at-large) * -0.75rem + var(--THEME_LINE_HEIGHT) * (var(--at-large) * var(--offset, 0) + var(--at-small) * 0.5));
 }
 
-.Highlight[id$=-Content]::before {
-  content: counter(sidenote) ". ";
+.Sidenote::before {
+  content: counter(var(--counter)) ". ";
 
   position: absolute;
   top: calc(var(--at-large) * var(--asides-padding-top));
@@ -112,11 +73,67 @@ p[role=note] {
   text-align: right;
   color: rgba(0,0,0, 0.6);
   transition: opacity 0.2s 0.2s linear;
+  white-space: nowrap;
 
-  opacity: var(--highlight-opacity, calc(1 - var(--at-large)));
+  opacity:
+    var(--state, 1)
+    var(--not-state, 0);
 }
 
-.Highlight[id$=-Content]:hover,
-.Sidenote:hover {
-  --highlight-opacity: 1;
+.Sidenote {
+  box-sizing: border-box;
+  padding-right: var(--h-gap);
+}
+
+.Sidelink,
+.Sidenote {
+  counter-increment: var(--counter);
+}
+
+/* TODO: Firefox behaves weirdly here without this. Need to investigate */
+.Sidelink-Link {
+  display: inline-block;
+}
+
+.Sidelink-Link::after {
+  content: counter(var(--counter));
+
+  cursor: pointer;
+
+  padding: 0.32rem 0.48rem;
+  margin: 0 -0.48rem 0 -0.40rem;
+
+  font-size: 1rem;
+  line-height: 1;
+  white-space: nowrap;
+
+  color: rgba(0,0,0, 0.6);
+
+  font-feature-settings: "smcp";
+}
+
+/* Cross-highlighting! */
+article[style*='--scopes:'] {
+  timeline-scope: var(--scopes);
+}
+
+@keyframes --state {
+  to {
+    --state: initial;
+    --not-state: ;
+  }
+}
+
+@supports (animation-timeline: --foo) {
+  [style*='--sidenote:']:not(:hover, :focus-within) {
+    --state: ;
+    --not-state: initial;
+    animation: --state both;
+    animation-timeline: var(--sidenote);
+    animation-range: 0 0;
+  }
+
+  [style*='--sidenote:']:is(:hover, :focus-within) {
+    view-timeline: var(--sidenote);
+  }
 }
