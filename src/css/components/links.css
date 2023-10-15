@@ -54,7 +54,8 @@ a,
 
 a,
 .Link,
-span[style*='--underline:'] {
+span[style*='--underline:'],
+:is(em,li)[tabindex='0'] {
   text-decoration: underline;
   text-decoration-thickness: var(--underline-width);
   text-decoration-color: var(--link-underline-color);
@@ -83,7 +84,8 @@ span {
 
 .Link:not(a),
 .Link_pseudo,
-a[href^="#"] {
+a[href^='#'],
+:is(em,li)[tabindex='0'] {
   text-decoration-style: dashed;
   --link-color--visited: var(--link-color);
 }

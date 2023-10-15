@@ -34,8 +34,12 @@
 
   transition: background-color 0.2s 0.2s linear;
   background:
-    var(--state, rgba(255, 255, 0, 0.3))
-    var(--not-state, transparent);
+    var(--is-active,
+      var(--LIGHT, rgba(255, 255,  0, 0.3))
+      var(--DARK,  rgba(150, 140, 90, 0.3))
+    )
+    var(--not-active, transparent);
+    border-radius: 0.5rem;
 }
 
 .Sidelink::after {
@@ -43,7 +47,7 @@
 }
 
 .Sidenote::after {
-  left: -2rem;
+  inset: -0.5rem 0 -0.5rem -2rem;
 }
 
 .Sidelink {
@@ -74,10 +78,14 @@ p[role=note] {
   color: rgba(0,0,0, 0.6);
   transition: opacity 0.2s 0.2s linear;
   white-space: nowrap;
+}
 
-  opacity:
-    var(--state, 1)
-    var(--not-state, 0);
+@supports (animation-range: entry-crossing) {
+  .Sidenote::before {
+    opacity:
+      var(--is-active,  1)
+      var(--not-active, 0);
+  }
 }
 
 .Sidenote {
@@ -104,6 +112,8 @@ p[role=note] {
   margin: 0 -0.48rem 0 -0.40rem;
 
   font-size: 1rem;
+  font-style: normal;
+  font-weight: normal;
   line-height: 1;
   white-space: nowrap;
 
@@ -117,23 +127,21 @@ article[style*='--scopes:'] {
   timeline-scope: var(--scopes);
 }
 
-@keyframes --state {
-  to {
-    --state: initial;
-    --not-state: ;
+@keyframes --is-active {
+  entry 0%, exit 101% { /* need 101 due to CSSO */
+    --is-active: initial;
+    --not-active: ;
   }
 }
 
-@supports (animation-timeline: --foo) {
-  [style*='--sidenote:']:not(:hover, :focus-within) {
-    --state: ;
-    --not-state: initial;
-    animation: --state both;
-    animation-timeline: var(--sidenote);
-    animation-range: 0 0;
-  }
+[style*='--sidenote:']:not(:hover, :focus-within) {
+  animation: --is-active;
+  animation-timeline: var(--sidenote);
 
-  [style*='--sidenote:']:is(:hover, :focus-within) {
-    view-timeline: var(--sidenote);
-  }
+  --is-active: ;
+  --not-active: initial;
+}
+
+[style*='--sidenote:']:is(:hover, :focus-within) {
+  view-timeline: var(--sidenote);
 }

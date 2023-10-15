@@ -1,0 +1,17 @@
+{{- $file := .Get "src" -}}
+{{- $src := (print "/" .Page.Params.srcPath $file) -}}
+{{- $id := (replace $file ".html" "") -}}
+{{- $id = (replace $id "examples/" "") -}}
+<figure
+  {{- if .Get "class" -}}
+    {{/**/}} class="{{ print (.Get "class") }}"
+  {{- end -}}
+  {{- if .Get "style" -}}
+    {{/**/}} style="{{ print (.Get "style") | safeCSS }}"
+  {{- end -}}
+>
+  <video controls muted playsinline preload="metadata" poster="{{ replace $file ".html" ".jpg" }}"><source src="{{ replace $file ".html" ".mp4" }}" type="video/mp4">Sorry, your browser doesn’t support embedded videos, but don’t worry, you can <a href="{{ replace $file ".html" ".mp4" }}">download it</a>.</video>
+  {{- if .Inner -}}
+    <figcaption>{{- .Inner | markdownify -}}</figcaption>
+  {{- end  -}}
+</figure>

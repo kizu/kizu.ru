@@ -1,0 +1,26 @@
+<style>
+.example1-fixed [style*='--is:'] {
+  animation-name:
+    --is-active--example1,
+    --is-active--example1,
+    --is-active--example1;
+}
+</style>
+
+<div class="example1 example1-fixed">
+  <p>What is a <em tabindex="0" style="--for: --property;">property</em> which has <em tabindex="0" style="--for: --hidden;">hidden</em> as a possible value?</p>
+  <p>What is a <em tabindex="0" style="--for: --value;">value</em> which can be assigned to a <em tabindex="0" style="--for: --display;">display</em> property?</p>
+
+  <ol>
+    <li>
+      <code style="--is: --none, --value, --display">none</code>
+    </li>
+    <li>
+      <code style="--is: --bad, --flag">!important</code>
+    </li>
+    <li>
+      <code style="--is: --property, --hidden">visibility</code>
+    </li>
+  </ol>
+</div>
+

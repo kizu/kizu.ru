@@ -20,6 +20,15 @@ figure {
   vertical-align: top;
 }
 
+figure > video {
+  max-width: 100%;
+}
+
+:not(aside) > figure > video + figcaption {
+  width: auto;
+  margin: 0;
+}
+
 video.Figure-Screenshot {
   max-width: calc(100% + 1rem);
   height: auto;

@@ -6,7 +6,7 @@ mastodon_post_id: "110686018570616601"
 
 #Blog
 
-_I did create a new work-in-progress blog where I would post random things. I wanted to create a more personal space for a while, and it would allow me to separate less polished posts from the elaborate articles on my main site._
+_I did create a new work-in-progress blog where I would post random things. I wanted to create a more personal space for a while, and it would allow me to separate less polished posts from the elaborate articles on my main site._
 
 Here is the URL: https://blog.kizu.dev.
 
