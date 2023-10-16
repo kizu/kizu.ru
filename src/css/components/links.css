@@ -50,64 +50,55 @@ a,
   margin: var(--link-margin);
   overflow-wrap: break-word;
   text-decoration: none;
-  /* Oh, hello, an absense of spread in text-shadow >_> */
-  text-shadow:
-    -2px 0 0 var(--link-text-shadow-color),
-    -1.5px 0 var(--link-text-shadow-color),
-    -1px 0 var(--link-text-shadow-color),
-    -0.5px 0 var(--link-text-shadow-color),
-    0.5px 0 var(--link-text-shadow-color),
-    1px 0 var(--link-text-shadow-color),
-    2px 0 0 var(--link-text-shadow-color),
-    1.5px 0 var(--link-text-shadow-color),
-    0 -0.5px var(--link-text-shadow-color),
-    0 -1px var(--link-text-shadow-color),
-    0 -1.5px var(--link-text-shadow-color),
-    0 -2px var(--link-text-shadow-color),
-    0 -2.5px var(--link-text-shadow-color),
-    0 -3px var(--link-text-shadow-color),
-    0 -3.5px var(--link-text-shadow-color),
-    0 -4px var(--link-text-shadow-color),
-    0 -4.5px var(--link-text-shadow-color),
-    0 -5px var(--link-text-shadow-color),
-    0 -5.5px var(--link-text-shadow-color),
-    0 -6px var(--link-text-shadow-color);
-  transition: text-shadow var(--link-text-shadow-transition, 0s 0.4s) linear;
+}
+
+a,
+.Link,
+span[style*='--underline:'],
+:is(em,li)[tabindex='0'] {
+  text-decoration: underline;
+  text-decoration-thickness: var(--underline-width);
+  text-decoration-color: var(--link-underline-color);
+  text-underline-offset: 2px;
+  text-decoration-skip-ink: auto;
   --underline-width: var(--link-underline-width);
   --time-color-a: invalid;
+}
+
+a[style*='--underline:'] {
+  text-decoration-line: none;
+}
+
+span[style*='--underline:'] {
+  text-decoration-thickness: inherit;
+  text-decoration-color: inherit;
+  text-decoration-style: inherit;
 }
 
 a,
 .Link,
 span {
-  --link-underline-image: linear-gradient(var(--link-underline-color), var(--link-underline-color));
-  background:
-    var(--link-underline-image)
-    repeat-x
-    left 0 var(--link-underline-position)/var(--link-underline-pattern-width)
-    calc(var(--underline-width) * var(--underline, 1));
   background-clip: content-box;
   --code-color: var(--link-color);
 }
 
 .Link:not(a),
 .Link_pseudo,
-a[href^="#"] {
-  user-select: none;
-  --link-underline-image: linear-gradient(to left, transparent 3px, var(--link-underline-color) 0);
-  --link-underline-pattern-width: 6px;
+a[href^='#'],
+:is(em,li)[tabindex='0'] {
+  text-decoration-style: dashed;
   --link-color--visited: var(--link-color);
 }
 
 a:visited {
   color: var(--link-color--visited);
   --code-color: var(--link-color--visited);
-
 }
 
 a:hover,
-a:not([href^='#']):focus-visible,
-.Link:hover {
+a:focus-visible,
+.Link:hover,
+.Link:focus-visible {
   --underline-width: calc(2 * var(--link-underline-width));
   --link-underline-color: var(--link-underline-color--hover);
   color: var(--link-color--hover);
@@ -119,7 +110,8 @@ summary.Link {
   width: max-content;
   max-width: calc(100% - var(--viewport-padding) * 2);
   background: none;
-  text-decoration: underline dashed;
+  text-decoration: underline;
+  text-decoration-style: dashed;
   text-decoration-color: var(--link-underline-color);
   text-decoration-thickness: var(--underline-width);
   text-underline-offset: 2px;

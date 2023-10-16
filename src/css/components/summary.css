@@ -65,6 +65,9 @@
 .Summary[data-fletter=A] {
   --first-line-inset: 1.5;
 }
+.Summary[data-fletter=A].with-space-after {
+  --first-line-inset: 0;
+}
 .Summary[data-fletter=B] {
   --fletter-style: "ss03";
   --left-adjustment: -1.444;
@@ -88,11 +91,14 @@
   --fletter-style: "ss03";
   --bottom-adjustment: 0.5;
 }
-.Summary[data-fletter=H] { 
+.Summary[data-fletter=H] {
   --first-line-inset: 0.5;
 }
 .Summary[data-fletter=I] {
-  --first-line-inset: 0.5;
+  --first-line-inset: 1.25;
+}
+.Summary[data-fletter=I].with-space-after {
+  --first-line-inset: 0;
 }
 .Summary[data-fletter=J] {
   --bottom-adjustment: 0.75;

@@ -1,0 +1,75 @@
+<style>
+  @keyframes --is-active--example1 {
+    entry 0%, exit 100% {
+      --is-active: initial;
+    }
+  }
+
+  .example1 [style*='--is:'] {
+    animation: --is-active--example1;
+    animation-timeline: var(--is);
+
+    --is-active: ;
+    outline: var(--is-active, 4px solid hotpink);
+  }
+
+  .example1 [style*='--for:']:is(:hover, :focus-visible) {
+    view-timeline: var(--for);
+  }
+
+  .example1 {
+    timeline-scope:
+      --property,
+      --value,
+      --none,
+      --display,
+      --hidden,
+      --visibility,
+      --zero,
+      --opacity;
+  }
+
+
+
+  /* Purely visual stuff */
+  .example1 {
+    display: grid;
+    place-items: center;
+    gap: 0.5em;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    gap: 1em;
+  }
+</style>
+
+<div class="example1">
+  <p>Which <em tabindex="0" style="--for: --property">property</em> corresponds with which <em tabindex="0" style="--for: --value">value</em>?</p>
+  <div class="columns">
+    <ol style="--is: --property">
+      <li style="--for: --none" tabindex="0">
+        <code style="--is: --display">display</code>
+      </li>
+      <li style="--for: --hidden" tabindex="0">
+        <code style="--is: --visibility">visibility</code>
+      </li>
+      <li style="--for: --zero" tabindex="0">
+        <code style="--is: --opacity">opacity</code>
+      </li>
+    </ol>
+    <ol style="--is: --value">
+      <li style="--for: --visibility" tabindex="0">
+        <code style="--is: --hidden">hidden</code>
+      </li>
+      <li style="--for: --opacity" tabindex="0">
+        <code style="--is: --zero">0</code>
+      </li>
+      <li style="--for: --display" tabindex="0">
+        <code style="--is: --none">none</code>
+      </li>
+    </ol>
+  </div>
+</div>
+

@@ -1,0 +1,62 @@
+<style>
+  @keyframes --is-active--example2 {
+    entry 0%, exit 100% {
+      --is-active: initial;
+    }
+  }
+
+  .example2 [style*='--property:'] {
+    animation: --is-active--example2;
+    animation-timeline: var(--property);
+
+    --is-active: ;
+    outline: var(--is-active, 4px solid hotpink);
+  }
+
+  .example2 [style*='--property:']:is(:hover, :focus-visible) {
+    view-timeline: var(--property);
+  }
+
+  .example2 {
+    timeline-scope:
+      --display,
+      --visibility,
+      --opacity;
+  }
+
+
+  /* Purely visual stuff */
+  .example2 {
+    display: grid;
+    place-items: center;
+    gap: 0.5em;
+  }
+</style>
+
+<div class="example2">
+  <div class="columns">
+    <ol>
+      <li style="--property: --display" tabindex="0">
+        <code>display</code>
+      </li>
+      <li style="--property: --visibility" tabindex="0">
+        <code>visibility</code>
+      </li>
+      <li style="--property: --opacity" tabindex="0">
+        <code>opacity</code>
+      </li>
+    </ol>
+    <ol>
+      <li style="--property: --visibility" tabindex="0">
+        <code>hidden</code>
+      </li>
+      <li style="--property: --opacity" tabindex="0">
+        <code>0</code>
+      </li>
+      <li style="--property: --display" tabindex="0">
+        <code>none</code>
+      </li>
+    </ol>
+  </div>
+</div>
+

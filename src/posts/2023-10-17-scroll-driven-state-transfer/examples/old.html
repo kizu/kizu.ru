@@ -1,0 +1,92 @@
+<div class="old">
+
+  <div style="timeline-scope: --a, --b">
+    <div class="test" style="--for: --a">hover me to highlight a</div>
+    <div class="test" style="--for: --b">hover me to highlight b</div>
+    <div class="test" style="--for: --a, --b">hover me to highlight a AND b</div>
+    <div class="test" style="--is: --a"><div>a</div></div>
+    <div class="test" style="--is: --b"><div>b</div></div>
+    <div class="test" style="--is: --a, --b"><span>a</span> AND <span>b</span></div>
+  </div>
+
+  <h2>Two-way cross-linking with the same variable name!</h2>
+
+  <div style="timeline-scope: --a, --b">
+    <div class="test" style="--uid: --a">hover me to highlight a</div>
+    <div class="test" style="--uid: --b">hover me to highlight b</div>
+    <div class="test" style="--uid: --a, --b">hover me to highlight a AND b</div>
+    <div class="test" style="--uid: --a"><div>a</div></div>
+    <div class="test" style="--uid: --b"><div>b</div></div>
+    <div class="test" style="--uid: --a, --b"><span>a</span> AND <span>b</span></div>
+  </div>
+
+  </div>
+
+  <style>
+    @keyframes --state {
+      to {
+        --state: initial;
+        --not-state: ;
+      }
+    }
+
+    .old {
+    [style*='--for:']:hover {
+      view-timeline: var(--for);
+    }
+
+    [style*='--is:'] {
+      --state: ;
+      --not-state: initial;
+      animation: --state, --state;
+      animation-range: entry 0% exit 100%;
+      animation-timeline: var(--is);
+      background-color:
+        var(--state, hotpink)
+        var(--not-state, pink);
+    }
+
+
+    /* Transition does not work for properties affected by the animation-tainted properties, BUT we can use style queries to apply styles based on our state, and in this case we get all the transitions, and it also gets much more convenient to write styles (but requires an extra wrapper) */
+    [style*='--is:'] > * {
+      display: inline-block;
+      transition: all 0.3s;
+      transform: scale(
+        var(--not-state, 1)
+        var(--state, 2.5)
+      );
+    }
+
+    /* Cross-linking */
+
+    [style*='--uid:'] {
+      --state: ;
+      --not-state: initial;
+      animation:
+        --state both,
+        --state both,
+        --state both,
+        --state both;
+      animation-range: 0 0;
+      animation-timeline: var(--uid);
+      background-color:
+        var(--state, hotpink)
+        var(--not-state, pink);
+    }
+
+    [style*='--uid:']:hover {
+      view-timeline: var(--uid);
+    }
+
+
+
+    /* Just visual stuff */
+    .test {
+      width: max-content;
+      outline: 1px solid;
+      padding: 0.5em;
+      margin: 0.5em;
+    }
+  }
+
+  </style>

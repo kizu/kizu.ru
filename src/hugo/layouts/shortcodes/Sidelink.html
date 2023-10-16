@@ -1,1 +1,1 @@
-<label aria-describedby="{{ .Get 0 }}" role="presentation" class="Sidelink" for="{{ .Get 0 }}-Content">{{ .Get 1 | markdownify }}{{ .Inner }}<a aria-hidden="true" href="#{{ .Get 0 }}"><output class="Highlight" id="{{ .Get 0 }}-Anchor"></output></a></label>{{- /**/ -}}
+<span id="{{ .Get 0 }}-Context" class="Sidelink" style="--sidenote: --{{ .Get 0 }}">{{ .Get 1 | markdownify }}{{ .Inner }}<sup><a href="#{{ .Get 0 }}" class="Sidelink-Link"><span class="visually-hidden">Go to a sidenote</span></a></sup></span>{{- /**/ -}}

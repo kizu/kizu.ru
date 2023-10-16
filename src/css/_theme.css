@@ -10,6 +10,10 @@
   /* Need this for the scrollbars on the window. */
   color-scheme: light dark;
 
+  /* Space toggles for the dark/light mode. */
+  --LIGHT: initial;
+  --DARK: ;
+
   /* Sizes & fonts */
   --THEME_ROOT_FONT_SIZE: 112.5%; /* [1] */
 
@@ -71,6 +75,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     background: var(--THEME_BG--INVERTED);
+    --DARK: initial;
+    --LIGHT: ;
   }
   .Root {
     /* Need to revert the color-scheme, as it would be inverted */
