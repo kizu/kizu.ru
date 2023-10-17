@@ -48,14 +48,6 @@ const initPjax = (queue, lazyQueue) => {
     registerToC();
   };
 
-  const applyMetrikaHit = () => {
-    queue.pushTask(() => {
-      if (window.galite) {
-        galite('send', 'pageview')
-      }
-    })
-  };
-
   const applyStateMeta = state => {
     document.title = state.title;
     html.setAttribute('lang', state.lang);
@@ -109,14 +101,12 @@ const initPjax = (queue, lazyQueue) => {
         location.hash = hash;
         if (!noPush) {
           window.history.replaceState({ url: url, hash: hash }, state.title, state.url + hash);
-          applyMetrikaHit();
         }
         applyStateMeta(state);
         shouldApplyPopState = true;
       } else {
         if (!noPush) {
           window.history.pushState({ url: url }, state.title, state.url);
-          applyMetrikaHit();
         }
         applyUrlState(url, false, noPush);
         window.scrollTo(0, 0);
