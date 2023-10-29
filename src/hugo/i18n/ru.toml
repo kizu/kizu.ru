@@ -64,6 +64,9 @@ other = "Подписаться на фид"
 [feedLink]
 other = "https://feeds.feedburner.com/kizu"
 
+[allArticles]
+other = "Все статьи"
+
 [recentShown]
 other = "Показаны только последние 10"
 

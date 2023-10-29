@@ -1,6 +1,6 @@
 {{- with .context -}}
   {{- partial "header.html" (dict "context" . "a11y" "true") -}}
-  {{- if eq .Kind "page" -}}<article role="main" style="--scopes:{{.Params.sidenotes | safeCSS}}">{{- else -}}<main>{{- end -}}
+  {{- if eq .Kind "page" -}}<article class="e-content" role="main" style="--scopes:{{.Params.sidenotes | safeCSS}}">{{- else -}}<main class="h-card h-feed">{{- end -}}
     {{- if .Title -}}
       {{- $prefix := "" -}}
       {{- $isTag := eq .Kind "taxonomy" -}}
@@ -9,7 +9,7 @@
         {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
       {{- end -}}
       {{- if ne .Kind "home" -}}
-        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1 style=\"--view-name: " (.Title | replaceRE "[^A-Za-z]+" "") "-header\">" $title "</h1>")) -}}
+        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1 class=\"p-name\" style=\"--view-name: " (.Title | replaceRE "[^A-Za-z]+" "") "-header\">" $title "</h1>")) -}}
       {{- else -}}
         {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
       {{- end -}}
@@ -28,7 +28,7 @@
   <!-- Goes after main for ~reasons~ -->
   {{- partial "header.html" (dict "context" . "a11y" "false") -}}
 
-  <footer role="contentinfo">
+  <footer class="h-card p-author" role="contentinfo">
     <nav>
       <ul>
         {{- if eq .Kind "page" -}}
@@ -38,7 +38,7 @@
           {{- if eq .Kind "home" -}}
             © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
           {{- else -}}
-            <a href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span style="--underline: 1;">{{ i18n "titleName" }}</span></a>
+            <a class="u-url" rel="author" href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span class="p-name" style="--underline: 1;">{{ i18n "titleName" }}</span><img class="u-photo" hidden aria-hidden="true" src="/photo.jpg" alt="A photo of me (rather outdated)" /></a>
           {{- end -}}
           {{- print " " -}}
           {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
@@ -51,12 +51,12 @@
             {{- if .Params.originalPath -}}
               <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
             {{- else -}}
-              <a href="https://github.com/kizu" rel="me" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
+              <a class="u-url" href="https://github.com/kizu" rel="me" aria-label="{{ i18n "GitHub" }}">{{ i18n "GitHub" }}</a>
             {{- end }}
             <span aria-hidden="true">·</span>
             <a href="{{ i18n "feedLink" }}" aria-label="{{ i18n "feedTitle" }}">{{ i18n "Feed" }}</a>
             <span aria-hidden="true">·</span>
-            <a href="{{ i18n "mastodonLink" }}" rel="me" aria-label="{{ i18n "mastodonTitle" }}">{{ i18n "Mastodon" }}</a></li>
+            <a class="u-url" href="{{ i18n "mastodonLink" }}" rel="me" aria-label="{{ i18n "mastodonTitle" }}">{{ i18n "Mastodon" }}</a></li>
         {{- end -}}
       </ul>
     </nav>
