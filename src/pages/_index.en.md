@@ -2,9 +2,9 @@
 aliases: [/en/everything/]
 ---
 
-# **Articles & Experiments** by <span style="--view-name: full-name">Roman Komarov</span>
+# **Articles & Experiments** by <span class="p-name" style="--view-name: full-name">Roman Komarov</span>
 
-Welcome! I’m Roman, a front-end web developer at [Datadog](https://www.datadoghq.com/). I love CSS, and most of the things I do, write, or think about are CSS-related. On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
+Welcome! I’m Roman![A photo of me (rather outdated)](/photo.jpg "{:hidden aria-hidden='true' class='u-photo'}")<a class="u-url u-uid" href="https://kizu.dev" hidden aria-hidden="true">kizu.dev</a>, a <span class="p-job-title">front-end web developer</span> at [Datadog](https://www.datadoghq.com/ "{:class='p-org'}"). <span class="p-note">I love <span class="p-category">CSS</span>, and most of the things I do, write, or think about are CSS-related.</span> On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
 
 Sometimes I find myself improving the ways I write CSS: I’m an author of [Hayaku](https://github.com/hayaku/hayaku/), [bemto-components](https://github.com/bemto/bemto-components), [bemto for Pug.js](https://github.com/kizu/bemto/), and used to maintain [Stylus](https://github.com/stylus/stylus/).
 
@@ -16,6 +16,6 @@ You can subscribe to the new posts with [my site's RSS/Atom Feed](https://feeds.
 
 ## How to contact me
 
-The best way to contact me is to write a letter to my e-mail address — [kizmarh@gmail.com](mailto:kizmarh@gmail.com).
+The best way to contact me is to write a letter to my e-mail address — [kizmarh@gmail.com](mailto:kizmarh@gmail.com "{:class='u-email'}").
 
-Some other places where you could sometimes find me: [Mastodon](https://front-end.social/@kizu "{:rel='me'}") and [GitHub](gh:kizu "{:rel='me'}").
+Some other places where you could sometimes find me: [Mastodon](https://front-end.social/@kizu "{:rel='me' class='u-url'}") and [GitHub](gh:kizu "{:rel='me' class='u-url'}").
