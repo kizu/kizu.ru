@@ -73,6 +73,9 @@ other = "Subscribe to the feed"
 [feedLink]
 other = "https://feeds.feedburner.com/kizuruen"
 
+[allArticles]
+other = "All Articles"
+
 [recentShown]
 other = "Only the 10 recent items shown"
 

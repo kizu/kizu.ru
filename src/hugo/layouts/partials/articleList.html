@@ -4,6 +4,7 @@
 {{- $isTagsPage := eq "asd" "taxonomyTerm" -}}
 
 {{- if $onlyRecent -}}<span class="ArticleList-Flag" id="Everything"></span>{{- end -}}
+<h2 class="p-name visually-hidden">{{ i18n "allArticles" }}</h2>
 <ul class="ArticleList" id="Articles">
   <!-- Ranges through content/post/*.md -->
   {{- $count := 0 -}}
@@ -13,16 +14,16 @@
     {{- if and .Title $langCheck $typeCheck (eq .Draft false) -}}
       {{ $count = add $count 1 }}
       <li class="ArticleList-Li"{{ if and (le $count 2) (not $isTagsPage) }} style="--priority: 1;"{{ end }}>
-        <article class="ArticleList-Item">
-          <h2>{{- /**/ -}}
-            <a class="ArticleList-Link" href="{{ .Permalink }}" style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-header">{{ .Title }}</a>
+        <article class="ArticleList-Item h-entry">
+          <h2 class="p-name">{{- /**/ -}}
+            <a class="ArticleList-Link u-url u-uid" href="{{ .Permalink }}" style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-header">{{ .Title }}</a>
             {{- if $isTagsPage }} ({{ $context.Site.Taxonomies.tags.Count .Title }}){{ end -}}
           </h2>
           <p class="Metadata Published">
             {{ if $isTagsPage }}{{ i18n "lastPost" }}: {{ end }}<span style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-published">{{ partial "readableDate.html" . }}</span>{{ partial "taglist.html" . }}
           </p>
           {{- if .Params.summary -}}
-            <p style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-summary">{{ .Params.summary | markdownify }}</p>
+            <p class="p-summary" style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-summary">{{ .Params.summary | markdownify }}</p>
           {{- end -}}
         </article>
       </li>

@@ -68,7 +68,7 @@
     {{- end }}
   </head>
   <body>
-    <div class="Root">
+    <div class="Root{{ if eq .Params.type "post" }} h-entry{{ end }}">
       {{- partial "layout_parts/root_layout.html" (dict "context" .) -}}
     </div>
 
