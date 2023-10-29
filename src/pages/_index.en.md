@@ -12,7 +12,13 @@ Below you will find links to some of the articles I wrote and experiments I 
 
 {{<ArticleList>}}
 
-You can subscribe to the new posts with [my site's RSS/Atom Feed](https://feeds.feedburner.com/kizuruen).
+You can subscribe to the new articles with [my site's RSS/Atom Feed](https://feeds.feedburner.com/kizuruen).
+
+- - -
+
+I also have a separate blog with less polished things. Here are five latest posts from it:
+
+{{<BlogList>}}
 
 ## How to contact me
 

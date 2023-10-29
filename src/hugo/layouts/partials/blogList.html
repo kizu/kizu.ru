@@ -1,0 +1,18 @@
+{{ $latest := getJSON "https://blog.kizu.dev/latest.json" }}
+
+<ul class="ArticleList-Blog">
+  {{- range $latest -}}
+  {{- $date := .pubDate | time -}}
+  {{- if eq ($date.Format "2006") (now.Format "2006") -}}
+    {{- $date = $date.Format "January 1" -}}
+  {{- else -}}
+    {{- $date = $date.Format "January 1, 2006" -}}
+  {{- end -}}
+
+  <li>
+    <a href="{{ .url }}">{{ .title }}</a>
+    —
+    {{ $date }}
+  </li>
+  {{- end -}}
+</ul>

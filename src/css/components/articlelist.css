@@ -126,3 +126,9 @@
     --link-cursor: text;
   }
 }
+
+.ArticleList-Blog {
+  padding-block: calc(0.5 * var(--THEME_INDENT));
+  font: var(--THEME_FONT--SMALL);
+  --list-item-padding: calc(0.5 * var(--THEME_INDENT));
+}
