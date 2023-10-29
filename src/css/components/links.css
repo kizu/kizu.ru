@@ -116,3 +116,8 @@ summary.Link {
   text-decoration-thickness: var(--underline-width);
   text-underline-offset: 2px;
 }
+
+.is-inherited-link:not(:hover, :focus-visible) {
+  all: unset;
+  color: inherit
+}

@@ -43,7 +43,7 @@
       {{- if eq .Page.Params.draft true -}}
         {{- i18n "draft" }}
       {{- else -}}
-        <a href="./" class="u-url u-uid is-inherited">{{- i18n "published" }}</a> {{ partial "readableDate.html" . }}
+        <a href="./" class="u-url u-uid is-inherited-link">{{- i18n "published" }}</a> {{ partial "readableDate.html" . }}
       {{- end -}}
       {{ partial "taglist.html" . }}
     </p>

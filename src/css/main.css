@@ -369,9 +369,5 @@ sub {
   width: 1px;
 }
 
-.is-inherited {
-  all: inherit;
-}
-
 /* End of the top level `@supports` */
 }
