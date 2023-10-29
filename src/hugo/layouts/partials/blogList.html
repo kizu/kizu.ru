@@ -4,9 +4,9 @@
   {{- range $latest -}}
   {{- $date := .pubDate | time -}}
   {{- if eq ($date.Format "2006") (now.Format "2006") -}}
-    {{- $date = $date.Format "January 1" -}}
+    {{- $date = $date.Format "January 2" -}}
   {{- else -}}
-    {{- $date = $date.Format "January 1, 2006" -}}
+    {{- $date = $date.Format "January 2, 2006" -}}
   {{- end -}}
 
   <li>
