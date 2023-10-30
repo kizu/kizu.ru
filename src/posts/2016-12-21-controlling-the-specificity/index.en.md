@@ -90,7 +90,7 @@ They're possible too, but with a slightly more complex code. What would help us 
 
 That looks awful, right? But that works[^works]!
 
-[^works]: Here is a [test at CodePen](http://codepen.io/kizu/pen/PbgYNV) with this selector, if you'd open it in the latest Safari, you'll see it in action. <!-- span="3" -->
+[^works]: Here is a [test at CodePen](https://codepen.io/kizu/pen/PbgYNV) with this selector, if you'd open it in the latest Safari, you'll see it in action. <!-- span="3" -->
 
 Of course, it would become a bit readable if we'd use some indentations and stuff:
 
@@ -121,7 +121,7 @@ The algorithm beyond rewriting the selector this way is rather simple: we go fro
 
 It worth mentioning that we can already increase the specificity of any given class just by multiplying[^foofoofoo] it, so `.foo.foo.foo` matches just the same as `.foo`, but with a specificity of three classes. And as we can now both reduce and increase the specificity of almost any given selectors, that means we can, finally, **control** the specificity of our selectors, regardless of their complexity. Of course, with the exception that we can't reduce the specificity to be less than the one of the biggest single selector's one, so we can't make a selector that contains a class to be as specific as an element selector or a universal one.
 
-[^foofoofoo]: You can read about this method in Harry Roberts' [article on specificity hacks](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity) (and, as Harry, I first saw this method in [Mathias Bynens' talk](https://speakerdeck.com/mathiasbynens/3-dot-14-things-i-didnt-know-about-css-at-css-day-2014)). <!-- offset="1" -->
+[^foofoofoo]: You can read about this method in Harry Roberts' [article on specificity hacks](https://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/#safely-increasing-specificity) (and, as Harry, I first saw this method in [Mathias Bynens' talk](https://speakerdeck.com/mathiasbynens/3-dot-14-things-i-didnt-know-about-css-at-css-day-2014)). <!-- offset="1" -->
 
 ## Preprocessors?
 
@@ -149,7 +149,7 @@ Here if you'd like to have a component that uses `<abbr>` and you'd want a borde
 
 But if we could reduce the specificity of each selector in our resets and normalizes to the smallest — of a single element or a single class — those tools would become even more powerful and flexible.
 
-Another area where the control over specificity is a must have are any complex CSS methodologies. The easiest example would be Harry Roberts' [itCSS](http://itcss.io) which[^itcss] have layers of selectors united by similar area of responsibility. If we could split those layers so they wouldn't merge in their specificity, we would obtain the ultimate power over CSS (ok, I exaggerated it a bit there).
+Another area where the control over specificity is a must have are any complex CSS methodologies. The easiest example would be Harry Roberts' [itCSS](https://itcss.io) which[^itcss] have layers of selectors united by similar area of responsibility. If we could split those layers so they wouldn't merge in their specificity, we would obtain the ultimate power over CSS (ok, I exaggerated it a bit there).
 
 [^itcss]: There is not much written on it anywhere, if you'd like to read more on it, you can try [this article](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) by Lubos Kmetko. <!-- offset="2" -->
 

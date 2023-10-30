@@ -8,30 +8,30 @@ aliases: [/preprocessors/]
 
 Основные:
 
-- [Sass](http://sass-lang.com): [документация](http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html), [проект на Гитхабе](https://github.com/nex3/sass/)
-- [Less](http://lesscss.org): [документация](http://lesscss.org/#docs), [проект на Гитхабе](https://github.com/cloudhead/less.js)
-- [Stylus](http://learnboost.github.com/stylus/): [проект на Гитхабе](https://github.com/learnboost/stylus)
+- [Sass](https://sass-lang.com): [документация](https://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html), [проект на Гитхабе](https://github.com/nex3/sass/)
+- [Less](https://lesscss.org): [документация](https://lesscss.org/#docs), [проект на Гитхабе](https://github.com/cloudhead/less.js)
+- [Stylus](https://learnboost.github.com/stylus/): [проект на Гитхабе](https://github.com/learnboost/stylus)
 
 Ещё по мелочи:
 
-- [CSS Crush](http://the-echoplex.net/csscrush/): [документация](https://github.com/peteboere/css-crush/wiki), [проект на Гитхабе](https://github.com/peteboere/css-crush)
-- [Closure Stylesheets](http://code.google.com/p/closure-stylesheets/)
+- [CSS Crush](https://the-echoplex.net/csscrush/): [документация](https://github.com/peteboere/css-crush/wiki), [проект на Гитхабе](https://github.com/peteboere/css-crush)
+- [Closure Stylesheets](https://code.google.com/p/closure-stylesheets/)
 
 ## Сравнения
 
-- [Детальное сравнение синтаксиса трёх основных препроцессоров](http://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/)
-- [Описание Less в сравнении с Sass](http://coding.smashingmagazine.com/2011/09/09/an-introduction-to-less-and-comparison-to-sass/)
-- [Сравнение Sass и Less от Криса Койера](http://css-tricks.com/sass-vs-less/)
+- [Детальное сравнение синтаксиса трёх основных препроцессоров](https://net.tutsplus.com/tutorials/html-css-techniques/sass-vs-less-vs-stylus-a-preprocessor-shootout/)
+- [Описание Less в сравнении с Sass](https://coding.smashingmagazine.com/2011/09/09/an-introduction-to-less-and-comparison-to-sass/)
+- [Сравнение Sass и Less от Криса Койера](https://css-tricks.com/sass-vs-less/)
 - [Ещё одно сравнение Sass/Less](https://gist.github.com/674726)
 
 ## Библиотеки
 
-- [Compass](http://compass-style.org) для Sass
-- [Less Elements](http://lesselements.com) для Less
-- [nib](http://visionmedia.github.com/nib/) для Stylus
+- [Compass](https://compass-style.org) для Sass
+- [Less Elements](https://lesselements.com) для Less
+- [nib](https://visionmedia.github.com/nib/) для Stylus
 
 ## Утилиты
 
-- [LiveReload](http://livereload.com): Mac + альфа для Windows
-- [CodeKit](http://incident57.com/codekit/): только Mac
-- [Scout](http://mhs.github.com/scout-app/): кроссплатформенный, но только Sass+Compass
+- [LiveReload](https://livereload.com): Mac + альфа для Windows
+- [CodeKit](https://incident57.com/codekit/): только Mac
+- [Scout](https://mhs.github.com/scout-app/): кроссплатформенный, но только Sass+Compass

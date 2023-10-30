@@ -131,7 +131,7 @@ When the conditions are binary it is still possible to write them by hand. But w
 
 Here is how I managed to quickly do it in Stylus[^pen]:
 
-[^pen]: You can look at [CodePen with this code](http://codepen.io/kizu/pen/zKmyvG) in action. <!-- span="2" -->
+[^pen]: You can look at [CodePen with this code](https://codepen.io/kizu/pen/zKmyvG) in action. <!-- span="2" -->
 
 ``` Stylus
     conditional($var, $values...)

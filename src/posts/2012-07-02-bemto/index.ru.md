@@ -13,12 +13,11 @@ Jade же — шаблонизатор, во многом похожий на Ha
 В общем, идите и прочитайте [документацию][readme] — там всё описано в подробностях. И обратите внимание на [подробный юзкейс][usecase] — он показывает как можно писать простые реиспользуемые блоки с bemto.
 
 
-[bemsm]: http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/
-[ng]: http://nicolasgallagher.com/about-html-semantics-front-end-architecture/
-[tj]: http://tjholowaychuk.com/
+[bemsm]: https://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/
+[ng]: https://nicolasgallagher.com/about-html-semantics-front-end-architecture/
+[tj]: https://tjholowaychuk.com/
 [Jade]: https://github.com/visionmedia/jade
-[БЭМ]: http://bem.github.com/bem-method/pages/beginning/beginning.en.html
-[bemru]: http://bem.github.com/bem-method/pages/beginning/beginning.ru.html
+[БЭМ]: https://ru.bem.info/methodology/
 [bemto]: https://github.com/kizu/bemto
 [readme]: https://github.com/kizu/bemto#readme
 [usecase]: https://github.com/kizu/bemto/blob/master/README.md#using-for-building-complex-mixins

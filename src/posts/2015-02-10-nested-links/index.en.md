@@ -8,13 +8,13 @@
 
 HTML specification has a lot of different restrictions. And I have my doubts about the feasibility of many of those. One example which I stumble upon rather often — nested links.
 
-[Spec](http://www.w3.org/TR/html5/text-level-semantics.html#the-a-element) straightly forbids such nesting:
+[Spec](https://www.w3.org/TR/html5/text-level-semantics.html#the-a-element) straightly forbids such nesting:
 
 > The **a** element
 >
 > […]
 >
-> Content model: transparent, but there must be no [interactive](http://www.w3.org/TR/html5/dom.html#interactive-content-0) content descendant.
+> Content model: transparent, but there must be no [interactive](https://www.w3.org/TR/html5/dom.html#interactive-content-0) content descendant.
 
 And if you’d do this, browser’s parser won’t understand you and, as soon as it’d see the opening tag for the nested link, it would close the first one right there:
 
@@ -47,7 +47,7 @@ However, there are cases when you’d want to nest one link inside another desp
 
 So, once again, while working on one task I stumbled upon such case. I happen to see and use different workarounds for it before, like an emulation of the nested links with JS (for example, with banal `onclick`), or positioning one of the links around the shared wrapper[^shared-wrapper], but all those workarounds wouldn’t work in all cases, and wouldn’t work perfectly. We’d either lose the nativity of a link, trying to emulate everything from scratch, either won’t be able to make a workaround work just like properly nested elements would.
 
-[^shared-wrapper]: Look at [such solution](http://jsfiddle.net/csswizardry/rxsna/) by Harry Roberts. <!-- offset="3" -->
+[^shared-wrapper]: Look at [such solution](https://jsfiddle.net/csswizardry/rxsna/) by Harry Roberts. <!-- offset="3" -->
 
 So, after trying and weighing all the known workarounds in my head, I found out that I couldn't solve the current task by any of the workarounds other than full JS emulation. But I stopped and decided to experiment a bit more.
 
@@ -120,7 +120,7 @@ You’d lose some functionality there, but it could be ok for the most cases.
 
 ## Is it valid?
 
-Nope, not even close. It is not valid because we don’t have any of the required attributes on an object. We could set some dummy, but [valid mime-type](http://www.w3.org/TR/html5/infrastructure.html#valid-mime-type), like `type="owo/uwu"`, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.
+Nope, not even close. It is not valid because we don’t have any of the required attributes on an object. We could set some dummy, but [valid mime-type](https://www.w3.org/TR/html5/infrastructure.html#valid-mime-type), like `type="owo/uwu"`, and the object itself would then pass the validation, but as soon as we nest the link inside of it, the validator would throw us an error.
 
 Obviously, a validator is a tool not showing anything but the formal specifications compliance. In our case, the usage of links inside objects is entirely reasonable and won’t break anything for anyone if we’d make things in a proper way.
 

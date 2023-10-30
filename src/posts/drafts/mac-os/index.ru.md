@@ -97,4 +97,4 @@
 - скриншоты и линейка
 
 
-http://www.makeuseof.com/tag/customise-mac-os-x-dock-hidden-terminal-commands/
+https://www.makeuseof.com/tag/customise-mac-os-x-dock-hidden-terminal-commands/

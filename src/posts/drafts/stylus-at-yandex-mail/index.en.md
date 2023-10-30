@@ -1,6 +1,6 @@
 # Stylus, Yandex.Mail and conditional IE styles
 
-Hi there. Here is a translation of [the article](http://habrahabr.ru/company/yandex/blog/169415/) I wrote in russian for Yandex’ blog at Habrahabr. There I wrote on how we ended up with using [Stylus](http://learnboost.github.com/stylus) CSS preprocessor in our [Mail service](http://mail.yandex.com/) and why we did it.
+Hi there. Here is a translation of [the article](https://habrahabr.ru/company/yandex/blog/169415/) I wrote in russian for Yandex’ blog at Habrahabr. There I wrote on how we ended up with using [Stylus](https://learnboost.github.com/stylus) CSS preprocessor in our [Mail service](https://mail.yandex.com/) and why we did it.
 
 Along with that I'll feature my little library/methodology on messing with IE styles using the magic of Stylus — [if-ie.styl](gh:kizu/if-ie.styl).
 
@@ -20,9 +20,9 @@ When we started to develop the new (early 2010) version of the Yandex.Mail, we h
 
 We looked at the best three available preprocessors at the time: Sass, Less and Stylus. The selection process was rather easy: we taken some of our complex blocks and tried to rewrite their CSS using each of the preprocessors.
 
-[**Less**](http://lesscss.org/) looked rather simple and handy at first: it uses the familiar CSS syntax and it can be used in the browser which is useful for debugging. However, when we tried to make more complex things with it we found out that it's also simple in other way — what could you achieve without arrays, cycles and proper conditions? Not that much.
+[**Less**](https://lesscss.org/) looked rather simple and handy at first: it uses the familiar CSS syntax and it can be used in the browser which is useful for debugging. However, when we tried to make more complex things with it we found out that it's also simple in other way — what could you achieve without arrays, cycles and proper conditions? Not that much.
 
-Then we tried [**Sass**](http://sass-lang.com/) and it was really nice. Powerful, offering two syntaxes, community and a lot of existing code including libraries like [Compass](http://compass-style.org/). But we found out just one big drawback there: Sass have very limited parent reference feature (using `&` symbol in nested selectors to, well, reference the parent). The main problem is that you can't use it for prefixing with multiple classes or elements and for concatenating the classes with any postfixes. Here are a few examples of what you _can't_ do in Sass (and can in other preprocessors):
+Then we tried [**Sass**](https://sass-lang.com/) and it was really nice. Powerful, offering two syntaxes, community and a lot of existing code including libraries like [Compass](https://compass-style.org/). But we found out just one big drawback there: Sass have very limited parent reference feature (using `&` symbol in nested selectors to, well, reference the parent). The main problem is that you can't use it for prefixing with multiple classes or elements and for concatenating the classes with any postfixes. Here are a few examples of what you _can't_ do in Sass (and can in other preprocessors):
 
 - `&__bar`
 - `.baz&`

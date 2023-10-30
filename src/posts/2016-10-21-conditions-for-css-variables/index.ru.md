@@ -133,7 +133,7 @@ calc(255 * (1 - var(--bar)) * (var(--bar) - 2) * -0.5)
 
 Вот как я реализовал это быстренько на Стайлусе[^pen]:
 
-[^pen]: Можно посмотреть на этот же код [на CodePen](http://codepen.io/kizu/pen/zKmyvG) в действии. <!-- span="2" -->
+[^pen]: Можно посмотреть на этот же код [на CodePen](https://codepen.io/kizu/pen/zKmyvG) в действии. <!-- span="2" -->
 
 ``` Stylus
     conditional($var, $values...)

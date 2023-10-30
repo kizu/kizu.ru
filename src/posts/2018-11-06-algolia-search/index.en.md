@@ -8,7 +8,7 @@ Some time ago I have started to notice that a lot of sites[^sites] with open sou
 
 [^sites]: For example, [Hugo](https://gohugo.io), [Netlify](https://www.netlify.com), [React](https://reactjs.org) and others.
 
-The project that allowed those static sites to have search was [Algolia DocSearch](https://community.algolia.com/docsearch/). However, in this post, I won't talk about it. Looking at the project's site, I found out that it is very easy to use it for your open source project for free, but I wanted to have more challenge, so I looked into what Algolia provides for regular sites.
+The project that allowed those static sites to have search was [Algolia DocSearch](https://docsearch.algolia.com/). However, in this post, I won't talk about it. Looking at the project's site, I found out that it is very easy to use it for your open source project for free, but I wanted to have more challenge, so I looked into what Algolia provides for regular sites.
 
 Basically, they provide a free tier with rather loose limitations[^free-plan-rates-link], so it is totally possible to implement it for your project. That's what I've done for my site, and in this post, I'll describe how I did it and what challenges were there.
 
@@ -30,7 +30,7 @@ Note how almost every page of this site has this button both in the header and f
 
 ## Implementing the Search
 
-The project that I've used to achieve this is called [InstantSearch.js](https://community.algolia.com/instantsearch.js/). The main difference from the DocSearch that I see there (apart from the usage conditions etc.) is that you don't get the DocSearch's UI. This is because docs often have their own data structure, and the indexing for DocSearch is made on the Algolia side via a crawler, so they can prepare everything for the UI right away. But InstantSearch is a general solution, it doesn't know anything about the site you'll use it for, and so you need to set up everything almost from scratch.
+The project that I've used to achieve this is called [InstantSearch.js](https://github.com/algolia/instantsearch). The main difference from the DocSearch that I see there (apart from the usage conditions etc.) is that you don't get the DocSearch's UI. This is because docs often have their own data structure, and the indexing for DocSearch is made on the Algolia side via a crawler, so they can prepare everything for the UI right away. But InstantSearch is a general solution, it doesn't know anything about the site you'll use it for, and so you need to set up everything almost from scratch.
 
 Everything you need to do can be described as the following parts:
 
@@ -177,7 +177,7 @@ I won't describe each and every nuance[^changes] that there was in my implementa
 - There is some limited keyboard navigation inside: both tab-based and with up/down arrows.
 - I've implemented some kind of an HTML&CSS-only display of the highlighted parts in the content results, but it looks a bit bad on the left side, where there is no ellipsis on text overflow. This is probably the hardest part of both the design and implementation — how to show the found context, how to strip what is not needed etc. I would totally continue working on this in the future.
 
-[^mustache]: InstantSearch uses [mustache](http://mustache.github.io/mustache.5.html) in its native JS variant, but there are also implementations of InstantSearch for React, Vue.js etc. as well. <!-- offset="3" -->
+[^mustache]: InstantSearch uses [mustache](https://mustache.github.io/mustache.5.html) in its native JS variant, but there are also implementations of InstantSearch for React, Vue.js etc. as well. <!-- offset="3" -->
 
 There is a lot of stuff going on behind the scenes, but most of it was kind easy to implement. InstantSearch API is rather nice.
 

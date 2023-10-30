@@ -6,14 +6,14 @@ License:
 	MIT-style license.
 
 Copyright:
-	Copyright (c) 2006-2008 [Valerio Proietti](http://mad4milk.net/).
+	Copyright (c) 2006-2008 [Valerio Proietti](https://mad4milk.net/).
 
 Code & Documentation:
-	[The MooTools production team](http://mootools.net/developers/).
+	[The MooTools production team](https://mootools.net/developers/).
 
 Inspiration:
-	- Class implementation inspired by [Base.js](http://dean.edwards.name/weblog/2006/03/base/) Copyright (c) 2006 Dean Edwards, [GNU Lesser General Public License](http://opensource.org/licenses/lgpl-license.php)
-	- Some functionality inspired by [Prototype.js](http://prototypejs.org) Copyright (c) 2005-2007 Sam Stephenson, [MIT License](http://opensource.org/licenses/mit-license.php)
+	- Class implementation inspired by [Base.js](https://dean.edwards.name/weblog/2006/03/base/) Copyright (c) 2006 Dean Edwards, [GNU Lesser General Public License](https://opensource.org/licenses/lgpl-license.php)
+	- Some functionality inspired by [Prototype.js](https://prototypejs.org) Copyright (c) 2005-2007 Sam Stephenson, [MIT License](https://opensource.org/licenses/mit-license.php)
 */
 
 var MooTools = {
@@ -522,7 +522,7 @@ Array.implement({
 		for (var i = 0, j = array.length; i < j; i++) this.push(array[i]);
 		return this;
 	},
-	
+
 	getLast: function(){
 		return (this.length) ? this[this.length - 1] : null;
 	},
@@ -1266,7 +1266,7 @@ var clean = function(item, retain){
 			}
 			Element.dispose(item);
 		}
-	}	
+	}
 	if (!uid) return;
 	collected[uid] = storage[uid] = null;
 };
@@ -1488,7 +1488,7 @@ Element.implement({
 	getParents: function(match, nocash){
 		return walk(this, 'parentNode', null, match, true, nocash);
 	},
-	
+
 	getSiblings: function(match, nocash) {
 		return this.getParent().getChildren(match, nocash).erase(this);
 	},
@@ -2143,7 +2143,7 @@ Selectors.Pseudo = new Hash({
 	checked: function(){
 		return this.checked;
 	},
-	
+
 	empty: function(){
 		return !(this.innerText || this.textContent || '').length;
 	},
@@ -2220,7 +2220,7 @@ Selectors.Pseudo = new Hash({
 	odd: function(argument, local){
 		return Selectors.Pseudo['nth-child'].call(this, '2n', local);
 	},
-	
+
 	selected: function() {
 		return this.selected;
 	}

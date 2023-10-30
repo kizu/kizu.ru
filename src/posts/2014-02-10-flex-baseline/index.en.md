@@ -112,5 +112,5 @@ But, overall, we won. We can now use baseline vertical aligning for blocks of an
 
 [bug1]: https://bugzilla.mozilla.org/show_bug.cgi?id=969874
 [bug2]: https://bugzilla.mozilla.org/show_bug.cgi?id=969880
-[vertical-align]: http://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align
-[flex-baselines]: http://www.w3.org/TR/css3-flexbox/#flex-baselines
+[vertical-align]: https://www.w3.org/TR/CSS2/visudet.html#propdef-vertical-align
+[flex-baselines]: https://www.w3.org/TR/css3-flexbox/#flex-baselines

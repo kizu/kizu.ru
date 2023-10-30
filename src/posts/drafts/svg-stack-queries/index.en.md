@@ -4,9 +4,9 @@ I love SVG and what I don't like is how browsers don't tend to improve in the su
 
 But in the last year or two I saw a lot of articles on SVG and a lot of people use it more and more[^articles]. I'd say it's what “Retina” did, but whatever.
 
-[^articles]: For example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](http://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG
+[^articles]: For example a few days ago my colleague from Yandex, Alexey Ten, wrote [an article](https://lynn.ru/examples/svg/en.html) on simple but powerful technique for graceful degradation with SVG
 
-Anyway, I'd like to talk about one of those hard-needed features that won't ship there anytime soon: SVG Stacks. You can be familiar with this idea from [this great article of Simurai](http://simurai.com/post/20251013889/svg-stacks) — the point is to have different SVG images inside one file and to show only the one we need using `:target` in CSS embedded in SVG and urls like `url(stack.svg#foo)`.
+Anyway, I'd like to talk about one of those hard-needed features that won't ship there anytime soon: SVG Stacks. You can be familiar with this idea from [this great article of Simurai](https://simurai.com/post/20251013889/svg-stacks) — the point is to have different SVG images inside one file and to show only the one we need using `:target` in CSS embedded in SVG and urls like `url(stack.svg#foo)`.
 
 But we can't use it because of [ephemeral security reasons](https://code.google.com/p/chromium/issues/detail?id=128055#c6). Well, whatever.
 
@@ -35,7 +35,7 @@ The HTML for those icons is this:
 The SVG itself would look like this:
 
 ``` XML
-<svg xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="https://www.w3.org/2000/svg">
     <style>
 
 .icon { display: none }
@@ -85,7 +85,7 @@ And the _basic_[^webkit-bug] CSS would look this way:
 
 I guess you already got the idea? While we can't use `:target`, you could already know that we can use media queries in SVG[^clowncar].
 
-[^clowncar]: See, for example [Clown Car Technique](http://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/) by Estelle
+[^clowncar]: See, for example [Clown Car Technique](https://coding.smashingmagazine.com/2013/06/02/clown-car-technique-solving-for-adaptive-images-in-responsive-web-design/) by Estelle
 
 So, we hide all the icons inside an SVG and then showing them when the specific media queries are triggered.
 

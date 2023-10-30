@@ -4,7 +4,7 @@
 
 Not that long ago Jekyll become that big — version “1.0” [was released](https://github.com/blog/1502-jekyll-turns-1-0).
 
-There are a lot of stuff in [the changelog](https://github.com/mojombo/jekyll/blob/master/History.markdown#100—2013-05-06): there are new features, there are a lot of fixes. You can read what's the most important [in this article](http://jekyllrb.com/docs/upgrading/).
+There are a lot of stuff in [the changelog](https://github.com/mojombo/jekyll/blob/master/History.markdown#100—2013-05-06): there are new features, there are a lot of fixes. You can read what's the most important [in this article](https://jekyllrb.com/docs/upgrading/).
 
 I moved my site to this version. Well, not actually _moved_ — everything worked anyway, but there were some stuff in a new version that I could use to make things in a better way. So, I'll write a bit on what I personally liked in this new version.
 

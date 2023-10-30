@@ -93,7 +93,7 @@ The differences are simple: while you could use only idents with the dot syntax,
 
 You can get the values from the hash in the same way — either by using a dot or using the square brackets.
 
-I won't describe [all the features](http://learnboost.github.io/stylus/docs/hashes.html) of the hashes, I'll just mention that you can use the built-in `length()` function with them, you can iterate through them, use them in conditions (`if baz in foo`), and there are also some built-in functions to work with hashes (`keys()`, `values()`, `merge()`). And you can interpolate hashes into CSS.
+I won't describe [all the features](https://learnboost.github.io/stylus/docs/hashes.html) of the hashes, I'll just mention that you can use the built-in `length()` function with them, you can iterate through them, use them in conditions (`if baz in foo`), and there are also some built-in functions to work with hashes (`keys()`, `values()`, `merge()`). And you can interpolate hashes into CSS.
 
 ## The `selector()` function {#selector}
 
@@ -191,7 +191,7 @@ We would get what we want.
 
 However, there are a few things to improve in this function: we do not want always to write the parentheses, and, actually, we won't want to write all those `only screen and`. Also, we would want to use some keywords[^keywords] instead of the literal conditions, like `palm`, `portable`, `desk` and so on. With those improvements and all the previous steps the resulting code would be this:
 
-[^keywords]: I've taken the names from the great [inuit.css](http://inuitcss.com/) framework by [Harry Roberts](https://csswizardry.com/). <!-- offset="3" -->
+[^keywords]: I've taken the names from the great [inuit.css](https://inuitcss.com/) framework by [Harry Roberts](https://csswizardry.com/). <!-- offset="3" -->
 
 ### Resulting code {#result}
 

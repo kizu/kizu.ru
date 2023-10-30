@@ -112,11 +112,11 @@ BTW it’s very interesting to look at different services in the search for c
 
 ### “But the specs say…”
 
-[SelenIT](https://github.com/SelenIT) brings [another argument](http://habrahabr.ru/qa/19097/) (in Russian): both the [CSS2.1](http://www.w3.org/TR/CSS21/ui.html#propdef-cursor) spec and the [CSS3 Basic UI](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer) clearly states[^spec-update] that “the cursor is a pointer that indicates a link”. He also gives a link to a [Gérard Talbot’s message](http://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html), where he declines a change to one of the CSS2.1 tests. However, it couldn’t be an argument for this issue — the context of this message is a **test for spec**, and if spec says something, then the test should cover only this.
+[SelenIT](https://github.com/SelenIT) brings [another argument](https://habrahabr.ru/qa/19097/) (in Russian): both the [CSS2.1](https://www.w3.org/TR/CSS21/ui.html#propdef-cursor) spec and the [CSS3 Basic UI](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer) clearly states[^spec-update] that “the cursor is a pointer that indicates a link”. He also gives a link to a [Gérard Talbot’s message](https://lists.w3.org/Archives/Public/public-css-testsuite/2010Jul/0024.html), where he declines a change to one of the CSS2.1 tests. However, it couldn’t be an argument for this issue — the context of this message is a **test for spec**, and if spec says something, then the test should cover only this.
 
 [^spec-update]: **Update from 2018-10-16:** After a long battle at CSSWG github issues, [we have managed to push](https://github.com/w3c/csswg-drafts/issues/1936#issuecomment-420722704) the more correct wording to the spec! <!-- offset="1" -->
 
-In specs it is only said the pointer is supposed to be used for links, but it don’t imply you _can’t_ use it for anything other than link. It states the default use of such cursor, nothing more. Moreover, I think this part in specs should be changed to something like “The cursor is a pointer that indicates an element that can be clicked” to reflect modern state of the web — ’cause the current statement is come at least from the [year 1997](http://www.w3.org/TR/WD-CSS2-971104/ui.html#propdef-cursor) and a lot of things did happen since then.
+In specs it is only said the pointer is supposed to be used for links, but it don’t imply you _can’t_ use it for anything other than link. It states the default use of such cursor, nothing more. Moreover, I think this part in specs should be changed to something like “The cursor is a pointer that indicates an element that can be clicked” to reflect modern state of the web — ’cause the current statement is come at least from the [year 1997](https://www.w3.org/TR/WD-CSS2-971104/ui.html#propdef-cursor) and a lot of things did happen since then.
 
 ### “Flickering”
 
@@ -140,14 +140,14 @@ Anyway, I hope _now_ this topic is obvious and you would go and add the `curs
 
 ## Links
 
-- [Chris Coyer’s snippet on adding pointer cursor](http://css-tricks.com/snippets/css/give-clickable-elements-a-pointer-cursor/)
+- [Chris Coyer’s snippet on adding pointer cursor](https://css-tricks.com/snippets/css/give-clickable-elements-a-pointer-cursor/)
 
     Except for the snippet itself, in the comments there are all the same arguments on habits and points of view without arguments at all.
 
-- [Dmitry Fadeyev’s article on cursor’s affordance](http://www.usabilitypost.com/2009/10/26/mouse-cursor-affordance/)
+- [Dmitry Fadeyev’s article on cursor’s affordance](https://www.usabilitypost.com/2009/10/26/mouse-cursor-affordance/)
 
     In this article Dmitry comes with this statement: “If the cursor type is wrong, specify it using the CSS `cursor` property” and gives as an example custom buttons and input placeholders.
 
-- [Vadim Makeev’s slides](http://pepelsbey.net/pres/push-it/) (in Russian)
+- [Vadim Makeev’s slides](https://pepelsbey.net/pres/push-it/) (in Russian)
 
     Nice slides on using the right elements for right purposes and all those things, however Vadim says you shouldn’t make a pointer cursor for buttons and I disagree there. Hope he’ll make up his mind after this article.

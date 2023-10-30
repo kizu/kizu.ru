@@ -385,8 +385,8 @@ BODY {
 
 ## Благодарности {#Credits}
 
-- [Павлу Корнилову](http://lusever.livejournal.com/) за [одноразовые экспрешны](http://lusever.ru/proceedings/thin_css/)
-- [Виталию Харисову](http://vitaly.ya.ru/) за [кешируемые экспрешны](http://subbotnik.yandex.st/css-framework/practice.html)
+- [Павлу Корнилову](https://lusever.livejournal.com/) за [одноразовые экспрешны](https://lusever.ru/proceedings/thin_css/)
+- [Виталию Харисову](https://vitaly.ya.ru/) за [кешируемые экспрешны](https://subbotnik.yandex.st/css-framework/practice.html)
 <sup>(примерно 40-й слайд)</sup>
-- [Stu Nicholls](http://www.cssplay.co.uk/) за [идею с селектами](http://www.cssplay.co.uk/menus/iframe-shim.html)
-- [Игорю Зеничу](http://izenich.moikrug.ru/) за [раскрытие темы dpi](http://habrahabr.ru/blogs/css/42794/)
+- [Stu Nicholls](https://www.cssplay.co.uk/) за [идею с селектами](https://www.cssplay.co.uk/menus/iframe-shim.html)
+- [Игорю Зеничу](https://izenich.moikrug.ru/) за [раскрытие темы dpi](https://habrahabr.ru/blogs/css/42794/)

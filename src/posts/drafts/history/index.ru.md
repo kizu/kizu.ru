@@ -71,7 +71,7 @@
 
 ## 7.0, «Окна» 06.01.2005?
 
-## 8.0, «Memories», 
+## 8.0, «Memories»,
 
 Заглушка, надо отрубить роботс.тхт на народе и посмотреть чо как? или она была после бреда и до строк? Или?
 
@@ -80,11 +80,11 @@
 
 Начал читать спецификацию CSS в декабре 2006
 
-http://ki-zu.livejournal.com/238734.html?c=5#comments
+https://ki-zu.livejournal.com/238734.html?c=5#comments
 
 В октябре 2007 переписывал layout layer в жж с ноля
 
-http://ki-zu.livejournal.com/282617.html?c=14#comments
+https://ki-zu.livejournal.com/282617.html?c=14#comments
 
 
 
@@ -98,13 +98,13 @@ http://ki-zu.livejournal.com/282617.html?c=14#comments
 
 Сайт с облаком тегов и всем таким
 
-http://ki-zu.livejournal.com/358617.html
+https://ki-zu.livejournal.com/358617.html
 
 Кажется, тут ещё без нанока, просто чистый html?
 
 ## 11.0, Упрощённый сайт, 2 апреля 2010
 
-http://ki-zu.livejournal.com/375955.html
+https://ki-zu.livejournal.com/375955.html
 
 С этого момента сайт постепенно развивается, оставаясь примерно в одном и том же состоянии
 

@@ -8,6 +8,6 @@
 
 У метода есть некоторое число ограничений: фон должен быть сплошным (хотя, если взять `background-attachment: fixed…`), блок должен иметь определённое позиционирование, но в остальном — метод довольно ударопрочный. Если делать не через CSS-градиенты, а используя обычные изображения, то метод должен будет заработать и в IE, но я не проверял.
 
-**Update:** [Lea Verou](https://lea.verou.me/) обновила мой эксперимент использовав `background-attachment: local`. [Подробности можно прочитать в её посте](http://lea.verou.me/2012/04/background-attachment-local/).
+**Update:** [Lea Verou](https://lea.verou.me/) обновила мой эксперимент использовав `background-attachment: local`. [Подробности можно прочитать в её посте](https://lea.verou.me/2012/04/background-attachment-local/).
 
 {{<Partial src="shadowscroll.html" style="font: initial;" />}}

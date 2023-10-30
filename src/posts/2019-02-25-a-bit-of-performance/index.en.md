@@ -170,7 +170,7 @@ Here is a list of useful resources I stumbled upon while implementing everything
 - [The PRPL Pattern](https://developers.google.com/web/fundamentals/performance/prpl-pattern/) by [Addy Osmani](https://addyosmani.com/) — the thorough description of this pattern.
 - [PRPL Pattern at Gatsby docs](https://www.gatsbyjs.org/docs/prpl-pattern/) — Gatsby.js implements a lot of the same things I have implemented by myself, maybe except for the localStorage caching (from what I have noticed), so if you have a blog on Gatsby, you could have a lot of things I have described already.
 - [pjax npm package](https://github.com/MoOx/pjax) by [Maxime Thirouin](https://moox.io/) — implementing the approach without using the JSON files, just by fetching the `.html` pages and doing some JS stuff to replace the changed parts. I didn't try to use it, but it seems interesting and you can see if it would work for you.
-- [http://instantclick.io](http://instantclick.io) and [https://instant.page](https://instant.page) by [Alexandre Dieulot](https://dieulot.fr/) — projects implementing the “hover to load” approach. Also didn't test those, but the instant.page looks like a nice way to quickly do this by utilizing the link prefetch.
+- [https://instantclick.io](https://instantclick.io) and [https://instant.page](https://instant.page) by [Alexandre Dieulot](https://dieulot.fr/) — projects implementing the “hover to load” approach. Also didn't test those, but the instant.page looks like a nice way to quickly do this by utilizing the link prefetch.
 
 
 ## What Is Next?

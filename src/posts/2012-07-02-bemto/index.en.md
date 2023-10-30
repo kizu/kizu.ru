@@ -18,12 +18,11 @@ And Jade is the template engine heavily influenced by Haml by [TJ Holowaychu
 Long story short: read [the readme of the project][readme] for more details. Especially look at [the extended use-case][usecase] — it shows how you can use bemto to create reusable and easy-to-use blocks.
 
 
-[bemsm]: http://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/
-[ng]: http://nicolasgallagher.com/about-html-semantics-front-end-architecture/
-[tj]: http://tjholowaychuk.com/
+[bemsm]: https://coding.smashingmagazine.com/2012/04/16/a-new-front-end-methodology-bem/
+[ng]: https://nicolasgallagher.com/about-html-semantics-front-end-architecture/
+[tj]: https://tjholowaychuk.com/
 [Jade]: https://github.com/visionmedia/jade
-[BEM]: http://bem.github.com/bem-method/pages/beginning/beginning.en.html
-[bemru]: http://bem.github.com/bem-method/pages/beginning/beginning.ru.html
+[BEM]: https://en.bem.info/methodology/
 [bemto]: https://github.com/kizu/bemto
 [readme]: https://github.com/kizu/bemto#readme
 [usecase]: https://github.com/kizu/bemto/blob/master/README.md#using-for-building-complex-mixins

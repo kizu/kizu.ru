@@ -1,4 +1,4 @@
-//MooTools More, <http://mootools.net/more>. Copyright (c) 2006-2009 Aaron Newton <http://clientcide.com/>, Valerio Proietti <http://mad4milk.net> & the MooTools team <http://mootools.net/developers>, MIT Style License.
+//MooTools More, <https://mootools.net/more>. Copyright (c) 2006-2009 Aaron Newton <https://clientcide.com/>, Valerio Proietti <https://mad4milk.net> & the MooTools team <https://mootools.net/developers>, MIT Style License.
 
 MooTools.More = {
 	'version': '1.2.2.2'
@@ -31,7 +31,7 @@ Script: Element.Pin.js
 
 		pin: function(enable){
 			if (this.getStyle('display') == 'none') return null;
-			
+
 			var p;
 			if (enable !== false){
 				p = this.getPosition();

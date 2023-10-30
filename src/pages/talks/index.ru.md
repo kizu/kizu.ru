@@ -22,9 +22,9 @@ aliases: [/talks/]
 
 - 7 декабря на [московских Web Standards Days](https://wsd.events/2013/12/07/) в офисе Яндекса [рассказал про грани опенсорса](https://events.yandex.ru/lib/talks/1518/).
 
-- 24 сентября я рассказал [обзорную лекцию про CSS](http://tech.yandex.ru/education/shri/msk-2013/talks/1429/) во [второй Школе Разработки Интерфейсов](http://tech.yandex.ru/education/shri/msk-2013/). И, 2 ноября, там же, немного рассказал про [эксперименты над вёрсткой](https://events.yandex.ru/lib/talks/1558/).
+- 24 сентября я рассказал [обзорную лекцию про CSS](https://tech.yandex.ru/education/shri/msk-2013/talks/1429/) во [второй Школе Разработки Интерфейсов](https://tech.yandex.ru/education/shri/msk-2013/). И, 2 ноября, там же, немного рассказал про [эксперименты над вёрсткой](https://events.yandex.ru/lib/talks/1558/).
 
-- 9 октября на [Fronteers Jam Session](http://fronteers.nl/congres/2013/jam-session) я [рассказал](*lang1 "На английском.") десятиминутку [«Don’t look into the source»](https://vimeo.com/album/2588576/video/77929464).
+- 9 октября на [Fronteers Jam Session](https://fronteers.nl/congres/2013/jam-session) я [рассказал](*lang1 "На английском.") десятиминутку [«Don’t look into the source»](https://vimeo.com/album/2588576/video/77929464).
 
 - 29 марта на пЯТЬнице я сделал доклад «Мысли о декларативном CSS-препроцессоре». [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/522/)
 
@@ -33,17 +33,17 @@ aliases: [/talks/]
 
 - 14 декабря я сделал короткий доклад «Github: не только про git» на пЯТЬнице. [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/507/)
 
-- 16 ноября на пЯТЬнице я рассказал доклад про [Hayaku](http://hayakubundle.com/) — «Пишем CSS ещё быстрее». [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/486/)
+- 16 ноября на пЯТЬнице я рассказал доклад про [Hayaku](https://hayakubundle.com/) — «Пишем CSS ещё быстрее». [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/486/)
 
-- 3 октября я [рассказал](*lang2 "На английском.") десятиминутку [«Use CSS transitions for pseudo-elements right now»](http://fronteers.nl/congres/2012/jam-session/use-css-transitions-for-pseudo-elements-right-now-roman-komarov) на [Fronteers Jam Session](http://fronteers.nl/congres/2012/jam-session) в Амстердаме.
+- 3 октября я [рассказал](*lang2 "На английском.") десятиминутку [«Use CSS transitions for pseudo-elements right now»](https://fronteers.nl/congres/2012/jam-session/use-css-transitions-for-pseudo-elements-right-now-roman-komarov) на [Fronteers Jam Session](https://fronteers.nl/congres/2012/jam-session) в Амстердаме.
 
 - 28 сентября я рассказал коротко про Маркдаун на пЯТЬнице. [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/606/)
 
-- 25 сентября, в рамках [первой Школы Разработки Интерфейсов](http://tech.yandex.ru/education/shri/msk-2012/) в Яндексе, я сделал доклад [«Механизм работы браузера»](http://tech.yandex.ru/education/shri/msk-2012/talks/538/).
+- 25 сентября, в рамках [первой Школы Разработки Интерфейсов](https://tech.yandex.ru/education/shri/msk-2012/) в Яндексе, я сделал доклад [«Механизм работы браузера»](https://tech.yandex.ru/education/shri/msk-2012/talks/538/).
 
-- 30 июня на [Я.Субботнике в Санкт-Петербурге](http://tech.yandex.ru/events/yasubbotnik/spb-jun-2012/) я сделал рассказал доклад [«CSS-препроцессоры: из каменного века — в будущее»](http://tech.yandex.ru/events/yasubbotnik/spb-jun-2012/talks/429/).
+- 30 июня на [Я.Субботнике в Санкт-Петербурге](https://tech.yandex.ru/events/yasubbotnik/spb-jun-2012/) я сделал рассказал доклад [«CSS-препроцессоры: из каменного века — в будущее»](https://tech.yandex.ru/events/yasubbotnik/spb-jun-2012/talks/429/).
 
-- 23 июня я рассказал про опенсорс в докладе «Спасаем мир вместе» на [Web Standards Days](http://webstandardsdays.ru/2012/06/23/).
+- 23 июня я рассказал про опенсорс в докладе «Спасаем мир вместе» на [Web Standards Days](https://webstandardsdays.ru/2012/06/23/).
 
 - 23 марта в рамках пЯТЬницы я сделал доклад «CSS transition и transform» [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/305/)
 
@@ -53,7 +53,7 @@ aliases: [/talks/]
 
 - 18 ноября на пЯТЬнице рассказал про генерацию сниппетов для TextMate (и для совместимых редакторов) на лету. [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/lib/talks/339/).
 
-- 21 апреля на пЯТЬнице рассказал доклад «Использование своего сервиса, как путь к его улучшению». [Ссылка для тех, кто работает в Яндексе](http://study.yandex-team.ru/events/friday/2011-04-22/talks/373/).
+- 21 апреля на пЯТЬнице рассказал доклад «Использование своего сервиса, как путь к его улучшению». [Ссылка для тех, кто работает в Яндексе](https://study.yandex-team.ru/events/friday/2011-04-22/talks/373/).
 
 ## 2010
 

@@ -1,7 +1,7 @@
 /*_*/
 
 /* Contents
-----------------------------------------	
+----------------------------------------
 	- Reset
 	- Global
 		- Links
@@ -22,7 +22,7 @@
 
 ---------------------------------------- */
 
-/* Reset based on http://html5doctor.com/html-5-reset-stylesheet/ */
+/* Reset based on https://html5doctor.com/html-5-reset-stylesheet/ */
 HTML,BODY,DIV,SPAN,OBJECT,IFRAME,H1,H2,H3,H4,H5,H6,P,BLOCKQUOTE,PRE,ABBR,ADDRESS,CITE,CODE,DEL,DFN,EM,IMG,INS,KBD,Q,SAMP,SMALL,STRONG,SUB,SUP,VAR,B,I,DL,DT,DD,OL,UL,LI,FIELDSET,FORM,LABEL,LEGEND,TABLE,CAPTION,TBODY,TFOOT,THEAD,TR,TH,TD,ARTICLE,ASIDE,DIALOG,FIGURE,FOOTER,HEADER,HGROUP,MENU,NAV,SECTION,TIME,MARK,AUDIO,VIDEO{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}BODY{line-height:1}ARTICLE,ASIDE,DIALOG,FIGURE,FOOTER,HEADER,HGROUP,NAV,SECTION{display:block}NAV UL{list-style:none}BLOCKQUOTE,Q{quotes:none}BLOCKQUOTE:before,BLOCKQUOTE:after,Q:before,Q:after{content:''}A{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;background:transparent}INS{background-color:#FF9;color:#000;text-decoration:none}MARK{background-color:#FF9;color:#000;font-style:italic;font-weight:bold}DEL{text-decoration:line-through}TABLE{border-collapse:collapse;border-spacing:0}INPUT,SELECT{vertical-align:middle}
 
 /* Global
