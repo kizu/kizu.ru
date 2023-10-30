@@ -1,4 +1,6 @@
-{{ $latest := getJSON "https://blog.kizu.dev/latest.json" }}
+{{ $latest_path := printf "https://blog.kizu.dev/latest.json?date=%s" (now.Format "2006-01-02") }}
+
+{{ $latest := getJSON $latest_path }}
 
 <ul class="ArticleList-Blog">
   {{- range $latest -}}
