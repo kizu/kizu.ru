@@ -47,13 +47,9 @@
 }
 
 
-.Button:focus {
+.Button:focus-visible {
   --_visibility: inherit;
   --_box-shadow: 0 0 2px 2px #6F9DEC, inset 0 0 2px 1px #6F9DEC;
-}
-
-.Button:not(:-moz-focusring):focus {
-  --_visibility: hidden;
 }
 
 .Button-Focus {
