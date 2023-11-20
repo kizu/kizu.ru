@@ -20,7 +20,7 @@ Let’s say we want to change[^styles] the ordered list’s markers to have b
 ol > li {
   list-style-type: none;
 }
-ol::before {
+li::before {
   content: counter(list-item) ') ';
 }
 ```
