@@ -6,10 +6,15 @@
   --link-hover-z-index: 10;
   --link-color: var(--color);
   --link-color--visited: var(--color);
-  --link-padding: 0.3em 0.15em;
+  --link-padding: 0.3em 0;
   --link-underline-position: bottom 5%;
-  --link-margin: 0 -0.15em;
 
   color: var(--color);
   --color-a: 0.5;
+}
+
+.TagList > a::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0 -0.15em;
 }

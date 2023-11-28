@@ -1,9 +1,9 @@
 {{- if .Params.tags -}}<span style="--view-name: {{ .Title | replaceRE "[^A-Za-z]+" "" }}-taglist">{{- if eq .Params.type "post" }} {{ i18n "withTags" }}: {{ else -}}, {{- end -}}
-  <span class="TagList"><span class="fxBugFix">
+  <span class="TagList">
     {{- range .Params.tags -}}
       {{- $tag := index $.Site.Taxonomies . -}}
       {{- $tagLink := ($.Site.GetPage (print "/tags/" .)).Permalink -}}
       <a rel="category tag" href="{{ $tagLink }}" style="--underline: 0;"><span aria-label="{{ i18n "tag" }}">#</span><span class="p-category" style="--underline: 1;">{{ . | replaceRE "_" " " }}</span></a> {{/**/ -}}
     {{- end -}}
-  </span></span></span>
+  </span></span>
 {{- end -}}
