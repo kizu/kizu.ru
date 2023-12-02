@@ -57,10 +57,13 @@
 
 @media screen and (min--moz-device-pixel-ratio:0) {
   .Summary::first-letter {
-    --top-adjustment-fx: 0.36;
     --text-indent-compensation: 0rem;
+    --top-adjustment-fx: 0.36;
   }
-}
+  /* Nightly seem to have this particular issue fixed, so for now fix it via hiding it by a `:has()`, but might need to revisit in the future */
+  .Summary:not(:has(#a#b))::first-letter {
+    --top-adjustment-fx: unset;
+  }
 
 .Summary[data-fletter=A] {
   --first-line-inset: 1.5;
