@@ -9,7 +9,7 @@
         {{- $title = print (i18n "tag") " " (i18n "lquo") ($title | replaceRE "_" " ") (i18n "rquo") -}}
       {{- end -}}
       {{- if ne .Kind "home" -}}
-        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1 class=\"p-name\" style=\"--view-name: " (.Title | replaceRE "[^A-Za-z]+" "") "-header\">" $title "</h1>")) -}}
+        {{- partial "handleContent.html" (dict "context" . "input" (print "<h1 class=\"p-name\">" $title "</h1>")) -}}
       {{- else -}}
         {{- partial "handleContent.html" (dict "context" . "input" (print "<h1>" $title "</h1>")) -}}
       {{- end -}}
