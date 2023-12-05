@@ -16,7 +16,7 @@ You can subscribe to the new articles with [my site's RSS/Atom Feed](https://fee
 
 - - -
 
-I also have a [separate blog with less polished things](https://blog.kizu.dev "{:rel='me' class='u-url'}"). Here are five latest posts from it:
+I also have a [separate blog with less polished things](https://blog.kizu.dev "{:rel='me' class='u-url'}"). Here are five latest posts about CSS from it:
 
 {{<BlogList>}}
 
