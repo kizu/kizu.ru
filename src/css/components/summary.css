@@ -64,6 +64,7 @@
   .Summary:not(:has(#a#b))::first-letter {
     --top-adjustment-fx: unset;
   }
+}
 
 .Summary[data-fletter=A] {
   --first-line-inset: 1.5;
