@@ -13,6 +13,14 @@ article {
   margin: 0;
 }
 
+article > section {
+  display: grid;
+  grid-column: both;
+  grid-template-columns: subgrid;
+  /* Firefox does not properly handle sticky for grids, so we want to clip the overflow when the section ends. */
+  overflow-y: clip;
+}
+
 article::after {
   content: "";
   grid-column: content;

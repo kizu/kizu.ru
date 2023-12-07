@@ -50,6 +50,13 @@ aside[style*='--align:end;'] {
   padding-bottom: calc(var(--at-large) * var(--asides-padding-top));
 }
 
+aside[style*='--sticky:'],
+.aside[style*='--sticky:'],
+.aside[style*='--sticky:'] + aside {
+  position: var(--initial-at-small, sticky);
+  top: var(--sticky, 0);
+}
+
 /* For subgrid substitute */
 header::after,
 footer::after {

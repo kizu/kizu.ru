@@ -21,6 +21,7 @@
 @import url("components/asides.css");
 @import url("components/button.css");
 @import url("components/code.css");
+@import url("components/fieldsets.css");
 @import url("components/figure.css");
 @import url("components/layout.css");
 @import url("components/lists.css");
@@ -187,7 +188,8 @@ h5 + h6 {
   margin-top: 0;
 }
 
-h1 {
+h1,
+.as-h1 {
   font-size: var(--h1-font-size, calc(3rem - 0.5rem * var(--at-small)));
   font-weight: var(--h1-font-weight, 900);
   line-height: var(--h1-line-height, 1em);
@@ -197,14 +199,16 @@ h1 {
   hyphens: var(--initial-at-large, none);
 }
 
-h2 {
+h2,
+.as-h2 {
   font-size: var(--h2-font-size, 2rem);
   line-height: var(--h2-line-height, 1em);
   margin-top: var(--h2-margin-top, var(--heading-margin-top, 2rem));
   margin-bottom: var(--h2-margin-bottom, var(--heading-margin-bottom, 1rem));
 }
 
-h3 {
+h3,
+.as-h3 {
   font-size: 1.5rem;
   line-height: 2rem;
 }

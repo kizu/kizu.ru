@@ -149,7 +149,7 @@
 }
 .Summary[data-fletter=T] {
   --fletter-style: "ss03";
-  --right-adjustment: -0.5;
+  --first-line-inset: 1;
 }
 .Summary[data-fletter=U] {
   --fletter-style: "ss01"; /* If not for Fx would use ss02 */

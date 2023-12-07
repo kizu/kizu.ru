@@ -16,6 +16,11 @@ figure {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
+aside > figure {
+  box-shadow: none;
+  padding: 0;
+}
+
 .Figure-Screenshot {
   vertical-align: top;
 }
@@ -162,6 +167,15 @@ figure[class|=require] .Figure-Demo::after {
   .require-timeline-scope,
   .require-timeline-scope + aside {
     --require-timeline-scope: 'timeline-scope';
+    --_toggler-on: none;
+    --_toggler-off: inline;
+  }
+}
+
+@supports not (opacity: round(5, 2)) {
+  .require-round,
+  .require-round + aside {
+    --require-timeline-scope: 'round()';
     --_toggler-on: none;
     --_toggler-off: inline;
   }

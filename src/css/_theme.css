@@ -43,7 +43,7 @@
   --THEME_BG--DISTANT: hsl(120, 12%, 94%);
   --THEME_LINK: hsl(202, 92%, 42%);
   --THEME_VISITED: hsl(270, 35%, 55%);
-  --THEME_TEXT_SHADOW: 0 1px #FFF;
+  --THEME_TEXT_SHADOW: 0 var(--LIGHT, 1px) var(--DARK, -1px) #FFF;
   --THEME_SELECTION: #B1D2FB;
   --THEME_CODE: #567E00;
   --THEME_COLOR_H: 52;
@@ -58,6 +58,9 @@
   --THEME_LI_CONTENT: "— ";
   --THEME_LI_CONTENT--OL: counter(list-item) ". ";
 
+  --PINK: pink;
+  --GREEN: lightgreen;
+  --RED: tomato;
 
   /* UNUSED */
   --THEME_COLOR_A--DISTANT: 0.48;
@@ -65,6 +68,14 @@
     inset 0 1px 0 rgba(255,255,255,.9),
     0 0 0 1px rgba(37,34,14,.05),
     0 0 40px -5px rgba(37,34,14,.3);
+}
+
+@supports (color: oklch(0.89 0.2 166.25)) {
+  :root {
+    --PINK: oklch(0.84 0.12 2.82);
+    --GREEN: oklch(0.89 0.2 166.25);
+    --RED: oklch(0.65 0.28 29.99);
+  }
 }
 
 .only-in-dark {
