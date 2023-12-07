@@ -19,6 +19,7 @@ figure {
 aside > figure {
   box-shadow: none;
   padding: 0;
+  margin-right: 0.5rem;
 }
 
 .Figure-Screenshot {
