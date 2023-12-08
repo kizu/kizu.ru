@@ -259,7 +259,7 @@ The solution here is the [`round()`](https://drafts.csswg.org/css-values/#funcd
   max-width: max-content;  /* 2 */
   width: calc(
     round(down, /* 3 */
-      100% /* 4 */
+      100cqi /* 4 */
       +
       var(--gap) /* 5 */
       -
@@ -291,13 +291,15 @@ Because in the above example, we're not using anchor positioning and are calcula
   The left side of this example is the same as in the previous example, the right side is an element that takes the rest of the space.
 {{</Partial>}}
 
-Here we use a grid, and while the grid itself stays the same, we can use a negative margin for the element in the second column to move it the same amount to which we reduced the wrapping container:
+Because the `round()` produces the proper length, we can modify the grid to be `auto 1fr` — making the rounded left part get its width calculated, and then the area that should fill the available space to rely only on `1fr` to do its job.
+
+One modification to the definition of our rounded width: we had to define the “proportions” by modifying the “rounded” width to have the initial value of 2/3 of the container:
 
 ```CSS
-.complex-layout .fill-available {
-  margin-left: calc(
+.complex-layout ul {
+  width: calc(
     round(down,
-      var(--ratio) * 100%
+      2 * 100cqi / 3
       +
       var(--gap)
       -
@@ -307,19 +309,13 @@ Here we use a grid, and while the grid itself stays the same, we can use a n
       +
       var(--gap)
     )
-    +
-    var(--gap)
     -
-    var(--ratio) * 100%
+    var(--gap)
   );
 }
 ```
 
-We’re using the same calculation[^mod-rem], with a notable difference in using the `--ratio` variable to adjust the percentage width: in our case, we’re using `2fr 1fr` for the columns, so the `--ratio` would be equal to `2`.
-
-[^mod-rem]: We could also try using the `mod()` or `rem()` here, but I like using the same `round ()` for consistency.
-
-The main limitation of this example is that when there are fewer elements that fit into the left column, the column won’t shrink, as we’re sizing the columns without relying on the content.
+Fun fact: this section was updated on December 8th — the original version of this example was overcomplicated, and not working correctly.
 
 ## The Basic Setup with the Fallback
 

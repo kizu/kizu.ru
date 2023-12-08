@@ -1,22 +1,17 @@
 <style>
   .complex-layout {
-    --ratio: 2;
     display: grid;
     gap: 1em;
-    /* calc does not work with fractions? */
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: auto 1fr;
     font-size: 0.75em;
     line-height: 1.5;
   }
 
   .complex-layout ul {
     margin: 0;
-  }
-
-  .complex-layout .fill-available {
-    margin-left: calc(
+    width: calc(
       round(down,
-        var(--ratio) * 100%
+        2 * 100cqi / 3
         +
         var(--gap)
         -
@@ -26,11 +21,13 @@
         +
         var(--gap)
       )
-      +
-      var(--gap)
       -
-      var(--ratio) * 100%
+      var(--gap)
     );
+  }
+
+  .complex-layout .fill-available {
+    overflow: visible;
   }
 
 </style>
