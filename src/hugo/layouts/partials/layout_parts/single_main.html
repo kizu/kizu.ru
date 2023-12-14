@@ -1,14 +1,3 @@
-{{- range .Translations -}}{{- if eq .Params.lang .Lang -}}
-  <aside style="--align: center">
-    {{- i18n "diffLangVersion" -}}: <br/>
-    <a href="{{ .Permalink }}" style="--underline: 0;">
-      {{- i18n "lquoDiffLang" -}}
-      <span style="--underline: 1;">{{ .Title }}</span>
-      {{- i18n "rquoDiffLang" -}}
-    </a>
-  </aside>
-{{- end -}}{{- end -}}
-
 {{- if eq .Page.Params.draft true -}}
   <p class="Warning"><strong>{{- i18n "draftWarning" -}}</strong></p>
 {{- end -}}

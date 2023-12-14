@@ -45,7 +45,6 @@
         </li>
 
         {{- if eq .Kind "home" -}}
-          <li style="--grid-position: end;"><a href="/{{ .Site.Params.diffLanguagePrefix }}">{{ i18n "diffLangVersion" }}</a></li>
         {{- else -}}
           <li style="--grid-position: end;">
             {{- if .Params.originalPath -}}
