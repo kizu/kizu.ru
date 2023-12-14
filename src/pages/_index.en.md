@@ -6,10 +6,6 @@ aliases: [/en/everything/]
 
 Welcome! I’m Roman![A photo of me (rather outdated)](/photo.jpg "{:hidden aria-hidden='true' class='u-photo'}")<a class="u-url u-uid" href="https://kizu.dev" hidden aria-hidden="true">kizu.dev</a>, a <span class="p-job-title">front-end web developer</span> at [Datadog](https://www.datadoghq.com/ "{:class='p-org'}"). <span class="p-note">I love <span class="p-category">CSS</span>, and most of the things I do, write, or think about are CSS-related.</span> On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
 
-Sometimes I find myself improving the ways I write CSS: I’m an author of [Hayaku](https://github.com/hayaku/hayaku/), [bemto-components](https://github.com/bemto/bemto-components), [bemto for Pug.js](https://github.com/kizu/bemto/), and used to maintain [Stylus](https://github.com/stylus/stylus/).
-
-Below you will find links to some of the articles I wrote and experiments I did, alongside some other stuff.
-
 {{<ArticleList>}}
 
 You can subscribe to the new articles with [my site's RSS/Atom Feed](https://feeds.feedburner.com/kizuruen).
