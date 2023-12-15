@@ -57,6 +57,9 @@ html {
 
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: subpixel-antialiased;
+
+  /* Do not fake weights and italics. */
+  font-synthesis: none;
 }
 
 /* TODO: replace home pages' one with a special case */
@@ -126,6 +129,7 @@ nav {
   --list-item-padding: 0;
   --link-color: var(--color);
   --link-color--visited: var(--color);
+  --link-weight: normal;
   --link-underline-offset: 0.4em;
   font: var(--THEME_FONT--SMALL);
   --ul-grid:
@@ -144,7 +148,7 @@ nav {
 
 time {
   color: var(--color);
-  --color-a: var(--time-color-a, 0.75);
+  --color-a: var(--time-color-a, 0.725);
 }
 
 img {

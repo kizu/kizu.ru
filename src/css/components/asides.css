@@ -1,5 +1,4 @@
 :root {
-  --asides-counter: asides 9;
   --asides-padding-top: calc(0.5rem - 2px);
 }
 
@@ -13,8 +12,6 @@ mastodon-post-info::part(aside) {
   align-self: var(--align, start);
 
   width: var(--initial-at-small, var(--aside-width)); /* There was min-width — why not just width? */
-
-  counter-increment: asides;
 
   font: var(--THEME_FONT--SMALL);
   font-feature-settings: "lnum", "onum" 0;
@@ -57,10 +54,19 @@ aside[style*='--sticky:'],
   top: var(--sticky, 0);
 }
 
+.Root {
+  --has-aside: ;
+  --no-aside: initial;
+}
+.Root:has(aside, .aside) {
+  --has-aside: initial;
+  --no-aside: ;
+}
+
 /* For subgrid substitute */
 header::after,
 footer::after {
-  content: counter(asides);
+  content: var(--has-aside, '10') var(--no-aside, '9');
   grid-column: aside;
 
   line-height: var(--aside-width);

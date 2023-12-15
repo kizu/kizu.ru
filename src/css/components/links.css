@@ -14,6 +14,7 @@
   --link-underline-color--hover: currentColor;
   --link-underline-pattern-width: 16px;
   --link-text-shadow-color: var(--THEME_BG);
+  --link-weight: bold;
 
   /* Windows problems with %? */
   /* --link-underline-position: calc(50% + var(--link-underline-offset)) */
@@ -27,6 +28,7 @@ a,
   cursor: var(--link-cursor, pointer);
   color: var(--link-color);
   hyphens: none;
+  font-weight: var(--link-weight); /* Better contrast */
 }
 
 a::before,

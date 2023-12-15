@@ -10,7 +10,7 @@
   --link-underline-position: bottom 5%;
 
   color: var(--color);
-  --color-a: 0.5;
+  --color-a: 0.725;
 }
 
 .TagList > a::before {

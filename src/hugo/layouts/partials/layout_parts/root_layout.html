@@ -1,5 +1,5 @@
 {{- with .context -}}
-  {{- partial "header.html" (dict "context" . "a11y" "true") -}}
+  {{- partial "header.html" (dict "context" .) -}}
   {{- if eq .Kind "page" -}}<article class="e-content" role="main" style="--scopes:{{.Params.sidenotes | safeCSS}}">{{- else -}}<main class="h-card h-feed">{{- end -}}
     {{- if .Title -}}
       {{- $prefix := "" -}}
@@ -25,8 +25,6 @@
     {{- end -}}
 
   {{- if eq .Kind "page" -}}</article>{{- else -}}</main>{{- end -}}
-  <!-- Goes after main for ~reasons~ -->
-  {{- partial "header.html" (dict "context" . "a11y" "false") -}}
 
   <footer class="h-card p-author" role="contentinfo">
     <nav>
