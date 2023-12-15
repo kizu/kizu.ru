@@ -119,7 +119,7 @@ footer {
   margin-bottom: var(--footer-margin-bottom, 2rem);
   --text-indent: 0;
   text-wrap: balance;
-  --link-padding: 0.45em 0;
+  --link-padding: var(--at-large, 0.45em 0);
 }
 
 nav {
@@ -134,8 +134,8 @@ nav {
   --link-underline-offset: 0.4em;
   font: var(--THEME_FONT--SMALL);
   --ul-grid:
-    "full full"
-    "start end";
+    var(--at-large-toggle, "full full" "start end")
+    var(--at-small-toggle, "full" "start" "end");
   --li-justify-self: start;
   --li-justify-self-even: end;
   --grid-column: auto;

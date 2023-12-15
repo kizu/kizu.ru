@@ -45,7 +45,7 @@
             {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
           </li>
         {{- else -}}
-          <li style="--grid-position: end;">
+          <li style="--grid-position: var(--at-large-toggle, end) var(--at-small-toggle, start);">
             {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
             <span aria-hidden="true">·</span>
             {{- print " " -}}
