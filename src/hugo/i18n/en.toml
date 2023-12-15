@@ -68,10 +68,10 @@ other = "Follow on Mastodon"
 other = "https://front-end.social/@kizu"
 
 [Feed]
-other = "Feed"
+other = "RSS Feed"
 
 [feedTitle]
-other = "Subscribe to the feed"
+other = "Subscribe to the RSS feed"
 
 [feedLink]
 other = "https://feeds.feedburner.com/kizuruen"

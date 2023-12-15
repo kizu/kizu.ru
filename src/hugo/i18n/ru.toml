@@ -59,10 +59,10 @@ other = "Гитхаб"
 other = "Редактировать на Гитхабе"
 
 [Feed]
-other = "Фид"
+other = "RSS Фид"
 
 [feedTitle]
-other = "Подписаться на фид"
+other = "Подписаться на RSS фид"
 
 [feedLink]
 other = "https://feeds.feedburner.com/kizu"
