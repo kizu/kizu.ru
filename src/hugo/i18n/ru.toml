@@ -49,6 +49,9 @@ other = "с метками"
 [tag]
 other = "Метка"
 
+[Search]
+other = "Поиск"
+
 [GitHub]
 other = "Гитхаб"
 

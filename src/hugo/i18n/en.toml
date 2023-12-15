@@ -52,6 +52,9 @@ other = "Tag"
 [githubTitle]
 other = "Edit on GitHub"
 
+[Search]
+other = "Search"
+
 [GitHub]
 other = "GitHub"
 

@@ -119,6 +119,7 @@ footer {
   margin-bottom: var(--footer-margin-bottom, 2rem);
   --text-indent: 0;
   text-wrap: balance;
+  --link-padding: 0.45em 0;
 }
 
 nav {

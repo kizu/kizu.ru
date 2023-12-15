@@ -38,13 +38,17 @@
           {{- else -}}
             <a class="u-url" rel="author" href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span class="p-name" style="--underline: 1;">{{ i18n "titleName" }}</span></a>
           {{- end -}}
-          {{- print " " -}}
-          {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
         </li>
 
         {{- if eq .Kind "home" -}}
+          <li style="--grid-position: end;">
+            {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
+          </li>
         {{- else -}}
           <li style="--grid-position: end;">
+            {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
+            <span aria-hidden="true">·</span>
+            {{- print " " -}}
             {{- if .Params.originalPath -}}
               <a href="https://github.com/kizu/kizu.ru/blob/source/src/{{ .Params.originalPath }}" aria-label="{{ i18n "githubTitle" }}">{{ i18n "GitHub" }}</a>
             {{- else -}}

@@ -115,29 +115,6 @@
   justify-content: flex-end;
 }
 
-html:not(.withJS) .SearchButton {
-  display: none;
-}
-
-.SearchButton {
-  --Button-padding: 0 0.5rem;
-  --_Text-transform: scale(1);
-  --_Text-transition: transform 0.2s linear;
-  will-change: transform;
-}
-
-.SearchButton:hover {
-  --_Text-transform: scale(1.4);
-}
-
-.SearchButton.isActive {
-  --_Text-transform: scale(1.4);
-}
-
-.SearchButton.isActive:hover {
-  --_Text-transform: scale(1);
-}
-
 .Search-Result-Link:not(.Search-Result-Link_main) {
   position: relative;
   z-index: 9;
