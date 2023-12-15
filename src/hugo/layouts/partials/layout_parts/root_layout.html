@@ -38,7 +38,7 @@
           {{- if eq .Kind "home" -}}
             © {{ partial "buildTime.html" . }} {{ i18n "titleName" }}
           {{- else -}}
-            <a class="u-url" rel="author" href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span class="p-name" style="--underline: 1;">{{ i18n "titleName" }}</span><img class="u-photo" hidden aria-hidden="true" src="/photo.jpg" alt="A photo of me (rather outdated)" /></a>
+            <a class="u-url" rel="author" href="/{{ .Site.Params.languagePrefix }}" style="--underline: 0;">© {{ partial "buildTime.html" . }} <span class="p-name" style="--underline: 1;">{{ i18n "titleName" }}</span></a>
           {{- end -}}
           {{- print " " -}}
           {{ partial "searchButton.html" (dict "context" . "position" "footer") }}
