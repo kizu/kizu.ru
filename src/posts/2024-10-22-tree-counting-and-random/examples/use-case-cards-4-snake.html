@@ -1,0 +1,146 @@
+<style>
+  .cards-example li {
+    --x-index: calc(
+      mod(var(--sibling-index) - 1, var(--x-count))
+      +
+      1
+    );
+    /* We need 0.999 instead of 1 to work around Firefox bug */
+    --y-index: calc(
+      round(
+        down,
+        (var(--sibling-index) - 0.999)
+        /
+        var(--x-count),
+        1
+      )
+      +
+      1
+    );
+  }
+  .cards-snake li {
+    --diff: calc(
+      var(--x-count)
+      -
+      2 * var(--x-index)
+      +
+      1
+    );
+    --is-reversed: mod(1 + var(--y-index), 2);
+    grid-column: calc(
+      var(--x-index)
+      +
+      var(--diff) * var(--is-reversed)
+    );
+    grid-row: var(--y-index);
+  }
+
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="16" min="1" max="36" style="width: 90px" id="cards-4-range" />
+        </input-source>
+        <input-source>
+          <input type="number" value="16" min="1" max="36" size="1" />
+        </input-source>
+      </input-value>
+    </fieldset>
+
+    <fieldset>
+      <legend>Options</legend>
+
+      <input-source>
+        <label>
+          <input class="input-snake" type="checkbox" checked />
+          Snake
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-snake"
+        to=".cards-example"
+        as=".cards-snake"
+      ></input-value>
+
+      <input-source>
+        <label>
+          <input class="input-colors" type="checkbox" checked />
+          Colors
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-colors"
+        to=".cards-example"
+        as=".cards-colors"
+      ></input-value>
+
+
+      <input-source>
+        <label>
+          <input class="input-rotate" type="checkbox" checked />
+          Rotate
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-rotate"
+        to=".cards-example"
+        as=".cards-rotation"
+      ></input-value>
+
+      <input-source>
+        <label>
+          <input class="input-stable" type="checkbox" />
+          Stable
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-stable"
+        to=".cards-example ol"
+        as=".random--stable"
+      ></input-value>
+    </fieldset>
+
+    <fieldset class="seed-inputs">
+      <legend>Seed</legend>
+      <input-value from=".seed-inputs input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="3" max="99" style="width: 90px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="3" min="0" max="99" size="1" />
+        </input-source>
+      </input-value>
+      <input-value
+        root="figure"
+        from=".seed-inputs input"
+        to=".cards-example ol"
+        as="--seed"
+      ></input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="cards-example cards-colors cards-rotation cards-grid cards-snake">
+        <ol class="count-and-index-99-children random-99-children">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

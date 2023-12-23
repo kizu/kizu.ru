@@ -1,0 +1,145 @@
+<style>
+  .algorithm-example {
+    max-height: 80vh;
+    position: relative;
+    overflow: auto;
+
+    & ol {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      --gap: 0.5em;
+      gap: var(--gap);
+    }
+    & li {
+      padding: var(--gap);
+      border-radius: var(--gap);
+      background: color-mix(in oklch,
+        var(--GREEN) min(100%, var(--sibling-index) * 100%),
+        var(--PINK)
+      );
+
+      &::before {
+        position: static;
+        width: auto;
+        margin: 0;
+      }
+      &::after {
+        counter-reset: index var(--sibling-index);
+        content: counter(index);
+      }
+    }
+  }
+
+  .algorithm-1 {
+    & li:nth-child(1) { --sibling-index: 1 }
+    & li:nth-child(2) { --sibling-index: 2 }
+    & li:nth-child(3) { --sibling-index: 3 }
+    & li:nth-child(4) { --sibling-index: 4 }
+    & li:nth-child(5) { --sibling-index: 5 }
+    & li:nth-child(6) { --sibling-index: 6 }
+    & li:nth-child(7) { --sibling-index: 7 }
+    & li:nth-child(8) { --sibling-index: 8 }
+    & li:nth-child(9) { --sibling-index: 9 }
+  }
+
+  /* For easier debugging later */
+  @property --is-reversed {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --diff {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --sibling-index {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --sibling-count {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --children-count {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --y-index {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --x-index {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --y-count {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --x-count {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: true;
+  }
+  @property --x-score {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
+  }
+  @property --y-score {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
+  }
+  @property --x-distance {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
+  }
+  @property --y-distance {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
+  }
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="9" max="17" id="algorithm-1-range" />
+        </input-source>
+        <input-source>
+          <input type="number" value="9" min="0" max="17" size="2" />
+        </input-source>
+      </input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="algorithm-example algorithm-1">
+        <ol>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

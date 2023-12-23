@@ -1,0 +1,103 @@
+<style>
+  .cards-example ol {
+    display: flex;
+    flex-wrap: wrap;
+    --gap: 0.5em;
+    gap: var(--gap);
+    justify-content: center;
+    align-items: start;
+    container-type: inline-size;
+    font: var(--THEME_FONT--SMALL);
+  }
+  .cards-example li {
+    position: relative;
+    z-index: 0;
+    padding: 1em;
+    outline: 1px solid;
+    border-radius: 0.5em;
+
+    box-sizing: border-box;
+    width: min(5em, (100cqw - 6 * var(--gap)) / 7);
+    aspect-ratio: 1;
+    align-content: center;
+    text-align: center;
+    background: #FFF;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: 0.3s;
+      transition-property: transform, rotate, translate, background-color, z-index;
+    }
+
+    &::before {
+      display: none;
+    }
+    &::after {
+      counter-reset: --index var(--sibling-index);
+      content: counter(--index);
+    }
+  }
+
+  .cards-colors li {
+    background: oklch(
+      0.9
+      0.125
+      calc(
+        27deg
+        +
+        300deg
+        *
+        (var(--sibling-index) - 1)
+        /
+        (var(--sibling-count) - 1)
+      )
+    );
+  }
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="7" min="1" max="21" style="width: 100px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="7" min="1" max="21" size="2" />
+        </input-source>
+      </input-value>
+    </fieldset>
+
+    <fieldset>
+      <legend>Options</legend>
+
+      <input-source>
+        <label>
+          <input class="input-colors" type="checkbox" checked id="cards-1-colors" />
+          Colors
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-colors"
+        to=".cards-example"
+        as=".cards-colors"
+      ></input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="cards-example cards-colors">
+        <ol class="count-and-index-99-children">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

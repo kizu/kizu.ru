@@ -1,0 +1,186 @@
+<style>
+  .children-count-example {
+    & li::after {
+      counter-reset: index var(--sibling-index) count var(--children-count);
+      content: counter(index) "/" counter(count);
+    }
+  }
+
+  /* `&, &` is a workaround for a Safari bug (https://bugs.webkit.org/show_bug.cgi?id=273125)  */
+  .count-and-index-99-children { &, & {
+    --cc2: 0;
+    --cc1: 0;
+    --children-count: calc(10 * var(--cc2) + var(--cc1));
+
+    & > li {
+      --si2: 0;
+      --si1: 0;
+      --sibling-index: calc(10 * var(--si2) + var(--si1));
+      --sibling-count: var(--children-count);
+
+      background: color-mix(in oklch,
+        var(--GREEN) min(100%, var(--sibling-index) * var(--children-count) * 100%),
+        var(--PINK)
+      );
+    }
+    & > li:nth-child(10n+1)
+      { --si1: 1; ol:has(>&:last-child) { --cc1: 1 } }
+    & > li:nth-child(10n+2)
+      { --si1: 2; ol:has(>&:last-child) { --cc1: 2 } }
+    & > li:nth-child(10n+3)
+      { --si1: 3; ol:has(>&:last-child) { --cc1: 3 } }
+    & > li:nth-child(10n+4)
+      { --si1: 4; ol:has(>&:last-child) { --cc1: 4 } }
+    & > li:nth-child(10n+5)
+      { --si1: 5; ol:has(>&:last-child) { --cc1: 5 } }
+    & > li:nth-child(10n+6)
+      { --si1: 6; ol:has(>&:last-child) { --cc1: 6 } }
+    & > li:nth-child(10n+7)
+      { --si1: 7; ol:has(>&:last-child) { --cc1: 7 } }
+    & > li:nth-child(10n+8)
+      { --si1: 8; ol:has(>&:last-child) { --cc1: 8 } }
+    & > li:nth-child(10n+9)
+      { --si1: 9; ol:has(>&:last-child) { --cc1: 9 } }
+    & > li:nth-child(n+10):nth-child(-n+19)
+      { --si2: 1; ol:has(>&:last-child) { --cc2: 1 } }
+    & > li:nth-child(n+20):nth-child(-n+29)
+      { --si2: 2; ol:has(>&:last-child) { --cc2: 2 } }
+    & > li:nth-child(n+30):nth-child(-n+39)
+      { --si2: 3; ol:has(>&:last-child) { --cc2: 3 } }
+    & > li:nth-child(n+40):nth-child(-n+49)
+      { --si2: 4; ol:has(>&:last-child) { --cc2: 4 } }
+    & > li:nth-child(n+50):nth-child(-n+59)
+      { --si2: 5; ol:has(>&:last-child) { --cc2: 5 } }
+    & > li:nth-child(n+60):nth-child(-n+69)
+      { --si2: 6; ol:has(>&:last-child) { --cc2: 6 } }
+    & > li:nth-child(n+70):nth-child(-n+79)
+      { --si2: 7; ol:has(>&:last-child) { --cc2: 7 } }
+    & > li:nth-child(n+80):nth-child(-n+89)
+      { --si2: 8; ol:has(>&:last-child) { --cc2: 8 } }
+    & > li:nth-child(n+90):nth-child(-n+99)
+      { --si2: 9; ol:has(>&:last-child) { --cc2: 9 } }
+  }}
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="99" max="100" />
+        </input-source>
+        <input-source>
+          <input type="number" value="99" min="0" max="100" size="3" />
+        </input-source>
+      </input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="algorithm-example algorithm-3 children-count-example">
+        <ol class="count-and-index-99-children">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

@@ -2,9 +2,21 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.fieldsets:first-child {
+  margin-block-end: 0.5rem;
+}
+
+.fieldsets:last-child {
   margin-block-start: 0.5rem;
 }
 
 .fieldsets > * {
   flex: 1 1 var(--min-width);
+}
+
+.fieldsets > .options {
+  flex-basis: 40%;
+  flex-grow: 1;
 }

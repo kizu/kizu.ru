@@ -1,0 +1,52 @@
+<style>
+  .algorithm-2 {
+    & li {
+      --si2: 0;
+      --si1: 0;
+      --sibling-index: calc(3 * var(--si2) + var(--si1));
+
+    }
+    & li:nth-child(3n+1) { --si1: 1 }
+    & li:nth-child(3n+2) { --si1: 2 }
+    & li:nth-child(n+3):nth-child(-n+5) { --si2: 1 }
+    & li:nth-child(n+6):nth-child(-n+8) { --si2: 2 }
+
+    /* Otherwise some of the broken items will be highlighted in green */
+    & li:nth-child(n+10) {
+      background: var(--PINK);
+    }
+  }
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="9" max="17" />
+        </input-source>
+        <input-source>
+          <input type="number" value="9" min="0" max="17" size="2" />
+        </input-source>
+      </input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="algorithm-example algorithm-2">
+        <ol>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

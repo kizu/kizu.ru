@@ -74,5 +74,11 @@
     </div>
 
     {{ partial "web_components/mastodon_post_info.html" . }}
+    <script type="module">// @ts-check
+      import { CloneContent, InputSource, InputValue } from '/j/ce/index.js';
+      CloneContent.register();
+      InputSource.register();
+      InputValue.register();
+    </script>
   </body>
 </html>

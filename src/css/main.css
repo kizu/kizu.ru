@@ -14,6 +14,7 @@
 @import url("_config.css");
 @import url("_theme.css");
 @import url("_utility.css");
+@import url("_custom-elements.css");
 @import url("components/color-components.css");
 
 @import url("components/articlelist.css");
@@ -329,8 +330,14 @@ fieldset label {
   display: inline-block;
 }
 
-fieldset label:not(:has(> :checked)) {
+label:not(:has(> :checked)) {
   cursor: pointer;
+}
+
+label:not(:hover):has(> input:hover),
+/* Very specific, for the tree-counting-and-random article */
+fieldset:not(:hover):has(> *:not(label) > *:not(label) > input:hover) {
+  outline: 4px solid var(--GREEN);
 }
 
 fieldset label > input {
@@ -339,6 +346,10 @@ fieldset label > input {
 
 fieldset label:active {
   user-select: none;
+}
+
+input[type=range] {
+  vertical-align: middle;
 }
 
 ::selection {

@@ -3,6 +3,9 @@
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
 <figure
+  {{- if not hugo.IsProduction -}}
+    {{/**/}} data-src="{{ print $src }}"
+  {{- end -}}
   {{- if .Get "class" -}}
     {{/**/}} class="{{ print (.Get "class") }}"
   {{- end -}}
@@ -54,7 +57,6 @@
         {{- $src  | readFile | safeHTML -}}
       </div>
     {{- end -}}
-    {{- .Inner | markdownify -}}
   {{- end -}}
 
 </figure>

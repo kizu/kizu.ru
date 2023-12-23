@@ -1,0 +1,105 @@
+<style>
+  .cards-grid ol {
+    display: grid;
+    --x-count: round(sqrt(var(--children-count)), 1);
+    grid-template-columns: repeat(
+      var(--x-count),
+      min-content
+    );
+  }
+
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="9" min="1" max="36" style="width: 100px" id="cards-3-range" />
+        </input-source>
+        <input-source>
+          <input type="number" value="9" min="1" max="36" size="1" />
+        </input-source>
+      </input-value>
+    </fieldset>
+
+    <fieldset>
+      <legend>Options</legend>
+
+      <input-source>
+        <label>
+          <input class="input-colors" type="checkbox" checked />
+          Colors
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-colors"
+        to=".cards-example"
+        as=".cards-colors"
+      ></input-value>
+
+      <input-source>
+        <label>
+          <input class="input-rotate" type="checkbox" checked />
+          Rotate
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-rotate"
+        to=".cards-example"
+        as=".cards-rotation"
+      ></input-value>
+
+      <input-source>
+        <label>
+          <input class="input-stable" type="checkbox" />
+          Stable random
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-stable"
+        to=".cards-example ol"
+        as=".random--stable"
+      ></input-value>
+    </fieldset>
+
+    <fieldset class="seed-inputs">
+      <legend>Seed</legend>
+      <input-value from=".seed-inputs input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="3" max="99" style="width: 100px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="3" min="0" max="99" size="1" />
+        </input-source>
+      </input-value>
+      <input-value
+        root="figure"
+        from=".seed-inputs input"
+        to=".cards-example ol"
+        as="--seed"
+      ></input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="cards-example cards-colors cards-rotation cards-grid">
+        <ol class="count-and-index-99-children random-99-children">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>
