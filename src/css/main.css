@@ -89,8 +89,7 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* For subgrid substitute */
-  counter-reset: var(--asides-counter) var(--sidenote-counters);
+  counter-reset: var(--sidenote-counters);
 }
 
 body::before {
