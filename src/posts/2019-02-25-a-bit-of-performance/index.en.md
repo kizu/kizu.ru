@@ -127,7 +127,7 @@ Here is a list of articles[^links] on this topic I have read while playing with 
 
 [^links]: Thanks to [Rachel Andrew](https://rachelandrew.co.uk/) for the idea of crediting the articles used for the research even if you do not quote them directly. Attributing other people is very important and I must admit I do forget about this sometimes. <!-- span="2"  -->
 
-- [“Font-display” playground](https://font-display.glitch.me) by [Monica Dinculescu](notwaldorf) — a nice explainer and a demo of how different values of the `font-display` property work.
+- [“Font-display” playground](https://font-display.glitch.me) by [Monica Dinculescu](https://meowni.ca/) — a nice explainer and a demo of how different values of the `font-display` property work.
 - [“Building the DOM faster: speculative parsing, async, defer and preload”](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by [Milica Mihajlija](https://mihajlija.github.io/) — a good article about the difference between async/defer and a bit about the link preloading.
 - [“The Critical Request”](https://calibreapp.com/blog/critical-request/) by [Ben Schwarz](https://germanforblack.com/) — a nice article about the resource loading priorities, preload links and so on.
 - [“Preloading Fonts and the Puzzle of Priorities”](https://andydavies.me/blog/2019/02/12/preloading-fonts-and-the-puzzle-of-priorities/) by [Andy Davies](https://andydavies.me/) — a bit more deep dive into the preload links.
