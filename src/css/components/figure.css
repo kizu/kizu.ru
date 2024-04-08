@@ -181,3 +181,18 @@ figure[class|=require] .Figure-Demo::after {
     --_toggler-off: inline;
   }
 }
+
+.require-style-queries,
+.require-style-queries + aside {
+  --require-timeline-scope: '@container style()';
+  --_toggler-on: none;
+  --_toggler-off: inline;
+}
+@container not style(--x: y) {
+  .require-style-queries,
+  .require-style-queries + aside {
+    --require-timeline-scope: initial;
+    --_toggler-on: inline;
+    --_toggler-off: none;
+  }
+}

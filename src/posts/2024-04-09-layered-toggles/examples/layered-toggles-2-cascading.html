@@ -1,0 +1,70 @@
+<style>
+  @layer mixins.alpha {
+    * {
+      --mix-alpha: var(--mix-alpha--off);
+      --mix-alpha--off: var(--mix-alpha,);
+      --mix-alpha--on: var(--mix-alpha,);
+
+      --mix-alpha-color: currentColor;
+      --mix-alpha-value: 75%;
+
+      color:
+        var(--mix-alpha--off, revert-layer)
+        var(--mix-alpha--on,
+          color-mix(
+            in srgb,
+            var(--mix-alpha-color)
+            var(--mix-alpha-value),
+            transparent
+          )
+        );
+    }
+  }
+
+  @layer mixins.red {
+    * {
+      --mix-red: var(--mix-red--off);
+      --mix-red--off: var(--mix-red,);
+      --mix-red--on: var(--mix-red,);
+
+      background:
+        var(--mix-red--off, revert-layer)
+        var(--mix-red--on, var(--RED));
+      color:
+        var(--mix-red--off, revert-layer)
+        var(--mix-red--on, #FFF);
+      text-shadow:
+        var(--mix-red--off, revert-layer)
+        var(--mix-red--on, none);
+    }
+  }
+
+  .with-alpha {
+    --mix-alpha: var(--mix-alpha--on);
+
+    &:is(:hover, :focus-visible) {
+      --mix-alpha-value: 90%;
+    }
+  }
+
+  .is-red {
+    --mix-red: var(--mix-red--on);
+  }
+
+</style>
+
+<div class="example-1">
+
+  <div class="item">
+    Regular
+  </div>
+
+  <div class="item with-alpha" tabindex="0">
+    With alpha (hover me)
+  </div>
+
+  <div class="item with-alpha is-red" tabindex="0">
+    With all mixins
+  </div>
+
+</div>

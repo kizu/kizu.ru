@@ -1,0 +1,32 @@
+<style>
+  @layer mixins.red {
+    .fixed * {
+      color:
+        var(--mix-red--off, revert-layer)
+        var(--mix-red--on,
+          var(--mix-alpha--off, #FFF)
+          var(--mix-alpha--on, revert-layer)
+        );
+      --mix-alpha-color:
+        var(--mix-red--off, revert-layer)
+        var(--mix-red--on, #FFF);
+    }
+  }
+
+</style>
+
+<div class="example-1 fixed">
+
+  <div class="item">
+    Regular
+  </div>
+
+  <div class="item with-alpha" tabindex="0">
+    With alpha (hover me)
+  </div>
+
+  <div class="item with-alpha is-red" tabindex="0">
+    With all mixins
+  </div>
+
+</div>

@@ -1,0 +1,52 @@
+<style>
+  @layer default, mixins;
+
+  .example-1 {
+    display: grid;
+    gap: 1em;
+    grid: auto / repeat(3, auto);
+  }
+
+  @layer default {
+    .item {
+      padding: 1em;
+      border-radius: 0.5em;
+      background: var(--PINK);
+      color: CanvasText;
+    }
+  }
+
+  @layer mixins {
+    * {
+      --hover: var(--hover--off);
+      --hover--off: var(--hover,);
+      --hover--on: var(--hover,);
+
+      background-color:
+        var(--hover--off, revert-layer)
+        var(--hover--on, var(--GREEN));
+    }
+  }
+
+  .can-be-hovered:is(:hover, :focus-visible),
+  .pseudo-hovered {
+    --hover: var(--hover--on);
+  }
+
+</style>
+
+<div class="example-1">
+
+  <div class="item">
+    Default
+  </div>
+
+  <div class="item can-be-hovered" tabindex="0">
+    Hover or focus me
+  </div>
+
+  <div class="item pseudo-hovered">
+    As if hovered
+  </div>
+
+</div>

@@ -90,6 +90,7 @@
 .Summary[data-fletter=F] {
   --fletter-style: "ss03";
   --bottom-adjustment: 0.5;
+  --right-adjustment: -1;
 }
 .Summary[data-fletter=G] {
   --fletter-style: "ss03";
