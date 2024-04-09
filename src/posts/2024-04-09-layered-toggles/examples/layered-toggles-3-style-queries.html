@@ -1,0 +1,57 @@
+<style>
+
+@layer mixins.child-hover {
+  * {
+    --mix-child-hover: var(--mix-child-hover--off);
+    --mix-child-hover--off: var(--mix-child-hover,);
+    --mix-child-hover--on: var(--mix-child-hover,);
+
+    /* Applies only to the direct children of the element */
+    @container style(--mix-child-hover--off: ) {
+      background: var(--GREEN);
+      color: CanvasText;
+    }
+  }
+}
+
+.child-hover:is(:hover, :focus-visible):not(:has(.child-hover:is(:hover, :focus-visible))) {
+  --mix-child-hover: var(--mix-child-hover--on);
+}
+
+</style>
+
+<div class="example-1">
+
+  <div class="item child-hover" tabindex="0">
+    Default
+
+    <div class="item is-red child-hover" tabindex="0">
+      Red
+    </div>
+  </div>
+
+  <div class="item is-red child-hover" tabindex="0">
+    Red
+
+    <div class="item child-hover" tabindex="0">
+      Default
+    </div>
+  </div>
+
+  <div class="item child-hover" tabindex="0">
+    Default
+
+    <div class="item is-red child-hover" tabindex="0">
+      Red
+
+      <div class="item child-hover" tabindex="0">
+        Default
+
+        <div class="item is-red child-hover" tabindex="0">
+          Red
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
