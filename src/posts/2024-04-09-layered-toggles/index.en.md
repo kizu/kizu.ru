@@ -258,7 +258,7 @@ There are many articles on the internet which you could use as an inspiration
 
 ### Update from 2024-04-10 {#update-2024-04-10}
 
-- As a start, I did create [a CodePen](https://codepen.io/kizu/pen/BaExxxz) that combines [Stephanie](https://thinkdobecreate.com/)’s [flex](https://smolcss.dev/#smol-flexbox-grid) and [grid](https://smolcss.dev/#smol-css-grid) layouts into one mixin.
+- I did create [a CodePen](https://codepen.io/kizu/pen/BaExxxz) that combines [Stephanie](https://thinkdobecreate.com/)’s [flex](https://smolcss.dev/#smol-flexbox-grid) and [grid](https://smolcss.dev/#smol-css-grid) layouts into one mixin.
 
     The flex one requires style queries to work, but the grid one will work everywhere where `@layer` is supported! We can see how the code is hardly readable, _but it works_! One interesting moment to note is that if we’d want to use some variables on the children that are defined on the parent, we’d need to explicitly `inherit` these variables, as otherwise they will be reset on every element due to the universal selector.
 
