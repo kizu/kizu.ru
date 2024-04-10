@@ -250,6 +250,12 @@ That might be your homework: think of anything reusable in your CSS — could
 
 There are many articles on the internet which you could use as an inspiration, with small snippets of code that can be converted into mixins like that. I can recommend starting with [SmolCSS](https://smolcss.dev/) by [Stephanie Eckles](https://thinkdobecreate.com/), and [CSS Tip](https://css-tip.com/) by [Temani Afif](https://css-articles.com/). There are many, many other resources, so don’t stop at these!
 
+- - -
+
+- <strong id="update-2024-04-10">Update from 2024-04-10:</strong> As a start, I did create [a CodePen](https://codepen.io/kizu/pen/BaExxxz) that combines Stephanie’s flex and grid layouts into one mixin.
+
+    The flex one requires style queries to work, but the grid one will work everywhere where `@layer` is supported! We can see how the code is hardly readable, _but it works_! One interesting moment to note is that if we’d want to use some variables on the children that are defined on the parent, we’d need to explicitly `inherit` these variables, as otherwise they will be reset on every element due to the universal selector.
+
 ## Future of Mixins
 
 While I’m happy this technique is possible, it can still look rather hacky, and cyclic toggles are not very fun to debug right now. Good news: there is a [Custom CSS Functions & Mixins proposal](https://github.com/w3c/csswg-drafts/issues/9350) by [Miriam Suzanne](https://www.miriamsuzanne.com/) which was [accepted](https://github.com/w3c/csswg-drafts/issues/9350#issuecomment-1939628591) by CSSWG as something to pursue. However, it is yet unknown which exact form it will take, and it can take years until we could use whatever will get into the specifications and later into browsers. CSS Layers are already here, and style queries will be sooner rather than later too, and the best thing we could do for the future of mixins — is prototype them with what we can today. This could allow us to gather common use cases, uncover potential issues, work out how they could interact with other CSS features, and so on.
