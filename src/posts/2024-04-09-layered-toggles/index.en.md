@@ -87,6 +87,8 @@ Of course, this technique is not without its limitations:
 
 4. Obviously, it requires the CSS layers to be supported, and all main styles to be handled by CSS layers. This means that you might wait to apply this technique unless you are certain that you can use custom cascade layers with the browser support your website requires.
 
+5. It is unknown how bad this technique could be for performance with a large number of mixins. Browsers will attempt to apply the mixins for _every_ element, going through multiple layers until encountering the one that have its variables enabled. Proper performance evaluation should be done.
+
 Because this technique is so new, there is a big chance I’m missing some other limitations or potential problems — if you encounter any, please let me know, and I will include them in this article.
 
 ## Advanced Cases
