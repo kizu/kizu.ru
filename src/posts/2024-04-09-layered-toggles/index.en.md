@@ -81,13 +81,15 @@ Of course, this technique is not without its limitations:
 
 1. All mixins live in a shared space. This means: that if multiple mixins need to toggle the same CSS property, we will need to _define_ how this should be handled. In the next section, I will show two ways to do it.
 
-2. As we’re applying our styles through a universal selector (`*`), we could use the mixin to only style the element itself, not its children. However, it will be possible to work around this with style queries, I’ll describe how later in the article. This might also be a blessing in some cases, as we don’t want to apply mixin to the _nested_ elements, so the disabled inheritance here can be welcome.
+2. As we’re applying our styles through a universal selector[^not-necessary] (`*`), we could use the mixin to only style the element itself, not its children. However, it will be possible to work around this with style queries, I’ll describe how later in the article. This might also be a blessing in some cases, as we don’t want to apply mixin to the _nested_ elements, so the disabled inheritance here can be welcome.
 
 3. We cannot toggle other cyclic toggles with this. Or, at least, I did not find a way to do so yet.
 
 4. Obviously, it requires the CSS layers to be supported, and all main styles to be handled by CSS layers. This means that you might wait to apply this technique unless you are certain that you can use custom cascade layers with the browser support your website requires.
 
-5. It is unknown how bad this technique could be for performance with a large number of mixins. Browsers will attempt to apply the mixins for _every_ element, going through multiple layers until encountering the one that have its variables enabled. Proper performance evaluation should be done.
+5. It is unknown how bad this technique could be for performance with many mixins. Browsers will attempt to apply the mixins for _every_ element, going through multiple layers until encountering the one that has its variables enabled. Proper performance evaluation should be done.
+
+[^not-necessary]: Note that it is not necessary to apply these as _mixins_, via a universal selector. The same method could be used to provide optional component API to some specific selector.<br/> This could be better than regular cyclic toggles as we won’t always override some of the properties, making it easier to mix different styles, and separate the defaults from the mixins. <!-- offset="4" -->
 
 Because this technique is so new, there is a big chance I’m missing some other limitations or potential problems — if you encounter any, please let me know, and I will include them in this article.
 
@@ -213,7 +215,7 @@ You could’ve asked: why are we not using [container style queries](https://de
 However, when we get style queries everywhere, could we use them in tandem with this technique:
 
 {{<Partial class="require-style-queries"  src="examples/layered-toggles-3-style-queries.html" screenshot="true" video="true">}}
-  Hovering of focusing over any element highlights a direct child nested inside.
+  Hovering or focusing over any element highlights a direct child nested inside.
 {{</Partial>}}
 
 Hovering on any element, Here is the CSS for this example:
