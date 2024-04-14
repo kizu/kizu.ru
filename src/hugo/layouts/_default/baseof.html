@@ -29,6 +29,9 @@
         {{ i18n "defaultDescription" }}
       {{- end -}}
     " />
+    {{ if .Params.og_image -}}
+      <meta property="og:image" content="{{ .Permalink }}{{ .Params.og_image }}"/>
+    {{ end -}}
 
     <script>document.documentElement.classList.add("withJS")</script>
 

@@ -1,0 +1,51 @@
+<style>
+.example-4 .test {
+  background:
+    var(--mode--pink,    var(--PINK))
+    var(--mode--green,   var(--GREEN))
+    var(--mode--pink2,   var(--PINK))
+    var(--mode--regular, var(--THEME_BG));
+
+  --mode: var(--mode--pink);
+  --mode--pink:    var(--mode,);
+  --mode--green:   var(--mode,);
+  --mode--pink2:   var(--mode,);
+  --mode--regular: var(--mode,);
+
+  @container not style(--mode--pink: ) {
+    --mode: var(--mode--green);
+  }
+
+  @container not style(--mode--green: ) {
+    --mode: var(--mode--pink2);
+  }
+
+  @container not style(--mode--pink2: ) {
+    --mode: var(--mode--regular);
+  }
+
+  @container not style(--mode--regular: ) {
+    --mode: var(--mode--pink);
+  }
+}
+</style>
+
+<div class="example-4">
+
+  <div class="test">
+    Pink background
+    <div class="test">
+      Green background
+      <div class="test">
+        Pink background
+        <div class="test">
+          Regular background
+          <div class="test">
+            Pink background
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

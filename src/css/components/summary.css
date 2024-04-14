@@ -162,6 +162,7 @@
 }
 .Summary[data-fletter=W] {
   --right-adjustment: -2;
+  --left-adjustment: -3.2;
 }
 .Summary[data-fletter=X] {
   --fletter-style: "ss01";

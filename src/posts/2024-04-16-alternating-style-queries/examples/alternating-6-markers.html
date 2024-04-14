@@ -1,0 +1,100 @@
+<style>
+  .example-6[class] li {
+    list-style-type: inherit;
+    padding: 0;
+
+    &::before {
+      content: "";
+    }
+  }
+
+  .example-6 {
+    --markers-style: var(--_custom);
+    --_built-in: var(--markers-style,);
+    --_custom: var(--markers-style,);
+    --_very-custom: var(--markers-style,);
+
+    &:has(label:nth-of-type(1) > input:checked) {
+      --markers-style: var(--_built-in);
+    }
+    &:has(label:nth-of-type(3) > input:checked) {
+      --markers-style: var(--_very-custom);
+    }
+  }
+
+  .example-6[class] ul {
+    display: block;
+    padding-inline-start: 1em;
+    list-style-type:
+      var(--_built-in, revert)
+      var(--_custom, var(--type))
+      var(--_very-custom, var(--type));
+
+    --type: disc;
+
+    @container style(--type: disc) {
+      --type: circle;
+    }
+
+    @container style(--type: circle) {
+      --type: square;
+    }
+
+    @container not style(--_very-custom: ) {
+      --m1: '✦ ';
+      --m2: '★ ';
+      --m3: '✶ ';
+      --m4: '✷ ';
+      --type: var(--m1);
+
+      @container style(--type: var(--m1)) {
+        --type: var(--m2);
+      }
+      @container style(--type: var(--m2)) {
+        --type: var(--m3);
+      }
+      @container style(--type: var(--m3)) {
+        --type: var(--m4);
+      }
+      @container style(--type: var(--m4)) {
+        --type: var(--m1);
+      }
+    }
+
+  }
+  </style>
+
+  <div class="example-6">
+
+    <ul>
+      <li>Regular item.</li>
+      <li>Nested list:
+        <ul>
+          <li>Regular item.</li>
+          <li>Nested list:
+            <ul>
+              <li>Regular item.</li>
+              <li>Nested list:
+                <ul>
+                  <li>Regular item.</li>
+                  <li>Nested list:
+                    <ul>
+                      <li>Regular item.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="fieldsets">
+      <fieldset>
+        <legend>Markers style</legend>
+        <label><input name="markers-style" type="radio"/> built-in</label>
+        <label><input name="markers-style" type="radio" checked/> custom</label>
+        <label><input name="markers-style" type="radio"/> very custom</label>
+      </fieldset>
+    </div>
+  </div>
