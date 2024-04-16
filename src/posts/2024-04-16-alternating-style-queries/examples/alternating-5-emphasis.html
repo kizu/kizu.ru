@@ -1,0 +1,23 @@
+<style>
+.example-5[class] :is(i, em, blockquote, code) {
+  font-style: var(--font-style);
+  --font-style: italic;
+
+  @container style(--font-style: italic) {
+    --font-style: normal;
+  }
+}
+</style>
+
+<div class="example-5">
+
+  <blockquote>
+    <p>
+      This is some blockquote that contains
+      <em>an emphasized part</em>
+      inside of it.
+    </p>
+    <p>There is also an <code>inline</code> code element, and even an <em>emphasized <code>inline</code> code element</em>.</p>
+  </blockquote>
+
+</div>

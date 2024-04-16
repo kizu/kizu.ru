@@ -1,0 +1,43 @@
+<style>
+figure {
+  --img-margin: -0.5rem;
+  --img-max-width: calc(100% + 1rem);
+
+  & img {
+    border-radius: inherit;
+  }
+}
+
+.test {
+  padding: 1em;
+  border-radius: 1em;
+  /* Need to make this into a mixin probably lol. */
+  text-shadow: 0 var(--LIGHT, 1px) var(--DARK, -1px) #FFF8;
+}
+
+.example-1 .test {
+  background: var(--bg);
+  --bg: var(--PINK);
+
+  @container style(--bg: var(--PINK)) {
+    --bg: var(--THEME_BG);
+  }
+}
+</style>
+
+<div class="example-1">
+
+  <div class="test">
+    Pink background
+    <div class="test">
+      Regular background
+      <div class="test">
+        Pink background
+        <div class="test">
+          Regular background
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

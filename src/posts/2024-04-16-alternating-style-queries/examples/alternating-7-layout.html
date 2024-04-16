@@ -1,0 +1,55 @@
+<style>
+  .test {
+    padding: 1em;
+    border-radius: 1em;
+  }
+
+  .example-7 .test {
+    display: flex;
+    gap: 1em;
+    flex-grow: 1;
+    --direction: row;
+    flex-direction: var(--direction);
+
+    background: var(--bg);
+    --bg: var(--PINK);
+
+    @container style(--direction: row) {
+      --direction: column;
+      --bg: var(--THEME_BG);
+    }
+  }
+  </style>
+
+  <div class="example-7">
+
+    <div class="test">
+      <div class="test">
+        <div class="test">
+        </div>
+        <div class="test">
+        </div>
+      </div>
+      <div class="test">
+        <div class="test">
+          <div class="test">
+          </div>
+          <div class="test">
+          </div>
+        </div>
+        <div class="test">
+          <div class="test">
+          </div>
+          <div class="test">
+          </div>
+        </div>
+        </div>
+      <div class="test">
+        <div class="test">
+        </div>
+        <div class="test">
+        </div>
+      </div>
+    </div>
+
+  </div>

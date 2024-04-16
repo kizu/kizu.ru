@@ -1,0 +1,31 @@
+<style>
+.example-2 .test {
+  background: var(--bg);
+  --bg: var(--PINK);
+
+  @container style(--bg: var(--PINK)) {
+    --bg: var(--GREEN);
+  }
+
+  @container style(--bg: var(--GREEN)) {
+    --bg: var(--THEME_BG);
+  }
+}
+</style>
+
+<div class="example-2">
+
+  <div class="test">
+    Pink background
+    <div class="test">
+      Green background
+      <div class="test">
+        Regular background
+        <div class="test">
+          Pink background
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
