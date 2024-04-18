@@ -1,6 +1,6 @@
 ---
 og_image: "og_image.png"
-mastodon_post_id: ""
+mastodon_post_id: "112292594239211916"
 ---
 
 # Self-Modifying Variables: the `inherit()` Workaround
