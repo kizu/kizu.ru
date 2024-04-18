@@ -1,0 +1,65 @@
+<style>
+
+.example-5,
+.example-5 * {
+  @container not style(--is-alternate: ) {
+    --is-alternate: ;
+    --inherited--even: var(--inherit);
+    --inherited: var(--inherited--odd);
+    --inherited2--even: var(--inherit2);
+    --inherited2: var(--inherited2--odd);
+  }
+  @container style(--is-alternate: ) {
+    --is-alternate: initial;
+    --inherited--odd: var(--inherit);
+    --inherited: var(--inherited--even);
+    --inherited2--odd: var(--inherit2);
+    --inherited2: var(--inherited2--even);
+  }
+}
+
+.a, .b {
+  margin: 0.5em;
+  padding: 0.25em 0.5em;
+  width: fit-content;
+}
+
+.example-5 {
+  display: flex;
+  justify-content: space-evenly;
+
+  --a: var(--GREEN);
+  --b: var(--PINK);
+  --inherit: var(--a);
+  --inherit2: var(--b);
+
+  & .test {
+    --a: var(--inherited2);
+    --b: var(--inherited);
+  }
+
+  & .a {
+    background: var(--a);
+  }
+
+  & .b {
+    background: var(--b);
+  }
+}
+
+
+</style>
+
+<div class="example-5">
+  <div>
+    <p>Regular:</p>
+    <div class="a">A: green</div>
+    <div class="b">B: pink</div>
+  </div>
+
+  <div class="test">
+    <p>Swapped:</p>
+    <div class="a">A: pink</div>
+    <div class="b">B: green</div>
+  </div>
+</div>

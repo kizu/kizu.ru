@@ -16,7 +16,7 @@
       <li class="ArticleList-Li"{{ if and (le $count 2) (not $isTagsPage) }} style="--priority: 1;"{{ end }}>
         <article class="ArticleList-Item h-entry">
           <h2 class="p-name">{{- /**/ -}}
-            <a class="ArticleList-Link u-url u-uid" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="ArticleList-Link u-url u-uid" href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
             {{- if $isTagsPage }} ({{ $context.Site.Taxonomies.tags.Count .Title }}){{ end -}}
           </h2>
           <p class="Metadata Published">
