@@ -1,0 +1,58 @@
+<style>
+figure {
+  --img-margin: -0.5rem;
+  --img-max-width: calc(100% + 1rem);
+
+  & img {
+    border-radius: inherit;
+  }
+}
+
+.example-1 * {
+  @container not style(--is-alternate: ) {
+    --is-alternate: ;
+    --inherited--even: var(--inherit);
+    --inherited: var(--inherited--odd);
+  }
+  @container style(--is-alternate: ) {
+    --is-alternate: initial;
+    --inherited--odd: var(--inherit);
+    --inherited: var(--inherited--even);
+  }
+}
+
+.example-1 .test {
+  --depth: calc(var(--inherited, 0) + 1);
+  --inherit: var(--depth);
+
+  --padding: 1em;
+  padding: var(--padding);
+  background: oklch(95% 0.125 calc(var(--depth) * 115));
+  border-radius: calc(
+    4.5 * var(--padding)
+    -
+    var(--depth) * var(--padding)
+  );
+  border-start-start-radius: calc(0.5 * var(--padding));
+
+  &::before {
+    counter-reset: depth var(--depth);
+    content: counter(depth);
+  }
+}
+
+</style>
+<div class="example-1">
+
+  <div class="test">
+    <div class="test">
+      <div class="bar">
+        <div class="test">
+          <div class="test">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

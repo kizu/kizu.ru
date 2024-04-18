@@ -82,6 +82,7 @@ a,
 span {
   background-clip: content-box;
   --code-color: var(--link-color);
+  --code-font-style: normal;
 }
 
 .Link:not(a),

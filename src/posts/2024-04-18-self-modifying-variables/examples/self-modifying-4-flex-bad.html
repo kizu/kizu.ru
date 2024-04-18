@@ -1,0 +1,31 @@
+<style>
+
+.example-4-bad .test {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  border: 1px solid;
+  gap: 0.5em;
+  --grow: 1;
+
+  & > * {
+    flex-grow: var(--grow);
+  }
+}
+
+</style>
+
+<div class="example-4-bad">
+
+  <div class="test">
+    <div class="test" style="--grow: 0;">
+      <div class="test">A</div>
+      <div class="test">B</div>
+    </div>
+    <div class="test">
+      <div class="test">C</div>
+      <div class="test">D</div>
+    </div>
+  </div>
+
+</div>

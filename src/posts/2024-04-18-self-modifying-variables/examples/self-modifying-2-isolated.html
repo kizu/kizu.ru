@@ -1,0 +1,45 @@
+<style>
+
+.example-2 .test {
+  @container not style(--is-alternate: ) {
+    --is-alternate: ;
+    --depth: calc(var(--inherited--odd, 0) + 1);
+    --inherited--even: var(--depth);
+  }
+  @container style(--is-alternate: ) {
+    --is-alternate: initial;
+    --depth: calc(var(--inherited--even, 0) + 1);
+    --inherited--odd: var(--depth);
+  }
+
+  --padding: 1em;
+  padding: var(--padding);
+  background: oklch(95% 0.125 calc(var(--depth) * 115));
+  border-radius: calc(
+    4.5 * var(--padding)
+    -
+    var(--depth) * var(--padding)
+  );
+  border-start-start-radius: calc(0.5 * var(--padding));
+
+  &::before {
+    counter-reset: depth var(--depth);
+    content: counter(depth);
+  }
+}
+
+</style>
+<div class="example-2">
+
+  <div class="test">
+    <div class="test">
+      <div class="bar">
+        <div class="test">
+          <div class="test">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

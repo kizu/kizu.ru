@@ -1,0 +1,45 @@
+<style>
+
+.example-4-good * {
+  @container not style(--is-alternate: ) {
+    --is-alternate: ;
+    --inherited--even: var(--inherit);
+    --inherited: var(--inherited--odd);
+  }
+  @container style(--is-alternate: ) {
+    --is-alternate: initial;
+    --inherited--odd: var(--inherit);
+    --inherited: var(--inherited--even);
+  }
+}
+
+.example-4-good .test {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  border: 1px solid;
+  gap: 0.5em;
+  --grow: 1;
+  --inherit: var(--grow);
+
+  & > * {
+    flex-grow: var(--inherited);
+  }
+}
+
+</style>
+
+<div class="example-4-good">
+
+  <div class="test">
+    <div class="test" style="--grow: 0;">
+      <div class="test">A</div>
+      <div class="test">B</div>
+    </div>
+    <div class="test">
+      <div class="test">C</div>
+      <div class="test">D</div>
+    </div>
+  </div>
+
+</div>
