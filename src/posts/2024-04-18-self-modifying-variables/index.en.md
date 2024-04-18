@@ -5,7 +5,7 @@ mastodon_post_id: "112292594239211916"
 
 # Self-Modifying Variables: the `inherit()` Workaround
 
-#CSS_Variables #Container_Style_Queries #CSS_Logic #Future_CSS #Experiment #CSS
+#CSS_Variables #Style_Queries #CSS_Logic #Future_CSS #Experiment #CSS
 
 _Style queries will unlock many doors. An ability to alternate a value of any variable that I presented in my previous article might seem to be trivial by itself, but what if there is a hidden depth in how we can utilize it? One interesting case is the ability to emulate `inherit()` — a way to access the previous state of a custom property._
 

@@ -5,7 +5,7 @@ mastodon_post_id: "112280126375821573"
 
 # Alternating Style Queries
 
-#Container_Style_Queries #Future_CSS #Experiment #CSS
+#Style_Queries #Future_CSS #Experiment #CSS
 
 _With the container style queries on the horizon, it is a good time to do more experiments with them. In one of my recent experiments, I found out that style queries will allow us to do what the currently specified (but not implemented by anyone) function `toggle()` was supposed to._
 
