@@ -278,7 +278,7 @@ In this example, we alternate between `column` and `row` `flex-direction`, at�
 
 The last use case I wanted to show you is even more unusual and ended up being complex and important enough for me to split it into a separate article.
 
-Stay tuned!
+**Update from 2024-04-19:** and here it is, published: [“Self-Modifying Variables: the `inherit ()` Workaround”](https://kizu.dev/self-modifying-variables/).
 
 ## Do We Need the `toggle()`?
 
