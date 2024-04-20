@@ -46,10 +46,11 @@
         z-index: -1;
         background: var(--GREEN);
         border-radius: inherit;
-        anchor-default: --span;
+        position-anchor: --span;
         inset:
-          0
-          calc(anchor(auto-same) - 1em);
+          /* Should be just one `anchor(inside)` there */
+          0 calc(anchor(end) - 1em)
+          0 calc(anchor(start) - 1em);
       }
     }
   }

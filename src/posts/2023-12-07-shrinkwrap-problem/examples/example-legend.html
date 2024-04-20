@@ -16,18 +16,18 @@
 .shrinkwrap--lines::after {
   content: "";
   position: absolute;
-  anchor-default: --target;
+  position-anchor: --target;
   top: calc(50% - 1px);
   inset-inline: 0;
   border-bottom: 2px solid;
 }
 
 .shrinkwrap--lines::before {
-  inset-inline-end: anchor(auto);
+  inset-inline-end: anchor(start);
   margin-inline-end: 0.5em;
 }
 .shrinkwrap--lines::after {
-  inset-inline-start: anchor(auto);
+  inset-inline-start: anchor(end);
   margin-inline-start: 0.5em;
 }
 

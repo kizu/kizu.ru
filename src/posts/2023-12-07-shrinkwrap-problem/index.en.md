@@ -8,6 +8,10 @@ mastodon_post_id: "111540322324716753"
 
 _There is one old, yet unsolved, CSS problem: shrinking containers to fit the content when it automatically wraps. While not intentional, anchor positioning allows us to come closer to solving it, at least for a few cases. In this article, I’ll demonstrate how we can use anchor positioning to neatly decorate wrapping text or elements in flex or grid contexts._
 
+## Update from 2024-04-20
+
+There were many changes since I did write this article. I did update the examples' code for them to work, but did not yet update the code snippets in the article, as I’m waiting for the implementation to be more stable, in particular, the examples in this article require either a `inside` keyword inside an `anchor ()` tag to be implemented, or the `all` keyword for the `inset-area` property. After the implementation will become more stable, I will update the examples in this article to use it.
+
 ## The Problem
 
 When different content wraps — be it text, floats, inline-blocks, flex, or grid, — if that wrapping is automatic (without hard breaks), the way CSS calculates the final width is limited. The element with wrapped items gets expanded to fill all the available space.
@@ -90,7 +94,7 @@ And the CSS that is responsible for our visuals is this:
       position: absolute;
       z-index: -1; /* 3 */
 
-      anchor-default: --span; /* 5 */
+      position-anchor: --span; /* 5 */
       inset:
         0 /* 6 */
         calc(anchor(auto-same) - 1em); /* 7 */
@@ -343,7 +347,7 @@ One convenient thing to do is to make our anchor target the positioning cont
   content: "";
   position: absolute;
   z-index: -1;              /* 1 */
-  anchor-default: --target; /* 3 */
+  position-anchor: --target; /* 3 */
   inset: 0; /* 4 */
   inset-inline: anchor(auto-same); /* 5 */
 }
@@ -364,7 +368,7 @@ A few notes:
 
 2. Without anchor positioning, the context for our background element would be the target, so we’d make it an inline-block, and add `position: relative`. However, we’d want to reset both of these to `static` and `inline` when we use anchor positioning.
 
-3. It is not necessary to put properties that are used for anchor positioning like `anchor-name` and `anchor-default` inside the `@supports`, as they would be ignored when not supported.
+3. It is not necessary to put properties that are used for anchor positioning like `anchor-name` and `position-anchor` inside the `@supports`, as they would be ignored when not supported.
 
 4. We’d want to have a fallback for our `inset` property when the `anchor()` is not supported.
 

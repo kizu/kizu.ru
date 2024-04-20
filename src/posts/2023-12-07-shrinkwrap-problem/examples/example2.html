@@ -37,12 +37,20 @@
   z-index: -1;
   inset-block: var(--padding);
   inset-inline:
+    /* Should be just one `inside` */
     min(
-      anchor(--a auto-same),
-      anchor(--b auto-same),
-      anchor(--c auto-same),
-      anchor(--d auto-same),
-      anchor(--e auto-same)
+      anchor(--a start),
+      anchor(--b start),
+      anchor(--c start),
+      anchor(--d start),
+      anchor(--e start)
+    )
+    min(
+      anchor(--a end),
+      anchor(--b end),
+      anchor(--c end),
+      anchor(--d end),
+      anchor(--e end)
     );
   margin: calc(-1 * var(--padding));
   background: var(--PINK);

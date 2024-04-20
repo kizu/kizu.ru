@@ -18,7 +18,13 @@
   }
 
   .example-sticky:is(:hover, :focus-within) p.fixed::after {
-    inset: calc(anchor(auto-same) - 2px);
+    inset:
+      /* Should be one `inside` */
+      calc(anchor(start) - 2px)
+      calc(anchor(end) - 2px)
+      calc(anchor(end) - 2px)
+      calc(anchor(start) - 2px)
+    ;
   }
 
   .example-sticky p.fixed::after,

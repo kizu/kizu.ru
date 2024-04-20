@@ -6,7 +6,8 @@
   content: "";
   position: absolute;
   inset-block-end: -2px;
-  inset-inline: anchor(--target auto-same);
+  /* Should be just `inside` */
+  inset-inline: anchor(--target start) anchor(--target end);
   border-bottom: 2px solid;
 }
 

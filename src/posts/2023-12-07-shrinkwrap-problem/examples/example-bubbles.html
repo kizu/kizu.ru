@@ -18,10 +18,11 @@
     content: "";
     position: absolute;
     z-index: -1;
-    anchor-default: --target;
+    position-anchor: --target;
     anchor-name: --shrinkwrap;
     inset: 0;
-    inset-inline: anchor(auto-same);
+    /* Should be just `inside` */
+    inset-inline: anchor(start) anchor(end);
   }
 }
 
@@ -78,13 +79,18 @@
   content: "❤️";
   position: absolute;
   top: -0.25em;
-  anchor-default: --shrinkwrap;
+  position-anchor: --shrinkwrap;
   inset-inline-end: -0.25em;
-  inset-inline-end: calc(anchor(auto-same) - 0.25em);
+  inset-inline-end: calc(anchor(end) - 0.25em);
   rotate: 15deg;
 }
 
 @supports (anchor-name: --foo) {
+  :has(.shrinkwrap-disable:checked) {
+    & > .example-bubbles .shrinkwrap-target::before {
+      inset: 0;
+    }
+  }
   *:not(:has(.shrinkwrap-disable:checked)) {
     & > .example-bubbles .shrinkwrap {
       padding: var(--padding-block) var(--padding-inline);
