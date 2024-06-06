@@ -8,6 +8,12 @@
 
     scroll-snap-type: x mandatory; /* 4 */
 
+    &::before {
+      content: "";
+      scroll-snap-align: start; /* 12 */
+      display: block;
+    }
+
     & > * {
       inline-size: max-content; /* 5 */
       line-height: 1;           /* 6 */
@@ -18,7 +24,6 @@
       animation-range: entry-crossing;    /* 10 */
 
       display: block;           /* 11 */
-      scroll-snap-align: start; /* 12 */
       contain: layout;          /* 13 */
     }
   }
