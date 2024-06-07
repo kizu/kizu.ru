@@ -230,11 +230,11 @@ I did try to get to the root of it, and I’ll try to present you with an 
 
     This issue proposed the changes to the specs that would result in the behavior that unlocked this technique. I won’t paraphrase its text — if you’re curious about the particularities of it, I recommend reading the issue and its comments.
 - **January 7, 2021,** — [Anders Hartvoll Ruud](https://github.com/andruud), who did participate in that issue, sent an [“Intent to Spec, Implement & Ship: CSS Variables: Persistent guaranteed-invalid values”](https://groups.google.com/a/chromium.org/g/blink-dev/c/0xrbzYe_vxU/m/52xVJHTICQAJ?pli=1) to Chromium.
-- From the end of **2021** to the middle of **2022** the changes corresponding to the specs change started to land[^land] in the major browsers.
+- From the end of **2021** to the beginning of **2023** the changes corresponding to the specs change started to land[^land] in the major browsers.
 - **October 3, 2022,** — [Jane Ori](https://propjockey.io/about/) wrote a fascinating article — [“CSS-Only Type Grinding: Casting Tokens (sm|md|etc) into Useful Values”](https://www.bitovi.com/blog/css-only-type-grinding-casting-tokens-into-useful-values). I cannot claim that I understood all of its nuances, but since reading it, I wondered if there could be a simple way to achieve the same effect.
 - **June 14, 2023,** — I’m publishing this article you’re reading now.
 
-[^land]: It is hard for me to pinpoint when it appeared in Safari: in my testing, I found that it appeared in it somewhere from September 20, 2021 (v14.1, not working) to July 20, 2022 (v15.6, working). Firefox supported this from around September 7, 2021 (v92), and Chrome from at least March 1, 2022 (v99). If you know any more precise dates here, let me know! <!-- offset="-8" span="2" -->
+[^land]: It is hard for me to pinpoint when it appeared in Safari: in my testing, I found that it appeared in it somewhere from September 20, 2021 (v14.1, not working) to July 20, 2022 (v15.6, working), but the [latest WPT tests related to it](https://wpt.fyi/results/css/css-variables/variables-substitute-guaranteed-invalid.html?label=experimental&label=master&aligned) were fixed only in January 2023. Firefox supported this from around September 7, 2021 (v92), and Chrome from at least March 1, 2022 (v99). If you know any more precise dates here, let me know! <!-- offset="-8" span="2" -->
 
 As we can see, the spec changes allowing this did land at the end of 2021, and all browsers implemented them during 2022 — there is a chance you did your experiments trying to achieve this technique before that and went away with nothing.
 

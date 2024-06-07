@@ -8,6 +8,12 @@
 
     scroll-snap-type: x mandatory; /* 4 */
 
+    &::before {
+      content: "";
+      scroll-snap-align: start; /* 12 */
+      display: block;
+    }
+
     & > * {
       inline-size: max-content; /* 5 */
       line-height: 1;           /* 6 */
@@ -18,7 +24,6 @@
       animation-range: entry-crossing;    /* 10 */
 
       display: block;           /* 11 */
-      scroll-snap-align: start; /* 12 */
       contain: layout;          /* 13 */
     }
   }
@@ -29,42 +34,6 @@
   from {
     transform: scale(0); /* 15 */
     margin-block-end: -1lh; /* 16 */
-  }
-}
-
-/* Experimenting with making the example sticky */
-@supports (animation-range: entry-crossing) {
-  figure[style*='--sticky:'] {
-    position: var(--initial-at-small, sticky);
-    top: 0;
-    z-index: 2;
-
-    --height: 550px;
-    --reduce-to: 0.35;
-    --distance: 0px;
-    --animation-range:
-      entry 100cqh
-      entry calc(100cqh + var(--distance));
-
-    transform-origin: 0 0;
-    animation: var(--initial-at-small, linear shrink-figure both);
-    animation-timeline: view();
-    animation-range: var(--animation-range);
-
-    @media (prefers-reduced-motion: no-preference) {
-      --distance: calc(var(--height) * (1 - var(--reduce-to)));
-    }
-  }
-}
-
-@keyframes shrink-figure {
-  from {
-    transform: translateY(0px) translateX(0px) scale(1);
-  }
-  to {
-    transform: translateY(1rem) translateX(calc(100% + var(--viewport-padding))) scale(var(--reduce-to));
-    resize: none;
-    width: 100%;
   }
 }
 
