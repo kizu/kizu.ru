@@ -1,5 +1,5 @@
 ---
-mastodon_post_id: ""
+mastodon_post_id: "112814091114763105"
 ---
 
 # Fit-to-Width Text: A New Technique
@@ -318,7 +318,7 @@ Given the technique works just by using existing CSS features without relying o
 
 I believe that this shows how browsers are capable of achieving this technique today and, similar to how we got the `text-wrap: balance`, it will be possible to implement this effect as a built-in CSS feature.
 
-The exact naming and syntax are to be specified (I’d go for something like `text-fit: full` or `text-fit: full up to 10em` for setting the upper limit), but I am planning to propose this as a feature in that issue. I will link here when I will do so.
+The exact naming and syntax are to be specified (I’d go for something like `text-fit: full` or `text-fit: full up to 10em` for setting the upper limit), but [here is my comment in the above issue](https://github.com/w3c/csswg-drafts/issues/2528#issuecomment-2239624304). As I mentioned there — any feedback is welcome.
 
 I invite browser developers to experiment with this algorithm and prototype a native CSS property that will allow us to achieve this effect natively. There is a clear need for this feature: my article about scroll-driven animation solution was one of my most popular ones, and the GitHub issue is in the [top 25](https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc) most liked open issues of CSSWG issues.
 
