@@ -1,0 +1,82 @@
+<style>
+.text-fit {
+  --max-font-size: 10em;
+
+  display: flex;
+  container-type: inline-size;
+
+  --captured-length: initial;
+  --support-sentinel: var(--captured-length, 9999px);
+
+  line-height: 0.95;
+  margin: 0.25em 0;
+
+  & > [aria-hidden] {
+    visibility: hidden;
+  }
+
+  & > :not([aria-hidden]) {
+    flex-grow: 1;
+    container-type: inline-size;
+
+    --captured-length: 100cqi;
+    --available-space: var(--captured-length);
+
+    & > * {
+      display: block;
+
+      --captured-length: 100cqi;
+      --ratio: tan(atan2(
+        var(--available-space),
+        var(--available-space) - var(--captured-length)
+      ));
+      font-size: clamp(
+        1em,
+        1em * var(--ratio),
+        var(--max-font-size, infinity * 1px)
+        -
+        var(--support-sentinel)
+      );
+      inline-size: calc(var(--available-space) + 1px);
+    }
+  }
+}
+
+@property --captured-length {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+</style>
+
+<p>
+  <span class="text-fit">
+    <span><span>What if I will tell you</span></span>
+    <span aria-hidden="true">What if I will tell you</span>
+  </span>
+  <span class="text-fit">
+    <span><span>how we could use</span></span>
+    <span aria-hidden="true">how we could use</span>
+  </span>
+  <em class="text-fit">
+    <span><span>registered custom properties</span></span>
+    <span aria-hidden="true">registered custom properties</span>
+  </em>
+  <span class="text-fit">
+    <span><span>(alongside <em>container query length units</em> and <strong style="font-weight: 800">math</strong>)</span></span>
+    <span aria-hidden="true">(alongside <em>container query length units</em> and <strong style="font-weight: 800">math</strong>)</span>
+  </span>
+  <strong class="text-fit">
+    <span><span>to solve</span></span>
+    <span aria-hidden="true">to solve</span>
+  </strong>
+  <span class="text-fit">
+    <span><span>fit-to-width text</span></span>
+    <span aria-hidden="true">fit-to-width text</span>
+  </span>
+  <strong class="text-fit" style="font-weight: 800">
+    <span><span>in all latest browsers?</span></span>
+    <span aria-hidden="true">in all latest browsers?</span>
+  </strong>
+</p>

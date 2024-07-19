@@ -1,0 +1,16 @@
+<style>
+  .text-fit-step-3 > [aria-hidden] {
+    position: relative;
+  }
+  .increased-width {
+    outline: 4px double var(--GREEN);
+    outline-offset: 6px;
+  }
+  .text-fit-step-3 > * {
+    visibility: inherit !important;
+  }
+</style>
+<span class="text-fit-step-3 text-fit">
+  <span class="remaining-space"><span class="increased-width">fit-to-width text</span></span>
+  <span class="shrink-to-fit" aria-hidden="true">fit-to-width text</span>
+</span>

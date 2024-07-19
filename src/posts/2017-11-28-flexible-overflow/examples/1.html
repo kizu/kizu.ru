@@ -19,7 +19,9 @@
       padding: 0.5em 1em;
       border: 1px solid;
 
-      transition: width 1.5s;
+      &:not(:active) {
+        transition: width 1.5s;
+      }
     }
 
     .wrapper:active {

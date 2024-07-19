@@ -6,6 +6,7 @@ figure {
   --link-text-shadow-color: transparent;
   --link-padding: 0;
 
+  align-self: start;
   max-width: calc(100% + 3rem * var(--at-small));
   box-sizing: border-box;
   padding: 0.5rem;

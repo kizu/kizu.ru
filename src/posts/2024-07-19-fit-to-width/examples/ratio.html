@@ -1,0 +1,28 @@
+<style>
+  .example-ratio {
+    display: grid;
+    gap: 1lh;
+  }
+  .box {
+    height: 3lh;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    background: var(--PINK);
+    border-radius: 1em;
+  }
+
+  .box1 {
+    width: 20%;
+  }
+
+  .box2 {
+    width: 100%;
+  }
+</style>
+
+<div class="example-ratio">
+  <div class="box box1">20%</div>
+  <p>Ratio: 20% / 100% = 5</p>
+  <div class="box box2">100%</div>
+</div>
