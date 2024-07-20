@@ -312,7 +312,9 @@ There are other downsides, some of which I have already mentioned in the arti
 
 ## A CSSWG Proposal
 
-There is already a [“Feature for making text always fit the width of its parent”](https://github.com/w3c/csswg-drafts/issues/2528) issue by [Tobi Reif](https://tobireif.com/) in CSSWG GitHub about the problem this technique solves.
+There is already[^past-proposal] a [“Feature for making text always fit the width of its parent”](https://github.com/w3c/csswg-drafts/issues/2528) issue by [Tobi Reif](https://tobireif.com/) in CSSWG GitHub about the problem this technique solves.
+
+[^past-proposal]: As [Alan Stearns](https://github.com/astearns) [pointed out](https://front-end.social/@famulimas/112814679500989185) in Mastodon, something like this was proposed a long time ago, for example, [Tab Atkins-Bittner](https://xanthir.com/) proposed it in the www-style mailing list: [“Suggestion for text-overflow:shrink”](https://lists.w3.org/Archives/Public/www-style/2009Oct/0031.html) in 2009. <!-- span="3" -->
 
 Given the technique works just by using existing CSS features without relying on unintended effects (unlike my scroll-driven animations solution), it proves that **this is possible**.
 
