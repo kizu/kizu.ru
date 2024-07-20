@@ -39,20 +39,15 @@ Let me start with the worst part of the technique: HTML. It is not _too bad_
 
 And, alongside it, there are two extra wrappers around our text. I’ll explain how it works a bit later, right after showing its CSS[^not-optimal]:
 
-[^not-optimal]: I am pretty sure this is not _the_ optimal way to write it, but while I see a few areas of improvement, I want to publish this article as soon as possible, so I am trying to contain my perfectionism.<br/><br/> If you have any suggestions, feel free to throw them at me! <!-- offset="1  " span="2" -->
+[^not-optimal]: I am pretty sure this is not _the_ optimal way to write it, but while I see a few areas of improvement, I want to publish this article as soon as possible, so I am trying to contain my perfectionism.<br/><br/> If you have any suggestions, feel free to throw them at me!<br/><br/> **Update from 2024-07-20:** I updated the code in two places: I am now applying `white-space: nowrap` conditionally, and also modified the code to support nested usage as a way to [account for optical sizing](#accounting-for-optical-sizing). <!-- offset="1  " span="2" -->
 
 ```CSS
 .text-fit {
-  --max-font-size: 10em;
-
   display: flex;
   container-type: inline-size;
 
   --captured-length: initial;
   --support-sentinel: var(--captured-length, 9999px);
-
-  line-height: 0.95;
-  margin: 0.25em 0;
 
   & > [aria-hidden] {
     visibility: hidden;
@@ -66,26 +61,47 @@ And, alongside it, there are two extra wrappers around our text. I’ll explain
     --available-space: var(--captured-length);
 
     & > * {
-      display: block;
-
+      --support-sentinel: inherit;
       --captured-length: 100cqi;
       --ratio: tan(atan2(
         var(--available-space),
         var(--available-space) - var(--captured-length)
       ));
-      font-size: clamp(
+      --font-size: clamp(
         1em,
         1em * var(--ratio),
         var(--max-font-size, infinity * 1px)
         -
         var(--support-sentinel)
       );
-      inline-size: calc(var(--available-space) + 1px);
+      inline-size: var(--available-space);
+
+      &:not(.text-fit) {
+        display: block;
+        font-size: var(--font-size);
+
+        @container (inline-size > 0) {
+          white-space: nowrap;
+        }
+      }
+
+      &.text-fit {
+        --captured-length2: var(--font-size);
+        font-variation-settings:
+          'opsz'
+          tan(atan2(var(--captured-length2), 1px));
+      }
     }
   }
 }
 
 @property --captured-length {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --captured-length2 {
   syntax: "<length>";
   initial-value: 0px;
   inherits: true;
@@ -231,15 +247,27 @@ Now that we know the ratio, we can apply it to our `font-size`. As this is�
 
 {{<Partial class="require-at-property" src="examples/step-2.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 4em; padding: 1rem;" />}}
 
-Because our text with a modified size is inside our growing but contained element, it does not have all the space available. That’s not a big deal: we already saved the `--available-width`, and we can now apply it[^round], so the element with the increased size won’t wrap.
-
-[^round]: I am using a `calc()` and adding an extra pixel there, as I found the subpixel values leading to an unnecessary wrapping in some cases; `round()` could potentially work as well. <!-- offset="3" span="2" -->
+Because our text with a modified size is inside our growing but contained element, it does not have all the space available. That’s not a big deal: we already saved the `--available-width`, and we can now apply it, so the element with the increased size won’t wrap.
 
 ```CSS
 .text-fit {
   & > :not([aria-hidden]) {
     & > * {
-      inline-size: calc(var(--available-space) + 1px);
+      inline-size: var(--available-space);
+    }
+  }
+}
+```
+
+In case the width of our resized text will go beyond the available width — after all we only approximate it — we don’t want it to wrap. Initially, I did want to just bump the `inline-size` slightly to account for this, but then I looked at how our container with the remaining space behaves: when our original text is smaller than the available size, we know that it does not wrap. When it becomes wider, there is no space available. And, as we already have a container, we can use container query to apply `white-space: nowrap` conditionally!
+
+```CSS
+.text-fit {
+  & > :not([aria-hidden]) {
+    & > * {
+      @container (inline-size > 0) {
+        white-space: nowrap;
+      }
     }
   }
 }
@@ -290,6 +318,98 @@ Here I am using it on the topmost container, relying on the interesting beh
 
 This allows us to define a variable that will result in a `9999px` value when the custom property is not registered and will be `0px` when we register it. Then we subtract it from our upper bound, making the font limited by the lower bound, which is just `1em`.
 
+### Accounting for Optical Sizing
+
+When I posted[^updated-later] the article for the first time, I mentioned that if a font will have a variation in optical sizing based on its `font-size`, then my technique won’t work correctly. [Scott Kellum](https://scottkellum.com/) and [Roel Nieskens](https://pixelambacht.nl/) [confirmed this](https://front-end.social/@pixelambacht@typo.social/112818142019407942) in comments to my mastodon post, which led to a discussion and some more
+experiments, in which I found a solution for this case as well.
+
+[^updated-later]: This section was added a day after posting, on 2024-07-20.
+
+#### Variable Fonts Problem
+
+What is the problem? Some variable fonts can contain an optical sizing axis, which can change how various glyphs are displayed based on the font size. That means that if we render the original text in a small size, it could look very different from the same text but with the increased size, including the difference in the dimensions of various glyphs.
+
+Here is the first example from this article, but with [the Fraunces font](https://fraunces.undercase.xyz/) applied:
+
+{{<Partial class="require-at-property" src="examples/broken.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8em; padding: 1rem;">}}
+  The line of the text in the example does not fit the width perfectly, changing drastically when we resize the width of the container.
+
+  The remaining space on each line is shown with pink rectangles.
+{{</Partial>}}
+
+For Fraunces, the optical adjustment of the larger sizes makes the glyphs narrower, making the proportional increase not fill the lines fully.
+
+Other fonts could have different optical adjustments, potentially making the lines _wider_.
+
+#### Nested Solution
+
+The most trivial solution for this could be just disabling the optical sizing by setting `font-optical-sizing: none`, but then the text won’t look as good.
+
+The proper solution involves duplicating the text once more, or, more specifically, _nesting_ my solution inside itself, alongside two small adjustments. Here is a modified HTML for one such line:
+
+```HTML
+<span class="text-fit">
+  <span>
+    <span class="text-fit">
+      <span><span>fit-to-width text</span></span>
+      <span aria-hidden="true">fit-to-width text</span>
+    </span>
+  </span>
+  <span aria-hidden="true">fit-to-width text</span>
+</span>
+```
+
+We replace the inner span with the same component. Then, we need to adjust the CSS slightly. First, instead of applying the `font-size` directly, we save it to a `--font-size` custom property. Then, we add this:
+
+```CSS
+.text-fit {
+  & > :not([aria-hidden]) {
+    & > * {
+      --support-sentinel: inherit; /* 1 */
+
+      &:not(.text-fit) { /* 2 */
+        display: block;
+        font-size: var(--font-size);
+
+        @container (inline-size > 0) {
+          white-space: nowrap;
+        }
+      }
+
+      &.text-fit { /* 3 */
+        --captured-length2: var(--font-size);
+        font-variation-settings:
+          'opsz'
+          tan(atan2(var(--captured-length2), 1px));
+      }
+    }
+  }
+}
+
+@property --captured-length2 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+```
+
+For the inner span, we separate what we apply based on if it is a simple case, or if it is a nested one.
+
+1. First, because we are nesting things, we need to reset the `--support-sentinel` on the inner element, as at that point `--captured-length` will be redefined.
+2. For the simple case, we add the `display: block` there (as it is just a span), and directly use our `--font-size` variable. We also move the `white-space` definition there, so it will be only applied to the innermost element.
+3. For the nested case, we first need to capture the `font-size` into a registered custom property — in this case, we have to add a new one, as we can’t reuse the existing — and then apply a `font-variation-settings` with its value via the `tan (atan2())` technique.
+
+{{<Partial class="require-at-property" src="examples/solved-by-nesting.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 8em; padding: 1rem;">}}
+  In this example, everything fits perfectly again. Resizing the example shows how the glyphs change, which can be especially noticeable for italics and the ampersand symbol.
+{{</Partial>}}
+
+
+That’s it! The way it works: on the first “layer” instead of applying the font size, we apply the optical sizing as if we were rendering the text with this new font size.
+
+Then, we nest our technique, and now the optical sizing is fixed based on the approximate initial adjusted `font-size`, making the nested small text get the changed glyphs, adjusting its dimensions, and allowing the second adjustment to the `font-size` take this into account.
+
+Note how we only need to use nesting if we need to account for the optical size adjustments: the CSS stays the same across the more simple cases and this one.
+
 ## Features
 
 This technique is better than my previous one in many ways.
@@ -301,9 +421,7 @@ This technique is better than my previous one in many ways.
 
 ## Limitations
 
-Because of the way our technique works — by first rendering the font in the smallest possible size, and then calculating how much we need to bump the font size proportionally, there is a small chance that some fonts could have the widths of glyphs adjusted based on the size, making the adjusted width to not fit exactly. However, in my quick test with fonts that I have installed locally, I did not encounter any issues, but it is worth mentioning.
-
-There are other downsides, some of which I have already mentioned in the article.
+Outside the optical size adjustment limitation of the more simple case, there are other general downsides, some of which I have already mentioned in the article.
 
 - The [`@property` browser support](https://caniuse.com/mdn-css_at-rules_property) is not perfect, but we can fall back gracefully.
 - There is a text duplication and extra wrappers, so it can be a bit tricky to implement, and requires `aria-hidden` for hiding the duplicated text.

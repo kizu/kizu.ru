@@ -1,15 +1,16 @@
 <style>
-.text-fit {
+.text-fit:not(.text-fit *) {
+  line-height: 0.95;
+  margin: 0.25em 0;
   --max-font-size: 10em;
+}
 
+.text-fit {
   display: flex;
   container-type: inline-size;
 
   --captured-length: initial;
   --support-sentinel: var(--captured-length, 9999px);
-
-  line-height: 0.95;
-  margin: 0.25em 0;
 
   & > [aria-hidden] {
     visibility: hidden;
@@ -23,21 +24,36 @@
     --available-space: var(--captured-length);
 
     & > * {
-      display: block;
-
+      --support-sentinel: inherit;
       --captured-length: 100cqi;
       --ratio: tan(atan2(
         var(--available-space),
         var(--available-space) - var(--captured-length)
       ));
-      font-size: clamp(
+      --font-size: clamp(
         1em,
         1em * var(--ratio),
         var(--max-font-size, infinity * 1px)
         -
         var(--support-sentinel)
       );
-      inline-size: calc(var(--available-space) + 1px);
+      inline-size: var(--available-space);
+
+      &:not(.text-fit) {
+        display: block;
+        font-size: var(--font-size);
+
+        @container (inline-size > 0) {
+          white-space: nowrap;
+        }
+      }
+
+      &.text-fit {
+        --captured-length2: var(--font-size);
+        font-variation-settings:
+          'opsz'
+          tan(atan2(var(--captured-length2), 1px));
+      }
     }
   }
 }
@@ -48,6 +64,11 @@
   inherits: true;
 }
 
+@property --captured-length2 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
 </style>
 
 <p>
