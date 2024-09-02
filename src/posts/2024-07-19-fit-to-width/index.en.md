@@ -165,7 +165,9 @@ However, today[^named-cqlu] we do not have this as a feature in CSS: we on
 
 [^named-cqlu]: In the future, we could use named container query units for this. [Una Kravets](https://una.im/) did open a [CSSWG issue](https://github.com/w3c/csswg-drafts/issues/7858) about them, and it was resolved to add them to the specs. <!-- span="2" -->
 
-That’s where registered custom properties can help us. When we register a custom property, and then assign a value to it, it is _captured_ on that element at the computed value time, allowing us to access it via inheritance. Here is the part responsible for it in our technique’s code:
+That’s where registered custom properties can help us. When we register a custom property, and then assign a value to it, it is _captured_[^captured] on that element at the computed value time, allowing us to access it via inheritance. Here is the part responsible for it in our technique’s code:
+
+[^captured]: I published a separate post about this in my blog: [“Captured Custom Properties”](https://blog.kizu.dev/captured-custom-properties/) <!-- offset="-3" -->
 
 ```CSS
 .text-fit {
