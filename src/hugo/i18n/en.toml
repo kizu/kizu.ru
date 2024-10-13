@@ -67,6 +67,9 @@ other = "Follow on Mastodon"
 [mastodonLink]
 other = "https://front-end.social/@kizu"
 
+[mastodonHandle]
+other = "@kizu@front-end.social"
+
 [Feed]
 other = "RSS Feed"
 
