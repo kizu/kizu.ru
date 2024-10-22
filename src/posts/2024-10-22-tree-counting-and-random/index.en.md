@@ -63,7 +63,7 @@ One of the potentially planned features — the ability to specify a selector
 
 [^selector-argument-issue]: And a CSSWG issue [“Extend `sibling-index()` and `sibling-count()` with a selector argument”](https://github.com/w3c/csswg-drafts/issues/9572) by [Oriol Brufau](https://github.com/Loirooriol). <!-- offset="2" span="3" -->
 
-Another missing part is the ability to count not the _siblings_, but the _children_. I’ll open a separate issue about that, and provide a few examples of that use case further in this article.
+Another missing part is the ability to count not the _siblings_, but the _children_. I opened [a CSSWG issue about that](https://github.com/w3c/csswg-drafts/issues/11068), and provide a few examples of that use case further in this article.
 
 
 ### Random Values
@@ -441,7 +441,7 @@ Note how this time the code[^webkit-bug] contains everything necessary to both 
 }}
 ```
 
-The main benefit of this method — the `--children-count` is available not only to the children, but also to the parent, and some use cases can benefit from this. The current specs do not cover this. I’ll open an issue to add a `children-count()` function to the other two, as this is also something that would be great to have.
+The main benefit of this method — the `--children-count` is available not only to the children, but also to the parent, and some use cases can benefit from this. The current specs do not cover this. I opened [a CSSWG issue to add a `children-count()` function](https://github.com/w3c/csswg-drafts/issues/11068) to the other two, as this is also something that would be great to have.
 
 I assigned the `--sibling-count` to be the same as `--children-count` on the items — this way I’ll use `--sibling-coung` whenever possible to show what will be available with the currently specified functions.
 
@@ -586,7 +586,7 @@ To select the closest prime to our `--children-count`, for every prime we do�
 
 7. Just in case, I am using the [captured custom property](https://blog.kizu.dev/captured-custom-properties/) for the `--closest-prime`, so it would be calculated only once on the `ol`, and not on every `li`.
 
-While this algorithm is likely unnecessary, it can be used for any similar purpose — when we’d like to round something to the closest number in some range. I have been thinking about this for a while and will open a CSSWG issue with a proposal to add this as an additional ability of a `round()` function.
+While this algorithm is likely unnecessary, it can be used for any similar purpose — when we’d like to round something to the closest number in some range. I have been thinking about this for a while and opened [a CSSWG issue](https://github.com/w3c/csswg-drafts/issues/11067) with a proposal to add this as an additional ability of a `round()` function.
 
 ##### Multiple Random Numbers
 
