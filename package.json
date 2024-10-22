@@ -40,6 +40,6 @@
     "yaml-front-matter": "^3.4.0"
   },
   "dependencies": {
-    "@kizu/custom-elements": "github:kizu/custom-elements#3e7a2f9915d813abebd1c7e281c75bb5153645dd"
+    "@kizu/custom-elements": "github:kizu/custom-elements#e3e6f448cdc9a3485e159bca44caa6b168cee41a"
   }
 }
