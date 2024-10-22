@@ -19,6 +19,12 @@ const hugoSrc = () => {
     .pipe(gulp.dest('./build/hugo'));
 };
 
+const copyScripts = () => {
+  return gulp
+    .src('./node_modules/@kizu/custom-elements/src/**/*', { since: gulp.lastRun(copyScripts) })
+    .pipe(gulp.dest('./build/hugo/static/j/ce'));
+};
+
 // TODO: should handle .md and everything else differently
 //       at least, watcher should run incrementally for docs,
 //       but completely for dependant files.
@@ -121,7 +127,7 @@ const watchReloaded = () => {
 
 // Defining tasks
 gulp.task('styles', gulp.parallel(stylesFile, stylesSrc));
-gulp.task('buildForHugo', gulp.parallel(hugoSrc, pages, documents, examples, scripts, 'styles'));
+gulp.task('buildForHugo', gulp.parallel(hugoSrc, copyScripts, pages, documents, examples, scripts, 'styles'));
 gulp.task('prepareHugo', gulp.series(clean, 'buildForHugo'));
 gulp.task('build', gulp.series('prepareHugo', hugoBuild));
 

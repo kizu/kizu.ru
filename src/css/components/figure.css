@@ -17,8 +17,23 @@ figure {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
 }
 
+/* For debugging */
+figure[data-src] {
+  position: relative;
+}
+
+figure[data-src]::before {
+  content: attr(data-src);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  font-size: 0.5em;
+  line-height: 1;
+}
+
 aside > figure {
   box-shadow: none;
+  background: none;
   padding: 0;
   margin-right: 0.5rem;
 }

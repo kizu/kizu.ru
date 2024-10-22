@@ -1,0 +1,300 @@
+<style>
+  .random-example {
+    font: var(--THEME_FONT--SMALL);
+
+    & ol {
+      display: grid;
+      height: 66vh;
+      --item-height: max(1px, calc(66vh / max(1, var(--children-count))));
+    }
+
+    & li {
+      position: relative;
+      z-index: 1;
+      --bg: var(--GREEN);
+      background: linear-gradient(var(--bg), var(--bg)) no-repeat;
+      background-size: calc(100% * var(--random-value)) 100%;
+      line-height: var(--item-height);
+
+      &:not(:hover) {
+        color: transparent;
+        text-shadow: none;
+        z-index: 0;
+        opacity: 0.7;
+      }
+    }
+    & li::after {
+      counter-reset: random calc(var(--random-value, 0) * 100);
+      content: counter(random);
+    }
+  }
+
+  @property --captured-integer {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+  }
+
+  .random-99-children {
+    --limit: 102;
+    --x: var(--children-count);
+    --closest-prime: var(--captured-integer);
+    --captured-integer: calc(
+      var(--limit)
+      -
+      max(
+        min(1, 11 - var(--x)) * (var(--limit) - 11),
+        min(1, 13 - var(--x)) * (var(--limit) - 13),
+        min(1, 17 - var(--x)) * (var(--limit) - 17),
+        min(1, 19 - var(--x)) * (var(--limit) - 19),
+        min(1, 23 - var(--x)) * (var(--limit) - 23),
+        min(1, 29 - var(--x)) * (var(--limit) - 29),
+        min(1, 31 - var(--x)) * (var(--limit) - 31),
+        min(1, 37 - var(--x)) * (var(--limit) - 37),
+        min(1, 41 - var(--x)) * (var(--limit) - 41),
+        min(1, 43 - var(--x)) * (var(--limit) - 43),
+        min(1, 47 - var(--x)) * (var(--limit) - 47),
+        min(1, 53 - var(--x)) * (var(--limit) - 53),
+        min(1, 59 - var(--x)) * (var(--limit) - 59),
+        min(1, 61 - var(--x)) * (var(--limit) - 61),
+        min(1, 67 - var(--x)) * (var(--limit) - 67),
+        min(1, 71 - var(--x)) * (var(--limit) - 71),
+        min(1, 73 - var(--x)) * (var(--limit) - 73),
+        min(1, 79 - var(--x)) * (var(--limit) - 79),
+        min(1, 83 - var(--x)) * (var(--limit) - 83),
+        min(1, 89 - var(--x)) * (var(--limit) - 89),
+        min(1, 97 - var(--x)) * (var(--limit) - 97),
+        min(1, 101 - var(--x)) * (var(--limit) - 101)
+      )
+    );
+
+    & > li {
+      --random-part-from-sibling:
+        pow(var(--sibling-index), 3)
+        -
+        pow(var(--sibling-index), 2)
+        +
+        var(--sibling-index);
+      --random-part-from-count: var(--children-count);
+      --random-limit: var(--closest-prime);
+      --random-value: calc(
+        mod(
+          var(--random-part-from-sibling)
+          *
+          var(--random-part-from-count)
+          *
+          var(--seed, 0)
+          ,
+          var(--random-limit)
+        )
+        /
+        var(--random-limit)
+      );
+      --random-value2: calc(
+        mod(
+          var(--random-part-from-sibling)
+          *
+          var(--random-part-from-count)
+          *
+          calc(var(--seed, 0) + 21)
+          ,
+          var(--random-limit)
+        )
+        /
+        var(--random-limit)
+      );
+      --random-value3: calc(
+        mod(
+          var(--random-part-from-sibling)
+          *
+          var(--random-part-from-count)
+          *
+          calc(var(--seed, 0) + 42)
+          ,
+          var(--random-limit)
+        )
+        /
+        var(--random-limit)
+      );
+    }
+  }
+  .random--stable > li {
+    --random-part-from-count: 1;
+    --random-limit: 101;
+  }
+  .random--sorted > li {
+    order: round(down, var(--random-value) * var(--children-count), 1);
+  }
+
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="99" max="99" style="width: 100px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="99" min="0" max="99" size="2" />
+        </input-source>
+      </input-value>
+    </fieldset>
+
+    <fieldset>
+      <legend>Options</legend>
+
+      <input-source>
+        <label>
+          <input class="input-sorted" type="checkbox" id="random-1-sort-by-value" />
+          Sort by value
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-sorted"
+        to=".random-example ol"
+        as=".random--sorted"
+      ></input-value>
+
+      <input-source>
+        <label>
+          <input class="input-stable" type="checkbox"id="random-1-stable-random" />
+          Stable random
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-stable"
+        to=".random-example ol"
+        as=".random--stable"
+      ></input-value>
+    </fieldset>
+
+    <fieldset class="seed-inputs">
+      <legend>Seed</legend>
+      <input-value from=".seed-inputs input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="3" max="99" style="width: 100px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="3" min="0" max="99" size="2" />
+        </input-source>
+      </input-value>
+      <input-value
+        root="figure"
+        from=".seed-inputs input"
+        to=".random-example ol"
+        as="--seed"
+      ></input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="random-example random-1">
+        <ol class="count-and-index-99-children random-99-children">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

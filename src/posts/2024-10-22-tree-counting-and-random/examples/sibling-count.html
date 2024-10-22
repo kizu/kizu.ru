@@ -1,0 +1,172 @@
+<style>
+  .count-99-siblings {
+    & > li::after {
+      counter-reset: index var(--sibling-index) count var(--sibling-count);
+      content: counter(index) "/" counter(count);
+    }
+  }
+  .count-99-siblings {
+    & > li {
+      --sc2: 0;
+      --sc1: 0;
+      --sibling-count: calc(10 * var(--sc2) + var(--sc1));
+
+      background: color-mix(in oklch,
+        var(--GREEN) min(100%, var(--sibling-index) * var(--sibling-count) * 100%),
+        var(--PINK)
+      );
+    }
+    & > li:first-child {
+      &:nth-last-child(10n+1) { &, & ~ li { --sc1: 1 } }
+      &:nth-last-child(10n+2) { &, & ~ li { --sc1: 2 } }
+      &:nth-last-child(10n+3) { &, & ~ li { --sc1: 3 } }
+      &:nth-last-child(10n+4) { &, & ~ li { --sc1: 4 } }
+      &:nth-last-child(10n+5) { &, & ~ li { --sc1: 5 } }
+      &:nth-last-child(10n+6) { &, & ~ li { --sc1: 6 } }
+      &:nth-last-child(10n+7) { &, & ~ li { --sc1: 7 } }
+      &:nth-last-child(10n+8) { &, & ~ li { --sc1: 8 } }
+      &:nth-last-child(10n+9) { &, & ~ li { --sc1: 9 } }
+      &:nth-last-child(n+10):nth-last-child(-n+19)
+        { &, & ~ li { --sc2: 1 } }
+      &:nth-last-child(n+20):nth-last-child(-n+29)
+        { &, & ~ li { --sc2: 2 } }
+      &:nth-last-child(n+30):nth-last-child(-n+39)
+        { &, & ~ li { --sc2: 3 } }
+      &:nth-last-child(n+40):nth-last-child(-n+49)
+        { &, & ~ li { --sc2: 4 } }
+      &:nth-last-child(n+50):nth-last-child(-n+59)
+        { &, & ~ li { --sc2: 5 } }
+      &:nth-last-child(n+60):nth-last-child(-n+69)
+        { &, & ~ li { --sc2: 6 } }
+      &:nth-last-child(n+70):nth-last-child(-n+79)
+        { &, & ~ li { --sc2: 7 } }
+      &:nth-last-child(n+80):nth-last-child(-n+89)
+        { &, & ~ li { --sc2: 8 } }
+      &:nth-last-child(n+90):nth-last-child(-n+99)
+        { &, & ~ li { --sc2: 9 } }
+    }
+  }
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="99" max="100" />
+        </input-source>
+        <input-source>
+          <input type="number" value="99" min="0" max="100" size="3" />
+        </input-source>
+      </input-value>
+    </fieldset>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+      <div class="algorithm-example algorithm-3">
+        <ol class="count-99-items count-99-siblings">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </clone-content>
+  </input-value>
+</input-scope>

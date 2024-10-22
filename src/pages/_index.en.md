@@ -4,7 +4,7 @@ aliases: [/en/everything/]
 
 # **Articles & Experiments** by <span class="p-name p-author">Roman Komarov</span>
 
-Welcome! I’m Roman, a <span class="p-job-title">front-end web developer</span> at [Datadog](https://www.datadoghq.com/ "{:class='p-org'}"). <span class="p-note">I love <span class="p-category">CSS</span>, and most of the things I do, write, or think about are CSS-related.</span> On this site I collect my experiments and articles about it (and, occasionally, about some other topics).
+Welcome! I’m Roman, a <span class="p-job-title">senior front-end engineer</span> at [Datadog](https://www.datadoghq.com/ "{:class='p-org'}"), and a member of [CSSWG](https://www.w3.org/groups/wg/css/). <span class="p-note">I love <span class="p-category">CSS</span>, and most of the things I do, write, or think about are CSS-related.</span> On this site, I collect my experiments and articles about it (and, occasionally, about some other topics).
 
 {{<ArticleList>}}
 

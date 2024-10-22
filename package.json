@@ -38,5 +38,8 @@
     "rollup-plugin-terser": "^4.0.4",
     "shelljs": "^0.8.1",
     "yaml-front-matter": "^3.4.0"
+  },
+  "dependencies": {
+    "@kizu/custom-elements": "github:kizu/custom-elements#3e7a2f9915d813abebd1c7e281c75bb5153645dd"
   }
 }
