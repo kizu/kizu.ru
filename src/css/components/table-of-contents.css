@@ -38,7 +38,8 @@
   --is-hovered: 0;
 }
 
-.ToC:hover {
+.ToC:hover,
+.ToC:focus-within {
   --is-hovered: 1;
 }
 
@@ -46,7 +47,7 @@
   --is-hovered: 0;
 }
 
-.ToC:not(:hover) {
+.ToC:not(:hover, :focus-within) {
   --ToC-opacity: var(--initial-at-small, 0.4);
 }
 
