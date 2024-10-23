@@ -443,7 +443,7 @@ Note how this time the code[^webkit-bug] contains everything necessary to both 
 
 The main benefit of this method — the `--children-count` is available not only to the children, but also to the parent, and some use cases can benefit from this. The current specs do not cover this. I opened [a CSSWG issue to add a `children-count()` function](https://github.com/w3c/csswg-drafts/issues/11068) to the other two, as this is also something that would be great to have.
 
-I assigned the `--sibling-count` to be the same as `--children-count` on the items — this way I’ll use `--sibling-coung` whenever possible to show what will be available with the currently specified functions.
+I assigned the `--sibling-count` to be the same as `--children-count` on the items — this way I’ll use `--sibling-count` whenever possible to show what will be available with the currently specified functions.
 
 
 ### Prototyping Randomness
