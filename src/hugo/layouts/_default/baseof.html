@@ -35,6 +35,34 @@
       <meta property="og:image" content="{{ .Permalink }}{{ .Params.og_image }}"/>
     {{ end -}}
 
+    {{- if eq .Params.initRandomSeed true -}}
+      <style>
+        html {
+          animation:
+            --random-seed 0.1s infinite linear,
+            --random-seed2 60s infinite linear,
+            --random-seed3 600s infinite linear;
+        }
+        @property --random-seed {
+          syntax: "<number>";
+          initial-value: 0;
+          inherits: true;
+        }
+        @property --random-seed2 {
+          syntax: "<number>";
+          initial-value: 0;
+          inherits: true;
+        }
+        @property --random-seed3 {
+          syntax: "<number>";
+          initial-value: 0;
+          inherits: true;
+        }
+        @keyframes --random-seed { to { --random-seed: 1 } }
+        @keyframes --random-seed2 { to { --random-seed2: 1000 } }
+        @keyframes --random-seed3 { to { --random-seed3: 100000 } }
+      </style>
+    {{- end }}
     <script>document.documentElement.classList.add("withJS")</script>
 
     <link rel="preload" as="font" type="font/woff2" href="{{ $font_regular.RelPermalink }}" crossorigin />

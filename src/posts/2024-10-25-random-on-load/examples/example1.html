@@ -1,0 +1,26 @@
+<style>
+  @import url("x");
+</style>
+<style>
+  @import url("y");
+  @import url("./examples/test.css");
+</style>
+
+<style>
+  .test1::before {
+    counter-reset: --random-seed calc(var(--random-seed) * 1000);
+    content: counter(--random-seed);
+  }
+  .test2::before {
+    counter-reset: --random-seed2 calc(var(--random-seed2) * 1000);
+    content: counter(--random-seed2);
+  }
+  .test3::before {
+    counter-reset: --random-seed3 calc(var(--random-seed3) * 1000);
+    content: counter(--random-seed3);
+  }
+</style>
+
+<div class="test1"></div>
+<div class="test2"></div>
+<div class="test3"></div>
