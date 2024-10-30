@@ -46,4 +46,5 @@ code:not(.z):not(.z) {
   line-height: var(--code-line-height, 1);
   color: var(--code-color, var(--THEME_CODE));
   hyphens: none;
+  word-break: keep-all;
 }
