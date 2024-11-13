@@ -8,6 +8,10 @@ mastodon_post_id: "110581379745089361"
 
 _What if I will tell you how we could solve fit-to-width text with pure CSS without any hardcoded parameters? Curiously, scroll-driven animations will allow us to do just that! Join me as I continue exploring the experimental implementations of the latest specs._
 
+## Update from 2024
+
+I discovered a new technique that works in all latest versions of major browsers: [“Fit-to-Width Text: A New Technique”](/fit-to-width/) — it requires text duplication, but otherwise works very well. It even allows us to still use the optical axis of variable fonts! Check it out!
+
 ## The Example
 
 Let me start with the demonstration: if you’d look at the following example in the browser[^browser] that supports [scroll-driven animations](/scroll-driven-animations/), you would see how the text fits the width of its container. The example has [`contentEditable`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable), so you could play with it or resize the container or browser window to see it automatically adapt to it.
