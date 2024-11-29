@@ -44,12 +44,11 @@
 /* Visually hiding inputs */
 .board > input {
   position: fixed;
-  top: -99em;
-  left: -99em;
   clip: rect(1px,1px,1px,1px);
   width: 1px;
   height: 1px;
   opacity: 0;
+  pointer-events: none;
 }
 
 /* Stones! */
