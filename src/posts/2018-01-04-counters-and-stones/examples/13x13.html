@@ -302,7 +302,7 @@
 }
 </style>
 
-<form class='board' style="--rows:13;--columns:13;">
+<form class='board restore-visuals' style="--rows:13;--columns:13;">
   <input id="Black1" type="radio" style="--stone:B1;--notstone:W1;"/>
   <input id="Black2" type="radio" style="--stone:B2;--notstone:W2;"/>
   <input id="Black3" type="radio" style="--stone:B3;--notstone:W3;"/>
@@ -641,8 +641,8 @@
   <input id="White167" type="radio" style="--stone:W167;--notstone:B167;"/>
   <input id="White168" type="radio" style="--stone:W168;--notstone:B168;"/>
   <input id="White169" type="radio" style="--stone:W169;--notstone:B169;"/>
-  <header>
-    <p>Current turn: <span></span>
+  <header class="restore-visuals">
+    <p>Current turn: <span class="restore-visuals"></span>
     </p>
     <button type="reset">Restart</button>
   </header>

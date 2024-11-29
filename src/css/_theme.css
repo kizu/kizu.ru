@@ -89,7 +89,8 @@
     --DARK: initial;
     --LIGHT: ;
   }
-  .Root {
+  .Root,
+  .restore-visuals {
     /* Need to revert the color-scheme, as it would be inverted */
     color-scheme: light;
     filter: hue-rotate(180deg) invert(1);
