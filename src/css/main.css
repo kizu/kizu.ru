@@ -152,11 +152,16 @@ time {
   --color-a: var(--time-color-a, 0.725);
 }
 
-img {
+img,
+svg {
   max-width: var(--img-max-width, 100%);
   border: none;
   display: var(--img-display, inline-block);
   margin: var(--img-margin, 0);
+}
+
+svg {
+  height: auto;
 }
 
 img:only-child {
@@ -259,7 +264,7 @@ em {
 blockquote {
   padding: 0 var(--THEME_INDENT);
   margin: 1rem 0;
-  box-shadow: inset 2px 0;
+  box-shadow: inset 3px 0 0 -1px;
   font-style: italic;
   --dl-margin: 0;
   --text-indent: 0;

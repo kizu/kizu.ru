@@ -1,0 +1,38 @@
+<style>
+  @layer {
+    .element {
+      border-radius: 4px;
+    }
+  }
+  @layer {
+    * {
+      --block-bg: var(--border-radius-value);
+      --border-radius-value:
+        999px
+        var(--WHEN, var(--block-bg));
+      --element-border-radius:
+        var(--border-radius-value, inherit)
+    }
+    .block {
+      padding: 1em;
+      background: var(--block-bg, var(--PINK));
+    }
+
+    .element {
+      outline: 2px solid;
+      border-radius:
+        var(--element-border-radius, revert-layer);
+    }
+  }
+
+</style>
+<div class="block">
+  The block itself, with default pink background
+  <div class="element">The .element, with tiny border-radius</div>
+</div>
+
+<div class="block" style="--block-bg: var(--GREEN)">
+  The block itself, with a green background.
+  <div class="element">The .element, with pill-like border-radius</div>
+</div>
+

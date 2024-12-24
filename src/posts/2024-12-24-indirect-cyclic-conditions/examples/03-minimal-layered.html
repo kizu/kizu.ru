@@ -1,0 +1,19 @@
+<style>
+@layer {
+  * {
+    --layered-input: var(--layered-bg-value);
+
+    background: var(--layered-bg-value, revert-layer);
+    --layered-bg-value:
+      var(--GREEN)
+      var(--WHEN, var(--layered-input));
+  }
+}
+</style>
+
+<div class="items">
+  <div>No background applied</div>
+  <div style="--layered-input: foo">Green</div>
+  <div style="--layered-input: 8px">Green</div>
+  <div style="--layered-input: red">Green</div>
+</div>

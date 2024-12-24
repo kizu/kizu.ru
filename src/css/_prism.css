@@ -11,7 +11,7 @@ pre[class*="language-"] {
 	color: black;
 	background: none;
 	text-shadow: 0 1px white;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-family: Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -98,7 +98,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: #690;
+	color: #950;
 }
 
 .token.operator,
@@ -124,7 +124,7 @@ pre[class*="language-"] {
 .token.regex,
 .token.important,
 .token.variable {
-	color: #e90;
+	color: var(--THEME_CODE);
 }
 
 .token.important,

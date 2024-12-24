@@ -1,0 +1,87 @@
+<style>
+  img.Figure-Screenshot {
+    margin: -0.5rem;
+    max-width: calc(100% + 1rem);
+  }
+</style>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    svg > * {
+      transition: opacity 0.3s;
+    }
+    .loop-a,
+    .loop-b,
+    .loop-c {
+      & [stroke-dasharray],
+      & [stroke-dashoffset="none"] {
+        animation: --dashing 300s linear infinite;
+        animation-play-state: var(--animation-play-state, paused);
+      }
+    }
+  }
+  svg:has(> .loop-a:hover) > :not(.loop-a),
+  svg:has(> .loop-b:hover) > :not(.loop-b),
+  svg:has(> .loop-c:hover) > :not(.loop-c) {
+    opacity: 0.3;
+  }
+  svg:has(> .loop-a:hover) > .loop-a,
+  svg:has(> .loop-b:hover) > .loop-b,
+  svg:has(> .loop-c:hover) > .loop-c {
+    opacity: 1;
+    --animation-play-state: running;
+
+    & [stroke-dashoffset="none"] {
+      stroke-dasharray: 32px 6px;
+    }
+  }
+  @keyframes --dashing {
+    to {
+      stroke-dashoffset: -9000px;
+    }
+  }
+</style>
+
+<style>
+  .items {
+    --smol-grid: 10ch;
+    --gap: 0.5em;
+
+    & > * {
+      padding: 0.25em 0.5em;
+      border-radius: 0.5em;
+      text-align: center;
+      align-content: center;
+    }
+  }
+
+  @property --em {
+    syntax: "<length>";
+    initial-value: 0px;
+    inherits: false;
+  }
+  * { --em: 1em }
+  :root { --rem: var(--em) }
+</style>
+
+<style>
+  /* A key static constant */
+  :root { --WHEN: }
+
+  .minimal {
+    /* Our entry point, initialized with a cycle */
+    --input: var(--bg-value);
+
+    /* The property, with the “initial” value */
+    background: var(--bg-value, var(--PINK));
+
+    /* The conditional value, another part of a cycle */
+    --bg-value: var(--GREEN) var(--WHEN, var(--input));
+  }
+</style>
+
+<div class="items">
+  <div class="minimal">Pink</div>
+  <div class="minimal" style="--input: foo">Green</div>
+  <div class="minimal" style="--input: 1">Green</div>
+  <div class="minimal" style="--input: red">Green</div>
+</div>

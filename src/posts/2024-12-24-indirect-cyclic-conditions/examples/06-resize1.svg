@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="594" height="344" stroke-linecap="round" stroke-linejoin="round" class="tl-container tl-theme__force-sRGB tl-theme__dark" data-color-mode="dark" style="background-color:transparent" viewBox="208 258 594 344">
+  <path fill="#010403" d="M452.8 290H560l-22.8 60H430Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M452.8 290H560l-22.8 60H430Z" class="loop-a loop-b"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(430 290)"><tspan x="21.797" y="27.25" unicode-bidi="plaintext">--resize</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(430 290)" class="loop-a loop-b"><tspan x="21.797" y="27.25" unicode-bidi="plaintext">--resize</tspan></text>
+  <path fill="#010403" d="M240 400h200v60H240Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M240 400h200v60H240Z" class="loop-a"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(240 400)"><tspan x="24.398" y="27.25" unicode-bidi="plaintext">--resize-value</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(240 400)" class="loop-a"><tspan x="24.398" y="27.25" unicode-bidi="plaintext">--resize-value</tspan></text>
+  <g transform="translate(490 220)" class="loop-a">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_YAsHiafM-G6l_KDwfEPdE_clip">
+        <path d="M-221.506 20.454H43.627V270.28h-265.133Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dasharray="7.456477525711876 8.947773030854252" stroke-dashoffset="3.5" d="M-56.373 120.454a222.446 222.446 0 0 0-65.133 49.826" style="clip-path:url(#_export_134_r3qq__shape_YAsHiafM-G6l_KDwfEPdE_clip)"/>
+      <path d="m-111.448 167.266-10.058 3.014 2.418-10.217"/>
+    </g>
+  </g>
+  <g transform="translate(360 420)" class="loop-a">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_EZbsLCzhEZlG8-1JHxMWe_clip">
+        <path d="M-20-158.087h244.842V94.756H-20Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dasharray="7.727380763460715 9.659225954325894" stroke-dashoffset="3.5" d="M80-5.244a121.941 121.941 0 0 0 44.842-52.843" style="clip-path:url(#_export_134_r3qq__shape_EZbsLCzhEZlG8-1JHxMWe_clip)"/>
+      <path d="m116.11-52.258 8.732-5.83.682 10.478"/>
+    </g>
+  </g>
+  <path fill="#010403" d="M320 570a30 30 0 1 1 0-60h40a30 30 0 1 1 0 60h-40Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M320 570a30 30 0 1 1 0-60h40a30 30 0 1 1 0 60h-40Z"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(290 510)"><tspan x="17.594" y="27.25" unicode-bidi="plaintext">resize</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(290 510)"><tspan x="17.594" y="27.25" unicode-bidi="plaintext">resize</tspan></text>
+  <g transform="translate(340 430)">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_pWDB5IVtKnTKF8vR1sNAZ_clip">
+        <path d="M-100-70h201v237.25h-201Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dashoffset="none" d="M0 30v37.25" style="clip-path:url(#_export_134_r3qq__shape_pWDB5IVtKnTKF8vR1sNAZ_clip)"/>
+      <path d="M3.725 60.798 0 67.25l-3.725-6.452"/>
+    </g>
+  </g>
+  <path fill="#010403" d="M630 570a30 30 0 1 1 0-60h60a30 30 0 1 1 0 60h-60Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M630 570a30 30 0 1 1 0-60h60a30 30 0 1 1 0 60h-60Z"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(600 510)"><tspan x="16.797" y="27.25" unicode-bidi="plaintext">overflow</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(600 510)"><tspan x="16.797" y="27.25" unicode-bidi="plaintext">overflow</tspan></text>
+  <path fill="#010403" d="M550 400h220v60H550Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M550 400h220v60H550Z" class="loop-b"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(550 400)"><tspan x="18.195" y="27.25" unicode-bidi="plaintext">--resize-overflow</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(550 400)" class="loop-b"><tspan x="18.195" y="27.25" unicode-bidi="plaintext">--resize-overflow</tspan></text>
+  <g transform="translate(500 220)" class="loop-b">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_CtZ9aqXm2nFDjWfRW7DbH_clip">
+        <path d="M-56.37 13.08h285.974v257.46H-56.37Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dasharray="7.946232842906454 9.270604983390863" stroke-dashoffset="3.5" d="M43.63 113.08a236.967 236.967 0 0 1 85.974 57.46" style="clip-path:url(#_export_134_r3qq__shape_CtZ9aqXm2nFDjWfRW7DbH_clip)"/>
+      <path d="m126.902 160.394 2.702 10.147-10.138-2.734"/>
+    </g>
+  </g>
+  <g transform="translate(670 420)" class="loop-b">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_EcGeztHFXhevmHr7U7qck_clip">
+        <path d="M-267.827-157.813H-20V101.46h-247.827Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dasharray="7.045691292664869 8.454829551197843" stroke-dashoffset="3.5" d="M-120 1.46a118.093 118.093 0 0 1-47.827-59.273" style="clip-path:url(#_export_134_r3qq__shape_EcGeztHFXhevmHr7U7qck_clip)"/>
+      <path d="m-169.173-47.4 1.346-10.413 8.345 6.373"/>
+    </g>
+  </g>
+  <g transform="translate(680 420)">
+    <defs>
+      <clipPath id="_export_134_r3qq__shape_Aw_17IQVTq2gcAvolvhLi_clip">
+        <path d="M-120-60H81v237.25h-201Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="3.5" pointer-events="none">
+      <path stroke-dashoffset="none" d="M-20 40v37.25" style="clip-path:url(#_export_134_r3qq__shape_Aw_17IQVTq2gcAvolvhLi_clip)"/>
+      <path d="M-16.275 70.798-20 77.25l-3.725-6.452"/>
+    </g>
+  </g>
+</svg>

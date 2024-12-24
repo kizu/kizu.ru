@@ -1,0 +1,50 @@
+<style>
+.item {
+  background: var(--GREEN);
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+}
+
+@layer smol-grid {
+  * {
+    --smol-grid:
+      var(--smol-grid-display)
+      var(--smol-grid-gap);
+
+    display: var(--smol-grid-display, revert-layer);
+    --smol-grid-display: grid var(--WHEN, var(--smol-grid));
+
+    gap: var(--smol-grid-gap, revert-layer);
+    --smol-grid-gap:
+      var(--gap, var(--rem))
+      var(--WHEN, var(--smol-grid));
+
+    grid-template-columns: var(--smol-grid-columns, revert-layer);
+    --smol-grid-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--smol-grid)), 1fr)
+    );
+  }
+}
+
+@layer resize {
+  * {
+    --resize: var(--resize-value) var(--resize-overflow);
+
+    resize: var(--resize-value, revert-layer);
+    --resize-value: horizontal var(--WHEN, var(--resize));
+
+    overflow: var(--resize-overflow, revert-layer);
+    --resize-overflow: hidden var(--WHEN, var(--resize));
+  }
+}
+</style>
+
+<div style="--smol-grid: 15ch">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+  <div class="item">Item 4</div>
+  <div class="item">Item 5</div>
+  <div class="item">Item 6</div>
+</div>

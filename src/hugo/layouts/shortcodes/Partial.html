@@ -2,6 +2,9 @@
 {{- $src := (print "/" .Page.Params.srcPath $file) -}}
 {{- $id := (replace $file ".html" "") -}}
 {{- $id = (replace $id "examples/" "") -}}
+{{- if .Get "id" -}}
+  {{- $id = .Get "id" -}}
+{{- end -}}
 <figure
   {{- if not hugo.IsProduction -}}
     {{/**/}} data-src="{{ print $src }}"
@@ -27,9 +30,21 @@
       {{- $src  | readFile | safeHTML -}}
     </div>
     {{- if .Get "video" -}}
-      <video class="Figure-Screenshot" controls muted playsinline preload="none" poster="{{ replace $file ".html" ".jpg" }}"><source src="{{ replace $file ".html" ".mp4" }}" type="video/mp4"></video>
+      {{- $video_src := (replace $file ".html" ".mp4") -}}
+      {{- if .Get "video_src" -}}
+        {{- $video_src = .Get "video_src" -}}
+      {{- end -}}
+      {{- $poster := (replace $file ".html" ".jpg") -}}
+      {{- if .Get "poster" -}}
+        {{- $poster = .Get "poster" -}}
+      {{- end -}}
+      <video class="Figure-Screenshot" controls muted playsinline preload="none" poster="{{ $poster }}"><source src="{{ $video_src }}" type="video/mp4"></video>
     {{- else -}}
-      <img class="Figure-Screenshot" src="{{ replace $file ".html" ".png" }}" alt="{{$alt}}" />
+      {{- $img_src := (replace $file ".html" ".png") -}}
+      {{- if .Get "img_src" -}}
+        {{- $img_src = .Get "img_src" -}}
+      {{- end -}}
+      <img class="Figure-Screenshot" src="{{ $img_src }}" alt="{{$alt}}" />
     {{- end -}}
 
   {{- else -}}

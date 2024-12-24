@@ -1,0 +1,21 @@
+<style>
+.minimal-practical {
+  --input: var(--bg-value);
+
+  background: var(--bg-value, var(--PINK));
+  --bg-value: var(--GREEN) var(--WHEN, var(--input));
+
+  border: var(--border-value, 2px dotted);
+  --border-value: var(--input) solid;
+}
+</style>
+
+<div class="items">
+  <div class="minimal-practical">Pink; dotted 2px</div>
+  <div class="minimal-practical" style="--input: 4px">
+    Green; solid 4px
+  </div>
+  <div class="minimal-practical" style="--input: 8px">
+    Green; solid 8px
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{{- $file := .Get "src" -}}
+{{- $src := (print "/" .Page.Params.srcPath $file) -}}
+{{- $id := (replace $file ".html" "") -}}
+{{- $id = (replace $id "examples/" "") -}}
+{{- $title := .Get "alt" -}}
+
+{{-
+  $src
+  | readFile
+  | replaceRE "class=\"tl-container tl-theme__force-sRGB tl-theme__(light|dark)\"" ""
+  | replaceRE " data-color-mode=\"(light|dark)\"" ""
+  | replaceRE "<path fill=\"([^\"]+)\"[\\s\\S]+?<path fill=\"none\"" "<path fill=\"$1\""
+  | replaceRE "<text fill=\"(#F9FAFB\"|hsl.+?) stroke=.+?</text>" ""
+  | replaceRE "'tldraw_mono'" "Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono'"
+  | replaceRE " alignment-baseline=\"mathematical\"" ""
+  | replaceRE " dominant-baseline=\"mathematical\"" "dy=\"0.5em\""
+  | replaceRE "<svg" "<svg role=\"img\""
+  | replaceRE "</svg>" (print "<title>" $title "</title></svg>")
+  | replaceRE "(#1d1d1d|#f2f2f2)" "currentColor"
+  | replaceRE "(#fcfffe|#010403)" "#f8fcf9"
+  | safeHTML
+-}}

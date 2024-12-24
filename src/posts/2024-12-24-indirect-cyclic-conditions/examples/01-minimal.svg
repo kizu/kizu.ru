@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="534" height="183.699" stroke-linecap="round" stroke-linejoin="round" class="tl-container tl-theme__force-sRGB tl-theme__dark" data-color-mode="dark" style="background-color:transparent" viewBox="338 229.845 534 183.699">
+  <path fill="#010403" d="M392.8 290H480l-22.8 60H370Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M392.8 290H480l-22.8 60H370Z" class="loop-a" />
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(370 290)"><tspan x="17.195" y="27.25" unicode-bidi="plaintext">--input</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(370 290)" class="loop-a"><tspan x="17.195" y="27.25" unicode-bidi="plaintext">--input</tspan></text>
+  <path fill="#010403" d="M520 290h140v60H520Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M520 290h140v60H520Z" class="loop-a"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(520 290)"><tspan x="16" y="27.25" unicode-bidi="plaintext">--bg-value</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(520 290)" class="loop-a"><tspan x="16" y="27.25" unicode-bidi="plaintext">--bg-value</tspan></text>
+  <g transform="translate(640 320)" class="loop-a">
+    <defs>
+      <clipPath id="_export_41_r38j__shape_r-Nsi8d7uI0av8cusmlud_clip">
+        <path d="M-291.033-70h325.26v231.544h-325.26Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="2" pointer-events="none">
+      <path stroke-dasharray="4.021287922255529 4.257834270623501" stroke-dashoffset="2" d="M-65.774 30a85.985 85.985 0 0 1-125.26 8.755" style="clip-path:url(#_export_41_r38j__shape_r-Nsi8d7uI0av8cusmlud_clip)"/>
+      <path d="m-189.07 44.425-1.963-5.67 5.891 1.135"/>
+    </g>
+  </g>
+  <g transform="translate(440 320)" class="loop-a">
+    <defs>
+      <clipPath id="_export_41_r38j__shape_bO7IDOWy-Wt7d2WdF0TgE_clip">
+        <path d="M-96.985-158.155h320.28V70h-320.28Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="2" pointer-events="none">
+      <path stroke-dasharray="4.029583738994493 4.281432722681648" stroke-dashoffset="2" d="M3.015-30a87.492 87.492 0 0 1 120.28-8.261" style="clip-path:url(#_export_41_r38j__shape_bO7IDOWy-Wt7d2WdF0TgE_clip)"/>
+      <path d="m121.014-43.811 2.28 5.55-5.946-.8"/>
+    </g>
+  </g>
+  <path fill="#010403" d="M730 350a30 30 0 1 1 0-60h80a30 30 0 1 1 0 60h-80Z"/>
+  <path fill="none" stroke="#f2f2f2" stroke-width="2" d="M730 350a30 30 0 1 1 0-60h80a30 30 0 1 1 0 60h-80Z"/>
+  <text fill="hsl(240, 5%, 6.5%)" stroke="hsl(240, 5%, 6.5%)" stroke-width="2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(700 290)"><tspan x="16" y="27.25" unicode-bidi="plaintext">background</tspan></text>
+  <text fill="#f2f2f2" alignment-baseline="mathematical" dominant-baseline="mathematical" font-family="'tldraw_mono', monospace" font-size="18" transform="translate(700 290)"><tspan x="16" y="27.25" unicode-bidi="plaintext">background</tspan></text>
+  <g transform="translate(640 320)">
+    <defs>
+      <clipPath id="_export_41_r38j__shape_HKGeFMjgLIeR9TGBYHwUg_clip">
+        <path d="M-80-100h228v201H-80Z"/>
+      </clipPath>
+    </defs>
+    <g fill="none" stroke="#f2f2f2" stroke-width="2" pointer-events="none">
+      <path stroke-dashoffset="none" d="M20 0h28" style="clip-path:url(#_export_41_r38j__shape_HKGeFMjgLIeR9TGBYHwUg_clip)"/>
+      <path d="M43.15-2.8 48 0l-4.85 2.8"/>
+    </g>
+  </g>
+</svg>

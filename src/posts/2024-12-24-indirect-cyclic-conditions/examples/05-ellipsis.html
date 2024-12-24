@@ -1,0 +1,34 @@
+<style>
+  @layer ellipsis {
+    * {
+      --ellipsis:
+        var(--ellipsis-text-overflow)
+        var(--ellipsis-overflow)
+        var(--ellipsis-white-space);
+
+      text-overflow:
+        var(--ellipsis-text-overflow, revert-layer);
+      --ellipsis-text-overflow:
+        ellipsis var(--WHEN, var(--ellipsis));
+
+      overflow:
+        var(--ellipsis-overflow, revert-layer);
+      --ellipsis-overflow:
+        hidden var(--WHEN, var(--ellipsis));
+
+      white-space:
+        var(--ellipsis-white-space, revert-layer);
+      --ellipsis-white-space:
+        nowrap var(--WHEN, var(--ellipsis));
+    }
+  }
+
+  .items > [style*='--ellipsis'] {
+    background: var(--GREEN);
+  }
+</style>
+
+<div class="items">
+  <div style="--ellipsis: yes, please">A short line</div>
+  <div style="--ellipsis: yes, please">A very long line that will surely overflow the container that is available for it.</div>
+</div>

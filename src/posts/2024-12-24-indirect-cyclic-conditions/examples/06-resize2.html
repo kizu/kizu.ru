@@ -1,0 +1,41 @@
+<style>
+  @property --resize2-value-typed {
+    syntax: "horizontal | vertical | both";
+    initial-value: horizontal;
+    inherits: false;
+  }
+
+  @property --resize2-overflow-typed {
+    syntax: "hidden | auto";
+    initial-value: hidden;
+    inherits: false;
+  }
+
+  @layer resize2 {
+    * {
+      --resize2: var(--resize2-value) var(--resize2-overflow);
+
+      resize: var(--resize2-value, revert-layer);
+      --resize2-value: var(--resize2-value-typed);
+      --resize2-value-typed: var(--resize2);
+
+      overflow: var(--resize2-overflow, revert-layer);
+      --resize2-overflow: var(--resize2-overflow-typed);
+      --resize2-overflow-typed: var(--resize2);
+    }
+  }
+</style>
+
+<div class="items">
+  <div class="item" style="--resize2: both">
+    You can resize me in both directions
+  </div>
+
+  <div class="item" style="--resize2: vertical">
+    You can resize me only vertically
+  </div>
+
+  <div class="item" style="--resize2: auto; white-space: nowrap;">
+    I am horizontally scrollable, that is: when overflown, I will have an actual scrollbar, wow, what an invention!
+  </div>
+</div>

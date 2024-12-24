@@ -7,7 +7,7 @@ kbd {
 pre {
   display: flex;
   white-space: pre-wrap;
-  font-family: Monaco, Consolas, monospace, monospace;
+  font-family: Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', monospace;
   --code-padding: 0 0 0 calc(
     var(--h-gap) * var(--at-large) +
     var(--viewport-padding) * var(--at-small)

@@ -1,0 +1,28 @@
+<style>
+  @layer {
+    .fixed * {
+      @container style(--block-bg) {
+        --border-radius-value: inherit;
+      }
+      @container not style(--block-bg) {
+        --element-border-radius: var(--border-radius-value);
+      }
+    }
+  }
+</style>
+
+<div class="fixed">
+  <div class="block">
+    The block itself, with default pink background
+    <div>
+      <div class="element">The .element, with tiny border-radius</div>
+    </div>
+  </div>
+
+  <div class="block" style="--block-bg: var(--GREEN)">
+    The block itself, with a green background.
+    <div>
+      <div class="element">The .element, with pill-like border-radius</div>
+    </div>
+  </div>
+</div>
