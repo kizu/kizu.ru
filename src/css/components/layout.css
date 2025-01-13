@@ -13,6 +13,18 @@ article {
   margin: 0;
 }
 
+/* Hello, servo! */
+@supports not (display: grid) {
+  header,
+  footer,
+  main,
+  article {
+    max-width: var(--content-max-width);
+    padding: var(--viewport-padding);
+    margin: 0 auto;
+  }
+}
+
 article > section {
   display: grid;
   grid-column: both;
