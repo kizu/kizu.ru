@@ -83,16 +83,16 @@ other = "https://feeds.feedburner.com/kizuruen"
 other = "All Articles"
 
 [recentShown]
-other = "Only the 10 recent items shown"
+other = "Older articles are hidden"
 
 [everythingShown]
-other = "All the items shown"
+other = "All the articles are shown"
 
 [showEverything]
 other = "Show the rest"
 
 [showOnlyRecent]
-other = "Show only the 10 recent ones"
+other = "Show only the more recent articles"
 
 [lastPost]
 other = "Last post"
