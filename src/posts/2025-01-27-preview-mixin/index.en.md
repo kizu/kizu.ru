@@ -4,7 +4,7 @@ mastodon_post_id: "113899865675690994"
 
 # Pure CSS Mixin for Displaying Values of Custom Properties
 
-#CSS_Variables #CSS_Logic #CSS_Layers #Experiment #Practical #CSS
+#CSS_Variables #CSS_Counters #CSS_Layers #Experiment #Practical #CSS
 
 _Do you write CSS? Do you use custom properties with calculations? Do you want to preview their values while you’re debugging them? What if you could do so by setting just one additional custom property? Without any JS? In this article, I present a native CSS mixin that will output various values as pseudo-elements._
 
