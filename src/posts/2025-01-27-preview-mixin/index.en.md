@@ -1700,7 +1700,9 @@ There is a lot going on inside! I learned a lot while working on this mixi
 
 - - -
 
-The core of the mixin is how we can use CSS counters to output strings. This is something I saw many people do already. One example that I vividly remember was from [Lea Verou](https://lea.verou.me/)’s [“CSS Variable Secrets”](https://youtu.be/ZuZizqDF4q8?si=aEft49zNFbbWqT-Q&t=2109) talk from [CSS Day 2022](https://cssday.nl/2022/) (which I attended), where she demonstrated how we can output a numeric value as a counter via `counter-reset`. For integers, it was as simple as setting the CSS counter directly, and for floats, she presented a trick that used a registered custom property that she attributed to [Ana Tudor](https://thebabydino.github.io/).
+The core of the mixin[^indirect-cyclic-conditions] is how we can use CSS counters to output strings. This is something I saw many people do already. One example that I vividly remember was from [Lea Verou](https://lea.verou.me/)’s [“CSS Variable Secrets”](https://youtu.be/ZuZizqDF4q8?si=aEft49zNFbbWqT-Q&t=2109) talk from [CSS Day 2022](https://cssday.nl/2022/) (which I attended), where she demonstrated how we can output a numeric value as a counter via `counter-reset`. For integers, it was as simple as setting the CSS counter directly, and for floats, she presented a trick that used a registered custom property that she attributed to [Ana Tudor](https://thebabydino.github.io/).
+
+[^indirect-cyclic-conditions]: Aside from the [“Indirect Cyclic Conditions”](/indirect-cyclic-conditions/) — the technique that is used for applying this mixin. If you want to understand why and how we can apply some styles by simply defining a single custom property — that article will tell you all about it.
 
 However, our mixin is so much more complicated!
 
