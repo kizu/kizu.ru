@@ -7,7 +7,7 @@ kbd {
 pre {
   display: flex;
   white-space: pre-wrap;
-  font-family: Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: var(--THEME_FONT_FAMILY_MONOSPACE);
   --code-padding: 0 0 0 calc(
     var(--h-gap) * var(--at-large) +
     var(--viewport-padding) * var(--at-small)
@@ -37,9 +37,15 @@ pre:not(.z):not(.z) {
   background: #FFF; /* Overrides prism.js one */
 }
 
+:is(pre, figure) + pre:not(.z):not(.z),
+:is(pre, figure) + style + pre:not(.z):not(.z) {
+  margin-top: 0;
+}
+
 code:not(.z):not(.z) {
   font: inherit;
   white-space: pre-wrap;
+  box-sizing: border-box;
   max-width: 100%;
   padding: var(--code-padding, 0);
   font-style: var(--code-font-style, italic);

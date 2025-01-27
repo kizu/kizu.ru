@@ -15,6 +15,8 @@
 @import url("_theme.css");
 @import url("_utility.css");
 @import url("_custom-elements.css");
+
+@import url("../../node_modules/@kizu/mixins/preview.css");
 @import url("components/color-components.css");
 
 @import url("components/articlelist.css");

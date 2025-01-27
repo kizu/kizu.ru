@@ -1,5 +1,7 @@
 {
   "files.associations": {
     "*.html": "html"
-  }
+  },
+  "editor.wordWrap": "wordWrapColumn",
+  "chat.editor.wordWrap": "on"
 }

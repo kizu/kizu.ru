@@ -28,6 +28,8 @@
 
   --THEME_FONT_FAMILY: '21Cent-Regular', '21Cent-Fallback', Georgia, serif, Helvetica Neue, Arial; /* [2] */
 
+  --THEME_FONT_FAMILY_MONOSPACE: Monaco, Consolas, 'Andale Mono', 'Ubuntu Mono', monospace;
+
   /* Same for every theme? Should be moved somewhere? */
   --THEME_FONT:
     var(--THEME_FONT_SIZE)/var(--THEME_LINE_HEIGHT)
