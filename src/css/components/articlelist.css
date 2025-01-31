@@ -64,6 +64,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-wrap: pretty;
 
   font-size: calc(
     var(--priority) * var(--THEME_FONT_SIZE) +
@@ -89,10 +90,25 @@
   --_transition: 0.2s;
 }
 
+.ArticleList-Item > h2 {
+  display: flex;
+  max-inline-size: max-content;
+  margin-inline: auto;
+}
+
+.ArticleList-Item > h2::after {
+  content: "";
+  flex-basis: calc(var(--priority) * 0.1px);
+}
+
 .ArticleList-Item:after {
   padding-top: 2rem;
   margin-top: auto;
   opacity: calc(1 - 100 * var(--_hover));
+}
+
+.ArticleList-Item > * > .TagList {
+  min-width: calc(var(--priority) * 100%);
 }
 
 .ArticleList-Item:hover {
