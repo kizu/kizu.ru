@@ -155,13 +155,16 @@ time {
 }
 
 img,
-svg {
+svg,
+object[role=img] {
   max-width: var(--img-max-width, 100%);
   border: none;
   display: var(--img-display, inline-block);
   margin: var(--img-margin, 0);
 }
 
+object[role=img],
+img,
 svg {
   height: auto;
 }
