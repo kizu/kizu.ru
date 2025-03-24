@@ -90,12 +90,13 @@
     background: var(--THEME_BG--INVERTED);
     --DARK: initial;
     --LIGHT: ;
+    --invert: hue-rotate(180deg) invert(1);
   }
   .Root,
   .restore-visuals {
     /* Need to revert the color-scheme, as it would be inverted */
     color-scheme: light;
-    filter: hue-rotate(180deg) invert(1);
+    filter: var(--invert);
   }
 
   .only-in-dark {

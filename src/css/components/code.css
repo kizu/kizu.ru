@@ -8,20 +8,19 @@ pre {
   display: flex;
   white-space: pre-wrap;
   font-family: var(--THEME_FONT_FAMILY_MONOSPACE);
-  --code-padding: 0 0 0 calc(
+  --code-padding: var(--code-padding-override, 0 0 0 calc(
     var(--h-gap) * var(--at-large) +
     var(--viewport-padding) * var(--at-small)
-  );
+  ));
+  --code-font-size: var(--code-font-size-override, var(--THEME_FONT_SIZE--CODE));
   --code-font-style: normal;
-  --code-line-height: 1.5rem;
-  font-size: var(--THEME_FONT_SIZE--CODE);
+  --code-line-height: var(--code-line-height-override, 1.5rem);
+  font-size: var(--code-font-size);
   line-height: 1;
 
   position: relative;
 
   overflow: hidden;
-
-  padding: 1rem 0;
 
   --code-color: var(--color);
 
@@ -31,7 +30,7 @@ pre {
 /* TODO: move to external import, like an escape hatch */
 /* Or just remove all the unneeded stuff from Prism? */
 pre:not(.z):not(.z) {
-  padding: 1rem 0;
+  padding: var(--code-outer-padding-override, 1rem 0);
   margin: 1rem;
   margin-inline: var(--initial-at-large, calc(-1 * var(--viewport-padding)));
   background: #FFF; /* Overrides prism.js one */

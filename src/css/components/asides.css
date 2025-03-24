@@ -26,6 +26,10 @@ mastodon-post-info::part(aside) {
   --text-indent: 0;
   --p-p-margin-top: 1.5em;
   --link-underline-offset: 0.4em;
+  --code-font-size-override: calc(1rem - 6px);
+  --code-line-height-override: 1rem;
+  --code-outer-padding-override: 0.5rem 0;
+  --code-padding-override: 0 1ch;
 }
 
 aside:first-child,
