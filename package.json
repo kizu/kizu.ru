@@ -41,6 +41,6 @@
   },
   "dependencies": {
     "@kizu/custom-elements": "github:kizu/custom-elements#e3e6f448cdc9a3485e159bca44caa6b168cee41a",
-    "@kizu/mixins": "^0.1.3"
+    "@kizu/mixins": "^0.2.1"
   }
 }

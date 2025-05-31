@@ -186,7 +186,7 @@ I published it in as minimal a setup as I could. I forgot when I publis
 
 You can read the full code[^full-code] of the mixin here under the `<details>`. Alternatively, you can [read it in full on GitHub](https://github.com/kizu/mixins/blob/main/preview.css) as well.
 
-[^full-code]: The code is for the 0.1.3 version. It is thoroughly commented and presented: out of 800+ lines, almost half are the comments and [indentation](https://blog.kizu.dev/calc-indent/). <!-- span="3" -->
+[^full-code]: The code is for the 0.2.1 version. It is thoroughly commented and presented: out of 800+ lines, almost half are the comments and [indentation](https://blog.kizu.dev/calc-indent/). <!-- span="3" -->
 
 <details>
 <summary class="Link Link_pseudo">The full code of the mixin (long, open at your own risk!)</summary>
@@ -202,7 +202,14 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 	for the details which cover this `--WHEN` custom
 	property, why we use custom cascade layers, etc.
 */
-:root { --WHEN: }
+:root {
+	--WHEN: ;
+}
+@supports (top: if(():)) {
+	:root {
+		--WHEN: initial;
+	}
+}
 
 /*
 	Most of the custom properties inside are registered,
@@ -236,6 +243,11 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 
 			/* Not used in the mixin, allows extensions. */
 			var(--preview--toggle)
+			/*
+				Not used, but can be assigned to short
+				circuit the `--preview` to something else.
+			*/
+			var(--preview-cycle-extension,)
 		;
 
 		/*
@@ -243,7 +255,9 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 			- `initial` when mixin is off.
 			- empty when it is on.
 		*/
-		--preview--toggle: var(--WHEN, var(--preview));
+		--preview--toggle:
+			var(--WHEN,
+				if(style(--preview: var(--preview)):));
 
 		/* Capturing `<dimension>`-like types. */
 		/*
@@ -278,13 +292,13 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 		--_p-from-length: calc(
 			10000
 			*
-			tan(atan2(var(--_p-captured), 10000px))
+			tan(atan2(var(--_p-captured) + 0px, 10000px))
 		);
 
 		--_p-from-angle: calc(
 			10000
 			*
-			tan(atan2(var(--_p-captured), 10000deg))
+			tan(atan2(var(--_p-captured) + 0deg, 10000deg))
 		);
 
 		/*
@@ -294,13 +308,13 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 		--_p-from-time: calc(
 			10000000
 			*
-			tan(atan2(var(--_p-captured), 10000s))
+			tan(atan2(var(--_p-captured) + 0s, 10000s))
 		);
 
 		--_p-from-percentage: calc(
 			10000
 			*
-			tan(atan2(var(--_p-captured), 10000%))
+			tan(atan2(var(--_p-captured) + 0%, 10000%))
 		);
 
 		/*
@@ -486,7 +500,9 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 			with all the parts needed.
 		*/
 		--_p-reset:
-			var(--WHEN, var(--preview))
+			var(--WHEN,
+				if(style(--preview: var(--preview)):)
+			)
 			--_p-is-color   var(--_p-is-color)
 			--_p-is-none    var(--_p-is-none)
 			--_p-is-empty   var(--_p-is-empty)
@@ -572,6 +588,9 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 				var(--_p-from-percentage) * var(--_p-sign),
 				1
 			)
+
+			/* Extension for the reset value */
+			var(--preview-reset-extension,)
 		;
 
 		/* For strings, we just need to ensure the type */
@@ -584,7 +603,9 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 			things. See the list of them in the end.
 		*/
 		--_p-content:
-			var(--WHEN, var(--preview))
+			var(--WHEN,
+				if(style(--preview: var(--preview)):)
+			)
 			var(--preview-prefix,)
 
 			/*
@@ -640,6 +661,9 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 			counter(--_p-unit-ms,   --_p-unit-ms)
 			counter(--_p-unit-perc, --_p-unit-perc)
 
+			/* Extension for the content value */
+			var(--preview-content-extension,)
+
 			var(--preview-suffix,)
 		;
 	}
@@ -685,13 +709,19 @@ You can read the full code[^full-code] of the mixin here under the `<details>`.
 			to have a few more custom properties.
 		*/
 		--_p-reset-value:
-			var(--_p-reset)   var(--WHEN, var(--preview));
+			var(--_p-reset)
+			var(--WHEN,
+				if(style(--preview: var(--preview)):));
 
 		--_p-content-value:
-			var(--_p-content) var(--WHEN, var(--preview));
+			var(--_p-content)
+			var(--WHEN,
+				if(style(--preview: var(--preview)):));
 
 		--_p-color-value:
-			var(--_p-color)   var(--WHEN, var(--preview));
+			var(--_p-color)
+			var(--WHEN,
+				if(style(--preview: var(--preview)):));
 
 		--_p-reset-final: var(
 			--_p-reset-value,
@@ -1904,25 +1934,25 @@ They all have the same[^why-not-merge] `syntax` and other descriptors, but this 
 --_p-from-length: calc(
 	10000
 	*
-	tan(atan2(var(--_p-captured), 10000px))
+	tan(atan2(var(--_p-captured) + 0px, 10000px))
 );
 
 --_p-from-angle: calc(
 	10000
 	*
-	tan(atan2(var(--_p-captured), 10000deg))
+	tan(atan2(var(--_p-captured) + 0deg, 10000deg))
 );
 
 --_p-from-time: calc(
 	10000000
 	*
-	tan(atan2(var(--_p-captured), 10000s))
+	tan(atan2(var(--_p-captured) + 0s, 10000s))
 );
 
 --_p-from-percentage: calc(
 	10000
 	*
-	tan(atan2(var(--_p-captured), 10000%))
+	tan(atan2(var(--_p-captured) + 0%, 10000%))
 );
 ```
 
@@ -1935,6 +1965,8 @@ Again, a few nuances worth mentioning:
 3. You might ask why we have the `calc(10000 * …)` and use a high value as the second argument for the `atan2()` — this is a workaround for a [Firefox bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1939353) that I stumbled upon when testing the mixin. Without doing this, there might be a loss in precision when applying `tan(atan2())`.
 
 4. By default, when using registered properties with the type `<time>`, their value is assigned in seconds. However, I prefer to work with `ms` instead, so we had to adjust the calculation a bit.
+
+5. **Update from 2025-05-31:** [Oddbjørn Øvernes](https://github.com/oddvernes) [reported](https://front-end.social/@oddvernes/114602912044928080) an issue in my mixin with Chrome: there might've been a change/regression in how `tan(atan2())` works with mixed units. A solution was to add the explicit units to the left side of `atan2()` by adding `0` with the corresponding unit.
 
 #### Merging Values Together
 
