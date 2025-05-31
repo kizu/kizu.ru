@@ -165,7 +165,7 @@ It is possible to include the mixin in HTML from any CDN:
 <link
 	rel="stylesheet"
 	type="text/css"
-	href="https://unpkg.com/@kizu/mixins@0.1.3/preview.css"
+	href="https://unpkg.com/@kizu/mixins@0.2.1/preview.css"
 />
 ```
 
@@ -173,7 +173,7 @@ Or from CSS
 
 ```CSS
 @import
-	url("https://unpkg.com/@kizu/mixins@0.1.3/preview.css");
+	url("https://unpkg.com/@kizu/mixins@0.2.1/preview.css");
 ```
 
 Or you can install it[^other-mixins] from npm: `npm install @kizu/mixins` or `yarn add @kizu/mixins`, and then include it from there.
