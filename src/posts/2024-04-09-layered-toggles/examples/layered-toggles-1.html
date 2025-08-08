@@ -1,5 +1,5 @@
 <style>
-  @layer default, mixins;
+  @layer example-default, example-mixins;
 
   .example-1 {
     display: grid;
@@ -7,7 +7,7 @@
     grid: auto / repeat(3, auto);
   }
 
-  @layer default {
+  @layer example-default {
     .item {
       padding: 1em;
       border-radius: 0.5em;
@@ -16,7 +16,7 @@
     }
   }
 
-  @layer mixins {
+  @layer example-mixins {
     * {
       --hover: var(--hover--off);
       --hover--off: var(--hover,);
