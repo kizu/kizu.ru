@@ -79,6 +79,13 @@ The current spec defines two functions:
 
 The first one could be beneficial for calculations, and the second one could be a convenient shortcut for various effects, or for cases that can’t be covered by calculations (at least until we get [proper conditionals](https://lea.verou.me/blog/2024/css-conditionals/) in CSS).
 
+## Update from 2025-08-21
+
+Chrome shipped tree-counting functions in Chrome 138 in June, and Safari just put a prototype implementation for them in the new [Technology Preview 226](https://webkit.org/blog/17282/release-notes-for-safari-technology-preview-226/).
+
+I did not update the text of this article, but I did update some of the examples to use the new `sibling-index()` and `sibling-count()` functions. They work!
+
+There is no yet any news about `children-count()`, and while [Safari TP now also has a prototype implementation of `random()`](https://webkit.org/blog/17285/rolling-the-dice-with-css-random/), it is not enough for the purposes of this article, so I did not add it here.
 
 ## Prototyping with Custom Properties
 
@@ -309,6 +316,8 @@ I’ll hide the code for the 1023 version and its demo under a `<details>` tag,
   & > li:nth-child(n+992):nth-child(-n+1023) { --si2: 31 }
 }
 ```
+
+**Update from 2025-08-21:** It seems that after I published this article there were a few changes in browsers which made this page render _even slower_, so I had to set the default count of elements here to just 10. If you want to test your browser's performance, you can try bumping the value here to 1000.
 
 {{<Partial src="examples/algorithm-4-1023.html" />}}
 

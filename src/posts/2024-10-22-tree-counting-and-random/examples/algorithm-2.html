@@ -1,19 +1,26 @@
 <style>
   .algorithm-2 {
-    & li {
-      --si2: 0;
-      --si1: 0;
-      --sibling-index: calc(3 * var(--si2) + var(--si1));
-
+    @supports (z-index: sibling-index()) {
+      li {
+        --sibling-index: sibling-index();
+      }
     }
-    & li:nth-child(3n+1) { --si1: 1 }
-    & li:nth-child(3n+2) { --si1: 2 }
-    & li:nth-child(n+3):nth-child(-n+5) { --si2: 1 }
-    & li:nth-child(n+6):nth-child(-n+8) { --si2: 2 }
+    @supports not (z-index: sibling-index()) {
+      & li {
+        --si2: 0;
+        --si1: 0;
+        --sibling-index: calc(3 * var(--si2) + var(--si1));
 
-    /* Otherwise some of the broken items will be highlighted in green */
-    & li:nth-child(n+10) {
-      background: var(--PINK);
+      }
+      & li:nth-child(3n+1) { --si1: 1 }
+      & li:nth-child(3n+2) { --si1: 2 }
+      & li:nth-child(n+3):nth-child(-n+5) { --si2: 1 }
+      & li:nth-child(n+6):nth-child(-n+8) { --si2: 2 }
+
+      /* Otherwise some of the broken items will be highlighted in green */
+      & li:nth-child(n+10) {
+        background: var(--PINK);
+      }
     }
   }
 </style>

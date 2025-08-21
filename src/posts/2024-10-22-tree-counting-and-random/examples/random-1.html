@@ -116,6 +116,12 @@
         /
         var(--random-limit)
       );
+
+      &:is(.random--native *) {
+        --random-value: random(--one, 0, 1);
+        --random-value2: random(--two, 0, 1);
+        --random-value3: random(--three, 0, 1);
+      }
     }
   }
   .random--stable > li {
@@ -125,7 +131,15 @@
   .random--sorted > li {
     order: round(down, var(--random-value) * var(--children-count), 1);
   }
-
+  /* Does not work yet in Safari: some stuff is ok, but not all */
+  .only-when-native-random {
+    display: none;
+  }
+  @supports not (z-index: random(0, 100)) {
+    .only-when-native-random {
+      display: none;
+    }
+  }
 </style>
 
 <input-scope>
@@ -169,6 +183,19 @@
         from=".input-stable"
         to=".random-example ol"
         as=".random--stable"
+      ></input-value>
+      <br />
+      <input-source>
+        <label class="only-when-native-random">
+          <input class="input-native" type="checkbox"id="random-1-native-random" />
+          Native random
+        </label>
+      </input-source>
+      <input-value
+        root="figure"
+        from=".input-native"
+        to=".random-example ol"
+        as=".random--native"
       ></input-value>
     </fieldset>
 
