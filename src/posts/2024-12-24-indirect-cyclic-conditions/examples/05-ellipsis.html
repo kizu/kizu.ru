@@ -9,17 +9,17 @@
       text-overflow:
         var(--ellipsis-text-overflow, revert-layer);
       --ellipsis-text-overflow:
-        ellipsis var(--WHEN, var(--ellipsis));
+        ellipsis var(--WHEN, if(style(--ellipsis: var(--ellipsis)):));
 
       overflow:
         var(--ellipsis-overflow, revert-layer);
       --ellipsis-overflow:
-        hidden var(--WHEN, var(--ellipsis));
+        hidden var(--WHEN, if(style(--ellipsis: var(--ellipsis)):));
 
       white-space:
         var(--ellipsis-white-space, revert-layer);
       --ellipsis-white-space:
-        nowrap var(--WHEN, var(--ellipsis));
+        nowrap var(--WHEN, if(style(--ellipsis: var(--ellipsis)):));
     }
   }
 

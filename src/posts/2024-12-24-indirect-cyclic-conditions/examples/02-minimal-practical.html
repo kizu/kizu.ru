@@ -3,7 +3,7 @@
   --input: var(--bg-value);
 
   background: var(--bg-value, var(--PINK));
-  --bg-value: var(--GREEN) var(--WHEN, var(--input));
+  --bg-value: var(--GREEN) var(--WHEN, if(style(--input: var(--input)):));
 
   border: var(--border-value, 2px dotted);
   --border-value: var(--input) solid;

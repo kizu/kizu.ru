@@ -6,7 +6,7 @@
     background: var(--layered-bg-value, revert-layer);
     --layered-bg-value:
       var(--GREEN)
-      var(--WHEN, var(--layered-input));
+      var(--WHEN, if(style(--layered-input: var(--layered-input)):));
   }
 }
 </style>

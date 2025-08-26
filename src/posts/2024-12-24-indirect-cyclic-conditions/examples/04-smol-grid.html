@@ -12,12 +12,12 @@
       var(--smol-grid-gap);
 
     display: var(--smol-grid-display, revert-layer);
-    --smol-grid-display: grid var(--WHEN, var(--smol-grid));
+    --smol-grid-display: grid var(--WHEN, if(style(--smol-grid: var(--smol-grid)):));
 
     gap: var(--smol-grid-gap, revert-layer);
     --smol-grid-gap:
       var(--gap, var(--rem))
-      var(--WHEN, var(--smol-grid));
+      var(--WHEN, if(style(--smol-grid: var(--smol-grid)):));
 
     grid-template-columns: var(--smol-grid-columns, revert-layer);
     --smol-grid-columns: repeat(

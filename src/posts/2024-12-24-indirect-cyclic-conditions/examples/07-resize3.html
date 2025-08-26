@@ -15,11 +15,11 @@
     * {
       --resize3:
         var(--resize3-overflow)
-        var(--WHEN, var(--resize3-overflow-final));
+        var(--WHEN, if(style(--resize3-overflow-final: var(--resize3-overflow-final)):));
       --resize3-value: var(--resize3);
       --resize3-overflow:
         var(--resize3-value)
-        var(--WHEN, var(--resize3-value-final));
+        var(--WHEN, if(style(--resize3-value-final: var(--resize3-value-final)):));
 
       resize: var(--resize3-value-final, revert-layer);
       --resize3-value-final: var(--resize3-value-typed);

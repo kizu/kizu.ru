@@ -9,7 +9,7 @@
       --block-bg: var(--border-radius-value);
       --border-radius-value:
         999px
-        var(--WHEN, var(--block-bg));
+        var(--WHEN, if(style(--block-bg: var(--block-bg)):));
       --element-border-radius:
         var(--border-radius-value, inherit)
     }

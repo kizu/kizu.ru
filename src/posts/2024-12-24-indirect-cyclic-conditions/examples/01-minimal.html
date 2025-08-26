@@ -67,6 +67,10 @@
   /* A key static constant */
   :root { --WHEN: }
 
+  @supports (top: if(():)) {
+		:root { --WHEN: initial }
+  }
+
   .minimal {
     /* Our entry point, initialized with a cycle */
     --input: var(--bg-value);
@@ -75,7 +79,7 @@
     background: var(--bg-value, var(--PINK));
 
     /* The conditional value, another part of a cycle */
-    --bg-value: var(--GREEN) var(--WHEN, var(--input));
+    --bg-value: var(--GREEN) var(--WHEN, if(style(--input: var(--input)):));
   }
 </style>
 
