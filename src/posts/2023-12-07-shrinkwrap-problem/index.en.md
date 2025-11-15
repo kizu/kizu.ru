@@ -8,6 +8,14 @@ mastodon_post_id: "111540322324716753"
 
 _There is one old, yet unsolved, CSS problem: shrinking containers to fit the content when it automatically wraps. While not intentional, anchor positioning allows us to come closer to solving it, at least for a few cases. In this article, I’ll demonstrate how we can use anchor positioning to neatly decorate wrapping text or elements in flex or grid contexts._
 
+## Update from 2025-11-15
+
+I finally found time to update the code in the examples: it was not that many of them.
+
+Additionally: when I write this, all the examples work in the latest stable versions of Chrome and Safari, and also work in Firefox Nightly.
+
+If you’re, for some reason, reading this — keep an eye on this website, and this topic specifically. I have something brewing.
+
 ## Update from 2024-04-20
 
 There were many changes since I did write this article. I did update the examples' code for them to work, but did not yet update the code snippets in the article, as I’m waiting for the implementation to be more stable, in particular, the examples in this article require either a `inside` keyword inside an `anchor ()` tag to be implemented, or the `all` keyword for the `inset-area` property. After the implementation will become more stable, I will update the examples in this article to use it.
@@ -97,7 +105,7 @@ And the CSS that is responsible for our visuals is this:
       position-anchor: --span; /* 5 */
       inset:
         0 /* 6 */
-        calc(anchor(auto-same) - 1em); /* 7 */
+        calc(anchor(inside) - 1em); /* 7 */
 
       background: var(--GREEN); /* 4 */
       border-radius: inherit;
@@ -159,15 +167,15 @@ The technique I’m using here is far from being optimal[^not-optimal] or easy
 ```CSS
   inset-inline:
     min(
-      anchor(--a auto-same),
-      anchor(--b auto-same),
-      anchor(--c auto-same),
-      anchor(--d auto-same),
-      anchor(--e auto-same)
+      anchor(--a inside),
+      anchor(--b inside),
+      anchor(--c inside),
+      anchor(--d inside),
+      anchor(--e inside)
     );
 ```
 
-For the above example, we have to repeat it five times, which can make maintaining this cumbersome. But it works! What we do here is test every item and get the one that is the closest to the edge. At least, we can rely on the anchor positioning’s `auto-same` (to be replaced with the `same` in the future), defining the value once for both sides. We could even define it as the `inset` shorthand, but I prefer to use an `inset-block: 0` here, and not do the useless comparisons, as the size in the block dimension is something we _can_ calculate.
+For the above example, we have to repeat it five times, which can make maintaining this cumbersome. But it works! What we do here is test every item and get the one that is the closest to the edge. At least, we can rely on the anchor positioning’s `inside`, defining the value once for both sides. We could even define it as the `inset` shorthand, but I prefer to use an `inset-block: 0` here, and not do the useless comparisons, as the size in the block dimension is something we _can_ calculate.
 
 ### Return of the Inline-Blocks
 
@@ -349,7 +357,7 @@ One convenient thing to do is to make our anchor target the positioning cont
   z-index: -1;              /* 1 */
   position-anchor: --target; /* 3 */
   inset: 0; /* 4 */
-  inset-inline: anchor(auto-same); /* 5 */
+  inset-inline: anchor(inside);
 }
 
 @supports (anchor-name: --foo) {
@@ -373,8 +381,6 @@ A few notes:
 4. We’d want to have a fallback for our `inset` property when the `anchor()` is not supported.
 
     **Important note: ** If there will be a `var()` inside the `inset` for anchor positioning, we would have to move the whole declaration inside a `@supports`, as using the CSS variables would make browsers think that the declaration is “supported” and the fallback mechanism won’t work.
-
-5. Currently, the keyword inside is `auto-same`; however, it is likely it will be renamed to `same` in the future.
 
 ## Use Cases
 

@@ -44,13 +44,12 @@
         content: "";
         position: absolute;
         z-index: -1;
+
+        position-anchor: --span;
+        inset: 0 calc(anchor(inside) - 1em);
+
         background: var(--GREEN);
         border-radius: inherit;
-        position-anchor: --span;
-        inset:
-          /* Should be just one `anchor(inside)` there */
-          0 calc(anchor(end) - 1em)
-          0 calc(anchor(start) - 1em);
       }
     }
   }
