@@ -233,7 +233,7 @@ While we cannot rely on the proper layout for this — our element would take 
   The left side of this example is the same as in the previous example, the right side is an element that takes the rest of the space.
 {{</Partial>}}
 
-We can see how we’re limited again by the elements’ alignment. All because we rely on the position of elements in their container, which gets the whole available width.
+We can see how we’re limited again by the elements’ <label class="Link Link_pseudo" for="text-align3">alignment</label>. All because we rely on the position of elements in their container, which gets the whole available width.
 
 The CSS I added to this example is as follows:
 
@@ -391,7 +391,7 @@ I can think of many use cases for all the above, I will provide a few that I
 The initial demos in this article did already look like them, but to re-iterate in a more obvious way: bubbles in various message apps can sometimes have this style. I remember doing a custom CSS theme for Adium, and stumbling upon the shrinkwrap issue, where I wanted the messages to be short and wrap the content. Now I know how to do it! Or — will know what to do in the future when anchor positioning will be available everywhere. But not in the past.
 
 {{<Partial class="require-anchor-name" src="examples/example-bubbles.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 10em;">}}
-  There are several text bubbles in this example, some are aligned to the left, and some — to the right. Text inside of them can wrap, but the bubbles won’t wrap around them neatly without the shrinkwrap fix.
+  There are several text bubbles in this example, some are aligned to the left, and some — to the right. Text inside of them can wrap, but the bubbles won’t wrap around them neatly <label class="Link Link_pseudo" for="example-bubbles-checkbox">without the shrinkwrap fix</label>.
 {{</Partial>}}
 
 ### Legends and Headings
@@ -403,7 +403,7 @@ Oh hey, this is a callback to [my old post here](/legends-and-headings/) wit
 The idea of that older experiment was to have a `<legend>` inside a `<fieldset>` or a heading that would have lines around it. In the case of a legend, we could “emulate” the position of it in the center of its fieldset, which is not possible with regular means.
 
 {{<Partial class="require-anchor-name" src="examples/example-legend.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 10em;">}}
-  There are two fieldset elements with centered legends. The border goes to the sides of the text inside the legends, even though one of them wraps. Disabling the shrinkwrap fix shows how the borders would not go close to the text when it wraps.
+  There are two fieldset elements with centered legends. The border goes to the sides of the text inside the legends, even though one of them wraps. <label class="Link Link_pseudo" for="example-legend-checkbox">Disabling the shrinkwrap</label> fix shows how the borders would not go close to the text when it wraps.
 {{</Partial>}}
 
 #### Headings
@@ -411,7 +411,7 @@ The idea of that older experiment was to have a `<legend>` inside a `<fields
 Both fieldsets and headings did use inline-blocks to emulate the borders that go from the edges of text, and for wrapping text I had to add a `<br />` to avoid the shrinkwrap problem. This time, it is absolute positioning, though for some time I thought that if I had to implement this method once more, I’d do it via flex or grid — but with them, we couldn’t solve the “shrinkwrap”.
 
 {{<Partial class="require-anchor-name" src="examples/example-headings.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 10em;">}}
-  There are two headers with the borders going from their sides to the edges of the sections they’re in. One of the headers wraps, and if we disable the shrinkwrap fix, the borders for this wrapping header disappear.
+  There are two headers with the borders going from their sides to the edges of the sections they’re in. One of the headers wraps, and if we <label class="Link Link_pseudo" for="example-headings-checkbox">disable the shrinkwrap fix</label>, the borders for this wrapping header disappear.
 {{</Partial>}}
 
 
@@ -424,7 +424,7 @@ These are simple-looking — I’m not a designer — but I hope they will dem
 {{</Partial>}}
 
 {{<Partial class="require-anchor-name" src="examples/example-headings-underline.html" screenshot="true" video="true" style="overflow: hidden; resize: horizontal; min-width: 10em;">}}
-  Headers that have a single underline beneath. Without the fix, the underline would go from the edge to the edge of the container, while with the fix, it goes only to the width of the widest line.
+  Headers that have a single underline beneath. <label class="Link Link_pseudo" for="example-underline-checkbox">Without the fix</label>, the underline would go from the edge to the edge of the container, while with the fix, it goes only to the width of the widest line.
 {{</Partial>}}
 
 There might be many other ways we could style the headers, I feel like I only scratched the surface with these simple examples. If you’re a designer and have an idea for some header style that you might think could be achieved with this technique — throw it at me!
