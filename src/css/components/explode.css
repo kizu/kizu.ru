@@ -1,0 +1,75 @@
+/* Listen, I just threw some random CSS here, I have no idea how the proper “3d explode elements” should look like, ok. This works, kinda, for the article for now, and that’s enough. */
+
+.explode {
+  display: grid;
+  padding: 0.5lh 0 var(--explode--on, 0px);
+  grid-template-rows:
+    1fr
+    var(--explode--on, 2.5fr)
+    var(--explode--off, 0fr)
+  ;
+
+  --explode-state: var(--explode--on);
+  --explode--on: var(--explode-state,);
+  --explode--off: var(--explode-state,);
+
+  --explode-opacity: var(--LIGHT, 0.3) var(--DARK, 0.5);
+
+  transform:
+    var(--explode--on,
+      perspective(100cqi)
+      translateZ(calc(
+        2 * var(--_ed)
+      ))
+      rotateY(var(--_ea))
+      scale(1.75)
+    )
+    var(--explode--off, none)
+  ;
+  transform-origin:
+    0px
+    calc(-3 * var(--_ed))
+  ;
+  transform-style: preserve-3d;
+  transition: 0.3s linear;
+  transition-property: transform, grid-template-rows, padding;
+}
+
+.explode,
+.explode * {
+  --_ed: var(--explode-distance, 1em);
+  --_ea: var(--explode-angle, 30deg);
+  --_el: var(--explode-level, 1);
+}
+
+.explode * {
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--_ed) * var(--_el)));
+}
+
+.explode-note {
+  position: absolute;
+  inset: anchor(inside);
+  pointer-events: none;
+  outline: 2px solid var(--PINK);
+  font-family: var(--THEME_FONT_FAMILY_MONOSPACE);
+  opacity: var(--explode-opacity);
+
+  --explode-note-position: var(--explode--bottom);
+  --explode--bottom: var(--explode-note-position,);
+  --explode--top: var(--explode-note-position,);
+}
+
+.explode-note::before {
+  content: var(--explode-note);
+  position: absolute;
+  inset: 0;
+  inset-block:
+    var(--explode--top, auto 100%)
+    var(--explode--bottom, 100% auto)
+  ;
+  text-align: center;
+  opacity: 0;
+  --explode--top: inherit;
+  --explode--bottom: inherit;
+}

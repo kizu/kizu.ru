@@ -90,7 +90,7 @@
   --is-active: 0;
 }
 
-.ToC-LI_active {
+.ToC-LI[aria-current] {
   --is-active: 1;
   --active-content: var(--finger-to-right) var(--hair-space);
 }

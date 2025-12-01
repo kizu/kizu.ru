@@ -148,11 +148,14 @@ figure:not(:has(.Figure-Toggle:checked)) + aside > * > .Figure-Toggler > .Figure
 /* Would only be shown if any of the required variables is defined */
 figure[class|=require] .Figure-Demo::after {
   content:
-    "\26A0 \FE0F  Your browser does not support `"
+    "\26A0 \FE0F  Your browser does not support ‘"
     var(--require-anchor-name,
       var(--require-animation-range,
-        var(--require-timeline-scope)))
-    '`';
+        var(--require-timeline-scope,
+          var(--require-round,
+            var(--require-style-queries)
+          ))))
+    '’';
   display: block;
   background: --THEME_BG--DISTANT;
 
@@ -183,6 +186,16 @@ figure[class|=require] .Figure-Demo::after {
     --_toggler-on: none;
     --_toggler-off: inline;
   }
+
+  .hide-without-animation-range {
+    display: none;
+  }
+}
+
+@supports not (flex-wrap: balance) {
+  .hide-without-flex-wrap-balance {
+    display: none;
+  }
 }
 
 @supports not (timeline-scope: --foo) {
@@ -197,7 +210,7 @@ figure[class|=require] .Figure-Demo::after {
 @supports not (opacity: round(5, 2)) {
   .require-round,
   .require-round + aside {
-    --require-timeline-scope: 'round()';
+    --require-round: 'round()';
     --_toggler-on: none;
     --_toggler-off: inline;
   }
@@ -205,14 +218,14 @@ figure[class|=require] .Figure-Demo::after {
 
 .require-style-queries,
 .require-style-queries + aside {
-  --require-timeline-scope: '@container style()';
+  --require-style-queries: '@container style()';
   --_toggler-on: none;
   --_toggler-off: inline;
 }
 @container not style(--x: y) {
   .require-style-queries,
   .require-style-queries + aside {
-    --require-timeline-scope: initial;
+    --require-style-queries: initial;
     --_toggler-on: inline;
     --_toggler-off: none;
   }

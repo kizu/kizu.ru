@@ -1,0 +1,132 @@
+<style>@scope (.example-items) {
+
+container-type: inline-size;
+--padding: 1em;
+
+ul, ol {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  @supports (flex-wrap: balance) {
+    flex-wrap: var(--flex-wrap, balance);
+  }
+  justify-content: var(--justify-content, center);
+
+  --column-width: 7em;
+  gap: var(--padding);
+
+  padding: var(--padding);
+}
+
+li {
+  list-style: none;
+  padding: var(--padding);
+  margin: 0;
+  border-radius: 0.5em;
+  background: var(--THEME_BG);
+}
+
+ul li::before {
+  content: none;
+}
+}
+
+.fieldsets:has(.controls label:nth-of-type(1) > [name^=justify-content]:checked) + * {
+  --justify-content: start;
+}
+.fieldsets:has(.controls label:nth-of-type(3) > [name^=justify-content]:checked) + * {
+  --justify-content: end;
+}
+.fieldsets:has(.controls label:nth-of-type(4) > [name^=justify-content]:checked) + * {
+  --justify-content: space-around;
+}
+.fieldsets:has(.controls label:nth-of-type(5) > [name^=justify-content]:checked) + * {
+  --justify-content: space-between;
+}
+.fieldsets:has(.controls label:nth-of-type(6) > [name^=justify-content]:checked) + * {
+  --justify-content: space-evenly;
+}
+
+.fieldsets:has(> * > .controls > label.flex-balance-controls > :checked) + * .shrinkwrap {
+  --flex-wrap: wrap;
+}
+
+</style>
+
+<style>@scope (.example-items-explicit) {
+
+.shrinkwrap {
+  margin: 0 auto;
+  background: var(--GREEN);
+  border-radius: 0.5em;
+  --sw-inner-padding: var(--padding);
+  --sw-inset:
+    min(
+      anchor(--a inside, calc(infinity * 1px)),
+      anchor(--b inside, calc(infinity * 1px)),
+      anchor(--c inside, calc(infinity * 1px)),
+      anchor(--d inside, calc(infinity * 1px)),
+      anchor(--e inside, calc(infinity * 1px)),
+      anchor(--f inside, calc(infinity * 1px)),
+      anchor(--g inside, calc(infinity * 1px))
+    )
+  ;
+}
+
+li {
+  anchor-name: var(--is);
+}
+
+}</style>
+
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>Justify-content</legend>
+      <label><input name="justify-content" type="radio"/> start</label>
+      <label><input name="justify-content" type="radio" checked/> center</label>
+      <label><input name="justify-content" type="radio"/> end</label>
+      <label><input name="justify-content" type="radio"/> space-around</label>
+      <label><input name="justify-content" type="radio"/> space-between</label>
+      <label><input name="justify-content" type="radio"/> space-evenly</label>
+    </fieldset>
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Miscellaneous</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label>
+      <label class="flex-balance-controls hide-without-flex-wrap-balance"><input type="checkbox" /> Disable the <code>flex-wrap: balance</code></label>
+    </fieldset>
+  </div>
+</div>
+<div class="example-items example-items-explicit">
+  <div class="shrinkwrap">
+    <div class="shrinkwrap-content">
+      <ul>
+        <li style="--is: --a">
+          An item
+        </li>
+        <li style="--is: --b">
+          Second item
+        </li>
+        <li style="--is: --c">
+          Third item
+        </li>
+        <li style="--is: --d">
+          Fourth item
+        </li>
+        <li style="--is: --e">
+          Fifth item
+        </li>
+        <li style="--is: --f">
+          Sixth item
+        </li>
+        <li style="--is: --g">
+          Sixth item
+        </li>
+      </ul>
+      <span class="shrinkwrap-probe"></span>
+    </div>
+  </div>
+</div>

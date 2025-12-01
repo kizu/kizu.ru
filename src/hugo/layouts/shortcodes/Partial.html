@@ -27,7 +27,9 @@
 
     <input class="Figure-Toggle" type="checkbox" id="Toggle-{{ $id }}" />
     <div class="Figure-Demo">
-      {{- $src  | readFile | safeHTML -}}
+        {{- $content := $src | readFile | safeHTML -}}
+        {{- $content := (replace $content "$$$id" $id) -}}
+        {{- $content | safeHTML -}}
     </div>
     {{- if .Get "video" -}}
       {{- $video_src := (replace $file ".html" ".mp4") -}}
@@ -69,7 +71,9 @@
       {{- end -}}
     {{- else -}}
       <div class="Figure-Demo">
-        {{- $src  | readFile | safeHTML -}}
+        {{- $content := $src | readFile | safeHTML -}}
+        {{- $content := (replace $content "aaa" $id) -}}
+        {{- $content | safeHTML -}}
       </div>
     {{- end -}}
   {{- end -}}

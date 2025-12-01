@@ -1,0 +1,40 @@
+<style>
+.simple-example {
+  h5 {
+    max-width: max-content;
+    --inline-padding: 1em;
+    padding: 0.5em var(--inline-padding);
+    margin: 0;
+    line-height: 1.25;
+    text-align: left;
+    text-wrap: balance;
+    text-box: trim-end;
+    border-radius: 1em;
+    background: var(--PINK);
+
+    /* Disabling fancy first letter offset until I fix the overflow padding */
+    --fletter-offset: 0;
+  }
+}
+
+.simple-example-fixed {
+  container-type: inline-size;
+
+  h5 {
+    --sw-padding: var(--inline-padding);
+    background: var(--GREEN);
+  }
+}
+
+.simple-example-aligned {
+  .shrinkwrap {
+    margin: 0 auto;
+  }
+}
+</style>
+<h5 class="shrinkwrap">
+  <span class="shrinkwrap-content">
+    <span class="shrinkwrap-source">I am a Longer Header; I Will Wrap & Look Bad! <span style="display: var(--initial-at-large, none)">Oh no! What Can We Do?</span></span>
+    <span class="shrinkwrap-probe"></span>
+  </span>
+</h5>

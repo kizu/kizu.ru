@@ -1,0 +1,62 @@
+<style>
+  .side-by-side {
+    display: grid;
+    container-type: inline-size;
+    --gap: 1em;
+    gap: var(--gap);
+    grid-template: "a b";
+    font: var(--THEME_FONT--SMALL);
+
+    & > ol {
+      text-wrap: balance;
+      padding: var(--gap);
+      outline: 3px solid var(--GREEN);
+      --max-width: calc(50cqi - 3 * var(--gap));
+      max-width: var(--max-width);
+    }
+
+    & .shrinkwrap {
+      --sw-limit: calc(
+        var(--max-width)
+        -
+        var(--list-item-padding)
+      );
+    }
+  }
+</style>
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Options</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" id="multiple-disable" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </div>
+</div>
+<div class="side-by-side">
+  <div>
+    <p>This example shows how we can have a list take <em>up to</em> 50% of content while shrinking to fit the wrapped items that have <code>text-wrap: balance</code>, which usually results in a worse visual experience.</p>
+  </div>
+  <ol>
+    <li>
+      <div class="shrinkwrap">
+        <span class="shrinkwrap-content">
+          <span class="shrinkwrap-source">
+            Some non-wrapping item.
+          </span>
+          <span class="shrinkwrap-probe"></span>
+        </span>
+      </div>
+    </li>
+    <li>
+      <div class="shrinkwrap">
+        <span class="shrinkwrap-content">
+          <span class="shrinkwrap-source">
+            Another item, this time with more content, wrapping onto a few more lines.
+          </span>
+          <span class="shrinkwrap-probe"></span>
+        </span>
+      </div>
+    </li>
+  </ol>
+</div>

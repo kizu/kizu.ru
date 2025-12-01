@@ -1,0 +1,141 @@
+<style>.example-bubbles {
+  display: grid;
+  gap: 1em;
+  padding-block: 1em;
+  container-type: inline-size;
+
+  & blockquote {
+    display: grid;
+    gap: 0.5lh;
+    position: relative;
+    --padding-block: 0.5em;
+    --padding-inline: 1em;
+    --margin-start: 1em;
+    --margin-end: 2em;
+    --side: var(--start);
+    --start: var(--side,);
+    --end: var(--side,);
+
+    max-inline-size: max-content;
+    padding: var(--padding-block) var(--padding-inline);
+    margin: 0;
+    margin-inline:
+      var(--start, var(--margin-start) var(--margin-end))
+      var(--end, var(--margin-end) var(--margin-start))
+    ;
+
+    --bg:
+      var(--start, var(--GREEN))
+      var(--end, var(--PINK))
+    ;
+
+    place-self:
+      var(--start, start)
+      var(--end, end)
+    ;
+
+    background: var(--bg);
+    border-radius: 1em;
+    box-shadow: none;
+
+    text-wrap: balance;
+    font-style: normal;
+
+    &.end {
+      --side: var(--end);
+    }
+
+    /* Tail */
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: var(--start, -0.9em) auto var(--end, -0.9em);
+      inset-block-end: 0.5em;
+      width: 1em;
+      height: 1em;
+      background: radial-gradient(circle at var(--start, 0) var(--end, 100%) 0, transparent 70%, var(--bg) 0);
+    }
+
+    &.liked::after {
+      content: "❤️";
+      position: absolute;
+      top: -0.25em;
+      inset-inline-end: -0.25em;
+      rotate: 15deg;
+    }
+  }
+
+  & .shrinkwrap {
+    --sw-padding: var(--padding-inline);
+    --sw-limit: calc(
+      100cqi
+      -
+      (
+        var(--margin-start)
+        +
+        var(--margin-end)
+      )
+    );
+  }
+}
+</style>
+
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Options</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" id="bubbles-balance" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </div>
+</div>
+<div class="example-bubbles">
+  <blockquote>
+    <p class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          Hello, there!
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </p>
+  </blockquote>
+  <blockquote class="end">
+    <p class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          Oh hey, this is a bubble with a lot of text, so it would wrap, hopefully!
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </p>
+  </blockquote>
+  <blockquote class="liked">
+    <p class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          This is cool! I like how the bubbles go neatly around the wrapped text.
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </p>
+  </blockquote>
+  <blockquote class="end">
+    <p class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          The styling is now simpler than what we have with the previous technique. For example, we can use regular absolute positioning, like for the emoji on the previous message!
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </p>
+    <p class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          We can even have multiple paragraphs inside, just each will need to be wrapped with our technique!
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </p>
+  </blockquote>
+</div>

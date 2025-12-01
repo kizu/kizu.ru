@@ -1,0 +1,379 @@
+<style>
+/*
+  The shrinkwrap technique.
+  https://kizu.dev/shrinkwrap-solution/
+*/
+.shrinkwrap {
+  /*
+    This should be easy to override, so placing the
+    custom property defaults in a separate layer.
+  */
+  @layer defaults {
+    /*
+      We cannot use `%` for either; use `cqi` instead.
+      Ideally, `progress()` would allow us to do it:
+      https://github.com/w3c/csswg-drafts/issues/13315
+    */
+    --sw-limit: 100cqi;
+    --sw-padding: 0px;
+    --sw-inner-padding: 0px;
+    --sw-inset: initial;
+    --sw-source: initial;
+
+    /*
+      Cyclic toggles, allowing turning the technique
+      on and off. See https://kizu.dev/cyclic-toggles/
+    */
+    --sw-enabled: var(--sw-enabled--on);
+    --sw-enabled--on: var(--sw-enabled,);
+    --sw-enabled--off: var(--sw-enabled,);
+
+    /*
+      Override the toggle when the timeline-scope is not
+      supported, which will disable everything nicely.
+    */
+    @supports not (timeline-scope: --f) {
+      --sw-enabled: var(--sw-enabled--off) !important;
+    }
+  }
+
+  /* Deriving an inner value to include the paddings. */
+  --_sw-limit: calc(
+    var(--sw-limit)
+    -
+    2 * var(--sw-padding)
+  );
+
+  /*
+    Must be `block`, `flow-root`, etc, so could be nested
+    in a flexbox/grid, but can’t establish one itself.
+  */
+  display: block;
+
+  /*
+    The content part will likely overflow due to the
+    inner box being larger.
+  */
+  overflow: hidden;
+
+  /* Lifting the scope of view timelines from inside. */
+  timeline-scope: --_sw-x;
+
+  /*
+    Accessing the start and end coordinates of the
+    inner element via scroll-driven animations.
+    Only apply when the technique is enabled.
+  */
+  animation: var(--sw-enabled--on,
+    --_sw-x-start linear both,
+    --_sw-x-end   linear both
+  );
+
+  /*
+    We will be using the “resolution” as a range to
+    retrieve the width of various things.
+  */
+  --_sw-resolution: 10000px;
+  animation-range:
+    0               var(--_sw-resolution),
+    contain contain var(--_sw-resolution);
+  animation-timeline: --_sw-x;
+
+  /*
+    Calculating the actual size from the variables applied
+    via the animation with the given resolution.
+  */
+  --_sw-size:
+    (var(--_sw-x-start) - var(--_sw-x-end))
+    *
+    var(--_sw-resolution)
+  ;
+  /*
+    For the main size, clamp the result within limits,
+    and guard everything with a space toggle.
+  */
+  inline-size: var(--sw-enabled--on,
+    clamp(
+      0px,
+      var(--_sw-size),
+      var(--_sw-max-size)
+    )
+  );
+  /* Min-size should not be clamped. */
+  min-inline-size: max(
+    0px,
+    var(--_sw-size)
+  );
+
+  /*
+    We need to always round down the `max-inline-size`;
+    otherwise, if it uses `cq` units, it could get weird
+    in Safari.
+  */
+  --_sw-max-size: round(
+    down,
+    max(
+      0px,
+      var(--_sw-limit)
+    ),
+    1px
+  );
+
+  /*
+    Our shrinkwrapped box will behave as `content-box`,
+    so we need to “enforce” the `content-box` here to
+    prevent the double-counting of the extra space
+    that could happen otherwise.
+  */
+  box-sizing: content-box !important;
+
+  /*
+    This can’t be changed from outside for the
+    base technique.
+  */
+  flex-grow: 0 !important;
+  /* Allow shrinking when the technique is disabled. */
+  flex-shrink:
+    var(--sw-enabled--on, 0)
+    var(--sw-enabled--off, 1)
+    !important
+  ;
+  /* Don’t limit the max size when disabled. */
+  max-inline-size:
+    var(--sw-enabled--on, none)
+    var(--sw-enabled--off, var(--_sw-limit))
+    !important
+  ;
+}
+
+.shrinkwrap-content {
+  /* Must be specifically `block`, nothing else. */
+  display: block;
+
+  /* Required for establishing the view timeline. */
+  overflow: hidden;
+
+  /*
+    Required for getting non-anchored positioning
+    dimensions.
+  */
+  position: relative;
+
+  /*
+    Crucial part: the content element should always
+    be max-sized and independent of anything else,
+    unless the technique is disabled.
+  */
+  inline-size: var(--sw-enabled--on, var(--_sw-max-size));
+
+  /* Makes shrinking not be hidden by the overflow. */
+  min-inline-size: min-content;
+
+  /*
+    The following styles should only apply for the
+    browsers that support `timeline-scope`, which is
+    currently the furthest from being implemented in
+    Firefox on 2026-01-26.
+  */
+  @supports (timeline-scope: --f) {
+    /* Guard by the cyclic toggle. */
+    inset-inline-start: var(--sw-enabled--on,
+      min(
+        0px,
+        var(--_sw-x-start) * var(--_sw-resolution)
+        -
+        var(--_sw-max-size)
+      )
+    );
+  }
+}
+
+.shrinkwrap-source {
+  anchor-name: var(--sw-source, --_sw-source);
+
+  /*
+    Must be specifically `inline` by default.
+    Allows anchor positioning to measure it’s size
+    and its offset.
+  */
+  @layer defaults {
+    display: inline;
+  }
+}
+
+/*
+  Creating the “probing” element that will be used to
+  measure the source element’s dimensions and offset.
+*/
+@supports (timeline-scope: --f) {
+  /*
+    We cannot use `::before` here due to a WebKit bug:
+    https://bugs.webkit.org/show_bug.cgi?id=302703
+  */
+  .shrinkwrap-probe {
+    position: absolute;
+    /* Could also be `visibility: hidden` in production. */
+    pointer-events: none;
+
+    /* Anchoring to the source element. */
+    position-anchor: var(--sw-source, --_sw-source);
+
+    /* Not strictly required, but better to be explicit. */
+    inset-block: 0;
+    /* Key part for calculating the text-align offset. */
+    inset-inline: var(--sw-inset, anchor(inside, 0px));
+    /* Accounting for the inner spacing if needed. */
+    margin: calc(-1 * var(--sw-inner-padding, 0px));
+
+    /* Exposes the element to the scope on an ancestor. */
+    view-timeline: --_sw-x inline;
+  }
+}
+
+/*
+  Custom properties that will be applied via scroll-driven
+  animations, with the value from 0 to 1.
+*/
+@property --_sw-x-end {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
+}
+@property --_sw-x-start {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
+}
+
+/* The keyframes that deliver their values. */
+@keyframes --_sw-x-end {
+  0%   { --_sw-x-end: 0 }
+  100% { --_sw-x-end: 1 }
+}
+@keyframes --_sw-x-start {
+  0%   { --_sw-x-start: 0 }
+  100% { --_sw-x-start: 1 }
+}
+
+</style>
+
+<style>
+
+.awesome {
+  font-family: system-ui, Arial;
+  font-size: 2.5em;
+  line-height: 1;
+  font-weight: 200;
+  text-transform: uppercase;
+
+  --border-width: 2px;
+  --inline-padding: 0.25rem;
+  padding: 0.1em var(--inline-padding);
+  border: var(--border-width) solid;
+
+  --size: calc(
+    50cqi
+    -
+    var(--gap)
+    -
+    1px
+    -
+    2 * var(--border-width)
+    -
+    2 * var(--inline-padding)
+  );
+
+  &:not(.shrinkwrap) {
+    border-color: var(--RED);
+    inline-size: var(--size);
+    max-inline-size: max-content;
+  }
+
+  @supports (timeline-scope: --foo) {
+    &.shrinkwrap {
+      border-color: var(--DARKGREEN);
+      --sw-limit: var(--size);
+    }
+  }
+}
+
+.example {
+  display: grid;
+  gap: var(--gap, 1em);
+  font: var(--THEME_FONT--SMALL);
+}
+
+.example-resizer {
+  overflow: hidden;
+  resize: horizontal;
+}
+
+.example-intro {
+  container-type: inline-size;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: var(--gap);
+  place-items: center;
+  --gap: .5rem;
+}
+
+.example-intro hr {
+  place-self: stretch;
+  border: none;
+  border-left: 1px solid rgba(0,0,0,.2);
+  margin: -0.5rem 0;
+  visibility: inherit;
+}
+
+.example-resizer--intro {
+  min-width: 300px;
+  margin-inline: auto;
+
+  @supports (timeline-scope: --f) {
+    &:has(> .Figure-Toggle:not(:checked)) {
+      width: 475px;
+    }
+  }
+  @supports not (timeline-scope: --f) {
+    &:has(> .Figure-Toggle:checked) {
+      width: 475px;
+    }
+  }
+}
+
+.awesome-content {
+  anchor-name: --not-awesome;
+}
+
+.awesome:not(.shrinkwrap) {
+  position: relative;
+}
+
+.awesome:not(.shrinkwrap)::before {
+  content: "";
+  position: absolute;
+  position-anchor: --not-awesome;
+  inset: 0;
+  inset-inline-start: calc(anchor(outside) + var(--gap));
+  --c: color-mix(in oklch, var(--RED), transparent);
+  background: repeating-linear-gradient(45deg, transparent, transparent 0.25em, var(--c) 0.25em, var(--c) 0.5em);
+  box-shadow: -2px 0 var(--RED);
+}
+
+</style>
+
+<div class="example example-intro">
+  <p class="awesome">
+    <span class="awesome-content">
+      CSS is Awe&shy;some
+    </span>
+  </p>
+  <hr />
+  <p class="shrinkwrap awesome">
+    <span class="shrinkwrap-content">
+      <span class="shrinkwrap-source">
+        CSS is Awe&shy;some
+      </span>
+      <span class="shrinkwrap-probe"></span>
+    </span>
+  </p>
+</div>

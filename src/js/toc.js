@@ -4,8 +4,8 @@ export const getToCMethods = () => {
   const visibleElements = new Map();
   let previousHeader = '';
 
-  const removeActiveHeaders = () => Array.from(document.getElementsByClassName('ToC-LI_active'))
-    .forEach(item => item.classList.remove('ToC-LI_active'))
+  const removeActiveHeaders = () => Array.from(document.querySelectorAll('.ToC-LI[aria-current]'))
+    .forEach(item => item.removeAttribute('aria-current'))
 
   const getCurrentHeader = () => {
     let scoredFirstHeader = false;
@@ -36,7 +36,7 @@ export const getToCMethods = () => {
       const linkElement = document.querySelector(`.ToC-Link[href='#${header}']`);
       if (linkElement) {
         const newHeader = linkElement.parentElement;
-        newHeader.classList.add('ToC-LI_active');
+        newHeader.setAttribute('aria-current', true);
       }
       previousHeader = header;
     }

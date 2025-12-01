@@ -1,0 +1,87 @@
+<style>
+  .example-tooltip {
+    text-align: center;
+    padding-bottom: 8em;
+
+    & button {
+      anchor-name: --button;
+    }
+    & .tooltip {
+      position: fixed;
+      position-anchor: --button;
+      top: anchor(outside);
+      justify-self: anchor-center;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+      margin: 0.75em;
+
+      text-align: left;
+      font: var(--THEME_FONT--SMALL);
+      text-wrap: balance;
+      --bg: color-mix(
+        in oklch,
+        var(--THEME_BG--INVERTED) 70%,
+        transparent
+      );
+      background: var(--bg);
+      color: #FFF;
+      text-shadow: none;
+
+      & > p + p {
+        margin-top: 0.5lh;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        width: 1em;
+        height: 1em;
+        rotate: 45deg;
+        translate: -50% 50%;
+        background: linear-gradient(
+          135deg,
+          var(--bg) 50%,
+          transparent 0
+        );
+      }
+
+      & .shrinkwrap {
+        --sw-limit: min(100vi, 20em);
+        --sw-padding: 0.75em;
+      }
+    }
+  }
+  </style>
+
+  <div class="fieldsets">
+    <div style="display: contents">
+      <fieldset class="controls" style="margin-bottom: 0.5lh;">
+        <legend>Options</legend>
+        <label class="shrinkwrap-controls"><input type="checkbox" id="tooltip-shrinkwrap" /> Disable the shrinkwrap technique</label>
+        <label class="balance-controls"><input type="checkbox" id="tooltip-balance" /> Disable the <code>text-wrap: balance</code></label>
+      </fieldset>
+    </div>
+  </div>
+  <div class="example-tooltip">
+    <button type="button">Button with a tooltip!</button>
+    <div class="tooltip">
+      <p class="shrinkwrap">
+        <span class="shrinkwrap-content">
+          <span class="shrinkwrap-source">
+            This is the tooltip’s content that wraps over several lines.
+          </span>
+          <span class="shrinkwrap-probe"></span>
+        </span>
+      </p>
+      <p class="shrinkwrap">
+        <span class="shrinkwrap-content">
+          <span class="shrinkwrap-source">
+            It is always shown, as this is a demo, so the button before it doesn’t really do anything.
+          </span>
+          <span class="shrinkwrap-probe"></span>
+        </span>
+      </p>
+    </div>
+  </div>

@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-items: start;
 }
 
 .fieldsets:first-child {
@@ -19,4 +20,13 @@
 .fieldsets > .options {
   flex-basis: 40%;
   flex-grow: 1;
+}
+
+.fieldsets > details {
+  display: contents;
+}
+
+.fieldsets > details > summary {
+  font: var(--THEME_FONT--SMALL);
+  place-self: center;
 }

@@ -1,0 +1,33 @@
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>3D view</legend>
+      <label><input id="exploded2-3d-view" type="checkbox" checked/> Show in 3D</label>
+    </fieldset>
+  </div>
+  <details>
+    <summary><span class="Link Link--pseudo">Extra options</span></summary>
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>Selected Element</legend>
+      <label><input name="exploded2-selected" type="radio"/> shrinkwrap</label>
+      <label><input name="exploded2-selected" type="radio" checked/> shrinkwrap-content</label>
+      <label><input name="exploded2-selected" type="radio"/> shrinkwrap-probe</label>
+    </fieldset>
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Miscellaneous</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </details>
+</div>
+<div class="explode">
+  <h5 class="shrinkwrap">
+    <span class="shrinkwrap-content">
+      <span class="shrinkwrap-source">I am a Longer Header; I Will Wrap & Look Bad! <span style="display: var(--initial-at-large, none)">Oh no! What Can We Do?</span></span>
+      <span class="shrinkwrap-probe"></span>
+    </span>
+  </h5>
+  <div class="explode-note expl0"></div>
+  <div class="explode-note expl1"></div>
+  <div class="explode-note expl2"></div>
+</div>
