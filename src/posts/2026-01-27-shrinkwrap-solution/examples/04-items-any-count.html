@@ -1,0 +1,157 @@
+<style>@scope (.example-items-any-count) {
+
+li {
+  anchor-name: --li;
+  anchor-scope: --li;
+}
+
+.probe-left,
+.probe-right {
+  position: absolute;
+  pointer-events: none;
+  inset: anchor(--li inside);
+  container-type: inline-size;
+
+  --angle: 45deg;
+  --c: var(--BLUE);
+  --co: var(--RED);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--overlays--on,
+      repeating-linear-gradient(var(--angle), transparent, transparent 0.25em, var(--c) 0.25em, var(--c) 0.5em)
+    );
+    outline: var(--overlays--on, 2px solid var(--co));
+  }
+}
+
+.probe-left {
+  left: anchor(--li left, 0);
+  right: anchor(
+    --leftmost left,
+    calc(anchor(--li left) - 1px)
+  );
+
+  @container (min-width: 1px) {
+    &::before {
+      anchor-name: --leftmost;
+      --co: var(--c);
+    }
+  }
+}
+
+.probe-right {
+  left: anchor(
+    --rightmost right,
+    calc(anchor(--li right) - 1px)
+  );
+  right: anchor(--li right, 0);
+  --angle: -45deg;
+  --c: var(--DARKGREEN);
+
+  @container (min-width: 1px) {
+    &::before {
+      anchor-name: --rightmost;
+      --co: var(--c);
+    }
+  }
+}
+
+.shrinkwrap {
+  --sw-inner-padding: 1em;
+  --sw-inset:
+    anchor(--leftmost left)
+    anchor(--rightmost right)
+  ;
+}
+
+/* Only for visuals */
+
+.shrinkwrap {
+  margin: 0 auto;
+  background: var(--GREEN);
+  border-radius: 0.5em;
+}
+
+ol li::before {
+  position: static;
+  margin: 0;
+}
+
+}</style>
+<style>
+.example-any-count {
+  --overlays: var(--overlays--off);
+  --overlays--on: var(--overlays,);
+  --overlays--off: var(--overlays,);
+}
+</style>
+
+<input-scope>
+  <div class="fieldsets">
+    <fieldset class="number-of-items">
+      <legend>Number of items</legend>
+      <input-value from=".number-of-items input" as="@value" to="input">
+        <input-source>
+          <input type="range" value="4" max="99" style="width: 100px" />
+        </input-source>
+        <input-source>
+          <input type="number" value="4" min="0" max="99" size="3" />
+        </input-source>
+      </input-value>
+    </fieldset>
+    <details>
+      <summary><span class="Link Link--pseudo">Extra options</span></summary>
+      <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>Justify-content</legend>
+      <label><input name="justify-content-$$$id" type="radio"/> start</label>
+      <label><input name="justify-content-$$$id" type="radio" checked/> center</label>
+      <label><input name="justify-content-$$$id" type="radio"/> end</label><br/>
+      <label><input name="justify-content-$$$id" type="radio"/> space-around</label>
+      <label><input name="justify-content-$$$id" type="radio"/> space-between</label>
+      <label><input name="justify-content-$$$id" type="radio"/> space-evenly</label>
+    </fieldset>
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Miscellaneous</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label>
+      <label class="flex-balance-controls hide-without-flex-wrap-balance"><input type="checkbox" /> Disable the <code>flex-wrap: balance</code></label>
+    </fieldset>
+  </details>
+</div>
+<div class="example-items example-items-any-count">
+  <div class="shrinkwrap">
+    <input-value from=".number-of-items input" as="@count" to="clone-content">
+    <clone-content root="ol">
+    <div class="shrinkwrap-content">
+      <ol>
+        <li>
+          An item
+          <div class="probe-left"></div>
+          <div class="probe-right"></div>
+        </li>
+        <li>
+          Second item
+          <div class="probe-left"></div>
+          <div class="probe-right"></div>
+        </li>
+        <li>
+          Third item
+          <div class="probe-left"></div>
+          <div class="probe-right"></div>
+        </li>
+        <li>
+          Fourth item
+          <div class="probe-left"></div>
+          <div class="probe-right"></div>
+        </li>
+
+      </ol>
+      <div class="shrinkwrap-probe"></div>
+    </div>
+  </div>
+</clone-content>
+</input-value>
+</div>
+</input-scope>

@@ -1,0 +1,58 @@
+<style>
+  .alignment-broken .shrinkwrap {
+    & .shrinkwrap-content {
+      inset-inline-start: 0;
+    }
+  }
+
+  .fieldsets:has(> * > .controls > label:nth-of-type(1) > [name$='align']:checked) + * > .shrinkwrap {
+    text-align: left;
+  }
+  .fieldsets:has(> * > .controls > label:nth-of-type(2) > [name$='align']:checked) + * > .shrinkwrap {
+    text-align: center;
+  }
+  .fieldsets:has(> * > .controls > label:nth-of-type(3) > [name$='align']:checked) + * > .shrinkwrap {
+    text-align: right;
+  }
+
+</style>
+
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>Text align</legend>
+      <label><input name="alignment-broken-align" type="radio"/> left</label>
+      <label><input name="alignment-broken-align" type="radio"/> center</label>
+      <label><input name="alignment-broken-align" type="radio" checked/> right</label>
+    </fieldset>
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>3D view</legend>
+      <label><input id="alignment-broken-3d-view" type="checkbox" checked/> Show in 3D</label>
+    </fieldset>
+  </div>
+  <details>
+    <summary><span class="Link Link--pseudo">Extra options</span></summary>
+    <fieldset class="controls" style="margin-bottom: 0.5rem;">
+      <legend>Selected Element</legend>
+      <label><input name="alignment-broken-selected" type="radio"/> shrinkwrap</label>
+      <label><input name="alignment-broken-selected" type="radio"/> shrinkwrap-content</label>
+      <label><input name="alignment-broken-selected" type="radio" checked/> shrinkwrap-probe</label>
+    </fieldset>
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Miscellaneous</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </details>
+</div>
+<div class="explode">
+  <h5 class="shrinkwrap">
+    <span class="shrinkwrap-content">
+      <span class="shrinkwrap-source">I am a Longer Header; I Will Wrap & Look Bad! <span style="display: var(--initial-at-large, none)">Oh no! What Can We Do?</span></span>
+      <span class="shrinkwrap-probe"></span>
+    </span>
+  </h5>
+  <div class="explode-note expl0"></div>
+  <div class="explode-note expl1"></div>
+  <div class="explode-note expl2"></div>
+</div>

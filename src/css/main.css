@@ -16,7 +16,7 @@
 @import url("_utility.css");
 @import url("_custom-elements.css");
 
-@import url("../../node_modules/@kizu/mixins/preview.css");
+/* @import url("../../node_modules/@kizu/mixins/preview.css"); */
 @import url("components/color-components.css");
 
 @import url("components/articlelist.css");
@@ -24,6 +24,7 @@
 @import url("components/asides.css");
 @import url("components/button.css");
 @import url("components/code.css");
+@import url("components/explode.css");
 @import url("components/fieldsets.css");
 @import url("components/figure.css");
 @import url("components/layout.css");
@@ -265,6 +266,10 @@ em {
   font-weight: var(--em-font-weight);
 }
 
+dfn {
+  --code-font-weight: bold;
+  --code-font-style: normal;
+}
 
 blockquote {
   padding: 0 var(--THEME_INDENT);

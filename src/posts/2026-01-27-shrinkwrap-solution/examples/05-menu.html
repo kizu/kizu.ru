@@ -1,0 +1,174 @@
+<style>@scope (.example-menu) {
+
+  display: flex;
+  gap: var(--padding);
+  padding: var(--padding);
+
+  --min-search-width: 100px;
+  --padding: 0.5em;
+  --gap: calc(2 * var(--padding));
+
+  h5 {
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    place-self: center;
+  }
+
+  nav {
+    display: flex;
+    container-type: inline-size;
+    flex-grow: 1;
+    gap: var(--padding);
+    padding: 0;
+    margin: 0;
+  }
+
+  & search {
+    flex-grow: 1;
+    place-self: center;
+
+    & > input {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+
+  & > nav > .shrinkwrap {
+    /* min-width: max-content; */
+    --sw-limit: calc(
+      100cqw
+      -
+      var(--min-search-width)
+      -
+      var(--gap)
+    )
+  }
+
+  ul {
+    display: flex;
+    gap: 0;
+    place-items: center;
+
+    & .shrinkwrap {
+      --sw-inner-padding: var(--padding);
+    }
+  }
+
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+
+    /* Apply via a checkbox */
+  }
+
+  li::before {
+    content: none;
+  }
+
+  li {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  a {
+    display: block;
+    padding: var(--padding);
+    overflow-wrap: normal;
+  }
+
+  .shrinkwrapped-sources {
+    position: absolute;
+    width: var(--sw-limit);
+    visibility: hidden;
+  }
+
+  .shrinkwrapped-targets {
+    width:
+      var(--sw-enabled--on, max-content)
+      var(--sw-enabled--off, auto)
+    ;
+  }
+
+}
+
+
+.fieldsets:has(> * > .controls > label.flex-sequential-control > :checked) + * li {
+  flex-shrink: pow(10000, sibling-index() - 1);
+}
+
+</style>
+
+
+<input-scope>
+  <div class="fieldsets">
+    <div style="display: contents">
+      <fieldset class="number-of-items">
+        <legend>Number of items</legend>
+        <input-value from=".number-of-items input" as="@value" to="input">
+          <input-source>
+            <input type="range" value="4" min="1" max="4" style="width: 100px" />
+          </input-source>
+          <input-source>
+            <input type="number" value="4" min="1" max="4" size="1" />
+          </input-source>
+        </input-value>
+      </fieldset>
+      <fieldset class="controls" style="margin-bottom: 0.5lh;">
+        <legend>Miscellaneous</legend>
+        <label class="shrinkwrap-controls"><input type="checkbox" /> Disable the shrinkwrap technique</label><br/>
+        <label class="flex-sequential-control"><input type="checkbox" /> Enable sequential shrinking</code></label>
+      </fieldset>
+    </div>
+  </div>
+  <input-value from=".number-of-items input" as="@count" to="clone-content">
+  <div class="example-menu">
+    <h5>My Website</h5>
+    <nav>
+      <div class="shrinkwrap">
+        <clone-content root="ul">
+          <ul class="shrinkwrapped-sources" aria-hidden>
+            <li style="--sw-source: --a;">
+              <a href="#x"><span class="shrinkwrap-source">Home</span></a>
+            </li>
+            <li style="--sw-source: --b;">
+              <a href="#x"><span class="shrinkwrap-source">About Me</span></a>
+            </li>
+            <li style="--sw-source: --c;">
+              <a href="#x"><span class="shrinkwrap-source">My Weird Projects</span></a>
+            </li>
+            <li style="--sw-source: --d;">
+              <a href="#x"><span class="shrinkwrap-source">All My Blog Posts</span></a>
+            </li>
+          </ul>
+        </clone-content>
+        <clone-content root="ul">
+          <ul class="shrinkwrapped-targets shrinkwrap-source">
+            <li class="shrinkwrap" style="--sw-source: --a">
+              <a href="#x">Home</a>
+              <div class="shrinkwrap-probe"></div>
+            </li>
+            <li class="shrinkwrap" style="--sw-source: --b">
+              <a href="#x">About Me</a>
+              <div class="shrinkwrap-probe"></div>
+            </li>
+            <li class="shrinkwrap" style="--sw-source: --c">
+              <a href="#x">My Weird Projects</a>
+              <div class="shrinkwrap-probe"></div>
+            </li>
+            <li class="shrinkwrap" style="--sw-source: --d">
+              <a href="#x">All My Blog Posts</a>
+              <div class="shrinkwrap-probe"></div>
+            </li>
+          </ul>
+        </clone-content>
+        <div class="shrinkwrap-probe"></div>
+      </div>
+      <search>
+        <input type="text" placeholder="Search" />
+      </search>
+    </nav>
+  </div>
+</input-scope>

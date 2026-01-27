@@ -1,0 +1,42 @@
+<style>
+  .example-legend {
+    container-type: inline-size;
+
+    & fieldset {
+      padding-inline: 1em;
+    }
+
+    & legend {
+      text-wrap: balance;
+      font-family: system-ui, sans-serif;
+      line-height: 1.1;
+    }
+
+    & .shrinkwrap {
+      --sw-padding: 1em;
+    }
+  }
+</style>
+
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Options</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" id="legend-shrinkwrap" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </div>
+</div>
+<div class="example-legend">
+  <fieldset>
+    <legend class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          Some text inside a balanced legend with that should span over two lines when there is too much text.
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </legend>
+    <p>Just some content inside a fieldset.</p>
+  </fieldset>
+</div>

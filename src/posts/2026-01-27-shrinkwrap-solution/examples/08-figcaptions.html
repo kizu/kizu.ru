@@ -1,0 +1,63 @@
+<style>
+.example-figcaptions {
+  container-type: inline-size;
+  max-width: 378px;
+  margin: 0 auto;
+
+  & figure {
+    display: grid;
+    width: max-content;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  & figcaption {
+    place-self: start end;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+    border-radius: 0.25em;
+
+    text-wrap: balance;
+
+    background: color-mix(
+      in oklch,
+      var(--THEME_BG--INVERTED) 70%,
+      transparent
+    );
+    color: #FFF;
+    text-shadow: none;
+
+    --sw-padding: 1.25em;
+  }
+
+  & a {
+    color: inherit;
+    text-decoration-color: inherit;
+  }
+}
+</style>
+
+<div class="fieldsets">
+  <div style="display: contents">
+    <fieldset class="controls" style="margin-bottom: 0.5lh;">
+      <legend>Options</legend>
+      <label class="shrinkwrap-controls"><input type="checkbox" id="legend-shrinkwrap" /> Disable the shrinkwrap technique</label>
+      <label class="balance-controls"><input type="checkbox" /> Disable the <code>text-wrap: balance</code></label>
+    </fieldset>
+  </div>
+</div>
+<div class="example-figcaptions">
+  <figure>
+    <img src="examples/image-example.jpg" width="360" height="270" loading="lazy" alt="A photo of a tiny building in a park with a bicycle standing near its open door. Inside, it looks like an office of a kind, with two office chairs. There is a tree near the building, various trees behind, and a cone-shaped bush closer to the camera. The building has blue window grilles, and a green postbox on a side." />
+    <figcaption class="shrinkwrap">
+      <span class="shrinkwrap-content">
+        <span class="shrinkwrap-source">
+          A <a href="https://pixey.org/p/kizu/819867772992844044">photo from my Pixelfed</a>, shot in April of 2025.
+        </span>
+        <span class="shrinkwrap-probe"></span>
+      </span>
+    </figcaption>
+  </figure>
+</div>
