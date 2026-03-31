@@ -8,6 +8,14 @@ mastodon_post_id: "111540322324716753"
 
 _There is one old, yet unsolved, CSS problem: shrinking containers to fit the content when it automatically wraps. While not intentional, anchor positioning allows us to come closer to solving it, at least for a few cases. In this article, I’ll demonstrate how we can use anchor positioning to neatly decorate wrapping text or elements in flex or grid contexts._
 
+## Update from 2026-03-31
+
+I forgot to make this update in-time, and recently saw this article mentioned in a few places.
+
+So! I came up with a more robust technique as a follow-up to this one — [“Solving Shrinkwrap: New Experimental Technique”](/shrinkwrap-solution/) — one that uses both anchor positioning and scroll-driven animations, and allows not just faking the background via anchor positioning, but adjusting the layout of the element based on that measurement, without any cycles. While it won’t solve all shrinkwrap cases, it will solve most of those you’re likely to stumble upon.
+
+The technique from this article is a part of the new technique, but could still be used on its own either for more simple cases, or for places where you need a bit more robust browser support, as pure anchor positioning is supported better than it plus SDA.
+
 ## Update from 2025-11-15
 
 I finally found time to update the code in the examples: it was not that many of them.
