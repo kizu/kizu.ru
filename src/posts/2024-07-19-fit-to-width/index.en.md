@@ -203,7 +203,7 @@ Now we have two lengths: `--available-space` of our furthest container, and ou
 
 Ideally, we could just now divide one by another — [the specs](https://www.w3.org/TR/css-values-4/#calc-type-checking) do specify that this should work, but no browser has implemented it yet.
 
-However, that’s where a [“CSS Type Casting to Numeric: `tan(atan2())` Scalars”](https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j) article by [Jane Ori]() comes to help with a workaround[^mentions]! By using the `tan()` with `atan2()` CSS functions, we can essentially divide one length by another and get the unitless ratio as the result!
+However, that’s where a [“CSS Type Casting to Numeric: `tan(atan2())` Scalars”](https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j) article by [Jane Ori](https://propjockey.io/about/) comes to help with a workaround[^mentions]! By using the `tan()` with `atan2()` CSS functions, we can essentially divide one length by another and get the unitless ratio as the result!
 
 [^mentions]: In the last few weeks, I saw this technique mentioned a few times, probably due to `@property` being released in Firefox. I also experimented with it a lot, but did not have an opportunity to share any of my experiments, until today. <!-- offset="2" span="3" -->
 

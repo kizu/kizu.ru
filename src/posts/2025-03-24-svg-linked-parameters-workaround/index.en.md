@@ -105,7 +105,7 @@ Before I go to the details of [the technique’s implementation](#the-implem
 
 #### The Spark
 
-My most recent experiments on this started from a random [Mastodon thread](https://mastodon.social/@spiralganglion/113921387566692673) by [Ivan Reese](https://ivanish.ca/) almost two months ago, in which he shared some work-in-progress bits of CSS with SVG inside. I’ll quote one of the challenges[^last-example] he had:
+My most recent experiments on this started from a random [Mastodon thread](https://mastodon.social/@spiralganglion/113921387566692673) by [Ivy Reese](https://ivy.boo/) almost two months ago, in which she shared some work-in-progress bits of CSS with SVG inside. I’ll quote one of the challenges[^last-example] she had:
 
 [^last-example]: My [last demo](#one-more-use-case-link-underlines) in this article solves this challenge, as well as a few others mentioned in that thread. <!-- offset="3" span="2" -->
 
@@ -1930,7 +1930,7 @@ But I am happy I managed to at least achieve splitting any regularly comput
 
 While the most common use case for SVG today is icons, there are more things we can do with it. Initially, I wanted to add many more use cases but found myself wanting to finish the article instead. Thus, I will look into just one such case, and I invite you to experiment with SVG for other purposes too.
 
-This last demo was the use case that [sparked](#the-spark) this article. [Ivan Reese](https://ivanish.ca/) was working on an implementation of link underlines for the [Ink & Switch](https://www.inkandswitch.com/) research lab’s website, with SVGs credited to [Todd Matthews](https://www.seaofclouds.com/) and Ink & Switch. The underlines should vary semi-randomly from one to another and change color alongside their link’s color when hovered or focused.
+This last demo was the use case that [sparked](#the-spark) this article. [Ivy Reese](https://ivy.boo/) was working on an implementation of link underlines for the [Ink & Switch](https://www.inkandswitch.com/) research lab’s website, with SVGs credited to [Todd Matthews](https://www.seaofclouds.com/) and Ink & Switch. The underlines should vary semi-randomly from one to another and change color alongside their link’s color when hovered or focused.
 
 With the technique from this article, it is possible to achieve both:
 
@@ -1978,13 +1978,13 @@ With the technique from this article, it is possible to achieve both:
 
 In this example, we can see how links have slightly different images as underlines, have a defined color[^splash-color], and change this color on hover or focus.
 
-[^splash-color]: To express the color, I am using the [Splash](https://www.todepond.com/lab/splash/) color format by [Lu Wilson](https://www.todepond.com/), which is fitting, as they and Ivan are two of the three current co-hosts of the [Future of Coding](https://futureofcoding.org/episodes/) podcast.<br/> Can recommend! <!-- offset="1" span="3" -->
+[^splash-color]: To express the color, I am using the [Splash](https://www.todepond.com/lab/splash/) color format by [Lu Wilson](https://www.todepond.com/), which is fitting, as they and Ivy are two of the three current co-hosts of the [Feeling of Computing](https://feelingof.com/episodes/) podcast.<br/> Can recommend! <!-- offset="1" span="3" -->
 
 The way I transform the color into Splash color and back is not as interesting and is covered in my [Splash Colour Mixin](https://blog.kizu.dev/splash-colour-mixin/) blog post. The color is then passed into the SVG using the technique that I already explained, but two things are happening that I need to mention.
 
 In this case, the scaling is rather interesting: we want to scale only in one direction (horizontally) while keeping the other direction always fixed. We don’t have a `preserveAspectRatio` value for this (after all, we’re not _preserving_ it). To achieve it, I had to position all the shapes to the bottom with `y="100%"`, and then move them back up with `transform`. Maybe there is a better way to do it, but I ended up keeping this one.
 
-Second thing: how do we choose between different shapes? The SVG file contains eight of them, and from the above example, we can see that these links have seemingly different underlines. In the [original thread](https://mastodon.social/@spiralganglion/113921387566692673), Ivan solved it by switching up the images with `:nth-child()`, and yes, we could do it here as well, and either use the “SVG stack” technique or pass the index as the information inside with our technique.
+Second thing: how do we choose between different shapes? The SVG file contains eight of them, and from the above example, we can see that these links have seemingly different underlines. In the [original thread](https://mastodon.social/@spiralganglion/113921387566692673), Ivy solved it by switching up the images with `:nth-child()`, and yes, we could do it here as well, and either use the “SVG stack” technique or pass the index as the information inside with our technique.
 
 I am doing neither!
 
